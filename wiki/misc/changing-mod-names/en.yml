@@ -1,0 +1,6 @@
+title: "Changing Mod Display Names"
+description: "Yes, it's cursed, but possible!"
+
+startup-line: "In a startup script, add this line:"
+useful: "This is useful when you add a bunch of items with KubeJS but want them to show your modpack name instead of \"KubeJS\""
+other-mods: "And yes, you can change name of other mods as well:"

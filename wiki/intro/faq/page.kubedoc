@@ -1,0 +1,46 @@
+@meta define support-url "https://kubejs.com/support"
+@meta define recipes-url "[](/events/recipes)"
+@meta define addons-url "[](/addons)"
+@meta define features-url "[](/intro/features)"
+@meta define arch-api "[Architectury](https://www.curseforge.com/minecraft/mc-mods/architectury-api)"
+@meta define discord-url "https://discord.gg/lat"
+@meta define unsupported-version "1.18.2"
+
+## {{q-info}}
+{{a-info}}
+
+## {{q-how-use}}
+{{a-how-use}}
+
+## {{q-js-help}}
+{{a-js-help}}
+
+## {{q-reload}}
+{{a-reload}}
+
+## {{q-mod-support}}
+{{a-mod-support}}
+
+## {{q-features}}
+{{a-features}}
+
+## {{q-how-work}}
+{{a-how-work}}
+
+## {{q-support}}
+{{a-support}}
+
+## {{q-discussion}}
+{{a-discussion}}
+
+[![](https://kubejs.com/discord.png)]({{discord-url}})
+
+{{website}}: [](https://kubejs.com/)
+
+{{source}}: [](https://kubejs.com/reference)
+
+{{download}}: [](https://kubejs.com/downloads)
+
+```warn
+{{no-support}}
+```

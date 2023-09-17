@@ -24,7 +24,7 @@ Documents of other languages will fall back to English if key is missing. Values
 
 ### Meta Properties
 
-- `@meta noindex` - This page won't be included in auto-index
+- `@meta index page1, page2, ...` - Ordered, comma-separated list of pages to include in index
 - `@meta versions [1202,1605]` - Versions this page exists for. See Version Syntax below
 - `@meta redirect /path/to/redirect` - Redirects this page to another
 - `@meta define key-name "Text"` - Defines key overrides. Can be used by both page and language documents

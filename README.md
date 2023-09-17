@@ -3,6 +3,7 @@
 ## Basic Page Structure
 
 Each page is its own directory, containing these files:
+
 - `page.kubejsdoc` - Page Document (see below for syntax). Optional - if not present, its assumed that its an auto-index page that only contains links to its sub-pages
 - `en.yml` - English Language Document (see below)
 - `other.yml` - Other Language Documents. Language must be specified in [languages.json](/languages.json)
@@ -20,6 +21,7 @@ key1: "Text"
 Documents of other languages will fall back to English if key is missing. Values can contain kubejsdoc syntax like `"Text **bold** text"` and will be recursively parsed. They can contain other language keys, but its recommended to write docs in such way that it's not necessary.
 
 ## Page Documents
+
 `page.kubejsdoc` files are very similar to markdown, with few differences, mostly related to linking to pages/files. Full spec below.
 
 ### Meta Properties
@@ -44,7 +46,6 @@ Documents of other languages will fall back to English if key is missing. Values
 - `# Heading 1` - Heading 1
 - `## Heading 2` - Heading 2
 - `### Heading 3` - Heading 3
-- `#### Heading 4` - Heading 4
 
 ### Advanced Syntax
 
@@ -63,7 +64,7 @@ Documents of other languages will fall back to English if key is missing. Values
 
 #### Code Blocks
 
-\```lang 
+\```lang
 
 `code`
 
@@ -73,11 +74,21 @@ Documents of other languages will fall back to English if key is missing. Values
 
 #### Callout blocks
 
-Same as code blocks, but you can use one of these as language:
-- `info`
-- `warn`
-- `danger`
-- `success`
+Special formatted blocks:
+
+```
+{{{ info
+Info text here.
+Supports multiple lines and **formatting** inside of it.
+}}}
+```
+
+You can use one of these markers:
+
+- `info` (blue)
+- `warn` (orange)
+- `danger` (red)
+- `success` (green)
 
 ---
 

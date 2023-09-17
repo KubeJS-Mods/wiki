@@ -1,14 +1,14 @@
-```info
+{{{ info
 {{title-info}}
-```
+}}}
 
-```info
+{{{ info
 {{icon-info}}
-```
+}}}
 
-```danger
+{{{ danger
 {{icon-32-bit}}
-```
+}}}
 
 {{pdn}}
 
@@ -20,6 +20,6 @@
 
 ![](result-2.png)
 
-```warn
+{{{ warn
 {{incompatible}}
-```
+}}}

@@ -1,11 +1,3 @@
-@meta define support-url "https://kubejs.com/support"
-@meta define recipes-url "[](/events/recipes)"
-@meta define addons-url "[](/addons)"
-@meta define features-url "[](/intro/features)"
-@meta define arch-api "[Architectury](https://www.curseforge.com/minecraft/mc-mods/architectury-api)"
-@meta define discord-url "https://discord.gg/lat"
-@meta define unsupported-version "1.18.2"
-
 ## {{q-info}}
 {{a-info}}
 

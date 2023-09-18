@@ -1,3 +1,12 @@
+# Meta
+support-url: "https://kubejs.com/support"
+recipes-url: "[](/events/recipes)"
+addons-url: "[](/addons)"
+features-url: "[](/intro/features)"
+arch-api: "[Architectury](https://www.curseforge.com/minecraft/mc-mods/architectury-api)"
+discord-url: "https://discord.gg/lat"
+unsupported-version: "1.18.2"
+
 title: "FAQ"
 description: "Frequently Asked Questions"
 

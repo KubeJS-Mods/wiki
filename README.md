@@ -4,18 +4,35 @@
 
 Each page is its own directory, containing these files:
 
+- `meta.yml` - Meta Properties, used to change properties of the page itself
 - `page.kubejsdoc` - Page Document (see below for syntax). Optional - if not present, its assumed that its an auto-index page that only contains links to its sub-pages
-- `en.yml` - English Language Document (see below)
+- `en.yml` - English Language Document
 - `other.yml` - Other Language Documents. Language must be specified in [languages.json](/languages.json)
+
+## Meta Properties
+
+An example `meta.yml`:
+
+```yml
+# Ordered, comma-separated list of pages to include in index. "" for no index
+index: "page1, page2, ..."
+# Version range this page exists for, see Version Syntax below
+versions: "[1202, 1605]"
+# Redirects this page to another
+redirect: "/path/to/redirect"
+```
 
 ## Language Documents
 
 An example `en.yml`:
 
 ```yml
+# Meta property that is also used for page title
 title: "Page Title"
+# Meta property that is also used for page subtitle
 description: "Page Description"
-key1: "Text"
+# Custom key
+language-key-1: "Hello"
 ```
 
 Documents of other languages will fall back to English if key is missing. Values can contain kubejsdoc syntax like `"Text **bold** text"` and will be recursively parsed. They can contain other language keys, but its recommended to write docs in such way that it's not necessary.
@@ -26,13 +43,6 @@ Documents of other languages will fall back to English if key is missing. Values
 
 You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
 
-### Meta Properties
-
-- `@meta index page1, page2, ...` - Ordered, comma-separated list of pages to include in index
-- `@meta versions [1202,1605]` - Versions this page exists for. See Version Syntax below
-- `@meta redirect /path/to/redirect` - Redirects this page to another
-- `@meta define key-name "Text"` - Defines key overrides. Can be used by both page and language documents
-
 ### Basic Syntax
 
 - `**text**` - Bold text
@@ -41,7 +51,7 @@ You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
 - `__text__` - Underlined text
 - `` `text` `` - Inline code
 - `==text==` - Highlighted text
-- `{{language-key}}` - Language key (e.g. `{{paragraph-1}}`)
+- `{{language-key}}` - Language key (e.g. `{{language-key-1}}`)
 - `[text](url)` - A link. Links to another page if url starts with `/` (e.g. `[KubeJS Website](https://kubejs.com/)` or `[](/addons)`)
 - `![alt text](filename)` - Media block - can be an image, video or file in same directory as page (e.g. `![](image.png)`)
 - `---` - Horizontal line

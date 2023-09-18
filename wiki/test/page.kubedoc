@@ -100,9 +100,50 @@ Success callout
 - ### Heading item 2
 - ### Heading item 3
 
+- List with tabs
+	- Item 1
+	- Item 2
+		- Item 1
+		- Item 2
+
+- List with weird spaces
+     - Item 1
+     - Item 2
+          - Item 1
+          - Item 2
+
 ---
 
 {{{ info
 - Item in callout 1
 - Item in callout 2
 }}}
+
+---
+
+|> Dropdown List
+Item 1
+Item 2
+- Some list item
+- Another list item
+<|
+
+|> Dropdown List
+Item 1
+Item 2
+- Some list item
+- Another list item
+|> Nested dropdown list
+Text
+<|
+<|
+
+---
+
+|> Tab I
+Content I
+Content II
+<| Tab II |>
+Content III
+Content IV
+<|

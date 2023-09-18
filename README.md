@@ -24,6 +24,8 @@ Documents of other languages will fall back to English if key is missing. Values
 
 `page.kubejsdoc` files are very similar to markdown, with few differences, mostly related to linking to pages/files. Full spec below.
 
+You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
+
 ### Meta Properties
 
 - `@meta index page1, page2, ...` - Ordered, comma-separated list of pages to include in index

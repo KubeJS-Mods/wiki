@@ -11,7 +11,7 @@ Text
 ### Heading 3
 Text
 
-### Heading [with link and **bold text**](https://kubejs.com/)
+### Heading [with link and *italic text*](https://kubejs.com/)
 Text
 
 ---
@@ -19,9 +19,9 @@ Text
 **Bold**
 *Italic*
 ~~Strikethrough~~
-__Underlined__
+__Underline__
 `Code`
-==Highlighted==
+==Highlight==
 {{description}} - Language key
 [Test Link](https://kubejs.com/)
 Page Link [](/test)

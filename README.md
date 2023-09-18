@@ -36,10 +36,10 @@ Documents of other languages will fall back to English if key is missing. Values
 - `**text**` - Bold text
 - `*text*` - Italic text
 - `~~text~~` - Strikethrough text
+- `__text__` - Underlined text
 - `` `text` `` - Inline code
 - `==text==` - Highlighted text
 - `{{language-key}}` - Language key (e.g. `{{paragraph-1}}`)
-- `{{#autoindex}}` - Include auto-index here
 - `[text](url)` - A link. Links to another page if url starts with `/` (e.g. `[KubeJS Website](https://kubejs.com/)` or `[](/addons)`)
 - `![alt text](filename)` - Media block - can be an image, video or file in same directory as page (e.g. `![](image.png)`)
 - `---` - Horizontal line
@@ -72,7 +72,7 @@ Documents of other languages will fall back to English if key is missing. Values
 
 ---
 
-#### Callout blocks
+#### Callout Blocks
 
 Special formatted blocks:
 
@@ -89,6 +89,36 @@ You can use one of these markers:
 - `warn` (orange)
 - `danger` (red)
 - `success` (green)
+
+---
+
+#### Unordered Lists
+
+Each line starts with 2N spaces (0, 2, 4...) and a `-` followed by space, then content:
+
+```
+- Item 1
+- Item 2
+- Item 3
+  - Sub-Item 1
+  - Sub-Item 2
+  - Sub-Item 3
+```
+
+---
+
+#### Ordered Lists
+
+Same syntax as unordered lists, but with `.` instead of `-`:
+
+```
+. Item 1
+. Item 2
+. Item 3
+  . Sub-Item 1
+  . Sub-Item 2
+  . Sub-Item 3
+```
 
 ---
 

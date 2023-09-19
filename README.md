@@ -20,6 +20,8 @@ index: "page1, page2, ..."
 versions: "[1202, 1605]"
 # Redirects this page to another
 redirect: "/path/to/redirect"
+# Author ID, you can find yours by right-clicking on yourself in Discord and opening Apps > KubeJS Profile
+author: "00000001"
 ```
 
 ## Language Documents

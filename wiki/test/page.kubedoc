@@ -28,9 +28,9 @@ __Underline__
 ==Highlight==
 {{description}} - Language key
 [Test Link](https://kubejs.com/)
-Page Link [](/test)
-Page Link - [See this page](/test)
-![Test Image](test.png)
+Page Link [[/test]]
+Page Link - [[/test|See this page]]
+![[test.png|Test Image]]
 
 **`Bold Code`**
 `**Bold Code**`
@@ -156,3 +156,7 @@ Content II
 Content III
 Content IV
 <|
+
+---
+
+![[youtube|eT3BFzSD6YY]]

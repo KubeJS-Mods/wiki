@@ -1,19 +1,19 @@
 {{intro}}
 
-- [](/events)
-- [](/events/recipes)
-- [](/events/tags)
-- [](/events/registry/items)
-- [](/events/registry/blocks)
-- [](/misc/default-options)
-- [](/misc/changing-window)
-- [](/misc/changing-mod-names)
-- [](/misc/loading-resources)
-- [](/events/modify/items)
-- [](/events/modify/blocks)
-- [](/events/registry/fluids)
-- [](/events/worldgen)
-- [](/events/server/chat)
-- [](/events/block/placement)
-- [](/events/item/right-click)
+- [[/events]]
+- [[/events/recipes]]
+- [[/events/tags]]
+- [[/events/registry/items]]
+- [[/events/registry/blocks]]
+- [[/misc/default-options]]
+- [[/misc/changing-window]]
+- [[/misc/changing-mod-names]]
+- [[/misc/loading-resources]]
+- [[/events/modify/items]]
+- [[/events/modify/blocks]]
+- [[/events/registry/fluids]]
+- [[/events/worldgen]]
+- [[/events/server/chat]]
+- [[/events/block/placement]]
+- [[/events/item/right-click]]
 - {{etc}}

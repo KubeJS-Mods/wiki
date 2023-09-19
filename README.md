@@ -54,8 +54,10 @@ You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
 - `` `text` `` - Inline code
 - `==text==` - Highlighted text
 - `{{language-key}}` - Language key (e.g. `{{language-key-1}}`)
-- `[text](url)` - A link. Links to another page if url starts with `/` (e.g. `[KubeJS Website](https://kubejs.com/)` or `[](/addons)`)
-- `![alt text](filename)` - Media block - can be an image, video or file in same directory as page (e.g. `![](image.png)`)
+- `[[/path/to/page]]` or `[[/path/to/page|text]]` - Page link. Text is optional, page title is used otherwise (e.g. `[[/addons]]` or `[[/addons|Cool Addons]]`)
+- `![[filename]]` or `![[filename|alt]]` - Media block - can be an image, video or file in same directory as page. Alt text is optional (e.g. `![[image.png]]` or `![[image.png|Image Name]]`)
+- `![[youtube|code]]` - Youtube media block (e.g. `![[youtube|eT3BFzSD6YY]]`)
+- `[text](url)` - External link, only supports https:// (e.g. `[KubeJS Website](https://kubejs.com/)`)
 - `---` - Horizontal line
 - `# Heading 1` - Heading 1
 - `## Heading 2` - Heading 2

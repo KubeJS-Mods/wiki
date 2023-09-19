@@ -1,6 +1,5 @@
 title: "Titel und Icon ändern"
 description: "Ja, auch das kannst du mit KubeJS tun."
-pdn-url: "[Paint.NET](https://www.getpaint.net/download.html#download)"
 
 title-info: "Um den Titel zu ändern, musst du lediglich die Option `title` in der `kubejs/config/client.properties` ändern."
 icon-info: "Um das Icon zu ändern, erstelle ein Bild namens `kubejs/config/packicon.png`, möglichst in einer quadratischen Standard-Icon-Größe (64x64, 128x128, 256x256, usw.)."

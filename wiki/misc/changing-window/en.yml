@@ -1,9 +1,10 @@
 title: "Changing Window Title and Icon"
 description: "Yes, you can do that with KubeJS too."
+pdn-url: "[Paint.NET](https://www.getpaint.net/download.html#download)"
 
 title-info: "To change title, all you have to do is change `title` in `kubejs/config/client.properties`."
 icon-info: "To change icon, you create a `kubejs/config/packicon.png` image in standard Minecraft texture size preferably (64x64, 128x128, 256x256, that kind of size)."
 icon-32-bit: "The image has to be saved as 32-bit PNG, not Auto-detect/24-bit, otherwise you will get a JVM crash!"
-pdn: "Here's how to do that in PaintNET:"
+pdn: "Here's how to do that in {{pdn-url}}:"
 result: "Example result:"
 incompatible: "Currently incompatible with Fancy Menu!"

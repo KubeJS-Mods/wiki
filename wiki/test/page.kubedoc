@@ -32,6 +32,13 @@ Page Link [](/test)
 Page Link - [See this page](/test)
 ![Test Image](test.png)
 
+**`Bold Code`**
+`**Bold Code**`
+
+**Bold** Regular **Bold**
+
+**Bold \**Escaped**
+
 ---
 
 | Header 1 | Header 2 |

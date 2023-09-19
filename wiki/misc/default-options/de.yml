@@ -1,0 +1,7 @@
+title: "Default-Optionen"
+description: "Automatisch generierte options.txt Dateien"
+
+p1: "Du kannst standardmäßig festgelegte \"Default\"-Optionen in deinem Pack mit KubeJS mitliefern. Unter anderem beinhaltet dies Tastenbelegungen, Videoeinstellungen, das aktive Resource Pack, oder weitere Einstellungen wie z.B. Autojump, Toggle Sprint und erweiterte Tooltips."
+p2: "Warum sollte ich das verwenden, anstatt selbst einfach eine options.txt mitzuliefern? Wenn du selbst eine options.txt mitlieferst, werden die Optionen des Spielers jedes Mal überschrieben, wenn er dein Modpack aktualisiert. Mit KubeJS werden die Optionen nur einmal überschrieben, und zwar beim ersten Start des Modpacks."
+p3: "Um dieses Feature zu verwenden, erstelle einfach eine Datei namens `defaultoptions.txt` im `kubejs/config` Ordner. Kopiere dann alle Zeilen, die du standardmäßig festlegen möchtest, aus der normalen options.txt Datei. Du kannst auch einfach die gesamte Datei kopieren, sofern du für alles ein Default festlegen möchtest."
+p4: "Eine vollständige Liste aller Optionen, die in der options.txt enthalten sein können, findest du im [Minecraft Wiki](https://minecraft.fandom.com/wiki/Options.txt)."

@@ -1,0 +1,6 @@
+title: "Mod-Anzeigenamen ändern"
+description: "Ist zwar cursed, aber dennoch möglich!"
+
+startup-line: "Füge in einem Startup-Skript diese Zeile hinzu:"
+useful: "Dieses Feature könnte z.B. nützlich sein, wenn du mit KubeJS jede Menge Items hinzufügst, aber möchtest, dass sie deinen Modpack-Namen tragen statt \"KubeJS\"."
+other-mods: "Und ja, du kannst auch die Namen anderer Mods verändern:"

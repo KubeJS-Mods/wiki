@@ -1,0 +1,10 @@
+title: "Titel und Icon ändern"
+description: "Ja, auch das kannst du mit KubeJS tun."
+pdn-url: "[Paint.NET](https://www.getpaint.net/download.html#download)"
+
+title-info: "Um den Titel zu ändern, musst du lediglich die Option `title` in der `kubejs/config/client.properties` ändern."
+icon-info: "Um das Icon zu ändern, erstelle ein Bild namens `kubejs/config/packicon.png`, möglichst in einer quadratischen Standard-Icon-Größe (64x64, 128x128, 256x256, usw.)."
+icon-32-bit: "Das Bild muss als 32-bit PNG gespeichert werden, nicht als Auto-detect/24-bit, sonst bekommst du einen JVM Crash!"
+pdn: "So geht das z.B. in {{pdn-url}}:"
+result: "Das Ergebnis:"
+incompatible: "Derzeit nicht kompatibel mit Fancy Menu!"

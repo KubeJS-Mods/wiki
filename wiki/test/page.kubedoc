@@ -39,7 +39,7 @@ Inline `code` and `code II` and `code *III*`
 
 **Bold** Regular **Bold**
 
-**Bold \**Escaped**
+**Bold \*\*Escaped**
 
 {{missing-key-test}}
 

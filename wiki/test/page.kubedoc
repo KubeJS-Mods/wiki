@@ -32,6 +32,8 @@ Page Link [[/test]]
 Page Link - [[/test|See this page]]
 ![[test.png|Test Image]]
 
+Inline `code` and `code II` and `code *III*`
+
 **`Bold Code`**
 `**Bold Code**`
 

@@ -62,7 +62,7 @@ let code = 'JavaScript code test';
 
 {{{ info
 Info callout
-![Test Image](test.png)
+![[test.png]]
 }}}
 
 {{{ warn

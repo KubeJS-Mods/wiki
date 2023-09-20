@@ -1,6 +1,6 @@
 {{startup-line}}
 
-```js
+```javascript
 Platform.mods.kubejs.name = 'My Modpack Name'
 ```
 
@@ -8,6 +8,6 @@ Platform.mods.kubejs.name = 'My Modpack Name'
 
 {{other-mods}}
 
-```js
+```javascript
 Platform.mods.botania.name = 'Plant Tech Mod'
 ```

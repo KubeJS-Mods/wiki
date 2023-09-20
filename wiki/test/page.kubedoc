@@ -54,9 +54,28 @@ Inline `code` and `code II` and `code *III*`
 
 ---
 
-```javascript
+```js
 let code = 'JavaScript code test';
 console.log('Hello, World!')
+```
+
+```js
+ServerEvents.recipes(event => {
+  let potting = (output, pottedInput) => {
+    event.shaped(output, [
+      'BIB',
+      ' B '
+    ], {
+      B: 'minecraft:brick',
+      I: pottedInput
+    })
+  }
+
+  //Now we can make many 'potting' recipes without typing that huge block over and over!
+  potting('kubejs:potted_snowball', 'minecraft:snowball')
+  potting('kubejs:potted_lava', 'minecraft:lava_bucket')
+  potting('minecraft:blast_furnace', 'minecraft:furnace')
+})
 ```
 
 ---

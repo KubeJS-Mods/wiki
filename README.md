@@ -67,17 +67,6 @@ You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
 
 ---
 
-#### Tables
-
-```
-| Header 1 | Header 2 |
-|----------|----------|
-| Cell 1 | Cell 2 |
-| Cell 3 | Cell 4 |
-```
-
----
-
 #### Code Blocks
 
 \```lang
@@ -137,6 +126,66 @@ Same syntax as unordered lists, but with `.` instead of `-`:
 ```
 
 ---
+
+#### Spoiler Blocks
+
+```
+|> Title
+Content
+<|
+```
+
+You can use `|>+` to make it expanded by default:
+
+```
+|>+ Title
+Content
+<|
+```
+
+You can also nest tabs:
+
+```
+|> Title
+Content
+|> Title 2
+Content 2
+<|
+<|
+```
+
+---
+
+#### Tabs
+
+```
+|> Tab 1 name
+Content
+<||> Tab 2 name
+Content
+<|
+```
+
+You can use `|>+` to select default tab:
+
+```
+|> Tab 1 name
+Content
+<||>+ Tab 2 name
+Content
+<|
+```
+
+---
+
+#### Tables
+
+```
+| Header 1 | Header 2 |
+|----------|----------|
+| Cell 1 | Cell 2 |
+| Cell 3 | Cell 4 |
+```
 
 ## Misc
 

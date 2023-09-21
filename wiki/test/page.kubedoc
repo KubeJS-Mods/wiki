@@ -179,7 +179,7 @@ Text
 
 |> Tab I
 Nothing to see here.
-<|+ Tab II |>
+<||>+ Tab II
 ☃️
 ![[youtube|7HNuh_KCHM0]]
 <|
@@ -206,7 +206,7 @@ ServerEvents.recipes(event => {
   )
 })
 ```
-<| 1.18.2 |>
+<||> 1.18.2
 ```js
 onEvent('recipes', event => {
   event.shaped(

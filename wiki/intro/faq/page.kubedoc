@@ -1,28 +1,28 @@
-## {{q-info}}
+# {{q-info}}
 {{a-info}}
 
-## {{q-how-use}}
+# {{q-how-use}}
 {{a-how-use}}
 
-## {{q-js-help}}
+# {{q-js-help}}
 {{a-js-help}}
 
-## {{q-reload}}
+# {{q-reload}}
 {{a-reload}}
 
-## {{q-mod-support}}
+# {{q-mod-support}}
 {{a-mod-support}}
 
-## {{q-features}}
+# {{q-features}}
 {{a-features}}
 
-## {{q-how-work}}
+# {{q-how-work}}
 {{a-how-work}}
 
-## {{q-support}}
+# {{q-support}}
 {{a-support}}
 
-## {{q-discussion}}
+# {{q-discussion}}
 {{a-discussion}}
 
 [![[https://kubejs.com/discord.png]]]({{discord-url}})

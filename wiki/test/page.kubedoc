@@ -45,6 +45,10 @@ Inline `code` and `code II` and `code *III*`
 
 {{missing-key-test}}
 
+![[test.png|Test Image]]![[test.png|Test Image]]
+
+![[test.png|Test Image]] Text ![[test.png|Test Image]]
+
 ---
 
 | Header 1 | Header 2 |
@@ -175,14 +179,10 @@ Text
 
 |> Tab I
 Nothing to see here.
-<| Tab II |>
+<|+ Tab II |>
 ☃️
 ![[youtube|7HNuh_KCHM0]]
 <|
-
----
-
-![[youtube|7HNuh_KCHM0]]
 
 ---
 

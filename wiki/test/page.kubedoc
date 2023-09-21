@@ -161,7 +161,7 @@ Item 2
 - Another list item
 <|
 
-|> Dropdown List
+|>+ Dropdown List (Open by default)
 Item 1
 Item 2
 - Some list item

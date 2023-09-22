@@ -7,7 +7,7 @@ Each page is its own directory, containing these files:
 - `meta.yml` - Meta Properties, used to change properties of the page itself
 - `page.kubejsdoc` - Page Document (see below for syntax). Optional - if not present, its assumed that its an auto-index page that only contains links to its sub-pages
 - `en.yml` - English Language Document
-- `other.yml` - Other Language Documents. Language must be specified in [languages.json](/languages.json)
+- `<other language>.yml` - Other Language Documents. Language must be specified in [/languages/ directory](/languages/)
 
 ## Meta Properties
 

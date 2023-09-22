@@ -62,7 +62,7 @@ You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
 - `# Heading 1` - Heading 1
 - `## Heading 2` - Heading 2****
 - `### Heading 3` - Heading 3
-- `:emoji:` - Emoji (e.g `:yes:`, see [emojis.yml](/emojis.yml))
+- `:global-replacement:` - Global replacement, typically emoji (e.g `:yes:`, see [global.yml](/global.yml))
 - `#[[text|color]]` - Colored text. You can use either hex code `RRGGBB` or color name, one of
     - red
     - yellow
@@ -101,6 +101,34 @@ You can use one of these markers:
 - `warn` (orange)
 - `danger` (red)
 - `success` (green)
+
+---
+
+#### Variable Blocks
+
+Variable blocks are useful when you want to include multiple elements in one inline block, for example multiple items in a list or table.
+
+Define block:
+
+```
+{{{ #identifier
+Content here.
+}}}
+```
+
+Reference block: `{{#identifier}}`
+
+e.g.
+```
+{{{ #test
+Line 1
+![[test.png]]
+Line 3
+}}}
+
+- List item 1
+- {{#test}}
+```
 
 ---
 

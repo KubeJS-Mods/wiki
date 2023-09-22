@@ -1,1 +1,1 @@
-# ![](/languages/icons/de.svg) German (Deutsch)
+# German (Deutsch)

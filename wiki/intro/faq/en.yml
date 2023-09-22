@@ -14,7 +14,7 @@ q-info: "What does this mod do?"
 a-info: "This mod lets you create scripts in JavaScript language to manage your server, add new blocks and items, change recipes, add custom handlers for quest mods and more!"
 
 q-how-use: "How to use it?"
-a-how-use: "Run the game with mod installed once. It should generate `kubejs` folder in your minecraft directory with example scripts and README.txt. Read that!"
+a-how-use: "Run the game with mod installed once. It should generate a `kubejs` folder in your minecraft directory with example scripts and README.txt. Read that!"
 
 q-js-help: "I don't know JavaScript"
 a-js-help: "There's examples and pre-made scripts here. And you can always ask in discord support channel for help with scripts, but be specific."

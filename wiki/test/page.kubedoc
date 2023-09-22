@@ -49,6 +49,10 @@ Inline `code` and `code II` and `code *III*`
 
 ![[test.png|Test Image]] Text ![[test.png|Test Image]]
 
+#[[Red|red]], #[[Gold|gold]], #[[Yellow|yellow]], #[[Green|green]], #[[Blue|blue]], #[[Magenta|magenta]], #[[Gray|gray]]
+
+#[[**Red and bold**|red]]
+
 ---
 
 Emoji test:

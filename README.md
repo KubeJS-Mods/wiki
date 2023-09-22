@@ -65,12 +65,10 @@ You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
 - `:emoji:` - Emoji (e.g `:yes:`, see [emojis.yml](/emojis.yml))
 - `#[[text|color]]` - Colored text. You can use either hex code `RRGGBB` or color name, one of
     - red
-    - gold
     - yellow
     - green
     - blue
     - magenta
-    - gray
 
 ### Advanced Syntax
 

@@ -110,6 +110,15 @@ Each line starts with 2N spaces (0, 2, 4...) and a `-` followed by space, then c
   - Sub-Item 3
 ```
 
+Will create:
+
+- Item 1
+- Item 2
+- Item 3
+    - Sub-Item 1
+    - Sub-Item 2
+    - Sub-Item 3
+
 ---
 
 #### Ordered Lists
@@ -124,6 +133,15 @@ Same syntax as unordered lists, but with `.` instead of `-`:
   . Sub-Item 2
   . Sub-Item 3
 ```
+
+Will create:
+
+1. Item 1
+2. Item 2
+3. Item 3
+    1. Sub-Item 1
+    2. Sub-Item 2
+    3. Sub-Item 3
 
 ---
 

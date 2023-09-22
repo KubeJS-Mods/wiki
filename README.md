@@ -60,7 +60,7 @@ You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
 - `[text](url)` - External link, only supports https:// (e.g. `[KubeJS Website](https://kubejs.com/)`)
 - `---` - Horizontal line
 - `# Heading 1` - Heading 1
-- `## Heading 2` - Heading 2
+- `## Heading 2` - Heading 2****
 - `### Heading 3` - Heading 3
 - `:emoji:` - Emoji (e.g `:yes:`, see [emojis.yml](/emojis.yml))
 - `#[[text|color]]` - Colored text. You can use either hex code `RRGGBB` or color name, one of

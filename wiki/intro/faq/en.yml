@@ -35,7 +35,7 @@ q-support: "Ok, but what if it.. doesn't work?"
 a-support: "You can report issues [here]({{support-url}})."
 
 q-discussion: "I have more questions/suggestions!"
-a-discussion: "If wiki didn't have the answer for what you were looking for, you can join the [Discord server]({{discord-url}}) and ask for help on [\#kubejs-support]({{discord-url}}) channel!"
+a-discussion: "If wiki didn't have the answer for what you were looking for, you can join the [Discord server]({{discord-url}}) and ask for help on [#kubejs-support]({{discord-url}}) channel!"
 
 website: "Website"
 source: "Source and issue tracker"

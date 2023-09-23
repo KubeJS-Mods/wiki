@@ -1,0 +1,58 @@
+# Primitive prototype additions
+
+- `string#namespace`: string - namespace part of namespaced string, aka of `minecraft:oak_planks` it's `minecraft`. Defaults to `minecraft` if there's no `:`.
+- `string#path`: string - path part of namespaced string, aka of `minecraft:oak_planks` it's `oak_planks`
+
+# Constants and Objects
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `global` | Map<String, Object> | Global object, you can use this to set objects and callbacks in startup script and reference them from server or client scripts |
+| `console` | Console | Console object, used for logging |
+| `SECOND` | number | 1000 |
+| `MINUTE` | number | 60000 (`60 * SECOND`) |
+| `HOUR` | number | 3600000 (`60 * MINUTE`) |
+
+# Classes
+
+|> 1.20.1
+- WIP
+<||>+ 1.19.2
+- `Platform`
+- `ResourceLocation`
+- `Utils`
+- `Java`
+- `Text`
+- `UUID`
+- `JsonIO`
+- `Block`
+- `Item`
+- `Ingredient`
+- `IngredientHelper`
+- `NBT`
+- `NBTIO`
+- `Direction`
+- `Facing`
+- `AABB`
+- `Fluid`
+- `Color`
+- `BlockStatePredicate`
+<||> 1.18.2
+- WIP
+<|
+
+# Wrapped Classes
+
+| Name | Class |
+| ---- | ----- |
+| JavaMath | java.lang.Math |
+| Blocks | net.minecraft.world.level.block.Blocks |
+| Items | net.minecraft.world.item.Items |
+| Stats | net.minecraft.stats.Stats |
+| DecorationGenerationStep | net.minecraft.world.level.levelgen.GenerationStep.Decoration |
+| CarvingGenerationStep | net.minecraft.world.level.levelgen.GenerationStep.Carving |
+| BlockPos | net.minecraft.core.BlockPos |
+| DamageSource | net.minecraft.world.damagesource.DamageSource |
+| BlockProperties | net.minecraft.world.level.block.state.properties.BlockStateProperties |
+| Vec3, Vec3d | net.minecraft.world.phys.Vec3 |
+| Vec3i	| net.minecraft.core.Vec3i |

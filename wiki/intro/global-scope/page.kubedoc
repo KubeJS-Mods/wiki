@@ -55,4 +55,4 @@
 | DamageSource | net.minecraft.world.damagesource.DamageSource |
 | BlockProperties | net.minecraft.world.level.block.state.properties.BlockStateProperties |
 | Vec3, Vec3d | net.minecraft.world.phys.Vec3 |
-| Vec3i	| net.minecraft.core.Vec3i |
+| Vec3i | net.minecraft.core.Vec3i |

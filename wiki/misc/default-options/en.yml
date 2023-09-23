@@ -1,7 +1,7 @@
 title: "Default Options"
 description: "Default options.txt file generation"
 
-p1: "You can ship default options from options.txt with KubeJS. This includes keybindings, video settings, enabled resource packs, controls like autojump and toggle sprint and wierd things like advanced tooltips."
-p2: "Why use this instead of just shipping options.txt? If you ship options.txt then the users options will get overridden every time they update your modpack, where-as KubeJS only sets the options once, on the first time the modpack boots."
-p3: "To use it simply make a file called `defaultoptions.txt` in the `kubejs/config` folder. Then copy any lines you want to set by default over from the normal options.txt file. You can also just copy the entire file if you want to include everything."
-p4: "A full list of what options the options.txt file can contain is available on the [Minecraft Wiki](https://minecraft.fandom.com/wiki/Options.txt)."
+intro: "You can ship default options from options.txt with KubeJS. This includes keybindings, video settings, enabled resource packs, controls like autojump and toggle sprint and wierd things like advanced tooltips."
+overriden: "Why use this instead of just shipping options.txt? If you ship options.txt then the users options will get overridden every time they update your modpack, where-as KubeJS only sets the options once, on the first time the modpack boots."
+howto: "To use it simply make a file called `defaultoptions.txt` in the `kubejs/config` folder. Then copy any lines you want to set by default over from the normal options.txt file. You can also just copy the entire file if you want to include everything."
+optionlist: "A full list of what options the options.txt file can contain is available on the [Minecraft Wiki](https://minecraft.fandom.com/wiki/Options.txt)."

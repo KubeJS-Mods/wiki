@@ -1,6 +1,6 @@
 title: "Loading Assets and Data"
 description: "Load assets from resource packs and data from datapacks"
 
-p1: "You can also use KubeJS to load assets from resource packs and data from datapacks! While this isn't the only method, its one of the easiest. Other options are <TODO: make and link server datapack load page and client generate assets event page>"
-p2: "The data folder is loaded identically to the data folder in a datapack. If you already have a datapack just copy the folder(s) from inside the datapacks data folder to KubeJS' data folder."
-p3: "The assets folder is loaded identically to the assets folder in a resourcepack. If you already have a resourcepack just copy the folder(s) from inside the resourcepacks assets folder to KubeJS' assets folder."
+intro: "You can also use KubeJS to load assets from resource packs and data from datapacks! While this isn't the only method, its one of the easiest. Other options are <TODO: make and link server datapack load page and client generate assets event page>"
+data: "The data folder is loaded identically to the data folder in a datapack. If you already have a datapack just copy the folder(s) from inside the datapacks data folder to KubeJS' data folder."
+assets: "The assets folder is loaded identically to the assets folder in a resourcepack. If you already have a resourcepack just copy the folder(s) from inside the resourcepacks assets folder to KubeJS' assets folder."

@@ -247,10 +247,15 @@ onEvent('recipes', event => {
 ---
 
 {{{ #test
-Line 1
+Referenced, multi-line content:
 ![[test.png]]
-Line 3
+Bottom text
 }}}
 
 - List item 1
 - {{#test}}
+
+| Header 1 | Header 2 |
+| -------- | -------- |
+| Cell 1 | Cell 2 |
+| Cell 3 | {{#test}} |

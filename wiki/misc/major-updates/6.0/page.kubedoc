@@ -1,6 +1,6 @@
 # onEvent()
 
-`onEvent('event', e => {})` syntax was replaced by `SomeEventGroup.someEventName(e => {})`
+`[js]onEvent('event', e => {})` syntax was replaced by `[js]SomeEventGroup.someEventName(e => {})`
 
 |> New
 ```js
@@ -59,15 +59,15 @@ onEvent('tags.items', e => {})
 ```
 <|
 
-Using parameters is actually faster on the CPU than checking some `event.id == 'id'`
+Using parameters is actually faster on the CPU than checking some `[js]event.id == 'id'`
 
 >>> info
-You can find the full list of new events [here](https://mods.latvian.dev/books/kubejs/page/list-of-events "List of Events").
+You can find the full list of new events [[/events|here]].
 <<<
 
 # onForgeEvent()
 
-`onForgeEvent('package.ClassName', e => {})` has been replaced by `ForgeEvents.onEvent('package.ClassName', e => {})`
+`[js]onForgeEvent('package.ClassName', e => {})` has been replaced by `[js]ForgeEvents.onEvent('package.ClassName', e => {})`
 
 |> New
 ```js
@@ -85,13 +85,13 @@ New! It now supports generic events:
 ForgeEvents.onGenericEvent('net.minecraftforge.event.AttachCapabilitiesEvent', 'net.minecraft.world.entity.Entity', e => {})
 ```
 
-#### Server settings
+# Server settings
 
 `settings.log...` properties have been removed from server scripts, and instead, moved to `local/kubejsdev.properties` file. By default, it won't be shipped with the pack, but you can change `saveDevPropertiesInConfig` to true to instead save the file in `kubejs/config/dev.properties`.
 
 # java()
 
-`java('package.ClassName')` has been replaced by `Java.loadClass('package.ClassName')`
+`[js]java('package.ClassName')` has been replaced by `[js]Java.loadClass('package.ClassName')`
 
 |> New
 ```js
@@ -109,8 +109,7 @@ There might be some more reflective helper methods later in the Java util class,
 
 None of the vanilla classes are wrappers anymore - `EntityJS`, `LevelJS`, `ItemStackJS`, `IngredientJS`, and others are gone. This may introduce some bugs, but in general, should make it significantly easier to interact with Minecraft and other mods. Almost all old methods are still supported by core-modding vanilla. This should also significantly boost performance, as it doesn't need to constantly wrap and unwrap classes.
 
-### [[/misc/major-updates/6.1|KubeJS 6.1 Update]]
-
-## Other questions
+# Other questions
 
 If you have any other questions, feel free to ask them on my [Discord Server](https://discord.gg/latviandev).
+You can find out info about [[/misc/major-updates/6.1|next update here]].

@@ -47,6 +47,7 @@ StartupEvents.registry('item', e => {})
 ```js
 onEvent('item.registry', e => {})
 ```
+<|
 
 |> New
 ```js

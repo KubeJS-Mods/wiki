@@ -93,22 +93,27 @@ ServerEvents.recipes(event => {
 
 ---
 
-{{{ info
+>>>
+Quote callout
+![[https://i.latvian.dev/pc/2023-09-24_09.00.50.png]]
+<<<
+
+>>> info
 Info callout
 ![[test.png]]
-}}}
+<<<
 
-{{{ warn
+>>> warn
 Warning callout
-}}}
+<<<
 
-{{{ danger
+>>> danger
 Danger callout
-}}}
+<<<
 
-{{{ success
+>>> success
 Success callout
-}}}
+<<<
 
 ---
 
@@ -160,10 +165,10 @@ Success callout
 
 ---
 
-{{{ info
+>>> info
 - Item in callout 1
 - Item in callout 2
-}}}
+<<<
 
 ---
 
@@ -246,11 +251,11 @@ onEvent('recipes', event => {
 
 ---
 
-{{{ #test
+>>> #test
 Referenced, multi-line content:
 ![[test.png]]
 Bottom text
-}}}
+<<<
 
 - List item 1
 - {{#test}}

@@ -33,6 +33,6 @@
 
 {{download}}: [](https://kubejs.com/downloads)
 
-{{{ warn
+>>> warn
 {{no-support}}
-}}}
+<<<

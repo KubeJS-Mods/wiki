@@ -89,14 +89,15 @@ You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
 Special formatted blocks:
 
 ```
-{{{ info
+>>> info
 Info text here.
 Supports multiple lines and **formatting** inside of it.
-}}}
+<<<
 ```
 
 You can use one of these markers:
 
+- `quote` (default, gray)
 - `info` (blue)
 - `warn` (orange)
 - `danger` (red)
@@ -111,20 +112,20 @@ Variable blocks are useful when you want to include multiple elements in one inl
 Define block:
 
 ```
-{{{ #identifier
+>>> #identifier
 Content here.
-}}}
+<<<
 ```
 
 Reference block: `{{#identifier}}`
 
 e.g.
 ```
-{{{ #test
+>>> #test
 Line 1
 ![[test.png]]
 Line 3
-}}}
+<<<
 
 - List item 1
 - {{#test}}

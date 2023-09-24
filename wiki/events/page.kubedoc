@@ -16,8 +16,8 @@
 | {{st-s}} | StartupEvents.init | :no: |
 | {{st-s}} | StartupEvents.postInit | :no: |
 | {{st-s}} | StartupEvents.registry | :no: |
+| {{st-s}} | ClientEvents.init | :no: |
 | {{cl-s}} | ClientEvents.highPriorityAssets | :no: |
-| {{cl-s}} | ClientEvents.init | :no: |
 | {{cl-s}} | ClientEvents.loggedIn | :no: |
 | {{cl-s}} | ClientEvents.loggedOut | :no: |
 | {{cl-s}} | ClientEvents.tick | :no: |

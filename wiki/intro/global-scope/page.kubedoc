@@ -49,8 +49,6 @@
 | Blocks | net.minecraft.world.level.block.Blocks |
 | Items | net.minecraft.world.item.Items |
 | Stats | net.minecraft.stats.Stats |
-| DecorationGenerationStep | net.minecraft.world.level.levelgen.GenerationStep.Decoration |
-| CarvingGenerationStep | net.minecraft.world.level.levelgen.GenerationStep.Carving |
 | BlockPos | net.minecraft.core.BlockPos |
 | DamageSource | net.minecraft.world.damagesource.DamageSource |
 | BlockProperties | net.minecraft.world.level.block.state.properties.BlockStateProperties |

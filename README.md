@@ -67,7 +67,7 @@ You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
     - red
     - yellow
     - green
-    - blue
+    - blue****
     - magenta
 
 ### Advanced Syntax

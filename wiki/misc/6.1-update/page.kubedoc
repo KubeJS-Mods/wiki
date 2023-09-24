@@ -1,13 +1,11 @@
-# KubeJS 6.1 Update
-
-## For script and pack developers
+# For script and pack developers
 
 - **Scheduled events now take in durations** (especially strings such as `200 t` for tick durations as well) for their delays!
 - **`NetworkEvents.fromServer` and `NetworkEvents.fromClient` have been merged into `NetworkEvents.dataReceived`**, which will handle incoming data from the corresponding side based on the script type.
 - **Registry: `event.custom(T)` is now `event.createCustom(() => T)`**, which takes in a *supplier* rather than an object directly in order to avoid possible early loading of other registry elements it might depend on. Note that custom still exists, but is HEAVILY discouraged for this very reason!
 - **Event `.cancel()` now exits event block** - This may be a small change but it may affect some scripts. Previously it would only mark event as cancelled and didn't do anything, but now it will act as return; call as well.
 - **Event results have been added!** You now have more granular control over how events work, closer to how they are handled on the Architectury / Minecraft side as well! For example:  
-      
+
 ```js
 ItemEvents.rightClicked('minecraft:stick', event => {
   // (note that only one of these will work at a time since they all immediately return!)
@@ -18,10 +16,10 @@ ItemEvents.rightClicked('minecraft:stick', event => {
   event.success('minecraft:apple') // success + the result is an apple 🍎
 })
 ```
-    
+
 Right now, this new system is only actively used for item right click events, but will be expanded to more events as time goes on (obviously without breaking scripts, and just using `event.cancel()` will still work just fine)!
 - **Massive backend rewrites, improved performance a lot** - Lat did another pass over the recipe event and has reworked the way recipes are parsed, as well as fixed async recipe operations, so you should generally notice a decrease in reload times if all works as intended! In some cases, recipes should now load even faster with KJS than they do with just vanilla!
-- **No more tag workarounds!** (hopefully) - We have fixed resolving tag ingredients during the recipe event on first world load and generally improved the way recipe filters work, so you shouldn't have to use hacky double-reload workarounds anymore (please just... stop using them already :ioa:)
+- **No more tag workarounds!** (hopefully) - We have fixed resolving tag ingredients during the recipe event on first world load and generally improved the way recipe filters work, so you shouldn't have to use hacky double-reload workarounds anymore (please just... stop using them already)
 - **Registries have been fixed on both Forge and Fabric** - We have ironed out some issues with the registry events, so you should now again be able to properly register Fluids, modded registries, etc.
 - **Renamed kubejs/logs files from .txt to .log** - So you can now have formatting in VSCode, etc.
 - **Fixed resource and data pack order** - User added resource packs and datapacks will now be above KJS generated packs, so you should be able to change textures and other things with them.
@@ -41,15 +39,13 @@ Right now, this new system is only actively used for item right click events, bu
 - **Fluid registry .tag() fixed** - Now tags flowing fluids too.
 - **You can now replace and match fluids** - You __must__ use `Fluid.of('minecraft:water')` instead of plain string, but you can use it in both `{input: Fluid.of('minecraft:water')}` recipe filter and `event.replaceInput('*', Fluid.of('minecraft:water'), Fluid.of('minecraft:lava'))` replace functions for supported recipe types.
 
-## For addon mod developers
+# For addon mod developers
 
 - **Complete rewrite of recipe system** - Recipes now use recipe schemas, a new system that (almost) fully replaces the old RecipeJS objects. More on that in the [Discord announcement](discord://-/channels/303440391124942858/678385948706209822/1125804134281510983)
 - **Events now have results** for more precise control over return values and we've added a `hasListeners()` check for performance reasons. The most noticeable change for you is going to be that your own events will need to return a `EventResult`, as well.
 - **Fixed datagen issue** - KJS should no longer keep datagens from closing game forever in dev environment. [We truly live in an age of wonders!](https://www.youtube.com/watch?v=TiWWvDrIpIE)
 
-## Update Primer (sorted by topics, still incomplete):
-
-### Recipe Schemas
+## Recipe Schemas
 
 From the announcement:
 
@@ -64,4 +60,4 @@ This is __the big one__. Recipe schemas *completely* change the way custom recip
 
 ### Download
 
-You can download KubeJS 6.1 at [](https://kubejs.com/downloads)!
+You can download KubeJS 6.1 [here](https://kubejs.com/downloads)!

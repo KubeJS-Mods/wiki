@@ -1,10 +1,13 @@
 {{intro}}
 {{click}}
-{{typedesc}}
 
-- {{startup}}
-- {{server}}
-- {{client}}
+# {{event-types}}
+## Startup
+{{startup}}
+## Server
+{{server}}
+## Client
+{{client}}
 
 # {{base}}
 

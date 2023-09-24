@@ -1,9 +1,9 @@
 # For script and pack developers
 
-- **Scheduled events now take in durations** (especially strings such as `200 t` for tick durations as well) for their delays!
-- **`NetworkEvents.fromServer` and `NetworkEvents.fromClient` have been merged into `NetworkEvents.dataReceived`**, which will handle incoming data from the corresponding side based on the script type.
-- **Registry: `event.custom(T)` is now `event.createCustom(() => T)`**, which takes in a *supplier* rather than an object directly in order to avoid possible early loading of other registry elements it might depend on. Note that custom still exists, but is HEAVILY discouraged for this very reason!
-- **Event `.cancel()` now exits event block** - This may be a small change but it may affect some scripts. Previously it would only mark event as cancelled and didn't do anything, but now it will act as return; call as well.
+- **Scheduled events now take in durations** (especially strings such as `[js]'200 t'` for tick durations as well) for their delays!
+- **`[js]NetworkEvents.fromServer` and `[js]NetworkEvents.fromClient` have been merged into `[js]NetworkEvents.dataReceived`**, which will handle incoming data from the corresponding side based on the script type.
+- **Registry: `[js]event.custom(T)` is now `[js]event.createCustom(() => T)`**, which takes in a *supplier* rather than an object directly in order to avoid possible early loading of other registry elements it might depend on. Note that custom still exists, but is HEAVILY discouraged for this very reason!
+- **Event `[js].cancel()` now exits event block** - This may be a small change but it may affect some scripts. Previously it would only mark event as cancelled and didn't do anything, but now it will act as return; call as well.
 - **Event results have been added!** You now have more granular control over how events work, closer to how they are handled on the Architectury / Minecraft side as well! For example:  
 
 ```js
@@ -25,24 +25,24 @@ Right now, this new system is only actively used for item right click events, bu
 - **Fixed resource and data pack order** - User added resource packs and datapacks will now be above KJS generated packs, so you should be able to change textures and other things with them.
 - **Added .zip loading from kubjes/data and kubejs/assets** - You simply drop a .zip file in that folder and it will force-load it (above KJS, under user packs)
 - **Moved `debugInfo` config** from `kubejs/config/common.properties` to `local/kubejsdev.properties`. No idea why it was in common properties in first place, its a *debug* config for devs.
-- **Improved `Platform.mods.modid.name = 'Custom Name'`** It should work with custom mod IDs on REI and ModNameTooltip now. You should use `Platform.getInfo('custom_mod_id').name = 'Custom Name'` for non-existent mods.
+- **Improved `[js]Platform.mods.modid.name = 'Custom Name'`** It should work with custom mod IDs on REI and ModNameTooltip now. You should use `[js]Platform.getInfo('custom_mod_id').name = 'Custom Name'` for non-existent mods.
 - **Better recipe integration with ProbeJS** - Because of new schema system in KJS, probe is able to much better display what ingredients go where, with less hacks!
 - **.stage(string)** recipe function no longer requires Recipe Stages to work.
 - **Fixed flowing fluid textures** on Fabric and other fluid related issues.
 - **Fixed errors being way too long in logs** - Believe or not, KJS was not supposed to spit out 150 lines of errors for each recipe.
-- **Added a new wrapper `FluidAmounts` for... fluid amounts!** For those of you who can't remember just how many blocks, ingots and nuggets are needed to make a bucket, or who just want to have cross-platform script compatibility with their scripts (since Fabric uses "81000 droplets" rather than "1000 mB" for more precise fluid measurements)
-- **Added custom toast notifications** - You can use `player.notify(title)`, `(title, subtitle)` or `(Notification.make(...))`.
+- **Added a new wrapper `[js]FluidAmounts` for... fluid amounts!** For those of you who can't remember just how many blocks, ingots and nuggets are needed to make a bucket, or who just want to have cross-platform script compatibility with their scripts (since Fabric uses "81000 droplets" rather than "1000 mB" for more precise fluid measurements)
+- **Added custom toast notifications** - You can use `[js]player.notify(title)`, `[js](title, subtitle)` or `[js](Notification.make(...))`.
 - **Added /kubejs reload config command** - No longer you have to restart the game to update configs!
 - **Added /kubejs packmode \[mode\] command** - Same as above, but you don't have to mess with files at all.
 - **Added /kubejs help command** - Useful links directly in-game.
 - **Removed /kjs\_hand command** - Instead added /kjs hand (with space) redirect. Some might hate this change, but \_ is much harder to reach than space, and I'm sure you'll get used to it quickly and like it better.
 - **Fluid registry .tag() fixed** - Now tags flowing fluids too.
-- **You can now replace and match fluids** - You __must__ use `Fluid.of('minecraft:water')` instead of plain string, but you can use it in both `{input: Fluid.of('minecraft:water')}` recipe filter and `event.replaceInput('*', Fluid.of('minecraft:water'), Fluid.of('minecraft:lava'))` replace functions for supported recipe types.
+- **You can now replace and match fluids** - You __must__ use `[js]Fluid.of('minecraft:water')` instead of plain string, but you can use it in both `[js]{input: Fluid.of('minecraft:water')}` recipe filter and `[js]event.replaceInput('*', Fluid.of('minecraft:water'), Fluid.of('minecraft:lava'))` replace functions for supported recipe types.
 
 # For addon mod developers
 
 - **Complete rewrite of recipe system** - Recipes now use recipe schemas, a new system that (almost) fully replaces the old RecipeJS objects. More on that in the [Discord announcement](discord://-/channels/303440391124942858/678385948706209822/1125804134281510983)
-- **Events now have results** for more precise control over return values and we've added a `hasListeners()` check for performance reasons. The most noticeable change for you is going to be that your own events will need to return a `EventResult`, as well.
+- **Events now have results** for more precise control over return values and we've added a `[js]hasListeners()` check for performance reasons. The most noticeable change for you is going to be that your own events will need to return a `[js]EventResult`, as well.
 - **Fixed datagen issue** - KJS should no longer keep datagens from closing game forever in dev environment. [We truly live in an age of wonders!](https://www.youtube.com/watch?v=TiWWvDrIpIE)
 
 ## Recipe Schemas

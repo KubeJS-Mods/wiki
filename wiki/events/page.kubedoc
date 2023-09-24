@@ -52,8 +52,8 @@
 | {{se-s}} | LevelEvents.afterExplosion | :no: |
 | {{st-s}} | WorldgenEvents.add | :no: |
 | {{st-s}} | WorldgenEvents.remove | :no: |
-| {{cl-s}} | NetworkEvents.fromServer | :yes: |
-| {{se-s}} | NetworkEvents.fromClient | :yes: |
+| {{cl-s}} | NetworkEvents.dataReceived | :yes: |
+| {{se-s}} | NetworkEvents.dataReceived | :yes: |
 | {{st-s}} | ItemEvents.modification | :no: |
 | {{st-s}} | ItemEvents.toolTierRegistry | :no: |
 | {{st-s}} | ItemEvents.armorTierRegistry | :no: |

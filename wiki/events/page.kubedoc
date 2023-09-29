@@ -2,11 +2,11 @@
 {{click}}
 
 # {{event-types}}
-## Startup
+## {{event-type-startup}}
 {{startup}}
-## Server
+## {{event-type-server}}
 {{server}}
-## Client
+## {{event-type-client}}
 {{client}}
 
 # {{description}}

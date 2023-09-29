@@ -1,0 +1,43 @@
+# Meta
+support-url: "https://kubejs.com/support"
+recipes-url: "[[/tutorials/recipes]]"
+addons-url: "[[/addons]]"
+features-url: "[[/intro/features]]"
+arch-api: "[Architectury](https://www.curseforge.com/minecraft/mc-mods/architectury-api)"
+discord-url: "https://discord.gg/lat"
+unsupported-version: "1.18.2"
+
+title: "常见问题"
+description: "一些常见的问题及解答"
+
+q-info: "KubeJS 可以做什么？"
+a-info: "KubeJS 允许你使用 JavaScript 编写脚本来管理你的服务器、添加新的方块和物品、更改配方、处理自定义事件，以及更多！"
+
+q-how-use: "我该如何使用 KubeJS？"
+a-how-use: "下载 KubeJS 并启动一次游戏。接下来，你应该可以在游戏目录下找到包含了示例脚本的 `kubejs` 文件夹，其中还包含一篇 `README.txt` 作为介绍。读它就行了！"
+
+q-js-help: "可我不会编写 JavaScript"
+a-js-help: "你可以在这里找到许多示例和预制脚本作为参考。如果你有任何问题，我们随时欢迎你加入我们的 Discord 群组并向我们提问！但一定记得要把问题描述得详细些。"
+
+q-reload: "我能重新加载脚本吗？"
+a-reload: "你可以！在游戏中使用 `/reload` 命令可以重新加载 `server_scripts/` 目录下的脚本，按下 `F3 + T` 快捷键可以重新加载 `client_scripts/` 目录下的脚本，使用 `/kubejs reload startup_scripts` 可以重新加载 `startup_scripts/` 目录下的启动时脚本。如果你不关心混乱的配方重载而是想要测试一些交互事件，则可以使用 `/kubejs reload server_scripts` 命令。不过注意，并不是所有内容都是可以重新加载的，许多内容都需要重新启动游戏才可以重新加载。此外，重新加载启动时脚本（Startup Scripts）并不是一个好主意，但如果你只有一些简单的事件处理器，那应该不成问题。"
+
+q-mod-support: "KubeJS 都支持哪些模组配方 / KubeJS 支持某某模组吗？"
+a-mod-support: "如果此模组使用数据包注册配方（正如大多数模组所做的），那么它受 KubeJS 的默认支持。有些模组可能会需要一些额外的附加模组，但理论上来说，只要是数据包式的配方注册都应该受支持。更多信息请翻阅 {{recipes-url}} 和 {{addons-url}}。"
+
+q-features: "KubeJS 都有什么功能？"
+a-features: "请翻阅 {{features-url}}。"
+
+q-how-work: "KubeJS 是如何工作的？"
+a-how-work: "KubeJS 基于 Rhino 的一个分支工作，后者是由 Mozilla 开发的一个 JavaScript 引擎，可以将 JavaScript 脚本转换为 Java 运行时代码。KubeJS 通过对 Minecraft 类的包装和简化使得无需映射表的脚本编写成为了可能。同时，{{arch-api}} 使得 Forge 和 Fabric 平台得以共用几乎同样的源代码，这让跨端开发变得空前容易。"
+
+q-support: "道理我都懂，但它...就是不运行怎么办？"
+a-support: "请将你的发现提交到 [这里]({{support-url}}) 来帮助我们改进 KubeJS！"
+
+q-discussion: "我还有更多想问的 / 想说的！"
+a-discussion: "如果你在此网站上找不到相应解答，你可以加入我们的 [Discord 群组]({{discord-url}}) 并在 [#kubejs-support]({{discord-url}}) 频道中寻求帮助！"
+
+website: "KubeJS 官网："
+source: "源代码托管："
+download: "下载："
+no-support: "任何低于 {{unsupported-version}} 的版本将不再受支持！"

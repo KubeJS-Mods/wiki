@@ -4,7 +4,7 @@ pdn-url: "[Paint.NET](https://www.getpaint.net/download.html#download)"
 
 title-info: "想要更改标题，只需更改 `kubejs/config/client.properties` 中的 `title` 条目即可。"
 icon-info: "想要更改图标，你需要先准备一张大小适宜（64x64、128x128、256x256 及类似）的图片，并放置在 `kubejs/config/packicon.png` 路径下。"
-icon-32-bit: "此图片需要以 `32 位 PNG` 格式保存，而不是 `自动选择` 或 `24 位 PNG` 之类。否则你会获得一个虚拟机崩溃作为奖励！"
+icon-32-bit: "此图片需要以 `32 位 PNG` 格式保存，而不是 `自动选择` 或 `24 位 PNG` 之类。否则你会获得一个 JVM 崩溃作为奖励！"
 pdn: "在 {{pdn-url}} 中，你可以跟随以下步骤制作一张合适的图片："
 result: "以下是结果："
 incompatible: "与 Fancy Menu 模组不兼容！"

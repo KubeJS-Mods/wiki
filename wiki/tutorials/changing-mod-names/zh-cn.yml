@@ -1,5 +1,5 @@
 title: "更改模组名称"
-description: "你也许会被诅咒，但不会被阻止！"
+description: "听起来就很难搞，不过 KubeJS 使其成为了可能"
 
 startup-line: "在你的启动时脚本中加入这一行即可："
 useful: "此功能在你使用 KubeJS 加入了许多物品却又想让它们显示你的整合包名称而不是“KubeJS”的时候极其有用。"

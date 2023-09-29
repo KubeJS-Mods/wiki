@@ -29,7 +29,7 @@ With type created, it is also possible to blend them into parameters of methods,
 
 Using the `Special.Advancement` as an example, we now try to modify the `stage()` in `RecipeJS` class to let it provides only suggestion of advancements when typed:
 
-Recommended to read with [[03. Document Properties]].
+Recommended to read with [[/addons/third-party/probejs/document-properties]].
 
 ```js
 ProbeJSEvents.generateDoc(event => {

@@ -2,8 +2,6 @@ This wiki contains most of the customizable features you can achieve via ProbeJS
 
 **Requires ProbeJS v4.6.0 or above.**
 
-A typing generator mod to generate KubeJS typings. Enabling Intellisense for your KubeJS environments!
-
 There will be no plan to support any older version. Some older versions may exist in GitHub but do not expect to receive any support from it.
 
 The generation is for VSCode only, other IDEs may support auto-completions for declaration files, but snippets are entirely generated in VSCode style.

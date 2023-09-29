@@ -1,0 +1,61 @@
+In addition to snippets, ProbeJS in v4.6.0 also allows you to create `Special.` types or modify documents programmatically at runtime.
+
+# Adding Special types
+
+`Special.` types are widely used in ProbeJS's documents. For example, `Special.Item` is a union type of every item ID available in the current game, and it is used in `Internal.ItemStack_` and other types to provide type hinting and suggestions:
+
+![[special-types-1.png]]
+![[special-types-2.png]]
+
+To create a `Special.` type in KubeJS, no matter for later usage in documents or `@type` jsdoc annotation. Write:
+
+```js
+ProbeJSEvents.generateDoc(event => {
+    event.specialType("SussyBaka", [
+        1, 2, 3, "\"sus\"", "\"lol\"", "Internal.ItemStack_"
+    ])
+})
+```
+
+And you will get the `Special.SussyBaka` like:
+
+![[special-types-3.png]]
+
+Note that the string literals (`sus` and `lol`) are guarded with `""`. Special type generation will not add quotes around inputs so you can create more flexible types.
+
+# Modifying documents
+
+With type created, it is also possible to blend them into parameters of methods, or just mess around with the original documents by transforming them.
+
+Using the `Special.Advancement` as an example, we now try to modify the `stage()` in `RecipeJS` class to let it provides only suggestion of advancements when typed:
+
+Recommended to read with [[03. Document Properties]].
+
+```js
+ProbeJSEvents.generateDoc(event => {
+    // So we will load the class and tell ProbeJS that we will transform the document of it
+    event.transformDocument(Java.loadClass("dev.latvian.mods.kubejs.recipe.RecipeJS"), document => {
+
+        // Find the first method with name "stage", it is also possible to find others by having more conditions
+        document.methods.find(method => method.name == "stage")
+            // Adds a property to modify the parameter, this will be explained in detail later
+            .addPropertyJson({
+                // The type of the property
+                type: "property:modify",
+                // The name of the property, property name will not change if this is omitted
+                name: "sussy_baka",
+                // The ordinal of the parameter to be modified
+                index: 0,
+                // The new type of property to be modified, type will not change if this is omitted
+                newType: {
+                    type: "type:primitive",
+                    name: "Special.Advancement"
+                }
+            })
+    })
+})
+```
+
+And now we see a modified `RecipeJS` after dumping:
+
+![[modified.gif]]

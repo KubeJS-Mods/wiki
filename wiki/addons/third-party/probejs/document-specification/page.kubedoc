@@ -1,0 +1,191 @@
+More than generating typing dynamically, ProbeJS supports adding statically defined documents to provide better auto-completions (like when recipes are not added correctly), this wiki aims to cover how to add a static document into the mod, and what you can do with the document.
+
+# 1. Where documents are located
+
+To add your own-defined documents to current ProbeJS context, you can put your docs at the `docs` folder under ProbeJS directory, which is located in `.minecraft/kubejs/probe/docs`. You may notice there's a `user` directory under the probe directory too, that folder is for putting raw TS declaration files, which is not a goal in this wiki.
+
+To load documents inside a mod, ProbeJS will first try to look up `probejs.documents.txt` at the root of each mod jar, then load every file it specified. Please refer to [this](https://github.com/Prunoideae/ProbeJS/blob/master/common/src/main/resources/probejs.documents.txt) as an example if you want to add some docs to your mod.
+
+Please check out [minecraft.d.ts](https://github.com/Prunoideae/ProbeJS/blob/master/common/src/main/resources/docs/minecraft.d.ts) for examples about most functions the document can provide, if you want to start reading about how to write the docs.
+
+# 2 Class, Properties and Targeting
+
+## 2.1 Class Documents
+
+The base of document is class, to create a class, you need to write:
+```ts
+class ResourceLocation {
+
+}
+```
+
+Where the first line must end with a `{`, and the `}` must be at a new line.
+
+This will create a `Document.ResourceLocation` class when the dump is generated. You can refer this class in other documents by specifying `Document.ResourceLocation`, note that it is not `ResourceLocation` or `Internal.ResourceLocation`.
+
+To make the class actually targets an Internal class, you need to specify the class name by attaching a special comment to it:
+```ts
+/**
+ * @target net.minecraft.resources.ResourceLocation
+ */
+class ResourceLocation {
+
+}
+```
+
+The `@target` will mark that this document class should be pointed to an internal class, to prevent confusion, a full class name must be specified, for inner classes, `$` is used, as how `Class::getName` in Java will return the class name.
+
+If multiple documents of a same target are specified, the document creation will create all methods specified in the documents, but the document targeting will only accept the last method specified by the documents:
+
+```ts
+/**
+ * @mod cucumber
+ */
+class RecipeHolder {
+    readonly cucumber: Document.CucumberRecipes;
+}
+
+/**
+* @mod integrateddynamics
+*/
+class RecipeHolder {
+    /**
+     * The builtin support for Integrated Dynamics is not complete in KubeJS.
+     * 
+     * If you need Basin or Mechanical Basin, please use event.custom() .
+     */
+    readonly integrateddynamics: Document.IntegratedDynamicsRecipes;
+}
+```
+
+The `Document.RecipeHolder` class will have both `integrateddynamics` and `cucumber` as property when both documents are loaded.
+
+## 2.2 Method Documents
+
+To specify a method in the class, you should write like:
+
+```ts
+/**
+ * @target dev.latvian.mods.kubejs.misc.EnchantmentBuilder
+ */
+class EnchantmentBuilder {
+    doPostAttack(i: dev.latvian.mods.kubejs.misc.EnchantmentBuilder$PostFunction): dev.latvian.mods.kubejs.misc.EnchantmentBuilder;
+}
+```
+
+Note that how all parameters and the return are in full class name, if the targeted class contains a method of identical name, parameter signatures and return type, the method will be targeted to the class method, a method will be created otherwise.
+
+You can add `static` modifier to mark this method will be a static method too. Static and non-static methods will be treated as different methods when targeting.
+
+If the targeted method is a bean method, which is named in `getXY(): T`, `setXY(arg0): void` or `isXY(): boolean`, and the targeted method exists in the Java class, and beanable, the bean `get xY(): T`, `set xY(arg0): void` and `get xY(): boolean` will be modified by the document too.
+
+## 2.3 Field Documents
+
+To specify a field in the class, you should write like:
+
+```ts
+class RecipeHolder {
+    readonly minecraft: Document.MinecraftRecipes;
+}
+```
+
+Different from method specification, field overrides occur when the specified field has an identical name with the field targeted, and thus the type of the field will be the documented one, no matter what. If the document field name is not existed in the target class, a new field will be created when dumping.
+
+You can add `static` modifier to mark this field to be a `static` field or add `readonly` modifier to mark this field to be a `readonly` (or `final` in Java). Note that this will not change how fields are targeted.
+
+# 3 Comments and special handlers
+
+You can attach comments to classes, methods or fields, and they will be retained when dump is generated. However, special comments (like `@target`) will be ignored when comment is generated. 
+
+## 3.1 `@mod`
+
+When specified with a mod id, the commented class will be loaded when and only when the mod id is present. This is only applicable to a Class Document.
+
+Example:
+```ts
+/**
+ * @mod cucumber
+ */
+class RecipeHolder {
+    cucumber: Document.CucumberRecipes;
+}
+```
+
+Will make this `RecipeHolder` class document to only be loaded when the mod `cucumber` is present.
+
+## 3.2 `@hidden`
+
+When specified, the commented object will not be present when the dump is generated. This is applicable to Class, Method and Field Documents.
+
+Example:
+```ts
+/**
+* @target dev.latvian.mods.kubejs.recipe.RecipeEventJS
+*/
+class RecipeEventJS {
+    /**
+     * @hidden
+     */
+    campfireCooking: dev.latvian.mods.kubejs.recipe.RecipeFunction;
+}
+```
+Will hide the field `campfireCooking` of the `RecipeEventJS` class.
+
+## 3.3 `@assign`
+
+When specified with a string or a type with full class name, all the commented type will be marked to be convertible from the given type. This is only applicable to Class Document.
+
+Example:
+```ts
+/**
+ * @target net.minecraft.resources.ResourceLocation
+ * @assign string
+ */
+class ResourceLocation {
+
+}
+```
+
+Thus, all methods which uses `ResourceLocation` as param type will use `ResourceLocation_` instead, and the underscored type is an union type of original class, and `string`. For detailed examples please refer to `minecraft.d.ts`.
+
+## 3.4 `@modify`
+
+When specified with two strings (name and type, respectively) separated by spaces, the method param with the same name will have type modified to be the specified type. This is only applicable to Method Document.
+
+Example:
+```ts
+/**
+ * @target java.util.Map
+ */
+class Map {
+    /**
+     * @modify key K
+     */
+    get(key: java.lang.Object): V;
+}
+```
+
+Will modify the key value from `Object` to `K`.
+
+## 3.5 `@rename`
+
+When specified with two strings (origName and curName, respectively) separated by spaces, the method param with the same name to `origName` will be renamed to `curName`. This is only applicable to Method Document.
+
+## 3.6 `@returns`
+
+When specified with a string or a type with full class name, the commented method's return type will be changed to the specified string or type. This is only applicable to Method Document.
+
+Example:
+```ts
+/**
+* @target dev.latvian.mods.kubejs.recipe.RecipeEventJS
+*/
+class RecipeEventJS {
+    /**
+     * Holds all the recipes collected from documents.
+     * @returns Document.RecipeHolder
+     */
+    getRecipes(): java.util.Map<java.lang.String, java.lang.Object>;
+}
+```
+Will change the return type of `getRecipes()` to `Document.RecipeHolder`.

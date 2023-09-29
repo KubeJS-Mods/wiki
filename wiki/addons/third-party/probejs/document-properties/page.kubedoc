@@ -1,0 +1,238 @@
+Properties are additional objects attached to a document (Class, Field, Method, etc.). With properties, you can change the name/type of method/field, add comments, or assign new types for type conversion (like `Special.Item` to `Internal.ItemStack_`).
+
+Recommended to read with [[/addons/third-party/probejs/dynamic-document-modification]].
+
+# Functional Properties
+
+Functional properties are directly attached to the document and have a specific effect on the original document.
+
+## `property:modify`
+
+Modifies a param in the method, can only be attached to a `method` document.
+
+```jsonc
+{
+    "type": "property:modify",
+    // The index of param in the method starting from 0.
+    "index": 0,
+    // The new name of the param, unchanged if omitted.
+    "name" : "ingredient"
+    // The new type of the param, unchanged if omitted. See the Type Properties section below for type specifications.
+    "newType": {
+        "type": "type:class",
+        "name": "net.minecraft.world.item.crafting.Ingredient"
+    }
+}
+```
+
+## `property:assign`
+
+Assigns a new type for conversion to the class, It can only be attached to a `class` document.
+
+Multiple properties at present will form a union type of all assigned types.
+
+```jsonc
+{
+    "type": "property:assign",
+    // If true, remove the original type in the type definition. Default to false.
+    "shield": false,
+    // The type assigned to this class. See the Type Properties section below for type specifications.
+    "assign": {
+        "type": "type:primitive",
+        "name": "string"
+    }
+}
+```
+
+## `property:comment`
+
+Attachs lines of comment to the object attached when formatted. It can be applied to all documents.
+
+```jsonc
+{
+    "type": "property:comment",
+    "lines": [
+        // Multiple lines of comments will be joined with newlines when formatted.
+        "Comment1",
+        "Comment2",
+    ]
+}
+```
+
+## `property:hide`
+
+Hides the attached object. It can be applied to all documents.
+
+```jsonc
+{
+    "type": "property:hide"
+}
+```
+
+# Type properties
+
+Type properties describe a type for many usages in the document.
+
+## `type:primitive`
+
+Represents a plain string. Will be as-is when formatted.
+
+```jsonc
+{
+    "type": "type:primitive",
+    // Will be `number` when formatted.
+    "name": "number"
+}
+```
+
+## `type:class`
+
+Represents a class type. Will be automatically resolved when formatted.
+
+```jsonc
+{
+    "type": "type:class",
+    // Will be resolved to `Internal.Biconsumer` when formatted.
+    "name": "java.util.function.BiConsumer"
+}
+```
+
+## `type:array`
+
+Represents an array type. Will be `InnerType[]` when formatted.
+
+```jsonc
+{
+    "type": "type:array",
+    // The InnerType
+    "component": {
+        "type": "type:class",
+        "name": "float"
+    }
+}
+```
+
+## `type:parameterized`
+
+Represents a parameterized type. WIll be `BaseType<ParamType1, ...>` when formatted.
+
+```jsonc
+{
+    // Will be `Internal.CompletionStage<T>` when formatted.
+    "type": "type:parameterized",
+    // Type parameters
+    "params": [
+        {
+            "type": "type:variable",
+            "name": "T"
+        }
+    ],
+    // The base type
+    "base": {
+        "type": "type:class",
+        "name": "java.util.concurrent.CompletionStage"
+    }
+}
+```
+
+## `type:variable`
+
+Represents a variable type. Will be as-is when formatted.
+
+```jsonc
+{
+    "type": "type:variable",
+    // Will be `T` when formatted.
+    "name": "T"
+}
+```
+
+## `type:union`
+
+Represents a union type. Will be `Type1 | Type2 ...` when formatted.
+
+```jsonc
+{
+    "type": "type:union",
+    // All types in the union, will be `Special.RecipeId | RegExp` when formatted.
+    "types": [
+        {
+            "type": "type:primitive",
+            "name": "Special.RecipeId"
+        },
+        {
+            "type": "type:primitive",
+            "name": "RegExp"
+        }
+    ]
+}
+```
+
+## `type:intersection`
+
+Represents an intersection type. Will be `Type1 & Type2 ...` when formatted.
+
+```jsonc
+{
+    "type": "type:intersection",
+    // All types in the intersection, will be `Special.Block & `${string}:${string}`` when formatted.
+    "types": [
+        {
+            "type": "type:primitive",
+            "name": "Special.Block"
+        },
+        {
+            "type": "type:primitive",
+            "name": "`${string}:${string}`"
+        }
+    ]
+}
+```
+
+## `type:jsArray`
+
+Reprensents a JSDoc array type. Will be `[Type1, Type2 ...]` when formatted.
+
+```jsonc
+{
+    "type": "type:jsArray",
+    // All types in the array, will be `[A, B]` when formatted.
+    "types": [
+        {
+            "type": "type:variable",
+            "name": "A"
+        },
+        {
+            "type": "type:variable",
+            "name": "B"
+        }
+    ]
+}
+```
+
+## `type:object`
+
+Represents an object type. Will be `{key1: Type1, key2: Type2 ...}` when formatted.
+
+```jsonc
+{
+    "type": "type:object",
+    // All items in the type, will be `{min: number, max: number}` when formatted.
+    "members": [
+        {
+            "key": "min",
+            "value": {
+                "type": "type:primitive",
+                "name": "number"
+            }
+        },
+        {
+            "key": "max",
+            "value": {
+                "type": "type:primitive",
+                "name": "number"
+            }
+        }
+    ]
+}
+```

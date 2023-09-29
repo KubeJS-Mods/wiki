@@ -1,0 +1,49 @@
+This wiki contains most of the customizable features you can achieve via ProbeJS' `generateDoc` event.
+
+**Requires ProbeJS v4.6.0 or above.**
+
+A typing generator mod to generate KubeJS typings. Enabling Intellisense for your KubeJS environments!
+
+There will be no plan to support any older version. Some older versions may exist in GitHub but do not expect to receive any support from it.
+
+The generation is for VSCode only, other IDEs may support auto-completions for declaration files, but snippets are entirely generated in VSCode style.
+
+With the [VSCode extension](https://marketplace.visualstudio.com/items?itemName=Prunoideae.probejs) installed, it can also provide more detailed info about items if the cursor is hovering on it. (v4.8.0+)
+
+Item/fluid rendering has been stripped off in 1.20.1. If you want to have a peek at the item icons when hovering, install and run the [IconExporter mod](https://curseforge.com/minecraft/mc-mods/iconexporter). Not installing the mod will not make the extension unusable.
+
+Usage:
+. Install the mod, run `/probejs dump` in your game in the singleplayer, then open your `.minecraft` in VSCode as a folder.
+. The .minecraft folder is the parent folder of the KubeJS folder.
+. Type docs and autocompletion should appear when you open the js files under the KubeJS folder.
+. Also, try to type like `@item` or `@block` to see snippets generated.
+
+In case nothing shows up in VSCode, check that:
+- Many JSON files started with "probe" in the .vscode folder are under your .minecraft folder.
+- There is a "probe" folder under the KubeJS folder, and many files ending with ".d.ts" are in the folder.
+- All ".d.ts" files don't have syntax errors indicated by VSCode.
+
+
+If all three steps are correct, you might need to configure your VSCode to make it accepts how ProbeJS dumps the typing, or just the VSCode can't handle the JS project created by ProbeJS.
+
+If any steps fail, especially step 3, please submit an issue to GitHub.
+
+Even if your VSCode can't figure out how to deal with it (it sometimes happens like being stuck at downloading the intellisense model or just not having a built-in JS extension at all).
+
+ProbeJS still can help your coding by snippets, as well as some information displayed via the [extension](https://marketplace.visualstudio.com/items?itemName=Prunoideae.probejs).
+
+Both Forge and Fabric are now supported (Please check in the **Files** tab since Recent Files will **only** show the latest entry). Please refer to the GitHub page for detailed instructions on installation and usage.
+
+Please update to the newest version first if you want to report some problems.
+
+Auto-completions for KubeJS scripts:
+![[auto-completions.gif]]
+
+Code snippets for item, fluids and etc:
+![[snippets.gif]]
+
+Also supports direct insertion of recipe JSONs:
+![[json.gif]]
+
+Rich item display:
+![[rich-item-display.gif]]

@@ -1,0 +1,45 @@
+ProbeJS v4.6.0 allows users to add user-defined snippets at runtime.
+
+# Adding snippets with choices
+
+Snippets added in this way will work like `@item` and other similar registry snippets. Snippets added in this way will always be prefixed with `@`.
+
+To add the snippet, listen to the `ProbeJSEvents.generateDoc` in `server_scripts`, like:
+
+```js
+ProbeJSEvents.generateDoc(event => {
+    event.addSnippet("metal", ["gold", "iron", "copper", "netherite"],  "A collection of metals")
+})
+```
+
+The first argument will be the type and prefix of this snippet. This means it will pop up if `@metal` is typed in the example:
+
+![[metal.gif]]
+
+The third parameter is the description of this snippet. It is optional.
+
+The event will be fired right before every time ProbeJS starts the dumping process. `/probejs dump` now also executes a `/reload` silently, so it is safe to dump directly after some code changes are made.
+
+# Adding fully-customized snippets
+
+Of course, just simply dumping a list of items won't satisfy many of the use cases. ProbeJS also provides a way to generate fully-customized snippets, as the example below:
+
+```js
+ProbeJSEvents.generateDoc(event => {
+    event.customSnippet(
+        "itemstack",
+        ["@itemstack"],
+        [`"\${1}x \${2|${Item.list.map(stack => stack.id).join(",")}|}"`],
+        "Snippets for creating ItemStack, first stop is number and the second is item."
+    )
+})
+
+```
+
+The first parameter is the type, the second is the prefixes that will trigger the snippet, the third is now a list of strings representing the snippet body, and the fourth is still the description.
+
+By customizing the snippet yourself, you now get a way more powerful snippet:
+
+![[snippet.gif]]
+
+For detailed specifications about user-defined snippets in VSCode, please refer to [the official document](https://code.visualstudio.com/docs/editor/userdefinedsnippets).

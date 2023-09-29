@@ -1,0 +1,7 @@
+title: "默认游戏设置"
+description: "生成默认的 `options.txt` 文件"
+
+intro: "你可以通过 KubeJS 生成 `options.txt` 文件，进而自定义游戏设置，例如按键绑定、视频设置、启用的资源包、疾跑设置、自动跳跃，甚至高级物品提示等。"
+overriden: "那么，为什么不直接在整合包内包含一个 `options.txt` 文件而是选择使用 KubeJS 提供的方法呢？假如你内置了 `options.txt`，那么每当用户更新整合包，客户端的游戏自定义设置都会被覆盖。而 KubeJS 只会在第一次启动整合包时生成 `options.txt` 文件，对开发者和用户都是更优解。"
+howto: "只需在 `kubejs/config` 目录下新建 `defaultoptions.txt` 文件即可使用此功能。你可以从 `options.txt` 中拷贝你想要更改的设置并存储到 `defaultoptions.txt` 中。大功告成！"
+optionlist: "你可以在 [Minecraft Wiki](https://minecraft.fandom.com/zh/wiki/Options.txt) 上找到关于 `options.txt` 中各种选项的详细信息。"

@@ -5,13 +5,17 @@
 |> New
 ```js
 BlockEvents.rightClicked(e => {
-  if(e.block.id === 'minecraft:dirt') console.info('Hi!')
+  if(e.block.id === 'minecraft:dirt') {
+    console.info('Hi!')
+  }
 })
 ```
 <||> Old
 ```js
 onEvent('block.right_click', e => {
-  if(e.block.id === 'minecraft:dirt') console.info('Hi!')
+  if(e.block.id === 'minecraft:dirt') {
+    console.info('Hi!')
+  }
 })
 ```
 <|
@@ -31,8 +35,11 @@ BlockEvents.rightClicked('minecraft:stone', e => {
 <||> Old
 ```js
 onEvent('block.right_click', e => {
-  if(e.block.id === 'minecraft:dirt') console.info('Hi!')
-  else if(e.block.id === 'minecraft:stone') console.info('Bye!')
+  if(e.block.id === 'minecraft:dirt') {
+    console.info('Hi!')
+  } else if(e.block.id === 'minecraft:stone') {
+    console.info('Bye!')
+  }
 })
 ```
 <|

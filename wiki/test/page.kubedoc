@@ -253,7 +253,7 @@ onEvent('recipes', event => {
 
 >>> #test
 Referenced, multi-line content:
-![[test.png]]
+![[test.png|**test** alt text]]
 Bottom text
 <<<
 

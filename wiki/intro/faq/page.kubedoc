@@ -8,7 +8,9 @@
 {a-js-help}
 
 # {q-reload}
-{a-reload}
+- {a-reload-st}
+- {a-reload-se}
+- {a-reload-cl}
 
 # {q-mod-support}
 {a-mod-support}

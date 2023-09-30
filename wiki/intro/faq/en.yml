@@ -17,9 +17,9 @@ q-js-help: "I don't know JavaScript"
 a-js-help: "There's examples and pre-made scripts here. And you can always ask in discord support channel for help with scripts, but be specific."
 
 q-reload: "Can I reload scripts?"
-a-reload-st: "{st-s}: Restart game or use `/kubejs reload startup_scripts`. Note: Not everything is reloadable. Some things require you to restart game, some only world, some work on fly."
-a-reload-se: "{se-s}: Use `/reload` to reload scripts, recipes, tags and all data or `/kubejs reload server_scripts` to reload only scripts"
-a-reload-cl: "{cl-s}: Use `F3 + T` to reload scripts and assets or `/kubejs reload client_scripts` to reload only scripts"
+a-reload-st: "{st-s}: Restart the game or use `/kubejs reload startup_scripts`. Not everything is reloadable - some things require you to restart the game (e.g. registries) or the world (e.g. worldgen)."
+a-reload-se: "{se-s}: Use `/reload` to reload scripts, recipes, tags and all data or `/kubejs reload server_scripts` to reload scripts only"
+a-reload-cl: "{cl-s}: Use `F3 + T` to reload scripts and assets or `/kubejs reload client_scripts` to reload scripts only"
 
 q-mod-support: "What mod recipes does it support / is mod X supported?"
 a-mod-support: "If the mod uses datapack recipes, then it's supported by default. Some more complicated mods require addon mods, but in theory, still would work with datapack recipes. See {recipes-url} and {addons-url} sections for more info."

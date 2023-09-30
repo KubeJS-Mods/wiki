@@ -55,14 +55,16 @@ You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
 - `==text==` - Highlighted text
 - `{replacement}` - Language key or global replacement, typically emojis (e.g. `{language-key-1}` or `{yes}`, see [global.yml](/global.yml))
 - `[[/path/to/page]]` or `[[/path/to/page|text]]` - Page link. Text is optional, page title is used otherwise (e.g. `[[/addons]]` or `[[/addons|Cool Addons]]`)
-- `![[filename]]` or `![[filename|alt]]` - Media block - can be an image, video or file in same directory as page. Alt text is optional (e.g. `![[image.png]]` or `![[image.png|Image Name]]`)
-- `![[youtube|code]]` - Youtube media block (e.g. `![[youtube|eT3BFzSD6YY]]`)
+- `![[filename]]` - Media block - can be an image, video or file in same directory as page. Alt text is optional (e.g. `![[image.png]]`)
+- `![[youtube:code]]` - Youtube media block (e.g. `![[youtube:eT3BFzSD6YY]]`)
+- `![[emoji:filename]]` - Media block but image will be inlined (e.g. `![[emoji:pepehands.png]]`)
+- `![[media|alt]]` - Same media block but with description text (e.g. `![[image.png|A very cool image]]`)
 - `[text](url)` - External link, only supports https:// (e.g. `[KubeJS Website](https://kubejs.com/)`)
 - `---` - Horizontal line
 - `# Heading 1` - Heading 1
-- `## Heading 2` - Heading 2****
+- `## Heading 2` - Heading 2
 - `### Heading 3` - Heading 3
-- `#[[text|color]]` - Colored text. You can use either hex code `RRGGBB` or color name, one of
+- `#[[text|color]]` - Colored text. You can use either hex code `#z\RRGGBB` or color name, one of
     - red
     - yellow
     - green
@@ -119,6 +121,7 @@ Content here.
 Reference block: `{{#identifier}}`
 
 e.g.
+
 ```
 >>> #test
 Line 1

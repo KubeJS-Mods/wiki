@@ -53,6 +53,8 @@ Inline `code` and `code II` and `code *III*`
 
 #[[**Red and bold**|red]]
 
+Inline image ![[emoji:test.png|Test] test
+
 ---
 
 Emoji test:
@@ -189,7 +191,7 @@ Item 2
 - Another list item
 |> Nested dropdown list
 Don't watch this video!
-![[youtube|YAAHW7AZx48]]
+![[youtube:YAAHW7AZx48]]
 <|
 <|
 
@@ -199,7 +201,7 @@ Don't watch this video!
 Nothing to see here.
 <||>+ Tab II
 ☃️
-![[youtube|7HNuh_KCHM0]]
+![[youtube:7HNuh_KCHM0|It's water.]]
 <|
 
 ---

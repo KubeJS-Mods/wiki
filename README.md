@@ -53,7 +53,7 @@ You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
 - `__text__` - Underlined text
 - `` `text` `` - Inline code
 - `==text==` - Highlighted text
-- `{{language-key}}` - Language key (e.g. `{{language-key-1}}`)
+- `{replacement}` - Language key or global replacement, typically emojis (e.g. `{language-key-1}` or `{yes}`, see [global.yml](/global.yml))
 - `[[/path/to/page]]` or `[[/path/to/page|text]]` - Page link. Text is optional, page title is used otherwise (e.g. `[[/addons]]` or `[[/addons|Cool Addons]]`)
 - `![[filename]]` or `![[filename|alt]]` - Media block - can be an image, video or file in same directory as page. Alt text is optional (e.g. `![[image.png]]` or `![[image.png|Image Name]]`)
 - `![[youtube|code]]` - Youtube media block (e.g. `![[youtube|eT3BFzSD6YY]]`)
@@ -62,7 +62,6 @@ You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
 - `# Heading 1` - Heading 1
 - `## Heading 2` - Heading 2****
 - `### Heading 3` - Heading 3
-- `:global-replacement:` - Global replacement, typically emoji (e.g `:yes:`, see [global.yml](/global.yml))
 - `#[[text|color]]` - Colored text. You can use either hex code `RRGGBB` or color name, one of
     - red
     - yellow

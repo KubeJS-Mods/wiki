@@ -28,7 +28,7 @@ __Underline__
 ==Highlight==
 ===Error Highlight===
 ***~~__==`Everything`==__~~***
-{{description}} - Language key
+{description} - Language key
 [Test Link](https://kubejs.com/)
 Page Link [[/test]]
 Page Link - [[/test|See this page]]
@@ -43,7 +43,7 @@ Inline `code` and `code II` and `code *III*`
 
 **Bold \*\*Escaped**
 
-{{missing-key-test}}
+{missing-key-test}
 
 ![[test.png|Test Image]]![[test.png|Test Image]]
 
@@ -56,10 +56,10 @@ Inline `code` and `code II` and `code *III*`
 ---
 
 Emoji test:
-:no: :yes: :thumbs-up: :thumbs-down: :point-up:
+{no} {yes} {thumbs-up} {thumbs-down} {point-up}
 
 Script types:
-:st-s:, :se-s:, :cl-s:
+{st-s}, {se-s}, {cl-s}
 
 ---
 
@@ -98,7 +98,7 @@ ServerEvents.recipes(event => {
 
 >>>
 Quote callout
-![[https://i.latvian.dev/pc/2023-09-24_09.00.50.png]]
+![[https://i.latvian.dev/pc/2023-09-24_09.00.50.png|This is where I would write something profound, but uh.. Nope. Nothing comes to mind.]]
 <<<
 
 >>> info
@@ -251,19 +251,19 @@ onEvent('recipes', event => {
 Šaursliežu Dzelsceļš
 生活就像海洋，只有意志坚强的人才能到达彼岸
 
-
 ---
 
 >>> #test
 Referenced, multi-line content:
-![[test.png|**test** alt text]]
+![[test.png|**test** alt text, image from {cl-s}]]
 Bottom text
 <<<
 
 - List item 1
-- {{#test}}
+- List item 2, <#test>
+- List item 3
 
 | Header 1 | Header 2 |
 | -------- | -------- |
 | Cell 1 | Cell 2 |
-| Cell 3 | {{#test}} |
+| Cell 3 | <#test> |

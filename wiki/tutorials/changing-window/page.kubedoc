@@ -1,25 +1,25 @@
 >>> info
-{{title-info}}
+{title-info}
 <<<
 
 >>> info
-{{icon-info}}
+{icon-info}
 <<<
 
 >>> danger
-{{icon-32-bit}}
+{icon-32-bit}
 <<<
 
-{{pdn}}
+{pdn}
 
 ![[pdn.png]]
 
-{{result}}
+{result}
 
 ![[result-1.png]]
 
 ![[result-2.png]]
 
 >>> warn
-{{incompatible}}
+{incompatible}
 <<<

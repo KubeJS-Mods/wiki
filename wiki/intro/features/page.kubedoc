@@ -1,4 +1,4 @@
-{{intro}}
+{intro}
 
 - [[/events|List of all Events]]
 - [[/tutorials/recipes]]
@@ -16,4 +16,4 @@
 - [[/tutorials/chat]]
 - [[/tutorials/block-interactions]]
 - [[/tutorials/item-interactions]]
-- {{etc}}
+- {etc}

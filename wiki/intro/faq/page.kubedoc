@@ -1,38 +1,38 @@
-# {{q-info}}
-{{a-info}}
+# {q-info}
+{a-info}
 
-# {{q-how-use}}
-{{a-how-use}}
+# {q-how-use}
+{a-how-use}
 
-# {{q-js-help}}
-{{a-js-help}}
+# {q-js-help}
+{a-js-help}
 
-# {{q-reload}}
-{{a-reload}}
+# {q-reload}
+{a-reload}
 
-# {{q-mod-support}}
-{{a-mod-support}}
+# {q-mod-support}
+{a-mod-support}
 
-# {{q-features}}
-{{a-features}}
+# {q-features}
+{a-features}
 
-# {{q-how-work}}
-{{a-how-work}}
+# {q-how-work}
+{a-how-work}
 
-# {{q-support}}
-{{a-support}}
+# {q-support}
+{a-support}
 
-# {{q-discussion}}
-{{a-discussion}}
+# {q-discussion}
+{a-discussion}
 
-[![[https://kubejs.com/discord.png]]]({{discord-url}})
+[![[https://kubejs.com/discord.png]]]({discord-url})
 
-{{website}}: [](https://kubejs.com/)
+{website}: [](https://kubejs.com/)
 
-{{source}}: [](https://kubejs.com/reference)
+{source}: [](https://kubejs.com/reference)
 
-{{download}}: [](https://kubejs.com/downloads)
+{download}: [](https://kubejs.com/downloads)
 
 >>> warn
-{{no-support}}
+{no-support}
 <<<

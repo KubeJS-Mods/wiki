@@ -1,12 +1,12 @@
-{{startup-line}}
+{startup-line}
 
 ```js
 Platform.mods.kubejs.name = 'My Modpack Name'
 ```
 
-{{useful}}
+{useful}
 
-{{other-mods}}
+{other-mods}
 
 ```js
 Platform.mods.botania.name = 'Plant Tech Mod'

@@ -56,7 +56,10 @@ Inline `code` and `code II` and `code *III*`
 ---
 
 Emoji test:
-:no: :yes: :thumbs_up: :thumbs_down: :point_up:
+:no: :yes: :thumbs-up: :thumbs-down: :point-up:
+
+Script types:
+:st-s:, :se-s:, :cl-s:
 
 ---
 

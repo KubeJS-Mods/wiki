@@ -1,5 +1,13 @@
 no: "❌"
 yes: "✅"
-thumbs_up: "👍"
-thumbs_down: "👎"
-point_up: "☝️"
+thumbs-up: "👍"
+thumbs-down: "👎"
+point-up: "☝️"
+
+discord-url: "https://discord.gg/lat"
+unsupported-version: "1.18.2"
+support-url: "https://kubejs.com/support"
+
+st-s: "#[[`startup_scripts/`|2dc26b]]"
+cl-s: "#[[`client_scripts/`|e67e23]]"
+se-s: "#[[`server_scripts/`|b96ad9]]"

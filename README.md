@@ -102,9 +102,9 @@ You can use one of these markers:
 
 - `quote` (default, gray)
 - `info` (blue)
-- `warn` (orange)
-- `danger` (red)
 - `success` (green)
+- `warning` (orange)
+- `danger` (red)
 
 ---
 

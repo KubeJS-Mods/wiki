@@ -12,6 +12,7 @@ a-info: "This mod lets you create scripts in JavaScript language to manage your 
 
 q-how-use: "How to use it?"
 a-how-use: "Run the game with mod installed once. It should generate a `kubejs` folder in your minecraft directory with example scripts and README.txt. Read that!"
+a-video: "Here's a video tutorial:"
 
 q-js-help: "I don't know JavaScript"
 a-js-help: "There's examples and pre-made scripts here. And you can always ask in discord support channel for help with scripts, but be specific."
@@ -25,7 +26,7 @@ q-mod-support: "What mod recipes does it support / is mod X supported?"
 a-mod-support: "If the mod uses datapack recipes, then it's supported by default. Some more complicated mods require addon mods, but in theory, still would work with datapack recipes. See {recipes-url} and {addons-url} sections for more info."
 
 q-features: "What features does this mod have?"
-a-features: "See <features-url>."
+a-features: "See {features-url}."
 
 q-how-work: "How does this mod work?"
 a-how-work: "It uses a fork of Rhino, a JavaScript engine by Mozilla to convert JS code to Java classes at runtime. KubeJS wraps minecraft classes and adds utilities to simplify that a lot and remove need for mappings. {arch-api} lets nearly the same source code be compiled for both Forge and Fabric making porting extremely easy."

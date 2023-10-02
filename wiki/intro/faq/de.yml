@@ -29,6 +29,6 @@ q-discussion: "Ich habe noch mehr Fragen / Vorschläge!"
 a-discussion: "Wenn du im Wiki nicht die Antwort findest, die du gesucht hast, kannst du unserem [Discord-Server]({discord-url}) beitreten und im [#kubejs-support]({discord-url}) Kanal nach Hilfe fragen!"
 
 website: "Website"
-source: "Quellcode und Issue Tracker"
+source: "Quellcode"
 download: "Download"
 no-support: "Alle älteren Versionen als {unsupported-version} werden nicht mehr unterstützt!"

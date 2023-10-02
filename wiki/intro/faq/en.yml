@@ -38,6 +38,6 @@ q-discussion: "I have more questions/suggestions!"
 a-discussion: "If wiki didn't have the answer for what you were looking for, you can join the [Discord server]({discord-url}) and ask for help on [#kubejs-support]({discord-url}) channel!"
 
 website: "Website"
-source: "Source and issue tracker"
+source: "Source code"
 download: "Download"
 no-support: "Anything older than {unsupported-version} is no longer supported!"

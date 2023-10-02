@@ -14,15 +14,17 @@ Any script that modifies recipes should be placed in the {se-s} folder, and can 
 
 Any modifications to the recipes should be done within the context of a `recipes` event. This means that we need to register an "event listener" for the `ServerEvents.recipes` event, and give it some code to execute whenever the game is ready to modify recipes. Here's how we tell KubeJS to execute some code whenever it's recipe time:
 
+|> 1.19.2+
 ```js
 /* 
- * ServerEvents.recipes() is a function that accepts another function,
+ * ServerEvents.recipes(callback) is a function that accepts another function,
  * called the "callback", as a parameter. The callback gets run when the 
  * server is working on recipes, and then we can make our own changes.
  * When the callback runs, it is also known as the event "firing". 
 */
 
-ServerEvents.recipes(event => { //listen for the "recipes" server event.
+// Listen for the "recipes" server event.
+ServerEvents.recipes(event => {
   // You can replace `event` with any name you like, as
   // long as you change it inside the callback too!
 
@@ -33,6 +35,28 @@ ServerEvents.recipes(event => { //listen for the "recipes" server event.
   console.log('Hello! The recipe event has fired!')
 })
 ```
+<||> 1.18.2
+```js
+/*
+ * onEvent('recipes', callback) is a function that accepts another function,
+ * called the "callback", as a parameter. The callback gets run when the
+ * server is working on recipes, and then we can make our own changes.
+ * When the callback runs, it is also known as the event "firing".
+*/
+
+// Listen for the "recipes" server event.
+onEvent('recipes', event => {
+  // You can replace `event` with any name you like, as
+  // long as you change it inside the callback too!
+
+  // This part, inside the curly braces, is the callback.
+  // You can modify as many recipes as you like in here,
+  // without needing to use ServerEvents.recipes() again.
+
+  console.log('Hello! The recipe event has fired!')
+})
+```
+<|
 
 In the next sections, you can see what to put inside your callback.
 
@@ -42,11 +66,11 @@ The following is all code that should be placed *inside* your recipe callback.
 
 ## Shaped
 
-Shaped recipes are added with the `event.shaped()` method. Shaped recipes must have their ingredients in a specific order and shape in order to match the player's input. The arguments to `event.shaped()` are:
+Shaped recipes are added with the `[js]event.shaped()` method. Shaped recipes must have their ingredients in a specific order and shape in order to match the player's input. The arguments to `[js]event.shaped()` are:
 
 1. The output item, which can have a count of 1-64
 2. An array (max length 3) of crafting table rows, represented as strings (max length 3). Spaces represent slots with no item, and letters represent items. The letters don't have to mean anything; you explain what they mean in the next argument.
-3. An object mapping the letters to Items, like `{letter: item}`. Input items must have a count of 1.
+3. An object mapping the letters to Items, like `[js]{letter: item}`. Input items must have a count of 1.
 
 If you want to force strict positions on the crafting grid or disable mirroring, see Methods of Custom Recipes.
 
@@ -68,7 +92,7 @@ event.shaped(
 
 ## Shapeless
 
-Shapeless recipes are added with the `event.shapeless()` method. Players can put ingredients of shapeless recipes anywhere on the grid and it will still craft. The arguments to `event.shapeless()` are:
+Shapeless recipes are added with the `[js]event.shapeless()` method. Players can put ingredients of shapeless recipes anywhere on the grid and it will still craft. The arguments to `[js]event.shapeless()` are:
 
 1. The output item
 2. An array of input items. The total input items' count must be 9 at most.
@@ -86,7 +110,7 @@ event.shapeless(
 
 ## Smithing
 
-Smithing recipes have 2 inputs and one output and are added with the `event.smithing()` method. Smithing recipes are crafted in the smithing table.
+Smithing recipes have 2 inputs and one output and are added with the `[js]event.smithing()` method. Smithing recipes are crafted in the smithing table.
 
 ```js
 event.smithing(
@@ -100,10 +124,10 @@ event.smithing(
 
 Cooking recipes are all very similar, accepting one input (a single item) and giving one output (which can be up to 64 of the same item). The fuel cannot be changed in this recipe event and should be done with tags instead.
 
-- Smelting recipes are added with `event.smelting()`, and require the regular Furnace.
-- Blasting recipes are added with `event.blasting()`, and require the Blast Furnace.
-- Smoking recipes are added with `event.smoking()`, and require the Smoker.
-- Campfire cooking recipes are added with `event.campfireCooking()`, and require the Campfire.
+- Smelting recipes are added with `[js]event.smelting()`, and require the regular Furnace.
+- Blasting recipes are added with `[js]event.blasting()`, and require the Blast Furnace.
+- Smoking recipes are added with `[js]event.smoking()`, and require the Smoker.
+- Campfire cooking recipes are added with `[js]event.campfireCooking()`, and require the Campfire.
 
 ```js
 // Cook 1 stone into 3 gravel in a Furnace:
@@ -121,7 +145,7 @@ event.campfireCooking('minecraft:torch', 'minecraft:stick')
 
 ## Stonecutting
 
-Like the cooking recipes, stonecutting recipes are very simple, with one input (a single item) and one output (which can be up to 64 of the same item). They are added with the `event.stonecutting()` method.
+Like the cooking recipes, stonecutting recipes are very simple, with one input (a single item) and one output (which can be up to 64 of the same item). They are added with the `[js]event.stonecutting()` method.
 
 ```js
 //allow cutting 3 sticks from any plank on the stonecutter
@@ -148,7 +172,7 @@ event.custom({
 })
 ```
 
-Here's another example of `event.custom()` for making a Tinkers' Construct alloying recipe, which defines inputs, an output, and a temperature straight from [their GitHub](https://github.com/SlimeKnights/TinkersConstruct/blob/1.18.2/src/generated/resources/data/tconstruct/recipes/smeltery/alloys/molten_electrum.json) (conditions removed):
+Here's another example of `[js]event.custom()` for making a Tinkers' Construct alloying recipe, which defines inputs, an output, and a temperature straight from [their GitHub](https://github.com/SlimeKnights/TinkersConstruct/blob/1.18.2/src/generated/resources/data/tconstruct/recipes/smeltery/alloys/molten_electrum.json) (conditions removed):
 
 ```js
 // Adding the Molten Electrum alloying recipe from Tinkers' Construct
@@ -165,16 +189,16 @@ event.custom({
 
 # Removing Recipes
 
-Removing recipes can be done with the `event.remove()` method. It accepts 1 argument: a Recipe Filter. A filter is a set of properties that determine which recipe(s) to select. There are many conditions with which you can select a recipe:
+Removing recipes can be done with the `[js]event.remove()` method. It accepts 1 argument: a Recipe Filter. A filter is a set of properties that determine which recipe(s) to select. There are many conditions with which you can select a recipe:
 
-- by output item `{output: '<item_id>'}`
-- by input item(s) `{input: '<item_id>'}`
-- by mod `{mod: '<mod_id>'}`
-- by the unique recipe ID `{id: '<recipe_id>'}`
+- by output item `[js]{output: '<item_id>'}`
+- by input item(s) `[js]{input: '<item_id>'}`
+- by mod `[js]{mod: '<mod_id>'}`
+- by the unique recipe ID `[js]{id: '<recipe_id>'}`
 - combinations of the above:
-    - Require ALL conditions to be met: `{condition1: 'value', condition2: 'value2'}`
-    - Require ANY of the conditions to be met: `\[{condition_a: 'true'}, {condition_b: 'true'}]`
-    - Require the condition NOT be met: `{not: {condition: 'requirement'}}`
+    - Require ALL conditions to be met: `[js]{condition1: 'value', condition2: 'value2'}`
+    - Require ANY of the conditions to be met: `[js][{condition_a: 'true'}, {condition_b: 'true'}]`
+    - Require the condition NOT be met: `[js]{not: {condition: 'requirement'}}`
 
 All of the following can go in your recipe callback, as normal:
 
@@ -211,11 +235,11 @@ event.remove([{ type: 'minecraft:smelting', output: 'minecraft:iron_ingot' }, { 
 event.remove({ id: 'minecraft:glowstone' })
 ```
 
-To find a recipe's unique ID, turn on advanced tooltips using the `F3`+`H` keys (you will see an announcement in chat), then hover over the \[+\] symbol (if using [REI](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items)) or the output (if using [JEI](https://www.curseforge.com/minecraft/mc-mods/jei)).
+To find a recipe's unique ID, turn on advanced tooltips using the `F3 + H` keys (you will see an announcement in chat), then hover over the \[+\] symbol (if using [REI](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items)) or the output (if using [JEI](https://www.curseforge.com/minecraft/mc-mods/jei)).
 
 # Modifying & Replacing Recipes
 
-You can bulk-modify supported recipes using `event.replaceInput()` and `event.replaceOutput()`. They each take 3 arguments:
+You can bulk-modify supported recipes using `[js]event.replaceInput()` and `[js]event.replaceOutput()`. They each take 3 arguments:
 
 1. A filter, similar to the ones used when [removing recipes](#removing-recipes)
 2. The ingredient to replace

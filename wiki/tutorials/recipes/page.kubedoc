@@ -173,7 +173,7 @@ Removing recipes can be done with the `event.remove()` method. It accepts 1 argu
 - by the unique recipe ID `{id: '<recipe_id>'}`
 - combinations of the above:
     - Require ALL conditions to be met: `{condition1: 'value', condition2: 'value2'}`
-    - Require ANY of the conditions to be met: `[{condition_a: 'true'}, {condition_b: 'true'}]`
+    - Require ANY of the conditions to be met: `\[{condition_a: 'true'}, {condition_b: 'true'}]`
     - Require the condition NOT be met: `{not: {condition: 'requirement'}}`
 
 All of the following can go in your recipe callback, as normal:

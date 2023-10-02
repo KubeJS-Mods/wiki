@@ -1,9 +1,9 @@
->>> warning
-This page is still under development. It is not complete, and subject to change at any time.
+>>> info
+The recipe event is a {se-s} event.
 <<<
 
->>> info
-The recipe event is a server event.
+>>> warning
+This page is still under development. It is not complete, and subject to change at any time.
 <<<
 
 # Recipes, Callbacks, and You
@@ -221,7 +221,7 @@ You can bulk-modify supported recipes using `event.replaceInput()` and `event.re
 2. The ingredient to replace
 3. The ingredient to replace it with (can be a tag)
 
-For example, let's say you were removing all sticks and wanted to make people craft things with saplings instead. Inside your [callback](#recipes%2C-callbacks%2C-) you would put:
+For example, let's say you were removing all sticks and wanted to make people craft things with saplings instead. Inside your [callback](#recipes-callbacks-and-you) you would put:
 
 ```js
 event.replaceInput(

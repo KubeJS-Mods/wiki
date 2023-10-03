@@ -36,7 +36,8 @@ In case it wasn't covered above, here's list of each method you can use when bui
 ## `[js]displayName('name')`
 Sets the item's display name.
 
-## `[js]material('material')` #[[(No longer supported in 1.20+, see `mapColor` and `soundType` below!)|red]]
+## `[js]material('material')`
+#[[red|(No longer supported in 1.20+, see `mapColor` and `soundType` below!)]]
 Set the item's material to an available material from the Materials List:
 
 |> Material List
@@ -91,10 +92,12 @@ Set the item's material to an available material from the Materials List:
 - `'wool'`
 <|
 
-## `[js]mapColor(MapColor)` #[[(1.20.1+ only)|red]]
+## `[js]mapColor(MapColor)`
+#[[red|(1.20.1+ only)]]
 Set block map color, you can [find the entire list here](https://minecraft.fandom.com/wiki/Map_item_format#Base_colors), use ID in lowercase, e.g. `'color_light_green'`.
 
-## `[js]soundType(SoundType)` #[[(1.20.1+ only)|red]]
+## `[js]soundType(SoundType)`
+#[[red|(1.20.1+ only)]]
 Set block sound type:
 
 |> SoundType List

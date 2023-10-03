@@ -64,7 +64,7 @@ You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
 - `# Heading 1` - Heading 1
 - `## Heading 2` - Heading 2
 - `### Heading 3` - Heading 3
-- `#[[text|color]]` - Colored text. You can use either hex code `#z\RRGGBB` or color name, one of
+- `#[[color|text]]` - Colored text. You can use either hex code `#z\RRGGBB` or color name, one of
     - red
     - orange
     - yellow

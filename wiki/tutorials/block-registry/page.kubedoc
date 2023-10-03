@@ -397,7 +397,7 @@ Usage: `.property(BlockProperties.PICKLES)`
   - A modifier affecting how high players can jump off the block.
 - `randomTick(consumer<randomTickEvent>)`
   - A function to run when the block recieves a random tick.
-- `item(consumer<<a href="https://wiki.latvian.dev/books/kubejs/page/custom-items" title="Custom Items">itemBuilder</a>>)`
+- `item(consumer<[[/tutorials/item-registry|ItemBuilder]]>)`
   - Modify certain properties of the block's item (see link)
 - `setLootTableJson(json)`
   - Pass in a custom loot table JSON directly

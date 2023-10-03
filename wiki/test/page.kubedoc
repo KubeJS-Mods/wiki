@@ -51,9 +51,9 @@ Inline `code` and `code II` and `code *III*`
 
 ![[test.png|Test Image]] Text ![[test.png|Test Image]]
 
-#[[Red|red]] text, #[[Orange|orange]] text, #[[Yellow|yellow]] text, #[[Green|green]] text, #[[Blue|blue]] text, #[[Purple|purple]] text, #[[Magenta|magenta]] text
+#[[red|Red]] text, #[[orange|Orange]] text, #[[yellow|Yellow]] text, #[[green|Green]] text, #[[blue|Blue]] text, #[[purple|Purple]] text, #[[magenta|Magenta]] text
 
-#[[**Red and bold**|red]]
+#[[red|Red and **bold**]]
 
 Inline image ![[emoji:test.png|Test]] test
 

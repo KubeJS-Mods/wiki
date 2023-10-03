@@ -120,7 +120,7 @@ event.smithing(
 )
 ```
 
-## Smelting &amp; Cooking
+## Smelting & Cooking
 
 Cooking recipes are all very similar, accepting one input (a single item) and giving one output (which can be up to 64 of the same item). The fuel cannot be changed in this recipe event and should be done with tags instead.
 

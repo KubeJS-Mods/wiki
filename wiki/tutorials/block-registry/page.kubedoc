@@ -15,17 +15,17 @@ That's it! Launch the game, and assuming you've left KubeJS' auto-generated reso
 To make modifications to this block, we use the **block builder** returned by the `[js]event.create()` call. The block builder allows us to chain together multiple modifications. Let's try making some of the more common modifications:
 
 ```js
-StartupEvents.registry("block", (event) => {
-    event.create("example_block") // Create a new block
-    .displayName("My Custom Block") // Set a custom name
-    .material("wood") // Set a material (affects the sounds and some properties)
+StartupEvents.registry('block', (event) => {
+    event.create('example_block') // Create a new block
+    .displayName('My Custom Block') // Set a custom name
+    .soundType('wool') // Set a material (affects the sounds and some properties)
     .hardness(1.0) // Set hardness (affects mining time)
     .resistance(1.0) // Set resistance (to explosions, etc)
-    .tagBlock("my_custom_tag") // Tag the block with `#minecraft:my_custom_tag` (can have multiple tags)
+    .tagBlock('my_custom_tag') // Tag the block with `#minecraft:my_custom_tag` (can have multiple tags)
     .requiresTool(true) // Requires a tool or it won't drop (see tags below)
-    .tagBlock("my_namespace:my_other_tag") // Tag the block with `#my_namespace:my_other_tag`
-    .tagBlock("mineable/axe") //can be mined faster with an axe
-    .tagBlock("mineable/pickaxe") // or a pickaxe
+    .tagBlock('my_namespace:my_other_tag') // Tag the block with `#my_namespace:my_other_tag`
+    .tagBlock('mineable/axe') //can be mined faster with an axe
+    .tagBlock('mineable/pickaxe') // or a pickaxe
     .tagBlock('minecraft:needs_iron_tool') // the tool tier must be at least iron
 })
 ```

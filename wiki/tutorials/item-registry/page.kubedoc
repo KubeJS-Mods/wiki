@@ -23,17 +23,17 @@ StartupEvents.registry('item', e => {
 ```
 
 Valid item types:
-- basic (this is the default)
-- sword
-- pickaxe
-- axe
-- shovel
-- shears
-- hoe
-- helmet
-- chestplate
-- leggings
-- boots
+- `'basic'` (this is the default)
+- `'sword'`
+- `'pickaxe'`
+- `'axe'`
+- `'shovel'`
+- `'shears'`
+- `'hoe'`
+- `'helmet'`
+- `'chestplate'`
+- `'leggings'`
+- `'boots'`
 
 Other methods item builder supports: (you can chain these methods after `create()`)
 
@@ -64,12 +64,12 @@ Methods available if you use a tool type (`'sword'`, `'pickaxe'`, `'axe'`, `'sho
 
 Default available tool tiers:
 
-- wood
-- stone
-- iron
-- gold
-- diamond
-- netherite
+- `'wood'`
+- `'stone'`
+- `'iron'`
+- `'gold'`
+- `'diamond'`
+- `'netherite'`
 
 Methods available if you use an armor type ('helmet', 'chestplate', 'leggings' or 'boots'):
 
@@ -78,26 +78,26 @@ Methods available if you use an armor type ('helmet', 'chestplate', 'leggings' o
 
 Default available armor tiers:
 
-- leather
-- chainmail
-- iron
-- gold
-- diamond
-- turtle
-- netherite
+- `'leather'`
+- `'chainmail'`
+- `'iron'`
+- `'gold'`
+- `'diamond'`
+- `'turtle'`
+- `'netherite'`
 
 Vanilla group/creative tab IDs:
 
-- search
-- buildingBlocks
-- decorations
-- redstone
-- transportation
-- misc
-- food
-- tools
-- combat
-- brewing
+- `'search'`
+- `'buildingBlocks'`
+- `'decorations'`
+- `'redstone'`
+- `'transportation'`
+- `'misc'`
+- `'food'`
+- `'tools'`
+- `'combat'`
+- `'brewing'`
 
 # Custom Foods
 

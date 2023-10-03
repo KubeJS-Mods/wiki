@@ -101,17 +101,6 @@ Set block map color, you can [find the entire list here](https://minecraft.fando
 Set block sound type:
 
 |> SoundType List
-Instead of using `soundType(SoundType)` you can also use one of these shortcut methods:
-
-- `noSoundType()`
-- `woodSoundType()`
-- `stoneSoundType()`
-- `gravelSoundType()`
-- `grassSoundType()`
-- `sandSoundType()`
-- `cropSoundType()`
-- `glassSoundType()`
-
 - `'wood'`
 - `'gravel'`
 - `'grass'`
@@ -216,7 +205,20 @@ Instead of using `soundType(SoundType)` you can also use one of these shortcut m
 - `'decorated_pot_cracked'`
 <|
 
-You can construct your own sound type with `new SoundType(volume, pitch, breakSound, stepSound, placeSound, hitSound, fallSound)` where volume and pitch are floats 0.0 - 1.0 (usually leave it as 1.0) and all sounds are SoundEvents.
+Instead of using `soundType(SoundType)` you can also use one of these shortcut methods:
+
+- `[js]noSoundType()`
+- `[js]woodSoundType()`
+- `[js]stoneSoundType()`
+- `[js]gravelSoundType()`
+- `[js]grassSoundType()`
+- `[js]sandSoundType()`
+- `[js]cropSoundType()`
+- `[js]glassSoundType()`
+
+You can construct your own sound type with
+ `[js]new SoundType(volume, pitch, breakSound, stepSound, placeSound, hitSound, fallSound)`
+ where volume and pitch are floats 0.0 - 1.0 (usually leave it as 1.0) and all sounds are SoundEvents.
 
 ## `[js]property(BlockProperty)`
 Adds more blockstates to the block, like being waterlogged or facing a certain direction. A full list of properties is available in the Properties List:
@@ -396,8 +398,8 @@ Defaults to `kubejs:block/<block_name>`.
 ## `[js]noItem()`
 Removes the associated item. Minecraft does this by default for a few blocks, like nether portal blocks. Use this if the player should never be able to hold or place the block.
 
-## `[js]box(x0, y0, z0, x1, y1, z1, boolean?)`
-Or `[js]box(x0, y0, z0, x1, y1, z1)` // defaults to true
+## `[js]box(x0, y0, z0, x1, y1, z1, boolean)`
+Or `[js]box(x0, y0, z0, x1, y1, z1)` (boolean defaults to true)
 Sets a custom hitbox for the block, affecting collision. You can use this multiple times to define a complex shape composed of multiple boxes.
 Each box is a rectangular prism with corners at (x0,y0,z0) and (x1,y1,z1)
 You will probably want to set up a custom block model that matches the shape you define here.
@@ -424,10 +426,10 @@ A modifier affecting how quickly players walk on the block.
 ## `[js]jumpFactor(float)`
 A modifier affecting how high players can jump off the block.
 
-## `[js]randomTick(consumer<randomTickEvent>)`
+## `[js]randomTick(randomTickEvent => {})`
 A function to run when the block recieves a random tick.
 
-## `[js]item(consumer<ItemBuilder>)`
+## `[js]item(item => {})`
 Modify certain properties of the block's item.
 See [[/tutorials/item-registry]] for more info.
 
@@ -458,5 +460,5 @@ Sets whether the block is transparent or not
 ## `[js]defaultCutout()`
 Batches a bunch of methods to make blocks such as glass
 
-## `[js]defaultTranslucent()`
-similar to `[js]defaultCutout()`` but using translucent layer instead
+## `[js].defaultTranslucent()`
+similar to `[js].defaultCutout()` but using translucent layer instead

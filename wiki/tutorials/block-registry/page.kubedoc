@@ -33,10 +33,11 @@ StartupEvents.registry("block", (event) => {
 # All Block Builder Methods
 In case it wasn't covered above, here's list of each method you can use when building a block.
 
-- `displayName('name')`
-  - Sets the item's display name.
-- `material('material')` #[[(No longer supported in 1.20+, see `mapColor` and `soundType` below!)|red]]
-  - Set the item's material to an available material from the Materials List:
+## `[js]displayName('name')`
+Sets the item's display name.
+
+## `[js]material('material')` #[[(No longer supported in 1.20+, see `mapColor` and `soundType` below!)|red]]
+Set the item's material to an available material from the Materials List:
 
 |> Material List
 - `'air'`
@@ -90,10 +91,11 @@ In case it wasn't covered above, here's list of each method you can use when bui
 - `'wool'`
 <|
 
-- `mapColor(MapColor)` #[[(1.20.1+ only)|red]]
-  - Set block map color, you can [find the entire list here](https://minecraft.fandom.com/wiki/Map_item_format#Base_colors), use ID in lowercase, e.g. `'color_light_green'`.
-- `soundType(SoundType)` #[[(1.20.1+ only)|red]]
-  - Set block sound type:
+## `[js]mapColor(MapColor)` #[[(1.20.1+ only)|red]]
+Set block map color, you can [find the entire list here](https://minecraft.fandom.com/wiki/Map_item_format#Base_colors), use ID in lowercase, e.g. `'color_light_green'`.
+
+## `[js]soundType(SoundType)` #[[(1.20.1+ only)|red]]
+Set block sound type:
 
 |> SoundType List
 Instead of using `soundType(SoundType)` you can also use one of these shortcut methods:
@@ -209,12 +211,12 @@ Instead of using `soundType(SoundType)` you can also use one of these shortcut m
 - `'suspicious_gravel'`
 - `'decorated_pot'`
 - `'decorated_pot_cracked'`
-
-You can construct your own sound type with `new SoundType(volume, pitch, breakSound, stepSound, placeSound, hitSound, fallSound)` where volume and pitch are floats 0.0 - 1.0 (usually leave it as 1.0) and all sounds are SoundEvents.
 <|
 
-- `property(BlockProperty)`
-  - Adds more blockstates to the block, like being waterlogged or facing a certain direction. A full list of properties is available in the Properties List:
+You can construct your own sound type with `new SoundType(volume, pitch, breakSound, stepSound, placeSound, hitSound, fallSound)` where volume and pitch are floats 0.0 - 1.0 (usually leave it as 1.0) and all sounds are SoundEvents.
+
+## `[js]property(BlockProperty)`
+Adds more blockstates to the block, like being waterlogged or facing a certain direction. A full list of properties is available in the Properties List:
 
 |> Properties List
 Usage: `.property(BlockProperties.PICKLES)`
@@ -334,88 +336,124 @@ Usage: `.property(BlockProperties.PICKLES)`
 - `'west_wall'`
 <|
 
-- `tagBlock('namespace:tag_name')`
-  - adds a tag to the block
-- `tagItem('namespace:tag_name')`
-  - adds a tag to the block's item, if it has one
-- `tagBoth('namespace:tag_name')`
-  - adds both block and item tag if possible
-- `hardness(float)`
-  - Sets the block's Hardness value. Used for calculating the time it takes for the block to be destroyed.
-- `resistance(float)`
-  - Set's the block's resistance to things like explosions
-- `unbreakable()`
-  - Shortcut to set the resistance to MAX\_VALUE and hardness to -1 (like bedrock)
-- `lightLevel(number)`
-  - Sets the block's light level.
-  - Passing an integer (0-15) will set the block's light level to that value.
-  - Passing a float (0.0-1.0) will multiply that number by 15, then set the block's light level to the nearest integer
-- `opaque(boolean)`
-  - Sets whether the block is opaque. Full, opaque blocks will not let light through.
-- `fullBlock(boolean)`
-  - Sets whether the block renders as a full block. Full blocks have certain optimizations applied to them, such as not rendering terrain behind them. If you're using `.box()` to make a custom hitbox, please set this to `false`.
-- `requiresTool(boolean)`
-  - If `true`, the block will use certain block tags to determine whether it should drop an item when mined. For example, a block tagged with `#minecraft:mineable/axe`, `#minecraft:mineable/pickaxe`, and `#minecraft:needs_iron_tool` would drop nothing unless it was mined with an axe or pickaxe that was at least iron level.
-- `renderType('solid'|'cutout'|'translucent')`
-  - Sets the render type.
-    - `cutout` is required for blocks with texture like glass, where pixels are either transparent or not
-    - `translucent` is required for blocks like stained glass, where pixels can be semitransparent
-    - otherwise, use `solid` if all pixels in your block are opaque.
-- `color(tintindex, color)`
-  - Recolors a block to a certain color
-- `textureAll('texturepath')`
-  - Textures all 6 sides of the block to the same texture.
-  - The path must look like `kubejs:block/texture_name` (which would be included under `kubejs/assets/kubejs/textures/block/texture_name.png`).
-  - Defaults to `kubejs:block/<block_name>`
-- `texture('side', 'texturepath')`
-  - Texture one side by itself. Valid sides are `up`, `down`, `north`, `south`, `east`, and `west`.
-- `model('modelpath')`
-  - Specify a custom model.
-  - The path must look like `kubejs:block/texture_name` (which would be included under `kubejs/assets/kubejs/models/block/texture_name.png`).
-  - Defaults to `kubejs:block/<block_name>`.
-- `noItem()`
-  - Removes the associated item. Minecraft does this by default for a few blocks, like nether portal blocks. Use this if the player should never be able to hold or place the block.
-- `box(x0, y0, z0, x1, y1, z1, boolean)`
-- `box(x0, y0, z0, x1, y1, z1)` // defaults to true
-  - Sets a custom hitbox for the block, affecting collision. You can use this multiple times to define a complex shape composed of multiple boxes.
-  - Each box is a rectangular prism with corners at (x0,y0,z0) and (x1,y1,z1)
-  - You will probably want to set up a custom block model that matches the shape you define here.
-  - The final boolean determines the coordinate scale of the box. Passing in `true` will use the numbers 0-16, while passing in `false` will use coordinates ranging from 0.0 to 1.0
-- `noCollision()`
-  - Removes the default full-block hitbox, allowing you to fall through the block.
-- `notSolid()`
-  - Tells the renderer that the block isn't solid.
-- `waterlogged()`
-  - Allows the block to be waterloggable.
-- `noDrops()`
-  - The block will not drop itself, even if mined with silk touch.
-- `slipperiness(float)`
-  - Sets the slipperiness of the block. Affects how much entities slide while moving on it. Almost every block in Vanilla has a slipperiness value of 0.6, except slime (0.8) and ice (0.98).
-- `speedFactor(float)`
-  - A modifier affecting how quickly players walk on the block.
-- `jumpFactor(float)`
-  - A modifier affecting how high players can jump off the block.
-- `randomTick(consumer<randomTickEvent>)`
-  - A function to run when the block recieves a random tick.
-- `item(consumer<[[/tutorials/item-registry|ItemBuilder]]>)`
-  - Modify certain properties of the block's item (see link)
-- `setLootTableJson(json)`
-  - Pass in a custom loot table JSON directly
-- `setBlockstateJson(json)`
-  - Pass in a custom blockstate JSON directly
-- `setModelJson(json)`
-  - Pass in a custom model JSON directly
-- `noValidSpawns(boolean)`
-  - If `true`, the block is not counted as a valid spawnpoint for entities
-- `suffocating(boolean)`
-  - Whether the block will suffocate entities that have their head inside it
-- `viewBlocking(boolean)`
-  - Whether the block counts as blocking a player's view.
-- `redstoneConductor(boolean)`
-  - Sets whether the block will conduct redstone. True by default.
-- `transparent(boolean)`
-  - Sets whether the block is transparent or not
-- `defaultCutout()`
-  - batches a bunch of methods to make blocks such as glass
-- `defaultTranslucent()`
-  - similar to defaultCutout() but using translucent layer instead
+## `[js]tagBlock('namespace:tag_name')`
+Adds a tag to the block
+
+## `[js]tagItem('namespace:tag_name')`
+Adds a tag to the block's item, if it has one
+
+## `[js]tagBoth('namespace:tag_name')`
+Adds both block and item tag if possible
+
+## `[js]hardness(float)`
+Sets the block's Hardness value. Used for calculating the time it takes for the block to be destroyed.
+
+## `[js]resistance(float)`
+Set's the block's resistance to things like explosions
+
+## `[js]unbreakable()`
+Shortcut to set the resistance to MAX\_VALUE and hardness to -1 (like bedrock)
+
+## `[js]lightLevel(number)`
+Sets the block's light level.
+Passing an integer (0-15) will set the block's light level to that value.
+Passing a float (0.0-1.0) will multiply that number by 15, then set the block's light level to the nearest integer
+
+## `[js]opaque(boolean)`
+Sets whether the block is opaque. Full, opaque blocks will not let light through.
+
+## `[js]fullBlock(boolean)`
+Sets whether the block renders as a full block. Full blocks have certain optimizations applied to them, such as not rendering terrain behind them. If you're using `.box()` to make a custom hitbox, please set this to `false`.
+
+## `[js]requiresTool(boolean)`
+If `true`, the block will use certain block tags to determine whether it should drop an item when mined. For example, a block tagged with `#minecraft:mineable/axe`, `#minecraft:mineable/pickaxe`, and `#minecraft:needs_iron_tool` would drop nothing unless it was mined with an axe or pickaxe that was at least iron level.
+
+## `[js]renderType('solid'|'cutout'|'translucent')`
+Sets the render type.
+- `'cutout'` is required for blocks with texture like glass, where pixels are either transparent or not
+- `'translucent'` is required for blocks like stained glass, where pixels can be semitransparent
+- otherwise, use `'solid'` if all pixels in your block are opaque.
+
+## `[js]color(tintindex, color)`
+Recolors a block to a certain color
+
+## `[js]textureAll('texturepath')`
+Textures all 6 sides of the block to the same texture.
+The path must look like `kubejs:block/texture_name` (which would be included under `kubejs/assets/kubejs/textures/block/texture_name.png`).
+Defaults to `kubejs:block/<block_name>`
+
+## `[js]texture('side', 'texturepath')`
+Texture one side by itself. Valid sides are `up`, `down`, `north`, `south`, `east`, and `west`.
+
+## `[js]model('modelpath')`
+Specify a custom model.
+The path must look like `kubejs:block/texture_name` (which would be included under `kubejs/assets/kubejs/models/block/texture_name.png`).
+Defaults to `kubejs:block/<block_name>`.
+
+## `[js]noItem()`
+Removes the associated item. Minecraft does this by default for a few blocks, like nether portal blocks. Use this if the player should never be able to hold or place the block.
+
+## `[js]box(x0, y0, z0, x1, y1, z1, boolean?)`
+Or `[js]box(x0, y0, z0, x1, y1, z1)` // defaults to true
+Sets a custom hitbox for the block, affecting collision. You can use this multiple times to define a complex shape composed of multiple boxes.
+Each box is a rectangular prism with corners at (x0,y0,z0) and (x1,y1,z1)
+You will probably want to set up a custom block model that matches the shape you define here.
+The final boolean determines the coordinate scale of the box. Passing in `true` will use the numbers 0-16, while passing in `false` will use coordinates ranging from 0.0 to 1.0
+
+## `[js]noCollision()`
+Removes the default full-block hitbox, allowing you to fall through the block.
+
+## `[js]notSolid()`
+Tells the renderer that the block isn't solid.
+
+## `[js]waterlogged()`
+Allows the block to be waterloggable.
+
+## `[js]noDrops()`
+The block will not drop itself, even if mined with silk touch.
+
+## `[js]slipperiness(float)`
+Sets the slipperiness of the block. Affects how much entities slide while moving on it. Almost every block in Vanilla has a slipperiness value of 0.6, except slime (0.8) and ice (0.98).
+
+## `[js]speedFactor(float)`
+A modifier affecting how quickly players walk on the block.
+
+## `[js]jumpFactor(float)`
+A modifier affecting how high players can jump off the block.
+
+## `[js]randomTick(consumer<randomTickEvent>)`
+A function to run when the block recieves a random tick.
+
+## `[js]item(consumer<ItemBuilder>)`
+Modify certain properties of the block's item.
+See [[/tutorials/item-registry]] for more info.
+
+## `[js]setLootTableJson(json)`
+Pass in a custom loot table JSON directly
+
+## `[js]setBlockstateJson(json)`
+Pass in a custom blockstate JSON directly
+
+## `[js]setModelJson(json)`
+Pass in a custom model JSON directly
+
+## `[js]noValidSpawns(boolean)`
+If `true`, the block is not counted as a valid spawnpoint for entities
+
+## `[js]suffocating(boolean)`
+Whether the block will suffocate entities that have their head inside it
+
+## `[js]viewBlocking(boolean)`
+Whether the block counts as blocking a player's view.
+
+## `[js]redstoneConductor(boolean)`
+Sets whether the block will conduct redstone. True by default.
+
+## `[js]transparent(boolean)`
+Sets whether the block is transparent or not
+
+## `[js]defaultCutout()`
+Batches a bunch of methods to make blocks such as glass
+
+## `[js]defaultTranslucent()`
+similar to `[js]defaultCutout()`` but using translucent layer instead

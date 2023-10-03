@@ -1,0 +1,141 @@
+>>> info
+The recipe event is a {st-s} event.
+<<<
+
+Custom items are created in a startup script. They cannot be reloaded without restarting the game. The event is not cancellable.
+
+```js
+// Listen to item registry event
+StartupEvents.registry('item', e => {
+  // The texture for this item has to be placed in kubejs/assets/kubejs/textures/item/test_item.png
+  // If you want a custom item model, you can create one in Blockbench and put it in kubejs/assets/kubejs/models/item/test_item.json
+  e.create('test_item')
+
+  // If you want to specify a different texture location you can do that too, like this:
+  e.create('test_item_1').texture('mobbo:item/lava') // This texture would be located at kubejs/assets/mobbo/textures/item/lava.png
+
+  // You can chain builder methods as much as you like
+  e.create('test_item_2').maxStackSize(16).glow(true)
+
+  // You can specify item type as 2nd argument in create(), some types have different available methods
+  e.create('custom_sword', 'sword').tier('diamond').attackDamageBaseline(10.0)
+})
+```
+
+Valid item types:
+- basic (this is the default)
+- sword
+- pickaxe
+- axe
+- shovel
+- shears
+- hoe
+- helmet
+- chestplate
+- leggings
+- boots
+
+Other methods item builder supports: (you can chain these methods after `create()`)
+
+- `[js]maxStackSize(size)`
+- `[js]displayName(name)`
+- `[js]unstackable()`
+- `[js]maxDamage(damage)`
+- `[js]burnTime(ticks)`
+- `[js]containerItem(item_id)`
+- `[js]rarity('rarity')`
+- `[js]tool(type, level)`
+- `[js]glow(true/false)`
+- `[js]tooltip(text...)`
+- `[js]group('group_id')`
+- `[js]color(index, colorHex)`
+- `[js]texture(customTextureLocation)`
+- `[js]parentModel(customParentModelLocation)`
+- `[js]food(foodBuilder => ...)` For full syntax see below
+
+Methods available if you use a tool type (`'sword'`, `'pickaxe'`, `'axe'`, `'shovel'` or `'hoe'`):
+
+- `[js]tier('toolTier')`
+- `[js]modifyTier(tier => ...)` Same syntax as custom tool tier, see Custom Tiers
+- `[js]attackDamageBaseline(damage)` You only want to modify this if you are creating a custom weapon such as Spear, Battleaxe, etc.
+- `[js]attackDamageBonus(damage)`
+- `[js]speedBaseline(speed)` Same as attackDamageBaseline, only modify for custom weapon types
+- `[js]speed(speed)`
+
+Default available tool tiers:
+
+- wood
+- stone
+- iron
+- gold
+- diamond
+- netherite
+
+Methods available if you use an armor type ('helmet', 'chestplate', 'leggings' or 'boots'):
+
+- `[js]tier('armorTier')`
+- `[js]modifyTier(tier => ...)` Same syntax as custom armor tier, see [[/tutorials/custom-tiers]]
+
+Default available armor tiers:
+
+- leather
+- chainmail
+- iron
+- gold
+- diamond
+- turtle
+- netherite
+
+Vanilla group/creative tab IDs:
+
+- search
+- buildingBlocks
+- decorations
+- redstone
+- transportation
+- misc
+- food
+- tools
+- combat
+- brewing
+
+# Custom Foods
+
+```js
+StartupEvents.registry('item', event => {
+	event.create('magic_steak').food(food => {
+		food
+    		.hunger(6)
+    		.saturation(6)//This value does not directly translate to saturation points gained
+      		//The real value can be assumed to be:
+      		//min(hunger * saturation * 2 + saturation, foodAmountAfterEating)
+      		.effect('speed', 600, 0, 1)
+      		.removeEffect('poison')
+      		.alwaysEdible()//Like golden apples
+      		.fastToEat()//Like dried kelp
+      		.meat()//Dogs are willing to eat it
+      		.eaten(ctx => {//runs code upon consumption
+        		ctx.player.tell(Text.gold('Yummy Yummy!'))
+          		//If you want to modify this code then you need to restart the game.
+          		//However, if you make this code call a global startup function
+          		//and place the function *outside* of an event handler
+          		//then you may use the command:
+          		//  /kubejs reload startup_scripts
+          		//to reload the function instantly.
+          		//See example below
+        	})
+	})
+
+	event.create('magicer_steak').unstackable().food(food => food
+		.hunger(7)
+		.saturation(7)
+		// This references the function below instead of having code directly, so it is reloadable!
+		.eaten(ctx => global.myAwesomeReloadableFunction(ctx))
+	)
+})
+
+global.myAwesomeReloadableFunction = ctx => {
+  ctx.player.tell('Hello there!')
+  ctx.player.tell(Text.of('Change me then reload with ').append(Text.red('/kubejs reload startup_scripts')).append(' to see your changes!'))
+}
+```

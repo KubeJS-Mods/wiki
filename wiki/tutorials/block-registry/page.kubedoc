@@ -144,9 +144,6 @@ If `true`, the block will use certain block tags to determine whether it should 
 ---
 ## $$.renderType(value: RenderType)
 Sets the render type.
-- `'cutout'` is required for blocks with texture like glass, where pixels are either transparent or not
-- `'translucent'` is required for blocks like stained glass, where pixels can be semitransparent
-- otherwise, use `'solid'` if all pixels in your block are opaque.
 ---
 ## $$.color(tintIndex: int, color: Color)
 Recolors a block to a certain color

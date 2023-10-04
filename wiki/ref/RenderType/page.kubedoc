@@ -1,6 +1,6 @@
 Enum with valid values:
 
-- `'solid'`
-- `'cutout'`
-- `'cutout_mipped'`
-- `'translucent'`
+- `'solid'` - default render type, blocks with textures like stone, where alpha value is only 255
+- `'cutout'` - blocks with texture like glass, where alpha is either 0 or 255
+- `'cutout_mipped'` - same as `'cutout'`, but with mipmaps enabled
+- `'translucent'` - blocks with texture like stained glass, where alpha is anywhere between 0-255

@@ -164,10 +164,11 @@ Defaults to `'kubejs:block/<block_name>'`.
 ## $$.noItem()
 Removes the associated item. Minecraft does this by default for a few blocks, like nether portal blocks. Use this if the player should never be able to hold or place the block.
 ---
-## $$.box(x0: float, y0: float, z0: float, x1: float, y1: float, z1: float, scale16?: boolean)
+## $$.box(x0: float, y0: float, z0: float, x1: float, y1: float, z1: float)
+Or $$.box(x0: float, y0: float, z0: float, x1: float, y1: float, z1: float, scale16?: boolean)
 scale16 boolean defaults to true.
 Sets a custom hitbox for the block, affecting collision. You can use this multiple times to define a complex shape composed of multiple boxes.
-Each box is a rectangular prism with corners at (x0,y0,z0) and (x1,y1,z1)
+Each box is a rectangular prism with corners at (x0, y0, z0) and (x1, y1, z1)
 You will probably want to set up a custom block model that matches the shape you define here.
 The final boolean determines the coordinate scale of the box. Passing in `true` will use the numbers 0-16, while passing in `false` will use coordinates ranging from 0.0 to 1.0
 ---

@@ -40,4 +40,4 @@ a-discussion: "If wiki didn't have the answer for what you were looking for, you
 website: "Website"
 source: "Source code"
 download: "Download"
-no-support: "Anything older than {unsupported-version} is no longer supported!"
+no-support: "Last supported Minecraft version is {last-supported-version}, anything below that and you're on your own!"

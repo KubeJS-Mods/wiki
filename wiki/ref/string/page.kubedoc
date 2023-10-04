@@ -1,0 +1,16 @@
+Type representing any array of characters
+
+---
+# Properties
+---
+## `[js].length`: {int}
+---
+## `[js].namespace`: {string}
+---
+## `[js].path`: {string}
+---
+# Methods
+---
+## `[js].trim()`: {string}
+---
+## `[js].charAt(index: `{int}`)`: {string}

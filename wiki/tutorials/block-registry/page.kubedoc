@@ -33,10 +33,10 @@ StartupEvents.registry('block', (event) => {
 # All Block Builder Methods
 In case it wasn't covered above, here's list of each method you can use when building a block.
 ---
-## `[js].displayName('name')`
+## `[js].displayName(`[[$TextComponent]]`)`
 Sets the item's display name.
 ---
-## `[js].material('material')`
+## `[js].material(`{string}`)`
 #[[red|(No longer supported in 1.20+, see `mapColor` and `soundType` below!)]]
 Set the item's material to an available material from the Materials List:
 
@@ -92,120 +92,13 @@ Set the item's material to an available material from the Materials List:
 - `'wool'`
 <|
 ---
-## `[js].mapColor(MapColor)`
+## `[js].mapColor(`[[$MapColor]]`)`
 #[[red|(1.20.1+ only)]]
-Set block map color, you can [find the entire list here](https://minecraft.fandom.com/wiki/Map_item_format#Base_colors), use ID in lowercase, e.g. `'color_light_green'`.
+Set block map color.
 ---
-## `[js].soundType(SoundType)`
+## `[js].soundType(`[[$SoundType]]`)`
 #[[red|(1.20.1+ only)]]
-Set block sound type:
-
-|> SoundType List
-- `'wood'`
-- `'gravel'`
-- `'grass'`
-- `'lily_pad'`
-- `'stone'`
-- `'metal'`
-- `'glass'`
-- `'wool'`
-- `'sand'`
-- `'snow'`
-- `'powder_snow'`
-- `'ladder'`
-- `'anvil'`
-- `'slime_block'`
-- `'honey_block'`
-- `'wet_grass'`
-- `'coral_block'`
-- `'bamboo'`
-- `'bamboo_sapling'`
-- `'scaffolding'`
-- `'sweet_berry_bush'`
-- `'crop'`
-- `'hard_crop'`
-- `'vine'`
-- `'nether_wart'`
-- `'lantern'`
-- `'stem'`
-- `'nylium'`
-- `'fungus'`
-- `'roots'`
-- `'shroomlight'`
-- `'weeping_vines'`
-- `'twisting_vines'`
-- `'soul_sand'`
-- `'soul_soil'`
-- `'basalt'`
-- `'wart_block'`
-- `'netherrack'`
-- `'nether_bricks'`
-- `'nether_sprouts'`
-- `'nether_ore'`
-- `'bone_block'`
-- `'netherite_block'`
-- `'ancient_debris'`
-- `'lodestone'`
-- `'chain'`
-- `'nether_gold_ore'`
-- `'gilded_blackstone'`
-- `'candle'`
-- `'amethyst'`
-- `'amethyst_cluster'`
-- `'small_amethyst_bud'`
-- `'medium_amethyst_bud'`
-- `'large_amethyst_bud'`
-- `'tuff'`
-- `'calcite'`
-- `'dripstone_block'`
-- `'pointed_dripstone'`
-- `'copper'`
-- `'cave_vines'`
-- `'spore_blossom'`
-- `'azalea'`
-- `'flowering_azalea'`
-- `'moss_carpet'`
-- `'pink_petals'`
-- `'moss'`
-- `'big_dripleaf'`
-- `'small_dripleaf'`
-- `'rooted_dirt'`
-- `'hanging_roots'`
-- `'azalea_leaves'`
-- `'sculk_sensor'`
-- `'sculk_catalyst'`
-- `'sculk'`
-- `'sculk_vein'`
-- `'sculk_shrieker'`
-- `'glow_lichen'`
-- `'deepslate'`
-- `'deepslate_bricks'`
-- `'deepslate_tiles'`
-- `'polished_deepslate'`
-- `'froglight'`
-- `'frogspawn'`
-- `'mangrove_roots'`
-- `'muddy_mangrove_roots'`
-- `'mud'`
-- `'mud_bricks'`
-- `'packed_mud'`
-- `'hanging_sign'`
-- `'nether_wood_hanging_sign'`
-- `'bamboo_wood_hanging_sign'`
-- `'bamboo_wood'`
-- `'nether_wood'`
-- `'cherry_wood'`
-- `'cherry_sapling'`
-- `'cherry_leaves'`
-- `'cherry_wood_hanging_sign'`
-- `'chiseled_bookshelf'`
-- `'suspicious_sand'`
-- `'suspicious_gravel'`
-- `'decorated_pot'`
-- `'decorated_pot_cracked'`
-<|
-
-Instead of using `.soundType(SoundType)` you can also use one of these shortcut methods:
+Set block sound type. You can also use one of these shortcut methods:
 
 - `[js]noSoundType()`
 - `[js]woodSoundType()`
@@ -215,162 +108,38 @@ Instead of using `.soundType(SoundType)` you can also use one of these shortcut 
 - `[js]sandSoundType()`
 - `[js]cropSoundType()`
 - `[js]glassSoundType()`
-
-You can construct your own sound type with
- `[js]new SoundType(volume, pitch, breakSound, stepSound, placeSound, hitSound, fallSound)`
- where volume and pitch are floats 0.0 - 1.0 (usually leave it as 1.0) and all sounds are SoundEvents.
 ---
-## `[js].property(BlockProperty)`
-Adds more blockstates to the block, like being waterlogged or facing a certain direction. A full list of properties is available in the Properties List:
-
-|> Properties List
-Usage: `[js].property(BlockProperties.PICKLES)` or `[js].property('pickles')`
-
-### Boolean Properties (true/false):
-
-- `'attached'`
-- `'berries'`
-- `'bloom'`
-- `'bottom'`
-- `'can_summon'`
-- `'conditional'`
-- `'disarmed'`
-- `'down'`
-- `'drag'`
-- `'east'`
-- `'enabled'`
-- `'extended'`
-- `'eye'`
-- `'falling'`
-- `'hanging'`
-- `'has_book'`
-- `'has_bottle_0'`
-- `'has_bottle_1'`
-- `'has_bottle_2'`
-- `'has_record'`
-- `'inverted'`
-- `'in_wall'`
-- `'lit'`
-- `'locked'`
-- `'north'`
-- `'occupied'`
-- `'open'`
-- `'persistent'`
-- `'powered'`
-- `'short'`
-- `'shrieking'`
-- `'signal_fire'`
-- `'snowy'`
-- `'south'`
-- `'triggered'`
-- `'unstable'`
-- `'up'`
-- `'vine_end'`
-- `'waterlogged'`
-- `'west'`
-
-### Integer properties:
-
-- `'age_1'`
-- `'age_2'`
-- `'age_3'`
-- `'age_4'`
-- `'age_5'`
-- `'age_7'`
-- `'age_15'`
-- `'age_25'`
-- `'bites'`
-- `'candles'`
-- `'delay'`
-- `'distance'`
-- `'eggs'`
-- `'hatch'`
-- `'layers'`
-- `'level'`
-- `'level_cauldron'`
-- `'level_composter'`
-- `'level_flowing'`
-- `'level_honey'`
-- `'moisture'`
-- `'note'`
-- `'pickles'`
-- `'power'`
-- `'respawn_anchor_charges'`
-- `'rotation_16'`
-- `'stability_distance'`
-- `'stage'`
-
-### Directional Properties:
-
-- `'facing'`
-- `'facing_hopper'`
-- `'horizontal_facing'`
-- `'vertical_direction'`
-
-### Other (`enum`) Properties:
-
-- `'attach_face'`
-- `'axis'`
-- `'bamboo_leaves'`
-- `'bed_part'`
-- `'bell_attachment'`
-- `'chest_type'`
-- `'door_hinge'`
-- `'double_block_half'`
-- `'dripstone_thickness'`
-- `'east_redstone'`
-- `'east_wall'`
-- `'half'`
-- `'horizontal_axis'`
-- `'mode_comparator'`
-- `'north_redstone'`
-- `'north_wall'`
-- `'noteblock_instrument'`
-- `'orientation'`
-- `'piston_type'`
-- `'rail_shape'`
-- `'rail_shape_straight'`
-- `'sculk_sensor_phase'`
-- `'slab_type'`
-- `'south_redstone'`
-- `'south_wall'`
-- `'stairs_shape'`
-- `'structureblock_mode'`
-- `'tilt'`
-- `'west_redstone'`
-- `'west_wall'`
-<|
+## `[js].property(`[[$BlockProperty]]`)`
+Adds more blockstates to the block, like being waterlogged or facing a certain direction.
 ---
-## `[js].tagBlock('namespace:tag_name')`
-Adds a tag to the block
+## `[js].tagBlock(`{id}`)`
+Adds a tag to the block, e.g `'namespace:tag_name'`
 ---
-## `[js].tagItem('namespace:tag_name')`
-Adds a tag to the block's item, if it has one
+## `[js].tagItem(`{id}`)`
+Adds a tag to the block's item, if it has one, e.g `'forge:storage_blocks/iron'`
 ---
-## `[js].tagBoth('namespace:tag_name')`
-Adds both block and item tag if possible
+## `[js].tagBoth(`{id}`)`
+Adds both block and item tag if possible, e.g `'minecraft:planks'`
 ---
-## `[js].hardness(float)`
+## `[js].hardness(`{float}`)`
 Sets the block's Hardness value. Used for calculating the time it takes for the block to be destroyed.
 ---
-## `[js].resistance(float)`
+## `[js].resistance(`{float}`)`
 Set's the block's resistance to things like explosions
 ---
 ## `[js].unbreakable()`
 Shortcut to set the resistance to MAX\_VALUE and hardness to -1 (like bedrock)
 ---
-## `[js].lightLevel(number)`
-Sets the block's light level.
-Passing an integer (0-15) will set the block's light level to that value.
-Passing a float (0.0-1.0) will multiply that number by 15, then set the block's light level to the nearest integer
+## `[js].lightLevel(`{float}`)`
+Sets the block's light level (0.0 - 1.0).
 ---
-## `[js].opaque(boolean)`
+## `[js].opaque(`{boolean}`)`
 Sets whether the block is opaque. Full, opaque blocks will not let light through.
 ---
-## `[js].fullBlock(boolean)`
+## `[js].fullBlock(`{boolean}`)`
 Sets whether the block renders as a full block. Full blocks have certain optimizations applied to them, such as not rendering terrain behind them. If you're using `.box()` to make a custom hitbox, please set this to `false`.
 ---
-## `[js].requiresTool(boolean)`
+## `[js].requiresTool(`{boolean}`)`
 If `true`, the block will use certain block tags to determine whether it should drop an item when mined. For example, a block tagged with `#minecraft:mineable/axe`, `#minecraft:mineable/pickaxe`, and `#minecraft:needs_iron_tool` would drop nothing unless it was mined with an axe or pickaxe that was at least iron level.
 ---
 ## `[js].renderType('solid'|'cutout'|'translucent')`
@@ -379,21 +148,21 @@ Sets the render type.
 - `'translucent'` is required for blocks like stained glass, where pixels can be semitransparent
 - otherwise, use `'solid'` if all pixels in your block are opaque.
 ---
-## `[js].color(tintindex, color)`
+## `[js].color(tintindex: `{int}`, color: Color)`
 Recolors a block to a certain color
 ---
-## `[js].textureAll('texturepath')`
+## `[js].textureAll(`{id}`)`
 Textures all 6 sides of the block to the same texture.
 The path must look like `kubejs:block/texture_name` (which would be included under `kubejs/assets/kubejs/textures/block/texture_name.png`).
 Defaults to `kubejs:block/<block_name>`
 ---
-## `[js].texture('side', 'texturepath')`
-Texture one side by itself. Valid sides are `up`, `down`, `north`, `south`, `east`, and `west`.
+## `[js].texture(side: `[[$direction]]`, texture: `{id}`)`
+Texture one side by itself.
 ---
-## `[js].model('modelpath')`
+## `[js].model(`{id}`)`
 Specify a custom model.
-The path must look like `kubejs:block/texture_name` (which would be included under `kubejs/assets/kubejs/models/block/texture_name.png`).
-Defaults to `kubejs:block/<block_name>`.
+The path must look like `'kubejs:block/texture_name'` (which would be included under `kubejs/assets/kubejs/models/block/texture_name.png`).
+Defaults to `'kubejs:block/<block_name>'`.
 ---
 ## `[js].noItem()`
 Removes the associated item. Minecraft does this by default for a few blocks, like nether portal blocks. Use this if the player should never be able to hold or place the block.
@@ -417,13 +186,13 @@ Allows the block to be waterloggable.
 ## `[js].noDrops()`
 The block will not drop itself, even if mined with silk touch.
 ---
-## `[js].slipperiness(float)`
+## `[js].slipperiness(`{float}`)`
 Sets the slipperiness of the block. Affects how much entities slide while moving on it. Almost every block in Vanilla has a slipperiness value of 0.6, except slime (0.8) and ice (0.98).
 ---
-## `[js].speedFactor(float)`
+## `[js].speedFactor(`{float}`)`
 A modifier affecting how quickly players walk on the block.
 ---
-## `[js].jumpFactor(float)`
+## `[js].jumpFactor(`{float}`)`
 A modifier affecting how high players can jump off the block.
 ---
 ## `[js].randomTick(randomTickEvent => {})`
@@ -442,19 +211,19 @@ Pass in a custom blockstate JSON directly
 ## `[js].setModelJson(json)`
 Pass in a custom model JSON directly
 ---
-## `[js].noValidSpawns(boolean)`
+## `[js].noValidSpawns(`{boolean}`)`
 If `true`, the block is not counted as a valid spawnpoint for entities
 ---
-## `[js].suffocating(boolean)`
+## `[js].suffocating(`{boolean}`)`
 Whether the block will suffocate entities that have their head inside it
 ---
-## `[js].viewBlocking(boolean)`
+## `[js].viewBlocking(`{boolean}`)`
 Whether the block counts as blocking a player's view.
 ---
-## `[js].redstoneConductor(boolean)`
+## `[js].redstoneConductor(`{boolean}`)`
 Sets whether the block will conduct redstone. True by default.
 ---
-## `[js].transparent(boolean)`
+## `[js].transparent(`{boolean}`)`
 Sets whether the block is transparent or not
 ---
 ## `[js].defaultCutout()`

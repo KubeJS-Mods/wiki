@@ -1,0 +1,17 @@
+Enum with valid values:
+
+- `'down'`
+- `'up'`
+- `'north'`
+- `'south'`
+- `'east'`
+- `'west'`
+
+You can also use
+
+- `[js]Direction.DOWN`
+- `[js]Direction.UP`
+- `[js]Direction.NORTH`
+- `[js]Direction.SOUTH`
+- `[js]Direction.EAST`
+- `[js]Direction.WEST`

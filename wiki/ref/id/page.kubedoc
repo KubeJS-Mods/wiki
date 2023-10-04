@@ -1,0 +1,8 @@
+IDs are sub-class of {string}. They have namespace and path.
+
+Examples:
+- `'minecraft:stone'`
+- `'minecraft:textures/blocks/stone'`
+- `'kubejs:custom_item'`
+
+They're called `ResourceLocation` in vanilla code.

@@ -156,7 +156,7 @@ Textures all 6 sides of the block to the same texture.
 The path must look like `kubejs:block/texture_name` (which would be included under `kubejs/assets/kubejs/textures/block/texture_name.png`).
 Defaults to `kubejs:block/<block_name>`
 ---
-## `[js].texture(side: `[[$direction]]`, texture: `{id}`)`
+## `[js].texture(side: `[[$Direction]]`, texture: `{id}`)`
 Texture one side by itself.
 ---
 ## `[js].model(`{id}`)`

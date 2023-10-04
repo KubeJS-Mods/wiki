@@ -271,3 +271,7 @@ Bottom text
 | -------- | -------- |
 | Cell 1 | Cell 2 |
 | Cell 3 | <#test> |
+
+`[js].texture(side: `[[$Direction]]`, texture: `{id}`)`
+$$.texture(side: Direction, texture: ID)
+$$.texture(side: Direction, texture?: ID, test: int)

@@ -5,4 +5,4 @@ Examples:
 - `'minecraft:textures/blocks/stone'`
 - `'kubejs:custom_item'`
 
-They're called `ResourceLocation` in vanilla code.
+This class is called `ResourceLocation` in mojang mappings and `Identifier` in Yarn.

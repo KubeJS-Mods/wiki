@@ -33,10 +33,10 @@ StartupEvents.registry('block', (event) => {
 # All Block Builder Methods
 In case it wasn't covered above, here's list of each method you can use when building a block.
 ---
-## &&.displayName(value: TextComponent)
+## $$.displayName(value: TextComponent)
 Sets the item's display name.
 ---
-## &&.material(value: string)
+## $$.material(value: string)
 #[[red|(No longer supported in 1.20+, see `mapColor` and `soundType` below!)]]
 Set the item's material to an available material from the Materials List:
 
@@ -92,142 +92,142 @@ Set the item's material to an available material from the Materials List:
 - `'wool'`
 <|
 ---
-## &&.mapColor(value: MapColor)
+## $$.mapColor(value: MapColor)
 #[[red|(1.20.1+ only)]]
 Set block map color.
 ---
-## &&.soundType(value: SoundType)
+## $$.soundType(value: SoundType)
 #[[red|(1.20.1+ only)]]
 Set block sound type. You can also use one of these shortcut methods:
 
-- &&.noSoundType()
-- &&.woodSoundType()
-- &&.stoneSoundType()
-- &&.gravelSoundType()
-- &&.grassSoundType()
-- &&.sandSoundType()
-- &&.cropSoundType()
-- &&.glassSoundType()
+- $$.noSoundType()
+- $$.woodSoundType()
+- $$.stoneSoundType()
+- $$.gravelSoundType()
+- $$.grassSoundType()
+- $$.sandSoundType()
+- $$.cropSoundType()
+- $$.glassSoundType()
 ---
-## &&.property(value: BlockProperty)
+## $$.property(value: BlockProperty)
 Adds more blockstates to the block, like being waterlogged or facing a certain direction.
 ---
-## &&.tagBlock(value: ID)
+## $$.tagBlock(value: ID)
 Adds a tag to the block, e.g `'namespace:tag_name'`
 ---
-## &&.tagItem(value: ID)
+## $$.tagItem(value: ID)
 Adds a tag to the block's item, if it has one, e.g `'forge:storage_blocks/iron'`
 ---
-## &&.tagBoth(value: ID)
+## $$.tagBoth(value: ID)
 Adds both block and item tag if possible, e.g `'minecraft:planks'`
 ---
-## &&.hardness(value: float)
+## $$.hardness(value: float)
 Sets the block's Hardness value. Used for calculating the time it takes for the block to be destroyed.
 ---
-## &&.resistance(value: float)
+## $$.resistance(value: float)
 Set's the block's resistance to things like explosions
 ---
-## &&.unbreakable()
+## $$.unbreakable()
 Shortcut to set the resistance to MAX\_VALUE and hardness to -1 (like bedrock)
 ---
-## &&.lightLevel(value: float)
+## $$.lightLevel(value: float)
 Sets the block's light level (0.0 - 1.0).
 ---
-## &&.opaque(value: boolean)
+## $$.opaque(value: boolean)
 Sets whether the block is opaque. Full, opaque blocks will not let light through.
 ---
-## &&.fullBlock(value: boolean)
+## $$.fullBlock(value: boolean)
 Sets whether the block renders as a full block. Full blocks have certain optimizations applied to them, such as not rendering terrain behind them. If you're using `.box()` to make a custom hitbox, please set this to `false`.
 ---
-## &&.requiresTool(value: boolean)
+## $$.requiresTool(value: boolean)
 If `true`, the block will use certain block tags to determine whether it should drop an item when mined. For example, a block tagged with `#minecraft:mineable/axe`, `#minecraft:mineable/pickaxe`, and `#minecraft:needs_iron_tool` would drop nothing unless it was mined with an axe or pickaxe that was at least iron level.
 ---
-## &&.renderType('solid'|'cutout'|'translucent')
+## $$.renderType('solid'|'cutout'|'translucent')
 Sets the render type.
 - `'cutout'` is required for blocks with texture like glass, where pixels are either transparent or not
 - `'translucent'` is required for blocks like stained glass, where pixels can be semitransparent
 - otherwise, use `'solid'` if all pixels in your block are opaque.
 ---
-## &&.color(tintindex: `{int}`, color: Color)
+## $$.color(tintindex: `{int}`, color: Color)
 Recolors a block to a certain color
 ---
-## &&.textureAll(value: ID)
+## $$.textureAll(value: ID)
 Textures all 6 sides of the block to the same texture.
 The path must look like `kubejs:block/texture_name` (which would be included under `kubejs/assets/kubejs/textures/block/texture_name.png`).
 Defaults to `kubejs:block/<block_name>`
 ---
-## &&.texture(side: Direction, texture: ID)
+## $$.texture(side: Direction, texture: ID)
 Texture one side by itself.
 ---
-## &&.model(value: ID)
+## $$.model(value: ID)
 Specify a custom model.
 The path must look like `'kubejs:block/texture_name'` (which would be included under `kubejs/assets/kubejs/models/block/texture_name.png`).
 Defaults to `'kubejs:block/<block_name>'`.
 ---
-## &&.noItem()
+## $$.noItem()
 Removes the associated item. Minecraft does this by default for a few blocks, like nether portal blocks. Use this if the player should never be able to hold or place the block.
 ---
-## &&.box(x0: float, y0: float, z0: float, x1: float, y1: float, z1: float, scale16?: boolean)
+## $$.box(x0: float, y0: float, z0: float, x1: float, y1: float, z1: float, scale16?: boolean)
 scale16 boolean defaults to true.
 Sets a custom hitbox for the block, affecting collision. You can use this multiple times to define a complex shape composed of multiple boxes.
 Each box is a rectangular prism with corners at (x0,y0,z0) and (x1,y1,z1)
 You will probably want to set up a custom block model that matches the shape you define here.
 The final boolean determines the coordinate scale of the box. Passing in `true` will use the numbers 0-16, while passing in `false` will use coordinates ranging from 0.0 to 1.0
 ---
-## &&.noCollision()
+## $$.noCollision()
 Removes the default full-block hitbox, allowing you to fall through the block.
 ---
-## &&.notSolid()
+## $$.notSolid()
 Tells the renderer that the block isn't solid.
 ---
-## &&.waterlogged()
+## $$.waterlogged()
 Allows the block to be waterloggable.
 ---
-## &&.noDrops()
+## $$.noDrops()
 The block will not drop itself, even if mined with silk touch.
 ---
-## &&.slipperiness(value: float)
+## $$.slipperiness(value: float)
 Sets the slipperiness of the block. Affects how much entities slide while moving on it. Almost every block in Vanilla has a slipperiness value of 0.6, except slime (0.8) and ice (0.98).
 ---
-## &&.speedFactor(value: float)
+## $$.speedFactor(value: float)
 A modifier affecting how quickly players walk on the block.
 ---
-## &&.jumpFactor(value: float)
+## $$.jumpFactor(value: float)
 A modifier affecting how high players can jump off the block.
 ---
-## &&.randomTick(callback: Consumer<RandomTickEvent>)
+## $$.randomTick(callback: Consumer<RandomTickEvent>)
 A function to run when the block recieves a random tick.
 ---
-## &&.item(item: Consumer<ItemBuilder>)
+## $$.item(item: Consumer<ItemBuilder>)
 Modify certain properties of the block's item.
 See [[/tutorials/item-registry]] for more info.
 ---
-## &&.setLootTableJson(value: json)
+## $$.setLootTableJson(value: json)
 Pass in a custom loot table JSON directly
 ---
-## &&.setBlockstateJson(value: json)
+## $$.setBlockstateJson(value: json)
 Pass in a custom blockstate JSON directly
 ---
-## &&.setModelJson(value: json)
+## $$.setModelJson(value: json)
 Pass in a custom model JSON directly
 ---
-## &&.noValidSpawns(value: boolean)
+## $$.noValidSpawns(value: boolean)
 If `true`, the block is not counted as a valid spawnpoint for entities
 ---
-## &&.suffocating(value: boolean)
+## $$.suffocating(value: boolean)
 Whether the block will suffocate entities that have their head inside it
 ---
-## &&.viewBlocking(value: boolean)
+## $$.viewBlocking(value: boolean)
 Whether the block counts as blocking a player's view.
 ---
-## &&.redstoneConductor(value: boolean)
+## $$.redstoneConductor(value: boolean)
 Sets whether the block will conduct redstone. True by default.
 ---
-## &&.transparent(value: boolean)
+## $$.transparent(value: boolean)
 Sets whether the block is transparent or not
 ---
-## &&.defaultCutout()
+## $$.defaultCutout()
 Batches a bunch of methods to make blocks such as glass
 ---
-## &&.defaultTranslucent()
-similar to &&.defaultCutout() but using translucent layer instead
+## $$.defaultTranslucent()
+similar to $$.defaultCutout() but using translucent layer instead

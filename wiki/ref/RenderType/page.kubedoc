@@ -1,0 +1,6 @@
+Enum with valid values:
+
+- `'solid'`
+- `'cutout'`
+- `'cutout_mipped'`
+- `'translucent'`

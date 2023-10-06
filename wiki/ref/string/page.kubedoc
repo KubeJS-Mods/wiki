@@ -14,7 +14,7 @@ Path of an {id} - of `'example:thing'` path would be `'thing'`
 ---
 # Methods
 ---
-## $$.trim(): int
+## $$.trim(): string
 Removes whitespace from both ends of the string
 ---
 ## $$.charAt(index: int): string

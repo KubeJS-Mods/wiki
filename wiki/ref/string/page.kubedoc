@@ -7,10 +7,10 @@ Type representing any array of characters
 Number of characters in the string
 ---
 ## $$.namespace: string
-Namespace of {id} - of `'example:thing'` namespace would be `'example'`
+Namespace of an {id} - of `'example:thing'` namespace would be `'example'`
 ---
 ## $$.path: string
-Path of {id} - of `'example:thing'` path would be `'thing'`
+Path of an {id} - of `'example:thing'` path would be `'thing'`
 ---
 # Methods
 ---

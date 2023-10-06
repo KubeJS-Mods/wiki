@@ -4,13 +4,18 @@ Type representing any array of characters
 # Properties
 ---
 ## $$.length: int
+Number of characters in the string
 ---
 ## $$.namespace: string
+Namespace of {id} - of `'example:thing'` namespace would be `'example'`
 ---
 ## $$.path: string
+Path of {id} - of `'example:thing'` path would be `'thing'`
 ---
 # Methods
 ---
 ## $$.trim(): int
+Removes whitespace from both ends of the string
 ---
 ## $$.charAt(index: int): string
+The character at the specified index

@@ -3,14 +3,14 @@ Type representing any array of characters
 ---
 # Properties
 ---
-## `[js].length`: {int}
+## $$.length: int
 ---
-## `[js].namespace`: {string}
+## $$.namespace: string
 ---
-## `[js].path`: {string}
+## $$.path: string
 ---
 # Methods
 ---
-## `[js].trim()`: {string}
+## $$.trim(): int
 ---
-## `[js].charAt(index: `{int}`)`: {string}
+## $$.charAt(index: int): string

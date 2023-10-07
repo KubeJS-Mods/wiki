@@ -278,4 +278,4 @@ Inline test $$.property inline test $$.method(test: int) inline test.
 | -------- | -------- |
 | Cell 1 | # Cell 2 |
 | Cell 3 | <#test> |
-| **Cell 5** | &&.methodInCell(test:int): string |
+| **Cell 5** | $$.methodInCell(test:int): string |

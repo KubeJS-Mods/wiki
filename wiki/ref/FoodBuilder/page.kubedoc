@@ -1,0 +1,35 @@
+Used in [[/tutorials/item-modification]]
+
+---
+# Properties
+---
+None
+---
+# Methods
+---
+## $$.hunger(value: int)
+Sets the hunger restored when this item is eaten.
+---
+## $$.hunger(value: int)
+Sets the hunger restored when this item is eaten
+---
+## $$.saturation(value: float)
+Sets the saturation mulitplier when this food is eaten. This is not the final value, it goes through some complicated maths first
+---
+## $$.meat(flag?: boolean)
+Sets if this item is considered meat. Meat can be fed to wolves to heal them.
+---
+## $$.alwaysEdible(flag?: boolean)
+If this item can be eaten even if your food bar is full. Chorus Fruit has this true by default.
+---
+## $$.fastToEat(flag?: boolean)
+If this item is fast to eat, like Dried Kelp.
+---
+## $$.effect(effect: ID, duration: int, amplifier: int, probability: float)
+Adds an effect to the entity who eats this, like a Golden Apple.
+---
+## $$.removeEffect(effect: MobEffect)
+Removes the effect from the entity who eats this, like Honey Bottles (poison).
+---
+## $$.eaten(callback: Consumer<FoodEatenEventJS>)
+===BROKEN!=== Use `ItemEvents.foodEaten` in server scripts instead.

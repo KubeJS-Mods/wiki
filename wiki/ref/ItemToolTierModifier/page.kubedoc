@@ -1,0 +1,26 @@
+Used in [[/tutorials/item-modification]]
+
+---
+# Properties
+---
+## $$.uses: int
+The maximum damage before this tool breaks. Identical to maxDamage.
+---
+## $$.speed: float
+The digging speed of this tool.
+---
+## $$.attackDamageBonus: float
+The bonus attack damage of this tool.
+---
+## $$.level: int
+The mining level of this tool.
+---
+## $$.enchantmentValue: int
+The enchanting power of this tool. The higher this is, the better the enchantments at an Enchanting Table are.
+---
+## $$.repairIngredient: Ingredient
+The material used to repair this tool in an anvil.
+---
+# Methods
+---
+None

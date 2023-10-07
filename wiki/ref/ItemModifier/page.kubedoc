@@ -1,0 +1,57 @@
+Used in [[/tutorials/item-modification]]
+
+---
+# Properties
+---
+# Available properties
+## $$.material: string
+WIP
+---
+## $$.maxStackSize: int
+Sets the maximum stack size for items. Default is 64 for most items. |
+---
+## $$.maxDamage: int
+Sets the maximum damage an item can take before it is broken. |
+---
+## $$.craftingRemainder: Item
+Sets the item left behind in the crafting grid when this item is used as a crafting ingredient (like milk buckets in the cake recipe). Most items do not have one. |
+---
+## $$.fireResistant: boolean
+If this item burns in fire and lava. Most items are false by default, but Ancient Debris and Netherite things are not.
+---
+## $$.rarity: Rarity
+Sets the items rarity. This is mainly used for the name colour. COMMON by default. Nether Stars and Elytra are UNCOMMON, Golden Apples are RARE and Enchanted Golden Apples are EPIC.
+---
+## $$.burnTime: int
+Sets the burn time (in ticks) in a regular furnace for this item. Note that Smokers and Blast Furnaces burn fuel twice as fast. Coal is 1600.
+---
+## $$.foodProperties: FoodProperties
+Sets the items food properties to the provided properties. Can be null to remove food properties.
+---
+## $$.foodProperties: Consumer<FoodBuilder>
+Sets the properties according to the consumer. See below for more info.
+---
+## $$.digSpeed: float
+Sets the items digging speed to the number provided. See table below for defaults.
+---
+## $$.tier: Consumer<MutableToolTier>
+Currently BROKEN! Sets the tools tier according to the consumer. See below for more info.
+---
+## $$.attackDamage: double
+Sets the attack damage of this item.
+---
+## $$.attackSpeed: double
+Sets the attack speed of this item
+---
+## $$.armorProtection: double
+Sets the armor protection for this item. 20 is a full armour bar.
+---
+## $$.armorToughness: double
+Adds an armor toughness bonus.
+---
+## $$.armorKnockbackResistance: double
+Add an armor knockback resistance bonus. Can be negative. 1 is full knockback resistance.
+---
+# Methods
+---
+None

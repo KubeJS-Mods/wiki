@@ -7,10 +7,12 @@ ItemEvents.modification(event => {
     item.fireResistant = true
     item.rarity = "UNCOMMON"
   })
+
   event.modify('minecraft:ancient_debris', item => {
     item.rarity = "RARE"
     item.burnTime = 16000
   })
+
   event.modify('minecraft:turtle_helmet', item => {
     item.rarity = "EPIC"
     item.maxDamage = 481
@@ -19,25 +21,7 @@ ItemEvents.modification(event => {
 })
 ```
 
-# Available properties
-| Property | Description |
-| --- | --- |
-| $$.material: string | WIP |
-| $$.maxStackSize: int | Sets the maximum stack size for items. Default is 64 for most items. |
-| $$.maxDamage: int | Sets the maximum damage an item can take before it is broken. |
-| $$.craftingRemainder: Item | Sets the item left behind in the crafting grid when this item is used as a crafting ingredient (like milk buckets in the cake recipe). Most items do not have one. |
-| $$.fireResistant: boolean | If this item burns in fire and lava. Most items are false by default, but Ancient Debris and Netherite things are not. |
-| $$.rarity: Rarity | Sets the items rarity. This is mainly used for the name colour. COMMON by default. Nether Stars and Elytra are UNCOMMON, Golden Apples are RARE and Enchanted Golden Apples are EPIC. |
-| $$.burnTime: int | Sets the burn time (in ticks) in a regular furnace for this item. Note that Smokers and Blast Furnaces burn fuel twice as fast. Coal is 1600. |
-| $$.foodProperties: FoodProperties | Sets the items food properties to the provided properties. Can be null to remove food properties. |
-| $$.foodProperties: Consumer<FoodBuilder> | Sets the properties according to the consumer. See below for more info. |
-| $$.digSpeed: float | Sets the items digging speed to the number provided. See table below for defaults. |
-| $$.tier: Consumer<MutableToolTier> | Currently BROKEN! Sets the tools tier according to the consumer. See below for more info. |
-| $$.attackDamage: double | Sets the attack damage of this item. |
-| $$.attackSpeed: double | Sets the attack speed of this item |
-| $$.armorProtection: double | Sets the armor protection for this item. 20 is a full armour bar. |
-| $$.armorToughness: double | Adds an armor toughness bonus. |
-| $$.armorKnockbackResistance: double | Add an armor knockback resistance bonus. Can be negative. 1 is full knockback resistance. |
+You can find [[$ItemModifier|full list of ItemModifier properties here]].
 
 # Tool Defaults
 | Tier | level | maxDamage | digSpeed | attackDamage (this is a bonus modified by the tool type value, not the final value) | enchantmentValue |
@@ -78,6 +62,7 @@ ItemEvents.modification(event => {
         tier.level = 3
     }
   })
+
   event.modify('wooden_sword', item => {
     item.tier = tier => {
         tier.enchantmentValue = 30
@@ -85,14 +70,7 @@ ItemEvents.modification(event => {
   })
 })
 ```
-| Property | Description |
-| --- | --- |
-| uses: int | The maximum damage before this tool breaks. Identical to maxDamage. |
-| speed: float | The digging speed of this tool. |
-| attackDamageBonus: float | The bonus attack damage of this tool. |
-| level: int | The mining level of this tool. |
-| enchantmentValue: int | The enchanting power of this tool. The higher this is, the better the enchantments at an Enchanting Table are. |
-| repairIngredient: Ingredient | The material used to repair this tool in an anvil. |
+You can find [[$ItemToolTierModifier|full list of ItemToolTierModifier properties here]].
 
 ## Armor
 Doesnt actually exist/work at the moment. Sorry.
@@ -115,13 +93,4 @@ ItemEvents.modification(event => {
 })
 ```
 
-| Method | Description |
-| --- | --- |
-| $$.hunger(value: int) | Sets the hunger restored when this item is eaten |
-| $$.saturation(value: float) | Sets the saturation mulitplier when this food is eaten. This is not the final value, it goes through some complicated maths first |
-| $$.meat(flag?: boolean) | Sets if this item is considered meat. Meat can be fed to wolves to heal them. |
-| $$.alwaysEdible(flag?: boolean) | If this item can be eaten even if your food bar is full. Chorus Fruit has this true by default. |
-| $$.fastToEat(flag?: boolean) If this item is fast to eat, like Dried Kelp. |
-| $$.effect(effect: ID, duration: int, amplifier: int, probability: float) | Adds an effect to the entity who eats this, like a Golden Apple. |
-| $$.removeEffect(effect: MobEffect) | Removes the effect from the entity who eats this, like Honey Bottles (poison). |
-| $$.eaten(callback: Consumer<FoodEatenEventJS>) | BROKEN! Use `ItemEvents.foodEaten` in server scripts instead. |
+You can find [[$FoodBuilder|full list of FoodBuilder methods here]].

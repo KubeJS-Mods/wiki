@@ -267,12 +267,15 @@ Bottom text
 - List item 2, <#test>
 - List item 3
 
-| Header 1 | Header 2 |
-| -------- | -------- |
-| Cell 1 | Cell 2 |
-| Cell 3 | <#test> |
-
 # Methods
 
 ## $$.texture(side: Direction, texture?: ID, test: int)
 Inline test $$.property inline test $$.method(test: int) inline test.
+
+# Tables
+
+| Header 1 | Header 2 |
+| -------- | -------- |
+| Cell 1 | # Cell 2 |
+| Cell 3 | <#test> |
+| **Cell 5** | &&.methodInCell(test:int): string |

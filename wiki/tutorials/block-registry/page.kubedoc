@@ -8,7 +8,7 @@ StartupEvents.registry("block", (event) => {
 
 That's it! Launch the game, and assuming you've left KubeJS' auto-generated resources alone, there should be a fully-textured block in the Creative menu under KubeJS (purple dye). KubeJS will also generate the name "Example Block" for you.
 
-To make modifications to this block, we use the [[/ref/BlockBuilder|block builder]] returned by the `[js]event.create()` call. The block builder allows us to chain together multiple modifications. Let's try making some of the more common modifications:
+To make modifications to this block, we use the [[$BlockBuilder|block builder]] returned by the `[js]event.create()` call. The block builder allows us to chain together multiple modifications. Let's try making some of the more common modifications:
 
 ```js
 StartupEvents.registry('block', (event) => {
@@ -28,4 +28,4 @@ StartupEvents.registry('block', (event) => {
 
 # All Block Builder Methods
 The example above only covers a few of the methods available on the block builder.
-See the [[/ref/BlockBuilder|full list here]]!
+See the [[$BlockBuilder|full list here]]!

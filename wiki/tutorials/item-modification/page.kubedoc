@@ -37,7 +37,7 @@ You can find [[$ItemModifier|full list of ItemModifier properties here]].
 <<<
 
 # Armor Defaults
-All boxes with multiple values are formatted [head, chest, legs, feet]. Boxes with single values are the same for every piece.
+All boxes with multiple values are formatted \[head, chest, legs, feet]. Boxes with single values are the same for every piece.
 | Tier | `maxDamage` | `armorProtection` | `armorToughness` | `armorKnockbackResistance` |
 | --- | --- | --- | --- | --- |
 | Leather | \[65, 75, 80, 55] | \[1, 2, 3, 1] | 0 | 0 |

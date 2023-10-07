@@ -6,7 +6,6 @@
 # Constants and Objects
 
 | Name | Type | Description |
-| ---- | ---- | ----------- |
 | `global` | Map<String, Object> | Global object, you can use this to set objects and callbacks in startup script and reference them from server or client scripts |
 | `console` | Console | Console object, used for logging |
 | `SECOND` | number | 1000 |
@@ -44,7 +43,6 @@
 # Wrapped Classes
 
 | Name | Class |
-| ---- | ----- |
 | JavaMath | java.lang.Math |
 | Blocks | net.minecraft.world.level.block.Blocks |
 | Items | net.minecraft.world.item.Items |

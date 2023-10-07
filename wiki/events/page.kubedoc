@@ -12,7 +12,6 @@
 # {description}
 
 | {folder} | {method} | {has-result} |
-| ------ | ------ | ----------- |
 | {st-s} | StartupEvents.init | {no} |
 | {st-s} | StartupEvents.postInit | {no} |
 | {st-s} | StartupEvents.registry | {no} |

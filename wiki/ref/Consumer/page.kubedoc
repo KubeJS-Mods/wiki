@@ -1,0 +1,13 @@
+Consumer is a generic method that usually means that method has a callback function.
+
+If your method looks something like
+
+`object`$$.example(callback: Consumer<string>)
+
+Then the script for this will be:
+```js
+object.example(obj => {
+  console.log(obj); // obj is a string
+})
+```
+Of course, the argument name in callback doesn't matter.

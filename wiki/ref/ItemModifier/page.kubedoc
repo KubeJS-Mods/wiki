@@ -8,13 +8,13 @@ Used in [[/tutorials/item-modification]]
 WIP
 ---
 ## $$.maxStackSize: int
-Sets the maximum stack size for items. Default is 64 for most items. |
+Sets the maximum stack size for items. Default is 64 for most items.
 ---
 ## $$.maxDamage: int
-Sets the maximum damage an item can take before it is broken. |
+Sets the maximum damage an item can take before it is broken.
 ---
 ## $$.craftingRemainder: Item
-Sets the item left behind in the crafting grid when this item is used as a crafting ingredient (like milk buckets in the cake recipe). Most items do not have one. |
+Sets the item left behind in the crafting grid when this item is used as a crafting ingredient (like milk buckets in the cake recipe). Most items do not have one.
 ---
 ## $$.fireResistant: boolean
 If this item burns in fire and lava. Most items are false by default, but Ancient Debris and Netherite things are not.

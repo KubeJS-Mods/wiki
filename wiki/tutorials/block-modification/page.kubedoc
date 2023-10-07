@@ -1,0 +1,25 @@
+`BlockEvents.modification` event is a startup script event that allows you to change properties of existing blocks.
+
+```js
+BlockEvents.modification(e => {
+  e.modify('minecraft:stone', block => {
+    block.destroySpeed = 0.1
+    block.hasCollision = false
+  })
+})
+```
+
+# Available properties
+| Property | Description |
+| --- | --- |
+| $$.material: string | WIP |
+| $$.hasCollision: boolean | WIP |
+| $$.destroySpeed: float | WIP |
+| $$.explosionResistance: float | WIP |
+| $$.randomlyTicking: boolean | WIP |
+| $$.soundType: string | WIP |
+| $$.friction: float | WIP |
+| $$.speedFactor: float | WIP |
+| $$.jumpFactor: float | WIP |
+| $$.lightEmission: int | WIP |
+| $$.requiredTool: boolean | WIP |

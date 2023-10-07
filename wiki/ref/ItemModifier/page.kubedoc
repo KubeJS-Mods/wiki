@@ -34,7 +34,7 @@ Sets the properties according to the consumer. See below for more info.
 Sets the items digging speed to the number provided. See table below for defaults.
 ---
 ## $$.tier: Consumer<MutableToolTier>
-Currently BROKEN! Sets the tools tier according to the consumer. See below for more info.
+===Currently BROKEN!=== Sets the tools tier according to the consumer. See below for more info.
 ---
 ## $$.attackDamage: double
 Sets the attack damage of this item.

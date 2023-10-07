@@ -21,7 +21,7 @@ ItemEvents.modification(event => {
 })
 ```
 
-You can find [[$ItemModifier|full list of ItemModifier properties here]].
+You can find [[$MutableItem|full list of MutableItem properties here]].
 
 # Tool Defaults
 | Tier | `level` | `maxDamage` | `digSpeed` | `attackDamage` | `enchantmentValue` |

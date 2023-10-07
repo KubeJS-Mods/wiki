@@ -1,0 +1,41 @@
+Used in [[/tutorials/block-modification]]
+
+---
+# Properties
+---
+## $$.material: string
+WIP
+---
+## $$.hasCollision: boolean
+WIP
+---
+## $$.destroySpeed: float
+WIP
+---
+## $$.explosionResistance: float
+WIP
+---
+## $$.randomlyTicking: boolean
+WIP
+---
+## $$.soundType: string
+WIP
+---
+## $$.friction: float
+WIP
+---
+## $$.speedFactor: float
+WIP
+---
+## $$.jumpFactor: float
+WIP
+---
+## $$.lightEmission: int
+WIP
+---
+## $$.requiredTool: boolean
+WIP
+---
+# Methods
+---
+None

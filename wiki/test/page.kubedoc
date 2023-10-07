@@ -274,4 +274,5 @@ Bottom text
 
 # Methods
 
-## $$.texture(side: Direction, texture?: ID, test: int) inline test
+## $$.texture(side: Direction, texture?: ID, test: int)
+Inline test $$.property inline test $$.method(test: int) inline test.

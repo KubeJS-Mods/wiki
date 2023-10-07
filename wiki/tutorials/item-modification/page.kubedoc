@@ -73,7 +73,7 @@ ItemEvents.modification(event => {
   })
 })
 ```
-You can find [[$ItemToolTierModifier|full list of ItemToolTierModifier properties here]].
+You can find [[$MutableToolTier|full list of MutableToolTier properties here]].
 
 ## Armor
 Doesnt actually exist/work at the moment. Sorry.

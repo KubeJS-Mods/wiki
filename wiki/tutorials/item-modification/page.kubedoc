@@ -38,7 +38,7 @@ You can find [[$ItemModifier|full list of ItemModifier properties here]].
 # Armor Defaults
 All boxes with multiple values are formatted `head | chest | legs | feet`.
 
-| Tier |[4] `maxDamage` |[span=4] `armorProtection` |[span=4] `armorToughness` | `armorKnockbackResistance` |
+| Tier |[merge=4] `maxDamage` |[merge=4] `armorProtection` | `armorToughness` | `armorKnockbackResistance` |
 | Leather | 65 | 75 | 80 | 55 | 1 | 2 | 3 | 1 | 0 | 0.0 |
 | Chain | 95 | 225 | 240 | 165 | 1 | 4 | 5 | 2 | 0 | 0.0 |
 | Iron | 195 | 225 | 240 | 165 | 2 | 5 | 6 | 2 | 0 | 0.0 |

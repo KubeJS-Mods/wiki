@@ -1,4 +1,4 @@
-ItemEvents.modification is a startup script event used to modify various properties of existing items.
+You can change properties of existing items:
 
 ```js
 ItemEvents.modification(event => {

@@ -1,4 +1,4 @@
-`BlockEvents.modification` event is a startup script event that allows you to change properties of existing blocks.
+You can change properties of existing blocks:
 
 ```js
 BlockEvents.modification(e => {

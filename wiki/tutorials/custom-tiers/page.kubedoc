@@ -1,8 +1,5 @@
->>> info
-The recipe event is a {st-s} event.
-<<<
-
-You can make custom tiers for armor and tools in a startup script. They are not reloadable without restarting the game. The events are not cancellable.
+You can make custom tiers for armor and tools.
+They are not reloadable without restarting the game.
 
 # Tool Tiers
 
@@ -34,3 +31,5 @@ ItemEvents.armorTierRegistry (event => {
   })
 })
 ```
+
+For default values see [[/tutorials/item-modification|item modification tutorial]].

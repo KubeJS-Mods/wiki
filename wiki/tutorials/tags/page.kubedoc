@@ -1,7 +1,3 @@
->>> info
-The tag event is a {se-s} event.
-<<<
-
 >>> warning
 Tags are per item/block/fluid/entity_type and as such cannot be added based on things like NBT data!
 <<<

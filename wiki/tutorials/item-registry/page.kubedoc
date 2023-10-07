@@ -1,7 +1,3 @@
->>> info
-The recipe event is a {st-s} event.
-<<<
-
 Custom items are created in a startup script. They cannot be reloaded without restarting the game. The event is not cancellable.
 
 ```js

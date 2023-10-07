@@ -1,6 +1,6 @@
-Consumer is a generic method that usually means that method has a callback function.
+Consumer is a generic class that usually means that method has a callback function.
 
-If your method looks something like
+If your method looks something like:
 
 `object`$$.example(callback: Consumer<string>)
 

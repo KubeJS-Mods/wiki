@@ -51,7 +51,7 @@
 | {se-s} | [[/ref/LevelEvents/afterExplosion]] | {no} |
 | {st-s} | [[/ref/WorldgenEvents/add]] | {no} |
 | {st-s} | [[/ref/WorldgenEvents/remove]] | {no} |
-| {cl-s}<br>{cl-s} | [[/ref/NetworkEvents/dataReceived]] | {yes} |
+| {se-s}<br>{cl-s} | [[/ref/NetworkEvents/dataReceived]] | {yes} |
 | {st-s} | [[/ref/ItemEvents/modification]] | {no} |
 | {st-s} | [[/ref/ItemEvents/toolTierRegistry]] | {no} |
 | {st-s} | [[/ref/ItemEvents/armorTierRegistry]] | {no} |

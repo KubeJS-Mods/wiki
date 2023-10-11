@@ -6,3 +6,12 @@ Examples:
 - `'kubejs:custom_item'`
 
 This class is called `ResourceLocation` in mojang mappings and `Identifier` in Yarn.
+
+---
+# Properties
+---
+## $$.namespace: String
+Namespace - of `'example:thing'` namespace would be `'example'`
+---
+## $$.path: String
+Path - of `'example:thing'` path would be `'thing'`

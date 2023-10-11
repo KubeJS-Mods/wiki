@@ -6,16 +6,16 @@ Type representing any array of characters
 ## $$.length: int
 Number of characters in the string
 ---
-## $$.namespace: string
-Namespace of an {id} - of `'example:thing'` namespace would be `'example'`
+## $$.namespace: String
+Namespace of an [[$ID]] - of `'example:thing'` namespace would be `'example'`
 ---
-## $$.path: string
-Path of an {id} - of `'example:thing'` path would be `'thing'`
+## $$.path: String
+Path of an [[$ID]] - of `'example:thing'` path would be `'thing'`
 ---
 # Methods
 ---
-## $$.trim(): string
+## $$.trim(): String
 Removes whitespace from both ends of the string
 ---
-## $$.charAt(index: int): string
+## $$.charAt(index: int): String
 The character at the specified index

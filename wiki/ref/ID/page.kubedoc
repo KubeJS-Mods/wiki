@@ -1,4 +1,4 @@
-IDs are sub-class of {string}. They have namespace and path.
+ID is basically a [[$String]] with namespace and path.
 
 Examples:
 - `'minecraft:stone'`

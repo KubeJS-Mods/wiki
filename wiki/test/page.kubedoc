@@ -48,9 +48,9 @@ Inline `code` and `code II` and `code *III*`
 
 {missing-key-test}
 
-![[test.png|Test Image]]![[test.png|Test Image]]
+![[test.png|L Image]]![[test.png|R Image]]
 
-![[test.png|Test Image]] Text ![[test.png|Test Image]]
+![[test.png|L Image]] Text ![[test.png|R Image]]
 
 #[[red|Red]] text, #[[orange|Orange]] text, #[[yellow|Yellow]] text, #[[green|Green]] text, #[[blue|Blue]] text, #[[purple|Purple]] text, #[[magenta|Magenta]] text
 

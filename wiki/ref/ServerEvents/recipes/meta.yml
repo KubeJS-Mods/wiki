@@ -1,0 +1,3 @@
+script: "server"
+event-result: false
+see-also: "$ServerEvents/tags, $ServerEvents/afterRecipes, $ServerEvents/compostableRecipes, $ServerEvents/recipeTypeRegistry, $ServerEvents/specialRecipeSerializers"

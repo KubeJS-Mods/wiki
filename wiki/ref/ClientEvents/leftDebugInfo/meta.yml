@@ -1,0 +1,3 @@
+script: "client"
+event-result: false
+see-also: "$ClientEvents/rightDebugInfo"

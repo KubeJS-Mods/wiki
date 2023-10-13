@@ -1,0 +1,3 @@
+script: "common"
+event-result: false
+see-also: "$BlockEvents/detectorChanged"

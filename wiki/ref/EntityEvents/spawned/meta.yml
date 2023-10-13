@@ -1,0 +1,3 @@
+script: "server"
+event-result: true
+see-also: "$EntityEvents/checkSpawn"

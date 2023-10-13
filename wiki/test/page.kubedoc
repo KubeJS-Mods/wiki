@@ -33,6 +33,7 @@ __Underline__
 {description} - Language key
 [Test Link](https://kubejs.com/)
 Page Link [[/test]]
+Page Link [[/fake-page]]
 Page Link - [[/test|See this page]]
 ![[test.png|Test Image]]
 

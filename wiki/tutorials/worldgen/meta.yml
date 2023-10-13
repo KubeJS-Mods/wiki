@@ -1,1 +1,2 @@
 script: "startup"
+see-also: "$WorldgenEvents/add, $WorldgenEvents/remove"

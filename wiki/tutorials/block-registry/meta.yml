@@ -1,2 +1,2 @@
 script: "startup"
-see-also: "$BlockBuilder"
+see-also: "$StartupEvents/registry, $BlockBuilder"

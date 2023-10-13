@@ -1,0 +1,3 @@
+script: "server"
+has-result: true
+see-also: "$LevelEvents/afterExplosion"

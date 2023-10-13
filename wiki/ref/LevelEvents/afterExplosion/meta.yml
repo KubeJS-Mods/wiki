@@ -1,0 +1,3 @@
+script: "server"
+has-result: false
+see-also: "$LevelEvents/beforeExplosion"

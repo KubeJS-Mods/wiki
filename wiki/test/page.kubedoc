@@ -72,13 +72,6 @@ Script types:
 
 ---
 
-| Header 1 | Header 2 |
-|----------|----------|
-| Cell 1 | Cell 2 |
-| Cell 3 | Cell 4 |
-
----
-
 ```js
 let code = 'JavaScript code test';
 console.log('Hello, World!')
@@ -279,7 +272,13 @@ Inline test $$.property inline test $$.method(test: int) inline test.
 
 # Tables
 
+---
+
+| Header 1 | Header 2 |
+| Cell 1 | Cell 2 |
+| Cell 3 | Cell 4 |
+
 | Header 1 | Header 2 |
 | Cell 1 | # Cell 2 |
-| Cell 3 | <#test> |
+| [[[/tutorials/block-registry]]] | <#test> |
 | **Cell 5** | $$.methodInCell(test:int): String |

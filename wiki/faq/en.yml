@@ -12,7 +12,6 @@ a-info: "This mod lets you create scripts in JavaScript language to manage your 
 
 q-how-use: "How to use it?"
 a-how-use: "Run the game with mod installed once. It should generate a `kubejs` folder in your minecraft directory with example scripts and README.txt. Read that!"
-a-video: "Here's a video tutorial:"
 
 q-js-help: "I don't know JavaScript"
 a-js-help: "There's examples and pre-made scripts here. And you can always ask in discord support channel for help with scripts, but be specific."

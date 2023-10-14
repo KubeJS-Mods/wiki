@@ -1,0 +1,14 @@
+{intro}
+{click}
+
+# {event-types}
+## {event-type-startup}
+{startup}
+## {event-type-server}
+{server}
+## {event-type-client}
+{client}
+
+# {description}
+
+<#$event-list>

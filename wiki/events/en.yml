@@ -11,5 +11,5 @@ server: "Scripts go into the {se-s} folder. It will be reloaded when you run `/r
 event-type-client: "Client"
 client: "Scripts go into the {cl-s} folder. Will be reloaded when you press `F3+T`. Most changes that are per-client (such as resource packs, Painter, and JEI) are client events."
 folder: "Folder"
-method: "Method"
+event: "Event"
 has-result: "Has Result"

@@ -105,4 +105,4 @@ Valid SoundTypes:
 
 You can also construct your own SoundType:
  `[js]new SoundType(volume, pitch, breakSound, stepSound, placeSound, hitSound, fallSound)`
-where volume and pitch are {float} 0.0 - 1.0 (usually leave it as 1.0) and all sounds are SoundEvents.
+where volume and pitch are [[$Float]] `0.0` - `1.0` (usually leave it as `1.0`) and all sounds are [[$SoundEvent|SoundEvents]].

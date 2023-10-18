@@ -1,0 +1,40 @@
+# {q-info}
+{a-info}
+
+# {q-how-use}
+{a-how-use}
+
+# {q-js-help}
+{a-js-help}
+
+# {q-reload}
+- {a-reload-st}
+- {a-reload-se}
+- {a-reload-cl}
+
+# {q-mod-support}
+{a-mod-support}
+
+# {q-features}
+{a-features}
+
+# {q-how-work}
+{a-how-work}
+
+# {q-support}
+{a-support}
+
+# {q-discussion}
+{a-discussion}
+
+[![[https://kubejs.com/discord.png]]]({discord-url})
+
+// {website}: [](https://kubejs.com/)
+
+{source}: [](https://github.com/KubeJS-Mods/KubeJS/tree/2002)
+
+{download}: [](https://kubejs.com/downloads)
+
+>>> warn
+{no-support}
+<<<

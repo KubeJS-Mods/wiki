@@ -12,26 +12,27 @@ Units are not really a class, but more its own language. It's very similar to Mo
 # Constants
 ---
 ## `[js]true`
-Boolean true value, equal to `1.0`
+Boolean true value, equal to `[js]1.0`
 ---
 ## `[js]false`
-Boolean false value, equal to `0.0`
+Boolean false value, equal to `[js]0.0`
 ---
 ## `[js]PI`
-Number equal to `3.14159265358979323846`
+Number equal to `[js]3.14159265358979323846`
 ---
 ## `[js]HALF_PI`
-Number equal to `1.57079632679`
+Number equal to `[js]1.57079632679`
 ---
 ## `[js]TWO_PI`
-Number equal to `6.28318530718`
+Number equal to `[js]6.28318530718`
 ---
 ## `[js]E`
-Number equal to `2.7182818284590452354`
+Number equal to `[js]2.7182818284590452354`
 ---
 # Operations
 ---
-## `[js]cond ? a : b` = TERNARY, if cond then a, else b
+## `[js]cond ? a : b`
+Same as $$if(statement: Unit, trueUnit: Unit, falseUnit: Unit).
 ---
 ## `[js]-a`
 Negate
@@ -95,68 +96,68 @@ Less or Equal Than
 ---
 # Functions
 ---
-## $$.random(): Unit
+## $$random(): Unit
 Random number between `0.0` and `1.0`.
 ---
-## $$.time(): Unit
+## $$time(): Unit
 Current time in seconds (includes milliseconds).
 ---
-## $$.roundTime(): Unit
+## $$roundTime(): Unit
 Current time in seconds (rounded to nearest second).
 ---
-## $$.min(a: Unit, b: Unit): Unit
+## $$min(a: Unit, b: Unit): Unit
 Smallest of two Units.
 ---
-## $$.max(a: Unit, b: Unit): Unit
+## $$max(a: Unit, b: Unit): Unit
 Largest of two Units.
 ---
-## $$.pow(a: Unit, b: Unit): Unit
+## $$pow(a: Unit, b: Unit): Unit
 `a` to the power of `b`.
 ---
-## $$.abs(a: Unit): Unit
+## $$abs(a: Unit): Unit
 Absolute value of `a` (always positive).
 ---
-## $$.sin(a: Unit): Unit
+## $$sin(a: Unit): Unit
 Math.sin(a)
 ---
-## $$.cos(a: Unit): Unit
+## $$cos(a: Unit): Unit
 Math.cos(a)
 ---
-## $$.tan(a: Unit): Unit
+## $$tan(a: Unit): Unit
 Math.tan(a)
 ---
-## $$.atan(a: Unit): Unit
+## $$atan(a: Unit): Unit
 Math.atan(a)
 ---
-## $$.atan2(y: Unit, x: Unit): Unit
+## $$atan2(y: Unit, x: Unit): Unit
 Math.atan2(y, x)
 ---
-## $$.deg(a: Unit): Unit
+## $$deg(a: Unit): Unit
 Converts radians to degrees.
 ---
-## $$.rad(a: Unit): Unit
+## $$rad(a: Unit): Unit
 Converts degrees to radians.
 ---
-## $$.log(a: Unit): Unit
+## $$log(a: Unit): Unit
 Logarithm of `a`.
 ---
-## $$.log10(a: Unit): Unit
+## $$log10(a: Unit): Unit
 Logarithm base 10 of `a`.
 ---
-## $$.log1p(a: Unit): Unit
+## $$log1p(a: Unit): Unit
 Returns the natural logarithm of the sum of `a` and 1.
 ---
-## $$.sqrt(a: Unit): Unit
+## $$sqrt(a: Unit): Unit
 Square root of `a`.
 ---
-## $$.sq(a: Unit): Unit
+## $$sq(a: Unit): Unit
 Square of `a`.
 ---
-## $$.floor(a: Unit): Unit
+## $$floor(a: Unit): Unit
 Round `a` down to nearest integer.
 ---
-## $$.ceil(a: Unit): Unit
+## $$ceil(a: Unit): Unit
 Round `a` up to nearest integer.
 ---
-## $$.if(statement: Unit, trueUnit: Unit, falseUnit: Unit): Unit
+## $$if(statement: Unit, trueUnit: Unit, falseUnit: Unit): Unit
 Returns `trueUnit` if `statement` is not equal to `0.0`, otherwise `falseUnit`.

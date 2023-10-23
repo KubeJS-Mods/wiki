@@ -7,7 +7,7 @@ Units are not really a class, but more its own language. It's very similar to Mo
 - You can use variables with a `$`, like `'$example'`.
 - Each function requires name parenthesis and comma separated arguments e.g. `'min(PI, $example)'`.
 - You can combine as many as you want, e.g. `'min(PI, 10 + $example)'`.
-- You can do pretty complex infix, e.g. `'atan2($mouseY, $mouseX) - HALF_PI - HALF_PI / 2'`.
+- You can do pretty complex infix, e.g. `'atan2($MY, $MX) - HALF_PI - HALF_PI / 2'`.
 ---
 # Constants
 ---
@@ -31,20 +31,25 @@ Number equal to `[js]2.7182818284590452354`
 ---
 # Variables
 ---
-## `$screenW`
+## `$SW`
 Screen width
+(legacy: `$screenW`)
 ---
-## `$screenH`
+## `$SH`
 Screen height
+(legacy: `$screenH`)
 ---
-## `$delta`
-Render delta
+## `$D`
+Render tick delta
+(legacy: `$delta`)
 ---
-## `$mouseX`
+## `$MX`
 Mouse X position
+(legacy: `$mouseX`)
 ---
-## `$mouseY`
+## `$MY`
 Mouse Y position
+(legacy: `$mouseY`)
 ---
 # Operations
 ---

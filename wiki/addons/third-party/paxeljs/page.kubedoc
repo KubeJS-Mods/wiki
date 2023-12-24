@@ -1,6 +1,7 @@
 PaxelJS adds the Paxel tooltype from Cucumber to KubeJS:
+
 ```js
-StartupEvents.registry('item', event =>{
+StartupEvents.registry('item', event => {
     event.create('cool_paxel', 'paxel')
 })
 ```

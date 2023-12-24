@@ -1,0 +1,89 @@
+>>> info
+REI integration only works on Fabric in 1.16. In 1.18+, it works on both Forge and Fabric!
+<<<
+
+{hide-items-and-fluids}:
+
+|> 1.19.2+
+```js
+REIEvents.hide('item', event => {
+  event.hide('example:ingredient')
+})
+
+REIEvents.hide('fluid', event => {
+  event.hide('example:fluid')
+})
+```
+<||> 1.18.2-
+```js
+onEvent('rei.hide.items', event => {
+  event.hide('example:ingredient')
+})
+
+onEvent('rei.hide.fluids', event => {
+  event.hide('example:fluid')
+})
+```
+<|
+
+{add-items-and-fluids}:
+
+|> 1.19.2+
+```js
+REIEvents.add('item', event => {
+  event.add(Item.of('example:item', {test: 123}))
+})
+
+REIEvents.add('fluid', event => {
+  event.add('example:fluid')
+})
+```
+<||> 1.18.2-
+```js
+onEvent('rei.add.items', event => {
+  event.add(Item.of('example:item', {test: 123}))
+})
+
+onEvent('rei.add.fluids', event => {
+  event.add('example:fluid')
+})
+```
+<|
+
+{add-information}:
+
+|> 1.19.2+
+```js
+REIEvents.information(event => {
+  event.addItem('example:ingredient', ['Line 1', 'Line 2'])
+})
+```
+<||> 1.18.2-
+```js
+onEvent('rei.information', event => {
+  event.add('example:ingredient', ['Line 1', 'Line 2'])
+})
+```
+<|
+
+{hide-categories}:
+
+|> 1.19.2+
+```js
+REIEvents.removeCategories(event => {
+  console.log(event.categoryIds) //log a list of all category ids to logs/kubejs/client.txt
+  
+  //event.remove works too, but yeeting is so much more fun {wink}
+  event.remove('create:compacting')
+})
+```
+<||> 1.18.2-
+```js
+onEvent('rei.remove.categories', event => {
+  console.log(event.categoryIds) //log a list of all category ids to logs/kubejs/client.txt
+  
+  //event.remove works too, but yeeting is so much more fun {wink}
+  event.remove('create:compacting')
+})
+```
+<|

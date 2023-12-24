@@ -1,0 +1,42 @@
+# Meta
+recipes-url: "[[/tutorials/recipes]]"
+addons-url: "[[/addons]]"
+tutorials-url: "[[/tutorials]]"
+arch-api: "[Architectury](https://www.curseforge.com/minecraft/mc-mods/architectury-api)"
+
+title: "KubeJS"
+description: "Spersonalizuj swoją paczkę modyfikacji/serwer z językiem JavaScript!"
+
+q-info: "Co robi ta modyfikacja?"
+a-info: "Modyfikacja ta pozwala Ci tworzyć skrypty w języku JavaScript aby zarządzać Swoim serwerem, dodać nowe bloki i przedmioty, zmieniać receptury, dodawać niestandardowe obsługi dla modyfikacji zadaniowych i więcej!"
+
+q-how-use: "Jak z niej korzystać?"
+a-how-use: "Uruchom grę z zainstalowaną modyfikacją. Powinien zostać wygenerowany folder `kubejs` w Twojej ścieżce minecraft z przykładowymi z skryptami i plikiem README.txt. Przeczytaj go!"
+
+q-js-help: "Nie znam JavaScript"
+a-js-help: "Istnieją tutaj przykłady i gotowe skrypty. I zawsze możesz zapytać w kanale support na discordzie o pomoc z skryptami, ale bądź konkretny."
+
+q-reload: "Czy mogę przeładować skrypty?"
+a-reload-st: "{st-s}: Uruchom ponownie grę lub skorzystaj z `/kubejs reload startup_scripts`. Nie wszystko można przeładować - nie które rzeczy potrzebują uruchomienia ponownego gry (np. rejestry) lub świata (np. worldgen)."
+a-reload-se: "{se-s}: Skorzystaj z `/reload` aby przeładować skrypty, tagi oraz wszystkie dane lub `/kubejs reload server_scripts` aby przeładować tylko skrypty"
+a-reload-cl: "{cl-s}: Skorzystaj z `F3 + T` aby przeładować skrypty oraz zasoby lub `/kubejs reload client_scripts` aby przeładować tylko skrypty"
+
+q-mod-support: "Jakie receptury modyfikacji wspiera / czy wspiera modyfikacje X?"
+a-mod-support: "Jeżeli modyfikacja używa receptur paczek danych, to jest domyślnie wspierany. Niektóre bardziej skomplikowane modyfikacje wymagają modyfikacji dodatkowych, ale teoretycznie, dalej powinny działać z recepturami paczek modów. Zobacz sekcje {recipes-url} oraz {addons-url} po więcej informacji."
+
+q-features: "Jakie funkcje posiada ta modyfikacja?"
+a-features: "Zobacz {tutorials-url}."
+
+q-how-work: "Jak działa ta modyfikacja?"
+a-how-work: "Korzysta z forku Rhino, silnika języka JavaScript stworzonego przez Mozilla aby zamienić kod JS w klasy Java w czasie uruchomienia. KubeJS zawija minecraftowe klasy i dodaje narzędzia aby to mocno ułatwić i usunąć potrzebę na mappingi. {arch-api} pozwala prawie temu samemu kodowi źródłowemu być skompilowanym na Forge i Fabric, powodując że portowanie staje się bardzo łatwe."
+
+q-support: "Ok, ale co jeżeli.. nie działa?"
+a-support: "Możesz zgłaszać problemy [tutaj]({support-url})."
+
+q-discussion: "Mam więcej pytań / sugestii!"
+a-discussion: "Jeżeli wiki nie miała odpowiedzi na to, czego szukałeś/szukałaś, możesz dołączyć do [serwera Discord]({discord-url}) i poprosić o pomoc na kanale [#kubejs-support]({discord-url})!"
+
+website: "Strona internetowa"
+source: "Kod źródłowy"
+download: "Pobierz"
+no-support: "Ostatnią wspieraną wersją Minecraft jest {last-supported-version}, wszystko poniżej i jesteś sam!"

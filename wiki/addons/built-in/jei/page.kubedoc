@@ -1,0 +1,99 @@
+{subtypes}:
+
+|> 1.19.2+
+```js
+JEIEvents.subtypes(event => {
+  event.useNBT('example:item')
+  event.useNBTKey('example:item', 'type')
+})
+```
+<||> 1.18.2-
+```js
+onEvent('jei.subtypes', event => {
+  event.useNBT('example:item')
+  event.useNBTKey('example:item', 'type')
+})
+```
+<|
+
+{hide-items-and-fluids}:
+
+|> 1.19.2+
+```js
+JEIEvents.hideItems(event => {
+  event.hide('example:ingredient')
+})
+JEIEvents.hideFluids(event => {
+  event.hide('example:fluid')
+})
+```
+<||> 1.18.2-
+```js
+onEvent('jei.hide.items', event => {
+  event.hide('example:ingredient')
+})
+
+onEvent('jei.hide.fluids', event => {
+  event.hide('example:fluid')
+})
+```
+<|
+
+{add-items-and-fluids}:
+
+|> 1.19.2+
+```js
+JEIEvents.addItems(event => {
+  event.add(Item.of('example:item', {test: 123}))
+})
+JEIEvents.addFluids(event => {
+  event.add('example:fluid')
+})
+```
+<||> 1.18.2-
+```js
+onEvent('jei.add.items', event => {
+  event.add(Item.of('example:item', {test: 123}))
+})
+
+onEvent('jei.add.fluids', event => {
+  event.add('example:fluid')
+})
+```
+<|
+
+{add-information}:
+
+|> 1.19.2+
+```js
+JEIEvents.information(event => {
+  event.addItem('example:ingredient', ['Line 1', 'Line 2'])
+})
+```
+<||> 1.18.2-
+```js
+onEvent('jei.information', event => {
+  event.add('example:ingredient', ['Line 1', 'Line 2'])
+})
+```
+<|
+
+{hide-categories}:
+
+|> 1.19.2+
+```js
+JEIEvents.removeCategories(event => {
+  console.log(event.categoryIds) //log a list of all category ids to logs/kubejs/client.txt
+  
+  event.remove('create:compacting')
+})
+```
+<||> 1.18.2-
+```js
+onEvent('jei.remove.categories', event => {
+  console.log(event.categoryIds) //log a list of all category ids to logs/kubejs/client.txt
+  
+  event.remove('create:compacting')
+})
+```
+<|

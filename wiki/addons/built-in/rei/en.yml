@@ -1,1 +1,7 @@
 title: "Roughly Enough Items"
+description: "KubeJS REI Integration"
+
+hide-items-and-fluids: "Hide Items & Fluids"
+add-items-and-fluids: "Add Items & Fluids"
+add-information: "Add Information"
+hide-categories: "Hide Categories"

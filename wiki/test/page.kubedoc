@@ -284,3 +284,4 @@ Inline test $$.property inline test $$.method(test: int) inline test.
 | **Cell 5** | $$.methodInCell(test:int): String |
 
 test
+test 2

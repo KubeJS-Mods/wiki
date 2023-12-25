@@ -1,0 +1,123 @@
+Download: [CurseForge](https://curseforge.com/minecraft/mc-mods/kubejs-industrial-foregoing/)
+
+---
+
+This mod lets you modify and create various recipes for [Industrial Foregoing](https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing)
+
+```js
+ServerEvents.recipes(event => {
+    event.recipes.industrialforegoing.dissolution_chamber(
+        ['tnt'], // input items
+        'water', // input fluid
+        'sand', // output item
+        100 // time
+    )
+    //     .outputFluid('water'); // output fluid
+
+    event.recipes.industrialforegoing.fluid_extractor(
+        'tnt', // input block
+        'sand', // output block
+        0.5, // break chance
+        'lava' // output fluid
+    )
+
+    event.recipes.industrialforegoing.stonework_generate(
+        'tnt',
+        100, // water needed
+        100, // lava needed
+        50, // water consumed
+        50 // lava consumed
+    )
+    event.recipes.industrialforegoing.crusher(
+        // the pickaxe action in the stonework factory
+        'tnt', // input item
+        'sand' // output item
+    )
+
+    event.recipes.industrialforegoing.laser_drill_ore(
+        'tnt', // output
+        'sand', // catalyst
+        [
+            //rarity, see below for more details
+            {
+                blacklist: {
+                    type: 'worldgen/biome',
+                    values: [
+                        'the_end',
+                        'the_void',
+                        'small_end_islands',
+                        'end_barrens',
+                        'end_highlands',
+                        'end_midlands'
+                    ]
+                },
+                depth_max: 16,
+                depth_min: 5,
+                weight: 4,
+
+                whitelist: {}
+            },
+            {
+                blacklist: {
+                    type: 'worldgen/biome',
+                    values: [
+                        'the_end',
+                        'the_void',
+                        'small_end_islands',
+                        'end_barrens',
+                        'end_highlands',
+                        'end_midlands'
+                    ]
+                },
+                depth_max: 255,
+                depth_min: 0,
+                weight: 1,
+                whitelist: {}
+            }
+        ]
+    )
+
+    event.recipes.industrialforegoing.laser_drill_fluid(
+        'water', // output
+        'sand', // catalyst
+        [
+            // rarity, see wiki for more details
+            {
+                blacklist: {
+                    type: 'worldgen/biome',
+                    values: [
+                        'the_end',
+                        'the_void',
+                        'small_end_islands',
+                        'end_barrens',
+                        'end_highlands',
+                        'end_midlands'
+                    ]
+                },
+                depth_max: 16,
+                depth_min: 5,
+                weight: 4,
+                whitelist: {}
+            },
+            {
+                blacklist: {
+                    type: 'worldgen/biome',
+                    values: [
+                        'the_end',
+                        'the_void',
+                        'small_end_islands',
+                        'end_barrens',
+                        'end_highlands',
+                        'end_midlands'
+                    ]
+                },
+                depth_max: 255,
+                depth_min: 0,
+                weight: 1,
+                whitelist: {}
+            }
+        ],
+        'zombie' // entity required below
+    )
+})
+```

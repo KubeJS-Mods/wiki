@@ -23,6 +23,7 @@ onEvent('jei.subtypes', event => {
 JEIEvents.hideItems(event => {
   event.hide('example:ingredient')
 })
+
 JEIEvents.hideFluids(event => {
   event.hide('example:fluid')
 })
@@ -46,6 +47,7 @@ onEvent('jei.hide.fluids', event => {
 JEIEvents.addItems(event => {
   event.add(Item.of('example:item', {test: 123}))
 })
+
 JEIEvents.addFluids(event => {
   event.add('example:fluid')
 })

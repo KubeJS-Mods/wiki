@@ -1,0 +1,13 @@
+`FluidAmounts` is a variable which contains fluid amounts for different items / blocks.
+Its constants are based on your modloader, which is why it can be used in scripts to make them work on all modloaders!
+
+# Constants
+| Name | NeoForge / Forge | Fabric | Description |
+| `B` | 1000 | 81000 | Shorthand for `BUCKET` |
+| `BOTTLE` | 250 | 27000 |  |
+| `BUCKET` | 1000 | 81000 |  |
+| `INGOT` | 90 | 9000 |  |
+| `MB` | 1 | 81 | Shorthand for `MILLIBUCKET` |
+| `METAL_BLOCK` | 810 | 81000 |  |
+| `MILLIBUCKET` | 1 | 81 |  |
+| `NUGGET` | 10 | 1000 |  |

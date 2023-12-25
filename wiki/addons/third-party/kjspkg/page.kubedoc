@@ -3,9 +3,9 @@ It will automatically manage your minecraft version, modloader, dependency and i
 
 ![[kjspkg.png]]
 
-# Instalation
+# Installation
 
-. Download either the [CLI version of KJSPKG] or the [WIP GUI client].
+. Download the [CLI version of KJSPKG](https://github.com/Modern-Modpacks/kjspkg/tree/main#installation--update).
 . Open a terminal in the `kubejs` directory inside of your instance.
 . Run `kjspkg init` and select your minecraft version/modloader.
 

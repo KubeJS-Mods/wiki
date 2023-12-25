@@ -285,3 +285,4 @@ Inline test $$.property inline test $$.method(test: int) inline test.
 
 test
 test 2
+test 3

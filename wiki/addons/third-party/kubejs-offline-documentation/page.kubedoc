@@ -1,0 +1,28 @@
+Download: [Curseforge](https://www.curseforge.com/minecraft/mc-mods/kubejs-offline), [Modrinth](https://modrinth.com/mod/kubejs-offline)
+
+---
+
+KubeJS Offline is a mod that dumps all class data at runtime into a single html file using a single command - `/kubejs_offline`.
+
+# Preview Generated Documentation Pages:
+
+[1.19.2 Forge ](https://hunter19823.github.io/kubejsoffline/1.19.2/forge)
+[1.19.2 Fabric](https://hunter19823.github.io/kubejsoffline/1.19.2/fabric)
+[1.18.2 Forge ](https://hunter19823.github.io/kubejsoffline/1.18.2/forge)
+[1.18.2 Fabric](https://hunter19823.github.io/kubejsoffline/1.18.2/fabric)
+[Enigmatica 9](https://hunter19823.github.io/kubejsoffline/modpacks/engimatica9)
+
+# How does it work?
+
+When you execute the KubeJS Offline command, a scan of the Java runtime is performed to find what classes exist at that time. This is important as mods might provide new event classes and possibly new methods to existing Minecraft classes.
+After the mod has searched what classes exist and are available at that time, it then proceeds to compress that data down into a json object.
+It records everything from the full class name, package info, super classes, sub-classes, generic implementations, fields, methods, as well as their relationships to other classes.
+This data is then used to create an HTML page which then runs dependency-less JavaScript to generate the webpage html elements.
+You can then open the file in a modern web browser, no need to host it on a server or anything like that.
+
+# Additional Features:
+
+You can right click inside the webpage to toggle certain tables, private fields, and other info that you may not need.
+
+There is a search feature you can activate by adding a question mark to the end of the url.
+[Here](https://hunter19823.github.io/kubejsoffline/1.19.2/forge#any--EventJS)'s an example of this search.

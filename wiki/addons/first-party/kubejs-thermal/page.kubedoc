@@ -1,0 +1,49 @@
+Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-thermal), [Modrinth](https://modrinth.com/mod/kubejs-thermal)
+
+---
+
+>>> warning
+This info is currently incomplete!
+<<<
+
+Supported recipe types:
+- `furnace`
+- `sawmill`
+- `pulverizer`
+- `smelter`
+- `centrifuge
+- `press`
+- `crucible`
+- `chiller`
+- `refinery`
+- `brewer`
+- `bottler`
+
+```js
+event.recipes.thermal.press('minecraft:bone', '#forge:dyes/black')  
+event.recipes.thermal.crucible(Fluid.of('minecraft:water', 300), '#minecraft:saplings')
+```
+
+- `insolator`
+
+```js
+event.recipes.thermal.insolator('minecraft:bone', '#forge:dyes/black').water(400)
+```
+
+- `pulverizer_catalyst` 
+- `smelter_catalyst` 
+- `insolator_catalyst`
+
+```js
+event.recipes.thermal.pulverizer_catalyst('minecraft:coal').primaryMod(1.0).secondaryMod(1.0).energyMod(1.0).minChance(0.0).useChance(1.0)
+```
+
+- `stirling_fuel`
+- `compression_fuel`
+- `magmatic_fuel`
+- `numismatic_fuel`
+- `lapidary_fuel`
+
+```js
+event.recipes.thermal.lapidary_fuel('minecraft:coal').energy(100000)
+```

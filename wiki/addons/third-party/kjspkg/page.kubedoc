@@ -1,0 +1,45 @@
+[KJSPKG](https://github.com/Modern-Modpacks/kjspkg) is a package manager for KubeJS that allows you to download different example scripts and libraries into your own instance.
+It will automatically manage your minecraft version, modloader, dependency and incompatibility control. It works with all modern KubeJS versions, and should even work with some older versions, ie. 1.12!
+
+![[kjspkg.png]]
+
+# Instalation
+
+. Download either the [CLI version of KJSPKG] or the [WIP GUI client].
+. Open a terminal in the `kubejs` directory inside of your instance.
+. Run `kjspkg init` and select your minecraft version/modloader.
+
+>>> success
+Now you are able to install packages into your instance!
+<<<
+
+# Usage
+
+- To see more info about a package, run `kjspkg pkg <package_name>`
+- To download a package, run `kjspkg install <package_name>`
+- To remove a package, run `kjspkg remove <package_name>`
+- To update a package, run `kjspkg update <package_name>`
+- To search for a package, run `kjspkg search <query>`
+- To list all packages in your instance, run `kjspkg list`
+- To list all of the commands available, run `kjspkg help`
+
+# Adding your own package
+
+If you have an example script you would like to share on KJSPKG, check out [the "Adding your own package" section](https://github.com/Modern-Modpacks/kjspkg#adding-your-own-package) of KJSPKG's README. We are always happy to add more scripts from different authors to our list!
+
+# Notable packages
+
+## [`craft-js`](https://kjspkglookup.modernmodpacks.site/#craft-js) (1.18, Forge/Fabric)
+Craft.js is a KubeJS script which allows you to prepare recipes inside of a container (like chests) to quickly create various recipes.
+
+![[craftjs.png]]
+
+## [`create-manual`](https://kjspkglookup.modernmodpacks.site/#create-manual) (1.19, Forge/Fabric)
+Create Manual adds a patchouli-esque manual item to [Create](https://www.curseforge.com/minecraft/mc-mods/create).
+
+![[youtube:5_ab2RnxJY0]]
+
+## [`not-neat`](https://kjspkglookup.modernmodpacks.site/#not-neat) (1.16-1.20, Forge/Fabric)
+Not Neat is a script that allows you to hide the [Neat](https://www.curseforge.com/minecraft/mc-mods/neat) tooltip depending on the game stages the player has.
+
+![[notneat.png]]

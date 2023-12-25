@@ -1,3 +1,7 @@
+Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/paxeljs), [Modrinth](https://modrinth.com/mod/paxeljs)
+
+---
+
 PaxelJS adds the Paxel tooltype from Cucumber to KubeJS:
 
 ```js
@@ -5,6 +9,3 @@ StartupEvents.registry('item', event => {
     event.create('cool_paxel', 'paxel')
 })
 ```
-
----
-Available for 1.19.2 - [Modrinth](https://modrinth.com/mod/paxeljs) | [Curse](https://www.curseforge.com/minecraft/mc-mods/paxeljs)

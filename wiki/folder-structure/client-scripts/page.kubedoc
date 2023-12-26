@@ -1,0 +1,6 @@
+The `client_scripts` folder contains scripts which are loaded every time client resources reload.
+They are used for:
+- JEI/REI events
+- tooltips
+- etc.
+You can reload all code inside of this folder by pressing F3 + T, or you can reload all code outside of any event listeners by running `/kubejs reload client_scripts`.

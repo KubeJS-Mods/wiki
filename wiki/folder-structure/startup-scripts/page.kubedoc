@@ -1,0 +1,7 @@
+The `startup_scripts` folder contains scripts which are used for things which require a full game restart.
+They're used for:
+- registering items/blocks
+- modifying existing items/blocks
+- adding forge event listeners
+- etc.
+You can reload all code inside of this folder by restarting the game, or you can reload all code outside of any event listeners by running `/kubejs reload startup_scripts`.

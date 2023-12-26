@@ -1,0 +1,2 @@
+The `config` folder is the KubeJS config storage.
+This is also the only directory that scripts can access other than the world directory.

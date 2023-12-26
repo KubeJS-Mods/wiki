@@ -142,7 +142,7 @@ REIEvents.groupEntries(event => {
   event.groupFluidsByTag('kubejs:rei_groups/fluid_tagged_as_water', '\'Water\' (yeah right lmao)', 'minecraft:water')
 })
 ```
-<||> 1.18.2-
+<||> 1.18.2
 ```js
 onEvent('rei.group', event => {
   // This event allows you to add custom entry groups to REI, which can be used to clean up the entry list significantly.

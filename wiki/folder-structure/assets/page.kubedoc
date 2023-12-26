@@ -1,0 +1,2 @@
+The `assets` folder acts just like the `assets` folder inside of a resource pack - however, it will always load - you can't disable it from loading in any way.
+Just like normal resource packs, it can be reloaded by pressing F3 + T. Or you can also use `/kubejs reload lang` to only reload lang files.

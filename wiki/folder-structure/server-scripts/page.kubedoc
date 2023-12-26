@@ -1,0 +1,8 @@
+The `server_scripts` folder contains scripts which are loaded every time server resources load (world load, `/reload`).
+They're used for:
+- adding/removing recipes
+- adding/removing tags
+- modifying loot tables
+- handling server events, like a player right clicking a block
+- etc.
+You can reload all code inside of this folder by running `/reload`, or you can reload all code outside of any event listeners by running `/kubejs reload server_scripts`.

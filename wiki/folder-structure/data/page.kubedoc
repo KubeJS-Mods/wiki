@@ -1,0 +1,2 @@
+The `data` folder acts just like the `data` folder inside of a datapack - however, it will always load - you can't disable it from loading in any way.
+Just like normal datapacks, it can be reloaded by running `/reload`.

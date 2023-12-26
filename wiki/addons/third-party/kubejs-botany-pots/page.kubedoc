@@ -1,0 +1,49 @@
+Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-botany-pots), [Modrinth](https://modrinth.com/mod/kubejs-botany-pots)
+
+---
+
+This addon allows you to create crops, soils, and fertilizers for the [Botany Pots](https://www.curseforge.com/minecraft/mc-mods/botany-pots) mod.
+```js
+ServerEvents.recipes(event => {
+    event.recipes.botanypots.crop(
+        'candle', // seed item
+        ['oak_leaves'], // categories that this crop can be planted on
+        10, // growthTicks
+        1, // growthModifier - this can be set to 1 in most cases
+        { block: 'candle' }, // display block
+        [
+            {
+                output: 'candle', // item
+                chance: 100, // weight of this entry compared to the others
+                minRolls: 1, // the minimum times this loot will be chosen
+                maxRolls: 2 // the maximum times this loot will be chosen
+                // for example, when chosen this will give 1 to 2 candles
+            }
+        ]
+    )
+
+    event.recipes.botanypots.soil(
+        'oak_leaves', // the item that this soil is attached to
+        { block: 'oak_leaves' }, // display block
+        ['oak_leaves'], // categories that this soil provides
+        100, // growth ticks that this soil will provide, set to -1 for no modifier
+        0.5 // optional, growth modifier, example: 0.5 means all crops will take half the time
+    )
+
+    event.recipes.botanypots.fertilizer(
+        'iron_ingot', // fertilizer item
+        10, // min growth ticks applied
+        20 // max growth ticks applied
+        // ex: 10 to 20 ticks will be randomly given to the crop
+    )
+})
+
+// fired everytime a crop grows
+BotanyPotsEvents.onCropGrow(event => {
+    // event.random : the random object associated with the event
+    // event.crop : a crop object describing the crop grown, use ProbeJS to find the specifics
+    // event.originalDrops : an array of items this crop drops
+    // event.drops : a writable array that changes the drops of the crop
+    console.log([event.random, event.crop, event.originalDrops, event.drops].join(','))
+})
+```

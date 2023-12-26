@@ -1,0 +1,48 @@
+Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-delight)
+
+---
+
+This addon allows you to register custom knifes, pies, feasts and modify [Farmer's Delight](https://www.curseforge.com/minecraft/mc-mods/farmers-delight) recipes.
+
+Here's an example of registering custom knifes, pies and feasts (put this in {st-s}):
+```js
+StartupEvents.registry("block", event => {
+  event.create('example_pie', 'farmersdelight:pie')
+    .sliceItem('kubejs:example_pie_slice')
+    .displayName('Example Pie')
+  event.create('example_feast', 'farmersdelight:feast')
+    .servingsAmount(3)
+    .servingItems(['kubejs:example_feast_serving', 'kubejs:example_feast_serving_2'])
+    .displayName('Example Feast')
+})
+
+StartupEvents.registry("item", event => {
+  event.create('example_knife', 'farmersdelight:knife')
+    .displayName('Example Knife')
+    .tier('diamond')
+})
+```
+
+Here's an example of adding custom recipes (put this in {se-s}):
+```js
+ServerEvents.recipes(event => {
+	event.recipes.farmersdelight.cutting(
+        "minecraft:cobblestone",
+        "#forge:tools/pickaxes", // tool
+        [ // results
+            "minecraft:iron_ore",
+            Item.of("minecraft:diamond")
+                .withChance(0.1)
+        ],
+        // "" // sound
+	);
+
+	event.recipes.farmersdelight.cooking(
+	    ["minecraft:cobblestone"],
+	    "minecraft:iron_ore", // output
+	    30, // exp
+	    10, // cookTime
+	    "minecraft:bowl", // container
+	);
+})
+```

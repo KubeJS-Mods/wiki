@@ -46,7 +46,7 @@ event.recipes.mekanism.energy_conversion(input, output)
 ```
 
 >>> warn
-Some recipe types don't work currently and/or are unsupported! Use `event.custom`.
+**Some recipe types don't work currently and/or are unsupported! Use `event.custom`**.
 Item > Gas Conversion
 Item > Infuse Type Conversion
 Thermal Evaporation
@@ -63,7 +63,7 @@ Reaction (PRC)
 Separator
 Washing
 Fission Reactor (There's a mod for this! [Mekanism Fission Recipe](https://www.curseforge.com/minecraft/mc-mods/mekanism-fission-recipe))
-These have no recipe types:
+**These have no recipe types**:
 Boiler
 Phase Shifter (SPS)
 <<<

@@ -72,7 +72,7 @@ Blueprint Categories:
 <<<
 
 >>> warn
-Some recipe types don't work currently! Use `event.custom`.
+**Some recipe types don't work currently! Use `event.custom`**.
 Bottling Machine
 Mixer
 Refinery

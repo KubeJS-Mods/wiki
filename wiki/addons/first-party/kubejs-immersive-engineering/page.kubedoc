@@ -2,6 +2,80 @@ Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-immer
 
 ---
 
->>> danger
-No info yet!
+Supported Recipe Types:
+
+- Alloy Kiln
+```js
+event.recipes.immersiveengineering.alloy(output, input1, input2)
+event.recipes.immersiveengineering.alloy(output, input1, input2, time)
+```
+- Blast Furnace
+```js
+event.recipes.immersiveengineering.blast_furnace(output, input)
+event.recipes.immersiveengineering.blast_furnace(output, input, slag)
+```
+- Blast Furnace Fuel
+```js
+event.recipes.immersiveengineering.blast_furnace_fuel(input, time)
+```
+- Coke Oven
+```js
+event.recipes.immersiveengineering.coke_oven(output, input, creosote)
+event.recipes.immersiveengineering.coke_oven(output, input, creosote, time)
+```
+- Garden Cloche
+```js
+event.recipes.immersiveengineering.cloche([outputs], input, soil) //CURRENTLY BROKEN ON 1.19
+event.recipes.immersiveengineering.cloche([outputs], input, soil, render) // Render format: {type: 'crop', block: 'minecraft:wheat'}
+```
+- Fertilizer
+```js
+event.recipes.immersiveengineering.fertilizer(input, growthModifier)
+```
+- Metal Press
+```js
+event.recipes.immersiveengineering.metal_press(output, input, mold)
+```
+- Arc Furnace
+```js
+event.recipes.immersiveengineering.arc_furnace([outputs], input)
+event.recipes.immersiveengineering.arc_furnace([outputs], input, [additives])
+event.recipes.immersiveengineering.arc_furnace([outputs], input, [additives], slag)
+```
+- Crusher
+```js
+event.recipes.immersiveengineering.crusher(output, input)
+event.recipes.immersiveengineering.crusher(output, input, [secondaries]) // Secondary output format: {chance: 0.5, output: 'item:id'}
+```
+- Sawmill
+```js
+event.recipes.immersiveengineering.sawmill(output, input)
+event.recipes.immersiveengineering.sawmill(output, input, [secondaries]) // Secondary output format: {stripping: true, output: 'item:id'}
+event.recipes.immersiveengineering.sawmill(output, input, [secondaries], stripped)
+```
+- Fermenter
+```js
+event.recipes.immersiveengineering.fermenter(input, fluid, output)
+```
+- Blueprint (Engineer's Workbench)
+```js
+event.recipes.immersiveengineering.blueprint(output, [inputs], blueprint) //"blueprint" is NOT AN ITEM, it is the Category name.
+```
+>>> info
+Blueprint Categories:
+"bannerpatterns"
+"bullet"
+"specialBullet"
+"components"
+"molds"
+"electrode"
+<<<
+
+>>> warn
+**Some recipe types don't work currently! Use `event.custom`**.
+Bottling Machine
+Mixer
+Refinery
+Squeezer
+Thermoelectric Source
 <<<

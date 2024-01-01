@@ -2,6 +2,79 @@ Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-mekan
 
 ---
 
->>> danger
-No info yet!
+Supported Recipe Types:
+
+- Crushing, Enriching, Smelting
+```js
+event.recipes.mekanism.crushing(output, input)
+event.recipes.mekanism.enriching(output, input)
+event.recipes.mekanism.smelting(output, input)
+```
+- Combining
+```js
+event.recipes.mekanism.combining(output, input1, input2)
+```
+- Compressing, Purifying, Injecting
+```js
+event.recipes.mekanism.compressing(output, inputItem, inputGas)
+event.recipes.mekanism.purifying(output, inputItem, inputGas)
+event.recipes.mekanism.injecting(output, inputItem, inputGas)
+```
+- Infusing
+```js
+event.recipes.mekanism.metallurgic_infusing(output, inputItem, infusionInput, infusionAmount)
+```
+- Sawing
+```js
+event.recipes.mekanism.sawing(output, input, extraOutput)
+```
+- Chemical Infusing
+```js
+event.recipes.mekanism.chemical_infusing(output, inputLeft, inputRight)
+```
+- Crystallizing
+```js
+event.recipes.mekanism.crystallizing(output, inputGas)
+```
+- Dissolution
+```js
+event.recipes.mekanism.dissolution(gasOutput, gasInput, itemInput)
+```
+- Item > Energy Conversion
+```js
+event.recipes.mekanism.energy_conversion(input, output)
+```
+
+>>> warn
+**Some recipe types don't work currently and/or are unsupported! Use `event.custom`**.
+Item > Gas Conversion
+Item > Infuse Type Conversion
+Thermal Evaporation
+Nucleosynthesizing
+Centrifuging
+Activating
+Liquifier
+Oxidizing
+Condensentrating / Decondensentrating
+Painting
+Pigment Mixing
+Pigment Extracting
+Reaction (PRC)
+Separator
+Washing
+Fission Reactor (There's a mod for this! [Mekanism Fission Recipe](https://www.curseforge.com/minecraft/mc-mods/mekanism-fission-recipe))
+**These have no recipe types**:
+Boiler
+Phase Shifter (SPS)
 <<<
+
+Registry:
+
+```js
+StartupEvents.registry('mekanism:slurry', event => {
+StartupEvents.registry('mekanism:gas', event => {
+StartupEvents.registry('mekanism:infuse_type', event => {
+StartupEvents.registry('mekanism:pigment', event => {
+StartupEvents.registry('mekanism:module', event => {
+StartupEvents.registry('mekanism:robit_skin', event => {
+```

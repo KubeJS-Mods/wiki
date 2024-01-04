@@ -4,7 +4,7 @@ They are not reloadable without restarting the game.
 # Tool Tiers
 
 ```js
-ItemEvents.toolTierRegistry (event => {
+ItemEvents.toolTierRegistry(event => {
   event.add('tier_id', tier => {
     tier.uses = 250
     tier.speed = 6.0
@@ -19,7 +19,7 @@ ItemEvents.toolTierRegistry (event => {
 # Armor Tiers
 
 ```js
-ItemEvents.armorTierRegistry (event => {
+ItemEvents.armorTierRegistry(event => {
   event.add('tier_id', tier => {
     tier.durabilityMultiplier = 15 // Each slot will be multiplied with [13, 15, 16, 11]
     tier.slotProtections = [2, 5, 6, 2] // Slot indicies are [FEET, LEGS, BODY, HEAD]

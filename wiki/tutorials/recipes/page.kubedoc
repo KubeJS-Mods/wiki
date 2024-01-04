@@ -261,7 +261,7 @@ Here's a helper function, which allows you to make items by crafting a flower po
 
 ```js
 ServerEvents.recipes(event => {
-  let potting = (output, pottedInput) => {
+  function potting(output, pottedInput) {
     event.shaped(output, [
       'BIB',
       ' B '

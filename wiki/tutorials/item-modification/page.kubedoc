@@ -5,16 +5,16 @@ ItemEvents.modification(event => {
   event.modify('minecraft:ender_pearl', item => {
     item.maxStackSize = 64
     item.fireResistant = true
-    item.rarity = "UNCOMMON"
+    item.rarity = 'UNCOMMON'
   })
 
   event.modify('minecraft:ancient_debris', item => {
-    item.rarity = "RARE"
+    item.rarity = 'RARE'
     item.burnTime = 16000
   })
 
   event.modify('minecraft:turtle_helmet', item => {
-    item.rarity = "EPIC"
+    item.rarity = 'EPIC'
     item.maxDamage = 481
     item.craftingRemainder = Item.of('minecraft:scute').item
   })
@@ -57,7 +57,7 @@ Turtle only has helmet slot and Elytra only has chestplate slot.
 ## Tools
 ```js
 ItemEvents.modification(event => {
-  event.modify('golden_sword', item => {
+  event.modify('minecraft:golden_sword', item => {
     item.tier = tier => {
         tier.speed = 12
         tier.attackDamageBonus = 10
@@ -66,7 +66,7 @@ ItemEvents.modification(event => {
     }
   })
 
-  event.modify('wooden_sword', item => {
+  event.modify('minecraft:wooden_sword', item => {
     item.tier = tier => {
         tier.enchantmentValue = 30
     }
@@ -86,11 +86,11 @@ ItemEvents.modification(event => {
         food.hunger(2)
         food.saturation(3)
         food.fastToEat()
-        food.eaten(e => e.player.tell('you ate')) // this is broken, use ItemEvents.foodEaten instead.
+        food.eaten(foodData => foodData.player.tell('you ate')) // this is broken, use ItemEvents.foodEaten instead.
     }
   })
 
-  event.modify('pumpkin_pie', item => {
+  event.modify('minecraft:pumpkin_pie', item => {
     item.foodProperties = null // make pumpkin pies inedible
   })
 })

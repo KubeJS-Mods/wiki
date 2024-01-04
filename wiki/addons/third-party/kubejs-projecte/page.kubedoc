@@ -8,33 +8,33 @@ Server side events ({se-s}):
 ```js
 ProjectEEvents.setEMC(event => {
     // sets the absolute emc value of an item
-    event.setEMC("minecraft:cobblestone", 0) // alias. setEMCAfter
+    event.setEMC('minecraft:cobblestone', 0) // alias. setEMCAfter
 
     // sets the emc of an item before anything else happens
     // this can sometimes result in this emc value not being
     // set, but also it allows for emc values to be generated
     // from this one; i.e crafting recipes
-    event.setEMCBefore("minecraft:stick", 10000);
+    event.setEMCBefore('minecraft:stick', 10000);
 })
 
-ItemEvents.rightClicked("minecraft:stick", event => {
+ItemEvents.rightClicked('minecraft:stick', event => {
     let player = event.player;
 
     // getPlayerEMC will always return a string
     // because emc values can get very large
-    player.tell("Your emc is " + ProjectE.getPlayerEMC(player))
+    player.tell('Your emc is ' + ProjectE.getPlayerEMC(player))
 
     ProjectE.addPlayerEMC(player, 1000);
     // the second argument can be a string because of the above
     // ProjectE.setPlayerEMC also exists
 
-    player.tell("Your new emc is " + ProjectE.getPlayerEMC(player))
+    player.tell('Your new emc is ' + ProjectE.getPlayerEMC(player))
 })
 ```
 
 Startup events ({st-s}):
 ```js
 ProjectEEvents.registerWorldTransmutations(event => {
-    event.transform("minecraft:tnt", "minecraft:oak_planks");
+    event.transform('minecraft:tnt', 'minecraft:oak_planks');
 })
 ```

@@ -6,25 +6,25 @@ This addon allows you to create recipes for the [Ars Nouveau](https://www.cursef
 ```js
 ServerEvents.recipes(event => {
     event.recipes.ars_nouveau.enchanting_apparatus(
-        ['sand', 'sand', 'sand', 'sand'], // input items
-        'gunpowder', // reagent
-        'tnt', // output
+        ['minecraft:sand', 'minecraft:sand', 'minecraft:sand', 'minecraft:sand'], // input items
+        'minecraft:gunpowder', // reagent
+        'minecraft:tnt', // output
         1000 // source cost
         // true // keep nbt of reagent, think like a smithing recipe
     )
 
     event.recipes.ars_nouveau.enchantment(
-        ['sand', 'sand', 'sand', 'sand'], // input items
-        'vanishing_curse', // applied enchantment
+        ['minecraft:sand', 'minecraft:sand', 'minecraft:sand', 'minecraft:sand'], // input items
+        'minecraft:vanishing_curse', // applied enchantment
         1, // enchantment level
         1000 // source cost
     )
 
     event.recipes.ars_nouveau.crush(
-        'tnt', // input block
+        'minecraft:tnt', // input block
         [
-            Item.of('sand').withChance(1.0)
-            //{ item: Item.of("sand").withChance(1.0), maxRolls: 4 }
+            Item.of('minecraft:sand').withChance(1.0)
+            //{ item: Item.of('minecraft:sand').withChance(1.0), maxRolls: 4 }
         ] // loot table
         // true // drop the item in world?
     )
@@ -34,8 +34,8 @@ ServerEvents.recipes(event => {
     // in the tome, so this really can only be used to
     // replace a glyph's recipe
     event.recipes.ars_nouveau.glyph(
-        'tnt', // output item (glyph)
-        ['sand', 'gunpowder'], // input items
+        'minecraft:tnt', // output item (glyph)
+        ['minecraft:sand', 'minecraft:gunpowder'], // input items
         3 // exp cost
     )
     */
@@ -51,7 +51,7 @@ ServerEvents.recipes(event => {
                 'ars_nouveau:glyph_extend_time',
                 'ars_nouveau:glyph_light'
             ], //spell
-            "Doesn't snare the target and grant other targets Glowing.", // description
+            'Doesn\'t snare the target and grant other targets Glowing.', // description
             16718260, // color
             {
                 family: 'ars_nouveau:default',
@@ -62,15 +62,15 @@ ServerEvents.recipes(event => {
         .id('kubejs:not_glow')
 
     event.recipes.ars_nouveau.imbuement(
-        'sand', // input item
-        'tnt', // output
+        'minecraft:sand', // input item
+        'minecraft:tnt', // output
         1000, // source cost
         []
     )
 
     event.recipes.ars_nouveau.imbuement(
-        'red_sand', // input item
-        'tnt', // output
+        'minecraft:red_sand', // input item
+        'minecraft:tnt', // output
         1000, // source cost
         []
     )

@@ -7,22 +7,22 @@ This mod lets you modify and create various recipes for [Industrial Foregoing](h
 ```js
 ServerEvents.recipes(event => {
     event.recipes.industrialforegoing.dissolution_chamber(
-        ['tnt'], // input items
-        'water', // input fluid
-        'sand', // output item
+        ['minecraft:tnt'], // input items
+        'minecraft:water', // input fluid
+        'minecraft:sand', // output item
         100 // time
     )
-    //     .outputFluid('water'); // output fluid
+    //     .outputFluid('minecraft:water'); // output fluid
 
     event.recipes.industrialforegoing.fluid_extractor(
-        'tnt', // input block
-        'sand', // output block
+        'minecraft:tnt', // input block
+        'minecraft:sand', // output block
         0.5, // break chance
-        'lava' // output fluid
+        'minecraft:lava' // output fluid
     )
 
     event.recipes.industrialforegoing.stonework_generate(
-        'tnt',
+        'minecraft:tnt',
         100, // water needed
         100, // lava needed
         50, // water consumed
@@ -30,25 +30,25 @@ ServerEvents.recipes(event => {
     )
     event.recipes.industrialforegoing.crusher(
         // the pickaxe action in the stonework factory
-        'tnt', // input item
-        'sand' // output item
+        'minecraft:tnt', // input item
+        'minecraft:sand' // output item
     )
 
     event.recipes.industrialforegoing.laser_drill_ore(
-        'tnt', // output
-        'sand', // catalyst
+        'minecraft:tnt', // output
+        'minecraft:sand', // catalyst
         [
             //rarity, see below for more details
             {
                 blacklist: {
-                    type: 'worldgen/biome',
+                    type: 'minecraft:worldgen/biome',
                     values: [
-                        'the_end',
-                        'the_void',
-                        'small_end_islands',
-                        'end_barrens',
-                        'end_highlands',
-                        'end_midlands'
+                        'minecraft:the_end',
+                        'minecraft:the_void',
+                        'minecraft:small_end_islands',
+                        'minecraft:end_barrens',
+                        'minecraft:end_highlands',
+                        'minecraft:end_midlands'
                     ]
                 },
                 depth_max: 16,
@@ -59,14 +59,14 @@ ServerEvents.recipes(event => {
             },
             {
                 blacklist: {
-                    type: 'worldgen/biome',
+                    type: 'minecraft:worldgen/biome',
                     values: [
-                        'the_end',
-                        'the_void',
-                        'small_end_islands',
-                        'end_barrens',
-                        'end_highlands',
-                        'end_midlands'
+                        'minecraft:the_end',
+                        'minecraft:the_void',
+                        'minecraft:small_end_islands',
+                        'minecraft:end_barrens',
+                        'minecraft:end_highlands',
+                        'minecraft:end_midlands'
                     ]
                 },
                 depth_max: 255,
@@ -78,20 +78,20 @@ ServerEvents.recipes(event => {
     )
 
     event.recipes.industrialforegoing.laser_drill_fluid(
-        'water', // output
-        'sand', // catalyst
+        'minecraft:water', // output
+        'minecraft:sand', // catalyst
         [
             // rarity, see wiki for more details
             {
                 blacklist: {
-                    type: 'worldgen/biome',
+                    type: 'minecraft:worldgen/biome',
                     values: [
-                        'the_end',
-                        'the_void',
-                        'small_end_islands',
-                        'end_barrens',
-                        'end_highlands',
-                        'end_midlands'
+                        'minecraft:the_end',
+                        'minecraft:the_void',
+                        'minecraft:small_end_islands',
+                        'minecraft:end_barrens',
+                        'minecraft:end_highlands',
+                        'minecraft:end_midlands'
                     ]
                 },
                 depth_max: 16,
@@ -101,14 +101,14 @@ ServerEvents.recipes(event => {
             },
             {
                 blacklist: {
-                    type: 'worldgen/biome',
+                    type: 'minecraft:worldgen/biome',
                     values: [
-                        'the_end',
-                        'the_void',
-                        'small_end_islands',
-                        'end_barrens',
-                        'end_highlands',
-                        'end_midlands'
+                        'minecraft:the_end',
+                        'minecraft:the_void',
+                        'minecraft:small_end_islands',
+                        'minecraft:end_barrens',
+                        'minecraft:end_highlands',
+                        'minecraft:end_midlands'
                     ]
                 },
                 depth_max: 255,
@@ -117,7 +117,7 @@ ServerEvents.recipes(event => {
                 whitelist: {}
             }
         ],
-        'zombie' // entity required below
+        'minecraft:zombie' // entity required below
     )
 })
 ```

@@ -17,9 +17,9 @@ Usage:
 . Also, try to type like `@item` or `@block` to see snippets generated.
 
 In case nothing shows up in VSCode, check that:
-- Many JSON files started with "probe" in the .vscode folder are under your .minecraft folder.
-- There is a "probe" folder under the KubeJS folder, and many files ending with ".d.ts" are in the folder.
-- All ".d.ts" files don't have syntax errors indicated by VSCode.
+- Many JSON files started with `probe` in the .vscode folder are under your .minecraft folder.
+- There is a `probe` folder under the KubeJS folder, and many files ending with `.d.ts` are in the folder.
+- All `.d.ts` files don't have syntax errors indicated by VSCode.
 
 
 If all three steps are correct, you might need to configure your VSCode to make it accepts how ProbeJS dumps the typing, or just the VSCode can't handle the JS project created by ProbeJS.

@@ -16,12 +16,12 @@ StartupEvents.registry('block', event => {
                 if(level.levelData.gameTime % 20 == 0) { // only .levelData.gameTime works for some reason??
                     if(level.getBlockState(pos.above()) === Blocks.AIR.defaultBlockState()) {
                         level.setBlock(pos.above(), Blocks.GLASS.defaultBlockState(), 3)
-                      	be.persistentData.putBoolean("placed", true)
+                      	be.persistentData.putBoolean('placed', true)
                     } else {
                         level.setBlock(pos.above(), Blocks.AIR.defaultBlockState(), 3)
-                        be.persistentData.putBoolean("placed", false)
+                        be.persistentData.putBoolean('placed', false)
                     }
-                  	console.info("placed: " + be.persistentData.getBoolean("placed"))
+                  	console.info('placed: ' + be.persistentData.getBoolean('placed'))
                 }
             }
     	}).defaultValues(tag => tag = { progress: 0, example_value_for_extra_saved_data: '0mG this iz Crazyyy'}) // adds a 'default' saved value, added on block entity creation (place etc)
@@ -52,9 +52,9 @@ StartupEvents.registry('block_entity_type', event => {
             }
         }
     }).saveCallback((level, pos, be, tag) => { // called on BlockEntity save, don't see why you would ever need these tbf, but they're here
-        tag.putInt("tagValueAa", be.getPersistentData().getInt('progress'))
+        tag.putInt('tagValueAa', be.getPersistentData().getInt('progress'))
     }).loadCallback((level, pos, be, tag) => { // called on BlockEntity load, same as above
-          be.getPersistentData().putInt("progress", tag.getInt("tagValueAa"))
+          be.getPersistentData().putInt('progress', tag.getInt('tagValueAa'))
     }).defaultValues(tag => tag = { progress: 0, example_value_for_extra_saved_data: '0mG this iz Crazyyy'}) // adds a 'default' saved value, added on block entity creation (place etc)
                                                                                                               // [1st param: CompoundTag consumer]
     .addValidBlock('example_block') // adds a valid block this can attach to, useless in normal circumstances (except if you want to attach to multible blocks)

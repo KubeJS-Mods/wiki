@@ -6,14 +6,14 @@ This addon allows you to create crops, soils, and fertilizers for the [Botany Po
 ```js
 ServerEvents.recipes(event => {
     event.recipes.botanypots.crop(
-        'candle', // seed item
-        ['oak_leaves'], // categories that this crop can be planted on
+        'minecraft:candle', // seed item
+        ['minecraft:oak_leaves'], // categories that this crop can be planted on
         10, // growthTicks
         1, // growthModifier - this can be set to 1 in most cases
-        { block: 'candle' }, // display block
+        { block: 'minecraft:candle' }, // display block
         [
             {
-                output: 'candle', // item
+                output: 'minecraft:candle', // item
                 chance: 100, // weight of this entry compared to the others
                 minRolls: 1, // the minimum times this loot will be chosen
                 maxRolls: 2 // the maximum times this loot will be chosen
@@ -23,15 +23,15 @@ ServerEvents.recipes(event => {
     )
 
     event.recipes.botanypots.soil(
-        'oak_leaves', // the item that this soil is attached to
-        { block: 'oak_leaves' }, // display block
-        ['oak_leaves'], // categories that this soil provides
+        'minecraft:oak_leaves', // the item that this soil is attached to
+        { block: 'minecraft:oak_leaves' }, // display block
+        ['minecraft:oak_leaves'], // categories that this soil provides
         100, // growth ticks that this soil will provide, set to -1 for no modifier
         0.5 // optional, growth modifier, example: 0.5 means all crops will take half the time
     )
 
     event.recipes.botanypots.fertilizer(
-        'iron_ingot', // fertilizer item
+        'minecraft:iron_ingot', // fertilizer item
         10, // min growth ticks applied
         20 // max growth ticks applied
         // ex: 10 to 20 ticks will be randomly given to the crop

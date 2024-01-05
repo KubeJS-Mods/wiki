@@ -21,12 +21,12 @@ Features:
 - supports chance-based output
 
 ```js
-ServerEvents.recipes(e => {
-  e.recipes.create.compacting('diamond', 'coal_block')
-  e.recipes.create.compacting('diamond', 'coal_block').heated()
-  e.recipes.create.compacting('diamond', 'coal_block').superheated()
-  e.recipes.create.compacting([Fluid.water(10), 'dead_bush'], ['#minecraft:saplings', '#minecraft:saplings'])
-  e.recipes.create.compacting(['diamond', Item.of('diamond').withChance(0.3)], 'coal_block')
+ServerEvents.recipes(event => {
+  event.recipes.create.compacting('minecraft:diamond', 'minecraft:coal_block')
+  event.recipes.create.compacting('minecraft:diamond', 'minecraft:coal_block').heated()
+  event.recipes.create.compacting('minecraft:diamond', 'minecraft:coal_block').superheated()
+  event.recipes.create.compacting([Fluid.water(10), 'minecraft:dead_bush'], ['#minecraft:saplings', '#minecraft:saplings'])
+  event.recipes.create.compacting(['minecraft:diamond', Item.of('minecraft:diamond').withChance(0.3)], 'minecraft:coal_block')
 })
 ```
 
@@ -43,10 +43,10 @@ Features:
 - supports `.processingTime()`
 
 ```js
-ServerEvents.recipes(e => {
-  e.recipes.create.crushing('diamond', 'coal_block')
-  e.recipes.create.crushing('diamond', 'coal_block').processingTime(500)
-  e.recipes.create.crushing(['diamond', Item.of('diamond').withChance(0.5)], 'coal_block')
+ServerEvents.recipes(event => {
+  event.recipes.create.crushing('minecraft:diamond', 'minecraft:coal_block')
+  event.recipes.create.crushing('minecraft:diamond', 'minecraft:coal_block').processingTime(500)
+  event.recipes.create.crushing(['minecraft:diamond', Item.of('minecraft:diamond').withChance(0.5)], 'minecraft:coal_block')
 })
 ```
 
@@ -63,10 +63,10 @@ Features:
 - supports `.processingTime()`
 
 ```js
-ServerEvents.recipes(e => {
-  e.recipes.create.cutting('diamond', 'coal_block')
-  e.recipes.create.cutting('diamond', 'coal_block').processingTime(500)
-  e.recipes.create.cutting(['diamond', Item.of('diamond').withChance(0.5)], 'coal_block')
+ServerEvents.recipes(event => {
+  event.recipes.create.cutting('minecraft:diamond', 'minecraft:coal_block')
+  event.recipes.create.cutting('minecraft:diamond', 'minecraft:coal_block').processingTime(500)
+  event.recipes.create.cutting(['minecraft:diamond', Item.of('minecraft:diamond').withChance(0.5)], 'minecraft:coal_block')
 })
 ```
 
@@ -84,10 +84,10 @@ Features:
 - supports `.keepHeldItem()`
 
 ```js
-ServerEvents.recipes(e => {
-  e.recipes.create.deploying('diamond', ['coal_block', 'sand'])
-  e.recipes.create.deploying(['diamond', 'emerald'], ['coal_block', 'sand']).keepHeldItem()
-  e.recipes.create.deploying(['diamond', Item.of('diamond').withChance(0.5)], ['coal_block', 'sand'])
+ServerEvents.recipes(event => {
+  event.recipes.create.deploying('minecraft:diamond', ['minecraft:coal_block', 'minecraft:sand'])
+  event.recipes.create.deploying(['minecraft:diamond', 'minecraft:emerald'], ['minecraft:coal_block', 'minecraft:sand']).keepHeldItem()
+  event.recipes.create.deploying(['minecraft:diamond', Item.of('minecraft:diamond').withChance(0.5)], ['minecraft:coal_block', 'minecraft:sand'])
 })
 ```
 
@@ -103,8 +103,8 @@ Features:
 - requires one input and two outputs, the outputs must be an item and a fluid
 
 ```js
-ServerEvents.recipes(e => {
-  e.recipes.create.emptying([Fluid.water(), 'bucket'], 'water_bucket')
+ServerEvents.recipes(event => {
+  event.recipes.create.emptying([Fluid.water(), 'minecraft:bucket'], 'minecraft:water_bucket')
 })
 ```
 
@@ -120,8 +120,8 @@ Features:
 - requires two inputs and one output, the inputs must be an item and a fluid
 
 ```js
-ServerEvents.recipes(e => {
-  e.recipes.create.filling('water_bucket', [Fluid.water(), 'bucket'])
+ServerEvents.recipes(event => {
+  event.recipes.create.filling('minecraft:water_bucket', [Fluid.water(), 'minecraft:bucket'])
 })
 ```
 
@@ -137,10 +137,10 @@ Features:
 - supports multiple chance-based outputs
 
 ```js
-ServerEvents.recipes(e => {
-  e.recipes.create.haunting('soul_campfire', 'campfire')
-  e.recipes.create.haunting(['wheat', 'oak_sapling'], 'potato')
-  e.recipes.create.haunting(['wheat', Item.of('oak_sapling').withChance(0.2)], 'potato')
+ServerEvents.recipes(event => {
+  event.recipes.create.haunting('minecraft:soul_campfire', 'minecraft:campfire')
+  event.recipes.create.haunting(['minecraft:wheat', 'minecraft:oak_sapling'], 'minecraft:potato')
+  event.recipes.create.haunting(['minecraft:wheat', Item.of('minecraft:oak_sapling').withChance(0.2)], 'minecraft:potato')
 })
 ```
 
@@ -157,15 +157,15 @@ Features:
 - supports up to 9x9 grid size
 
 ```js
-ServerEvents.recipes(e => {
-  e.recipes.create.mechanical_crafting('emerald', [
+ServerEvents.recipes(event => {
+  event.recipes.create.mechanical_crafting('minecraft:emerald', [
     ' DDD ',
     'D   D',
     'D   D',
     'D   D',
     ' DDD '
   ], {
-    D: 'dirt'
+    D: 'minecraft:dirt'
   })
 })
 ```
@@ -181,10 +181,10 @@ Features:
 - supports multiple chance-based outputs
 
 ```js
-ServerEvents.recipes(e => {
-  e.recipes.create.milling('diamond', 'coal_block')
-  e.recipes.create.milling(['diamond', 'emerald'], 'coal_block')
-  e.recipes.create.milling(['diamond', Item.of('diamond').withChance(0.5)], 'coal_block')
+ServerEvents.recipes(event => {
+  event.recipes.create.milling('minecraft:diamond', 'minecraft:coal_block')
+  event.recipes.create.milling(['minecraft:diamond', 'minecraft:emerald'], 'minecraft:coal_block')
+  event.recipes.create.milling(['minecraft:diamond', Item.of('minecraft:diamond').withChance(0.5)], 'minecraft:coal_block')
 })
 ```
 
@@ -201,12 +201,12 @@ Features:
 - supports `.heated()` and `.superheated()`
 
 ```js
-ServerEvents.recipes(e => {
-  e.recipes.create.mixing('diamond', 'coal_block')
-  e.recipes.create.mixing('diamond', 'coal_block').heated()
-  e.recipes.create.mixing('diamond', 'coal_block').superheated()
-  e.recipes.create.mixing([Fluid.water(10), 'dead_bush'], ['#minecraft:saplings', '#minecraft:saplings'])
-  e.recipes.create.mixing(['diamond', Item.of('diamond').withChance(0.3)], 'coal_block')
+ServerEvents.recipes(event => {
+  event.recipes.create.mixing('minecraft:diamond', 'minecraft:coal_block')
+  event.recipes.create.mixing('minecraft:diamond', 'minecraft:coal_block').heated()
+  event.recipes.create.mixing('minecraft:diamond', 'minecraft:coal_block').superheated()
+  event.recipes.create.mixing([Fluid.water(10), 'minecraft:dead_bush'], ['#minecraft:saplings', '#minecraft:saplings'])
+  event.recipes.create.mixing(['minecraft:diamond', Item.of('minecraft:diamond').withChance(0.3)], 'minecraft:coal_block')
 })
 ```
 
@@ -222,10 +222,10 @@ Features:
 - supports multiple chance-based outputs
 
 ```js
-ServerEvents.recipes(e => {
-  e.recipes.create.pressing('diamond', 'coal_block')
-  e.recipes.create.pressing(['diamond', 'emerald'], 'coal_block')
-  e.recipes.create.pressing(['diamond', Item.of('diamond').withChance(0.5)], 'coal_block')
+ServerEvents.recipes(event => {
+  event.recipes.create.pressing('minecraft:diamond', 'minecraft:coal_block')
+  event.recipes.create.pressing(['minecraft:diamond', 'minecraft:emerald'], 'minecraft:coal_block')
+  event.recipes.create.pressing(['minecraft:diamond', Item.of('minecraft:diamond').withChance(0.5)], 'minecraft:coal_block')
 })
 ```
 
@@ -243,9 +243,9 @@ Features:
 - supports chance-based output
 
 ```js
-ServerEvents.recipes(e => {
-  e.recipes.create.sandpaper_polishing('diamond', 'coal_block')
-  e.recipes.create.sandpaper_polishing(Item.of('diamond').withChance(0.5), 'coal_block')
+ServerEvents.recipes(event => {
+  event.recipes.create.sandpaper_polishing('minecraft:diamond', 'minecraft:coal_block')
+  event.recipes.create.sandpaper_polishing(Item.of('minecraft:diamond').withChance(0.5), 'minecraft:coal_block')
 })
 ```
 
@@ -272,45 +272,45 @@ The transitional item needs to be the input ***and*** output of each of these re
 `Loops` is the number of times that the recipe repeats. Calling `.loops()` is optional and defaults to **4**.
 
 ```js
-ServerEvents.recipes(e => {
-	e.recipes.create.sequenced_assembly([
+ServerEvents.recipes(event => {
+	event.recipes.create.sequenced_assembly([
 		Item.of('create:precision_mechanism').withChance(130.0), // this is the item that will appear in JEI as the result
 		Item.of('create:golden_sheet').withChance(8.0), // the rest of these items will be part of the scrap
 		Item.of('create:andesite_alloy').withChance(8.0),
 		Item.of('create:cogwheel').withChance(5.0),
 		Item.of('create:shaft').withChance(2.0),
 		Item.of('create:crushed_gold_ore').withChance(2.0),
-		Item.of('2x gold_nugget').withChance(2.0),
-		'iron_ingot',
-		'clock'
+		Item.of('2x minecraft:gold_nugget').withChance(2.0),
+		'minecraft:iron_ingot',
+		'minecraft:clock'
 	], 'create:golden_sheet', [ // 'create:golden_sheet' is the input
 		// the transitional item set by `transitionalItem('create:incomplete_large_cogwheel')` is the item used during the intermediate stages of the assembly
-		e.recipes.createDeploying('create:incomplete_precision_mechanism', ['create:incomplete_precision_mechanism', 'create:cogwheel']),
+		event.recipes.createDeploying('create:incomplete_precision_mechanism', ['create:incomplete_precision_mechanism', 'create:cogwheel']),
 		// like a normal recipe function, is used as a sequence step in this array. Input and output have the transitional item
-		e.recipes.createDeploying('create:incomplete_precision_mechanism', ['create:incomplete_precision_mechanism', 'create:large_cogwheel']),
-		e.recipes.createDeploying('create:incomplete_precision_mechanism', ['create:incomplete_precision_mechanism', 'create:iron_nugget'])
+		event.recipes.createDeploying('create:incomplete_precision_mechanism', ['create:incomplete_precision_mechanism', 'create:large_cogwheel']),
+		event.recipes.createDeploying('create:incomplete_precision_mechanism', ['create:incomplete_precision_mechanism', 'minecraft:iron_nugget'])
 	]).transitionalItem('create:incomplete_precision_mechanism').loops(5) // set the transitional item and the number of loops
 
 	// for this code to work, kubejs:incomplete_spore_blossom needs to be added to the game
 	let inter = 'kubejs:incomplete_spore_blossom' // making a variable to store the transitional item makes the code more readable
-	e.recipes.create.sequenced_assembly([
-		Item.of('spore_blossom').withChance(16.0), // this is the item that will appear in JEI as the result
-		Item.of('flowering_azalea_leaves').withChance(16.0), // the rest of these items will be part of the scrap
-		Item.of('azalea_leaves').withChance(2.0),
-		'oak_leaves',
-		'spruce_leaves',
-		'birch_leaves',
-		'jungle_leaves',
-		'acacia_leaves',
-		'dark_oak_leaves'
-	], 'flowering_azalea_leaves', [ // 'flowering_azalea_leaves' is the input
+	event.recipes.create.sequenced_assembly([
+		Item.of('minecraft:spore_blossom').withChance(16.0), // this is the item that will appear in JEI as the result
+		Item.of('minecraft:flowering_azalea_leaves').withChance(16.0), // the rest of these items will be part of the scrap
+		Item.of('minecraft:azalea_leaves').withChance(2.0),
+		'minecraft:oak_leaves',
+		'minecraft:spruce_leaves',
+		'minecraft:birch_leaves',
+		'minecraft:jungle_leaves',
+		'minecraft:acacia_leaves',
+		'minecraft:dark_oak_leaves'
+	], 'minecraft:flowering_azalea_leaves', [ // 'minecraft:flowering_azalea_leaves' is the input
 		// the transitional item is a variable, that is 'kubejs:incomplete_spore_blossom' and is used during the intermediate stages of the assembly
-		e.recipes.createPressing(inter, inter),
+		event.recipes.createPressing(inter, inter),
 		// like a normal recipe function, is used as a sequence step in this array. Input and output have the transitional item
-		e.recipes.createDeploying(inter, [inter, 'minecraft:hanging_roots']),
-		e.recipes.createFilling(inter, [inter, Fluid.water(420)]),
-		e.recipes.createDeploying(inter, [inter, 'minecraft:moss_carpet']),
-		e.recipes.createCutting(inter, inter)
+		event.recipes.createDeploying(inter, [inter, 'minecraft:hanging_roots']),
+		event.recipes.createFilling(inter, [inter, Fluid.water(420)]),
+		event.recipes.createDeploying(inter, [inter, 'minecraft:moss_carpet']),
+		event.recipes.createCutting(inter, inter)
 	]).transitionalItem(inter).loops(2) // set the transitional item and the number of loops
 })
 ```
@@ -340,10 +340,10 @@ Features:
 - uses the 
 
 ```js
-ServerEvents.recipes(e => {
-  e.recipes.create.splashing('soul_campfire', 'campfire')
-  e.recipes.create.splashing(['wheat', 'oak_sapling'], 'potato')
-  e.recipes.create.splashing(['wheat', Item.of('oak_sapling').withChance(0.2)], 'potato')
+ServerEvents.recipes(event => {
+  event.recipes.create.splashing('minecraft:soul_campfire', 'minecraft:campfire')
+  event.recipes.create.splashing(['minecraft:wheat', 'minecraft:oak_sapling'], 'minecraft:potato')
+  event.recipes.create.splashing(['minecraft:wheat', Item.of('minecraft:oak_sapling').withChance(0.2)], 'minecraft:potato')
 })
 ```
 
@@ -357,8 +357,8 @@ Mysterious Conversion recipes go in {cl-s}, outside of any event listeners. Curr
 let $MysteriousItemConversionCategory = Java.loadClass('com.simibubi.create.compat.jei.category.MysteriousItemConversionCategory')
 let $ConversionRecipe = Java.loadClass('com.simibubi.create.compat.jei.ConversionRecipe')
 
-$MysteriousItemConversionCategory.RECIPES.add($ConversionRecipe.create('apple', 'carrot'))
-$MysteriousItemConversionCategory.RECIPES.add($ConversionRecipe.create('golden_apple', 'golden_carrot'))
+$MysteriousItemConversionCategory.RECIPES.add($ConversionRecipe.create('minecraft:apple', 'minecraft:carrot'))
+$MysteriousItemConversionCategory.RECIPES.add($ConversionRecipe.create('minecraft:golden_apple', 'minecraft:golden_carrot'))
 ```
 
 # Preventing Recipe Auto-Generation
@@ -366,8 +366,8 @@ $MysteriousItemConversionCategory.RECIPES.add($ConversionRecipe.create('golden_a
 If you don't want smelting, blasting, smoking, crafting, or stonecutting to get an auto-generated counterpart, then include `manual_only` at the end of the recipe id:
 
 ```js
-ServerEvents.recipes(e => {
-	e.shapeless('wet_sponge', ['water_bucket', 'sponge']).id('kubejs:moisting_the_sponge_manual_only')
+ServerEvents.recipes(event => {
+	event.shapeless('minecraft:wet_sponge', ['minecraft:water_bucket', 'minecraft:sponge']).id('kubejs:moisting_the_sponge_manual_only')
 })
 ```
 

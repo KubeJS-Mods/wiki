@@ -2,80 +2,99 @@ Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-immer
 
 ---
 
-Supported Recipe Types:
+# Supported Recipe Types
 
-- Alloy Kiln
+## Alloy Kiln
 ```js
 event.recipes.immersiveengineering.alloy(output, input1, input2)
 event.recipes.immersiveengineering.alloy(output, input1, input2, time)
 ```
-- Blast Furnace
+
+## Blast Furnace
 ```js
 event.recipes.immersiveengineering.blast_furnace(output, input)
 event.recipes.immersiveengineering.blast_furnace(output, input, slag)
 ```
-- Blast Furnace Fuel
+
+## Blast Furnace Fuel
 ```js
 event.recipes.immersiveengineering.blast_furnace_fuel(input, time)
 ```
-- Coke Oven
+
+## Coke Oven
 ```js
 event.recipes.immersiveengineering.coke_oven(output, input, creosote)
 event.recipes.immersiveengineering.coke_oven(output, input, creosote, time)
 ```
-- Garden Cloche
+
+## Garden Cloche
+>>> warn
+This is currently broken on 1.19!
+<<<
+`render` format: `{type: 'crop', block: 'minecraft:wheat'}`
 ```js
-event.recipes.immersiveengineering.cloche([outputs], input, soil) //CURRENTLY BROKEN ON 1.19
-event.recipes.immersiveengineering.cloche([outputs], input, soil, render) // Render format: {type: 'crop', block: 'minecraft:wheat'}
+event.recipes.immersiveengineering.cloche([outputs], input, soil)
+event.recipes.immersiveengineering.cloche([outputs], input, soil, render)
 ```
-- Fertilizer
+
+## Fertilizer
 ```js
 event.recipes.immersiveengineering.fertilizer(input, growthModifier)
 ```
-- Metal Press
+
+## Metal Press
 ```js
 event.recipes.immersiveengineering.metal_press(output, input, mold)
 ```
-- Arc Furnace
+
+## Arc Furnace
 ```js
 event.recipes.immersiveengineering.arc_furnace([outputs], input)
 event.recipes.immersiveengineering.arc_furnace([outputs], input, [additives])
 event.recipes.immersiveengineering.arc_furnace([outputs], input, [additives], slag)
 ```
-- Crusher
+
+## Crusher
+`secondaries` format: `{chance: 0.5, output: 'item:id'}`
 ```js
 event.recipes.immersiveengineering.crusher(output, input)
-event.recipes.immersiveengineering.crusher(output, input, [secondaries]) // Secondary output format: {chance: 0.5, output: 'item:id'}
+event.recipes.immersiveengineering.crusher(output, input, [secondaries])
 ```
-- Sawmill
+
+## Sawmill
+`secondaries` format: `{stripping: true, output: 'item:id'}`
 ```js
 event.recipes.immersiveengineering.sawmill(output, input)
-event.recipes.immersiveengineering.sawmill(output, input, [secondaries]) // Secondary output format: {stripping: true, output: 'item:id'}
+event.recipes.immersiveengineering.sawmill(output, input, [secondaries])
 event.recipes.immersiveengineering.sawmill(output, input, [secondaries], stripped)
 ```
-- Fermenter
+
+## Fermenter
 ```js
 event.recipes.immersiveengineering.fermenter(input, fluid, output)
 ```
-- Blueprint (Engineer's Workbench)
-```js
-event.recipes.immersiveengineering.blueprint(output, [inputs], blueprint) //"blueprint" is NOT AN ITEM, it is the Category name.
-```
->>> info
-Blueprint Categories:
-"bannerpatterns"
-"bullet"
-"specialBullet"
-"components"
-"molds"
-"electrode"
-<<<
 
->>> warn
-**Some recipe types don't work currently! Use `event.custom`**.
-Bottling Machine
-Mixer
-Refinery
-Squeezer
-Thermoelectric Source
-<<<
+## Blueprint (Engineer's Workbench)
+`blueprint` is a blueprint category name.
+```js
+event.recipes.immersiveengineering.blueprint(output, [inputs], blueprint)
+```
+
+### Blueprint Categories
+As stated above, in `blueprint` you have to use a category name. These are the default ones:
+- `bannerpatterns`
+- `bullet`
+- `specialBullet`
+- `components`
+- `molds`
+- `electrode`
+
+# Broken Recipe Types
+These recipe types are currently broken:
+- Bottling Machine
+- Mixer
+- Refinery
+- Squeezer
+- Thermoelectric Source
+
+For now, use `event.custom` for these.

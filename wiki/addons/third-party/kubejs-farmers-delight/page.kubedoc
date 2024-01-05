@@ -6,7 +6,7 @@ This addon allows you to register custom knifes, pies, feasts and modify [Farmer
 
 Here's an example of registering custom knifes, pies and feasts (put this in {st-s}):
 ```js
-StartupEvents.registry("block", event => {
+StartupEvents.registry('block', event => {
   event.create('example_pie', 'farmersdelight:pie')
     .sliceItem('kubejs:example_pie_slice')
     .displayName('Example Pie')
@@ -16,7 +16,7 @@ StartupEvents.registry("block", event => {
     .displayName('Example Feast')
 })
 
-StartupEvents.registry("item", event => {
+StartupEvents.registry('item', event => {
   event.create('example_knife', 'farmersdelight:knife')
     .displayName('Example Knife')
     .tier('diamond')
@@ -27,22 +27,22 @@ Here's an example of adding custom recipes (put this in {se-s}):
 ```js
 ServerEvents.recipes(event => {
 	event.recipes.farmersdelight.cutting(
-        "minecraft:cobblestone",
-        "#forge:tools/pickaxes", // tool
+        'minecraft:cobblestone',
+        '#forge:tools/pickaxes', // tool
         [ // results
-            "minecraft:iron_ore",
-            Item.of("minecraft:diamond")
+            'minecraft:iron_ore',
+            Item.of('minecraft:diamond')
                 .withChance(0.1)
         ],
-        // "" // sound
+        // '' // sound
 	);
 
 	event.recipes.farmersdelight.cooking(
-	    ["minecraft:cobblestone"],
-	    "minecraft:iron_ore", // output
+	    ['minecraft:cobblestone'],
+	    'minecraft:iron_ore', // output
 	    30, // exp
 	    10, // cookTime
-	    "minecraft:bowl", // container
+	    'minecraft:bowl', // container
 	);
 })
 ```

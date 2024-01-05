@@ -34,7 +34,7 @@ Recommended to read with [[/addons/third-party/probejs/document-properties]].
 ```js
 ProbeJSEvents.generateDoc(event => {
     // So we will load the class and tell ProbeJS that we will transform the document of it
-    event.transformDocument(Java.loadClass("dev.latvian.mods.kubejs.recipe.RecipeJS"), document => {
+    event.transformDocument(Java.loadClass('dev.latvian.mods.kubejs.recipe.RecipeJS'), document => {
 
         // Find the first method with name "stage", it is also possible to find others by having more conditions
         document.methods.find(method => method.name == "stage")

@@ -1,0 +1,21 @@
+>>> warning
+It is very recommended that you learn about the basics of programming and/or JavaScript before you start using KubeJS.
+<<<
+
+Starting off, you will need a code editor. A code editor will make your code more readable, and help you find errors you have made.
+The code editor we recommend is [Visual Studio Code](https://code.visualstudio.com/), which has native support for JS.
+
+# Using ProbeJS
+ProbeJS is an essential addon for KubeJS that allows for code completion based on generated TypeScript files.
+It can help you find methods and fields, and provide documentation for methods, functions, and event handlers.
+
+To use ProbeJS, you first need to start up your game with both it and KubeJS installed, go into a world, and run the command `/probejs dump`.
+This command will generate all the typings (documentation) within your modpack's folder.
+
+The next thing you need to do is open your modpack's folder (be it named .minecraft, or your modpack's name) in Visual Studio Code, and click on the folder called `kubejs` in the sidebar.
+
+# The Folder Structure
+In the `kubejs` folder, there are 3 folders to be aware of.
+- `server_scripts`
+- `client_scripts`
+- `startup_scripts`

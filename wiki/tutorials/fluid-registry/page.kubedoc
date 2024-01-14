@@ -1,0 +1,112 @@
+Custom fluids are made in a startup script. The event is not cancellable.
+
+>>> info
+This is supported by NeoForge/Forge on all versions, and Fabric on 1.18.2+
+<<<
+
+|> 1.19.2+
+```js
+StartupEvents.registry('fluid', event => {
+  // Basic "thick" (looks like lava) fluid with red tint
+  event.create('thick_fluid')
+    .thickTexture(0xFF0000)
+    .bucketColor(0xFF0000)
+    .displayName('Thick Fluid')
+                 
+  // Basic "thin" (looks like water) fluid with cyan tint, has no bucket and is not placeable
+  event.create('thick_fluid')
+    .thinTexture(0xFF0000)
+    .bucketColor(0x00FFFF)
+    .displayName('Thin Fluid')
+    .noBucket() // both these methods are 1.18.2+ only
+    .noBlock() 
+    
+  // Fluid with custom textures
+  event.create('strawberry_cream')
+    .displayName('Strawberry Cream')
+    .stillTexture('kubejs:block/strawberry_still')
+    .flowingTexture('kubejs:block/strawberry_flow')
+    .bucketColor(0xFF33FF)
+
+  // Fluid with a modified bucket item
+  let tacoSauce = event
+    .create('taco_suace')
+    .thickTexture(0xff0000)
+    .bucketColor(0xff0000)
+  
+  tacoSauce.bucketItem.group('food')
+})
+```
+<||> 1.18.2 and below
+```js
+onEvent('fluid.registry', event => {
+  // Basic "thick" (looks like lava) fluid with red tint
+  event.create('thick_fluid')
+    .thickTexture(0xFF0000)
+    .bucketColor(0xFF0000)
+    .displayName('Thick Fluid')
+                 
+  // Basic "thin" (looks like water) fluid with cyan tint, has no bucket and is not placeable
+  event.create('thick_fluid')
+    .thinTexture(0xFF0000)
+    .bucketColor(0x00FFFF)
+    .displayName('Thin Fluid')
+    .noBucket() // both these methods are 1.18.2+ only
+    .noBlock() 
+    
+  // Fluid with custom textures
+  event.create('strawberry_cream')
+    .displayName('Strawberry Cream')
+    .stillTexture('kubejs:block/strawberry_still')
+    .flowingTexture('kubejs:block/strawberry_flow')
+    .bucketColor(0xFF33FF)
+  
+  // Fluid with a modified bucket item
+  let tacoSauce = event
+    .create('taco_suace')
+    .thickTexture(0xff0000)
+    .bucketColor(0xff0000)
+  
+  tacoSauce.bucketItem.group('food')
+})
+```
+<|
+
+Other methods fluid builder supports: (you can chain these methods after create())
+- `[js]displayName(name)`
+- `[js]color(color)`
+- `[js]bucketColor(color)`
+- `[js]builtinTextures()`
+    - same as thinTexture(0xFFFFFF)
+- `[js]stillTexture(path)`
+    - path is the path to txture is for example maybe "minecraft:block/sand"
+    - this texture is recomended to be 16x16, or if animated with a mcmeta file then 16x48 for 3 frames or 16x80 for 5 or 16x240 for 15
+    - Frame counts of 3, 5, 15, 6, 10, or 30 will make your life easier, because the flowing animation need to be a multiple of 15 to look good
+- `[js]flowingTexture(path)`
+    - path is the path to texture is for example maybe "minecraft:block/sand"
+    - this texture is recommended to be 32x480 and animated with a mcmeta file
+    - each frame is recommended to be 32x32 (recommended to be the same 16x16 texture tiled)
+    - then each of these frames are shifted one pixel vertically from the previous, so it looks like its moving
+    - If you are going to be making your own flowing fluid texture it is *highly recommended* to <span style="text-decoration: underline;">*not*</span> make these by hand (It is hours of suffering), and instead write a some program, or setup something with blender nodes to make it.
+- `[js]noBucket()`
+- `[js]noBlock()`
+- `[js]gaseous()`
+  - This makes the fluid a gas in Architectury's eyes, which isn't the same as a Mekanism gas!
+- `[js]rarity(value)`
+  - `rarity` can be: 
+    - `'common'`
+    - `'uncommon'`
+    - `'rare'`
+    - `'epic'`
+- `[js]bucketItem`
+  - You should be able to chain [item builder](https://kubejs.com/wiki/tutorials/item-registry) methods after this
+
+The following can also be used but have no effect unless a mod adds a purpose:
+- `[js]luminosity(value)`
+  - default 0
+- `[js]density(value)`
+  - default 1000
+- `[js]temperature(value)`
+  - default 300
+- `[js]viscosity(value)`
+  - default 1000

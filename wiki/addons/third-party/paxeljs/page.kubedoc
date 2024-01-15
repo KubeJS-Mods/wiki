@@ -9,9 +9,9 @@ StartupEvents.registry('item', event => {
     event.create('cool_paxel', 'paxel')
 })
 ```
-<||> 1.18.2-
+<||> 1.18.2 and below
 ```js
-onEvent(item.registry, event => {
+onEvent('item.registry', event => {
     event.create('cool_paxel', 'paxel')
 })
 ```

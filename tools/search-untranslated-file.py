@@ -4,7 +4,7 @@ CWD = Path.cwd()
 LANGUAGES = CWD / "languages"
 WIKI = CWD / "wiki"
 TOOLS = CWD / "tools"
-EXCLUDE_PATHS = ["test/"]
+EXCLUDE_PATHS = ["test/", "ref/"]
 
 en_files = [*WIKI.rglob("en.yml")]
 

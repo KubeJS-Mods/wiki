@@ -1,7 +1,7 @@
 title: "預設選項"
-description: "生成預設好的 options.txt 檔案"
+description: "生成預設的 options.txt 檔案"
 
-intro: "你可以使用 KubeJS 從 option.txt 中調用默認選項。這包括按鍵綁定、顯示選項、已啟用的資源包、自動跳躍和切換疾走等控制選項，還有進階物品提示等奇奇怪怪的設置"
-overriden: "為什麼要使用這個而不是直接設定 option.txt？如果你直接設定 option.txt，當使用者更新模組包後，所有設置都會被覆蓋，而 KubeJS 只會在模組包首次啟動時設定設置。"
+intro: "你可以使用 KubeJS 從 option.txt 中呼叫預設選項。這包括按鍵綁定、顯示設定、已啟用的資源包、自動跳躍和切換疾走等控制選項、進階物品提示等奇奇怪怪的設置。"
+overriden: "為什麼要使用此功能而非直接設定 option.txt？如果你直接設定 option.txt，當使用者更新模組包後，所有設定都會被覆蓋，而 KubeJS 只會在模組包首次啟動時為選項設定預設值。"
 howto: "要使用此功能，只需要在 `kubejs/config` 資料夾中新增 `defaultoptions.txt` 檔案，然後從普通的 options.txt 檔案中複製你要設定成預設值的那一行，如果你想包含所有內容，也可以直接複製整個檔案。"
-optionlist: "關於 options.txt 的完整清單可以在 [Minecraft Wiki](https://zh.minecraft.wiki/w/Options.txt) 上找到。"
+optionlist: "關於 options.txt 的完整選項列表可以在 [Minecraft Wiki](https://zh.minecraft.wiki/w/Options.txt) 上找到。"

@@ -77,17 +77,17 @@ Other methods fluid builder supports: (you can chain these methods after create(
 - `[js]color(color)`
 - `[js]bucketColor(color)`
 - `[js]builtinTextures()`
-    - same as thinTexture(0xFFFFFF)
+  - Same as thinTexture(0xFFFFFF)
 - `[js]stillTexture(path)`
-    - path is the path to txture is for example maybe "minecraft:block/sand"
-    - this texture is recomended to be 16x16, or if animated with a mcmeta file then 16x48 for 3 frames or 16x80 for 5 or 16x240 for 15
-    - Frame counts of 3, 5, 15, 6, 10, or 30 will make your life easier, because the flowing animation need to be a multiple of 15 to look good
+  - `path` is the path to the texture, for example `minecraft:block/sand`
+  - This texture is recomended to be 16x16, or if animated with a mcmeta file then 16x48 for 3 frames or 16x80 for 5 or 16x240 for 15
+  - Frame counts of 3, 5, 15, 6, 10, or 30 will make your life easier, because the flowing animation need to be a multiple of 15 to look good
 - `[js]flowingTexture(path)`
-    - path is the path to texture is for example maybe "minecraft:block/sand"
-    - this texture is recommended to be 32x480 and animated with a mcmeta file
-    - each frame is recommended to be 32x32 (recommended to be the same 16x16 texture tiled)
-    - then each of these frames are shifted one pixel vertically from the previous, so it looks like its moving
-    - If you are going to be making your own flowing fluid texture it is *highly recommended* to <span style="text-decoration: underline;">*not*</span> make these by hand (It is hours of suffering), and instead write a some program, or setup something with blender nodes to make it.
+  - `path` is the path to texture, for example `minecraft:block/sand`
+  - This texture is recommended to be 32x480 and animated with a mcmeta file
+  - Each frame is recommended to be 32x32 (recommended to be the same 16x16 texture tiled)
+  - Then each of these frames are shifted one pixel vertically from the previous, so it looks like its moving
+  - If you're going to be making your own flowing fluid texture, it is *highly recommended* to __*not*__ make these by hand (it's hours of suffering), and instead write some program, or setup something with blender nodes to make it
 - `[js]noBucket()`
 - `[js]noBlock()`
 - `[js]gaseous()`

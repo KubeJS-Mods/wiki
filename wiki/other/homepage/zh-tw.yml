@@ -17,7 +17,7 @@ q-js-help: "我不會JavaScript怎麼辦？"
 a-js-help: "這裡有些範例和預製好的腳本。你也可以在 Discord 的支援頻道尋求幫助，但請記得具體描述你的問題。"
 
 q-reload: "我可以熱重新載入腳本嗎？"
-a-reload-st: "{st-s}: 重啟遊戲或使用 `/kubejs reload startup_scripts`，並不是所有的起動腳本都能熱重新載入－－有些東西必須得重啟遊戲（例如：註冊）或重啟世界（例如：世界生成）；"
+a-reload-st: "{st-s}: 重啟遊戲或使用 `/kubejs reload startup_scripts`，並不是所有的啟動腳本都能熱重新載入－－有些東西必須得重啟遊戲（例如：註冊）或重啟世界（例如：世界生成）；"
 a-reload-se: "{se-s}: 使用 `/reload` 重新載入入腳本、配方、標籤和所有資料，或使用 `/kubejs reload server_scripts` 來僅重新載入腳本；"
 a-reload-cl: "{cl-s}: 使用 `F3 + T` 重新載入腳本和資源，或使用 `/kubejs reload client_scripts` 來僅重新載入腳本。"
 

@@ -1,0 +1,88 @@
+Custom fluids are created in a startup script. They cannot be reloaded without restarting the game. The event is not cancellable.
+```js
+// Listen to fluid registry event
+StartupEvents.registry('fluid', e =>{
+	// Fluid textures can be made manually or through already existing fluid textures presets
+	// Fluid presets let u get the base texture of Lava / Water (Thick / Thin) and change their color as u please
+	// Notice that thin fluids and thick fluids affect the player movement in the liquid, Thick is harder to move in then Thin
+
+	// Water like texture (thin) with cyan tint:
+	e.create('thin_fluid')
+		.displayName("Thin Fluid")
+		.thinTexture(0x3b8fd9)
+		.bucketColor(0x42aafc)
+
+	// Lava like texture (thick) with orange tint, no bucket item, cant be placed: 
+	e.create('thick_fluid')
+		.displayName("Thick Fluid")
+		.thickTexture(0xe06b0b)
+		.noBucket()
+		.noBlock()
+
+	// Fluid with custom textures:
+	e.create('blueberry_cream')
+		.displayName('Blueberry Cream')
+		.stillTexture('kubejs:block/blueberry_still')
+		.flowingTexture('kubejs:block/blueberry_flow')
+		.bucketColor(0x4f86f7)
+})
+```
+---
+## Methods that you can use after the event.create('name')
+
+---
+
+- `[js]displayName(name)`
+- `[js]rarity(value)`
+
+---
+
+- `[js]bucketColor(color)`
+  - Sets the color of the inside of the bucket.
+- `[js]thinTexture(color)`
+  - Water like texture, easier for the player to move in.
+- `[js]thickTexture(color)`
+  - Lava like texture, harder for the player to move in.
+
+==The `color` property should be a HEX color, like so: `0x7d7d7d`==
+
+---
+
+- `[js]stillTexture(path)`
+  - The `path` property is the path to the still texture of the fluid, for example "minecraft:block/water_still".
+  - This texture is recomended to be 16x16, or if animated with a mcmeta file then 16x48 for 3 frames or 16x80 for 5 or 16x240 for 15.
+  - Frame counts of 3, 5, 15 or 30 will make the flowing animation be smoother as it needs to be a multiple of 15 to look good.
+- `[js]flowingTexture(path)`
+  - The `path` property is the path to the flowing texture of the fluid, for example "minecraft:block/water_flow".
+  - This texture is recommended to be 32x480 so that it can be animated with a mcmeta file.
+  - Each frame of the animated block should be 32x32 (recommended to be the same 16x16 texture tiled).
+  - Then each of these frames are shifted one pixel vertically from the previous, so it looks like its moving.
+  - If you are going to be making your own flowing fluid texture it is *highly recommended* to __not__ make these by hand (It is hours of suffering), and instead write a some program, or setup something with blender nodes to make it.
+
+==The `path` property is the path to the flowing / still texture of the fluid.==
+==For example: "minecraft:block/water_flow" / "minecraft:block/water_still".==
+
+---
+
+- `[js]noBucket()`
+  - *Disables the bucket item.*
+- `[js]noBlock()`
+  - *Makes the fluid unplacable.*
+- `[js]gaseous()`
+  - *Makes the fluid a gas.*
+
+---
+
+>>> warn
+These methods depend on an external mod to affect the liquid in any special way
+<<<
+- `[js]luminosity(value)`
+  - Default value: 0
+- `[js]temperature(value)`
+  - Default value: 300
+- `[js]density(value)`
+  - Default value: 1000
+- `[js]viscosity(value)`
+  - Default value: 1000
+
+

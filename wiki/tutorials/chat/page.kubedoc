@@ -153,6 +153,6 @@ ServerEvents.customCommand('diamonds', event => {
   event.player.give(Item.of('minecraft:diamond', 64))
 })
 ```
-<||>
+<||> 1.18.2 and below
 WIP
 <|

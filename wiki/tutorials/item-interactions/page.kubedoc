@@ -11,18 +11,18 @@ ItemEvents.canPickUp('minecraft:cobblestone', event => event.cancel())
 # Crafted
 The crafted event fires when an item is crafted. It's not cancellable.
 Here's an example of adding a stage to the player when they craft diamond boots:
-<| 1.19.2+
+|> 1.19.2+
 ```js
 ItemEvents.crafted('minecraft:diamond_boots', e => e.addGameStage('myCoolStage'))
 ```
 <||> 1.18.2 and below
 WIP
-|>
+<|
 
 # Dropped
 The dropped event fires when an item is dropped. It's cancellable.
 Here's an example of disabling dropping of cobblestone.
-<| 1.19.2+
+|> 1.19.2+
 ```js
 ItemEvents.dropped('minecraft:cobblestone', e => e.cancel())
 ```
@@ -30,12 +30,12 @@ ItemEvents.dropped('minecraft:cobblestone', e => e.cancel())
 ```js
 WIP
 ```
-|>
+<|
 
 # Entity Interacted
 The entity interacted event is fired when a player right clicks on an entity. It's cancellable.
 Here's an example of making goats be milkable.
-<| 1.19.2+
+|> 1.19.2+
 ```js
 ItemEvents.entityInteracted('minecraft:goat', event => {
   if(event.item.id != 'minecraft:bucket') return
@@ -53,7 +53,7 @@ onEvent('item.entity_interact', event => {
   event.target.playSound('minecraft:entity.cow.milk')
 })
 ```
-|>
+<|
 
 # First Left/Right Click
 The first left/right click events trigger when a player left/right clicks without targetting anything. They aren't cancellable.

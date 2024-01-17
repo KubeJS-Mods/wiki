@@ -1,0 +1,42 @@
+# Meta
+recipes-url: "[[/tutorials/recipes]]"
+addons-url: "[[/addons]]"
+tutorials-url: "[[/tutorials]]"
+arch-api: "[Architectury](https://www.curseforge.com/minecraft/mc-mods/architectury-api)"
+
+title: "KubeJS"
+description: "使用 JavaScript 自訂你的模組包或伺服器！"
+
+q-info: "這模組用處為何？"
+a-info: "你可以透過此模組使用 JavaScript 建立腳本來管理你的伺服器、新增方塊和物品、修改配方、自訂任務或更多功能等你來發掘！"
+
+q-how-use: "如何使用？"
+a-how-use: "安裝此模組後啟動遊戲，應當會在你的 Minecraft 路徑中生成帶有範例腳本的 `kubejs` 資料夾，還有一個 README.txt 檔案，記得去讀它！"
+
+q-js-help: "我不會JavaScript怎麼辦？"
+a-js-help: "這裡有些範例和預製好的腳本。你也可以在 Discord 的支援頻道尋求幫助，但請記得具體描述你的問題。"
+
+q-reload: "我可以熱重新載入腳本嗎？"
+a-reload-st: "{st-s}: 重啟遊戲或使用 `/kubejs reload startup_scripts`，並不是所有的啟動腳本都能熱重新載入 - 有些東西必須得重啟遊戲（例如：註冊）或重啟世界（例如：世界生成）；"
+a-reload-se: "{se-s}: 使用 `/reload` 重新載入腳本、配方、標籤和所有資料，或使用 `/kubejs reload server_scripts` 來僅重新載入腳本；"
+a-reload-cl: "{cl-s}: 使用 `F3 + T` 重新載入腳本和資源，或使用 `/kubejs reload client_scripts` 來僅重新載入腳本。"
+
+q-mod-support: "什麼模組可以被 KubeJS 支援／X 模組支援 KubeJS 嗎？"
+a-mod-support: "如果模組使用資料包載入配方，基本上可以使用 KubeJS 來新增或修改；有些更複雜的模組需要使用擴展模組，理論上還是可以成功執行資料包配方，詳情請見 {recipes-url} 及 {addons-url} 頁面。"
+
+q-features: "這個模組有哪些功能？"
+a-features: "請見 {tutorials-url} 頁面。"
+
+q-how-work: "這個模組是如何運作的？"
+a-how-work: "這個模組使用了 Rhino — 由 Mozilla 製作並用於執行時轉換 JavaScript 程式碼到 Java 類別，的分支。KubeJS 封裝了 Minecraft 類別並加入了一些實用的工具，以簡化了操作並移除了對映射的需求。{arch-api} 讓 Forge 和 Fabric 可以使用幾乎相同的原始碼，從而使移植變得相當簡單。"
+
+q-support: "好咧，但……如果它不起作用呢？"
+a-support: "你可以到 [這裡]({support-url}) 回報問題。"
+
+q-discussion: "我有更多疑問、建議！"
+a-discussion: "如果 Wiki 沒有解答你所尋找的問題，你可以加入 [Discord 伺服器]({discord-url}) 並在 [#kubejs-support]({discord-url}) 頻道詢問問題！"
+
+website: "網站"
+source: "原始碼"
+download: "下載"
+no-support: "Minecraft 的最低支援版本是 {last-supported-version}，如果低於這個版本，你就只能依靠你自己了！"

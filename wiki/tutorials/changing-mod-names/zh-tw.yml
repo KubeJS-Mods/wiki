@@ -1,0 +1,7 @@
+title: "變更模組顯示名稱"
+description: "是的，這很邪惡，但是可能的！"
+
+version-info: "這只在 KubeJS 6 以上有效。"
+startup-line: "在啟動腳本中，加入這行："
+useful: "當你使用 KubeJS 新增了不少物品，但想讓其顯示「KubeJS」以外的名稱時十分有用（譬如你自己的模組包）。"
+other-mods: "沒錯，你也可以這樣修改其他模組的名稱："

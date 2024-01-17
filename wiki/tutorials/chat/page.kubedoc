@@ -22,7 +22,7 @@ onEvent('player.chat', event => {
   if (event.message.trim().toLowerCase() == 'creeper') {
     // Schedule task in 1 tick, because if you reply immediately, it will print before player's message
     event.server.scheduleInTicks(1, event.server, ctx => {
-      // Tell everyone Aw man, colored green. Callback data is the server
+      // Tell everyone "Aw man", colored green. Callback data is the server
       ctx.data.tell(Text.green('Aw man'))
     })
   }
@@ -62,23 +62,23 @@ This event only exists on 1.19.2 and above! Use the normal chat event for this i
 <<<
 Here's an example, which removes the letter "g" from players' messages
 ```js
-PlayerEvents.decorateChat(e => {
+PlayerEvents.decorateChat(event => {
   // Remove the letter "g"
-  e.setMessage(e.message.replace('g', ''))
+  event.setMessage(event.message.replace('g', ''))
 })
 ```
 Here's another example, this time replacing `:sword:` with the sword emoji
 ```js
-PlayerEvents.decorateChat(e => {
+PlayerEvents.decorateChat(event => {
   // Replace `:sword:` with the sword emoji
-  e.setMessage(e.message.replace(':sword:', '⚔'))
+  event.setMessage(event.message.replace(':sword:', '⚔'))
 })
 ```
 
 # Command Events
 # Command Event
 The command event is an event which is fired when a command is ran. It's cancellable.
-```
+
 # Command Registry Event
 The command registry event can be used to register custom commands. It's not cancellable.
 
@@ -91,9 +91,10 @@ ServerEvents.commandRegistry(event => {
   event.register(Commands.literal('fly') // The name of the command
     .requires(s => s.hasPermission(2)) // Check if the player has operator privileges
     .executes(c => fly(c.source.player)) // Toggle flight for the player that ran the command if the `target` argument isn't included
-    .then(Commands.argument('target', Arguments.PLAYER.create(event)) 
+    .then(Commands.argument('target', Arguments.PLAYER.create(event))
       .executes(c => fly(Arguments.PLAYER.getResult(c, 'target'))) // Toggle flight for the player included in the `target` argument
-  ))
+    )
+  )
   
   // Helper function
   let fly = (player) => {
@@ -119,9 +120,10 @@ onEvent('command.registry', event => {
   event.register(Commands.literal('fly') // The name of the command
     .requires(s => s.hasPermission(2)) // Check if the player has operator privileges
     .executes(c => fly(c.source.player)) // Toggle flight for the player that ran the command if the `target` argument isn't included
-    .then(Commands.argument('target', Arguments.PLAYER.create(event)) 
+    .then(Commands.argument('target', Arguments.PLAYER.create(event))
       .executes(c => fly(Arguments.PLAYER.getResult(c, 'target'))) // Toggle flight for the player included in the `target` argument
-  ))
+    )
+  )
   
   // Helper function
   let fly = (player) => {
@@ -147,8 +149,8 @@ The event can act as an easier way to create a custom command.
 Here's an example of giving a player diamonds when they run `/kubejs custom_command diamonds`
 |> 1.19.2+
 ```js
-ServerEvents.customCommand('diamonds', e => {
-    e.player.give(Item.of('diamond', 64))
+ServerEvents.customCommand('diamonds', event => {
+  event.player.give(Item.of('minecraft:diamond', 64))
 })
 ```
 <||>

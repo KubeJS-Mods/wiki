@@ -1,0 +1,91 @@
+All block events listed on this page can be put in {se-s} or {cl-s}.
+
+# Broken Event
+The block broken event is cancellable.
+Here's an example of replacing stone with cobblestone once it's broken.
+<| 1.19.2+
+```js
+BlockEvents.broken('minecraft:stone', event => {
+  event.block.set('minecraft:cobblestone')
+  event.cancel()
+})
+```
+<||> 1.18.2 and below
+```js
+onEvent('block.break', event => {
+  if(event.block.id != 'minecraft:stone') return
+  event.block.set('minecraft:cobblestone')
+  event.cancel()
+})
+```
+|> 
+
+# Detector Events
+>>> warn
+WIP
+<<<
+
+# Farmland Trampled Event
+The farmland trampled event is cancellable.
+>>> warn
+The farmland trampled event only exists on version 1.19.2 and above!
+<<<
+Here's an example of cancelling the event if the player has boots on with the feather falling 4 enchant
+```js
+BlockEvents.farmlandTrampled(event => {
+  if(event.player.feetArmorItem.hasEnchantment('minecraft:feather_falling', 4)) e.cancel()
+})
+```
+
+# Left Clicked Event
+The left click event is cancellable.
+Here's an example of giving the player stone when left clicking sand, and removing the sand.
+<| 1.19.2+
+```js
+BlockEvents.leftClicked('minecraft:sand', event => {
+  event.player.give('minecraft:cobblestone')
+  event.block.set('minecraft:air')
+})
+```
+<||> 1.18.2 and below
+```js
+onEvent('block.left_click', event => {
+  if(event.block.id != 'minecraft:sand') return
+  event.player.give('minecraft:cobblestone')
+  event.block.set('minecraft:air')
+})
+```
+|>
+
+# Placed Event
+The block placed event is cancellable.
+Here's an example of replacing a crafting table with an oak log when placed.
+<| 1.19.2+
+```js
+BlockEvents.placed('minecraft:crafting_table', event => {
+  event.player.tell('NO CRAFTING FOR YOU')
+  event.block.set('minecraft:oak_log')
+})
+```
+<||> 1.18.2 and below
+```js
+onEvent('block.place', event => {
+  if(event.block.id != 'minecraft:crafting_table') return
+  event.player.tell('NO CRAFTING FOR YOU')
+  event.block.set('minecraft:oak_log')
+})
+```
+|>
+
+# Right Clicked Event
+The right click event is cancellable.
+Here's an example of cancelling the event when right clicking chests.
+<| 1.19.2+
+```js
+BlockEvents.rightClicked('minecraft:chest', event => event.cancel())
+```
+<||> 1.18.2 and below
+onEvent('block.right_click', event => {
+  if(event.block.id == 'minecraft:chest') event.cancel()
+})
+|>

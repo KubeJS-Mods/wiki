@@ -47,7 +47,7 @@ onEvent('fluid.registry', event => {
     .displayName('Thick Fluid')
                  
   // Basic "thin" (looks like water) fluid with cyan tint, has no bucket and is not placeable
-  event.create('thick_fluid')
+  event.create('thin_fluid')
     .thinTexture(0xFF0000)
     .bucketColor(0x00FFFF)
     .displayName('Thin Fluid')
@@ -74,10 +74,17 @@ onEvent('fluid.registry', event => {
 
 Other methods fluid builder supports: (you can chain these methods after create())
 - `[js]displayName(name)`
+- `[js]rarity(value)`
+  - `rarity` can be: 
+    - `'common'`
+    - `'uncommon'`
+    - `'rare'`
+    - `'epic'`
 - `[js]color(color)`
 - `[js]bucketColor(color)`
+- `[js]thinTexture(color)`
+- `[js]thickTexture(color)`
 - `[js]builtinTextures()`
-  - Same as thinTexture(0xFFFFFF)
 - `[js]stillTexture(path)`
   - `path` is the path to the texture, for example `minecraft:block/sand`
   - This texture is recomended to be 16x16, or if animated with a mcmeta file then 16x48 for 3 frames or 16x80 for 5 or 16x240 for 15
@@ -92,21 +99,15 @@ Other methods fluid builder supports: (you can chain these methods after create(
 - `[js]noBlock()`
 - `[js]gaseous()`
   - This makes the fluid a gas in Architectury's eyes, which isn't the same as a Mekanism gas!
-- `[js]rarity(value)`
-  - `rarity` can be: 
-    - `'common'`
-    - `'uncommon'`
-    - `'rare'`
-    - `'epic'`
 - `[js]bucketItem`
   - You should be able to chain [item builder](https://kubejs.com/wiki/tutorials/item-registry) methods after this
 
 The following can also be used but have no effect unless a mod adds a purpose:
 - `[js]luminosity(value)`
-  - default 0
+  - Default: 0
 - `[js]density(value)`
-  - default 1000
+  - Default: 1000
 - `[js]temperature(value)`
-  - default 300
+  - Default: 300
 - `[js]viscosity(value)`
-  - default 1000
+  - Default: 1000

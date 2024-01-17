@@ -1,0 +1,74 @@
+# Can Pick Up
+The can pick up event is fired when a player picks up an item. It's cancellable.
+>>> warn
+This event only exists on version 1.19.2 and above!
+<<<
+Here's an example of preventing the player from picking up cobblestone.
+```js
+ItemEvents.canPickUp('minecraft:cobblestone', event => event.cancel())
+```
+
+# Crafted
+The crafted event fires when an item is crafted. It's not cancellable.
+Here's an example of adding a stage to the player when they craft diamond boots:
+<| 1.19.2+
+```js
+ItemEvents.crafted('minecraft:diamond_boots', e => e.addGameStage('myCoolStage'))
+```
+<||> 1.18.2 and below
+WIP
+|>
+
+# Dropped
+The dropped event fires when an item is dropped. It's cancellable.
+Here's an example of disabling dropping of cobblestone.
+<| 1.19.2+
+```js
+ItemEvents.dropped('minecraft:cobblestone', e => e.cancel())
+```
+<||> 1.18.2 and below
+```js
+WIP
+```
+|>
+
+# Entity Interacted
+The entity interacted event is fired when a player right clicks on an entity. It's cancellable.
+Here's an example of making goats be milkable.
+<| 1.19.2+
+```js
+ItemEvents.entityInteracted('minecraft:goat', event => {
+  if(event.item.id != 'minecraft:bucket') return
+  event.item.count--
+  event.player.giveInHand('minecraft:milk_bucket')
+  event.target.playSound('minecraft:entity.cow.milk')
+})
+```
+<||> 1.18.2 and below
+```js
+onEvent('item.entity_interact', event => {
+  if (event.target.type != 'minecraft:goat' || event.item.id != 'minecraft:bucket') return
+  event.item.count--
+  event.player.giveInHand('minecraft:milk_bucket')
+  event.target.playSound('minecraft:entity.cow.milk')
+})
+```
+|>
+
+# First Left/Right Click
+The first left/right click events trigger when a player left/right clicks without targetting anything. They aren't cancellable.
+
+# Food Eaten
+The food eaten triggers when a player eats food. It's cancellable.
+
+# Model Properties
+The model properties event is an event which allows you to register model properties for items. It's not cancellable.
+
+# Picked Up
+The can pick up event is fired when a player picks up an item. It's not cancellable.
+
+# Right Clicked
+The right clicked event triggers when a player right clicks without targetting anything. It's cancellable.
+
+# Smelted
+The smelted event triggers when an item is smelted. It's not cancellable.

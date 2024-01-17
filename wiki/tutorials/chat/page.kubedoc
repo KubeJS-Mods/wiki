@@ -1,0 +1,158 @@
+# Chat Events
+## Chat Event
+The chat event fires when a player send a message in chat. It's mostly used to cancel messages from being sent.
+Here's an example which replies with "Aw man" when a player says "creeper" (ignoring case).
+|> 1.19.2+
+```js
+PlayerEvents.chat(event => {
+  // Check if message equals creeper, ignoring case
+  if (event.message.trim().toLowerCase() == 'creeper') {
+    // Schedule task in 1 tick, because if you reply immediately, it will print before player's message
+    event.server.scheduleInTicks(1, event.server, ctx => {
+      // Tell everyone "Aw man", colored green. Callback data is the server
+      ctx.data.tell(Text.green('Aw man'))
+    })
+  }
+})
+```
+<||> 1.18.2 and below
+```js
+onEvent('player.chat', event => {
+  // Check if message equals creeper, ignoring case
+  if (event.message.trim().toLowerCase() == 'creeper') {
+    // Schedule task in 1 tick, because if you reply immediately, it will print before player's message
+    event.server.scheduleInTicks(1, event.server, ctx => {
+      // Tell everyone "Aw man", colored green. Callback data is the server
+      ctx.data.tell(Text.green('Aw man'))
+    })
+  }
+})
+```
+<|
+
+Here's an example of cancelling the event.
+|> 1.19.2+
+```js
+PlayerEvents.chat(event => {
+  // Check if message starts with "!some_command"
+  if (event.message.startsWith('!some_command')) {
+    // Reply to the player and cancel the event
+    event.player.tell('Hi!')
+    event.cancel()
+  }
+})
+```
+<||> 1.18.2 and below
+```js
+onEvent('player.chat', event => {
+  // Check if message starts with "!some_command"
+  if (event.message.startsWith('!some_command')) {
+    // Reply to the player and cancel the event
+    event.player.tell('Hi!')
+    event.cancel()
+  }
+})
+```
+<|
+## Decorate Chat Event
+The decorate chat event also fires when a player sents a message, however it's used to modify its content.
+The event is not cancellable.
+>>> warn
+This event only exists on 1.19.2 and above! Use the normal chat event for this if you're on 1.18 and below!
+<<<
+Here's an example, which removes the letter "g" from players' messages
+```js
+PlayerEvents.decorateChat(event => {
+  // Remove the letter "g"
+  event.setMessage(event.message.replace('g', ''))
+})
+```
+Here's another example, this time replacing `:sword:` with the sword emoji
+```js
+PlayerEvents.decorateChat(event => {
+  // Replace `:sword:` with the sword emoji
+  event.setMessage(event.message.replace(':sword:', '⚔'))
+})
+```
+
+# Command Events
+# Command Event
+The command event is an event which is fired when a command is ran. It's cancellable.
+
+# Command Registry Event
+The command registry event can be used to register custom commands. It's not cancellable.
+
+Here's an example of a simple `/fly` command.
+|> 1.19.2+
+```js
+ServerEvents.commandRegistry(event => {
+  const { commands: Commands, arguments: Arguments } = event
+  
+  event.register(Commands.literal('fly') // The name of the command
+    .requires(s => s.hasPermission(2)) // Check if the player has operator privileges
+    .executes(c => fly(c.source.player)) // Toggle flight for the player that ran the command if the `target` argument isn't included
+    .then(Commands.argument('target', Arguments.PLAYER.create(event))
+      .executes(c => fly(Arguments.PLAYER.getResult(c, 'target'))) // Toggle flight for the player included in the `target` argument
+    )
+  )
+  
+  // Helper function
+  let fly = (player) => {
+    console.log(player)
+    if (player.abilities.mayfly) {
+      player.abilities.mayfly = false
+      player.abilities.flying = false
+      player.displayClientMessage(Component.gold('Flying: ').append(Component.red('disabled')), true)
+    } else {
+      player.abilities.mayfly = true
+      player.displayClientMessage(Component.gold('Flying: ').append(Component.green('enabled')), true)
+    }
+    player.onUpdateAbilities()
+    return 1
+  }
+})
+```
+<||> 1.18.2 and below
+```js
+onEvent('command.registry', event => {
+  const { commands: Commands, arguments: Arguments } = event
+  
+  event.register(Commands.literal('fly') // The name of the command
+    .requires(s => s.hasPermission(2)) // Check if the player has operator privileges
+    .executes(c => fly(c.source.player)) // Toggle flight for the player that ran the command if the `target` argument isn't included
+    .then(Commands.argument('target', Arguments.PLAYER.create(event))
+      .executes(c => fly(Arguments.PLAYER.getResult(c, 'target'))) // Toggle flight for the player included in the `target` argument
+    )
+  )
+  
+  // Helper function
+  let fly = (player) => {
+    console.log(player)
+    if (player.abilities.mayfly) {
+      player.abilities.mayfly = false
+      player.abilities.flying = false
+      player.displayClientMessage(Component.gold('Flying: ').append(Component.red('disabled')), true)
+    } else {
+      player.abilities.mayfly = true
+      player.displayClientMessage(Component.gold('Flying: ').append(Component.green('enabled')), true)
+    }
+    player.onUpdateAbilities()
+    return 1
+  }
+})
+```
+<|
+# Custom Command Event
+The custom command event is fired when `/kubejs custom_command` is ran. It's cancellable.
+The event can act as an easier way to create a custom command.
+
+Here's an example of giving a player diamonds when they run `/kubejs custom_command diamonds`
+|> 1.19.2+
+```js
+ServerEvents.customCommand('diamonds', event => {
+  event.player.give(Item.of('minecraft:diamond', 64))
+})
+```
+<||> 1.18.2 and below
+WIP
+<|

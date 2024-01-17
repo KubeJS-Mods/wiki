@@ -7,7 +7,7 @@ JEIEvents.subtypes(event => {
   event.useNBTKey('example:item', 'type')
 })
 ```
-<||> 1.18.2-
+<||> 1.18.2 and below
 ```js
 onEvent('jei.subtypes', event => {
   event.useNBT('example:item')
@@ -28,7 +28,7 @@ JEIEvents.hideFluids(event => {
   event.hide('example:fluid')
 })
 ```
-<||> 1.18.2-
+<||> 1.18.2 and below
 ```js
 onEvent('jei.hide.items', event => {
   event.hide('example:ingredient')
@@ -52,7 +52,7 @@ JEIEvents.addFluids(event => {
   event.add('example:fluid')
 })
 ```
-<||> 1.18.2-
+<||> 1.18.2 and below
 ```js
 onEvent('jei.add.items', event => {
   event.add(Item.of('example:item', {test: 123}))
@@ -72,7 +72,7 @@ JEIEvents.information(event => {
   event.addItem('example:ingredient', ['Line 1', 'Line 2'])
 })
 ```
-<||> 1.18.2-
+<||> 1.18.2 and below
 ```js
 onEvent('jei.information', event => {
   event.add('example:ingredient', ['Line 1', 'Line 2'])
@@ -90,7 +90,7 @@ JEIEvents.removeCategories(event => {
   event.remove('create:compacting')
 })
 ```
-<||> 1.18.2-
+<||> 1.18.2 and below
 ```js
 onEvent('jei.remove.categories', event => {
   console.log(event.categoryIds) //log a list of all category ids to logs/kubejs/client.txt

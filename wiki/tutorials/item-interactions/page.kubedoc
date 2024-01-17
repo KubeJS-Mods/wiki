@@ -27,9 +27,7 @@ Here's an example of disabling dropping of cobblestone.
 ItemEvents.dropped('minecraft:cobblestone', e => e.cancel())
 ```
 <||> 1.18.2 and below
-```js
 WIP
-```
 <|
 
 # Entity Interacted

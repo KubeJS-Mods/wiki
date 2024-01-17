@@ -85,7 +85,9 @@ Here's an example of cancelling the event when right clicking chests.
 BlockEvents.rightClicked('minecraft:chest', event => event.cancel())
 ```
 <||> 1.18.2 and below
+```js
 onEvent('block.right_click', event => {
   if(event.block.id == 'minecraft:chest') event.cancel()
 })
+```
 <|

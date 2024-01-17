@@ -30,7 +30,7 @@ a-features: "請見 {tutorials-url} 頁面。"
 q-how-work: "這個模組是如何運作的？"
 a-how-work: "這個模組使用了 Rhino — 由 Mozilla 製作並用於執行時轉換 JavaScript 程式碼到 Java 類別，的分支。KubeJS 封裝了 Minecraft 類別並加入了一些實用的工具，以簡化了操作並移除了對映射的需求。{arch-api} 讓 Forge 和 Fabric 可以使用幾乎相同的原始碼，從而使移植變得相當簡單。"
 
-q-support: "好咧，但……如果他不起作用呢？"
+q-support: "好咧，但……如果它不起作用呢？"
 a-support: "你可以到 [這裡]({support-url}) 回報問題。"
 
 q-discussion: "我有更多疑問、建議！"

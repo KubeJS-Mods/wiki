@@ -35,5 +35,5 @@ Methods:
 - `[js]harmful()`
 - `[js]category(category)`
 - `[js]color(hex)`
-- `[js]effectTick(builder => {})` - To see all usable methods, check out https://lexxie.site/forge/1.19.2/net/minecraft/world/entity/LivingEntity.html.
+- `[js]effectTick(callback => {})` - To see all usable methods, check out https://lexxie.site/forge/1.19.2/net/minecraft/world/entity/LivingEntity.html.
 - `[js]modifyAttribute(attribute, name, number, operation)`

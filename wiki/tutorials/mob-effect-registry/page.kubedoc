@@ -11,6 +11,7 @@ StartupEvents.registry('mob_effect', event => {
         ctx.modifyAttribute('minecraft:generic.max_health', 'identifier', 1, 'addition') //This modifies an Attribute, which will increase an Entity's Max Health by 1 HP.
 
         //To see more of what you can do here, check out this class's Methods: https://lexxie.site/forge/1.19.2/net/minecraft/world/entity/LivingEntity.html.
+    })
 
     .modifyAttribute() //This method can also be used here, but is not recommended because the modified Attribute continues to stay modified until the Entity dies.
 })

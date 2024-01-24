@@ -2,85 +2,39 @@ Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-immer
 
 ---
 
-# Supported Recipe Types
-
-## Alloy Kiln
+# Alloy Kiln
 ```js
 event.recipes.immersiveengineering.alloy(output, input1, input2)
 event.recipes.immersiveengineering.alloy(output, input1, input2, time)
 ```
 
-## Blast Furnace
+# Arc Furnace
+```js
+event.recipes.immersiveengineering.arc_furnace(outputs[], input, additives[])
+event.recipes.immersiveengineering.arc_furnace(outputs[], input, additives[], slag)
+event.recipes.immersiveengineering.arc_furnace(outputs[], input, additives[], slag, time)
+event.recipes.immersiveengineering.arc_furnace(outputs[], input, additives[], slag, time, energy)
+```
+
+# Blast Furnace
 ```js
 event.recipes.immersiveengineering.blast_furnace(output, input)
 event.recipes.immersiveengineering.blast_furnace(output, input, slag)
+event.recipes.immersiveengineering.blast_furnace(output, input, slag, time)
 ```
 
-## Blast Furnace Fuel
+# Blast Furnace Fuel
 ```js
 event.recipes.immersiveengineering.blast_furnace_fuel(input, time)
 ```
 
-## Coke Oven
-```js
-event.recipes.immersiveengineering.coke_oven(output, input, creosote)
-event.recipes.immersiveengineering.coke_oven(output, input, creosote, time)
-```
-
-## Garden Cloche
->>> warn
-This is currently broken on 1.19!
-<<<
-`render` format: `{type: 'crop', block: 'minecraft:wheat'}`
-```js
-event.recipes.immersiveengineering.cloche([outputs], input, soil)
-event.recipes.immersiveengineering.cloche([outputs], input, soil, render)
-```
-
-## Fertilizer
-```js
-event.recipes.immersiveengineering.fertilizer(input, growthModifier)
-```
-
-## Metal Press
-```js
-event.recipes.immersiveengineering.metal_press(output, input, mold)
-```
-
-## Arc Furnace
-```js
-event.recipes.immersiveengineering.arc_furnace([outputs], input)
-event.recipes.immersiveengineering.arc_furnace([outputs], input, [additives])
-event.recipes.immersiveengineering.arc_furnace([outputs], input, [additives], slag)
-```
-
-## Crusher
-`secondaries` format: `{chance: 0.5, output: 'item:id'}`
-```js
-event.recipes.immersiveengineering.crusher(output, input)
-event.recipes.immersiveengineering.crusher(output, input, [secondaries])
-```
-
-## Sawmill
-`secondaries` format: `{stripping: true, output: 'item:id'}`
-```js
-event.recipes.immersiveengineering.sawmill(output, input)
-event.recipes.immersiveengineering.sawmill(output, input, [secondaries])
-event.recipes.immersiveengineering.sawmill(output, input, [secondaries], stripped)
-```
-
-## Fermenter
-```js
-event.recipes.immersiveengineering.fermenter(input, fluid, output)
-```
-
-## Blueprint (Engineer's Workbench)
+# Blueprint (Engineer's Workbench)
 `blueprint` is a blueprint category name.
 ```js
-event.recipes.immersiveengineering.blueprint(output, [inputs], blueprint)
+event.recipes.immersiveengineering.blueprint(output, inputs[], blueprint)
 ```
 
-### Blueprint Categories
+## Blueprint Categories
 As stated above, in `blueprint` you have to use a category name. These are the default ones:
 - `bannerpatterns`
 - `bullet`
@@ -89,12 +43,98 @@ As stated above, in `blueprint` you have to use a category name. These are the d
 - `molds`
 - `electrode`
 
-# Broken Recipe Types
-These recipe types are currently broken:
-- Bottling Machine
-- Mixer
-- Refinery
-- Squeezer
-- Thermoelectric Source
+# Bottling Machine
+>>> warn
+This recipe is currently broken!
+<<<
+```js
+event.recipes.immersiveengineering.bottling_machine(outputs[], fluid, inputs[])
+```
 
-For now, use `event.custom` for these.
+# Coke Oven
+```js
+event.recipes.immersiveengineering.coke_oven(output, input)
+event.recipes.immersiveengineering.coke_oven(output, input, creosote)
+event.recipes.immersiveengineering.coke_oven(output, input, creosote, time)
+```
+
+# Garden Cloche
+>>> warn
+This recipe is currently broken on 1.19!
+<<<
+`render` format: `[js]{type: 'crop', block: 'minecraft:wheat'}`
+```js
+event.recipes.immersiveengineering.cloche(outputs[], input, soil)
+event.recipes.immersiveengineering.cloche(outputs[], input, soil, render)
+```
+
+# Crusher
+`secondaries` format: `[js]{chance: 0.5, output: 'item:id'}`
+```js
+event.recipes.immersiveengineering.crusher(output, input)
+event.recipes.immersiveengineering.crusher(output, input, secondaries[])
+```
+
+# Fermenter
+```js
+event.recipes.immersiveengineering.fermenter(input)
+event.recipes.immersiveengineering.fermenter(input, fluid)
+event.recipes.immersiveengineering.fermenter(input, fluid, output)
+event.recipes.immersiveengineering.fermenter(input, fluid, output, energy)
+```
+
+# Fertilizer
+```js
+event.recipes.immersiveengineering.fertilizer(input)
+event.recipes.immersiveengineering.fertilizer(input, growthModifier)
+```
+
+# Metal Press
+```js
+event.recipes.immersiveengineering.metal_press(output, input)
+event.recipes.immersiveengineering.metal_press(output, input, mold)
+event.recipes.immersiveengineering.metal_press(output, input, mold, energy)
+```
+
+# Mixer
+>>> warn
+This recipe is currently broken!
+<<<
+```js
+event.recipes.immersiveengineering.mixer(output, fluid, inputs[])
+event.recipes.immersiveengineering.mixer(output, fluid, inputs[], energy)
+```
+
+# Refinery
+>>> warn
+This recipe is currently broken!
+<<<
+```js
+event.recipes.immersiveengineering.refinery(output, inputs[])
+event.recipes.immersiveengineering.refinery(output, inputs[], catalyst)
+event.recipes.immersiveengineering.refinery(output, inputs[], catalyst, energy)
+```
+
+# Sawmill
+`secondaries` format: `[js]{stripping: true, output: 'item:id'}`
+```js
+event.recipes.immersiveengineering.sawmill(output, input, secondaries[])
+event.recipes.immersiveengineering.sawmill(output, input, secondaries[], stripped)
+event.recipes.immersiveengineering.sawmill(output, input, secondaries[], stripped, energy)
+```
+
+# Squeezer
+>>> warn
+This recipe is currently broken!
+<<<
+```js
+event.recipes.immersiveengineering.squeezer(fluid_or_output, input, energy)
+```
+
+# Thermoelectric Source
+>>> warn
+This recipe is currently broken!
+<<<
+```js
+event.recipes.immersiveengineering.thermoelectric_source(heat_source, tempKelvin)
+```

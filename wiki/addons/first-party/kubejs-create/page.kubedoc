@@ -8,7 +8,7 @@ The example scripts are only here to demonstrate the recipes. They are not meant
 
 # Compacting
 
-Syntax: `compacting(output[], input[])`
+Syntax: `[js]compacting(output[], input[])`
 
 >>> info
 Compacting uses the **Mechanical Press**, **Basin** and optionally a **Blaze Burner**.
@@ -16,7 +16,7 @@ Compacting uses the **Mechanical Press**, **Basin** and optionally a **Blaze Bur
 
 Features:
 - supports multiple inputs and outputs
-- supports .heated() and .superheated()
+- supports `[js].heated()` and `[js].superheated()`
 - can have a fluid output as long as it has another item output
 - supports chance-based output
 
@@ -32,7 +32,7 @@ ServerEvents.recipes(event => {
 
 # Crushing
 
-Syntax: `crushing(output[], input)`
+Syntax: `[js]crushing(output[], input)`
 
 >>> info
 Crushing uses the **Crushing Wheels**
@@ -40,7 +40,7 @@ Crushing uses the **Crushing Wheels**
 
 Features:
 - supports multiple chance-based outputs
-- supports `.processingTime()`
+- supports `[js].processingTime()`
 
 ```js
 ServerEvents.recipes(event => {
@@ -52,7 +52,7 @@ ServerEvents.recipes(event => {
 
 # Cutting
 
-Syntax: `cutting(output[], input)`
+Syntax: `[js]cutting(output[], input)`
 
 >>> info
 Cutting uses the **Mechanical Saw**
@@ -60,7 +60,7 @@ Cutting uses the **Mechanical Saw**
 
 Features:
 - supports multiple chance-based outputs
-- supports `.processingTime()`
+- supports `[js].processingTime()`
 
 ```js
 ServerEvents.recipes(event => {
@@ -72,7 +72,7 @@ ServerEvents.recipes(event => {
 
 # Deploying
 
-Syntax: `deploying(output[], input[])`
+Syntax: `[js]deploying(output[], input[])`
 
 >>> info
 Deploying uses the **Deployer**
@@ -81,7 +81,7 @@ Deploying uses the **Deployer**
 Features:
 - supports multiple chance-based outputs
 - requires exactly two inputs, the second input is what the Deployer is holding
-- supports `.keepHeldItem()`
+- supports `[js].keepHeldItem()`
 
 ```js
 ServerEvents.recipes(event => {
@@ -93,7 +93,7 @@ ServerEvents.recipes(event => {
 
 # Emptying
 
-Syntax: `emptying(output[], input)`
+Syntax: `[js]emptying(output[], input)`
 
 >>> info
 Emptying uses the **Item Drain**
@@ -110,7 +110,7 @@ ServerEvents.recipes(event => {
 
 # Filling
 
-Syntax: `filling(output, input[])`
+Syntax: `[js]filling(output, input[])`
 
 >>> info
 Filling uses the **Spout**
@@ -127,7 +127,7 @@ ServerEvents.recipes(event => {
 
 # Haunting
 
-Syntax: `haunting(output[], input)`
+Syntax: `[js]haunting(output[], input)`
 
 >>> info
 Haunting uses the **Encased Fan** and **Soul Fire**
@@ -146,7 +146,7 @@ ServerEvents.recipes(event => {
 
 # Mechanical Crafting
 
-Syntax: `mechanical_crafting(output, pattern[], key{})`
+Syntax: `[js]mechanical_crafting(output, pattern[], key{})`
 
 >>> info
 Mechanical Crafting uses **Mechanical Crafters**
@@ -172,7 +172,7 @@ ServerEvents.recipes(event => {
 
 # Milling
 
-Syntax: `milling(output[], input)`
+Syntax: `[js]milling(output[], input)`
 
 >>> info
 Milling uses the **Millstone**
@@ -190,7 +190,7 @@ ServerEvents.recipes(event => {
 
 # Mixing
 
-Syntax: `mixing(output[], input)`
+Syntax: `[js]mixing(output[], input)`
 >>> info
 Mixing uses the **Mechanical Mixer**, **Basin**, and optionally a **Blaze Burner**
 <<<
@@ -198,7 +198,7 @@ Mixing uses the **Mechanical Mixer**, **Basin**, and optionally a **Blaze Burner
 Features:
 - supports multiple chance-based outputs
 - supports fluid inputs and outputs
-- supports `.heated()` and `.superheated()`
+- supports `[js].heated()` and `[js].superheated()`
 
 ```js
 ServerEvents.recipes(event => {
@@ -212,7 +212,7 @@ ServerEvents.recipes(event => {
 
 # Pressing
 
-Syntax: `pressing(output[], input)`
+Syntax: `[js]pressing(output[], input)`
 
 >>> info
 Pressing uses the **Mechanical Press**
@@ -231,9 +231,9 @@ ServerEvents.recipes(event => {
 
 ---
 
-##### Sandpaper Polishing
+# Sandpaper Polishing
 
-Syntax: `sandpaper_polishing(output, input)`
+Syntax: `[js]sandpaper_polishing(output, input)`
 
 >>> info
 Sandpaper Polishing uses any item tagged with `create:sandpaper`
@@ -249,19 +249,18 @@ ServerEvents.recipes(event => {
 })
 ```
 
-##### Sequenced Assembly
+# Sequenced Assembly
 
-Syntax: `sequenced_assembly(output[], input, sequence[]).transitionalItem(item).loops(int)`
+Syntax: `[js]sequenced_assembly(output[], input, sequence[]).transitionalItem(item).loops(int)`
 
 `Output` is an item or an array of items. If it is an array:
 - The first item is the real output, the remainder is scrap.
 - Only one item is chosen, with an equal chance of each.
-- You can use `Item.of('create:shaft').withChance(2)` to double the chance of that item being chosen.
+- You can use `[js]Item.of('create:shaft').withChance(2)` to double the chance of that item being chosen.
 
 `Transitional Item` is any item used during the intermediate stages of the assembly.
 
 `Sequence` is an array of recipes of the following types:
-
 - `create:cutting`
 - `create:pressing`
 - `create:deploying`
@@ -269,7 +268,7 @@ Syntax: `sequenced_assembly(output[], input, sequence[]).transitionalItem(item).
 
 The transitional item needs to be the input ***and*** output of each of these recipes.
 
-`Loops` is the number of times that the recipe repeats. Calling `.loops()` is optional and defaults to **4**.
+`Loops` is the number of times that the recipe repeats. Calling `[js].loops()` is optional and defaults to **4**.
 
 ```js
 ServerEvents.recipes(event => {
@@ -322,14 +321,14 @@ As mentioned earlier, any item can be a transition item. However, this is not co
 If you wish to make your own transitional item, it's best if you make the type `create:sequenced_assembly`.
 
 ```js
-StartupEvents.registry('item', e => {
-	e.create('incomplete_spore_blossom', 'create:sequenced_assembly')
+StartupEvents.registry('item', event => {
+	event.create('incomplete_spore_blossom', 'create:sequenced_assembly')
 })
 ```
 
 # Splashing/Washing
 
-Syntax: `splashing(output[], input)`
+Syntax: `[js]splashing(output[], input)`
 
 >>> info
 Splashing/Washing uses the **Encased Fan** and **Water**

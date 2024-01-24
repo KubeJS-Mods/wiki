@@ -1,0 +1,14 @@
+# Game Stage Events
+## Stage Added Event
+This event fires when a stage gets added to an entity. It's not cancellable.
+
+## Stage Removed Event
+This event fires when a stage gets removed from an entity. It's not cancellable.
+
+# Modifying Stages through Other Events
+You can modify any entity's stages in any event in which you can get them!
+The `.stages` property of an entity will give you tools to manage them!
+
+To add a stage, use `[js].add(stage)`.
+To remove a stage, use `[js].remove(stage)`.
+To check if an entity has a stage, use `[js].has(stage)`.

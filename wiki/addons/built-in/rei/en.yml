@@ -1,8 +1,10 @@
 title: "Roughly Enough Items"
 description: "KubeJS REI Integration"
 
+integration-warn: "REI integration only works on Fabric in 1.16. In 1.18+, it works on both Forge and Fabric!"
 hide-items-and-fluids: "Hide Items & Fluids"
 add-items-and-fluids: "Add Items & Fluids"
 add-information: "Add Information"
 hide-categories: "Hide Categories"
 grouping: "Grouping / Collapsible Entries"
+grouping-warn: "This will only work on version 1.18.2 and above!"

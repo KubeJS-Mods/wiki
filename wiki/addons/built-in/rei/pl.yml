@@ -1,7 +1,10 @@
 title: "Roughly Enough Items"
 description: "Integracja Kubejs z REI"
 
+integration-warn: "Integracja z REI jest dostępna na Fabric'u od wersji 1.16, i na Forge'u od 1.18."
 hide-items-and-fluids: "Ukryj przedmioty i ciecze"
 add-items-and-fluids: "Dodaj przedmioty i ciecze"
 add-information: "Dodaj informacje"
 hide-categories: "Ukryj kategorie"
+grouping: "Grupowanie / Zwijalne wpisy"
+grouping-warn: "To jest tylko dostępne na wersji 1.18.2 i nowszych!"

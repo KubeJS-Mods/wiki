@@ -2,19 +2,19 @@ Custom items are created in a startup script. They cannot be reloaded without re
 
 ```js
 // Listen to item registry event
-StartupEvents.registry('item', e => {
+StartupEvents.registry('item', event => {
   // The texture for this item has to be placed in kubejs/assets/kubejs/textures/item/test_item.png
   // If you want a custom item model, you can create one in Blockbench and put it in kubejs/assets/kubejs/models/item/test_item.json
-  e.create('test_item')
+  event.create('test_item')
 
   // If you want to specify a different texture location you can do that too, like this:
-  e.create('test_item_1').texture('mobbo:item/lava') // This texture would be located at kubejs/assets/mobbo/textures/item/lava.png
+  event.create('test_item_1').texture('mobbo:item/lava') // This texture would be located at kubejs/assets/mobbo/textures/item/lava.png
 
   // You can chain builder methods as much as you like
-  e.create('test_item_2').maxStackSize(16).glow(true)
+  event.create('test_item_2').maxStackSize(16).glow(true)
 
   // You can specify item type as 2nd argument in create(), some types have different available methods
-  e.create('custom_sword', 'sword').tier('diamond').attackDamageBaseline(10.0)
+  event.create('custom_sword', 'sword').tier('diamond').attackDamageBaseline(10.0)
 })
 ```
 
@@ -31,28 +31,46 @@ Valid item types:
 - `'leggings'`
 - `'boots'`
 
-Other methods item builder supports: (you can chain these methods after `create()`)
+Other methods item builder supports (you can chain these methods after `create()`):
 
 - `[js]maxStackSize(size)`
-- `[js]displayName(name)`
-- `[js]unstackable()`
+- `[js]unstackable()` Identical to `[js]maxStackSize(1)`
 - `[js]maxDamage(damage)`
 - `[js]burnTime(ticks)`
-- `[js]containerItem(item_id)`
-- `[js]rarity('rarity')`
-- `[js]tool(type, level)`
+- `[js]fireResistant(true/false)`
+- `[js]rarity(rarity)`
 - `[js]glow(true/false)`
 - `[js]tooltip(text...)`
-- `[js]group('group_id')`
 - `[js]color(index, colorHex)`
-- `[js]texture(customTextureLocation)`
+- `[js]color((itemstack, tintIndex) => ...)`
+- `[js]displayName(name)`
+- `[js]name(itemstack => ...)`
+- `[js]translationKey(key)`
+- `[js]textureJson(json)`
+- `[js]modelJson(json)`
 - `[js]parentModel(customParentModelLocation)`
+- `[js]texture(customTextureLocation)`
+- `[js]texture(key, customTextureLocation)`
+- `[js]barColor(itemstack => ...)`
+- `[js]barWidth(itemstack => ...)`
+- `[js]useAnimation(animation)`
+- `[js]useDuration(itemstack => ...)`
+- `[js]use((level, player, hand) => ...)`
+- `[js]finishUsing((itemstack, level, entity) => ...)`
+- `[js]releaseUsing((itemstack, level, entity, tick) => ...)`
+- `[js]type(type)` For 1.16!
+- `[js]tag(resourceLocation)`
+- `[js]tool(type, level)`
+- `[js]modifyAttribute(attribute, identifier, d, operation)`
+- `[js]group(groupId)`
+- `[js]containerItem(itemId)`
+- `[js]subtypes(itemstack => ...)`
 - `[js]food(foodBuilder => ...)` For full syntax see below
 
 Methods available if you use a tool type (`'sword'`, `'pickaxe'`, `'axe'`, `'shovel'` or `'hoe'`):
 
-- `[js]tier('toolTier')`
-- `[js]modifyTier(tier => ...)` Same syntax as custom tool tier, see Custom Tiers
+- `[js]tier(toolTier)`
+- `[js]modifyTier(tier => ...)` Same syntax as custom tool tier, see [[/tutorials/custom-tiers]]
 - `[js]attackDamageBaseline(damage)` You only want to modify this if you are creating a custom weapon such as Spear, Battleaxe, etc.
 - `[js]attackDamageBonus(damage)`
 - `[js]speedBaseline(speed)` Same as attackDamageBaseline, only modify for custom weapon types
@@ -67,9 +85,9 @@ Default available tool tiers:
 - `'diamond'`
 - `'netherite'`
 
-Methods available if you use an armor type ('helmet', 'chestplate', 'leggings' or 'boots'):
+Methods available if you use an armor type (`'helmet'`, `'chestplate'`, `'leggings'` or `'boots'`):
 
-- `[js]tier('armorTier')`
+- `[js]tier(armorTier)`
 - `[js]modifyTier(tier => ...)` Same syntax as custom armor tier, see [[/tutorials/custom-tiers]]
 
 Default available armor tiers:
@@ -95,43 +113,162 @@ Vanilla group/creative tab IDs:
 - `'combat'`
 - `'brewing'`
 
-# Custom Foods
+# Examples
+## Custom Foods
 
 ```js
 StartupEvents.registry('item', event => {
-	event.create('magic_steak').food(food => {
-		food
-    		.hunger(6)
-    		.saturation(6)//This value does not directly translate to saturation points gained
-      		//The real value can be assumed to be:
-      		//min(hunger * saturation * 2 + saturation, foodAmountAfterEating)
-      		.effect('speed', 600, 0, 1)
-      		.removeEffect('poison')
-      		.alwaysEdible()//Like golden apples
-      		.fastToEat()//Like dried kelp
-      		.meat()//Dogs are willing to eat it
-      		.eaten(ctx => {//runs code upon consumption
-        		ctx.player.tell(Text.gold('Yummy Yummy!'))
-          		//If you want to modify this code then you need to restart the game.
-          		//However, if you make this code call a global startup function
-          		//and place the function *outside* of an event handler
-          		//then you may use the command:
-          		//  /kubejs reload startup_scripts
-          		//to reload the function instantly.
-          		//See example below
-        	})
-	})
+  event.create('magic_steak').food(food => {
+    food
+      .hunger(6)
+      .saturation(6) // This value does not directly translate to saturation points gained
+      // The real value can be assumed to be:
+      // min(hunger * saturation * 2 + saturation, foodAmountAfterEating)
+      .effect('speed', 600, 0, 1)
+      .removeEffect('poison')
+      .alwaysEdible() // Like golden apples
+      .fastToEat() // Like dried kelp
+      .meat() // Dogs are willing to eat it
+      .eaten(ctx => {
+        // runs code upon consumption
+        ctx.player.tell(Text.gold('Yummy Yummy!'))
+        // If you want to modify this code then you need to restart the game.
+        // However, if you make this code call a global startup function
+        // and place the function *outside* of an event handler
+        // then you may use the command:
+        // /kubejs reload startup_scripts
+        // to reload the function instantly.
+        // See example below
+      })
+  })
 
-	event.create('magicer_steak').unstackable().food(food => food
-		.hunger(7)
-		.saturation(7)
-		// This references the function below instead of having code directly, so it is reloadable!
-		.eaten(ctx => global.myAwesomeReloadableFunction(ctx))
-	)
+  event.create('magicer_steak')
+    .unstackable()
+    .food(food =>
+      food
+        .hunger(7)
+        .saturation(7)
+        // This references the function below instead of having code directly, so it is reloadable!
+        .eaten(ctx => global.myAwesomeReloadableFunction(ctx))
+    )
 })
 
 global.myAwesomeReloadableFunction = ctx => {
   ctx.player.tell('Hello there!')
   ctx.player.tell(Text.of('Change me then reload with ').append(Text.red('/kubejs reload startup_scripts')).append(' to see your changes!'))
 }
+```
+
+## Custom Uses
+```js
+StartupEvents.registry('item', event => {
+  event.create('nuke_soda', 'basic')
+    .tooltip('§5Taste of Explosion!')
+    .tooltip('§c...Inappropriate intake may cause disastrous result.')
+    /**
+     * The use animation of the item, can be  "spear" (trident),
+     * "crossbow", "eat" (food), "spyglass", "block", "none", "bow", "drink"
+     * When using certain animations, corresponding sound will be played.
+     */
+    .useAnimation('drink')
+    /**
+     * The duration before the item finishs its using,
+     * if you need something like hold-and-charge time (like bow),
+     * consider set this to 72000 (1h) or more.
+     * A returned value of 0 or lower will render the item not usable.
+     */
+    .useDuration(itemstack => 64)
+    /**
+     * When item is about to be used.
+     * If true, item will starts it use animation if duration > 0.
+     */
+    .use((level, player, hand) => true)
+    // When the item use duration expires.
+    .finishUsing((itemstack, level, entity) => {
+      let effects = entity.potionEffects
+      effects.add('haste', 120 * 20)
+      itemstack.itemStack.shrink(1)
+      if (entity.player) {
+        entity.minecraftPlayer.addItem(Item.of('minecraft:glass_bottle').itemStack)
+      }
+      return itemstack
+    })
+    /**
+     * When the duration is not expired yet, but
+     * players release their right button.
+     * Tick is how many ticks remained for player to finish using the item.
+     */
+    .releaseUsing((itemstack, level, entity, tick) => {
+      itemstack.itemStack.shrink(1)
+      level.createExplosion(entity.x, entity.y, entity.z).explode()
+    })
+})
+```
+
+## Bar
+```js
+StartupEvents.registry('item', event => {
+  event.create('hammer')
+    /**
+     * Determine how long the bar is, should be an integer between 0 (empty) and 13 (full)
+     * If the value is below 0, it will be treated as 0.
+     * The value is capped at 13, any value over 13 will be considered "full", thus making it not shown
+     */
+    .barWidth(itemstack => (itemstack.nbt.contains('hit_count') ? itemstack.nbt.getInt('hit_count') / 13.0 : 0))
+    // Determine what color should the bar be.
+    .barColor(itemstack => Color.AQUA)
+})
+```
+
+## Dynamic Tinting and Model Stuff
+```js
+StartupEvents.registry('item', event => {
+  // Old style with just setting color by index still works!
+  event.create('old_color_by_index')
+    .textureJson({
+      layer0: 'minecraft:item/paper',
+      layer1: 'minecraft:item/ghast_tear'
+    })
+    .color(0, '#70F00F')
+    .color(1, '#00FFF0')
+
+  event
+    .create('cooler_sword', 'sword')
+    .displayName('Test Cooler Sword')
+    .texture('minecraft:item/iron_sword')
+    /**
+     * Example by storing the color in the nbt of the itemstack
+     * You have to return -1 to apply no tint.
+     *
+     * You can test this through: /give @p kubejs:cooler_sword{color:"#ff0000"}
+     */
+    .color(itemstack => itemstack.nbt && itemstack.nbt.color ? itemstack.nbt.color : -1)
+
+  event.create('test_item')
+    .displayName('Test Item')
+    .textureJson({
+      layer0: 'minecraft:item/beef',
+      layer1: 'minecraft:item/ghast_tear'
+    })
+    /**
+     * If you want to apply the color to a specific layer, you can use the tintIndex
+     * tintIndex is the texture layer index from the model: layer0 -> 0, layer1 -> 1, etc.
+     * U can use the `Color` wrapper for some default colors
+     *
+     * This example will apply the color to the ghast_tear texture.
+     */
+    .color((itemstack, tintIndex) => tintIndex == 1 ? Color.BLUE : -1)
+
+  // Set a texture for a specific layer
+  event.create('test_sword', 'sword')
+    .displayName('Test Sword')
+    .texture('layer0', 'minecraft:item/bell')
+
+  // Directly set your custom model json
+  event.create('test_something')
+    .displayName('Test something')
+    .modelJson({
+      parent: 'minecraft:block/anvil'
+    })
+})
 ```

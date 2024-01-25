@@ -1,0 +1,2 @@
+script: "startup"
+see-also: "$StartupEvents/registry"

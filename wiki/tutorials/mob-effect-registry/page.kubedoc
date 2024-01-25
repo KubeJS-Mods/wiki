@@ -1,0 +1,37 @@
+You can create custom Mob Effects:
+
+|> 1.19.2+
+```js
+StartupEvents.registry('mob_effect', event => {
+  event.create('custom_effect') // Create the Effect. Can also have Types, but vanilla Kube has none.
+    .color(0x000000) // Sets the color of the Effect's Particles.
+    .beneficial() // Categorizes the Effect as Beneficial.
+    .effectTick(ctx => { // EffectTick is where the magic happens. It has tooooons of methods for you to use, which activate every Tick.
+      ctx.absorptionAmount = 2 // For example, this will apply an Absorption heart.
+      ctx.modifyAttribute('minecraft:generic.max_health', 'identifier', 1, 'addition') // This modifies an Attribute, which will increase an Entity's Max Health by 1 HP.
+    })
+    .modifyAttribute() // This method can also be used here, but is not recommended because the modified Attribute continues to stay modified until the Entity dies.
+})
+```
+<||> 1.18.2 and below
+```js
+onEvent('mob_effect.registry', event => {
+  event.create('custom_effect') // Create the Effect. Can also have Types, but vanilla Kube has none.
+    .color(0x000000) // Sets the color of the Effect's Particles.
+    .beneficial() // Categorizes the Effect as Beneficial.
+    .effectTick(ctx => { // EffectTick is where the magic happens. It has tooooons of methods for you to use, which activate every Tick.
+      ctx.absorptionAmount = 2 // For example, this will apply an Absorption heart.
+      ctx.modifyAttribute('minecraft:generic.max_health', 'identifier', 1, 'addition') // This modifies an Attribute, which will increase an Entity's Max Health by 1 HP.
+    })
+    .modifyAttribute() // This method can also be used here, but is not recommended because the modified Attribute continues to stay modified until the Entity dies.
+})
+```
+<|
+
+Methods:
+- `[js]beneficial()`
+- `[js]harmful()`
+- `[js]category(category)`
+- `[js]color(hex)`
+- `[js]effectTick(callback => {})` To see all usable methods, check out [LivingEntity](https://lexxie.site/forge/1.19.2/net/minecraft/world/entity/LivingEntity.html).
+- `[js]modifyAttribute(attribute, name, number, operation)`

@@ -58,14 +58,16 @@ Other methods item builder supports (you can chain these methods after `create()
 - `[js]use((level, player, hand) => ...)`
 - `[js]finishUsing((itemstack, level, entity) => ...)`
 - `[js]releaseUsing((itemstack, level, entity, tick) => ...)`
-- `[js]type(type)` For 1.16!
 - `[js]tag(resourceLocation)`
-- `[js]tool(type, level)`
 - `[js]modifyAttribute(attribute, identifier, d, operation)`
 - `[js]group(groupId)`
 - `[js]containerItem(itemId)`
 - `[js]subtypes(itemstack => ...)`
 - `[js]food(foodBuilder => ...)` For full syntax see below
+
+Old/Removed methods:
+- `[js]type(type)` - 1.16 and 1.18
+- `[js]tool(type, level)` - 1.16
 
 Methods available if you use a tool type (`'sword'`, `'pickaxe'`, `'axe'`, `'shovel'` or `'hoe'`):
 

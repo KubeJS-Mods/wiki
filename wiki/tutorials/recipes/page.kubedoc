@@ -98,7 +98,7 @@ event.shapeless(
   Item.of('minecraft:dandelion', 3), // arg 1: output
   [
     'minecraft:bone_meal',
-    'minecraft:yellow_dye', 	//arg 2: the array of inputs
+    'minecraft:yellow_dye', 	       // arg 2: the array of inputs
     '3x minecraft:ender_pearl'
   ]
 )
@@ -106,15 +106,26 @@ event.shapeless(
 
 ## Smithing
 
-Smithing recipes have 2 inputs and one output and are added with the `[js]event.smithing()` method. Smithing recipes are crafted in the smithing table.
+Smithing recipes have 2 or 3 inputs (depending on the minecraft version, see below) and one output and are added with the `[js]event.smithing()` method. Smithing recipes are crafted in the smithing table.
 
+|> 1.20+
 ```js
 event.smithing(
-  'minecraft:netherite',  // arg 1: output
-  'minecraft:iron_ingot', // arg 2: the item to be upgraded
-  'minecraft:black_dye'   // arg 3: the upgrade item
+  'minecraft:netherite_ingot',                     // arg 1: output
+  'minecraft:netherite_upgrade_smithing_template', // arg 2: the smithing template
+  'minecraft:iron_ingot',                          // arg 3: the item to be upgraded
+  'minecraft:black_dye'                            // arg 4: the upgrade item
 )
 ```
+<||> 1.19.2 and below
+```js
+event.smithing(
+  'minecraft:netherite_ingot',  // arg 1: output
+  'minecraft:iron_ingot',       // arg 2: the item to be upgraded
+  'minecraft:black_dye'         // arg 3: the upgrade item
+)
+```
+|>
 
 ## Smelting & Cooking
 

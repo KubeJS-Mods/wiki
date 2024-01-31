@@ -125,7 +125,7 @@ event.smithing(
   'minecraft:black_dye'         // arg 3: the upgrade item
 )
 ```
-|>
+<|
 
 ## Smelting & Cooking
 

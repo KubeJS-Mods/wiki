@@ -76,10 +76,10 @@ PlayerEvents.decorateChat(event => {
 ```
 
 # Command Events
-# Command Event
+## Command Event
 The command event is an event which is fired when a command is ran. It's cancellable.
 
-# Command Registry Event
+## Command Registry Event
 The command registry event can be used to register custom commands. It's not cancellable.
 
 Here's an example of a simple `/fly` command.
@@ -142,7 +142,7 @@ onEvent('command.registry', event => {
 })
 ```
 <|
-# Custom Command Event
+## Custom Command Event
 The custom command event is fired when `/kubejs custom_command` is ran. It's cancellable.
 The event can act as an easier way to create a custom command.
 

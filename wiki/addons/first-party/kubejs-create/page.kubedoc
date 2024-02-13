@@ -190,7 +190,7 @@ ServerEvents.recipes(event => {
 
 # Mixing
 
-Syntax: `[js]mixing(output[], input)`
+Syntax: `[js]mixing(output[], input[])`
 >>> info
 Mixing uses the **Mechanical Mixer**, **Basin**, and optionally a **Blaze Burner**
 <<<

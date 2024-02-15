@@ -8,37 +8,37 @@ Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-blood
 
 ## Supported recipe types:
 
-### altar
+- altar
 
 `[js]event.recipes.bloodmagic.altar(output, input)`
 `[js]event.recipes.bloodmagic.altar(output, input).upgradeLevel(int).altarSyphon(int).consumptionRate(int).drainRate(int)`
 
-### array
+- array
 
 `[js]event.recipes.bloodmagic.array(output, baseInput, addedInput)`
 `[js]event.recipes.bloodmagic.array(output, baseInput, addedInput).texture(string)`
 
-### soulforge
+- soulforge
 
 `[js]event.recipes.bloodmagic.soulforge(output, [input])`
 `[js]event.recipes.bloodmagic.soulforge(output, [input]).minimumDrain(double).drain(double)`
 
-### arc
+- arc
 
 `[js]event.recipes.bloodmagic.arc(output, input, tool)`
 `[js]event.recipes.bloodmagic.arc(output, input, tool, [addedOutput])`
 `[js]event.recipes.bloodmagic.arc(output, input, tool, [addedOutput]).consumeIngredient(boolean).outputFluid(fluid)`
 
-### alchemytable
+- alchemytable
 
 `[js]event.recipes.bloodmagic.alchemytable(output, [input])`
 `[js]event.recipes.bloodmagic.alchemytable(output, [input]).syphon(int).ticks(int).upgradeLevel(int)`
 
----
+ 
 
 Example {{se-s}}blood_magic.js:
 
-```js
+```
 onEvent('recipes', event => {
   const { altar, array, soulforge, arc, alchemytable } = event.recipes.bloodmagic
   altar('minecraft:carrot', 'minecraft:apple')

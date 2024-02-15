@@ -1,0 +1,9 @@
+Download: [curseforge](https://www.curseforge.com/minecraft/mc-mods/multiblocked)
+
+---
+
+Multiblocked (mbd) is an extremely flexible yet vanilla-esque multiblock mod, that embraces aspects of MultiblockTweaker and Modular Machinery.
+The goal was to make it as easy as possible for modpack/mod authors to create multiblocks to interacte IO from other mods, and provide as much detail control as possible. Mbd is essentially both a tweaker mod and a library mod that provides rendering and logic APIs.
+1.12.2 is CleanroomMC's, visit our website and discord.
+1.16+ are LowDragMC's, discord.
+Note: 1.16.5+ require LDLib mod.

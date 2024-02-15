@@ -8,65 +8,37 @@ Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-blood
 
 ## Supported recipe types:
 
-<<<<<<< HEAD
 ### altar
-=======
-- altar
->>>>>>> fb5984dbd1becb17813aee4c14388cb3750c1f55
 
 `[js]event.recipes.bloodmagic.altar(output, input)`
 `[js]event.recipes.bloodmagic.altar(output, input).upgradeLevel(int).altarSyphon(int).consumptionRate(int).drainRate(int)`
 
-<<<<<<< HEAD
 ### array
-=======
-- array
->>>>>>> fb5984dbd1becb17813aee4c14388cb3750c1f55
 
 `[js]event.recipes.bloodmagic.array(output, baseInput, addedInput)`
 `[js]event.recipes.bloodmagic.array(output, baseInput, addedInput).texture(string)`
 
-<<<<<<< HEAD
 ### soulforge
-=======
-- soulforge
->>>>>>> fb5984dbd1becb17813aee4c14388cb3750c1f55
 
 `[js]event.recipes.bloodmagic.soulforge(output, [input])`
 `[js]event.recipes.bloodmagic.soulforge(output, [input]).minimumDrain(double).drain(double)`
 
-<<<<<<< HEAD
 ### arc
-=======
-- arc
->>>>>>> fb5984dbd1becb17813aee4c14388cb3750c1f55
 
 `[js]event.recipes.bloodmagic.arc(output, input, tool)`
 `[js]event.recipes.bloodmagic.arc(output, input, tool, [addedOutput])`
 `[js]event.recipes.bloodmagic.arc(output, input, tool, [addedOutput]).consumeIngredient(boolean).outputFluid(fluid)`
 
-<<<<<<< HEAD
 ### alchemytable
-=======
-- alchemytable
->>>>>>> fb5984dbd1becb17813aee4c14388cb3750c1f55
 
 `[js]event.recipes.bloodmagic.alchemytable(output, [input])`
 `[js]event.recipes.bloodmagic.alchemytable(output, [input]).syphon(int).ticks(int).upgradeLevel(int)`
 
-<<<<<<< HEAD
 --- 
 
 Example {{se-s}}blood_magic.js:
 
 ```js
-=======
- 
-
-Example {{se-s}}blood_magic.js:
-
-```
->>>>>>> fb5984dbd1becb17813aee4c14388cb3750c1f55
 onEvent('recipes', event => {
   const { altar, array, soulforge, arc, alchemytable } = event.recipes.bloodmagic
   altar('minecraft:carrot', 'minecraft:apple')

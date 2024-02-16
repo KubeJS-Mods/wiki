@@ -35,8 +35,8 @@ The entity interacted event is fired when a player right clicks on an entity. It
 Here's an example of making goats be milkable.
 |> 1.19.2+
 ```js
-ItemEvents.entityInteracted('minecraft:goat', event => {
-  if(event.item.id != 'minecraft:bucket') return
+ItemEvents.entityInteracted('minecraft:bucket', event => {
+  if(event.target.type != 'minecraft:goat') return
   event.item.count--
   event.player.giveInHand('minecraft:milk_bucket')
   event.target.playSound('minecraft:entity.cow.milk')

@@ -29,17 +29,17 @@ If you have an example script you would like to share on KJSPKG, check out [the 
 
 # Notable packages
 
-## [`craft-js`](https://kjspkglookup.modernmodpacks.site/#craft-js) (1.18, Forge/Fabric)
+## [`craft-js`](https://kjspkglookup.modernmodpacks.site/p/?id=craft-js) (1.18, Forge/Fabric)
 Craft.js is a KubeJS script which allows you to prepare recipes inside of a container (like chests) to quickly create various recipes.
 
 ![[craftjs.png]]
 
-## [`create-manual`](https://kjspkglookup.modernmodpacks.site/#create-manual) (1.19, Forge/Fabric)
+## [`create-manual`](https://kjspkglookup.modernmodpacks.site/p/?id=create-manual) (1.19, Forge/Fabric)
 Create Manual adds a patchouli-esque manual item to [Create](https://www.curseforge.com/minecraft/mc-mods/create).
 
 ![[youtube:5_ab2RnxJY0]]
 
-## [`not-neat`](https://kjspkglookup.modernmodpacks.site/#not-neat) (1.16-1.20, Forge/Fabric)
+## [`not-neat`](https://kjspkglookup.modernmodpacks.site/p/?id=not-neat) (1.16-1.20, Forge/Fabric)
 Not Neat is a script that allows you to hide the [Neat](https://www.curseforge.com/minecraft/mc-mods/neat) tooltip depending on the game stages the player has.
 
 ![[notneat.png]]

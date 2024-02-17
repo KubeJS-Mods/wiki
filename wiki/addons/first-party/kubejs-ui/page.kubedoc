@@ -2,7 +2,10 @@ Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-ui)
 
 ---
 
-Here's a simple example script for using KubeJS UI (for versions below 1.19):
+Here's a simple example script for using KubeJS UI:
+|> 1.19.2+
+WIP
+<||>+ 1.18.2 and below
 ```js
 onEvent('ui.main_menu', event => {
   event.replace(ui => {
@@ -49,3 +52,4 @@ onEvent('ui.main_menu', event => {
   })
 })
 ```
+<|

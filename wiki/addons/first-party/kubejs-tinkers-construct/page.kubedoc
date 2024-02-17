@@ -2,38 +2,34 @@ Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-tinke
 
 ---
 
-# Allows [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) to edit and create [Tinker's Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) recipes. See [Recipes page](https://kubejs.com/wiki/tutorials/recipes) for more info.
+Edit and create [Tinker's Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) recipes. See [Recipes page](https://kubejs.com/wiki/tutorials/recipes) for more info.
 
----
+# Supported Recipe Types
+```js
+event.recipes.tconstruct.casting_table(outputItem, inputFluidId)
+event.recipes.tconstruct.casting_table(outputItem, inputFluidId, inputFluidAmount) // defaults to 144 mB
+```
 
-## Supported recipe types:
-`[js]event.recipes.tconstruct.casting_table(outputItem, inputFluidId)`
-`[js]event.recipes.tconstruct.casting_table(outputItem, inputFluidId, inputFluidAmount) // defaults to 144 mB`
-
---- 
-
-## Supported recipe methods:
-
-`[js].cast(castIngredient) // defaults to '#tconstruct:casts/multi_use/ingot'`
+# Supported Methods
+`[js].cast(castIngredient)` defaults to `#tconstruct:casts/multi_use/ingot`
 `[js].noCast()`
 `[js].multiUseCast(castType)`
 `[js].singleUseCast(castType)`
 `[js].consumeCast()`
 `[js].switchSlots()`
-`[js].coolingTime(ticks) // defaults to 60`
+`[js].coolingTime(ticks)` defaults to 60
 `[js]event.recipes.tconstruct.casting_basin(output, inputFluidId)`
-`[js]event.recipes.tconstruct.casting_basin(output, inputFluidId, inputFluidAmount) // defaults to 1296`
+`[js]event.recipes.tconstruct.casting_basin(output, inputFluidId, inputFluidAmount)` defaults to 1296
 
----
+Supports the same cast methods as casting table!
+`[js].coolingTime(ticks)` defaults to 180
 
-## Supports the same cast methods as casting table!
-
-`[js].coolingTime(ticks) // defaults to 180`
-
----
-
-Example {st-s}tinkers_construct.js:
-
+# Example Script
+|> 1.19.2+
+>>> danger
+This addon isn't available for versions above 1.18.2 yet!
+<<<
+<||>+ 1.18.2 and below
 ```js
 onEvent('recipes', event => {
   const { casting_table, casting_basin } = event.recipes.tconstruct;
@@ -42,3 +38,4 @@ onEvent('recipes', event => {
   casting_basin('minecraft:emerald', 'minecraft:water').cast('#forge:dusts/emerald')
 })
 ```
+<|

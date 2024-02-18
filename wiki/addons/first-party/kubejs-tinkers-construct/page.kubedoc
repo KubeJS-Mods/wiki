@@ -5,24 +5,29 @@ Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-tinke
 Edit and create [Tinker's Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) recipes. See [Recipes page](https://kubejs.com/wiki/tutorials/recipes) for more info.
 
 # Supported Recipe Types
+## Casting Table
 ```js
 event.recipes.tconstruct.casting_table(outputItem, inputFluidId)
 event.recipes.tconstruct.casting_table(outputItem, inputFluidId, inputFluidAmount) // defaults to 144 mB
 ```
 
-# Supported Methods
-`[js].cast(castIngredient)` defaults to `#tconstruct:casts/multi_use/ingot`
-`[js].noCast()`
-`[js].multiUseCast(castType)`
-`[js].singleUseCast(castType)`
-`[js].consumeCast()`
-`[js].switchSlots()`
-`[js].coolingTime(ticks)` defaults to 60
-`[js]event.recipes.tconstruct.casting_basin(output, inputFluidId)`
-`[js]event.recipes.tconstruct.casting_basin(output, inputFluidId, inputFluidAmount)` defaults to 1296
+## Casting Basin
+```js
+event.recipes.tconstruct.casting_basin(output, inputFluidId)
+event.recipes.tconstruct.casting_basin(output, inputFluidId, inputFluidAmount) // defaults to 1296 mb
+```
 
 Supports the same cast methods as casting table!
 `[js].coolingTime(ticks)` defaults to 180
+
+# Supported Methods
+- `[js].cast(castIngredient)` defaults to `#tconstruct:casts/multi_use/ingot`
+- `[js].noCast()`
+- `[js].multiUseCast(castType)`
+- `[js].singleUseCast(castType)`
+- `[js].consumeCast()`
+- `[js].switchSlots()`
+- `[js].coolingTime(ticks)` defaults to 60
 
 # Example Script
 |> 1.19.2+

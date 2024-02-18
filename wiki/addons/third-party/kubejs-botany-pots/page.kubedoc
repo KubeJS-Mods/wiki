@@ -8,18 +8,15 @@ ServerEvents.recipes(event => {
     event.recipes.botanypots.crop(
         'minecraft:candle', // seed item
         ['minecraft:oak_leaves'], // categories that this crop can be planted on
-        10, // growthTicks
-        1, // growthModifier - this can be set to 1 in most cases
         { block: 'minecraft:candle' }, // display block
         [
-            {
-                output: 'minecraft:candle', // item
-                chance: 100, // weight of this entry compared to the others
-                minRolls: 1, // the minimum times this loot will be chosen
-                maxRolls: 2 // the maximum times this loot will be chosen
-                // for example, when chosen this will give 1 to 2 candles
-            }
-        ]
+            Item.of('minecraft:candle') // item
+                .withChance(100) // weight of this entry compared to the others
+                .withRolls(1, 2) // the times this loot will be chosen (min, max)
+            // for example, when chosen this will give 1 to 2 candles
+        ],
+        10, // growthTicks
+        1 // optional, growthModifier - this can be set to 1 in most cases
     )
 
     event.recipes.botanypots.soil(

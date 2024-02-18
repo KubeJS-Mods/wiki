@@ -1,19 +1,19 @@
 # onEvent()
 
-`[js]onEvent('event', e => {})` syntax was replaced by `[js]SomeEventGroup.someEventName(e => {})`
+`[js]onEvent('event', event => {})` syntax was replaced by `[js]SomeEventGroup.someEventName(event => {})`
 
 |> New
 ```js
-BlockEvents.rightClicked(e => {
-  if(e.block.id === 'minecraft:dirt') {
+BlockEvents.rightClicked(event => {
+  if(event.block.id === 'minecraft:dirt') {
     console.info('Hi!')
   }
 })
 ```
 <||> Old
 ```js
-onEvent('block.right_click', e => {
-  if(e.block.id === 'minecraft:dirt') {
+onEvent('block.right_click', event => {
+  if(event.block.id === 'minecraft:dirt') {
     console.info('Hi!')
   }
 })
@@ -24,20 +24,20 @@ Not only that, but new events also support extra parameters for IDs and other th
 
 |> New
 ```js
-BlockEvents.rightClicked('minecraft:dirt', e => {
+BlockEvents.rightClicked('minecraft:dirt', event => {
   console.info('Hi!')
 })
 
-BlockEvents.rightClicked('minecraft:stone', e => {
+BlockEvents.rightClicked('minecraft:stone', event => {
   console.info('Bye!')
 })
 ```
 <||> Old
 ```js
-onEvent('block.right_click', e => {
-  if(e.block.id === 'minecraft:dirt') {
+onEvent('block.right_click', event => {
+  if(event.block.id === 'minecraft:dirt') {
     console.info('Hi!')
-  } else if(e.block.id === 'minecraft:stone') {
+  } else if(event.block.id === 'minecraft:stone') {
     console.info('Bye!')
   }
 })
@@ -48,21 +48,21 @@ Some events *require* ID, such as registry and tag events:
 
 |> New
 ```js
-StartupEvents.registry('item', e => {})
+StartupEvents.registry('item', event => {})
 ```
 <||> Old
 ```js
-onEvent('item.registry', e => {})
+onEvent('item.registry', event => {})
 ```
 <|
 
 |> New
 ```js
-ServerEvents.tags('item', e => {})
+ServerEvents.tags('item', event => {})
 ```
 <||> Old
 ```js
-onEvent('tags.items', e => {})
+onEvent('tags.items', event => {})
 ```
 <|
 
@@ -74,22 +74,22 @@ You can find the full list of new events [[/events|here]].
 
 # onForgeEvent()
 
-`[js]onForgeEvent('package.ClassName', e => {})` has been replaced by `[js]ForgeEvents.onEvent('package.ClassName', e => {})`
+`[js]onForgeEvent('package.ClassName', event => {})` has been replaced by `[js]ForgeEvents.onEvent('package.ClassName', event => {})`
 
 |> New
 ```js
-ForgeEvents.onEvent('net.minecraftforge.event.level.BlockEvent$PortalSpawnEvent', e => {})
+ForgeEvents.onEvent('net.minecraftforge.event.level.BlockEvent$PortalSpawnEvent', event => {})
 ```
 <||> Old
 ```js
-onForgeEvent('net.minecraftforge.event.level.BlockEvent$PortalSpawnEvent', e => {})
+onForgeEvent('net.minecraftforge.event.level.BlockEvent$PortalSpawnEvent', event => {})
 ```
 <|
 
 New! It now supports generic events:
 
 ```js
-ForgeEvents.onGenericEvent('net.minecraftforge.event.AttachCapabilitiesEvent', 'net.minecraft.world.entity.Entity', e => {})
+ForgeEvents.onGenericEvent('net.minecraftforge.event.AttachCapabilitiesEvent', 'net.minecraft.world.entity.Entity', event => {})
 ```
 
 # Server settings

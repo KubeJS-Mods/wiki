@@ -5,17 +5,17 @@ Currently it doesn't support any input, but in future, in-game menus or even GUI
 
 Paintable objects are created from NBT/Json objects and all have an id. If id isn't provided, a random one will be generated. Objects x and z are absolute positions based on screen, but you can align elements in one of the corners of screen. You can bulk add multiple objects in one json object. All properties are optional, but obviously some you should almost always override like size and position for rectangles.
 
-`paint({...})` is based on upsert principle - if object doesn't exist it will create it (if the object also contains valid `type`), otherwise, update existing:
-- `event.player.paint({example: {type: 'rectangle', x: 10, y: 10, w: 20, h: 20}})` - New rectangle is created
-- `event.player.paint({example: {x: 50}})` - Updates previous rectangle with partial data
+`[js]paint({...})` is based on upsert principle - if object doesn't exist it will create it (if the object also contains valid `type`), otherwise, update existing:
+- `[js]event.player.paint({example: {type: 'rectangle', x: 10, y: 10, w: 20, h: 20}})` - New rectangle is created
+- `[js]event.player.paint({example: {x: 50}})` - Updates previous rectangle with partial data
 
 You can bulk update/create multiple things in same object:
-- `event.player.paint({a: {x: 10}, b: {x: 30}, c: {type: 'rectangle', x: 10}})`
+- `[js]event.player.paint({a: {x: 10}, b: {x: 30}, c: {type: 'rectangle', x: 10}})`
 
 You can remove object with remove: true, bulk remove multiple objects or remove all objects:
-- `event.player.paint({a: {remove: true}})`
-- `event.player.paint({a: {remove: true}, b: {remove: true}})`
-- `event.player.paint({'*': {remove: true}})`
+- `[js]event.player.paint({a: {remove: true}})`
+- `[js]event.player.paint({a: {remove: true}, b: {remove: true}})`
+- `[js]event.player.paint({'*': {remove: true}})`
 
 These methods have command alternatives:
 - `/kubejs painter @p {example: {type: 'rectangle', x: 10, y: 10, w: 20, h: 20}}`
@@ -84,11 +84,11 @@ Underlined objects are not something you can create
 # Properties
 
 - Unit is a [Rhino Unit](https://mods.latvian.dev/books/kubejs/page/units "Units"). It can be a number, boolean, color, equation. Every Float, Int, Boolean and Color are also Units, so you can use equations on them.
-- Int is a int32 number, any whole value, e.g. `40`.
-- Float is float64 floating point number, e.g `2.35`.
-- String is a string, e.g. `'example'`. Textures usually need resource location `'namespace:path/to/texture.png'`.
-- Color can be either `0xRRGGBB`, `'#RRGGBB'`, `'#AARRGGBB',` e.g. `'#58AD5B'` or chat colors `'red'`, `'dark_aqua'`, etc. RGBA `color(Float, Float, Float, Float)` is also supported where Float is any number between 0.0 and 1.0 (supports Units).
-- Text can be a string `'Example'` or `Text.of('Red and italic string example').red().italic()` etc formatted string.
+- Int is a int32 number, any whole value, e.g. `[js]40`.
+- Float is float64 floating point number, e.g `[js]2.35`.
+- String is a string, e.g. `[js]'example'`. Textures usually need resource location `[js]'namespace:path/to/texture.png'`.
+- Color can be either `[js]0xRRGGBB`, `[js]'#RRGGBB'`, `[js]'#AARRGGBB',` e.g. `[js]'#58AD5B'` or chat colors `[js]'red'`, `[js]'dark_aqua'`, etc. RGBA `[js]color(Float, Float, Float, Float)` is also supported where Float is any number between 0.0 and 1.0 (supports Units).
+- Text can be a string `[js]'Example'` or `[js]Text.of('Red and italic string example').red().italic()` etc formatted string.
 
 ## Available Unit Variables
 - `$screenW` - Screen width

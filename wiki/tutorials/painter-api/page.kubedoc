@@ -110,25 +110,25 @@ Underlined objects are not something you can create
 ```js
 PlayerEvents.loggedIn(event => {
   event.player.paint({
-	example_rectangle: {
-	  type: 'rectangle',
-	  x: 10,
-	  y: 10,
-	  w: 50,
-	  h: 20,
-	  color: '#00FF00',
-	  draw: 'always'
-	},
-	last_message: {
-	  type: 'text',
-	  text: 'No last message',
-	  scale: 1.5,
-	  x: -4,
-	  y: -4,
-	  alignX: 'right',
-	  alignY: 'bottom',
-	  draw: 'always'
-	}
+    example_rectangle: {
+      type: 'rectangle',
+      x: 10,
+      y: 10,
+      w: 50,
+      h: 20,
+      color: '#00FF00',
+      draw: 'always'
+    },
+    last_message: {
+      type: 'text',
+      text: 'No last message',
+      scale: 1.5,
+      x: -4,
+      y: -4,
+      alignX: 'right',
+      alignY: 'bottom',
+      draw: 'always'
+    }
   })
 })
 
@@ -145,25 +145,25 @@ PlayerEvents.chat(event => {
 ```js
 onEvent('player.logged_in', event => {
   event.player.paint({
-	example_rectangle: {
-	  type: 'rectangle',
-	  x: 10,
-	  y: 10,
-	  w: 50,
-	  h: 20,
-	  color: '#00FF00',
-	  draw: 'always'
-	},
-	last_message: {
-	  type: 'text',
-	  text: 'No last message',
-	  scale: 1.5,
-	  x: -4,
-	  y: -4,
-	  alignX: 'right',
-	  alignY: 'bottom',
-	  draw: 'always'
-	}
+    example_rectangle: {
+      type: 'rectangle',
+      x: 10,
+      y: 10,
+      w: 50,
+      h: 20,
+      color: '#00FF00',
+      draw: 'always'
+    },
+    last_message: {
+      type: 'text',
+      text: 'No last message',
+      scale: 1.5,
+      x: -4,
+      y: -4,
+      alignX: 'right',
+      alignY: 'bottom',
+      draw: 'always'
+    }
   })
 })
 

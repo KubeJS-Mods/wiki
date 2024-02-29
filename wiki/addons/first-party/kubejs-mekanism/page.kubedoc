@@ -10,43 +10,51 @@ event.recipes.mekanism.crushing(output, input)
 event.recipes.mekanism.enriching(output, input)
 event.recipes.mekanism.smelting(output, input)
 ```
+
 ## Combining
 ```js
 event.recipes.mekanism.combining(output, input1, input2)
 ```
+
 ## Compressing, Purifying, Injecting
 ```js
 event.recipes.mekanism.compressing(output, inputItem, inputGas)
 event.recipes.mekanism.purifying(output, inputItem, inputGas)
 event.recipes.mekanism.injecting(output, inputItem, inputGas)
 ```
+
 ## Infusing
 ```js
 event.recipes.mekanism.metallurgic_infusing(output, inputItem, infusionInput, infusionAmount)
 ```
+
 ## Sawing
 ```js
 event.recipes.mekanism.sawing(output, input, extraOutput)
 ```
+
 ## Chemical Infusing
 ```js
 event.recipes.mekanism.chemical_infusing(output, inputLeft, inputRight)
 ```
+
 ## Crystallizing
 ```js
 event.recipes.mekanism.crystallizing(output, inputGas)
 ```
+
 ## Dissolution
 ```js
 event.recipes.mekanism.dissolution(gasOutput, gasInput, itemInput)
 ```
+
 ## Item > Energy Conversion
 ```js
 event.recipes.mekanism.energy_conversion(input, output)
 ```
 
 # Broken / Unsupported Recipe Types
-There recipe types are currently broken:
+There recipe types are currently broken / aren't supported:
 - Item > Gas Conversion
 - Item > Infuse Type Conversion
 - Thermal Evaporation

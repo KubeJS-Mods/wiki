@@ -2,4 +2,5 @@ Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/lootjs), [Mo
 
 ---
 
-LootJS has its own wiki, which you can find [here](https://github.com/AlmostReliable/lootjs/wiki).
+LootJS is an addon used for dynamically modifying loot (way easier to use than KubeJS' built-in events).
+You can find more info about it on its wiki found [here](https://github.com/AlmostReliable/lootjs/wiki).

@@ -1,0 +1,36 @@
+Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-irons-spells)
+
+---
+
+Irons' Spells JS is an addon that allows for creating custom spells and listening to Irons' Spells events like `ChangedManaEvent` and `SpellCastEvent`.
+
+# Custom Spells
+Example script:
+```js
+StartupEvents.registry('irons_spellbooks:spells', event => {
+	event.create('bloodfed')
+		.setCastTime(60)                           // Sets the cast time
+		.setCooldownSeconds(10)                    // Sets the cooldown in seconds
+		.setManaCostPerLevel(20)                   // Sets the mana cost per level
+		.setCastType('continuous')                 // Sets the cast type
+		.setSchool('irons_spellbooks:blood')       // Sets the school
+		.setMinRarity('epic')                      // Sets the minimal rarity
+		.setMaxLevel(2)                            // Sets the maximum level
+		.setStartSound('item.honey_bottle.drink')  // Sets the start sound
+		.setFinishSound('item.honey_bottle.drink') // Sets the finish sound
+		.onCast(ctx => global.bloodfed(ctx))       // Calls global.bloodfed when the spell is casted
+})
+
+global.bloodfed = (/** @type {Internal.CustomSpell$CastContext} */ ctx) => {
+	let /** @type {Internal.ServerPlayer} */ player = ctx.entity
+	if ((player.getFoodData().getFoodLevel() * (ctx.getSpellLevel() / 2)) < 2
+	|| !ctx.entity.isPlayer()) return
+	player.heal(ctx.getSpellLevel() / 2)
+	player.getFoodData().setFoodLevel(player.getFoodData().getFoodLevel() - 2 * (ctx.getSpellLevel() / 2))
+}
+```
+
+# Listening to Irons' Spells Events
+>>> danger
+NYI
+<<<

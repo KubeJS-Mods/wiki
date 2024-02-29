@@ -2,7 +2,7 @@ Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-irons
 
 ---
 
-Irons' Spells JS is an addon that allows for creating custom spells and listening to Irons' Spells events like `ChangedManaEvent` and `SpellCastEvent`.
+Iron's Spells JS is an addon that allows for creating custom spells and listening to Iron's Spells events like `ChangedManaEvent` and `SpellCastEvent`.
 
 # Custom Spells
 Example script:
@@ -30,7 +30,7 @@ global.bloodfed = (/** @type {Internal.CustomSpell$CastContext} */ ctx) => {
 }
 ```
 
-# Listening to Irons' Spells Events
+# Listening to Iron's Spells Events
 >>> danger
 NYI
 <<<

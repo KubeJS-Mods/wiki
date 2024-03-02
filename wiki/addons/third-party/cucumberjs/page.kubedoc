@@ -1,0 +1,59 @@
+Download: [Modrinth](https://modrinth.com/mod/cucumberjs)
+
+---
+
+CucumberJS is a KubeJS addon for creating Cucumber Library tools/weapons, such as scythes, paxels, fishing rods and more!
+
+# Crossbow
+A vanilla like crossbow that can support any type of arrows tagged with `#minecraft:arrow`.
+```js
+StartupEvents.registry('item', (event) => {
+	// This will create a crossbow item without a texture named `kubejs:test_crossbow`
+	event.create('test_crossbow', 'crossbow')
+});
+```
+
+# Fishing Rod
+A vanilla like fishing rod that can fish like any other rod.
+```js
+StartupEvents.registry('item', event => {
+	// This will create a fishing rod item without a texture named `kubejs:test_fishingrod`
+	event.create('test_fishingrod', 'fishingrod')
+});
+```
+
+# Paxel
+A paxel that can break pickaxe, shovel, and axe blocks.
+```js
+StartupEvents.registry('item', event => {
+	// This will create a paxel item without a texture named `kubejs:test_paxel`
+	event.create('test_paxel', 'paxel')
+});
+```
+
+# Scythe
+A scythe, similar to a sword with larger sweeping attacks.
+```js
+StartupEvents.registry('item', event => {
+	// This will create a scythe item without a texture named `kubejs:test_scythe`
+	event.create('test_scythe', 'scythe')
+});
+```
+
+# Sickle
+A sickle can break grass like blocks in a specified range around the center block.
+```js
+StartupEvents.registry('item', event => {
+	// This will create a sickle item without a texture named `kubejs:test_sickle` and with a range of 5, if no range is specified it will default to 3
+	event.create('test_sickle', 'sickle').range(5)
+});
+```
+
+# Watering Can
+A watering can can water farmland or crops to make them grow faster.
+```js
+StartupEvents.registry('item', event => {
+	// This will create a watering can item without a texture named `kubejs:test_wateringcan`, with a range of 5, and a growth/watering chance of 100%. If no range is specified it will default to 3. If no chance is specified it will default to 100
+	event.create('test_wateringcan', 'wateringcan').range(5).chance(20)
+});
+```

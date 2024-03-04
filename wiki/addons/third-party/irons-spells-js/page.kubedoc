@@ -2,11 +2,13 @@ Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-irons
 
 ---
 
-Iron's Spells JS is an addon that allows for creating custom spells and listening to Iron's Spells events like `ChangeManaEvent` and `SpellCastEvent`.
+KubeJS Iron's Spells is an addon that allows for creating custom spells and listening to Iron's Spells events like `ChangeManaEvent` and `SpellCastEvent`.
 
 # Custom Spells
 Example script:
 ```js
+// Spell registry goes in the startup_scripts folder
+
 StartupEvents.registry('irons_spellbooks:spells', event => {
 	event.create('bloodfed')
 		.setCastTime(60)                           // Sets the cast time
@@ -19,8 +21,15 @@ StartupEvents.registry('irons_spellbooks:spells', event => {
 		.setStartSound('item.honey_bottle.drink')  // Sets the start sound
 		.setFinishSound('item.honey_bottle.drink') // Sets the finish sound
 		.onCast(ctx => global.bloodfed(ctx))       // Calls global.bloodfed when the spell is casted
+		// Other methods like these also exist:
+		// .onClientCast(ctx => {})
+		// .onPreCast(ctx => {})
+		// .onPreClientCast(ctx => {})
+		// .setAllowLooting(true)
+		// .needsLearning(false)
 })
 
+// The functions for certain methods with callbacks like onCast can go in a global variable if you want it to be reloadable by using /kubejs reload startup_scripts
 global.bloodfed = (/** @type {Internal.CustomSpell$CastContext} */ ctx) => {
 	let /** @type {Internal.ServerPlayer} */ player = ctx.entity
 	if ((player.getFoodData().getFoodLevel() * (ctx.getSpellLevel() / 2)) < 2
@@ -32,6 +41,8 @@ global.bloodfed = (/** @type {Internal.CustomSpell$CastContext} */ ctx) => {
 
 # Listening to Iron's Spells Events
 ```js
+// These go in server_scripts
+
 PlayerEvents.changeMana(event => {
 	// This makes it so that casting any spell consumes only 10 mana 
 	if (event.getMagicData().getCastSource() != 'SPELLBOOK') return
@@ -40,6 +51,6 @@ PlayerEvents.changeMana(event => {
 
 PlayerEvents.spellCast(event => {
 	// Casting any spell kills the player who casted it
-	event.player.kill()
+	event.getEntity().kill()
 })
 ```

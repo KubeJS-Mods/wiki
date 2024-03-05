@@ -57,3 +57,22 @@ StartupEvents.registry('item', event => {
 	event.create('test_wateringcan', 'wateringcan').range(5).chance(20)
 });
 ```
+
+# Editing damage, attack speed, and range values of already built items
+Credit to Uncandango for this.
+```js
+ItemEvents.modification(event => {
+  
+  event.modify("mysticalagriculture:inferium_axe", item => {
+    item.cucumberAttackDamage = 999
+  })
+
+  event.modify("mysticalagriculture:inferium_pickaxe", item => {
+    item.cucumberAttackSpeed = 20
+  })
+
+  event.modify("mysticalagriculture:inferium_sickle", item => {
+    item.range = 20 // So big that it insta breaks LOL
+  })
+
+})```

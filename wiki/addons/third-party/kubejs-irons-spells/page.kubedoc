@@ -2,9 +2,12 @@ Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-irons
 
 ---
 
-KubeJS Iron's Spells is an addon that allows for creating custom spells and listening to Iron's Spells events like `ChangeManaEvent` and `SpellCastEvent`.
+KubeJS Iron's Spells is an addon that allows for creating custom spells, spell schools, and listening to Iron's Spells events like `ChangeManaEvent` and `SpellCastEvent`.
 
 # Custom Spells
+>>> warn
+If you change the properties of a spell between restarts, you'll need to regenerate the Iron's Spells server config by deleting it and joining the world again. 
+<<<
 Example script:
 ```js
 // Spell registry goes in the startup_scripts folder
@@ -52,5 +55,54 @@ PlayerEvents.changeMana(event => {
 PlayerEvents.spellCast(event => {
 	// Casting any spell kills the player who casted it
 	event.getEntity().kill()
+})
+```
+
+# Creating Spell Schools
+>>> warn
+This feature may be a little difficult to understand. If you need help, you can always ask in the support channel in the Discord.
+<<<
+To create a spell school, you'll first need to create two attributes for spell power and spell resistance.
+```js
+// This goes in startup_scripts
+
+// We create an object within the global object so that we can store the attributes inside.
+// We use the `StartupEvents.init` event to make sure that when we reload startup scripts, the attributes within this object don't get reset.
+StartupEvents.init(event => {
+	global.attributes = {}
+})
+
+StartupEvents.registry("attribute", event => {
+    // Use the `spell` type for these attributes and set all the values needed. The default value has to be higher than the minimum value and lower than the maximum value.
+    global.attributes.TEST_SPELL_POWER = event.create("test_spell_power", "spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
+    global.attributes.TEST_SPELL_RESISTANCE = event.create("test_spell_resistance", "spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
+})
+```
+Then, in the next few lines, you need to apply these attributes to entities by listening to the mod bus event `EntityAttributeModificationEvent`.
+```js
+// You can listen to mod bus events by using `ForgeModEvents.onEvent`, and then inputting the event class.
+ForgeModEvents.onEvent("net.minecraftforge.event.entity.EntityAttributeModificationEvent", event => {
+	// Here, we loop through all the entity types and add both attributes to each and every one of them. 
+	// This makes sure that every entity that has magic capabilities can use these attributes.
+    event.types.forEach(type => {
+        event.add(type, global.attributes.TEST_SPELL_POWER.get())
+        event.add(type, global.attributes.TEST_SPELL_RESISTANCE.get())
+    })
+})
+```
+Finally, we need to register the school.
+```js
+StartupEvents.registry("irons_spellbooks:schools", event => {
+	// This creates a school named `Test` with the ID `kubejs:test`.
+	// You can use the ID of this school in any spell you create, or to change the school of an existing spell using the Iron's Spells server config.
+    event.create("test")
+        .setName(Component.of("Test").aqua()) // This sets what the school will be displayed as. This needs to be a Component.
+        .setFocus("kubejs:test_focus") // The focus needs to be an item tag. You can add this same tag to an item to make it the focus.
+        .setPowerAttribute(global.attributes.TEST_SPELL_POWER.get()) // This sets the power attribute. We use `.get()` on the attribute to obtain the registry object.
+        .setResistanceAttribute(global.attributes.TEST_SPELL_RESISTANCE.get()) // This sets the resistance attribute.
+        .setDefaultCastSound('minecraft:entity.chicken.death') // You can also set a default cast sound for each spell in the school.
+		// In 1.20.1 and up, creating spell schools requires a damage type to be inputted.
+		// You can create a damage type using datapacks. https://minecraft.wiki/w/Damage_type
+		// .setDamageType('kubejs:test_spell_damage_type')
 })
 ```

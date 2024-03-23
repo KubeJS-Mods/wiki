@@ -108,10 +108,12 @@ FTBChunksEvents.after("claim", (event) => {
 `.after` executes code after a Chunk has been claimed.
 This example sends a message to everyone, saying who claimed a chunk, and the claimed chunks's position.
 `.after('string')` The string here is for which event to listen for. Current available operations:
-    - 'claim'
-    - 'unclaim'
-    - 'load'
-    - 'unload'
+```
+'claim'
+'unclaim'
+'load'
+'unload'
+```
 
 >>> danger
 - Before

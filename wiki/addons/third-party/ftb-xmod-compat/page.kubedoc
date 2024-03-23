@@ -114,7 +114,7 @@ This example sends a message to everyone, saying who claimed a chunk, and the cl
     - 'unload'
 
 >>> danger
-* Before
+- Before
 `.before` is currently broken! If it is applied, you will not be able to claim Chunks anymore!
 <<<
 

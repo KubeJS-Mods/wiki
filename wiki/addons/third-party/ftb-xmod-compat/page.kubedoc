@@ -57,4 +57,37 @@ Executes code when a player starts a quest.
 `custom_task_id` = "Custom" task's ID. To get it, right-click a Custom task and select "Copy ID".
 `custom_reward_id` = "Custom" reward's ID. To get it, right-click a Custom reward and select "Copy ID".
 <<<
+
 ---
+
+## `FTBTeamsEvents`
+<| PlayerJoinedParty
+```js
+FTBTeamsEvents.playerJoinedParty(event => {
+    let team = event.currentTeam.name
+    let player = event.player.username
+    event.server.tell(
+        Component.aqua(player)
+        .append(' joined: ')
+        .append(Component.green(team))
+        )
+})
+```
+<||> playerLeftParty
+```js
+FTBTeamsEvents.playerLeftParty(event => {
+    let team = event.currentTeam.name
+    let player = event.player.username
+    event.server.tell(
+        Component.aqua(player)
+        .append(' left: ')
+        .append(Component.green(team))
+        )
+})
+```
+<|
+`playerJoined/LeftParty` executes code when a player Joines or Leaves a party.
+This example here sends a message to everyone, saying who joined or left what party.
+
+---
+

@@ -61,7 +61,7 @@ Executes code when a player starts a quest.
 ---
 
 ## `FTBTeamsEvents`
-<| PlayerJoinedParty
+|> PlayerJoinedParty
 ```js
 FTBTeamsEvents.playerJoinedParty(event => {
     let team = event.currentTeam.name

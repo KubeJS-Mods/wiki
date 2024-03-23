@@ -86,7 +86,7 @@ FTBTeamsEvents.playerLeftParty(event => {
 })
 ```
 <|
-`playerJoined` / `playerLeftParty` executes code when a player Joins or Leaves a party.
+`playerJoinedParty` / `playerLeftParty` executes code when a player Joins or Leaves a party.
 This example here sends a message to everyone, saying who joined or left what party.
 
 ---

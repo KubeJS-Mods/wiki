@@ -93,7 +93,7 @@ This example here sends a message to everyone, saying who joined or left what pa
 
 ## `FTBChunksEvents
 
-* After
+- After
 ```js
 FTBChunksEvents.after("claim", (event) => {
   let chunkPos = event.chunk.pos.chunkPos;

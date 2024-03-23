@@ -88,9 +88,9 @@ FTBTeamsEvents.playerLeftParty(event => {
 <|
 `playerJoined/LeftParty` executes code when a player Joins or Leaves a party.
 This example here sends a message to everyone, saying who joined or left what party.
-
+ 
 ---
-
+ 
 ## `FTBChunksEvents
 
 - After
@@ -105,7 +105,7 @@ FTBChunksEvents.after("claim", (event) => {
   )
 })
 ```
-`.after` executes code after a Chunk has been claimed.
+`.after` executes code after a listened operation is executed.
 This example sends a message to everyone, saying who claimed a chunk, and the claimed chunks's position.
 `.after('string')` The string here is for which event to listen for. Current available operations:
 ```
@@ -114,8 +114,9 @@ This example sends a message to everyone, saying who claimed a chunk, and the cl
 'load'
 'unload'
 ```
-
+ 
 >>> danger
 - Before
 `.before` is currently broken! If it is applied, you will not be able to claim Chunks anymore!
+It's the opposite of `.after`, instead getting information *before* 
 <<<

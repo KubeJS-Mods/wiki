@@ -52,4 +52,9 @@ FTBQuestsEvents.started('quest_id', event => {
 ```
 Executes code when a player starts a quest.
 
+>>> info
+`quest_id` = Quest's ID. To get it, right-click a Quest and select "Copy ID".
+`custom_task_id` = "Custom" task's ID. To get it, right-click a Custom task and select "Copy ID".
+`custom_reward_id` = "Custom" reward's ID. To get it, right-click a Custom reward and select "Copy ID".
+<<<
 ---

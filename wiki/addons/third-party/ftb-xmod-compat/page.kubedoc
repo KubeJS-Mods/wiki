@@ -91,7 +91,7 @@ This example here sends a message to everyone, saying who joined or left what pa
 
 ---
 
-## `FTBChunksEvents
+## `FTBChunksEvents`
 
 - After
 ```js
@@ -114,7 +114,7 @@ This example sends a message to everyone, saying who claimed a chunk, and the cl
 'load'
 'unload'
 ```
-
+---
 - Before
 ==`.before` is currently broken! If it is applied, you will not be able to claim Chunks anymore!==
 It works just like `.after`, but *before* the specified operation.

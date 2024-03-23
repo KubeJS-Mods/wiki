@@ -1,0 +1,55 @@
+Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat)
+
+---
+
+### `FTBQuestsEvents`
+
+* Completed
+```js
+FTBQuestsEvents.completed('quest_id', event => {
+    event.player.tell('You completed the quest!')
+})
+```
+Executes code when a specific quest is completed.
+
+* CustomFilterItem
+```js
+FTBQuestsEvents.customFilterItem(event => {
+    event.addStack('acacia_boat')
+})
+```
+Adds ItemStack(s) to a custom Filter.
+
+* CustomReward
+```js
+FTBQuestsEvents.customReward('custom_reward_id', event => {
+    event.player.give('acacia_boat')
+})
+```
+Adds logic to Custom Rewards.
+
+* CustomTask
+```js
+FTBQuestsEvents.customTask('custom_task_id', event => {
+    event.maxProgress = 100 // Sets the Progress Count.
+
+    event.setCheckTimer(20) // Checks for progress every 1 second (20 ticks).
+    
+    event.setCheck((task, player) => {
+        if(player.level.thundering) { //Checks if it is Thundering at a player.
+            task.progress++ // Adds progress to the quest.
+        }
+    })
+})
+```
+Adds logic to Custom Tasks. This example code progresses the quest every 20 seconds when Player is in a thunderstorm.
+
+* Started
+```js
+FTBQuestsEvents.started('quest_id', event => {
+    event.server.tell('A player started a quest!')
+})
+```
+Executes code when a player starts a quest.
+
+---

@@ -91,3 +91,31 @@ This example here sends a message to everyone, saying who joined or left what pa
 
 ---
 
+## `FTBChunksEvents
+
+* After
+```js
+FTBChunksEvents.after("claim", (event) => {
+  let chunkPos = event.chunk.pos.chunkPos;
+  let player = event.player.username;
+  event.server.tell(
+    Component.aqua(player)
+      .append(Component.literal(" has claimed Chunk at: "))
+      .append(Component.green(chunkPos))
+  )
+})
+```
+`.after` executes code after a Chunk has been claimed.
+This example sends a message to everyone, saying who claimed a chunk, and the claimed chunks's position.
+`.after('string')` The string here is for which event to listen for. Current available operations:
+    - 'claim'
+    - 'unclaim'
+    - 'load'
+    - 'unload'
+
+>>> danger
+* Before
+`.before` is currently broken! If it is applied, you will not be able to claim Chunks anymore!
+<<<
+
+---

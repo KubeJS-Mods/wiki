@@ -30,6 +30,7 @@ StartupEvents.registry('irons_spellbooks:spells', event => {
 		// .onPreClientCast(ctx => {})
 		// .setAllowLooting(true)
 		// .needsLearning(false)
+		// .canBeCraftedBy(player => true)
 })
 
 // The functions for certain methods with callbacks like onCast can go in a global variable if you want it to be reloadable by using /kubejs reload startup_scripts
@@ -73,9 +74,9 @@ StartupEvents.init(event => {
 })
 
 StartupEvents.registry("attribute", event => {
-    // Use the `spell` type for these attributes and set all the values needed. The default value has to be higher than the minimum value and lower than the maximum value.
-    global.attributes.TEST_SPELL_POWER = event.create("test_spell_power", "spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
-    global.attributes.TEST_SPELL_RESISTANCE = event.create("test_spell_resistance", "spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
+	// Use the `spell` type for these attributes and set all the values needed. The default value has to be higher than the minimum value and lower than the maximum value.
+	global.attributes.TEST_SPELL_POWER = event.create("test_spell_power", "spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
+	global.attributes.TEST_SPELL_RESISTANCE = event.create("test_spell_resistance", "spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
 })
 ```
 Then, in the next few lines, you need to apply these attributes to entities by listening to the mod bus event `EntityAttributeModificationEvent`.
@@ -84,10 +85,10 @@ Then, in the next few lines, you need to apply these attributes to entities by l
 ForgeModEvents.onEvent("net.minecraftforge.event.entity.EntityAttributeModificationEvent", event => {
 	// Here, we loop through all the entity types and add both attributes to each and every one of them. 
 	// This makes sure that every entity that has magic capabilities can use these attributes.
-    event.types.forEach(type => {
-        event.add(type, global.attributes.TEST_SPELL_POWER.get())
-        event.add(type, global.attributes.TEST_SPELL_RESISTANCE.get())
-    })
+	event.types.forEach(type => {
+		event.add(type, global.attributes.TEST_SPELL_POWER.get())
+		event.add(type, global.attributes.TEST_SPELL_RESISTANCE.get())
+	})
 })
 ```
 Finally, we need to register the school.
@@ -95,12 +96,12 @@ Finally, we need to register the school.
 StartupEvents.registry("irons_spellbooks:schools", event => {
 	// This creates a school named `Test` with the ID `kubejs:test`.
 	// You can use the ID of this school in any spell you create, or to change the school of an existing spell using the Iron's Spells server config.
-    event.create("test")
-        .setName(Component.of("Test").aqua()) // This sets what the school will be displayed as. This needs to be a Component.
-        .setFocus("kubejs:test_focus") // The focus needs to be an item tag. You can add this same tag to an item to make it the focus.
-        .setPowerAttribute(global.attributes.TEST_SPELL_POWER.get()) // This sets the power attribute. We use `.get()` on the attribute to obtain the registry object.
-        .setResistanceAttribute(global.attributes.TEST_SPELL_RESISTANCE.get()) // This sets the resistance attribute.
-        .setDefaultCastSound('minecraft:entity.chicken.death') // You can also set a default cast sound for each spell in the school.
+	event.create("test")
+		.setName(Component.of("Test").aqua()) // This sets what the school will be displayed as. This needs to be a Component.
+		.setFocus("kubejs:test_focus") // The focus needs to be an item tag. You can add this same tag to an item to make it the focus.
+		.setPowerAttribute(global.attributes.TEST_SPELL_POWER.get()) // This sets the power attribute. We use `.get()` on the attribute to obtain the registry object.
+		.setResistanceAttribute(global.attributes.TEST_SPELL_RESISTANCE.get()) // This sets the resistance attribute.
+		.setDefaultCastSound('minecraft:entity.chicken.death') // You can also set a default cast sound for each spell in the school.
 		// In 1.20.1 and up, creating spell schools requires a damage type to be inputted.
 		// You can create a damage type using datapacks. https://minecraft.wiki/w/Damage_type
 		// .setDamageType('kubejs:test_spell_damage_type')

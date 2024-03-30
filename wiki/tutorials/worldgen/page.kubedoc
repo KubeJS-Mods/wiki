@@ -1,6 +1,8 @@
-# General Notes
+>>> warn
+Worldgen isn't available on versions above 1.20.1 yet!
+<<<
 
-## Biome Filters
+# Biome Filters
 Biome filters work similarly to recipe filters and can be used to create complex and exact filters to fine-tune where your features may and may not spawn in the world. They are used for the `biomes` field of a feature and may look something like this:
 
 ```js
@@ -28,7 +30,7 @@ WorldgenEvents.add(event => {
 })
 ```
 
-## Rule Tests and Targets
+# Rule Tests and Targets
 
 In 1.18, Minecraft WorldGen has changed to a "target-based" replacement system, meaning you can specify specific blocks to be replaced with specific other blocks within the same feature configuration. (For example, this is used to replace Stone with the normal ore and Deepslate with the Deepslate ore variant).
 Each target gets a "rule test" as input (something that checks if a given block state should be replaced or not) and produces a specific output block state. While scripting, both of these concepts are expressed as the same class: `BlockStatePredicate`.
@@ -49,7 +51,7 @@ When a `RuleTest` is required instead of a `BlockStatePredicate`, you can also s
 
 **More examples of how targets work can be found in the example script down below.**
 
-## Height Providers
+# Height Providers
 Another system that may appear a bit confusing at first is the system of "height providers", which are used to determine at what Y level a given ore should spawn and with what frequency. Used in tandem with this feature are the so-called "vertical anchors", which may be used to get the height of something relative to a specific anchor point (for example the top or bottom of the world).
 In KubeJS, this system has been simplified a bit to make it easier to use for script developers. There are two common types of ore placement:
 . **Uniform**: has the same chance to spawn anywhere in between the two anchors
@@ -59,7 +61,7 @@ To use these two, you can use the methods `uniformHeight` and `traingleHeight` i
 
 **Once again, see the example script for more information!**
 
-## Example script
+# Example script
 ```js
 WorldgenEvents.add(event => {
   // use the anchors helper from the event
@@ -127,7 +129,7 @@ WorldgenEvents.remove(event => {
 })
 ```
 
-## Generation Steps
+# Generation Steps
 
 . `raw_generation`
 . `lakes`

@@ -6,10 +6,9 @@ This page is still under development. It is not complete, and subject to change 
 
 The genericLootTables event can be used to add, remove, or replace generic loot tables.
 
-Any script that modifies recipes should be placed in the {se-s} folder, and can be reloaded at any time with `/reload`.
+Any script that modifies loot tables should be placed in the Server Events folder, and can be reloaded at any time with `/reload`.
 
-
-A simple example, this creates a generic loot table that the /loot command can (probably, I'm not in-game to test) access, and spawn the loot of
+A simple example, this creates a generic loot table that the /loot command can (probably, I'm not in-game to test) access, and spawn or insert the loot of:
 
 ```js
 ServerEvents.genericLootTables(event => {
@@ -26,8 +25,8 @@ ServerEvents.genericLootTables(event => {
 })
 ```
 
+This table will pull somewhere between 2 and 4 items randomly selected between the diamond, gold, and iron, with no bias
 Simple enough, let's get more complicated
-
 
 
 This example uses Weight, allowing some items to be rare, and others common!
@@ -46,8 +45,8 @@ ServerEvents.genericLootTables(event => {
 })
 
 ```
-Does that make any sense to you? great! let's dive a bit deeper..
 
+Does that make any sense to you? great! let's dive a bit deeper..
 
 
 This example will show off count, allowing more than just one of an item to be dropped in a loot table.
@@ -69,9 +68,9 @@ ServerEvents.genericLootTables(event => {
 So far so good! you can already make a simple loot table (don't worry about inserting it yet, we'll get to that)
 (I'm sure just using a normal number as a count, instead of the random nunber range works fine, but I'm again not in-game, so I'm just being safe by using my own code as an example)
 
+this is a table → ⌐¬
 
-
-We can get spicer though, let's learn Quality! Quality multiplies the luck of the opener and it's own value (by default 0) and adds the result to the loot table
+We can get spicer though, let's learn Quality! Quality multiplies the luck of the opener and it's own value (by default 0) and adds the result to the weight of the entry in the loot table
 
 ```js
 ServerEvents.genericLootTables(event => {
@@ -80,15 +79,14 @@ ServerEvents.genericLootTables(event => {
         table.addPool(pool => {
             pool.rolls = 1
             pool.addItem('minecraft:diamond', 1).quality(10)//every point of luck you have will add 10 weight to the diamond!
-            pool.addItem('minecraft:iron_ingot', 99).quality(-10)//quality can be negative as well! the iron will become less common the higher your luck!
+            pool.addItem('minecraft:iron_ingot', 100).quality(-10)//quality can be negative as well! the iron will become less common the higher your luck!
         })
     })
 
 })
 ```
 
-If weight becomes, or is set to 0, the item will not appear! if Quality pushes it out of the negative, it can appear again, (or stop appearing, in the inverse scenario) so you may be able to hide power loot in very common tables!
-
+If weight becomes, or is set to 0, the item will not appear! if Quality pushes it out of the negative, it can appear again, (or stop appearing, in the inverse scenario) so you may be able to hide powerful loot in very common tables!
 
 
 Are you ready for one of the spiciest things a loot table can do?
@@ -114,7 +112,6 @@ ServerEvents.genericLootTables(event => {
 ```
 
 Alright, you maybe-hopefully-perhaps know enough to get started with loot table making!...
-
 
 
 Oh right, you want to see it somewhere, don't you, I'm running out of steam to write this entry so here's a quick piece of code that'll get you started on actually seeing your table spawn:

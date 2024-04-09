@@ -31,6 +31,7 @@ StartupEvents.registry('irons_spellbooks:spells', event => {
 		// .setAllowLooting(true)
 		// .needsLearning(false)
 		// .canBeCraftedBy(player => true)
+		// .setUniqueInfo([Component.translatable("ui.irons_spellbooks.damage", "3"), Component.of("test")])
 })
 
 // The functions for certain methods with callbacks like onCast can go in a global variable if you want it to be reloadable by using /kubejs reload startup_scripts
@@ -53,7 +54,8 @@ PlayerEvents.changeMana(event => {
 	event.setNewMana(event.getOldMana() - 10)
 })
 
-PlayerEvents.spellCast(event => {
+// There is also spellPreCast, which is cancelable
+PlayerEvents.spellOnCast(event => {
 	// Casting any spell kills the player who casted it
 	event.getEntity().kill()
 })
@@ -68,15 +70,12 @@ To create a spell school, you'll first need to create two attributes for spell p
 // This goes in startup_scripts
 
 // We create an object within the global object so that we can store the attributes inside.
-// We use the `StartupEvents.init` event to make sure that when we reload startup scripts, the attributes within this object don't get reset.
-StartupEvents.init(event => {
-	global.attributes = {}
-})
+global.attributes = {}
 
 StartupEvents.registry("attribute", event => {
 	// Use the `spell` type for these attributes and set all the values needed. The default value has to be higher than the minimum value and lower than the maximum value.
-	global.attributes.TEST_SPELL_POWER = event.create("test_spell_power", "spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
-	global.attributes.TEST_SPELL_RESISTANCE = event.create("test_spell_resistance", "spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
+	global.attributes.TEST_SPELL_POWER = event.create("test_spell_power", "irons_spells_js:spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
+	global.attributes.TEST_SPELL_RESISTANCE = event.create("test_spell_resistance", "irons_spells_js:spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
 })
 ```
 Then, in the next few lines, you need to apply these attributes to entities by listening to the mod bus event `EntityAttributeModificationEvent`.
@@ -101,9 +100,63 @@ StartupEvents.registry("irons_spellbooks:schools", event => {
 		.setFocus("kubejs:test_focus") // The focus needs to be an item tag. You can add this same tag to an item to make it the focus.
 		.setPowerAttribute(global.attributes.TEST_SPELL_POWER.get()) // This sets the power attribute. We use `.get()` on the attribute to obtain the registry object.
 		.setResistanceAttribute(global.attributes.TEST_SPELL_RESISTANCE.get()) // This sets the resistance attribute.
+		// .setPowerAttribute("kubejs:test_spell_power") // You can also use strings or ResourceLocations instead of a direct registry object.
+		// .setResistanceAttribute("kubejs:test_spell_resistance")
 		.setDefaultCastSound('minecraft:entity.chicken.death') // You can also set a default cast sound for each spell in the school.
 		// In 1.20.1 and up, creating spell schools requires a damage type to be inputted.
 		// You can create a damage type using datapacks. https://minecraft.wiki/w/Damage_type
 		// .setDamageType('kubejs:test_spell_damage_type')
+})
+```
+
+# Custom Spell Books, Staves, and Magic Swords
+```js
+// These all go in startup scripts
+StartupEvents.registry("item", event => {
+	// Other item methods also work on these builders. It is recommended to give the spell books the proper Curios item tag for them to work properly.
+	// (that being "curios:spellbook")
+
+	//This just creates a basic spell book with nothing special to it. It is given 3 spell slots as defined.
+    	event.create("test_spellbook", "irons_spells_js:spellbook")
+        	.setMaxSpellSlots(3)
+
+	// You can add attributes to the spell book, including custom attributes.
+	// This spell book is given 8 total spell slots and two attributes.
+    	event.create("test_attribute_spellbook", "irons_spells_js:spellbook")
+        	.setMaxSpellSlots(8)
+        	.addDefaultAttribute("kubejs:test_spell_power", "Test Spell Power", 2.0, "multiply_total")
+        	.addDefaultAttribute("minecraft:generic.movement_speed", "Test Movement Speed", 1.2, "multiply_total")
+
+	// If you give a spell book default spells, it is converted to a Unique spell book. 
+	// This spell book has been given two extra attributes and a single default spell, being Firebolt at level 1.
+    	event.create("test_unique_spellbook", "irons_spells_js:spellbook")
+        	.setMaxSpellSlots(4)
+        	.addDefaultAttribute("kubejs:test_spell_power", "Test Spell Power", 2.0, "multiply_total")
+        	.addDefaultAttribute("minecraft:generic.movement_speed", "Test Movement Speed", 1.2, "multiply_total")
+        	.addDefaultSpell(SpellRegistry.FIREBOLT_SPELL, 1)
+
+	// You can create custom staves too, and give them additional custom attributes.
+	// This staff deals 50 base damage and gives the user 200% more spell power for the school Test, shown in a previous example.
+    	event.create("test_staff", "irons_spells_js:staff")
+        	.addAdditionalAttribute("kubejs:test_spell_power", "Test Spell Power", 2.0, "multiply_total")
+        	.attackDamageBaseline(50)
+        	.speedBaseline(-2.4)
+
+	// Along with custom staves, you can also create custom magic swords that come with default spells.
+	// This sword deals 100 damage, has 3 attack speed, and has two pre-inscribed spells, being Firebolt and Blood Slash.
+    	event.create("test_magic_sword", "irons_spells_js:magic_sword")
+        	.addAdditionalAttribute("kubejs:test_spell_power", "Test Spell Power", 2.0, "multiply_total")
+        	.attackDamageBaseline(100)
+        	.speedBaseline(3)
+        	.addDefaultSpell(SpellRegistry.FIREBOLT_SPELL, 1)
+        	.addDefaultSpell(SpellRegistry.BLOOD_SLASH_SPELL, 2)
+
+	// Also, you don't need to use a registry object for spells. You can input a string as the spell ID and it works just fine as well. 
+    	event.create("test_magic_sword_2", "irons_spells_js:magic_sword")
+        	.addAdditionalAttribute("kubejs:test_spell_power", "Test Spell Power", 2.0, "multiply_total")
+        	.attackDamageBaseline(100)
+        	.speedBaseline(3)
+        	.addDefaultSpell("irons_spellbooks:starfall", 1)
+        	.addDefaultSpell("irons_spellbooks:planar_sight", 2)
 })
 ```

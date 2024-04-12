@@ -9,7 +9,7 @@ EXCLUDE_PATHS = ["test/", "ref/"]
 en_files = [*WIKI.rglob("en.yml")]
 
 #! Remember to change this
-target_language_code = None
+target_language_code = "zh-tw"
 
 dump_md_lines = [
     "# Untranslate files",

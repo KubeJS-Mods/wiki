@@ -98,10 +98,8 @@ StartupEvents.registry("irons_spellbooks:schools", event => {
 	event.create("test")
 		.setName(Component.of("Test").aqua()) // This sets what the school will be displayed as. This needs to be a Component.
 		.setFocus("kubejs:test_focus") // The focus needs to be an item tag. You can add this same tag to an item to make it the focus.
-		.setPowerAttribute(global.attributes.TEST_SPELL_POWER.get()) // This sets the power attribute. We use `.get()` on the attribute to obtain the registry object.
-		.setResistanceAttribute(global.attributes.TEST_SPELL_RESISTANCE.get()) // This sets the resistance attribute.
-		// .setPowerAttribute("kubejs:test_spell_power") // You can also use strings or ResourceLocations instead of a direct registry object.
-		// .setResistanceAttribute("kubejs:test_spell_resistance")
+		.setPowerAttribute("kubejs:test_spell_power") // This sets the power attribute.
+		.setResistanceAttribute("kubejs:test_spell_resistance") // This sets the resistance attribute.
 		.setDefaultCastSound('minecraft:entity.chicken.death') // You can also set a default cast sound for each spell in the school.
 		// In 1.20.1 and up, creating spell schools requires a damage type to be inputted.
 		// You can create a damage type using datapacks. https://minecraft.wiki/w/Damage_type

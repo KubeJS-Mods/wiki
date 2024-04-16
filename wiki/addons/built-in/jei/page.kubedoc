@@ -68,7 +68,6 @@ onEvent('jei.information', event => {
 ```js
 JEIEvents.removeCategories(event => {
   console.log(event.categoryIds) //log a list of all category ids to logs/kubejs/client.txt
-  
   event.remove('create:compacting')
 })
 ```
@@ -76,7 +75,6 @@ JEIEvents.removeCategories(event => {
 ```js
 onEvent('jei.remove.categories', event => {
   console.log(event.categoryIds) //log a list of all category ids to logs/kubejs/client.txt
-  
   event.remove('create:compacting')
 })
 ```

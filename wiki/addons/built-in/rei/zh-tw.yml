@@ -1,7 +1,7 @@
 title: "REI物品管理器（Roughly Enough Items）"
 description: "KubeJS REI 整合"
 
-integration-warn: "在 1.16 中僅在 Fabric 中運作，1.18 級以上則可同時運作於 Forge 及 Fabric！"
+integration-warn: "在 1.16 中僅在 Fabric 中執行，但在 1.18 以上則可同時執行於 Forge 和 Fabric！"
 hide-items-and-fluids: "隱藏物品及流體"
 add-items-and-fluids: "新增物品及流體"
 add-information: "新增資訊"

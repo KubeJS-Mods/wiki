@@ -7,7 +7,7 @@ arch-api: "[Architectury](https://www.curseforge.com/minecraft/mc-mods/architect
 title: "KubeJS"
 description: "使用 JavaScript 自訂你的模組包或伺服器！"
 
-q-info: "這模組可以用來做什麼？"
+q-info: "這個模組可以用來做什麼？"
 a-info: "你可以透過此模組使用 JavaScript 建立腳本來管理你的伺服器、新增方塊和物品、修改配方、自訂任務，還有更多功能等你來發掘！"
 
 q-how-use: "如何使用這個模組？"

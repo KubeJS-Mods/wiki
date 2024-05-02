@@ -1,6 +1,6 @@
 title: "載入資源（assets）和資料（data）"
 description: "從資源包載入資源（assets）及從資料包載入資料（data）"
 
-intro: "你還可以使用 KubeJS 從資源包載入資源和從資料包載入資料，雖然這不是唯一的方法，但這是最簡單的方法之一。其他選項包括<TODO: make and link server datapack load page and client generate assets event page>"
-data: "資料的載入方式與資料包中的資料夾相同。如果你已經有資料包，只需將資料包中的資料夾複製到 KubeJS 的資料（kubejs/data）資料夾中。"
-assets: "資源的載入方式與資源包中的資料夾相同。如果你已經有資源包，只需將資源包中的資料夾複製到 KubeJS 的資源（kubejs/assets）資料夾中。"
+intro: "你還可以使用 KubeJS 從資源包載入資源和從資料包載入資料，儘管這不是唯一的方法，但這是最簡單的方法之一。其他選項包括<TODO: make and link server datapack load page and client generate assets event page>"
+data: "資料的載入方式與資料包中的資料夾相同。如果你已經有資料包，只需將資料包中的資料夾複製到 KubeJS 的資料包資料夾（kubejs/data）中。"
+assets: "資源的載入方式與資源包中的資料夾相同。如果你已經有資源包，只需將資源包中的資料夾複製到 KubeJS 的資源包資料夾（kubejs/assets）中。"

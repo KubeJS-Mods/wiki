@@ -97,3 +97,18 @@ onEvent('jei.subtypes', event => {
 })
 ```
 <|
+
+# {hide-recipes}
+|> 1.19.2+
+```js
+JEIEvents.removeRecipes(event => {
+    event.remove("example:crafting_catagory", "example:item_or_recipe")
+})
+```
+
+<||> 1.18.2 and below
+```js
+  onEvent('jei.remove.recipes', event =>{
+    event.remove('example:crafting_catagory','example:item_or_recipe')
+  })
+```

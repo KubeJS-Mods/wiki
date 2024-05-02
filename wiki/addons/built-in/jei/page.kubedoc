@@ -112,3 +112,4 @@ JEIEvents.removeRecipes(event => {
     event.remove('example:crafting_catagory','example:item_or_recipe')
   })
 ```
+<|

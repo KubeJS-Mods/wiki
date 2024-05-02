@@ -1,1 +1,32 @@
-Nothing yet
+### Add items to tab, remove items from tab
+```js
+StartupEvents.modifyCreativeTab('minecraft:redstone_blocks', event => {
+	// Adds example item after redstone
+	event.addAfter('minecraft:redstone', 'kubejs:example_item')
+	// Removes redstone
+	event.removeDisplay('minecraft:redstone');
+})
+```
+
+### Change icon and display name of tab
+```js
+StartupEvents.modifyCreativeTab('minecraft:functional_blocks', event => {
+	// Change tab icon
+	event.icon = 'kubejs:example_block'
+	// Change display name. Technically supports formatting, but it's not recommended
+	event.displayName = Text.darkRed('Functional Blocks!')
+})
+```
+
+### Create a new tab and all dirt blocks to it
+```js
+StartupEvents.registry('creative_mode_tab', event => {
+	event.create('dirt').icon(() => 'minecraft:dirt').content(() => [
+		'minecraft:dirt',
+		'minecraft:grass_block',
+		'minecraft:podzol',
+		'minecraft:coarse_dirt',
+		'minecraft:rooted_dirt'
+	])
+})
+```

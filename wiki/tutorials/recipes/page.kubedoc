@@ -71,7 +71,7 @@ Shaped recipes are added with the `[js]event.shaped()` method. Shaped recipes mu
 If you want to force strict positions on the crafting grid or disable mirroring, see Methods of Custom Recipes.
 
 ```js
-event.shaped(
+event.recipes.kubejs.shaped(
   Item.of('minecraft:stone', 3), // arg 1: output
   [
     'A B',
@@ -94,7 +94,7 @@ Shapeless recipes are added with the `[js]event.shapeless()` method. Players can
 2. An array of input items. The total input items' count must be 9 at most.
 
 ```js
-event.shapeless(
+event.recipes.kubejs.shapeless(
   Item.of('minecraft:dandelion', 3), // arg 1: output
   [
     'minecraft:bone_meal',
@@ -110,7 +110,7 @@ Smithing recipes have 2 or 3 inputs (depending on the minecraft version, see bel
 
 |> 1.20+
 ```js
-event.smithing(
+event.minecraft.recipes.smithing(
   'minecraft:netherite_ingot',                     // arg 1: output
   'minecraft:netherite_upgrade_smithing_template', // arg 2: the smithing template
   'minecraft:iron_ingot',                          // arg 3: the item to be upgraded
@@ -119,7 +119,7 @@ event.smithing(
 ```
 <||> 1.19.2 and below
 ```js
-event.smithing(
+event.minecraft.recipes.smithing(
   'minecraft:netherite_ingot',  // arg 1: output
   'minecraft:iron_ingot',       // arg 2: the item to be upgraded
   'minecraft:black_dye'         // arg 3: the upgrade item
@@ -136,18 +136,20 @@ Cooking recipes are all very similar, accepting one input (a single item) and gi
 - Smoking recipes are added with `[js]event.smoking()`, and require the Smoker.
 - Campfire cooking recipes are added with `[js]event.campfireCooking()`, and require the Campfire.
 
+Third and Fourth arguments for these recipes are for XP and cookTime.
+
 ```js
 // Cook 1 stone into 3 gravel in a Furnace:
-event.smelting('3x minecraft:gravel', 'minecraft:stone')
+event.recipes.minecraft.smelting('3x minecraft:gravel', 'minecraft:stone')
 
 // Blast 1 iron ingot into 10 nuggets in a Blast Furnace: 
-event.blasting('10x minecraft:iron_nugget', 'minecraft:iron_ingot')
+event.recipes.minecraft.blasting('10x minecraft:iron_nugget', 'minecraft:iron_ingot')
 
 // Smoke glass into tinted glass in the Smoker:
-event.smoking('minecraft:tinted_glass', 'minecraft:glass')
+event.recipes.minecraft.smoking('minecraft:tinted_glass', 'minecraft:glass')
 
 // Burn sticks into torches on the Campfire:
-event.campfireCooking('minecraft:torch', 'minecraft:stick')
+event.recipes.minecraft.campfireCooking('minecraft:torch', 'minecraft:stick')
 ```
 
 ## Stonecutting
@@ -156,7 +158,7 @@ Like the cooking recipes, stonecutting recipes are very simple, with one input (
 
 ```js
 //allow cutting 3 sticks from any plank on the stonecutter
-event.stonecutting('3x minecraft:stick', '#minecraft:planks')
+event.recipes.minecraft.stonecutting('3x minecraft:stick', '#minecraft:planks')
 ```
 
 ## Custom/Modded JSON recipes
@@ -273,7 +275,7 @@ Here's a helper function, which allows you to make items by crafting a flower po
 ```js
 ServerEvents.recipes(event => {
   function potting(output, pottedInput) {
-    event.shaped(output, [
+    event.recipes.kubejs.shaped(output, [
       'BIB',
       ' B '
     ], {

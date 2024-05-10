@@ -110,7 +110,7 @@ Smithing recipes have 2 or 3 inputs (depending on the minecraft version, see bel
 
 |> 1.20+
 ```js
-event.minecraft.recipes.smithing(
+event.recipes.minecraft.smithing(
   'minecraft:netherite_ingot',                     // arg 1: output
   'minecraft:netherite_upgrade_smithing_template', // arg 2: the smithing template
   'minecraft:iron_ingot',                          // arg 3: the item to be upgraded
@@ -119,7 +119,7 @@ event.minecraft.recipes.smithing(
 ```
 <||> 1.19.2 and below
 ```js
-event.minecraft.recipes.smithing(
+event.recipes.minecraft.smithing(
   'minecraft:netherite_ingot',  // arg 1: output
   'minecraft:iron_ingot',       // arg 2: the item to be upgraded
   'minecraft:black_dye'         // arg 3: the upgrade item

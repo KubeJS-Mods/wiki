@@ -189,7 +189,7 @@ StartupEvents.registry('item', event => {
     .finishUsing((itemstack, level, entity) => {
       let effects = entity.potionEffects
       effects.add('minecraft:haste', 120 * 20)
-      itemstack.itemStack.shrink(1)
+      itemstack.shrink(1)
       if (entity.player) {
         entity.minecraftPlayer.addItem(Item.of('minecraft:glass_bottle').itemStack)
       }
@@ -201,7 +201,7 @@ StartupEvents.registry('item', event => {
      * Tick is how many ticks remained for player to finish using the item.
      */
     .releaseUsing((itemstack, level, entity, tick) => {
-      itemstack.itemStack.shrink(1)
+      itemstack.shrink(1)
       level.createExplosion(entity.x, entity.y, entity.z).explode()
     })
 })

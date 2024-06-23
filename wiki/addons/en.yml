@@ -1,2 +1,11 @@
 title: "Addons"
 description: "All KubeJS mod integrations"
+
+title-built-in: "Built-in"
+description-built-in: "Addons of already shipped with KubeJS mod by default"
+
+title-first-party: "First Party Addons"
+description-first-party: "Addons of KubeJS made by KubeJS team"
+
+title-third-party: "Third Party Addons"
+description-third-party: "Addons of KubeJS made by community"

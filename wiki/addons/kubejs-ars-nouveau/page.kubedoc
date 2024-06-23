@@ -1,7 +1,3 @@
-Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-ars-nouveau), [Modrinth](https://modrinth.com/mod/kubejs-ars-nouveau)
-
----
-
 This addon allows you to create recipes for the [Ars Nouveau](https://www.curseforge.com/minecraft/mc-mods/ars-nouveau) mod.
 ```js
 ServerEvents.recipes(event => {

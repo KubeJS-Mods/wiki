@@ -1,4 +1,4 @@
-[KJSPKG](https://github.com/Modern-Modpacks/kjspkg) is a package manager for KubeJS that allows you to download different example scripts and libraries into your own instance.
+KJSPKG is a package manager for KubeJS that allows you to download different example scripts and libraries into your own instance.
 It will automatically manage your minecraft version, modloader, dependency and incompatibility control. It works with all modern KubeJS versions, and should even work with some older versions, ie. 1.12!
 
 ![[kjspkg.png]]

@@ -1,2 +1,4 @@
 script: "server"
 addon: "first-party"
+download-curseforge: "kubejs-mekanism"
+download-modrinth: "kubejs-mekanism"

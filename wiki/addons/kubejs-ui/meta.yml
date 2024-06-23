@@ -1,2 +1,3 @@
 script: "client"
 addon: "first-party"
+download-curseforge: "kubejs-ui"

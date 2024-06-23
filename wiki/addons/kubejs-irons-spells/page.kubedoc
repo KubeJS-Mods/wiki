@@ -1,7 +1,3 @@
-Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-irons-spells)
-
----
-
 KubeJS Iron's Spells is an addon that allows for creating custom spells, spell schools, and listening to Iron's Spells events like `ChangeManaEvent` and `SpellCastEvent`.
 
 # Custom Spells

@@ -1,7 +1,3 @@
-Download: [Curseforge](https://www.curseforge.com/minecraft/mc-mods/kubejs-offline), [Modrinth](https://modrinth.com/mod/kubejs-offline)
-
----
-
 KubeJS Offline is a mod that dumps all class data at runtime into a single html file using a single command - `/kubejs_offline`.
 
 # Preview Generated Documentation Pages:

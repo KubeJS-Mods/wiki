@@ -1,7 +1,3 @@
-Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-botany-pots), [Modrinth](https://modrinth.com/mod/kubejs-botany-pots)
-
----
-
 This addon allows you to create crops, soils, and fertilizers for the [Botany Pots](https://www.curseforge.com/minecraft/mc-mods/botany-pots) mod.
 ```js
 ServerEvents.recipes(event => {

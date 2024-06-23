@@ -1,7 +1,3 @@
-Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-powah), [Modrinth](https://modrinth.com/mod/kubejs-powah)
-
----
-
 This addon allows you to create custom Energizing Orb recipes (among other things) from the [Powah](https://beta.curseforge.com/minecraft/mc-mods/powah-rearchitected) mod.
 ```js
 ServerEvents.recipes(event => {

@@ -1,7 +1,3 @@
-Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-delight)
-
----
-
 This addon allows you to register custom knifes, pies, feasts and modify [Farmer's Delight](https://www.curseforge.com/minecraft/mc-mods/farmers-delight) recipes.
 
 Here's an example of registering custom knifes, pies and feasts (put this in {st-s}):

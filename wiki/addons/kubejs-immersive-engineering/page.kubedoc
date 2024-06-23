@@ -1,7 +1,3 @@
-Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs-immersive-engineering), [Modrinth](https://modrinth.com/mod/kubejs-immersive-engineering)
-
----
-
 # Alloy Kiln
 ```js
 event.recipes.immersiveengineering.alloy(output, input1, input2)

@@ -1,2 +1,3 @@
 script: "server"
 addon: "first-party"
+download-curseforge: "kubejs-blood-magic"

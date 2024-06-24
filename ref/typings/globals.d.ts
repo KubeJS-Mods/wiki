@@ -5,6 +5,8 @@ import {TextWrapper} from "./java/net/minecraft/network/chat/TextComponent";
 export {}
 
 declare global {
+	const global: object
+
 	export type byte = number
 	export type short = number
 	export type int = number

@@ -1,4 +1,4 @@
-export interface EventJS {
+export interface KubeEvent {
 	defaultExitValue(): any
 
 	mapExitValue(value?: any): any

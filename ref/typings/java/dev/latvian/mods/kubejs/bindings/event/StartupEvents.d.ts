@@ -1,21 +1,22 @@
-import {EventHandler, EventJS} from "./EventJS";
+import {EventHandler, KubeEvent} from "../../event/KubeEvent";
 import {BuilderBase} from "../../registry/BuilderBase";
 import {Block} from "@java/net/minecraft/world/level/block/Block";
 import {BlockBuilder} from "../../block/BlockBuilder";
 import {ItemStack} from "@java/net/minecraft/world/item/ItemStack";
 import {Ingredient} from "@java/net/minecraft/world/item/crafting/Ingredient";
 import {TextComponent} from "@java/net/minecraft/network/chat/TextComponent";
+import {Supplier} from "@java/java/util/function/FunctionalInterfaces";
 
-export interface StartupEventJS extends EventJS {
+export interface StartupEventJS extends KubeEvent {
 }
 
-export interface RegistryEventJS<E, T extends BuilderBase<E>> extends EventJS {
+export interface RegistryEventJS<E, T extends BuilderBase<E>> extends KubeEvent {
 	create(id: string, type?: string): T
 
-	createCustom(id: string, object: () => E);
+	createCustom(id: string, object: Supplier<E>);
 }
 
-export interface RecipeSchemaRegistryEventJS extends EventJS {
+export interface RecipeSchemaRegistryEventJS extends KubeEvent {
 	readonly components: Map<string, any>
 
 	namespace(namespace: string): any
@@ -27,7 +28,7 @@ export interface RecipeSchemaRegistryEventJS extends EventJS {
 
 export type CreativeTabVisibility = 'parent_and_search_tabs' | 'parent_tab_only' | 'search_tab_only'
 
-export interface CreativeTabEventJS extends EventJS {
+export interface CreativeTabEventJS extends KubeEvent {
 	displayName: TextComponent
 	icon: ItemStack
 

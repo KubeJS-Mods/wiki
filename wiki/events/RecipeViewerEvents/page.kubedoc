@@ -41,4 +41,4 @@ If you see 2 icons that means Client & Server
 | `addInformation`                | {no}  | {yes}\* {no} | {no}  |
 | `groupEntries`                  | {na}  | {yes}\* {no} | {na}  |
 
-\* Requires a KubeJS addon to register the custom
+\* Requires a KubeJS addon to register the custom type

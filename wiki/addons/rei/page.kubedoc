@@ -1,4 +1,4 @@
-# Supports [[/events/RecipeViewerEvents]]!
+# See [[/events/RecipeViewerEvents]]!
 
 # Supported Features
 
@@ -33,4 +33,4 @@ If you see 2 icons that means Client & Server
 | `addInformation`                | {yes}\* {no} |
 | `groupEntries`                  | {yes}\* {no} |
 
-\* Requires a KubeJS addon to register the custom
+\* Requires a KubeJS addon to register the custom type

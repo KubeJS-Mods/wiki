@@ -1,0 +1,3 @@
+interface <T>
+
+boolean test(T value)

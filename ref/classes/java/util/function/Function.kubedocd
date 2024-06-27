@@ -1,0 +1,3 @@
+interface <T, R>
+
+R apply(T value)

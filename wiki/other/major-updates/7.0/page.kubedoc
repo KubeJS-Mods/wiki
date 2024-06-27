@@ -28,7 +28,7 @@
 - Buffed class filter, it should be more safe now
 
 # RecipeViewerEvents
-- Documented here: [[/events/RecipeViewerEvents/]]
+- Documented [[/events/RecipeViewerEvents|here]]
 - All mod integration merged into one
 - Use events from server-side
 - Partial EMI support (adding, removing entries, hiding recipes)

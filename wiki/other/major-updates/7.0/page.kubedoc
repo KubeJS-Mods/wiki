@@ -1,3 +1,5 @@
+# Highly WIP changelog!
+
 # Platform Changes
 - For foreseeable future, only NeoForge will be supported
 - The mod no longer depends on Architectury API
@@ -10,20 +12,23 @@
 # For Addon Devs
 - Lots of classes moved around and changed types, so modders will need to update their locations
 - Plugin class changed to interface, added a lot more registry functions
+- You can now add `KubeJSContext cx` as first argument in a method that is supposed to be used by JS, so you can access registries, current console and script type. That argument will be stripped from JS call
 
 # For Modpack Devs
 - All configs are now .json files instead of .properties
 - You can change creative tab name and icon
 - A lot more dev logging options
+- Reloadable native events! Also both are now handled from `NativeEvents`, so `NativeModEvents` has been removed. Also also added priority param option as optional first argument
+- `global` is now restricted to only allow setting values from startup script. There should no longer be a use case where you'd need to set a callback, since NativeEvents can work from client and server scripts now
 - Added Kubedex button which currently is WIP, for a GUI that will mostly be replacing functionality of `/kjs hand` in an easier to use way
 - Modifying recipe ingredients and result now require using events rather than callback functions
 - Fluid registry is now easier than before, added thin and thick fluid types rather than functions, more fluid config options, better defaults
-- Reloadable native events! Also both are now handled from `NativeEvents`, so `NativeModEvents` has been removed. Also also added priority param option as optional first argument
 - Added TextIcons - a bunch of icons that could be useful when displaying text
 - Config to enable auto-reloading on file save
 - Buffed class filter, it should be more safe now
 
 # RecipeViewerEvents
+- Documented [[/events/RecipeViewerEvents/|here]]
 - All mod integration merged into one
 - Use events from server-side
 - Partial EMI support (adding, removing entries, hiding recipes)

@@ -1,2 +1,2 @@
-script: "client"
+script: "common"
 addon: "built-in"

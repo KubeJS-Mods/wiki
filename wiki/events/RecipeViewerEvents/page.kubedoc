@@ -1,6 +1,7 @@
 # About
 These events allow you to modify recipe viewer mods (such as [[/addons/rei]], [[/addons/emi]], [[/addons/jei]] all at once with the same events and even from server-side!
 Previously these were split up as `REIEvents` and `JEIEvents`.
+You can use these events from both {cl-s} and {se-s} (on server side only `'item'` and `'fluid'` types will work, though).
 
 # Supported Features
 

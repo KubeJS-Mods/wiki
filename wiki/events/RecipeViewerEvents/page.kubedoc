@@ -22,9 +22,9 @@ If you see 2 icons that means Client & Server
 | Removing fluid entries    | {yes} | {yes}       | {yes} |
 | Adding fluid information  | {yes} | {yes}       | {yes} |
 | Grouping fluid entries    | {na}  | {yes}       | {na}  |
-| Adding custom entries     | {no}  | {yes}* {no} | {no}  |
-| Removing custom entries   | {no}  | {yes}* {no} | {no}  |
-| Adding custom information | {no}  | {yes}* {no} | {no}  |
-| Grouping custom entries   | {na}  | {yes}* {no} | {na}  |
+| Adding custom entries     | {no}  | {yes}\* {no} | {no}  |
+| Removing custom entries   | {no}  | {yes}\* {no} | {no}  |
+| Adding custom information | {no}  | {yes}\* {no} | {no}  |
+| Grouping custom entries   | {na}  | {yes}\* {no} | {na}  |
 
-\* Requires a KubeJS addon to register the custom type
+\* Requires a KubeJS addon to register the custom

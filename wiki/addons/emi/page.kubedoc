@@ -7,7 +7,7 @@
 {na} - This feature isn't available in the recipe viewer mod in first place
 
 | Generic RecipeViewerEvents | EMI   |
-| `removeCategories`         | {na}  |
+| `removeCategories`         | {yes} |
 | `removeRecipes`            | {yes} |
 
 | Item RecipeViewerEvents   | EMI   |

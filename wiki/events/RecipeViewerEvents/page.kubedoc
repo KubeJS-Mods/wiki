@@ -15,7 +15,7 @@ You can use these events from both {cl-s} and {se-s} (on server side only `'item
 {na} - This feature isn't available in the recipe viewer mod in first place
 
 | Generic RecipeViewerEvents | JEI   | REI   | EMI   |
-| `removeCategories`         | {yes} | {yes} | {na}  |
+| `removeCategories`         | {yes} | {yes} | {yes}  |
 | `removeRecipes`            | {yes} | {yes} | {yes} |
 
 | Item RecipeViewerEvents   | JEI   | REI   | EMI   |

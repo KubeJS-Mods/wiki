@@ -1,0 +1,35 @@
+# Platform Changes
+- For foreseeable future, only NeoForge will be supported
+- The mod no longer depends on Architectury API
+- The new wiki, released soon, will only reflect 1.21+ info
+- The legacy wiki will continue to exist for 1.20.1- info
+- Advanced loot events are moving to LootJS
+- Worldgen events currently disabled, will most likely be moved to first party addon
+- Added local script folder loaders for dedicated servers, useful when you want to make changes in your server and not care if scripts get erased when you update server modpack
+
+# For Addon Devs
+- Lots of classes moved around and changed types, so modders will need to update their locations
+- Plugin class changed to interface, added a lot more registry functions
+
+# For Modpack Devs
+- All configs are now .json files instead of .properties
+- You can change creative tab name and icon
+- A lot more dev logging options
+- Added Kubedex button which currently is WIP, for a GUI that will mostly be replacing functionality of `/kjs hand` in an easier to use way
+- Modifying recipe ingredients and result now require using events rather than callback functions
+- Fluid registry is now easier than before, added thin and thick fluid types rather than functions, more fluid config options, better defaults
+- Reloadable native events! Also both are now handled from `NativeEvents`, so `NativeModEvents` has been removed. Also also added priority param option as optional first argument
+- Added TextIcons - a bunch of icons that could be useful when displaying text
+- Config to enable auto-reloading on file save
+- Buffed class filter, it should be more safe now
+
+# RecipeViewerEvents
+- All mod integration merged into one
+- Use events from server-side
+- Partial EMI support (adding, removing entries, hiding recipes)
+
+# Recipes
+- Recipe types can now be registered as json schemas. That's good news for both modders who want to add KJS integration without depending on the mod jar and modpack creators who can add integration themselves to mods that don't have it yet
+
+# Other questions
+If you have any other questions, feel free to ask them on my [Discord Server]({discord-url}).

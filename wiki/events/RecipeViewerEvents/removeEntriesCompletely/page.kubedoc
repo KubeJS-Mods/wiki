@@ -1,0 +1,6 @@
+# Example
+```js
+RecipeViewerEvents.removeEntriesCompletely('item', event => {
+	event.remove('minecraft:stick')
+})
+```

@@ -1,30 +1,38 @@
 # About
-These events allow you to modify recipe viewer mods (such as REI, EMI, JEI) all at once with the same events and even from server-side!
-Previously these were split up as REIEvents and JEIEvents.
+These events allow you to modify recipe viewer mods (such as [REI](/addons/rei), [EMI](/addons/emi), [JEI](/addons/jei) all at once with the same events and even from server-side!
+Previously these were split up as `REIEvents` and `JEIEvents`.
 
 # Supported Features
 
 {yes} - This feature is supported
 {no} - This feature is currently not supported
-{na} - This feature isn't available in recipe viewer mod in first place
+{na} - This feature isn't available in the recipe viewer mod in first place
+
+| Generic RecipeViewerEvents | JEI   | REI   | EMI   |
+| `removeCategories`         | {yes} | {yes} | {na}  |
+| `removeRecipes`            | {yes} | {yes} | {yes} |
+
+| Item RecipeViewerEvents   | JEI   | REI   | EMI   |
+| `addEntries`              | {yes} | {yes} | {yes} |
+| `removeEntries`           | {yes} | {yes} | {yes} |
+| `removeEntriesCompletely` | {yes} | {yes} | {yes} |
+| `addInformation`          | {yes} | {yes} | {yes} |
+| `groupEntries`            | {na}  | {yes} | {na}  |
+
+| Fluid RecipeViewerEvents  | JEI   | REI   | EMI   |
+| `addEntries`              | {yes} | {yes} | {yes} |
+| `removeEntries`           | {yes} | {yes} | {yes} |
+| `removeEntriesCompletely` | {yes} | {yes} | {yes} |
+| `addInformation`          | {yes} | {yes} | {yes} |
+| `groupEntries`            | {na}  | {yes} | {na}  |
 
 If you see 2 icons that means Client & Server
 
-| Feature | JEI | REI | EMI |
-|---------|-----|-----|-----|
-| Removing categories       | {yes} | {yes}       | {na}  |
-| Removing recipes          | {yes} | {yes}       | {yes} |
-| Adding item entries       | {yes} | {yes}       | {yes} |
-| Removing item entries     | {yes} | {yes}       | {yes} |
-| Adding item information   | {yes} | {yes}       | {yes} |
-| Grouping item entries     | {na}  | {yes}       | {na}  |
-| Adding fluid entries      | {yes} | {yes}       | {yes} |
-| Removing fluid entries    | {yes} | {yes}       | {yes} |
-| Adding fluid information  | {yes} | {yes}       | {yes} |
-| Grouping fluid entries    | {na}  | {yes}       | {na}  |
-| Adding custom entries     | {no}  | {yes}\* {no} | {no}  |
-| Removing custom entries   | {no}  | {yes}\* {no} | {no}  |
-| Adding custom information | {no}  | {yes}\* {no} | {no}  |
-| Grouping custom entries   | {na}  | {yes}\* {no} | {na}  |
+| Custom Entry RecipeViewerEvents | JEI   | REI          | EMI   |
+| `addEntries`                    | {no}  | {yes}\* {no} | {no}  |
+| `removeEntries`                 | {no}  | {yes}\* {no} | {no}  |
+| `removeEntriesCompletely`       | {no}  | {yes}\* {no} | {no}  |
+| `addInformation`                | {no}  | {yes}\* {no} | {no}  |
+| `groupEntries`                  | {na}  | {yes}\* {no} | {na}  |
 
 \* Requires a KubeJS addon to register the custom

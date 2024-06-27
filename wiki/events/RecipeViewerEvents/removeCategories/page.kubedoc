@@ -1,0 +1,7 @@
+# Example
+```js
+RecipeViewerEvents.removeCategories(event => {
+	// Hide REI's tag category
+	event.remove('minecraft:plugins/tag')
+})
+```

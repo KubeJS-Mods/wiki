@@ -1,9 +1,2 @@
 title: "JEI物品管理器（Just Enough Items）"
 description: "KubeJS JEI 集成"
-
-subtypes: "子類別"
-hide-items-and-fluids: "隱藏物品及流體"
-add-items-and-fluids: "新增物品及流體"
-add-information: "新增資訊"
-hide-categories: "隱藏類別"
-hide-recipes: "隱藏食譜"

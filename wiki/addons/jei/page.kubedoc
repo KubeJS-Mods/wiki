@@ -1,114 +1,32 @@
-# {hide-items-and-fluids}
+# Supports [[/events/RecipeViewerEvents]]!
 
-|> 1.19.2+
-```js
-JEIEvents.hideItems(event => {
-  event.hide('example:ingredient')
-})
+# Supported Features
 
-JEIEvents.hideFluids(event => {
-  event.hide('example:fluid')
-})
-```
-<||> 1.18.2 and below
-```js
-onEvent('jei.hide.items', event => {
-  event.hide('example:ingredient')
-})
+{yes} - This feature is supported
+{no} - This feature is currently not supported
+{na} - This feature isn't available in the recipe viewer mod in first place
 
-onEvent('jei.hide.fluids', event => {
-  event.hide('example:fluid')
-})
-```
-<|
+| Generic RecipeViewerEvents | JEI   |
+| `removeCategories`         | {yes} |
+| `removeRecipes`            | {yes} |
 
-# {add-items-and-fluids}
+| Item RecipeViewerEvents   | JEI   |
+| `addEntries`              | {yes} |
+| `removeEntries`           | {yes} |
+| `removeEntriesCompletely` | {yes} |
+| `addInformation`          | {yes} |
+| `groupEntries`            | {na}  |
 
-|> 1.19.2+
-```js
-JEIEvents.addItems(event => {
-  event.add(Item.of('example:item', {test: 123}))
-})
+| Fluid RecipeViewerEvents  | JEI   |
+| `addEntries`              | {yes} |
+| `removeEntries`           | {yes} |
+| `removeEntriesCompletely` | {yes} |
+| `addInformation`          | {yes} |
+| `groupEntries`            | {na}  |
 
-JEIEvents.addFluids(event => {
-  event.add('example:fluid')
-})
-```
-<||> 1.18.2 and below
-```js
-onEvent('jei.add.items', event => {
-  event.add(Item.of('example:item', {test: 123}))
-})
-
-onEvent('jei.add.fluids', event => {
-  event.add('example:fluid')
-})
-```
-<|
-
-# {add-information}
-
-|> 1.19.2+
-```js
-JEIEvents.information(event => {
-  event.addItem('example:ingredient', ['Line 1', 'Line 2'])
-})
-```
-<||> 1.18.2 and below
-```js
-onEvent('jei.information', event => {
-  event.add('example:ingredient', ['Line 1', 'Line 2'])
-})
-```
-<|
-
-# {hide-categories}
-
-|> 1.19.2+
-```js
-JEIEvents.removeCategories(event => {
-  console.log(event.categoryIds) //log a list of all category ids to logs/kubejs/client.txt
-  event.remove('create:compacting')
-})
-```
-<||> 1.18.2 and below
-```js
-onEvent('jei.remove.categories', event => {
-  console.log(event.categoryIds) //log a list of all category ids to logs/kubejs/client.txt
-  event.remove('create:compacting')
-})
-```
-<|
-
-# {subtypes}
-
-|> 1.19.2+
-```js
-JEIEvents.subtypes(event => {
-  event.useNBT('example:item')
-  event.useNBTKey('example:item', 'type')
-})
-```
-<||> 1.18.2 and below
-```js
-onEvent('jei.subtypes', event => {
-  event.useNBT('example:item')
-  event.useNBTKey('example:item', 'type')
-})
-```
-<|
-
-# {hide-recipes}
-|> 1.19.2+
-```js
-JEIEvents.removeRecipes(event => {
-  event.remove('example:crafting_catagory', 'example:item_or_recipe')
-})
-```
-<||> 1.18.2 and below
-```js
-onEvent('jei.remove.recipes', event =>{
-  event.remove('example:crafting_catagory', 'example:item_or_recipe')
-})
-```
-<|
+| Custom Entry RecipeViewerEvents | JEI   |
+| `addEntries`                    | {no}  |
+| `removeEntries`                 | {no}  |
+| `removeEntriesCompletely`       | {no}  |
+| `addInformation`                | {no}  |
+| `groupEntries`                  | {na}  |

@@ -1,3 +1,32 @@
-See [[/events/RecipeViewerEvents]] page.
+# Supports [[/events/RecipeViewerEvents]]!
 
-1.21+ only!
+# Supported Features
+
+{yes} - This feature is supported
+{no} - This feature is currently not supported
+{na} - This feature isn't available in the recipe viewer mod in first place
+
+| Generic RecipeViewerEvents | EMI   |
+| `removeCategories`         | {na}  |
+| `removeRecipes`            | {yes} |
+
+| Item RecipeViewerEvents   | EMI   |
+| `addEntries`              | {yes} |
+| `removeEntries`           | {yes} |
+| `removeEntriesCompletely` | {yes} |
+| `addInformation`          | {yes} |
+| `groupEntries`            | {na}  |
+
+| Fluid RecipeViewerEvents  | EMI   |
+| `addEntries`              | {yes} |
+| `removeEntries`           | {yes} |
+| `removeEntriesCompletely` | {yes} |
+| `addInformation`          | {yes} |
+| `groupEntries`            | {na}  |
+
+| Custom Entry RecipeViewerEvents | EMI   |
+| `addEntries`                    | {no}  |
+| `removeEntries`                 | {no}  |
+| `removeEntriesCompletely`       | {no}  |
+| `addInformation`                | {no}  |
+| `groupEntries`                  | {na}  |

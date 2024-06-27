@@ -1,2 +1,4 @@
 script: "common"
 addon: "built-in"
+download-curseforge: "jei"
+download-modrinth: "jei"

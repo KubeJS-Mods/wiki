@@ -1,0 +1,33 @@
+# Kubejs Create: Garnished integration
+
+## Supported recipe types
+- Bulk Dyeing [Red]
+- Bulk Dyeing [Orange]
+- Bulk Dyeing [Yellow]
+- Bulk Dyeing [Green]
+- Bulk Dyeing [Blue]
+- Bulk Dyeing [Purple]
+- Bulk Freezing
+
+## Supported item types
+- Hatchets
+
+Bulk Dyeing can be achieved just like most other recipes in the following format:
+
+```js
+event.recipes.garnished.red_dye_blowing('rubymod:ruby', 'minecraft:emerald', 200).id('garnished_kubejs:red_dye_blowing/ruby_from_emerald')
+```
+
+To use any of the other available colours, simply change `event.recipes.garnished.red_dye_blowing` to instead be `event.recipes.garnished.<colour>_dye_blowing`.
+
+Bulk Freezing can be achieved similarly:
+
+```js
+event.recipes.garnished.freezing('minecraft:powder_snow_bucket', 'minecraft:water_bucket', 200).id('garnished_kubejs:freezing/powder_snow_bucket_from_water_bucket')
+```
+
+Hatchets are an interesting case, as it's quite simple to implement a custom hatchet for your project. Register an item just like how you would usually, but insert 'garnished:hatchet' for the item type as shown below:
+
+```js
+event.create('bone_hatchet', 'garnished:hatchet').displayName('Bone Hatchet').unstackable().texture('kubejs:item/bone_hatchet').tier('netherite')
+```

@@ -1,4 +1,5 @@
 script: "common"
+author: "00000001"
 addon: "built-in"
 download-curseforge: "emi"
 download-modrinth: "emi"

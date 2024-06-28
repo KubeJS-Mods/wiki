@@ -1,3 +1,4 @@
 script: "server"
+author: "00000001"
 addon: "first-party"
 download-curseforge: "kubejs-tinkers-construct"

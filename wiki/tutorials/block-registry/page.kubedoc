@@ -29,3 +29,19 @@ StartupEvents.registry('block', event => {
 # All Block Builder Methods
 The example above only covers a few of the methods available on the block builder.
 See the [[$BlockBuilder|full list here]]!
+
+# Alternate Block Builders
+Besides the base block builder, there are a few additional block builders avaialable which generally all inherit all the base methods from the base builder. Using `[js]event.create(<Name>,<AltBuilderKey>)`, you can use one of these alternate builders.
+| AltBuilderKey | Alternate Builder | notes |
+| "slab" | SlabBlockBuilder |  |
+| "stairs" | StairBlockBuilder |  |
+| "fence" | FenceBlockBuilder |  |
+| "wall" | WallBlockBuilder |  |
+| "fence_gate" | FenceGateBlockBuilder |  |
+| "pressure_plate" | PressurePlateBlockBuilder |  |
+| "button" | ButtonBlockBuilder |  |
+| "falling" | FallingBlockBuilder |  |
+| "crop" | CropBlockBuilder | aditional methods include `[js].survive()`, '[js].crop()` and `[js].growTick()`; `[js].item()` refers to the seed item for this crop |
+| "cardinal" | HorizontalDirectionalBlockBuilder |  |
+| "detector" | DetectorBlock$Builder |  |
+| "basic" | BasicBlockJS$Builder | This is the default [[$BlockBuilder|block builder]] |

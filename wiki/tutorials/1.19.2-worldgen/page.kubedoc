@@ -1,5 +1,5 @@
 >>> warn
-Worldgen isn't available on versions above 1.19.2 yet!
+Worldgen isn't available (built-in) on versions above 1.19.2 yet!
 <<<
 
 # Biome Filters

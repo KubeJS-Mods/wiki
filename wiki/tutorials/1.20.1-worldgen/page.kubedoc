@@ -6,7 +6,7 @@ Unfortunately kubejs support for 1.20.1 worldgen is not that good. (Doesn't work
 So instead we have to use a datapack. This guide is only supposed to be a first point of reference if you are struggling to remove ores using the outdated methods.
 <<<
 
-**File Location: Make sure to put it in `kubejs/data/Insert Name OF Mod Here/worldgen/configured_feature/identifier.json`**
+**File Location: Make sure to put it in:** `kubejs/data/Insert Name OF Mod Here/worldgen/configured_feature/identifier.json`
 
 In This File needs to be:
 
@@ -16,7 +16,7 @@ In This File needs to be:
     "config": {}
 },
 ```
-#All ores
+# All ores
 
 For Example: if we wanted to remove all minecraft ores, we would create ore.json in:
 `kubejs/data/minecraft/worldgen/configured_feature/ore.json` and insert the above code snippet. 
@@ -25,14 +25,14 @@ Note: the identifier `ore` removes all minecraft ores
 
 This removes all Minecraft ores. 
 
-#Specific Ores:
+# Specific Ores:
 
 if we wanted to remove a specific ore it is a similar process. 
 see https://minecraft.wiki/w/Ore_(feature)#Data_values to find the identifier you want to remove. 
 
 to remove iron we add this file to kubejs/data/minecraft/worldgen/configured_feature/ore_iron.json
 
-#Custom:
+# Custom:
 I recommend you check out https://misode.github.io/worldgen/feature/ (use the preset button on the right to get an idea of some vanilla worldgen) to generate the necessary files
 In order to change a vanilla worldgen feature name the file `identifier-of-feature.json`
 Using a preset you could probably even add your own custom geode

@@ -1,5 +1,5 @@
 >>> #warn
-Unfortunately kubejs support for 1.20.1 worldgen is not that good. (Doesn't work)
+Unfortunately Kubejs support for 1.20.1 worldgen is not that good. (Doesn't work)
 <<<
 
 >>> #info
@@ -33,6 +33,6 @@ see https://minecraft.wiki/w/Ore_(feature)#Data_values to find the identifier yo
 to remove iron we add this file to kubejs/data/minecraft/worldgen/configured_feature/ore_iron.json
 
 # Custom:
-I recommend you check out https://misode.github.io/worldgen/feature/ (use the preset button on the right to get an idea of some vanilla worldgen) to generate the necessary files
+I recommend you check out https://misode.github.io/worldgen/feature/ (use the preset button on the right to get an idea of some vanilla worldgen) to generate the necessary files.
 In order to change a vanilla worldgen feature name the file `identifier-of-feature.json`
-Using a preset you could probably even add your own custom geode
+Using a preset you could probably even add your own custom geode.

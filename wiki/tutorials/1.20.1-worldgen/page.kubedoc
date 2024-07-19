@@ -3,7 +3,7 @@ Unfortunately Kubejs support for 1.20.1 worldgen is not that good. (Doesn't work
 <<<
 
 >>> #info
-So instead we have to use a datapack. This guide is only supposed to be a first point of reference if you are struggling to remove ores using the outdated methods.
+So instead we have to use a datapack. This guide is only supposed to be a first point of reference if you want to change world generation using Kubejs.
 <<<
 
 **File Location: Make sure to put it in:** `kubejs/data/Insert Name OF Mod Here/worldgen/configured_feature/identifier.json`

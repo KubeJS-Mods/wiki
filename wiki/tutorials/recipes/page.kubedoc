@@ -136,6 +136,8 @@ Cooking recipes are all very similar, accepting one input (a single item) and gi
 - Smoking recipes are added with `[js]event.smoking()`, and require the Smoker.
 - Campfire cooking recipes are added with `[js]event.campfireCooking()`, and require the Campfire.
 
+XP gained is set by appending `[js].xp()`. Cooking time (in ticks) is set by appending `[js].cookingTime()`. They can also be specified after the input and output.
+
 ```js
 // Cook 1 stone into 3 gravel in a Furnace:
 event.smelting('3x minecraft:gravel', 'minecraft:stone')
@@ -143,11 +145,11 @@ event.smelting('3x minecraft:gravel', 'minecraft:stone')
 // Blast 1 iron ingot into 10 nuggets in a Blast Furnace: 
 event.blasting('10x minecraft:iron_nugget', 'minecraft:iron_ingot')
 
-// Smoke glass into tinted glass in the Smoker:
-event.smoking('minecraft:tinted_glass', 'minecraft:glass')
+// Smoke glass into tinted glass in the Smoker and give 0.35XP:
+event.smoking('minecraft:tinted_glass', 'minecraft:glass').xp(0.35)
 
-// Burn sticks into torches on the Campfire:
-event.campfireCooking('minecraft:torch', 'minecraft:stick')
+// Burn sticks into torches on the Campfire, give 0.35XP and take 30 seconds:
+event.campfireCooking('minecraft:torch', 'minecraft:stick', 0.35, 600)
 ```
 
 ## Stonecutting

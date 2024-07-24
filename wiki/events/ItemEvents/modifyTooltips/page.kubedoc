@@ -1,16 +1,16 @@
 # Info
 This event can be on either client or server side.
-To simply add tooltip to item you can use `js event.add(filter, Text[])` method.
+To simply add tooltip to item you can use `[js]event.add(filter, Text[])` method.
 You can register dynamic tooltip handler from server side but the handler itself has to be on client side.
 
-Available methods in `js ItemEvents.modifyTooltips` event:
+Available methods in `[js]ItemEvents.modifyTooltips` event:
 
-- `js event.add(filter, Text[])` - shortcut method to just add text lines to item
-- `js event.add(filter, TooltipRequirements, Text[])` - same method but 2nd argument adds requirements. See below
-- `js event.modify(filter, (tooltip: TooltipActionBuilder) => void)` - modify tooltip with no requirements
-- `js event.modify(filter, TooltipRequirements, (tooltip: TooltipActionBuilder) => void)` - modify tooltip with requirements
-- `js event.modifyAll((tooltip: TooltipActionBuilder) => void)` - modify all tooltips with no requirements
-- `js event.modifyAll(TooltipRequirements, (tooltip: TooltipActionBuilder) => void)` - modify all tooltips with requirements
+- `[js]event.add(filter, Text[])` - shortcut method to just add text lines to item
+- `[js]event.add(filter, TooltipRequirements, Text[])` - same method but 2nd argument adds requirements. See below
+- `[js]event.modify(filter, (tooltip: TooltipActionBuilder) => void)` - modify tooltip with no requirements
+- `[js]event.modify(filter, TooltipRequirements, (tooltip: TooltipActionBuilder) => void)` - modify tooltip with requirements
+- `[js]event.modifyAll((tooltip: TooltipActionBuilder) => void)` - modify all tooltips with no requirements
+- `[js]event.modifyAll(TooltipRequirements, (tooltip: TooltipActionBuilder) => void)` - modify all tooltips with requirements
 
 # Basic Example
 ```js
@@ -37,27 +37,27 @@ ItemEvents.modifyTooltips(event => {
 
 # Text actions
 
-All available methods in `js tooltip` of `js event.modify`:
-- `js tooltip.dynamic(id)`
-- `js tooltip.add(Text[])` - adds text lines at end of tooltip
-- `js tooltip.insert(index, Text[])` - inserts text lines in middle of tooltip at specific line
-- `js tooltip.removeLine(index)` - removes specific line
-- `js tooltip.removeText(Text)` - removes line if any part of component's content matches input
-- `js tooltip.removeExactText(Text)` - removes line if it matches component exactly
-- `js tooltip.clear()` - clears entire tooltip
+All available methods in `[js]tooltip` of `[js]event.modify`:
+- `[js]tooltip.dynamic(id)`
+- `[js]tooltip.add(Text[])` - adds text lines at end of tooltip
+- `[js]tooltip.insert(index, Text[])` - inserts text lines in middle of tooltip at specific line
+- `[js]tooltip.removeLine(index)` - removes specific line
+- `[js]tooltip.removeText(Text)` - removes line if any part of component's content matches input
+- `[js]tooltip.removeExactText(Text)` - removes line if it matches component exactly
+- `[js]tooltip.clear()` - clears entire tooltip
 
 >>> warn
-Tooltip actions are executed in order, so if you call `js tooltip.removeLine(0)` twice, it will remove first two lines
+Tooltip actions are executed in order, so if you call `[js]tooltip.removeLine(0)` twice, it will remove first two lines
 <<<
 
 # Tooltip Requirements
 Available requirement properties:
-- `shift: true/false` - if shift key is pressed
-- `ctrl: true/false` - if ctrl key is pressed
-- `alt: true/false` - if alt key is pressed
-- `advanced: true/false` - if advanced tooltips are enabled (F3+H)
-- `creative: true/false` - if player is in creative mode
-- `stages: {stageName: true/false}` - if player has specific stage
+- `[js]shift: true/false` - if shift key is pressed
+- `[js]ctrl: true/false` - if ctrl key is pressed
+- `[js]alt: true/false` - if alt key is pressed
+- `[js]advanced: true/false` - if advanced tooltips are enabled (F3+H)
+- `[js]creative: true/false` - if player is in creative mode
+- `[js]stages: {stageName: true/false}` - if player has specific stage
 
 You can combine multiple properties, e.g. `{shift: true, ctrl: false, advanced: true}`
 

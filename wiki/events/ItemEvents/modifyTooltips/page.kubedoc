@@ -1,5 +1,5 @@
 # Info
-This event can be on either client or server side.
+This event can be used from either client or server side.
 To simply add tooltip to item you can use `[js]event.add(filter, Text[])` method.
 You can register dynamic tooltip handler from server side but the handler itself has to be on client side.
 
@@ -59,7 +59,7 @@ Available requirement properties:
 - `[js]creative: true/false` - if player is in creative mode
 - `[js]stages: {stageName: true/false}` - if player has specific stage
 
-You can combine multiple properties, e.g. `{shift: true, ctrl: false, advanced: true}`
+You can combine multiple properties, e.g. `[js]{shift: true, ctrl: false, advanced: true}`
 
 # Dynamic Tooltips
 You can add dynamic tooltip handler to an item, which on client side gets called every frame you look at the tooltip, with access to item

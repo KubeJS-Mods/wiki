@@ -1,3 +1,0 @@
-script: "server"
-event-result: false
-see-also: "$ServerEvents/highPriorityData"

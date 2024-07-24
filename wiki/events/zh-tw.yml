@@ -12,4 +12,5 @@ event-type-client: "用戶端腳本"
 client: "放在 {cl-s} 資料夾中的腳本。當按下 `F3+T` 時將會被重新載入。大多數只會影響用戶端的事件（例如資源包、Painter 和 JEI 等）都會放在這裡。"
 folder: "資料夾"
 event: "事件"
-has-result: "Has Result" #TODO
+# TODO
+has-result: "Has Result"

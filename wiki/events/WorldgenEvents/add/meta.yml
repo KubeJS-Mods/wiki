@@ -1,3 +1,0 @@
-script: "startup"
-event-result: false
-see-also: "$WorldgenEvents/remove"

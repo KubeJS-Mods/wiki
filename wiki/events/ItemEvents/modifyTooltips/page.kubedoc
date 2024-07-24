@@ -15,8 +15,12 @@ Available methods in `[js]ItemEvents.modifyTooltips` event:
 # Basic Example
 ```js
 ItemEvents.modifyTooltips(event => {
-	event.add('minecraft:campfire', Text.gray('Campfire!'))
+	// Show this tooltip for all red blocks
 	event.add(/minecraft:red_/, Text.red('Red!'))
+	// Only show this text when shift is not pressed
+	event.add('minecraft:campfire', {shift: false}, Text.gray('Campfire :D'))
+	// Only show this text when shift is pressed
+	event.add('minecraft:campfire', {shift: true}, Text.gray('Campfire :('))
 })
 ```
 
@@ -67,6 +71,7 @@ You can add dynamic tooltip handler to an item, which on client side gets called
 Example adding mod name to all item tooltips while ALT key is pressed:
 ```js
 ItemEvents.modifyTooltips(event => {
+	// When alt key is pressed, show 'mod_id' dynamic tooltip
 	event.modifyAll({alt: true}, tooltip => {
 		tooltip.dynamic('mod_id')
 	})
@@ -76,6 +81,7 @@ ItemEvents.modifyTooltips(event => {
 This event has to be in client scripts
 ```js
 ItemEvents.dynamicTooltips('mod_id', event => {
+	// Add mod name to tooltip
     event.add(Text.blue(Platform.getInfo(event.item.mod).name))
 })
 ```

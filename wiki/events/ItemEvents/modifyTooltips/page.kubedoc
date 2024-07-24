@@ -78,3 +78,4 @@ This event has to be in client scripts
 ItemEvents.dynamicTooltips('mod_id', event => {
     event.add(Text.blue(Platform.getInfo(event.item.mod).name))
 })
+```

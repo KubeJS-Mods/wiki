@@ -1,0 +1,16 @@
+# Available Event Fields
+- `event.player` - player entity
+- `event.input` - string
+
+# Example
+```js
+ServerEvents.basicCommand('icons', event => {
+	// Will print KubeJS icons from their characters, try `/icons BCDEFIJKNTWY`
+	event.server.tell(TextIcons.icon(event.input))
+})
+
+ServerEvents.basicCommand('heal', event => {
+	// Will heal the player
+	event.player.heal()
+})
+```

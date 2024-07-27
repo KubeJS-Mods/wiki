@@ -1,8 +1,10 @@
 # Available Event Fields
 - `event.player` - player entity
-- `event.input` - string
+- `event.input` - string (Only 1.21+)
 
 # Example
+
+|> 1.21
 ```js
 ServerEvents.basicCommand('icons', event => {
 	// Will print KubeJS icons from their characters, try `/icons BCDEFIJKNTWY`
@@ -14,3 +16,9 @@ ServerEvents.basicCommand('heal', event => {
 	event.player.heal()
 })
 ```
+<||> 1.20.1
+ServerEvents.customCommand('heal', event => {
+	// Will heal the player
+	event.player.heal()
+})
+<|

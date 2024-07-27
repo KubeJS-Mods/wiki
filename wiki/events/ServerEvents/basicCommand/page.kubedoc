@@ -17,8 +17,10 @@ ServerEvents.basicCommand('heal', event => {
 })
 ```
 <||> 1.20.1
+```js
 ServerEvents.customCommand('heal', event => {
 	// Will heal the player
 	event.player.heal()
 })
+```
 <|

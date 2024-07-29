@@ -1,4 +1,10 @@
-KubeJS Iron's Spells is an addon that allows for creating custom spells, spell schools, and listening to Iron's Spells events like `ChangeManaEvent` and `SpellCastEvent`.
+KubeJS Iron's Spells is an addon that integrates Iron's Spells and Spellbooks into KubeJS.
+The addon allows:
+- Creating custom spells and spell schools
+- Creating custom Alchemist Cauldron recipes
+- Creating custom spellbooks, staves and magic swords
+- EntityJS compatibility for custom spell casting mobs, spell projectiles, and to modify existing mobs to cast spells and use spell casting AI (use their wiki for more information on these features)
+- New special events
 
 # Custom Spells
 >>> warn
@@ -10,29 +16,41 @@ Example script:
 
 StartupEvents.registry('irons_spellbooks:spells', event => {
 	event.create('bloodfed')
-		.setCastTime(60)                           // Sets the cast time
-		.setCooldownSeconds(10)                    // Sets the cooldown in seconds
-		.setManaCostPerLevel(20)                   // Sets the mana cost per level
-		.setCastType('continuous')                 // Sets the cast type
-		.setSchool('irons_spellbooks:blood')       // Sets the school
-		.setMinRarity('epic')                      // Sets the minimal rarity
-		.setMaxLevel(2)                            // Sets the maximum level
-		.setStartSound('item.honey_bottle.drink')  // Sets the start sound
-		.setFinishSound('item.honey_bottle.drink') // Sets the finish sound
-		.onCast(ctx => global.bloodfed(ctx))       // Calls global.bloodfed when the spell is casted
+		.setCastTime(60)                           // Cast time in ticks
+		.setCooldownSeconds(10)                    // Spell cooldown in seconds
+		.setManaCostPerLevel(20)                   // How much additional mana is needed per level
+		.setCastType('continuous')                 // Cast type can be "continuous", "long", "instant", or "none"
+		.setSchool('irons_spellbooks:blood')       // The school type. This is the ID of the school you want to use
+		.setMinRarity('epic')                      // The minimum rarity of the spell. Can be "common", "uncommon", "rare", "epic", or "legendary"
+		.setMaxLevel(2)                            // The maximum level
+		.setStartSound('item.honey_bottle.drink')  // The sound to be played when you start casting the spell. Used for long spells
+		.setFinishSound('item.honey_bottle.drink') // Plays when the spell has finished casting
+		.onCast(ctx => global.bloodfed(ctx))       // The function to be called when the spell is cast
 		// Other methods like these also exist:
-		// .onClientCast(ctx => {})
-		// .onPreCast(ctx => {})
-		// .onPreClientCast(ctx => {})
-		// .setAllowLooting(true)
-		// .needsLearning(false)
-		// .canBeCraftedBy(player => true)
-		// .setUniqueInfo([Component.translatable("ui.irons_spellbooks.damage", "3"), Component.of("test")])
+		.onClientCast(ctx => {})                   // Client-side only cast method. Useful for particles and sounds
+		.onPreCast(ctx => {})                      // Called before the spell is cast.
+		.onPreClientCast(ctx => {})
+		.setAllowLooting(true)                     // Setting this to false will disallow looting the spell from mobs or chests
+		.needsLearning(false)                      // Usually this one is used for Eldritch spells
+		.canBeCraftedBy(player => true)
+		.setUniqueInfo((spellLevel, caster) => {   // Caster refers to the player
+			return [
+				// You need to return an array of components for this method. They can be any text you want.
+	 			Component.green(`Health: ${spellLevel / 2}`),
+	  			Component.green(`Hunger Usage: ${caster.getFoodData().getFoodLevel() * (spellLevel / 2)}`)
+			]
+		})
+		.checkPreCastConditions(ctx => { // This method can be used to check if the spell can be cast. If it returns false, the spell won't be cast.
+			// You can use this for targeting spells, like how the Slow spell works. preCastTargetHelper returns true or false based on the target conditions.
+			// The parameters of this method include the level, entity, the player's magic data, the spell, the range, and the aim assist. 
+            return ISSUtils.preCastTargetHelper(ctx.level, ctx.entity, ctx.playerMagicData, ctx.spell, 48, 0.35)
+        })
 })
 
 // The functions for certain methods with callbacks like onCast can go in a global variable if you want it to be reloadable by using /kubejs reload startup_scripts
-global.bloodfed = (/** @type {Internal.CustomSpell$CastContext} */ ctx) => {
-	let /** @type {Internal.ServerPlayer} */ player = ctx.entity
+// It is recommended to use ProbeJS for this, to see all the available methods and properties in the context object.
+global.bloodfed = (ctx) => {
+	let player = ctx.entity
 	if ((player.getFoodData().getFoodLevel() * (ctx.getSpellLevel() / 2)) < 2
 	|| !ctx.entity.isPlayer()) return
 	player.heal(ctx.getSpellLevel() / 2)
@@ -42,8 +60,8 @@ global.bloodfed = (/** @type {Internal.CustomSpell$CastContext} */ ctx) => {
 
 # Listening to Iron's Spells Events
 ```js
-// These go in server_scripts
 
+// These two go in server_scripts
 PlayerEvents.changeMana(event => {
 	// This makes it so that casting any spell consumes only 10 mana 
 	if (event.getMagicData().getCastSource() != 'SPELLBOOK') return
@@ -53,38 +71,53 @@ PlayerEvents.changeMana(event => {
 // There is also spellPreCast, which is cancelable
 PlayerEvents.spellOnCast(event => {
 	// Casting any spell kills the player who casted it
-	event.getEntity().kill()
+	event.player.kill()
+})
+
+// The one below goes in startup_scripts
+// You can add spells to the spell selection wheel without requiring the player to have a spell book, magic sword or scroll
+PlayerEvents.spellSelection(event => {
+	// This event is fired when the spell selection wheel changes or appears, or on login
+	// You can add spells to the selection wheel by using the addSelectionOption method, which requires SpellData (the spell and spell level), a selection option ID, and the local slot index
+    event.addSelectionOption(new SpellData('kubejs:test_with_ctx', 1), "custom", 0) // Usually the last parameter should be 0.
+    event.addSelectionOption(new SpellData('irons_spellbooks:blood_slash', 1), "custom2", 0)
 })
 ```
 
 # Creating Spell Schools
->>> warn
-This feature may be a little difficult to understand. If you need help, you can always ask in the support channel in the Discord.
-<<<
 To create a spell school, you'll first need to create two attributes for spell power and spell resistance.
 ```js
 // This goes in startup_scripts
 
-// We create an object within the global object so that we can store the attributes inside.
-global.attributes = {}
-
 StartupEvents.registry("attribute", event => {
 	// Use the `spell` type for these attributes and set all the values needed. The default value has to be higher than the minimum value and lower than the maximum value.
-	global.attributes.TEST_SPELL_POWER = event.create("test_spell_power", "irons_spells_js:spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
-	global.attributes.TEST_SPELL_RESISTANCE = event.create("test_spell_resistance", "irons_spells_js:spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
+	event.create("test_spell_power", "irons_spells_js:spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
+	event.create("test_spell_resistance", "irons_spells_js:spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
 })
 ```
-Then, in the next few lines, you need to apply these attributes to entities by listening to the mod bus event `EntityAttributeModificationEvent`.
+Then, in the next few lines, you need to apply these attributes to entities.
 ```js
 // You can listen to mod bus events by using `ForgeModEvents.onEvent`, and then inputting the event class.
 ForgeModEvents.onEvent("net.minecraftforge.event.entity.EntityAttributeModificationEvent", event => {
 	// Here, we loop through all the entity types and add both attributes to each and every one of them. 
 	// This makes sure that every entity that has magic capabilities can use these attributes.
 	event.types.forEach(type => {
-		event.add(type, global.attributes.TEST_SPELL_POWER.get())
-		event.add(type, global.attributes.TEST_SPELL_RESISTANCE.get())
+		event.add(type, 'kubejs:test_spell_power')
+		event.add(type, 'kubejs:test_spell_resistance')
 	})
 })
+```
+If you have EntityJS, you can do this easier:
+```js
+EntityJSEvents.attributes(event => {
+    event.allTypes.forEach(type => {
+        event.modify(type, (a) => {
+            a.add('kubejs:test_spell_power')
+            a.add('kubejs:test_spell_resistance')
+        })
+    })
+})
+
 ```
 Finally, we need to register the school.
 ```js
@@ -152,5 +185,30 @@ StartupEvents.registry("item", event => {
         	.speedBaseline(3)
         	.addDefaultSpell("irons_spellbooks:starfall", 1)
         	.addDefaultSpell("irons_spellbooks:planar_sight", 2)
+})
+```
+
+# Custom Alchemist Cauldron Recipes
+
+You can also add custom recipes for the Alchemist Cauldron.
+```js
+// This goes in startup_scripts
+StartupEvents.postInit(event => {
+	// This creates a recipe that turns an apple into a golden apple using a gold ingot.
+    AlchemistCauldronRecipeBuilder.create()
+        .setInput('minecraft:apple')
+        .setIngredient('minecraft:gold_ingot')
+        .setResult('minecraft:golden_apple')
+        .setBaseRequirement(1) // This sets the minimum amount required for the input item
+        .setResultLimit(1) // This sets how much of the result item you get
+        .register() // You need to call this at the end of the recipe for it to work
+
+    AlchemistCauldronRecipeBuilder.create()
+        .setPotionInput(Potions.THICK) // You can also use potion inputs. Only one of either setPotionInput or setInput can be used, not both.
+        .setIngredient('minecraft:diamond')
+        .setResult('minecraft:diamond_sword')
+        .setBaseRequirement(1)
+        .setResultLimit(1)
+        .register()
 })
 ```

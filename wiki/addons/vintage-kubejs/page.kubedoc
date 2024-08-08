@@ -52,12 +52,13 @@ Curving uses the **Curving Press** with **Curving Heads**
 
 Features:
 - supports multiple chance-based outputs
-- supports `[js].mode()` and `[js].head()`
+- supports `[js].mode()`, `[js].head()` and `[js].headDamage()`
 
 ```js
 ServerEvents.recipes(event => {
   event.recipes.vintageimprovements.curving('vintageimprovements:vanadium_rod', 'vintageimprovements:vanadium_sheet').mode(3)
   event.recipes.vintageimprovements.curving('minecraft:prismarine_crystals', 'minecraft:lapis_lazuli').head("minecraft:heart_of_the_sea")
+  event.recipes.vintageimprovements.curving('vintageimprovements:vanadium_rod', 'vintageimprovements:vanadium_sheet').mode(3).headDamage(50)
 })
 ```
 
@@ -75,12 +76,19 @@ Hammering uses the **Helve Hammer** with **Anvil**
 
 Features:
 - supports multiple chance-based outputs
+- supports `[js].hammerBlows()` and `[js].anvilBlock()`
 
 ```js
 ServerEvents.recipes(event => {
   event.recipes.vintageimprovementsHammering(Item.of('create:iron_sheet', 9), 'minecraft:iron_block', 5)
+  event.recipes.vintageimprovementsHammering(Item.of('create:iron_sheet', 9), 'minecraft:iron_block').hammerBlows(5)
+  event.recipes.vintageimprovementsHammering(Item.of('create:iron_sheet', 9), 'minecraft:iron_block').hammerBlows(5).anvilBlock('minecraft:iron_block')
 })
 ```
+
+>>> info
+Item used in .anvilBlock() must be tagged with `vintageimprovements:custom_hammering_blocks`
+<<<
 
 # Laser Cutting
 

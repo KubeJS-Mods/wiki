@@ -1,0 +1,63 @@
+The [HexJS](https://modrinth.com/mod/hexjs) addon allows you to fully customize [Hexcasting](https://modrinth.com/mod/hex-casting)!
+
+This introduction won't go over all the features of HexJS, but will hopefully guide you in the right direction.
+You can find all the bindings [here](https://github.com/Nanorasmus/HexJS/blob/main/common/src/main/java/me/nanorasmus/nanodev/hex_js/kubejs/HexJSBindings.java), [here](https://github.com/Nanorasmus/HexJS/blob/main/common/src/main/java/me/nanorasmus/nanodev/hex_js/kubejs/customPatterns/CustomPatternCastedEvent.java), and [here](https://github.com/Nanorasmus/HexJS/blob/main/common/src/main/java/me/nanorasmus/nanodev/hex_js/helpers/IotaHelper.java).
+
+# Introduction: Making a pattern/spell
+Making your own hexcasting pattern/spell is a 2 step process.
+First, Register the pattern with a name, angle signature, and whether it requires enlightenment and/or triggers the `Blind Diversion` advancement.
+```js
+    Hexcasting.registerCustomPattern("Testing", "deewde", false, false);
+```
+This registered the following pattern with the name "Testing", which does not require enlightenment, not does it trigger the `Blind Diversion` advancement.
+![[deewde.png]]
+
+Now for the sake of example, let's make this pattern do the following things:
+- Take the entity at the top of the stack, and turn it into the position 10 blocks above it
+- Set the cost of the pattern to 5 amethyst dust
+- Give the player a one-use cypher to self destruct. (Safely)
+```js
+// This event triggers whenever any registered pattern is cast
+HexcastingEvents.registeredPatternCastEvent((e) => {
+    // You could get the stack after checking what pattern it is,
+    // but this is more convenient if you're going to have multiple patterns
+    let stack = e.getStack();
+
+    // Check if the pattern is the one we registered earlier
+    if (e.getPattern().anglesSignature() == "deewde") {
+        if (
+            stack.length < 1 // If the stack is not long enough
+            || !(stack[stack.length - 1] instanceof EntityIota) // Or the top Iota is not an entity
+        ) {
+            // Schedule the mishap
+            e.scheduleMishap("Expected an entity at the top of the stack");
+            // And finish the spell
+            e.finish();
+        }
+        // Now that we know the pattern which was cast is the one we registered and we have an entity on the top of the stack, we can do the logic.
+
+        // Remove the top iota from the stack and get the entity from it
+        let entity = stack.pop().getEntity();
+
+        // Turn the entity into a position 10 blocks above it and add it to the stack
+        stack.add(new Vec3Iota(entity.blockPosition().offset(0, 10, 0)));
+
+        // Set the price of the spell to be 5 ametheyst dust (Value is in 10,000s of amtheyst dust)
+        e.setCost(50000);
+
+        // For the cypher, we just want to give the caster a new cypher with the *exact* amount of media needed for the spell, in this case 15.125 dust.
+        // The cypher should also contain the angle signatures of the patterns we want it to contain.
+        e.getCaster().give(
+            Hexcasting.createCypher([
+                "qaq", // Mind's Reflection
+                "aa", // Compass' Purification
+                "aqaaq", // Number Literal: 5
+                "aawaawaa" // Explode
+            ], 151250) // The exact cost of a power 5 explosion (Once again the media amount is in 10,000s of amtheyst dust)
+        )
+
+        // And finish the spell (This is mandatory at the end of all code paths where this was the correct pattern)
+        e.finish();
+    }
+})
+```

@@ -23,7 +23,7 @@ WorldgenEvents.add(event => {
     ore.biomes = {					// see above for an explanation of these filters
       id: 'minecraft:plains',
       id: /^minecraft:.*/,			// regex (also technically an ID filter)
-      tag: '#minecraft:is_forest',
+      tag: 'minecraft:is_forest',
     }
     // note all of the above syntax may be mixed and matched individually
   })

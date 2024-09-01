@@ -3,39 +3,39 @@ You can create custom Mob Effects:
 |> 1.19.2+
 ```js
 StartupEvents.registry('mob_effect', event => {
-    event.create('custom_effect') // Create the effect under "kubejs:custom_effect"
-        .color(0x000000) // Sets the color of the Effect's Particles.
-        .beneficial() // Categorizes the Effect as Beneficial.
-        .effectTick((entity, lvl) => { // This useful for reoccurring logic while the entity is under the effect.
-            // Heal the entity once a second scaled by the effect's level, much like regeneration.
-            if (entity.age % 20 != 0) return
-            entity.heal(1 * lvl)
-        })
-        // modifyAttribute is useful to scale an entity's attributes only lasting while under the effect
-        .modifyAttribute('minecraft:generic.attack_damage', // The attribute to scale
-            'e0f4e796-3d3d-11ee-be56-0242ac183754',//Some random UUID which serves as the effect's unique instance
-            1, // The amount to increase/decrease by
-            "multiply_base" // The operation to perform
-        )
+  event.create('custom_effect') // Create the effect under "kubejs:custom_effect"
+    .color(0x000000) // Sets the color of the Effect's Particles.
+    .beneficial() // Categorizes the Effect as Beneficial.
+    .effectTick((entity, lvl) => { // This useful for reoccurring logic while the entity is under the effect.
+      // Heal the entity once a second scaled by the effect's level, much like regeneration.
+      if (entity.age % 20 != 0) return
+      entity.heal(1 * lvl)
+    })
+    // modifyAttribute is useful to scale an entity's attributes only lasting while under the effect
+    .modifyAttribute('minecraft:generic.attack_damage', // The attribute to scale
+      'e0f4e796-3d3d-11ee-be56-0242ac183754',//Some random UUID which serves as the effect's unique instance
+      1, // The amount to increase/decrease by
+      "multiply_base" // The operation to perform
+    )
 })
 ```
 <||> 1.18.2 and below
 ```js
 onEvent('mob_effect.registry', event => {
-    event.create('custom_effect') // Create the effect under "kubejs:custom_effect"
-        .color(0x000000) // Sets the color of the Effect's Particles.
-        .harmful() // Categorizes the Effect as Harmful.
-        .effectTick((entity, lvl) => { // This useful for reoccurring logic while the entity is under the effect.
-            // Heal the entity once a second scaled by the effect's level, much like regeneration.
-            if (entity.age % 20 != 0) return
-            entity.heal(1 * lvl)
-        })
-        // modifyAttribute is useful to scale an entity's attributes only lasting while under the effect
-        .modifyAttribute('minecraft:generic.attack_damage', // The attribute to scale
-            'e0f4e796-3d3d-11ee-be56-0242ac183754',//Some random UUID which serves as the effect's unique instance
-            1, // The amount to increase/decrease by
-            "multiply_base" // The operation to perform
-        )
+  event.create('custom_effect') // Create the effect under "kubejs:custom_effect"
+    .color(0x000000) // Sets the color of the Effect's Particles.
+    .harmful() // Categorizes the Effect as Harmful.
+    .effectTick((entity, lvl) => { // This useful for reoccurring logic while the entity is under the effect.
+      // Heal the entity once a second scaled by the effect's level, much like regeneration.
+      if (entity.age % 20 != 0) return
+      entity.heal(1 * lvl)
+    })
+    // modifyAttribute is useful to scale an entity's attributes only lasting while under the effect
+    .modifyAttribute('minecraft:generic.attack_damage', // The attribute to scale
+      'e0f4e796-3d3d-11ee-be56-0242ac183754',//Some random UUID which serves as the effect's unique instance
+      1, // The amount to increase/decrease by
+      "multiply_base" // The operation to perform
+    )
 })
 ```
 <|

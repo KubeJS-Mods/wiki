@@ -1,1 +1,53 @@
-![[https://i.latvian.dev/pc/2024-01-18_08.25.24.png]]
+##### What does this mod do?
+
+This mod lets you create scripts in JavaScript language to manage your server, add new blocks and items, change recipes, add custom handlers for quest mods and more!
+
+##### How to use it?
+
+Run the game with mod installed once. It should generate `kubejs` folder in your minecraft directory with example scripts and README.txt. Read that!
+
+Here's a video tutorial for 1.19.2:
+
+![[youtube:xhJJbNJjics]]
+
+##### I don't know JavaScript
+
+There's examples and pre-made scripts here. And you can always ask in discord support channel for help with scripts, but be specific.
+
+##### Can I reload scripts?
+
+Yes, use `/reload` to reload {se-s}, `F3 + T` to reload {cl-s}` and `/kubejs reload startup_scripts` to reload {st-s}. If you don't care about reloading recipes but are testing some world interaction event, you can run `/kubejs reload server_scripts`. Note: Not everything is reloadable. Some things require you to restart game, some only world, some work on fly. Reloading startup scripts is not recommended, but if you only have event listeners, it shouldn't be a problem.
+
+##### What mod recipes does it support / is mod X supported?
+
+If the mod uses datapack recipes, then it's supported by default. Some more complicated mods require addon mods, but in theory, still would work with datapack recipes. See [Recipes](https://mods.latvian.dev/books/kubejs-legacy/page/recipeeventjs) and [Addons](https://mods.latvian.dev/books/kubejs/chapter/addons "Addons") sections for more info.
+
+##### What features does this mod have?
+
+See [list of all Features](https://mods.latvian.dev/books/kubejs/page/features "Features").
+
+##### How does this mod work?
+
+It uses a fork of Rhino, a JavaScript engine by Mozilla to convert JS code to Java classes at runtime. KubeJS wraps minecraft classes and adds utilities to simplify that a lot and remove need for mappings. [Architectury](https://www.curseforge.com/minecraft/mc-mods/architectury-api) lets nearly the same source code be compiled for both Forge and Fabric making porting extremely easy.
+
+##### Ok, but what if it.. doesn't work?
+
+You can report issues [here](https://github.com/KubeJS-Mods/KubeJS/issues).
+
+##### I have more questions/suggestions!
+
+If wiki didn't have the answer for what you were looking for, you can join the [Discord server](https://discord.gg/lat) and ask for help on [\#support](https://discord.gg/lat) channel!
+
+[![](https://discordapp.com/api/guilds/303440391124942858/widget.png?style=banner3)](https://discord.gg/lat)
+
+Website: [https://kubejs.com/](https://kubejs.com/)
+
+Source and issue tracker: [https://github.com/KubeJS-Mods/KubeJS](https://github.com/KubeJS-Mods/KubeJS)
+
+Download: [https://www.curseforge.com/minecraft/mc-mods/kubejs](https://www.curseforge.com/minecraft/mc-mods/kubejs)
+
+>>> warn
+Anything below 1.18 is no longer supported!
+<<<
+
+#####   

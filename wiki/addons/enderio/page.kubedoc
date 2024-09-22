@@ -1,0 +1,39 @@
+# Basic Recipes
+## Fire Crafting
+
+```js
+ServerEvents.recipes(event => {
+
+  // removes all fire crafting recipes
+  event.remove({ type: "enderio:fire_crafting" });
+
+  // spawn items from the simple_dungeon loot table when igniting dirt or any kind of glass
+  // this example uses a block tag
+  // this craft will result in a loot explosion because the amount is not limited and the table is very large
+  // limited to the overworld by default
+  event.recipes.enderio.fire_crafting(
+      ["minecraft:dirt", "#forge:glass"],
+      "minecraft:chests/simple_dungeon"
+  );
+
+  // spawn items from the simple_dungeon loot table when igniting obsidian
+  // limited to 5 item drops
+  // limited to the overworld and the nether
+  event.recipes.enderio.fire_crafting(
+      ["minecraft:obsidian"],
+      "minecraft:chests/simple_dungeon",
+      5,
+      ["minecraft:overworld", "minecraft:the_nether"]
+  );
+
+  // spawn items from the simple_dungeon loot table when igniting white wool
+  // this example uses the KubeJS block wrapper
+  // limited to 3 item drops
+  // limited to the overworld and the end
+  // uses chaining functions for the max item drops and dimensions
+  event.recipes.enderio
+      .fire_crafting([Block.id('minecraft:white_wool')], 'minecraft:chests/simple_dungeon')
+      .maxItemDrops(3)
+      .dimensions(['minecraft:overworld', 'minecraft:end']);
+});
+```

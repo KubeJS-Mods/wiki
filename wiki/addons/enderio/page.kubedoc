@@ -4,9 +4,9 @@
 Fire Crafting allows you to light a specific block on fire. After a bit of time, the fire will go out and the block will spawn items from the specified loot table.
 To avoid loot explosions when using a loot table with a lot of items, you can also limit the item amount.
 <<<
+### Examples:
 ```js
 ServerEvents.recipes(event => {
-
   // removes all fire crafting recipes
   event.remove({ type: "enderio:fire_crafting" });
 

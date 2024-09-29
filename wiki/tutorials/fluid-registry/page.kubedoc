@@ -14,7 +14,7 @@ StartupEvents.registry('fluid', event => {
     .displayName('Thick Fluid')
                  
   // Basic "thin" (looks like water) fluid with cyan tint, has no bucket and is not placeable
-  event.create('thick_fluid')
+  event.create('thin_fluid')
     .thinTexture(0xFF0000)
     .bucketColor(0x00FFFF)
     .displayName('Thin Fluid')
@@ -30,7 +30,7 @@ StartupEvents.registry('fluid', event => {
 
   // Fluid with a modified bucket item
   let tacoSauce = event
-    .create('taco_suace')
+    .create('taco_sauce')
     .thickTexture(0xff0000)
     .bucketColor(0xff0000)
   
@@ -63,7 +63,7 @@ onEvent('fluid.registry', event => {
   
   // Fluid with a modified bucket item
   let tacoSauce = event
-    .create('taco_suace')
+    .create('taco_sauce')
     .thickTexture(0xff0000)
     .bucketColor(0xff0000)
   

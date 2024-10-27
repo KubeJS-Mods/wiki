@@ -41,7 +41,7 @@ Besides the base block builder, there are a few additional block builders avaial
 | "pressure_plate" | PressurePlateBlockBuilder |  |
 | "button" | ButtonBlockBuilder |  |
 | "falling" | FallingBlockBuilder |  |
-| "crop" | CropBlockBuilder | aditional methods include `[js].survive()`, `[js].crop()` and `[js].growTick()`; `[js].item()` refers to the seed item for this crop |
+| "crop" | CropBlockBuilder | additional methods include `[js].survive()`, `[js].crop()` and `[js].growTick()`; `[js].item()` refers to the seed item for this crop |
 | "cardinal" | HorizontalDirectionalBlockBuilder |  |
 | "detector" | DetectorBlock$Builder |  |
 | "basic" | BasicBlockJS$Builder | This is the default [[$BlockBuilder|block builder]] |

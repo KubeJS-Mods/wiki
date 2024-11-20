@@ -3,7 +3,7 @@ These events allow you to modify recipe viewer mods all at once with the same ev
 Currently supported mods:
 - [[/addons/rei]]
 - [[/addons/jei]]
-- [[/addons/emi]]
+- EMI
 
 Previously these were split up as `REIEvents` and `JEIEvents`.
 You can use these events from both {cl-s} and {se-s} (on server side only `'item'` and `'fluid'` types will work, though).

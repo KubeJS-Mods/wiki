@@ -22,6 +22,12 @@ versions: "[1202, 1605]"
 redirect: "/path/to/redirect"
 # Author ID, you can find yours by right-clicking on yourself in Discord and opening Apps > KubeJS Profile
 author: "00000001"
+# Marks the page as "Also see" in the sidebar
+see-also: "/path/to/see/also"
+# Downloads
+download-curseforge: "kubejs"
+download-modrinth: "kubejs"
+download-github: "KubeJS-Mods/KubeJS"
 ```
 
 ## Language Documents
@@ -43,7 +49,7 @@ Documents of other languages will fall back to English if key is missing. Values
 
 `page.kubejsdoc` files are very similar to markdown, with few differences, mostly related to linking to pages/files. Full spec below.
 
-You can preview some test syntax [here](https://kubejs.com/wiki/en/test).
+You can preview some test syntax [here](https://kubejs.com/wiki/test).
 
 ### Basic Syntax
 

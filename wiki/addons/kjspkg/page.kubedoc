@@ -1,11 +1,19 @@
-KJSPKG is a package manager for KubeJS that allows you to download different example scripts and libraries into your own instance.
-It will automatically manage your minecraft version, modloader, dependency and incompatibility control. It works with all modern KubeJS versions, and should even work with some older versions, ie. 1.12!
+[KJSPKG](https://kjspkg-uwqx.shuttle.app/) is an advanced package manager for KubeJS that allows you to quickly and easily download
+community-made scripts and libraries for use in your own modpacks and projects.
+It automatically manages your minecraft version, modloader, dependencies, and incompatibilities.
+It works with all modern KubeJS versions, and should even work with some legacy versions, like 1.12!
+
+>>> info
+Do note that the current URL for KJSPKG (https://kjspkg-uwqx.shuttle.app/) is temporary. We are
+working on getting a proper domain, but for now, just use this.
+(It's deployed on [Shuttle](https://shuttle.dev).)
+<<<
 
 ![[kjspkg.png]]
 
 # Installation
 
-. Download the [CLI version of KJSPKG](https://github.com/Modern-Modpacks/kjspkg/tree/main#installation--update).
+. Install the [KJSPKG CLI](https://github.com/RedstoneWizard08/kjspkg/wiki/CLI-Installation).
 . Open a terminal in the `kubejs` directory inside of your instance.
 . Run `kjspkg init` and select your minecraft version/modloader.
 
@@ -15,7 +23,7 @@ Now you are able to install packages into your instance!
 
 # Usage
 
-- To see more info about a package, run `kjspkg pkg <package_name>`
+- To see more info about a package, run `kjspkg info <package_name>`
 - To download a package, run `kjspkg install <package_name>`
 - To remove a package, run `kjspkg remove <package_name>`
 - To update a package, run `kjspkg update <package_name>`
@@ -25,21 +33,25 @@ Now you are able to install packages into your instance!
 
 # Adding your own package
 
-If you have an example script you would like to share on KJSPKG, check out [the "Adding your own package" section](https://github.com/Modern-Modpacks/kjspkg#adding-your-own-package) of KJSPKG's README. We are always happy to add more scripts from different authors to our list!
+If you have an package you would like to publish on KJSPKG, check out [the wiki page](https://github.com/RedstoneWizard08/kjspkg/wiki/Uploading-a-package) on how to do so!
+We are always happy to add more scripts from different authors to our list!
 
 # Notable packages
 
-## [`craft-js`](https://kjspkglookup.modernmodpacks.site/p/?id=craft-js) (1.18, Forge/Fabric)
-Craft.js is a KubeJS script which allows you to prepare recipes inside of a container (like chests) to quickly create various recipes.
+## [`craft-js`](https://kjspkg-uwqx.shuttle.app/p/craft-js) (1.18, Forge/Fabric)
+Craft.js is a KubeJS script that allows you to place recipes inside of a container (like chests) to quickly create various recipes.
 
 ![[craftjs.png]]
 
-## [`create-manual`](https://kjspkglookup.modernmodpacks.site/p/?id=create-manual) (1.19, Forge/Fabric)
-Create Manual adds a patchouli-esque manual item to [Create](https://www.curseforge.com/minecraft/mc-mods/create).
+## [`create-manual`](https://kjspkg-uwqx.shuttle.app/p/create-manual) (1.19, Forge/Fabric)
+Create Manual adds a Patchouli-esque manual item to [Create](https://www.curseforge.com/minecraft/mc-mods/create).
 
 ![[youtube:5_ab2RnxJY0]]
 
-## [`not-neat`](https://kjspkglookup.modernmodpacks.site/p/?id=not-neat) (1.16-1.20, Forge/Fabric)
+## [`not-neat`](https://kjspkg-uwqx.shuttle.app/p/not-neat) (1.16-1.20, Forge/Fabric)
 Not Neat is a script that allows you to hide the [Neat](https://www.curseforge.com/minecraft/mc-mods/neat) tooltip depending on the game stages the player has.
 
 ![[notneat.png]]
+
+## [`left-pad`](https://kjspkg-uwqx.shuttle.app/p/left-pad) (All versions, all loaders)
+`left-pad` is a package that was made mostly as a joke for JavaScript developers. It's a reference to the [`left-pad` incident](https://en.wikipedia.org/wiki/Npm_left-pad_incident).

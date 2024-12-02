@@ -2,6 +2,10 @@ KubeJS TFMG allows you to create recipes for **Create: The Factory Must Grow**
 
 You can also go to the GitHub wiki [Here](https://github.com/wolfieboy09/KubeJS-TFMG/wiki/)
 
+>>> info
+For **1.20.1**, you have to use `tfmg`, and for **1.19.2**, you need to use `createindustry`
+<<<
+
 # Recipes
 Create: TFMG intergration for KubeJS. It allows you to create the current recipes:
 - Casting
@@ -10,7 +14,8 @@ Create: TFMG intergration for KubeJS. It allows you to create the current recipe
 - Industrial Blasting
 - Polarizing
 
-Examples of the recipes in action:
+Recipe examples:
+|> 1.20.1
 ```js
 ServerEvents.recipes(event => {
     // Casting supports ONE input fluid, up to THREE item outputs.
@@ -38,5 +43,34 @@ ServerEvents.recipes(event => {
     event.recipes.tfmg.polarizing("minecraft:dirt", "minecraft:mud", 400)
 })
 ```
+<||> 1.19.2
+```
+ServerEvents.recipes(event => {
+    // Casting supports ONE input fluid, up to THREE item outputs.
+    // The last argument (the "100" at the end) is processing time in ticks
+    // This recipe generates cobblestone from lava in the cast
+    event.recipes.createindustry.casting(Fluid.of("minecraft:lava", 1), ["minecraft:cobblestone"], 100)
+
+    // Coking supports ONE input item.
+    // NOTE: Second argument must be one item and one fluid. (TFMG thing)
+    // The last argument (the "100" at the end) is processing time in ticks
+    // This recipe uses mud to create dirt and water
+    event.recipes.createindustry.coking("minecraft:mud", ["minecraft:dirt", Fluid.of("minecraft:water", 5)], 100)
+
+    // Distillation supports ONE input item, and up to 6 output fluids.
+    // This example uses 500 mB of water to create 400 mB of water and 100 mB of lava
+    event.recipes.createindustry.distillation(Fluid.of("minecraft:water", 500), [Fluid.of("minecraft:water", 400), Fluid.of("minecraft:lava", 100)])
+
+    // Industrial Blasting supports ONE input item, and up to TWO fluid outputs.
+    // This example uses dirt to make 300mB of water and 200mB of lava
+    event.recipes.createindustry.industrial_blasting("minecraft:dirt", [Fluid.of("minecraft:water", 300), Fluid.of("minecraft:lava", 200)], 1)
+
+    // Polarizing supports ONE input item, and ONE output item.
+    // NOTE: Third argument is the amount of FE (energy) the recipe needs/uses
+    // This example makes one mud from dirt with 400 FE
+    event.recipes.createindustry.polarizing("minecraft:dirt", "minecraft:mud", 400)
+})
+```
+<|
 
 Remember: More features will be released in the future.

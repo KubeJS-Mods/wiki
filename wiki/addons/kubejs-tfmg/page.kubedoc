@@ -73,5 +73,3 @@ ServerEvents.recipes(event => {
 })
 ```
 <|
-
-Remember: More features will be released in the future.

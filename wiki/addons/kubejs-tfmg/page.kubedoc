@@ -3,7 +3,8 @@ KubeJS TFMG allows you to create recipes for **Create: The Factory Must Grow**
 You can also go to the GitHub wiki [Here](https://github.com/wolfieboy09/KubeJS-TFMG/wiki/)
 
 >>> info
-For **1.20.1**, you have to use `tfmg`, and for **1.19.2**, you need to use `createindustry`
+For **1.20.1**, you have to use `tfmg`
+And for **1.19.2**, you need to use `createindustry`
 <<<
 
 # Recipes
@@ -44,7 +45,7 @@ ServerEvents.recipes(event => {
 })
 ```
 <||> 1.19.2
-```
+```js
 ServerEvents.recipes(event => {
     // Casting supports ONE input fluid, up to THREE item outputs.
     // The last argument (the "100" at the end) is processing time in ticks

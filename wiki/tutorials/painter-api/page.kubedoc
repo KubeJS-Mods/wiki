@@ -1,3 +1,7 @@
+>>> danger
+Painter API was removed in versions above 1.21!
+<<<
+
 # About
 Painter API allows you to draw things on the screen, both from server and directly from client. This can allow you to create widgets from server side or effects on screen or in world from client side.
 

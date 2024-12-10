@@ -16,9 +16,11 @@ Create: TFMG intergration for KubeJS. It allows you to create the current recipe
 - Polarizing
 
 # Casting
+
 Code: `casting(inputFluid, outputItem[], castingTime)`
 
 # Coking
+
 Code: `coking(inputItem, [outputItem, outputFluid], cokingTime)`
 
 >>> info
@@ -26,9 +28,11 @@ Coking requires one output item and one output fluid
 <<<
 
 # Distillation
+
 Code: `distillation(inputItem, outputFluid[])`
 
 # Industrial Blasting
+
 Code: `industrial_blasting(inputItem, outputFluid[])`
 
 >>> info
@@ -36,6 +40,7 @@ Output can only have up to two output fluids
 <<<
 
 # Polarizing
+
 Code: `polarizing(inputItem, outputItem, energy_amount)`
 
 Recipe examples:

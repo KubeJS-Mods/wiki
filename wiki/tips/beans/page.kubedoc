@@ -1,0 +1,8 @@
+KubeJS has a feature known as beans which allows you to make scripts a tad more readable.
+Anything getXy() can be gotten with xy, anything setXy(value) can be set with xy = value and anything isXy() can be checked with just xy.
+This allows us to shorten our code! For example, to get a list of all online players you can do: event.getServer().getPlayers(). With beans this can be shortened to event.server.players!
+
+>>> warn
+Note that get and is beans only work if the method has no parameters. This means a method like getHeldItem(InteractionHand hand) cannot be shortened to heldItem.
+For set the method needs to have a single parameter.
+<<<

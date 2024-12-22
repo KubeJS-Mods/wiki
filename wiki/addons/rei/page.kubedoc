@@ -196,5 +196,5 @@ onEvent('rei.group', event => {
 ```
 <|
 >>> danger
-To reload these, it is not enough to only reload the client. You need to also run `/kjs reload client_scripts` and `/reload`.
+To reload these, it is not enough to only reload the client. You also need to run `/kjs reload client_scripts` and `/reload`.
 <<<

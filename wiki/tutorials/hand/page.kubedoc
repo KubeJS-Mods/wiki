@@ -2,6 +2,10 @@ To get the ID of an item with NBT data/components, you can use the `/kjs hand` c
 Here's how to use it:
 . Put the item in your main hand
 . Run the command
-. Now you should see something like this:
-![[command_output.png]]
+. <#output>
 . Click on the green text (the item ID) to copy it
+
+>>> #output
+Now you should see something similar to this:
+![[command_output.png]]
+<<<

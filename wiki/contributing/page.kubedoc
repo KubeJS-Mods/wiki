@@ -1,4 +1,5 @@
 {contributing}
+Make sure to also check the README of the wiki repo on GitHub for info on the file structure.
 
 # {formatting}
 {formatting-info}
@@ -6,4 +7,4 @@
 WIP
 <<<
 
-check `https://kubejs.com/wiki/preview/x` x being the pr number for a preview
+You can check `https://kubejs.com/wiki/preview/x` for a preview of a currently open PR.

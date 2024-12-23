@@ -34,6 +34,6 @@ To remove iron we create a file at this path `kubejs/data/minecraft/worldgen/con
 This JSON file contains the code shown above.
 
 # Custom:
-I recommend you check out https://misode.github.io/worldgen/feature/ (use the preset button on the right to get an idea of some vanilla worldgen) to generate the necessary files.
+I recommend you check out [Misode's Configured Feature Generator](https://misode.github.io/worldgen/feature/) (use the preset button on the right to get an idea of some vanilla worldgen) to generate the necessary files.
 In order to change a vanilla worldgen feature name the file `identifier-of-feature.json`
 Using a preset you could probably even add your own custom geode.

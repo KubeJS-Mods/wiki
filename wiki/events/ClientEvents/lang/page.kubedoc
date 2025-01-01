@@ -1,5 +1,7 @@
 This event is used to create new or modify existing translations for a particular language.
 
+# Adding Translations
+
 To add a new translation, retrieve the key to be translated. A key must not have an existing translation.
 
 Below is an example of adding a name to a block without one for U.S. English:
@@ -8,6 +10,9 @@ ClientEvents.lang('en_us', event => { // 'en_us' is the name of the U.S. English
   event.add('block.kubejs.newblock', 'New Block')
 })
 ```
+
+# Renaming Items, Entities, and More
+
 To modify an existing translation, you can use the methods `renameItem`, `renameBlock`, `renameEntity`, or `renameBiome`. Instead of using a translation key, the ID of the what you want to change is used.
 
 Below is an example of renaming the vanilla Grass Block item:
@@ -19,3 +24,7 @@ ClientEvents.lang('en_us', event => {
 >>> warning
 NOTE: Renaming an item, block, entity, or biome DOES NOT change its registry ID.
 <<<
+
+# Renaming Specific Keys
+
+At the moment, there is no method to change the text translations of an already-translated key using a KubeJS script. Instead, you will have to override the key's existing translation by editing the language of the respective mod using a resource pack.

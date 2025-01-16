@@ -1,15 +1,15 @@
 >>> info
 RecipeViewerEvents is only available on version 1.21 and above.
+On prior versions, use `REIEvents` and `JEIEvents` instead.
 <<<
 
 # About
 These events allow you to modify recipe viewer mods all at once with the same events!
 Currently supported mods:
-- [[/addons/rei]]
-- [[/addons/jei]]
+- Roughly Enough Items (for 1.20 and below go [here)](/addons/rei)
+- Just Enough Items (for 1.20 and below [here)](/addons/jei)
 - EMI
 
-Previously these were split up as `REIEvents` and `JEIEvents`.
 You can use these events from both {cl-s} and {se-s} (on server side only `'item'` and `'fluid'` types will work, though).
 
 # Supported Features
@@ -39,10 +39,10 @@ You can use these events from both {cl-s} and {se-s} (on server side only `'item
 If you see 2 icons that means Client & Server
 
 | Custom Entry RecipeViewerEvents | JEI   | REI          | EMI   |
-| `addEntries`                    | {no}  | {yes}\* {no} | {no}  |
-| `removeEntries`                 | {no}  | {yes}\* {no} | {no}  |
-| `removeEntriesCompletely`       | {no}  | {yes}\* {no} | {no}  |
-| `addInformation`                | {no}  | {yes}\* {no} | {no}  |
-| `groupEntries`                  | {na}  | {yes}\* {no} | {na}  |
+| `addEntries`                    | {no}  | {yes}\* / {no} | {no}  |
+| `removeEntries`                 | {no}  | {yes}\* / {no} | {no}  |
+| `removeEntriesCompletely`       | {no}  | {yes}\* / {no} | {no}  |
+| `addInformation`                | {no}  | {yes}\* / {no} | {no}  |
+| `groupEntries`                  | {na}  | {yes}\* / {no} | {na}  |
 
 \* Requires a KubeJS addon to register the custom type

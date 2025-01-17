@@ -245,6 +245,9 @@ event.remove({ id: 'minecraft:glowstone' })
 ```
 
 To find a recipe's unique ID, turn on advanced tooltips using the `F3 + H` keys (you will see an announcement in chat), then hover over the \[+\] symbol (if using REI) or the output (if using EMI or JEI).
+>>> warning
+NOTE: When using both EMI and JEI, recipes added by JEI will have IDs similar to  `jei:/mod_id/pathway_1/pathway_2`. The actual recipe ID would be `mod_id:pathway_1/pathway_2`.
+<<<
 
 # Modifying & Replacing Recipes
 

@@ -35,6 +35,3 @@
 
 # Recipes
 - Recipe types can now be registered as json schemas. That's good news for both modders who want to add KJS integration without depending on the mod jar and modpack creators who can add integration themselves to mods that don't have it yet
-
-# Other questions
-If you have any other questions, feel free to ask them on my [Discord Server]({discord-url}).

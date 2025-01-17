@@ -1,2 +1,4 @@
 script: "startup"
 see-also: "$BlockBuilder"
+prev-page: "/test/unknown-page-test"
+next-page: "event-list"

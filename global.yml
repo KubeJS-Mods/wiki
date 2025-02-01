@@ -13,3 +13,7 @@ support-url: "https://kubejs.com/support"
 st-s: "<#$st-s>"
 cl-s: "<#$cl-s>"
 se-s: "<#$se-s>"
+
+slv-rank: "![[emoji:/other/hall-of-fame/slv.png|Silver]]"
+gld-rank: "![[emoji:/other/hall-of-fame/gld.png|Gold]]"
+dmd-rank: "![[emoji:/other/hall-of-fame/dmd.png|Diamond]]"

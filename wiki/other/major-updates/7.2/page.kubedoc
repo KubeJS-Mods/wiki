@@ -1,0 +1,7 @@
+# For Addon Devs
+- WIP
+
+# For Modpack Devs
+- Fixed script order bug, where it was different on Linux and Windows. They should always be alphabetical now, case insensitive
+- Fixed localized enum name bug, e.g. `"epıc"` instead of `"epic"` Rarity in Turkish
+- WIP

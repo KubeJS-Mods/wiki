@@ -240,11 +240,14 @@ event.remove({ output: 'minecraft:cooked_chicken', type: 'minecraft:campfire_coo
 event.remove([{ type: 'minecraft:smelting', output: 'minecraft:iron_ingot' }, { type: 'minecraft:blasting', output: 'minecraft:iron_ingot' }])
 
 // Remove a recipe by ID. in this case, data/minecraft/recipes/glowstone.json:
-// Note: Recipe ID and output are different!
+// Note: Recipe ID and output are usually different!
 event.remove({ id: 'minecraft:glowstone' })
 ```
 
-To find a recipe's unique ID, turn on advanced tooltips using the `F3 + H` keys (you will see an announcement in chat), then hover over the \[+\] symbol (if using [REI](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items)) or the output (if using [JEI](https://www.curseforge.com/minecraft/mc-mods/jei)).
+To find a recipe's unique ID, turn on advanced tooltips using the `F3 + H` keys (you will see an announcement in chat), then hover over the \[+\] symbol (if using REI) or the output (if using EMI or JEI).
+>>> warning
+NOTE: When both EMI and JEI are installed, recipes added by JEI will have IDs similar to  `jei:/mod_id/pathway_1/pathway_2`. The actual recipe ID would be `mod_id:pathway_1/pathway_2`.
+<<<
 
 # Modifying & Replacing Recipes
 

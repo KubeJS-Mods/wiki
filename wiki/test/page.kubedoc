@@ -56,7 +56,7 @@ Inline `code` and `code II` and `code *III*`
 
 #[[red|Red and **bold**]]
 
-Inline image ![[emoji:test.png|Test]] test
+Inline image ![[emoji:test.png|Test]] test [[@000001]]
 
 [[[/tutorials/block-registry]]]
 [[[/ref/BlockBuilder]]]

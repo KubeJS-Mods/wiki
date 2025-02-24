@@ -1,0 +1,20 @@
+`global` is an object accessible in all script types.
+It can be used for sharing data across scripts, ie. for automatically adding recipes to items.
+Here's an example:
+```js
+// Startup scripts
+global.items = [
+  ['hi_wiki', '4x diamond']
+]
+StartupEvents.registry('item', event => {
+  // Register the items
+  global.items.forEach(items => event.register(items[0]))
+})
+```
+```js
+// Server scripts
+ServerEvents.recipes(event => {
+  // Add the recipes
+  global.items.forEach(items => event.shapeless(items[0], items[1]))
+})
+```

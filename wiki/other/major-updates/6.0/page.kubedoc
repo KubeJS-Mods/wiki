@@ -115,8 +115,3 @@ There might be some more reflective helper methods later in the Java util class,
 # Bye Bye Wrapper classes
 
 None of the vanilla classes are wrappers anymore - `EntityJS`, `LevelJS`, `ItemStackJS`, `IngredientJS`, and others are gone. This may introduce some bugs, but in general, should make it significantly easier to interact with Minecraft and other mods. Almost all old methods are still supported by core-modding vanilla. This should also significantly boost performance, as it doesn't need to constantly wrap and unwrap classes.
-
-# Other questions
-
-If you have any other questions, feel free to ask them on my [Discord Server]({discord-url}).
-You can find out info about [[/other/major-updates/6.1|next update here]].

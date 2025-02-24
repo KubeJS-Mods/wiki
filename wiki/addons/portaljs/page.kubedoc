@@ -56,9 +56,9 @@ PortalEvents.register(event => {
 
     // (optional) Create a sound from sound event data to play to the player before/after teleportation
     // Example: play the ALLAY_THROW sound at pitch 1 and volume 1
-    .inPortalAmbienceSound(SoundEventData.of(SoundEvents.ALLAY_THROW, 1, 1))
+    .inPortalAmbienceSound(SoundEvents.ALLAY_THROW, 1, 1)
 
     // Example: play the ALLAY_DEATG sound at pitch 1 and volume 1
-    .afterTeleportationAmbienceSound(SoundEventData.of(SoundEvents.ALLAY_DEATH, 1, 1))
+    .afterTeleportationAmbienceSound(SoundEvents.ALLAY_DEATH, 1, 1)
 })
 ```

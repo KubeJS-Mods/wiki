@@ -1,0 +1,64 @@
+This addon allowes you to create custom portals into Minecraft.
+
+Inside your **startup scripts**:
+```js
+PortalEvents.register(event => {
+  // Here is where we start a new portal
+  event.create()
+    // (required) Set the frame block for the portal
+    .frameBlock("minecraft:dirt")
+
+    // Set the dimension to travel to when the portal is used
+    .setDestination("minecraft:the_nether")
+
+    // Now you can do one of the following (default flint and steel):
+    // This lights the portal with a grass block
+    .lightWithItem("minecraft:grass_block")
+
+    // Lights the portal with water
+    .lightWithWater()
+
+    // Light the portal with a fluid
+    .lightWithFluid("minecraft:lava")
+
+    // (Optional) Custom ignition source by the namespace and path (as in mod_id:some_source)
+    .customIgnitionSource("mod:source")
+
+    // (optional) Set a forced size for the portal (width, height)
+    .forcedSize(4, 5)
+
+    // (Optional) Configure the portal's return dimension. `onlyIgniteInReturnDimension` specifies if the portal can only be ignited in the return dimension
+    .returnDim("minecraft:the_end", true)
+
+    // Or, you can just do .returnDim("minecraft:the_end") (false is the default)
+
+    // (Optional) Restrict portal ignition to the Overworld. Use this if you want the portal to be ignitable only in the Overworld
+    .onlyLightInOverworld()
+
+    // (Optional) Use the flat portal style, similar to the End Portal
+    .flatPortal()
+
+    // (Optional) Set the RGB color for the portal's tint
+    .tint(r, g, b) // (red, green, blue)
+    // .tint(0x) // You can do your 0x[hex color code] here as well
+
+    // .tintColor(r, g, b) // does the game thing as tint
+
+    // (Optional) Event handling before/after the entity gets teleported
+    .beforeTeleportation(entity => {
+      // Example logic: cancel for non-player entities
+      return entity instanceof Player ? ShouldTP.CONTINUE : ShouldTP.CANCEL;
+    })
+    .afterTeleportation(entity => {
+       // Example logic for after teleportation
+       console.log("Teleported: " + entity.getName().getString())
+    })
+
+    // (optional) Create a sound from sound event data to play to the player before/after teleportation
+    // Example: play the ALLAY_THROW sound at pitch 1 and volume 1
+    .inPortalAmbienceSound(SoundEvents.ALLAY_THROW, 1, 1)
+
+    // Example: play the ALLAY_DEATG sound at pitch 1 and volume 1
+    .afterTeleportationAmbienceSound(SoundEvents.ALLAY_DEATH, 1, 1)
+})
+```

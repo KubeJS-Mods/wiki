@@ -23,7 +23,7 @@ The `ore` identifier removes all minecraft ores.
 # Specific Ores
 
 If we wanted to remove a specific ore it is a similar process.
-You can find ores' identifiers [here](https://minecraft.wiki/w/Ore_(feature)#Data_values).
+You can find ores' identifiers [here](https://minecraft.wiki/w/Ore_\(feature\)#Data_values).
 
 To remove iron we create a file at this path `kubejs/data/minecraft/worldgen/configured_feature/` called `ore_iron.json`
 This JSON file contains the code shown above.

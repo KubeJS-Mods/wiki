@@ -1,8 +1,8 @@
-# Add
 >>> warn
 This event isn't complete and can only do basic things.
 <<<
 
+# Add
 ## Example script
 ```js
 onEvent("worldgen.add", event => {

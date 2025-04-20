@@ -124,7 +124,7 @@ Much like vanilla biome categories, Forge uses a "biome dictionary" to sort biom
 See [BiomeDictionary](https://github.com/MinecraftForge/MinecraftForge/blob/4011c3fb07dfedc234949b429f853349e0526470/src/main/java/net/minecraftforge/common/BiomeDictionary.java#L39-L94) for more
 <<<
 >>> warn
-This system is _designed_ to be extended by mods.
+This system is designed to be extended by mods.
 <<<
 
 >>> danger

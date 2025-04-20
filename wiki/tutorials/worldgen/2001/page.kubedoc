@@ -1,31 +1,26 @@
->>> #warn
-Unfortunately Kubejs support for 1.20.1 worldgen is not that good. (Doesn't work)
+>>> warn
+KubeJS worldgen on 1.20.1 is not that good. (Doesn't work)
+<<<
+>>> info
+Instead we have to use a datapack. This guide is only supposed to be a first point of reference if you want to change world generation using KubeJS.
 <<<
 
->>> #info
-So instead we have to use a datapack. This guide is only supposed to be a first point of reference if you want to change world generation using Kubejs.
-<<<
-
-**File Location: Make sure to put it in:** `kubejs/data/Insert Name OF Mod Here/worldgen/configured_feature/identifier.json`
-
+Make sure to put this in: `kubejs/data/mod_name/worldgen/configured_feature/identifier.json`
 This file needs to contain:
 
-```JSON
+```json
 {
     "type": "minecraft:no_op",
     "config": {}
 },
 ```
-# All ores
+# All Ores
+If we wanted to remove all minecraft ores, we would create `ore.json` in `kubejs/data/minecraft/worldgen/configured_feature/` and insert the above code snippet. 
+>>> info
+The `ore` identifier removes all minecraft ores.
+<<<
 
-For Example: if we wanted to remove all minecraft ores, we would create ore.json in:
-`kubejs/data/minecraft/worldgen/configured_feature/ore.json` and insert the above code snippet. 
-
-Note: the identifier `ore` removes all minecraft ores
-
-This removes all Minecraft ores. 
-
-# Specific Ores:
+# Specific Ores
 
 If we wanted to remove a specific ore it is a similar process.
 You can find ores' identifiers [here](https://minecraft.wiki/w/Ore_(feature)#Data_values).

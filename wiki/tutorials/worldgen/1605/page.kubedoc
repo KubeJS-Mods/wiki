@@ -1,0 +1,143 @@
+# Add
+>>> warn
+This event isn't complete and can only do basic things.
+<<<
+
+## Example script
+```js
+onEvent("worldgen.add", event => {
+  event.addLake(lake => { // Create new lake feature
+    lake.block = "minecraft:diamond_block" // Block ID (Use [] syntax for properties)
+    lake.chance = 3 // Spawns every ~3 chunks
+  })
+
+  event.addOre(ore => {
+    ore.block = "minecraft:glowstone" // Block ID (Use [] syntax for properties)
+    ore.spawnsIn.blacklist = false // Inverts spawn whitelist
+    ore.spawnsIn.values = [ // List of valid block IDs or tags that the ore can spawn in
+      "#minecraft:base_stone_overworld" // Default behavior - ores spawn in all stone types
+    ]
+    
+    ore.biomes.blacklist = true // Inverts biome whitelist
+    ore.biomes.values = [ // Biomes this ore can spawn in
+      "minecraft:plains", // Biome ID
+      "#nether" // OR #category, see list of categories below
+    ]
+    
+    ore.clusterMinSize = 5 // Min blocks per cluster (currently ignored, will be implemented later, it's always 1)
+    ore.clusterMaxSize = 9 // Max blocks per cluster
+    ore.clusterCount = 30 // Clusters per chunk
+    ore.minHeight = 0 // Min Y ore spawns in
+    ore.maxHeight = 64 // Max Y ore spawns in
+    ore.squared = true // Adds random value to X and Z between 0 and 16. Recommended to be true
+    // ore.chance = 4 // Spawns the ore every ~4 chunks. You usually combine this with clusterCount = 1 for rare ores
+  })
+  
+  event.addSpawn(spawn => { // Create new entity spawn
+    spawn.category = "creature" // Category, can be one of "creature", "monster", "ambient", "water_creature" or "water_ambient"
+    spawn.entity = "minecraft:pig" // Entity ID
+    spawn.weight = 10 // Weight
+    spawn.minCount = 4 // Min entities per group
+    spawn.maxCount = 4 // Max entities per group
+  })
+})
+```
+
+>>> info
+All values are optional. All feature types have a `biomes` field.
+<<<
+
+Valid biome categories (`#category`):
+- `taiga`
+- `extreme_hills`
+- `jungle`
+- `mesa`
+- `plains`
+- `savanna`
+- `icy`
+- `the_end`
+- `beach`
+- `forest`
+- `ocean`
+- `desert`
+- `river`
+- `swamp`
+- `mushroom`
+- `nether`
+
+You can also use `$type` (case doesn't matter) on Forge's BiomeDictionary:
+- `hot`
+- `cold`
+- `wet`
+- `dry`
+- `sparse`
+- `dense`
+- `spooky`
+- `dead`
+- `lush`
+
+>>> info
+See [BiomeDictionary](https://github.com/MinecraftForge/MinecraftForge/blob/4011c3fb07dfedc234949b429f853349e0526470/src/main/java/net/minecraftforge/common/BiomeDictionary.java#L39-L94) for more
+<<<
+
+This is the order vanilla worldgen happens:
+
+. `raw_generation`
+. `lakes`
+. `local_modifications`
+. `underground_structures`
+. `surface_structures`
+. `strongholds`
+. `underground\ores`
+. `underground_decoration`
+. `vegetal_decoration`
+. `top_layer_modification`
+
+>>> warn
+It's possible you may not be able to generate some things in their layer, like ores in dirt, because dirt hasn't spawned yet. This means you may have to change the layer by calling `ore.worldgenLayer = "top_layer_modification"`. But this is not recommended.
+<<<
+
+# Remove
+## Example script
+```js
+onEvent("worldgen.remove", event => {
+  event.removeOres(ores => {
+    ores.blocks = ["minecraft:coal_ore", "minecraft:iron_ore"] // Removes coal and iron ore
+    ores.biomes.values = ["minecraft:plains"] // Removes it only from plains biomes
+  })
+  
+  event.removeSpawnsByID(spawns => {
+    spawns.entities.values = [
+      "minecraft:cow",
+      "minecraft:chicken",
+      "minecraft:pig",
+      "minecraft:zombie"
+    ]
+  })
+  
+  event.removeSpawnsByCategory(spawns => {
+    spawns.biomes.values = [
+      "minecraft:plains"
+    ]
+    spawns.categories.values = [
+      "monster"
+    ]
+  })
+})
+```
+
+If something isn't being removed, you may try to remove it "manually" by printing all features (this will spam your console a lot) and then removing them by ID where possible
+
+```js
+onEvent("worldgen.remove", event => {
+  // May be one of the decoration types/levels described in worldgen.add docs
+  // But ores are *most likely* to be generated in this one
+  event.printFeatures("underground_ores")
+})
+```
+
+```js
+onEvent("worldgen.remove", event => {
+  event.removeFeatureById("underground_ores", "mekanism:ore_copper")
+})
+```

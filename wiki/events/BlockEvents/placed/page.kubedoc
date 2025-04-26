@@ -1,0 +1,28 @@
+This event called each time block is placed by entity or a dispenser.
+
+## Syntax
+```js
+BlockEvents.placed(event => {
+    event.cancel();    // cancels event by preventing block placement
+    event.getLevel();  // returns level block placed in
+    event.getEntity(); // returns entity that placed the block. Could be null if block placed by dispenser
+    event.getBlock();  // returns block which was placed
+
+    // Inherited from KubeEntityEvent
+    event.getPlayer(); // returns player that placed the block. Could be null if block placed by dispenser OR entity that placed the block isn't player
+
+    // Inherited from KubeLevelEvent
+    event.getServer(); // returns server block placed in.
+    event.getRegistries(); // returns regestry access of level block was placed in
+})
+```
+
+## Usage example
+```
+BlockEvents.placed(event => {
+    if (even.getEntity() == null) {
+        event.cancel();
+    }
+})
+```
+Code above will prevent dispensers from placing blocks.

@@ -1,0 +1,29 @@
+This event called each frame when debug info (avalible by pressing F3) is rendered.
+
+>>> warning
+This event called every frame meaning any heavy operations here will result in lags!
+<<<
+
+## Syntax
+```js
+ClientEvents.leftDebugInfo(event => { // or ClientEvents.rightDebugInfo
+    event.getLines(); // returns array of strings. This array represents lines of text in one side of F3 menu
+    event.getShowDebug() // returns true if debug menu should be rendered.
+});
+```
+
+>>> warning
+Mutating array returned by `event.getLines()` will change text rendered in F3 screen.
+<<<
+
+## Usage example
+```
+ClientEvents.leftDebugInfo(event => {
+    event.getLines().push("I love KUBEJSSS");
+});
+```
+Code above will add text `I love KUBEJSSS` in bottom of left side in F3 screen.
+
+>>> info
+`event.getLines()` returns javascript array. You can find information about them at [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+<<<

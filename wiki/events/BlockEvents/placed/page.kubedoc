@@ -18,7 +18,7 @@ BlockEvents.placed(event => {
 ```
 
 ## Usage example
-```
+```js
 BlockEvents.placed(event => {
     if (even.getEntity() == null) {
         event.cancel();

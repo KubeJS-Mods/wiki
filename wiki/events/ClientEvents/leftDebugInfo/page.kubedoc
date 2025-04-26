@@ -17,7 +17,7 @@ Mutating array returned by `event.getLines()` will change text rendered in F3 sc
 <<<
 
 ## Usage example
-```
+```js
 ClientEvents.leftDebugInfo(event => {
     event.getLines().push("I love KUBEJSSS");
 });

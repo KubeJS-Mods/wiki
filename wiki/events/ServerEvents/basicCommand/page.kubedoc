@@ -4,14 +4,16 @@ This event allows regestry of basic chat commands.
 |> 1.21
 ```js
 ServerEvents.basicCommand('<command name>', event => {
-    event.player // player who executed the command
+	event.player // player who executed the command
 	event.input  // string provided as command arguments (ONLY 1.21+)
 })
 ```
 <||> 1.20.1
+```js
 ServerEvents.customCommand('<command name>', event => {
-    event.player // player who executed the command
+	event.player // player who executed the command
 })
+```
 <|
 
 ## Usage example

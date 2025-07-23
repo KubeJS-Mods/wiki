@@ -23,8 +23,8 @@ Here's an example of adding custom recipes (put this in {se-s}):
 |> 1.21.1+
 ```js
 ServerEvents.recipes(event => {
-	event.recipes.farmersdelight.cooking(
-	    "meals", // recipe book tab - valid values: meals, drinks, misc
+    event.recipes.farmersdelight.cooking(
+        "meals", // recipe book tab - valid values: meals, drinks, misc
         ["minecraft:cobblestone"],
         "minecraft:stone", // output
         30, // exp

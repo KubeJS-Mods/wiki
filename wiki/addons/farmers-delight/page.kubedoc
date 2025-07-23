@@ -20,6 +20,30 @@ StartupEvents.registry('item', event => {
 ```
 
 Here's an example of adding custom recipes (put this in {se-s}):
+|> 1.21.1+
+```js
+ServerEvents.recipes(event => {
+	event.recipes.farmersdelight.cooking(
+	    "meals", // recipe book tab - valid values: meals, drinks, misc
+        ["minecraft:cobblestone"],
+        "minecraft:stone", // output
+        30, // exp
+        10, // cookTime
+        "minecraft:bowl" // container
+    );
+
+    event.recipes.farmersdelight.cutting(
+        'minecraft:cobblestone',
+        '#minecraft:pickaxes', // tool
+        [ // results
+            "minecraft:stone",
+            ChanceResult.of("minecraft:flint", 0.75)
+        ],
+        // '' // sound
+    );
+})
+```
+<||> 1.19.2 - 1.20.1
 ```js
 ServerEvents.recipes(event => {
 	event.recipes.farmersdelight.cutting(
@@ -42,3 +66,4 @@ ServerEvents.recipes(event => {
 	);
 })
 ```
+<|

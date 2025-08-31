@@ -1,8 +1,8 @@
-This addon provides a **Helper class** for both chemical items (`elements` and `compounds`).
+This addon introduces a collection of utility classes that make it easier to query, inspect, and interact with chemical items (`elements` and `compounds`) as well as the periodic table.
 
-# Element Methods
+# ElementHelper Methods
 
-The `Element` class exposes methods for retrieving data from element `ItemStack`s.
+The `ElementHelper` class exposes methods for retrieving data from element `ItemStack`s.
 
 ## Methods
 
@@ -41,23 +41,90 @@ Returns `true` if the element is **synthetic/artificial**
 
 ## Example
 
-Example script that tests if a player right clicked an element and if so display its atomic number
+The following script demonstrates how to check if a player right-clicked an `element`
+If the item is a valid chemical element, the script retrieves and displays its `atomic number` to the player.
 
-```js
+```javascript
 ItemEvents.rightClicked(event => {
     const { player, item, hand, level } = event;
 
     if (level.isClientSide()) return;
 
-    if (Element.isElement(item)) {
+    if (ElementHelper.isElement(item)) {
         player.sendSystemMessage("Atomic Number: " + Element.getAtomicNumber(item));
     }
 });
 ```
 
-# Compound Methods
+# CompoundHelper Methods
 
-The `Compound` class exposes methods for retrieving data from compound `ItemStack`s.
+The `CompoundHelper` class exposes methods for retrieving data from compound `ItemStack`s.
+
+## Methods
+
+- $$.isCompound(item: ItemStack): boolean
+Returns `true` if the given `ItemStack` is a `CompoundItem`
+
+- $$.getDescription(item: ItemStack): String
+Returns the **description** of the `compound`
+
+- $$.getMatterState(item: ItemStack): MatterState
+Returns the **state of matter** (`SOLID`, `LIQUID`, `GAS`) of the `compound`
+
+- $$.getColor(item: ItemStack): int
+Returns the `color` of the compound as an integer (RGB)
+
+- $$.getComponents(item: ItemStack): Map<String, int>
+Returns a map of component elements and their counts inside the compound
+
+- $$.getEffects(item: ItemStack): MobEffect[]
+Returns a list of status effects applied by the compound (if any exist)
+
+## Example
+
+```javascript
+ItemEvents.rightClicked(event => {
+    const { player, item, hand, level } = event;
+
+    if (level.isClientSide()) return;
+
+    if (CompoundHelper.isCompound(item)) {
+        player.sendSystemMessage(
+            "Compound: " + Compound.getDescription(item)
+        );
+    }
+});
+```
+
+# PeriodicTableHelper Methods
+
+The `PeriodicTableHelper` class provides utility methods for querying global information about elements
+
+## Methods
+
+- $$.getElementByAtomicNumber(number: int): ItemStack
+Returns the `element` with the specified atomic number
+
+- $$.getElementByAbbreviation(symbol: string): ItemStack
+Returns the `element` with the given abbreviation/symbol (e.g, `"H"`, `"Fe"`)
+
+- $$.getElementByName(name: string): ItemStack
+Returns the element by its full name (e.g, `"Oxygen"`, `"Carbon"`)
+
+- $$.getAllElements(): ItemStack[]
+Returns a list of **all** registered `elements`
+
+- $$.getNaturalElements(): ItemStack[]
+Returns all **naturally occurring** `elements`
+
+- $$.getArtificialElements(): ItemStack[]
+Returns all **synthetic/artificial** `elements`
+
+- $$.getGroupElements(group: int): ItemStack[]
+Returns all elements that belong to the given **group number** (periodic table column)
+
+- $$.getPeriodElements(period: int): ItemStack[]
+Returns all elements that belong to the given **period number** (row)
 
 >>> warn
 This section is still **WIP** – some methods may change in future updates

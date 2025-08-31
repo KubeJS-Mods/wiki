@@ -4,7 +4,7 @@
 
 Syntax: $$liquifier(input: Item, output: Fluid)
 
-Example:
+*Example*:
 
 ```javascript
 ServerEvents.recipes(event => {
@@ -17,7 +17,7 @@ ServerEvents.recipes(event => {
 
 Syntax: $$atomizer(input: Fluid, output: Item)
 
-Example:
+*Example*:
 
 ```javascript
 ServerEvents.recipes(event => {
@@ -30,7 +30,7 @@ ServerEvents.recipes(event => {
 
 Syntax: $$compactor(input: Item, output: Item)
 
-Example:
+*Example*:
 
 ```javascript
 ServerEvents.recipes(event => {
@@ -43,7 +43,7 @@ ServerEvents.recipes(event => {
 
 Syntax: $$combiner(input: Item[], output: Item)
 
-Example:
+*Example*:
 
 ```javascript
 ServerEvents.recipes(event => {
@@ -72,7 +72,7 @@ Syntax: $$dissolver(input: Item, rolls: int, weighted: bool)
 Requires `[js].withGroup(weight, output[])`
 <<<
 
-Example:
+*Example*:
 
 ```javascript
 ServerEvents.recipes(event => {
@@ -89,7 +89,7 @@ ServerEvents.recipes(event => {
 
 Syntax: $$fission(input: Item, output1: Item, output2: Item)
 
-Example:
+*Example*:
 
 ```javascript
 ServerEvents.recipes(event => {

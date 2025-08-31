@@ -1,3 +1,64 @@
+This addon provides a **Helper class** for both chemical items (`elements` and `compounds`).
+
+# Element Methods
+
+The `Element` class exposes methods for retrieving data from element `ItemStack`s.
+
+## Methods
+
+- $$.isElement(item: ItemStack)
+Returns `true` if the `ItemStack` is a chemical element
+
+- $$.getAtomicNumber(item: ItemStack)
+Returns the **atomic number** of the element in the given `ItemStack`
+
+- $$.getAbbreviation(item: ItemStack)
+Returns the **abbreviation/symbol** of the element (e.g., `"H"`, `"O"`, `"Fe"`)
+
+- $$.getGroup(item: ItemStack)
+Returns the **group number** (column in periodic table)
+
+- $$.getGroupName(item: ItemStack)
+Returns the **group name** (e.g., `"Noble Gases"`, `"Alkali Metals"`)
+
+- $$.getPeriod(item: ItemStack)
+Returns the **period number** (row in periodic table)
+
+- $$.getMatterState(item: ItemStack)
+Returns the **state of matter** (`SOLID`, `LIQUID`, `GAS`)
+
+- $$.getMetalType(item: ItemStack)
+Returns the **metal classification** (`METAL`, `NONMETAL`, `METALLOID`)
+
+- $$.getColor(item: ItemStack)
+Returns the **display color** of the element as an integer (RGB)
+
+- $$.getEffects(item: ItemStack)
+Returns a **list of status effects** applied by the element (if any exists)
+
+- $$.isArtificial(item: ItemStack)
+Returns `true` if the element is **synthetic/artificial**
+
+## Example
+
+Example script that tests if a player right clicked an element and if so display its atomic number
+
+```js
+ItemEvents.rightClicked(event => {
+    const { player, item, hand, level } = event;
+
+    if (level.isClientSide()) return;
+
+    if (Element.isElement(item)) {
+        player.sendSystemMessage("Atomic Number: " + Element.getAtomicNumber(item));
+    }
+});
+```
+
+# Compound Methods
+
+The `Compound` class exposes methods for retrieving data from compound `ItemStack`s.
+
 >>> warn
-WIP
+This section is still **WIP** – some methods may change in future updates
 <<<

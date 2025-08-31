@@ -1,0 +1,69 @@
+Place these scripts in the {st-s} folder. On the next game startup, they will be loaded and the new elements and compounds will automatically become available for use in recipes, JEI/REI/EMI, and even be used in certain compounds
+
+|> Element Builder
+## Element Builder
+
+Syntax: Syntax: ## $$create(id: String, type: String)
+
+Methods: 
+
+## $$elementColor(color: String)
+         ## $$groupName(name: String)
+         ## $$abbreviation(abb: String)
+         ## $$atomicNumber(z: int)
+         ## $$chemicalGroup(g: int)
+         ## $$period(p: int)
+         ## $$matterState(state: MatterState)
+         ## $$metalType(type: MetalType)
+         ## $$artificial(isArtificial: bool)
+         ## $$withEffect(effectId: String, duration: int, amplifier: int)
+
+Example
+
+```javascript
+StartupEvents.registry("item", event => {
+    event.create("chemlib:deuterium", "chemlib:element")
+        .elementColor("1e90ff")                 // no # needed at the start
+        .groupName("Isotopes")
+        .abbreviation("²H")
+        .atomicNumber(1)
+        .chemicalGroup(1)
+        .period(1)
+        .matterState(MatterType.GAS)            // or .matterState("solid")
+        .metalType(Metal.NONMETAL)              // or .metalType("nonmetal")
+        .artificial(false)
+})
+```
+
+* `atomicNumber(int)` - Atomic number of the element
+* `abbreviation` - Chemical symbol
+* `chemicalGroup` - Group number
+* `groupName` - Group name
+* `period` - Period number
+* `matterState` - SOLID, LIQUID, GAS (see {{#MatterState}})
+* `metalType` - METAL, METALLOID, NONMETAL (see {{#MetalType}})
+* `artificial()` - Mark as synthetic element
+* `elementColor` - Hex color
+* `withEffect` - Status effect on player when held
+
+<||>+ Compound Builder
+
+## Compound Builder
+
+```javascript
+event.create('test_compound_solid', 'chemlib:compound')
+    .matterState(Matter.SOLID)
+    .description("Dev Testing Compound Description")
+    .compoundColor("0000FF")
+    .withComponent("carbonate", 3)
+    .withComponent("test_element_solid", 4)
+    .withComponent("test_element_liquid");
+```
+
+* `matterState` - SOLID, LIQUID, GAS (see {{#MatterState}})
+* `description` - Text description
+* `compoundColor` - Hex color
+* `withComponent` - Items included in the compound
+* `withEffect` - Status effects
+
+<|

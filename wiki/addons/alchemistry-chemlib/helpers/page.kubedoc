@@ -39,7 +39,7 @@ Returns a **list of status effects** applied by the element (if any exists)
 - $$.isArtificial(item: ItemStack): boolean
 Returns `true` if the element is **synthetic/artificial**
 
-## Example
+### *Example*:
 
 The following script demonstrates how to check if a player right-clicked an `element`
 If the item is a valid chemical element, the script retrieves and displays its `atomic number` to the player.
@@ -80,7 +80,7 @@ Returns a map of component elements and their counts inside the compound
 - $$.getEffects(item: ItemStack): MobEffect[]
 Returns a list of status effects applied by the compound (if any exist)
 
-## Example
+### *Example*:
 
 ```javascript
 ItemEvents.rightClicked(event => {
@@ -125,6 +125,20 @@ Returns all elements that belong to the given **group number** (periodic table c
 
 - $$.getPeriodElements(period: int): ItemStack[]
 Returns all elements that belong to the given **period number** (row)
+
+### *Example*:
+
+```javascript
+ItemEvents.rightClicked(event => {
+    const {player, item, hand, level} = event;
+
+    if (level.isClientSide()) return;
+
+    let elements = PeriodicTableHelper.getPeriodElements(6)
+
+    elements.forEach(item => player.sendSystemMessage(item.toString()))
+})
+```
 
 >>> warn
 This section is still **WIP** – some methods may change in future updates

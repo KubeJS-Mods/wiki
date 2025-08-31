@@ -14,7 +14,7 @@ Type must be set to `"chemlib:element"`
 Sets the hex color of the compound (The `#` is Optional)
 
 >>> info
-Accepts a color in any of these formats: `"#52277E"`, `"52277E"`, `0x52277E`, or `"0x52277E"`—whichever is easiest for you.
+Accepts a color in any of these formats: `"#52277E"`, `"52277E"`, `0x52277E`, or `"0x52277E"` whichever is easiest for you.
 <<<
 
 - $$.groupName(name: String)
@@ -36,14 +36,14 @@ Sets the period `(row)` number of the element in the periodic table
 Sets the physical state. Accepts a `MatterState` enum (`SOLID`, `LIQUID`, `GAS`)
 
 >>> info
-$$.matterState(state: MatterState) can also accept a string (`"solid"`, `"liquid"`, `"gas"`)
+You can also use a string value (`"solid"`, `"liquid"` or `"gas"`) instead of the enum
 <<<
 
 - $$.metalType(type: MetalType)
 Sets the element classification. Accepts a `MetalType` enum (`METAL`, `METALLOID`, `NONMETAL`)
 
 >>> info
-$$.metalType(type: String) can also accept a string (`"metal"`, `"metalloid"`, `"nonmetal"`)
+You can also use a string value (`"metal"`, `"metalloid"` or `"nonmetal"`) instead of the enum
 <<<
 
 - $$.hasPlate(hasPlate: boolean)
@@ -123,7 +123,7 @@ Type must be set to `"chemlib:compound"`
 Sets the hex color of the compound (The `#` is Optional)
 
 >>> info
-Accepts a color in any of these formats: `"#52277E"`, `"52277E"`, `0x52277E`, or `"0x52277E"`—whichever is easiest for you.
+Accepts a color in any of these formats: `"#52277E"`, `"52277E"`, `0x52277E`, or `"0x52277E"` whichever is easiest for you.
 <<<
 
 - $$.description(desc: String)
@@ -133,7 +133,7 @@ Sets the description shown in JEI/REI/EMI
 Sets the physical state. Accepts a `MatterState` enum (`SOLID`, `LIQUID`, `GAS`)
 
 >>> info
-$$.matterState(state: String) can also accept a string (`"solid"`, `"liquid"`, `"gas"`)
+You can also use a string value (`"solid"`, `"liquid"` or `"gas"`) instead of the enum
 <<<
 
 - $$.hasDust(hasDust: boolean)
@@ -159,7 +159,7 @@ Associates a status effect with the compound
 | $$.withComponent(componentId: String, quantity: int) | ===(Required)=== |
 | $$.description(desc: String) | ==(Optional)== |
 | $$.hasDust(hasDust: boolean) | ==(Optional)== |
-| $$.withEffect(effectId: String, duration: int, amplifier: int) | ==(Optional)== |
+| $$.withEffect(effect: ID, duration: int, amplifier: int) | ==(Optional)== |
 
 ### *Example*:
 

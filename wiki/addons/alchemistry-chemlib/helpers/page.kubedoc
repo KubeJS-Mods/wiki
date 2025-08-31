@@ -6,37 +6,37 @@ The `Element` class exposes methods for retrieving data from element `ItemStack`
 
 ## Methods
 
-- $$.isElement(item: ItemStack)
+- $$.isElement(item: ItemStack): boolean
 Returns `true` if the `ItemStack` is a chemical element
 
-- $$.getAtomicNumber(item: ItemStack)
+- $$.getAtomicNumber(item: ItemStack): int
 Returns the **atomic number** of the element in the given `ItemStack`
 
-- $$.getAbbreviation(item: ItemStack)
+- $$.getAbbreviation(item: ItemStack): String
 Returns the **abbreviation/symbol** of the element (e.g., `"H"`, `"O"`, `"Fe"`)
 
-- $$.getGroup(item: ItemStack)
+- $$.getGroup(item: ItemStack): int
 Returns the **group number** (column in periodic table)
 
-- $$.getGroupName(item: ItemStack)
+- $$.getGroupName(item: ItemStack): String
 Returns the **group name** (e.g., `"Noble Gases"`, `"Alkali Metals"`)
 
-- $$.getPeriod(item: ItemStack)
+- $$.getPeriod(item: ItemStack): int
 Returns the **period number** (row in periodic table)
 
-- $$.getMatterState(item: ItemStack)
+- $$.getMatterState(item: ItemStack): MatterState
 Returns the **state of matter** (`SOLID`, `LIQUID`, `GAS`)
 
-- $$.getMetalType(item: ItemStack)
+- $$.getMetalType(item: ItemStack): MetalType
 Returns the **metal classification** (`METAL`, `NONMETAL`, `METALLOID`)
 
-- $$.getColor(item: ItemStack)
+- $$.getColor(item: ItemStack): int
 Returns the **display color** of the element as an integer (RGB)
 
-- $$.getEffects(item: ItemStack)
+- $$.getEffects(item: ItemStack): MobEffect[]
 Returns a **list of status effects** applied by the element (if any exists)
 
-- $$.isArtificial(item: ItemStack)
+- $$.isArtificial(item: ItemStack): boolean
 Returns `true` if the element is **synthetic/artificial**
 
 ## Example

@@ -3,67 +3,68 @@ Place these scripts in the {st-s} folder. On the next game startup, they will be
 |> Element Builder
 ## Element Builder
 
-Syntax: Syntax: ## $$create(id: String, type: String)
+Syntax: $$create(id: String, type: String)
 
-Methods: 
+>>> warn
+Type must be `"chemlib:element"`
+<<<
 
-## $$elementColor(color: String)
-         ## $$groupName(name: String)
-         ## $$abbreviation(abb: String)
-         ## $$atomicNumber(z: int)
-         ## $$chemicalGroup(g: int)
-         ## $$period(p: int)
-         ## $$matterState(state: MatterState)
-         ## $$metalType(type: MetalType)
-         ## $$artificial(isArtificial: bool)
-         ## $$withEffect(effectId: String, duration: int, amplifier: int)
+| Methods | Description | Optional / Default |
+| $$.elementColor(color: String) | Sets the hex color of the element (no # needed) | Required |
+| $$.groupName(name: String) | Sets the name of the group the element belongs to (e.g, "Noble Gases") | Optional |
+| $$.abbreviation(abb: String) | Sets the chemical symbol of the element (e.g, H, Cu, Fe) | Required |
+| $$.atomicNumber(z: int) | Sets the atomic number of the element (its position in the periodic table) | Required |
+| $$.chemicalGroup(g: int) | Sets the group (column) number of the element in the periodic table | Required |
+| $$.period(p: int) | Sets the period (row) number of the element in the periodic table | Required |
+| $$.matterState(state: MatterState | String) | Sets the physical state. Accepts a `MatterState` enum (`SOLID`, `LIQUID`, `GAS`) or a string (`"solid"`, `"liquid"`, `"gas"`) | Required |
+| $$.metalType(type: MetalType | String) | Sets the element classification. Accepts a `MetalType` enum (`METAL`, `METALLOID`, `NONMETAL`) or a string (`"metal"`, `"metalloid"`, `"nonmetal"`) | Required |
+| $$.artificial(isArtificial: bool = true) | Marks the element as synthetic. Defaults to true if no parameter is specified. Use false for naturally occurring elements | Optional, defaults to `false` |
+| $$.withEffect(effectId: String, duration: int, amplifier: int) | Associate a status effect to the element | Optional |
 
-Example
+Example:
 
 ```javascript
 StartupEvents.registry("item", event => {
     event.create("chemlib:deuterium", "chemlib:element")
-        .elementColor("1e90ff")                 // no # needed at the start
+        .elementColor("1e90ff")
         .groupName("Isotopes")
         .abbreviation("²H")
         .atomicNumber(1)
         .chemicalGroup(1)
         .period(1)
-        .matterState(MatterType.GAS)            // or .matterState("solid")
-        .metalType(Metal.NONMETAL)              // or .metalType("nonmetal")
+        .matterState(MatterType.GAS)
+        .metalType(Metal.NONMETAL)
         .artificial(false)
+        .withEffect("minecraft:levitation", 5, 2)
 })
 ```
 
-* `atomicNumber(int)` - Atomic number of the element
-* `abbreviation` - Chemical symbol
-* `chemicalGroup` - Group number
-* `groupName` - Group name
-* `period` - Period number
-* `matterState` - SOLID, LIQUID, GAS (see {{#MatterState}})
-* `metalType` - METAL, METALLOID, NONMETAL (see {{#MetalType}})
-* `artificial()` - Mark as synthetic element
-* `elementColor` - Hex color
-* `withEffect` - Status effect on player when held
-
 <||>+ Compound Builder
-
 ## Compound Builder
 
+Syntax: $$create(id: String, type: String)
+
+>>> warn
+Type must be `"chemlib:compound"`
+<<<
+
+| Methods | Description | Optional / Default |
+| $$.compoundColor(color: String) | Sets the hex color of the compound (no # needed) | Required |
+| $$.description(desc: String) | Sets the description shown in JEI/REI/EMI | Optional |
+| $$.matterState(state: MatterState | String) | Sets the physical state. Accepts a `MatterState` enum (`SOLID`, `LIQUID`, `GAS`) or a string (`"solid"`, `"liquid"`, `"gas"`) | Required |
+| $$.withComponent(componentId: String, quantity: int = 1) | Adds an element or another compound as a component. Quantity defaults to 1 if not specified | Required (at least one component must be added) |
+| $$.withEffect(effectId: String, duration: int, amplifier: int) | Associates a status effect with the compound | Optional |
+
 ```javascript
-event.create('test_compound_solid', 'chemlib:compound')
-    .matterState(Matter.SOLID)
-    .description("Dev Testing Compound Description")
-    .compoundColor("0000FF")
-    .withComponent("carbonate", 3)
-    .withComponent("test_element_solid", 4)
-    .withComponent("test_element_liquid");
+StartupEvents.registry("item", event => {
+    event.create('chemlib:heavy_water', 'chemlib:compound')
+        .compoundColor("4682b4")
+        .description("Deuterium oxide, used in nuclear reactors and scientific research")
+        .matterState(Matter.LIQUID)
+        .withComponent("chemlib:deuterium", 2)
+        .withComponent("chemlib:oxygen", 1)
+        .withEffect("minecraft:slowness", 10, 3)
+        .withEffect("minecraft:blindness", 7, 1)
+})
 ```
-
-* `matterState` - SOLID, LIQUID, GAS (see {{#MatterState}})
-* `description` - Text description
-* `compoundColor` - Hex color
-* `withComponent` - Items included in the compound
-* `withEffect` - Status effects
-
 <|

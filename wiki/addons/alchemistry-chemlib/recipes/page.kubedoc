@@ -70,7 +70,7 @@ Syntax: $$dissolver(input: Item, rolls: int, weighted: bool)
 
 >>> danger
 Requires `[js].withGroup(weight, output[])`
->>>
+<<<
 
 Example:
 

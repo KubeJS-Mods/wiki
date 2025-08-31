@@ -143,8 +143,12 @@ Sets whether the compound has a Dust item, defaults to `true` if no parameter is
 Item generation is restricted to `SOLID` compounds; liquids and gases **cannot** generate items
 <<<
 
-- $$.withComponent(componentId: ID, quantity: int)
+- $$.withComponent(componentName: String, quantity: int)
 Adds an element or another compound as a component. Quantity defaults to 1 if not specified
+
+>>> info
+Use only the element or compound name for `componentName`, #[[red|**Do not** include the namespace prefix]]
+<<<
 
 >>> warn
 At least one component must be added to the compound

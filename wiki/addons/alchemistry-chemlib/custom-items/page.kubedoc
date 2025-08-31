@@ -1,13 +1,14 @@
 Place these scripts in the {st-s} folder. On the next game startup, they will be loaded and the new elements and compounds will automatically become available for use in recipes, JEI/REI/EMI, and even be used in certain compounds
 
-|> Element Builder
-## Element Builder
+# Element Builder
 
 Syntax: $$create(id: ID, type: String)
 
 >>> warn
 Type must be set to `"chemlib:element"`
 <<<
+
+## Methods
 
 - $$.elementColor(color: String)
 Sets the hex color of the compound (The `#` is Optional)
@@ -89,7 +90,7 @@ Associate a status effect to the element
 | $$.withEffect(effect: ID, duration: int, amplifier: int) | ==(Optional)== |
 
 
-*Example*:
+### *Example*:
 
 ```javascript
 StartupEvents.registry("item", event => {
@@ -108,8 +109,7 @@ StartupEvents.registry("item", event => {
 })
 ```
 
-<||> Compound Builder
-## Compound Builder
+# Compound Builder
 
 Syntax: $$create(id: ID, type: String)
 
@@ -117,7 +117,7 @@ Syntax: $$create(id: ID, type: String)
 Type must be set to `"chemlib:compound"`
 <<<
 
-### Methods
+## Methods
 
 - $$.compoundColor(color: String)
 Sets the hex color of the compound (The `#` is Optional)
@@ -161,7 +161,7 @@ Associates a status effect with the compound
 | $$.hasDust(hasDust: boolean) | ==(Optional)== |
 | $$.withEffect(effectId: String, duration: int, amplifier: int) | ==(Optional)== |
 
-*Example*:
+### *Example*:
 
 ```javascript
 StartupEvents.registry("item", event => {
@@ -176,4 +176,3 @@ StartupEvents.registry("item", event => {
         .hasDust(true)
 })
 ```
-<|

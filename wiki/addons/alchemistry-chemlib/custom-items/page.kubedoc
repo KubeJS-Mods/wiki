@@ -147,7 +147,7 @@ Item generation is restricted to `SOLID` compounds; liquids and gases **cannot**
 Adds an element or another compound as a component. Quantity defaults to 1 if not specified
 
 >>> info
-Use only the element or compound name for `componentName`, #[[red|**Do not** include the namespace prefix]]
+Use only the element or compound name for `componentName`, #[[red|**Do not include the namespace prefix**]]
 <<<
 
 >>> warn
@@ -173,8 +173,8 @@ StartupEvents.registry("item", event => {
         .compoundColor("4682b4")
         .description("Deuterium oxide, used in nuclear reactors and scientific research")
         .matterState(Matter.LIQUID)
-        .withComponent("chemlib:deuterium", 2)
-        .withComponent("chemlib:oxygen", 1)
+        .withComponent("deuterium", 2)
+        .withComponent("oxygen", 1)
         .withEffect("minecraft:slowness", 10, 3)
         .withEffect("minecraft:blindness", 7, 1)
         .hasDust(true)

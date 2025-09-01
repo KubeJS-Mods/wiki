@@ -140,6 +140,48 @@ ItemEvents.rightClicked(event => {
 })
 ```
 
+# ChemicalBlock Methods
+
+The `ChemicalBlock` class provides utility methods for querying properties about Chemlib’s chemical-related blocks
+
+## Methods
+
+- $$.getChemicalColor(block: Block): int
+Returns the **display color** of the given chemical block, derived from its associated element or compound
+Returns `0` if the block is not a chemical block.
+
+- $$.getBlockChemical(block: Block): Chemical
+Returns the **Chemical** associated with the block
+Returns `null` if the block is not a chemical block
+
+- $$.getBlockType(block: Block): ChemicalBlockType
+Returns the **ChemicalBlockType** (e.g., `METAL`, `LAMP`, etc.) of the given block
+Returns `null` if the block is not a chemical block.
+
+- $$.isChemicalBlock(block: Block): boolean
+Checks if the given block is a **chemical block**
+Returns `true` if it is, otherwise `false`
+
+
+### *Example*:
+
+```javascript
+BlockEvents.rightClicked(event => {
+    const { player ,block, level } = event
+
+    if (level.isClientSide()) return;
+
+    if (ChemicalBlock.isChemicalBlock(block.id)) {
+        const color = ChemicalBlock.getChemicalColor(block);
+        const chemical = ChemicalBlock.getBlockChemical(block);
+
+        player.sendSystemMessage(
+            "Chemical Block: " + chemical.getAbbreviation() + ", Color: " + color
+        );
+    }
+});
+```
+
 >>> warn
 This section is still **WIP** – some methods may change in future updates
 <<<

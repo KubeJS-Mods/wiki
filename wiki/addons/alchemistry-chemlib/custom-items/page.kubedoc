@@ -1,0 +1,182 @@
+Place these scripts in the {st-s} folder. On the next game startup, they will be loaded and the new elements and compounds will automatically become available for use in recipes, JEI/REI/EMI, and even be used in certain compounds
+
+# Element Builder
+
+Syntax: $$create(id: ID, type: String)
+
+>>> warn
+Type must be set to `"chemlib:element"`
+<<<
+
+## Methods
+
+- $$.elementColor(color: String)
+Sets the hex color of the compound (The `#` is Optional)
+
+>>> info
+Accepts a color in any of these formats: `"#52277E"`, `"52277E"`, `0x52277E`, or `"0x52277E"` whichever is easiest for you.
+<<<
+
+- $$.groupName(name: String)
+Sets the name of the group the element belongs to (e.g, `"Noble Gases"`)
+
+- $$.abbreviation(abbreviation: String)
+Sets the chemical symbol of the element (e.g, `H`, `Cu`, `Fe`)
+
+- $$.atomicNumber(z: int)
+Sets the atomic number of the element (its position in the periodic table)
+
+- $$.chemicalGroup(g: int)
+Sets the group `(column)` number of the element in the periodic table
+
+- $$.period(p: int)
+Sets the period `(row)` number of the element in the periodic table
+
+- $$.matterState(state: MatterState)
+Sets the physical state. Accepts a `MatterState` enum (`SOLID`, `LIQUID`, `GAS`)
+
+>>> info
+You can also use a string value (`"solid"`, `"liquid"` or `"gas"`) instead of the enum
+<<<
+
+- $$.metalType(type: MetalType)
+Sets the element classification. Accepts a `MetalType` enum (`METAL`, `METALLOID`, `NONMETAL`)
+
+>>> info
+You can also use a string value (`"metal"`, `"metalloid"` or `"nonmetal"`) instead of the enum
+<<<
+
+- $$.hasPlate(hasPlate: boolean)
+Sets whether the element has a Plate item, defaults to `true` if no parameter is specified; defaults to `false` if the method isn’t called
+
+- $$.hasDust(hasDust: boolean)
+Sets whether the element has a Dust item, defaults to `true` if no parameter is specified; defaults to `false` if the method isn’t called
+
+- $$.hasIngot(hasIngot: boolean)
+Sets whether the element has an Ingot item, defaults to `true` if no parameter is specified; defaults to `false` if the method isn’t called
+
+>>> info
+Ingot items come with a nugget item by default
+<<<
+
+>>> warn
+Items can only be generated for elements whose `MatterState` is `SOLID`
+<<<
+
+- $$.hasItems(hasItems: boolean)
+Sets all standard chemical items (`plate`, `dust`, `ingot`). Defaults to `true` if no parameter is specified.
+
+- $$.artificial(isArtificial: boolean)
+Marks the element as synthetic. Use `false` for naturally occurring elements. Defaults to `true` if no parameter is specified; defaults to `false` if the method isn’t called
+
+- $$.withEffect(effect: ID, duration: int, amplifier: int)
+Associate a status effect to the element
+
+
+| Methods | Required/Optional |
+| $$.elementColor(color: String) | ===(Required)=== |
+| $$.abbreviation(symbol: String) | ===(Required)=== |
+| $$.atomicNumber(z: int) | ===(Required)=== |
+| $$.chemicalGroup(g: int) | ===(Required)=== |
+| $$.period(p: int) | ===(Required)=== |
+| $$.matterState(state: MatterState) | ===(Required)=== |
+| $$.metalType(type: MetalType) | ===(Required)=== |
+| $$.groupName(name: String) | ==(Optional)== |
+| $$.hasPlate(hasPlate: boolean) | ==(Optional)== |
+| $$.hasDust(hasDust: boolean) | ==(Optional)== |
+| $$.hasIngot(hasIngot: boolean) | ==(Optional)== |
+| $$.hasItems(hasPlate: boolean) | ==(Optional)== |
+| $$.artificial(isArtificial: boolean) | ==(Optional)== |
+| $$.withEffect(effect: ID, duration: int, amplifier: int) | ==(Optional)== |
+
+
+### *Example*:
+
+```javascript
+StartupEvents.registry("item", event => {
+    event.create("chemlib:deuterium", "chemlib:element")
+        .elementColor("1e90ff")
+        .groupName("Isotopes")
+        .abbreviation("²H")
+        .atomicNumber(1)
+        .chemicalGroup(1)
+        .period(1)
+        .matterState(MatterType.GAS)
+        .metalType(Metal.NONMETAL)
+        .hasItems(false)
+        .artificial(false)
+        .withEffect("minecraft:levitation", 5, 2)
+})
+```
+
+# Compound Builder
+
+Syntax: $$create(id: ID, type: String)
+
+>>> warn
+Type must be set to `"chemlib:compound"`
+<<<
+
+## Methods
+
+- $$.compoundColor(color: String)
+Sets the hex color of the compound (The `#` is Optional)
+
+>>> info
+Accepts a color in any of these formats: `"#52277E"`, `"52277E"`, `0x52277E`, or `"0x52277E"` whichever is easiest for you.
+<<<
+
+- $$.description(desc: String)
+Sets the description shown in JEI/REI/EMI
+
+- $$.matterState(state: MatterState)
+Sets the physical state. Accepts a `MatterState` enum (`SOLID`, `LIQUID`, `GAS`)
+
+>>> info
+You can also use a string value (`"solid"`, `"liquid"` or `"gas"`) instead of the enum
+<<<
+
+- $$.hasDust(hasDust: boolean)
+Sets whether the compound has a Dust item, defaults to `true` if no parameter is specified.
+
+>>> warn
+Item generation is restricted to `SOLID` compounds; liquids and gases **cannot** generate items
+<<<
+
+- $$.withComponent(componentName: String, quantity: int)
+Adds an element or another compound as a component. Quantity defaults to 1 if not specified
+
+>>> info
+Use only the element or compound name for `componentName`, #[[red|**Do not include the namespace prefix**]]
+<<<
+
+>>> warn
+At least one component must be added to the compound
+<<<
+
+- $$.withEffect(effectId: ID, duration: int, amplifier: int)
+Associates a status effect with the compound
+
+| Methods | Required/Optional |
+| $$.compoundColor(color: String) | ===(Required)=== |
+| $$.matterState(state: MatterState) | ===(Required)=== |
+| $$.withComponent(componentId: String, quantity: int) | ===(Required)=== |
+| $$.description(desc: String) | ==(Optional)== |
+| $$.hasDust(hasDust: boolean) | ==(Optional)== |
+| $$.withEffect(effect: ID, duration: int, amplifier: int) | ==(Optional)== |
+
+### *Example*:
+
+```javascript
+StartupEvents.registry("item", event => {
+    event.create('chemlib:heavy_water', 'chemlib:compound')
+        .compoundColor("4682b4")
+        .description("Deuterium oxide, used in nuclear reactors and scientific research")
+        .matterState(Matter.LIQUID)
+        .withComponent("deuterium", 2)
+        .withComponent("oxygen", 1)
+        .withEffect("minecraft:slowness", 10, 3)
+        .withEffect("minecraft:blindness", 7, 1)
+        .hasDust(true)
+})
+```

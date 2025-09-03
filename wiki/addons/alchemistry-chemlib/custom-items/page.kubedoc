@@ -90,9 +90,9 @@ Associate a status effect to the element
 | $$.withEffect(effect: ID, duration: int, amplifier: int) | ==(Optional)== |
 
 
-### *Example*:
+## Example
 
-```javascript
+```js
 StartupEvents.registry("item", event => {
     event.create("chemlib:deuterium", "chemlib:element")
         .elementColor("1e90ff")
@@ -165,9 +165,9 @@ Associates a status effect with the compound
 | $$.hasDust(hasDust: boolean) | ==(Optional)== |
 | $$.withEffect(effect: ID, duration: int, amplifier: int) | ==(Optional)== |
 
-### *Example*:
+## Example
 
-```javascript
+```js
 StartupEvents.registry("item", event => {
     event.create('chemlib:heavy_water', 'chemlib:compound')
         .compoundColor("4682b4")

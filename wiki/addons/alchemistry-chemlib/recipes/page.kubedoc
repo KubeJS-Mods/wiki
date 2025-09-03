@@ -4,9 +4,9 @@
 
 Syntax: $$liquifier(input: Item, output: Fluid)
 
-*Example*:
+Example:
 
-```javascript
+```js
 ServerEvents.recipes(event => {
   event.recipes.alchemistry.liquifier("minecraft:netherrack", "minecraft:lava")
   event.recipes.alchemistry.liquifier(Item.of("chemlib:calcium", 16), Fluid.of("minecraft:milk", 250))
@@ -17,9 +17,9 @@ ServerEvents.recipes(event => {
 
 Syntax: $$atomizer(input: Fluid, output: Item)
 
-*Example*:
+Example:
 
-```javascript
+```js
 ServerEvents.recipes(event => {
   event.recipes.alchemistry.atomizer("minecraft:lava", "minecraft:netherrack")
   event.recipes.alchemistry.atomizer(Fluid.of("minecraft:milk", 250), Item.of("chemlib:calcium", 8))
@@ -30,9 +30,9 @@ ServerEvents.recipes(event => {
 
 Syntax: $$compactor(input: Item, output: Item)
 
-*Example*:
+Example:
 
-```javascript
+```js
 ServerEvents.recipes(event => {
   event.recipes.alchemistry.compactor("64x minecraft:coal", Item.of("minecraft:diamond"))
   event.recipes.alchemistry.compactor(Item.of("minecraft:coal", 64), Item.of("minecraft:diamond"))
@@ -43,9 +43,9 @@ ServerEvents.recipes(event => {
 
 Syntax: $$combiner(input: Item[], output: Item)
 
-*Example*:
+Example:
 
-```javascript
+```js
 ServerEvents.recipes(event => {
   event.recipes.alchemistry.combiner([
       "minecraft:copper_ingot",
@@ -64,17 +64,16 @@ ServerEvents.recipes(event => {
 Syntax: $$dissolver(input: Item, rolls: int, weighted: bool)
         $$.withGroup(weight: Number, output: Item[])
 
-
-- *`rolls`* - optional, default `[js]1`
-- *`weighted`* - optional, defaults to `[js]false`
+- `rolls` - optional, default `[js]1`
+- `weighted` - optional, default `[js]false`
 
 >>> danger
 Requires `[js].withGroup(weight, output[])`
 <<<
 
-*Example*:
+Example:
 
-```javascript
+```js
 ServerEvents.recipes(event => {
   event.recipes.alchemistry.dissolver("minecraft:lava_bucket").withGroup(100, ["minecraft:netherrack"])
 
@@ -89,9 +88,9 @@ ServerEvents.recipes(event => {
 
 Syntax: $$fission(input: Item, output1: Item, output2: Item)
 
-*Example*:
+Example:
 
-```javascript
+```js
 ServerEvents.recipes(event => {
   event.recipes.alchemistry.fission("minecraft:diamond", Item.of("minecraft:iron_ingot", 8), "4x minecraft:gold_ingot");
   event.recipes.alchemistry.fission(Item.of("minecraft:diamond", 2), "8x minecraft:iron_ingot", "4x minecraft:gold_ingot");
@@ -102,7 +101,7 @@ ServerEvents.recipes(event => {
 
 Syntax: $$fission(input1: Item, input2: Item, output: Item)
 
-```javascript
+```js
 ServerEvents.recipes(event => {
   event.recipes.alchemistry.fusion("minecraft:apple", Item.of("minecraft:dirt", 8), "20x minecraft:diamond");
   event.recipes.alchemistry.fusion(Item.of("minecraft:diamond", 4), "4x minecraft:emerald", "minecraft:nether_star");

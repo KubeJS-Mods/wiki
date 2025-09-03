@@ -39,20 +39,20 @@ Returns a **list of status effects** applied by the element (if any exists)
 - $$.isArtificial(item: ItemStack): boolean
 Returns `true` if the element is **synthetic/artificial**
 
-### *Example*:
+## Example
 
 The following script demonstrates how to check if a player right-clicked an `element`
 If the item is a valid chemical element, the script retrieves and displays its `atomic number` to the player.
 
-```javascript
+```js
 ItemEvents.rightClicked(event => {
-    const { player, item, hand, level } = event;
+  const { player, item, hand, level } = event;
 
-    if (level.isClientSide()) return;
+  if (level.isClientSide()) return;
 
-    if (ElementHelper.isElement(item)) {
-        player.sendSystemMessage("Atomic Number: " + Element.getAtomicNumber(item));
-    }
+  if (ElementHelper.isElement(item)) {
+    player.sendSystemMessage("Atomic Number: " + Element.getAtomicNumber(item));
+  }
 });
 ```
 
@@ -80,19 +80,19 @@ Returns a map of component elements and their counts inside the compound
 - $$.getEffects(item: ItemStack): MobEffect[]
 Returns a list of status effects applied by the compound (if any exist)
 
-### *Example*:
+## Example
 
-```javascript
+```js
 ItemEvents.rightClicked(event => {
-    const { player, item, hand, level } = event;
+  const { player, item, hand, level } = event;
 
-    if (level.isClientSide()) return;
+  if (level.isClientSide()) return;
 
-    if (CompoundHelper.isCompound(item)) {
-        player.sendSystemMessage(
-            "Compound: " + Compound.getDescription(item)
-        );
-    }
+  if (CompoundHelper.isCompound(item)) {
+    player.sendSystemMessage(
+      "Compound: " + Compound.getDescription(item)
+    );
+  }
 });
 ```
 
@@ -126,17 +126,16 @@ Returns all elements that belong to the given **group number** (periodic table c
 - $$.getPeriodElements(period: int): ItemStack[]
 Returns all elements that belong to the given **period number** (row)
 
-### *Example*:
+## Example
 
-```javascript
+```js
 ItemEvents.rightClicked(event => {
-    const {player, item, hand, level} = event;
+  const { player, item, hand, level } = event;
 
-    if (level.isClientSide()) return;
+  if (level.isClientSide()) return;
 
-    let elements = PeriodicTableHelper.getPeriodElements(6)
-
-    elements.forEach(item => player.sendSystemMessage(item.toString()))
+  let elements = PeriodicTableHelper.getPeriodElements(6)
+  elements.forEach(item => player.sendSystemMessage(item.toString()))
 })
 ```
 
@@ -163,22 +162,22 @@ Checks if the given block is a **chemical block**
 Returns `true` if it is, otherwise `false`
 
 
-### *Example*:
+## Example
 
-```javascript
+```js
 BlockEvents.rightClicked(event => {
-    const { player ,block, level } = event
+  const { player, block, level } = event
 
-    if (level.isClientSide()) return;
+  if (level.isClientSide()) return;
 
-    if (ChemicalBlock.isChemicalBlock(block.id)) {
-        const color = ChemicalBlock.getChemicalColor(block);
-        const chemical = ChemicalBlock.getBlockChemical(block);
+  if (ChemicalBlock.isChemicalBlock(block.id)) {
+    const color = ChemicalBlock.getChemicalColor(block);
+    const chemical = ChemicalBlock.getBlockChemical(block);
 
-        player.sendSystemMessage(
-            "Chemical Block: " + chemical.getAbbreviation() + ", Color: " + color
-        );
-    }
+    player.sendSystemMessage(
+      "Chemical Block: " + chemical.getAbbreviation() + ", Color: " + color
+    );
+  }
 });
 ```
 

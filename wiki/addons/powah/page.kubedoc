@@ -1,25 +1,26 @@
 This addon allows you to create custom Energizing Orb recipes (among other things) from the [Powah](https://beta.curseforge.com/minecraft/mc-mods/powah-rearchitected) mod.
+
 ```js
 ServerEvents.recipes(event => {
-    // .energizing([inputs, ...], output, energy)
-	event.recipes.powah.energizing(['minecraft:cobblestone'], 'minecraft:tnt', 1000)
+  // .energizing([inputs, ...], output, energy)
+  event.recipes.powah.energizing(['minecraft:cobblestone'], 'minecraft:tnt', 1000)
 })
 
 PowahEvents.registerCoolants(event => {
-    // .addFluid(fluid, coolness)
-	event.addFluid('minecraft:lava', 10);
+  // .addFluid(fluid, coolness)
+  event.addFluid('minecraft:lava', 10);
     
-    // .addSolid(fluid, coolness)
-	event.addSolid('minecraft:cobblestone', 10);
+  // .addSolid(fluid, coolness)
+  event.addSolid('minecraft:cobblestone', 10);
 })
 
 PowahEvents.registerHeatSource(event => {
-    // .add(block, hotness)
-	event.add('minecraft:cobblestone', 10);
+  // .add(block, hotness)
+  event.add('minecraft:cobblestone', 10);
 })
 
 PowahEvents.registerMagmaticFluid(event => {
-    // .add(fluid, hotness)
-	event.add('minecraft:water', 10);
+  // .add(fluid, hotness)
+  event.add('minecraft:water', 10);
 })
 ```

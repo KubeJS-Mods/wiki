@@ -1,0 +1,34 @@
+>>> warn
+KubeJS worldgen on 1.20.1 is not that good. (Doesn't work)
+<<<
+>>> info
+Instead we have to use a datapack. This guide is only supposed to be a first point of reference if you want to change world generation using KubeJS.
+<<<
+
+Make sure to put this in: `kubejs/data/mod_name/worldgen/configured_feature/identifier.json`
+This file needs to contain:
+
+```json
+{
+    "type": "minecraft:no_op",
+    "config": {}
+},
+```
+# All Ores
+If we wanted to remove all minecraft ores, we would create `ore.json` in `kubejs/data/minecraft/worldgen/configured_feature/` and insert the above code snippet. 
+>>> info
+The `ore` identifier removes all minecraft ores.
+<<<
+
+# Specific Ores
+
+If we wanted to remove a specific ore it is a similar process.
+You can find ores' identifiers [here](https://minecraft.wiki/w/Ore_\(feature\)#Data_values).
+
+To remove iron we create a file at this path `kubejs/data/minecraft/worldgen/configured_feature/` called `ore_iron.json`
+This JSON file contains the code shown above.
+
+# Custom:
+I recommend you check out [Misode's Configured Feature Generator](https://misode.github.io/worldgen/feature/) (use the preset button on the right to get an idea of some vanilla worldgen) to generate the necessary files.
+In order to change a vanilla worldgen feature name the file `identifier-of-feature.json`
+Using a preset you could probably even add your own custom geode.

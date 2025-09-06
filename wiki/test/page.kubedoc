@@ -78,6 +78,7 @@ console.log('Hello, World!')
 ```
 
 ```js
+// this code uses space indents
 ServerEvents.recipes(event => {
   let potting = (output, pottedInput) => {
     event.shaped(output, [
@@ -93,6 +94,26 @@ ServerEvents.recipes(event => {
   potting('kubejs:potted_snowball', 'minecraft:snowball')
   potting('kubejs:potted_lava', 'minecraft:lava_bucket')
   potting('minecraft:blast_furnace', 'minecraft:furnace')
+})
+```
+
+```js
+// and this uses tab indents
+ServerEvents.recipes(event => {
+	let potting = (output, pottedInput) => {
+		event.shaped(output, [
+			'BIB',
+			' B '
+		], {
+			B: 'minecraft:brick',
+			I: pottedInput
+		})
+	}
+
+	//Now we can make many 'potting' recipes without typing that huge block over and over!
+	potting('kubejs:potted_snowball', 'minecraft:snowball')
+	potting('kubejs:potted_lava', 'minecraft:lava_bucket')
+	potting('minecraft:blast_furnace', 'minecraft:furnace')
 })
 ```
 

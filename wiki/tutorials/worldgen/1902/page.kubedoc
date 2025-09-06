@@ -1,0 +1,224 @@
+# Biome Filters
+Biome filters work similarly to recipe filters (see [[/tutorials/recipes#removing-recipes]]).
+They can be used to create complex and exact filters to fine tune exactly where your features may or may not spawn in the world.
+They are used for the `biomes` field of a feature and may look like this:
+
+```js
+onEvent('worldgen.add', event => {
+  event.addOre(ore => {
+    // let's look at all of the 'simple' filters first
+    ore.biomes = 'minecraft:plains' 		// only spawn in exactly this biome
+    ore.biomes = /^minecraft:.*/			// spawn in all biomes that match the given pattern (here: anything that starts with minecraft:)
+    ore.biomes = '#minecraft:is_forest' 	// [1.19+] spawn in all biomes tagged as 'minecraft:is_forest'
+    ore.biomes = '^nether' 				// [1.18 only!] spawn in all biomes in the 'nether' category (see Biome Categories)
+    ore.biomes = '$hot'					// [Forge 1.18 only!] spawn in all biomes that have the 'hot' biome type (see Biome Dictionary)
+    // filters can be arbitrarily combined using AND, OR and NOT logic
+    ore.biomes = {}						// empty AND filter, always true
+    ore.biomes = []						// empty OR filter, also always true
+    ore.biomes = { not: 'minecraft:ocean' } // spawn in all biomes that are NOT 'minecraft:ocean'
+    // since AND filters are expressed as maps and expect string keys,
+    // all of the 'primitive' filters can also be expressed as such
+    ore.biomes = {					// see above for an explanation of these filters
+      id: 'minecraft:plains',
+      id: /^minecraft:.*/,			// regex (also technically an ID filter)
+      tag: '#minecraft:is_forest',
+      category: '^nether',
+      biome_type: '$hot',
+    }
+    // note all of the above syntax may be mixed and matched individually
+    // for example, this will spawn the feature in any biome that is
+    // either plains, or a hot biome that is not in the nether or savanna categories
+    ore.biomes = [
+      'minecraft:plains', {
+        biome_type: '$hot',
+        not: [
+          '#nether',
+          { category: 'savanna' }
+        ]
+      },
+    ]
+  })
+})
+```
+
+# Rule Tests and Targets
+In 1.18, Minecraft worldgen has changed to a `target` based replacement system.
+This means that you can specify specific blocks to be replaced with other blocks within the same feature configuration.
+>>> info
+For example, this is used to replace stone with normal ore and deepslate with the deepslate ore variant.
+<<<
+
+Each targets gets a "rule set" as input (something that checks if a given block state should be replaced or not) and produces a specific output block state.
+On the KubeJS script side, both of these concepts are expressed in the same class - `BlockStatePredicate`.
+
+Syntax-wise, `BlockStatePredicate` is pretty similar to biome filters as they too can be combined using AND/OR filters (this is why we won't be repeating that step here).
+They can be used to match one of three different things:
+. Blocks
+  - These are parsed as strings, ie. `'minecraft:stone'` to match Stone.
+. Block States
+  - These are parsed as the block ID followed by an array of properties, ie. `"minecraft:furnace[lit=true]"` to match Furnace blocks that are active (lit).
+  - You can use F3 to figure out blocks properties, aswell as prossible values using a Debug Stick.
+. Block Tags
+  - These are parsed in the "familiar" tag syntax, ie. `"#minecraft:base_stone_overworld"` to match all types of Stone that can be found underground in the Overworld.
+  - Note that these are **block** tags and not **item** tags, so they probably will be different.
+
+>>> success
+You can also use regular expressions with block filters, ie. `/^mekanism:.*_ore$/`. However, this will not match block state properties!
+<<<
+>>> info
+When a `RuleTest` is required instead of a `BlockStatePredicate`, you can also supply that rule test directly in the form of a JS object.
+It will then be parsed the same as vanilla would parse JSON or NBT objects.
+<<<
+
+# Height Providers
+Another system that may appear a bit confusing at first is the "height providers" system, which are used to determine at what Y level a given ore should spawn and with what frequency.
+Used in tandem with this feature are the so-called "vertical anchors", which are used to get the height of something relative to a specific anchor point (ie. the top or bottom of the world).
+
+In KubeJS, this system has been simplified a bit. The most common types of ore placement are:
+- `uniform`
+  - The feature has the same chance to spawn anywhere inbetween the two anchors.
+- `triangle`
+  - The feature is more likely to spawn in the center of the two anchors than it is to spawn further outwards.
+To use these, you can use `uniformHeight` and `triangleHeight` in `AddOreProperties`.
+Vertical anchors have also been simplified, as you can use the `aboveBottom` / `belowTop` helper methods in `AddOreProperties`.
+You can also use `VerticalAnchor` in new KubeJS versions if you want to specify absolute heights as simple numbers instead.
+
+# Biome Categories
+Biome categories are a vanilla system that can be used to roughly sort biomes into predefined categories, which are:
+- `taiga`
+- `extreme_hills`
+- `jungle`
+- `mesa`
+- `plains`
+- `savanna`
+- `icy`
+- `the_end`
+- `beach`
+- `forest`
+- `ocean`
+- `desert`
+- `river`
+- `swamp`
+- `mushroom`
+- `nether`
+
+>>> warn
+Other mods may add more categories.
+<<<
+
+# Biome Dictionary (Forge only)
+Much like vanilla biome categories, Forge uses a "biome dictionary" to sort biomes based on their properties, these include:
+- `hot`
+- `cold`
+- `wet`
+- `dry`
+- `sparse`
+- `dense`
+- `spooky`
+- `dead`
+- `lush`
+
+>>> info
+See [BiomeDictionary](https://github.com/MinecraftForge/MinecraftForge/blob/4011c3fb07dfedc234949b429f853349e0526470/src/main/java/net/minecraftforge/common/BiomeDictionary.java#L39-L94) for more
+<<<
+>>> warn
+This system is _designed_ to be extended by mods.
+<<<
+
+>>> danger
+In 1.19, both of these systems have been removed **with no replacement** in favour of biome tags!
+<<<
+
+# Generation Steps
+. `raw_generation`
+. `lakes`
+. `local_modifications`
+. `underground_structures`
+. `surface_structures`
+. `strongholds`
+. `underground_ores`
+. `underground_decoration`
+. `vegetal_decoration`
+. `top_layer_modification`
+
+>>> info
+Nether ores are generated in `underground_decoration` step!
+<<<
+
+>>> warn
+It's possible that you may not be able to generate some things in their layer, like ores in dirt, because dirt hasn't spawned yet.
+In that case, you might have to change the layer to one of the above generation steps by calling `[js]ore.worldgenLayer = 'top_layer_modification'`.
+However, this is not recommended.
+<<<
+
+# Example Script
+```js
+onEvent('worldgen.add', event => {
+  // use the anchors helper from the event (NOTE: this requires newer versions of KubeJS)
+  // if you are using an older version of KubeJS, you can use the methods in the ore properties class
+  const { anchors } = event
+
+  event.addOre(ore => {
+    ore.id = 'kubejs:glowstone_test_lmao' // (optional, but recommended) custom id for the feature
+    ore.biomes = {
+      not: '^savanna' // biome filter, see above (technically also optional)
+    }
+
+    // examples on how to use targets
+    ore.addTarget('#minecraft:stone_ore_replaceables', 'minecraft:glowstone') // replace anything in the vanilla stone_ore_replaceables tag with Glowstone
+    ore.addTarget('minecraft:deepslate', 'minecraft:nether_wart_block')       // replace Deepslate with Nether Wart Blocks
+    ore.addTarget([
+      'minecraft:gravel',     // replace gravel...
+      /minecraft:(.*)_dirt/   // or any kind of dirt (including coarse, rooted, etc.)...
+    ], 'minecraft:tnt')       // with TNT (trust me, it'll be funny)
+
+    ore.count([15, 50])             // generate between 15 and 50 veins (chosen at random), you could use a single number here for a fixed amount of blocks
+      .squared()                    // randomly spreads the ores out across the chunk, instead of generating them in a column
+      .triangleHeight(				      // generate the ore with a triangular distribution, this means it will be more likely to be placed closer to the center of the anchors
+        anchors.aboveBottom(32),    // the lower bound should be 32 blocks above the bottom of the world, so in this case, Y = -32 since minY = -64
+        anchors.absolute(96)	      // the upper bound, meanwhile is set to be just exactly at Y = 96
+      )								              // in total, the ore can be found between Y levels -32 and 96, and will be most likely at Y = (96 + -32) / 2 = 32
+
+    // more, optional parameters (default values are shown here)
+    ore.size = 9                            // max. vein size
+    ore.noSurface = 0.5                     // chance to discard if the ore would be exposed to air
+    ore.worldgenLayer = 'underground_ores'  // what generation step the ores should be generated in (see below)
+    ore.chance = 0							// if != 0 and count is unset, the ore has a 1/n chance to generate per chunk
+  })
+
+  // oh yeah, and did I mention lakes exist, too?
+  // (for now at least, Vanilla is likely to remove them in the future)
+  event.addLake(lake => {
+    lake.id = 'kubejs:funny_lake' // BlockStatePredicate
+    lake.chance = 4
+    lake.fluid = 'minecraft:lava'
+    lake.barrier = 'minecraft:diamond_block'
+  })
+})
+
+onEvent('worldgen.remove', event => {
+  console.info('HELP')
+  //console.debugEnabled = true;
+
+  // print all features for a given biome filter
+  event.printFeatures('', 'minecraft:plains')
+
+  event.removeOres(props => {
+    // much like ADDING ores, this supports filtering by worldgen layer...
+    props.worldgenLayer = 'underground_ores'
+    // ...and by biome
+    props.biomes = [
+      { category: 'icy' },
+      { category: 'savanna' },
+      { category: 'mesa' }
+    ]
+
+    // BlockStatePredicate to remove iron and copper ores from the given biomes
+    // Note tags may NOT be used here, unfortunately...
+    props.blocks = ['minecraft:iron_ore', 'minecraft:copper_ore']
+  })
+
+  // remove features by their id (first argument is a generation step)
+  event.removeFeatureById('underground_ores', ['minecraft:ore_coal_upper', 'minecraft:ore_coal_lower'])
+})
+```

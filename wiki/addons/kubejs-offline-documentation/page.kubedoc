@@ -1,24 +1,31 @@
 KubeJS Offline is a mod that dumps all class data at runtime into a single html file using a single command - `/kubejs_offline`.
 
 # Preview Generated Documentation Pages:
-
-[1.19.2 Forge ](https://hunter19823.github.io/kubejsoffline/1.19.2/forge)
+[1.21.1 NeoForge](https://hunter19823.github.io/kubejsoffline/1.21.1/neoforge/)
+[1.21 NeoForge](https://hunter19823.github.io/kubejsoffline/1.21/neoforge/)
+[1.20.1 Forge](https://hunter19823.github.io/kubejsoffline/1.20.1/forge)
+[1.20.1 Fabric](https://hunter19823.github.io/kubejsoffline/1.20.1/fabric)
+[1.19.2 Forge](https://hunter19823.github.io/kubejsoffline/1.19.2/forge)
 [1.19.2 Fabric](https://hunter19823.github.io/kubejsoffline/1.19.2/fabric)
-[1.18.2 Forge ](https://hunter19823.github.io/kubejsoffline/1.18.2/forge)
+[1.18.2 Forge](https://hunter19823.github.io/kubejsoffline/1.18.2/forge)
 [1.18.2 Fabric](https://hunter19823.github.io/kubejsoffline/1.18.2/fabric)
-[Enigmatica 9](https://hunter19823.github.io/kubejsoffline/modpacks/engimatica9)
+
+## Goal
+
+To provide dynamic javadoc-like documentation for use with KubeJS scripts.
+The reason we can't just use the javadoc tool itself is because every user who makes a modpack uses different mods, and javadoc is intended for use with the source code of the mod itself. 
+Therefor we need to generate this information at runtime.
 
 # How does it work?
 
 When you execute the KubeJS Offline command, a scan of the Java runtime is performed to find what classes exist at that time. This is important as mods might provide new event classes and possibly new methods to existing Minecraft classes.
 After the mod has searched what classes exist and are available at that time, it then proceeds to compress that data down into a json object.
-It records everything from the full class name, package info, super classes, sub-classes, generic implementations, fields, methods, as well as their relationships to other classes.
-This data is then used to create an HTML page which then runs dependency-less JavaScript to generate the webpage html elements.
-You can then open the file in a modern web browser, no need to host it on a server or anything like that.
+This data is then used to create an HTML page which then runs dependency-less JavaScript to generate simple html content.
+You can then open the file in any modern web browser. No file hosting or additional installations required!
 
 # Additional Features:
 
-You can right click inside the webpage to toggle certain tables, private fields, and other info that you may not need.
-
-There is a search feature you can activate by adding a question mark to the end of the url.
-[Here](https://hunter19823.github.io/kubejsoffline/1.19.2/forge#any--EventJS)'s an example of this search.
+## Documented KubeJS Bindings
+Can't remember the name of that event? What was it again? Something about food? Was it a player event? Or an Item Event?
+Well, using the [Global Bindings](https://hunter19823.github.io/kubejsoffline/1.21.1/neoforge/#?focus=global-bindings-header&global-bindings-expanded=true) section on the homepage, simply expanding the list, and search for the event. 
+Just like that, [ItemEvents.foodEaten](https://hunter19823.github.io/kubejsoffline/1.21.1/neoforge/#?focus=global-bindings-ItemEvents.foodEaten%28FoodEatenKubeEvent%2C+net.minecraft.resources.ResourceKey%3Cnet.minecraft.world.item.Item%3E%29&global-bindings-expanded=true&global-bindings-page=4&global-bindings-page-size=25) is found.

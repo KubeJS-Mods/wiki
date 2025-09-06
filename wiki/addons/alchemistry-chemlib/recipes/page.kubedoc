@@ -1,0 +1,109 @@
+# Supported Recipe Types
+
+## Liquifier
+
+Syntax: $$liquifier(input: Item, output: Fluid)
+
+Example:
+
+```js
+ServerEvents.recipes(event => {
+  event.recipes.alchemistry.liquifier("minecraft:netherrack", "minecraft:lava")
+  event.recipes.alchemistry.liquifier(Item.of("chemlib:calcium", 16), Fluid.of("minecraft:milk", 250))
+})
+```
+
+## Atomizer
+
+Syntax: $$atomizer(input: Fluid, output: Item)
+
+Example:
+
+```js
+ServerEvents.recipes(event => {
+  event.recipes.alchemistry.atomizer("minecraft:lava", "minecraft:netherrack")
+  event.recipes.alchemistry.atomizer(Fluid.of("minecraft:milk", 250), Item.of("chemlib:calcium", 8))
+})
+```
+
+## Compactor
+
+Syntax: $$compactor(input: Item, output: Item)
+
+Example:
+
+```js
+ServerEvents.recipes(event => {
+  event.recipes.alchemistry.compactor("64x minecraft:coal", Item.of("minecraft:diamond"))
+  event.recipes.alchemistry.compactor(Item.of("minecraft:coal", 64), Item.of("minecraft:diamond"))
+})
+```
+
+## Combiner
+
+Syntax: $$combiner(input: Item[], output: Item)
+
+Example:
+
+```js
+ServerEvents.recipes(event => {
+  event.recipes.alchemistry.combiner([
+      "minecraft:copper_ingot",
+      "8x minecraft:iron_ingot",
+      Item.of("minecraft:gold_ingot"),
+      Item.of("minecraft:netherite_ingot", 2)*
+    ],
+    "minecraft:nether_star")
+
+  event.recipes.alchemistry.combiner(["minecraft:dirt", "minecraft:apple"], "minecraft:diamond")
+})
+```
+
+## Dissolver
+
+Syntax: $$dissolver(input: Item, rolls: int, weighted: bool)
+        $$.withGroup(weight: Number, output: Item[])
+
+- `rolls` - optional, default `[js]1`
+- `weighted` - optional, default `[js]false`
+
+>>> danger
+Requires `[js].withGroup(weight, output[])`
+<<<
+
+Example:
+
+```js
+ServerEvents.recipes(event => {
+  event.recipes.alchemistry.dissolver("minecraft:lava_bucket").withGroup(100, ["minecraft:netherrack"])
+
+  event.recipes.alchemistry.dissolver("minecraft:lava_bucket", 1, true)
+      .withGroup(50, ["chemlib:carbonate"])
+      .withGroup(33.3, ["2x chemlib:hydroxide"])
+      .withGroup(16.7,["4x chemlib:iron", Item.of("chemlib:cobalt", 8)])
+})
+```
+
+## Fission
+
+Syntax: $$fission(input: Item, output1: Item, output2: Item)
+
+Example:
+
+```js
+ServerEvents.recipes(event => {
+  event.recipes.alchemistry.fission("minecraft:diamond", Item.of("minecraft:iron_ingot", 8), "4x minecraft:gold_ingot");
+  event.recipes.alchemistry.fission(Item.of("minecraft:diamond", 2), "8x minecraft:iron_ingot", "4x minecraft:gold_ingot");
+})
+```
+
+## Fusion
+
+Syntax: $$fission(input1: Item, input2: Item, output: Item)
+
+```js
+ServerEvents.recipes(event => {
+  event.recipes.alchemistry.fusion("minecraft:apple", Item.of("minecraft:dirt", 8), "20x minecraft:diamond");
+  event.recipes.alchemistry.fusion(Item.of("minecraft:diamond", 4), "4x minecraft:emerald", "minecraft:nether_star");
+})
+```

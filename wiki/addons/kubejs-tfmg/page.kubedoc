@@ -142,8 +142,8 @@ Information:
   - Mixing can be added by doing `.machines("tfmg:mixing")`
   - Electrode can be added by doing `.machines("electrode")`
   - Note: you can "mix-and-match" them by doing (for example): `.machines("tfmg:mixing", "tfmg:electrode")`
-  - Note: to note use any machine, you do not need to use this method at all.
-- Chemical vat typs to make the results can have:
+  - Note: to note, use any machine; you do not need to use this method at all.
+- Chemical vat types to make the results can have:
   - Steel vat by adding `.allowedVatTypes("tfmg:steel_vat")`
   - Cast Iron vat by adding `.allowedVatTypes("tfmg:cast_iron_vat")`
   - Firebrick Lined vat by adding `.allowedVatTypes("tfmg:firebrick_lined_vat")`
@@ -157,14 +157,15 @@ Example Usage:
 ```js
 ServerEvents.recipes(event => {
     event.recipes.tfmg.vat_machine_recipe("minecraft:dirt", "minecraft:diamond")
-    .superheated() // Makes the vat require super heating
+    .superheated() // Makes the vat require superheating
     .allowedVatTypes("tfmg:firebrick_lined_vat") // It's super hot, so we should use the firebrick vat for some realism
     .processingTime(500) // Takes 500 ticks to make dirt to diamonds
 
     event.recipes.tfmg.vat_machine_recipe(["tfmg:sulfuric_acid", "tfmg:hot_air", "minecraft:water"], ["minecraft:lava", "minecraft:mud"])
     .heated() // Make this recipe use basic heating
     .allowAllVatTypes() // Does not matter on the vat type we use, so we allow the three TFMG vat types
-    .processingTime(250) // Takes 250 ticks to make the ingredients to lava and mud
+    .machines("tfmg:mixing") // Make it where you have to have a mixer machine on top of the vat
+    .processingTime(250) // Takes 250 ticks to make the ingredients into lava and mud
 })
 ```
 

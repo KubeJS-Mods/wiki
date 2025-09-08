@@ -169,6 +169,8 @@ ServerEvents.recipes(event => {
 })
 ```
 
+To add more machines (like requiring 3 electrodes for example), you just add more into the "machines" method. (Example: `.machines("tfmg:electrode", "tfmg:electrode", "tfmg:electrode")`. That makes it require three electrodes)
+
 # Custom Cable types and Electrodes
 >>> info
 This feature of creating custom cable types and electrodes will be added in a future update!

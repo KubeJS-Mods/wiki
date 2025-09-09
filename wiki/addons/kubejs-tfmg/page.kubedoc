@@ -152,6 +152,7 @@ Information:
 - You can set the minimum size of the vat by attaching `.minSize(int)` (replace int with the min size)
   - Note: If the method is not provided, it will default to a min size of 1
 - To set the processing time, attach the method `.processingTime(int)` (replace the int with the processing time in ticks)
+- The output also supports items with a chance of being made with `Item.of("item here").withChance(chance here)` (Chance is from a 0-1 scale)
 
 Example Usage:
 ```js

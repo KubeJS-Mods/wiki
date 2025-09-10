@@ -1,6 +1,4 @@
-# Supported Recipe Types
-
-## Liquifier
+# Liquifier
 
 Syntax: $$liquifier(input: Item, output: Fluid)
 
@@ -13,7 +11,7 @@ ServerEvents.recipes(event => {
 })
 ```
 
-## Atomizer
+# Atomizer
 
 Syntax: $$atomizer(input: Fluid, output: Item)
 
@@ -26,7 +24,7 @@ ServerEvents.recipes(event => {
 })
 ```
 
-## Compactor
+# Compactor
 
 Syntax: $$compactor(input: Item, output: Item)
 
@@ -39,7 +37,7 @@ ServerEvents.recipes(event => {
 })
 ```
 
-## Combiner
+# Combiner
 
 Syntax: $$combiner(input: Item[], output: Item)
 
@@ -48,18 +46,17 @@ Example:
 ```js
 ServerEvents.recipes(event => {
   event.recipes.alchemistry.combiner([
-      "minecraft:copper_ingot",
-      "8x minecraft:iron_ingot",
-      Item.of("minecraft:gold_ingot"),
-      Item.of("minecraft:netherite_ingot", 2)*
-    ],
-    "minecraft:nether_star")
+    "minecraft:copper_ingot",
+    "8x minecraft:iron_ingot",
+    Item.of("minecraft:gold_ingot"),
+    Item.of("minecraft:netherite_ingot", 2)*
+  ], "minecraft:nether_star")
 
   event.recipes.alchemistry.combiner(["minecraft:dirt", "minecraft:apple"], "minecraft:diamond")
 })
 ```
 
-## Dissolver
+# Dissolver
 
 Syntax: $$dissolver(input: Item, rolls: int, weighted: bool)
         $$.withGroup(weight: Number, output: Item[])
@@ -78,13 +75,13 @@ ServerEvents.recipes(event => {
   event.recipes.alchemistry.dissolver("minecraft:lava_bucket").withGroup(100, ["minecraft:netherrack"])
 
   event.recipes.alchemistry.dissolver("minecraft:lava_bucket", 1, true)
-      .withGroup(50, ["chemlib:carbonate"])
-      .withGroup(33.3, ["2x chemlib:hydroxide"])
-      .withGroup(16.7,["4x chemlib:iron", Item.of("chemlib:cobalt", 8)])
+    .withGroup(50, ["chemlib:carbonate"])
+    .withGroup(33.3, ["2x chemlib:hydroxide"])
+    .withGroup(16.7,["4x chemlib:iron", Item.of("chemlib:cobalt", 8)])
 })
 ```
 
-## Fission
+# Fission
 
 Syntax: $$fission(input: Item, output1: Item, output2: Item)
 
@@ -97,7 +94,7 @@ ServerEvents.recipes(event => {
 })
 ```
 
-## Fusion
+# Fusion
 
 Syntax: $$fission(input1: Item, input2: Item, output: Item)
 

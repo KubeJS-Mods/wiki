@@ -94,18 +94,18 @@ Associate a status effect to the element
 
 ```js
 StartupEvents.registry("item", event => {
-    event.create("chemlib:deuterium", "chemlib:element")
-        .elementColor("1e90ff")
-        .groupName("Isotopes")
-        .abbreviation("²H")
-        .atomicNumber(1)
-        .chemicalGroup(1)
-        .period(1)
-        .matterState(MatterType.GAS)
-        .metalType(Metal.NONMETAL)
-        .hasItems(false)
-        .artificial(false)
-        .withEffect("minecraft:levitation", 5, 2)
+  event.create("chemlib:deuterium", "chemlib:element")
+    .elementColor("1e90ff")
+    .groupName("Isotopes")
+    .abbreviation("²H")
+    .atomicNumber(1)
+    .chemicalGroup(1)
+    .period(1)
+    .matterState(MatterType.GAS)
+    .metalType(Metal.NONMETAL)
+    .hasItems(false)
+    .artificial(false)
+    .withEffect("minecraft:levitation", 5, 2)
 })
 ```
 

@@ -158,7 +158,7 @@ vat_machine_recipe([itemIngredient | fluidIngredient], [itemOutput | fluidOutput
 ```
 
 >>> success
-Read the information so the syntax is less confusing!
+Read the info below so the syntax is less confusing!
 <<<
 
 Information:

@@ -117,6 +117,10 @@ ServerEvents.recipes(event => {
 ```
 <|
 
+>>> danger
+The below types don't exist on 1.19.2!
+<<<
+
 # Winding
 Syntax: `winding(itemIngredients[], itemOutput, processingTime)`
 
@@ -125,21 +129,12 @@ Information:
 - Item output cannot have more than 1 item output
 
 Example:
-|> 1.20.1
 ```js
 ServerEvents.recipes(event => {
   event.recipes.tfmg.winding(["minecraft:dirt", "minecraft:stick"], "minecraft:sand", 200)
   event.recipes.tfmg.winding("minecraft:glass", "minecraft:sand", 150)
 })
 ```
-<||> 1.19.2
-```js
-ServerEvents.recipes(event => {
-  event.recipes.createindustry.winding(["minecraft:dirt", "minecraft:stick"], "minecraft:sand", 200)
-  event.recipes.createindustry.winding("minecraft:glass", "minecraft:sand", 150)
-})
-```
-<|
 
 # Hot Blasting (aka Air Blasting)
 Syntax: `hot_blast(fluidIngredient[], fluidOutput[], processingTime)`
@@ -149,21 +144,12 @@ Information:
 - Fluid output cannot have more than 2 fluid outputs
 
 Example:
-|> 1.20.1
 ```js
 ServerEvents.recipes(event => {
   event.recipes.tfmg.hot_blast(["minecraft:water", "minecraft:lava"], "tfmg:air", 300)
   event.recipes.tfmg.hot_blast("minecraft:lava", "minecraft:air", 250)
 })
 ```
-<||> 1.19.2
-```js
-ServerEvents.recipes(event => {
-  event.recipes.createindustry.hot_blast(["minecraft:water", "minecraft:lava"], "tfmg:air", 300)
-  event.recipes.createindustry.hot_blast("minecraft:lava", "minecraft:air", 250)
-})
-```
-<|
 
 # Chemical Vat
 Syntax:
@@ -203,7 +189,6 @@ Information:
 - The output also supports items with a chance of being made with `Item.of("item here").withChance(chance here)` (Chance is from a 0-1 scale)
 
 Example:
-|> 1.20.1
 ```js
 ServerEvents.recipes(event => {
   event.recipes.tfmg.vat_machine_recipe("minecraft:dirt", "minecraft:diamond")
@@ -218,22 +203,6 @@ ServerEvents.recipes(event => {
     .processingTime(250) // Takes 250 ticks to make the ingredients into lava and mud
 })
 ```
-<||> 1.19.2
-```js
-ServerEvents.recipes(event => {
-  event.recipes.createindustry.vat_machine_recipe("minecraft:dirt", "minecraft:diamond")
-    .superheated() // Makes the vat require superheating
-    .allowedVatTypes("tfmg:firebrick_lined_vat") // It's super hot, so we should use the firebrick vat for some realism
-    .processingTime(500) // Takes 500 ticks to make dirt to diamonds
-
-  event.recipes.createindustry.vat_machine_recipe(["tfmg:sulfuric_acid", "tfmg:hot_air", "minecraft:water"], ["minecraft:lava", "minecraft:mud"])
-    .heated() // Make this recipe use basic heating
-    .allowAllVatTypes() // Does not matter on the vat type we use, so we allow the three TFMG vat types
-    .machines("tfmg:mixing") // Make it where you have to have a mixer machine on top of the vat
-    .processingTime(250) // Takes 250 ticks to make the ingredients into lava and mud
-})
-```
-<|
 
 >>> info
 To add more machines (for example, requiring 3 electrodes), you just add more into the "machines" method. (Example: `[js].machines("tfmg:electrode", "tfmg:electrode", "tfmg:electrode")`)

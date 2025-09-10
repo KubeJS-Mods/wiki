@@ -123,7 +123,7 @@ ServerEvents.recipes(event => {
 ```
 
 ## Chemical Vat
-Syntax: `vat_machine_recipe([itemIngredient | itemIngredient], [itemOutput | fluidOutput], machines[]?, vatTypes[]?, minSize? processingTime?, heatRequirement?)`
+Syntax: `vat_machine_recipe([itemIngredient | fluidIngredient], [itemOutput | fluidOutput], machines[]?, vatTypes[]?, minSize? processingTime?, heatRequirement?)`
 >>> info
 Read the information so the syntax is less confusing!
 <<<

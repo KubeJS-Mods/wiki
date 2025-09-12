@@ -163,7 +163,7 @@ Read the info below so the syntax is less confusing!
 
 Information:
 - There can only be up to **four** item inputs
-  - Stacking items in one entry (e.g., `Item.of("some:item", 2)`) is not allowed. Instead, list each item individually, like: `["some:item", "some:item"]`.
+  - Stacking items in one entry (e.g., `Item.of("some:item", 2)`) is not allowed. Instead, list each item individually, like: `[js]["some:item", "some:item"]`.
 - There can only be up to **four** fluid inputs
 - Item output cannot have more than 4 item outputs
 - Fluid output cannot have more than 4 fluid outputs

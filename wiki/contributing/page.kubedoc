@@ -14,11 +14,17 @@ Make sure to also check the README of the wiki repo on GitHub for info on the fi
 - After starting a comment, leave a space (`[js]// This is a comment with a space!`)
 - After operators like `[js]if`, `[js]for`, etc., use a space. Always wrap code in a branch with a block, unless that branch results in an early return.
 ```js
-if (player.hand == "OFF_HAND") return; // Here, `return` doesn't need to be wrapped in a block.
+if (player.hand == "OFF_HAND") return // Here, `return` doesn't need to be wrapped in a block.
 if (player.hand == "MAIN_HAND") {
   console.log("Right-clicked with main hand")
 }
 ```
-- An 
+- Do not use semicolons, unless that's absolutely necessary due to the code being parsed unexpectedly.
+```js
+console.log("Hello, world!")
+// Here, a semicolon is needed in order for code to be not parsed as:
+// console.log("Hello, world!")['minecraft:stone', 'minecraft:cobblestone'].forEach(item => {})
+;['minecraft:stone', 'minecraft:cobblestone'].forEach(item => {})
+```
 
 You can check `https://kubejs.com/wiki/preview/x` for a preview of a currently open PR.

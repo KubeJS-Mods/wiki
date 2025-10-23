@@ -11,6 +11,13 @@ Make sure to also check the README of the wiki repo on GitHub for info on the fi
 - Whenever a Minecraft item is used, use it with the `minecraft:` namespace. Did you know you could skip it?
 - Don't leave trailing commas unless they are used in arrays that span multiple lines.
 - For string literals, use single quotes (`[js]'minecraft:stone'`), unless usage of double quotes will result in less quotes being escaped (`[js]"I'm not escaped!"`).
+- After starting a comment, leave a space (`[js]// This is a comment with a space!`)
+- After operators like `[js]if`, `[js]for`, etc., use a space. Always wrap code in a branch with a block.
+```js
+if (player.hand == "MAIN_HAND") {
+  console.log("Right-clicked with main hand")
+}
+```
 >>> info
 This section is still WIP
 <<<

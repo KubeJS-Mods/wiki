@@ -18,8 +18,5 @@ if (player.hand == "MAIN_HAND") {
   console.log("Right-clicked with main hand")
 }
 ```
->>> info
-This section is still WIP
-<<<
 
 You can check `https://kubejs.com/wiki/preview/x` for a preview of a currently open PR.

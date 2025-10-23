@@ -1,12 +1,35 @@
-### Add items to tab, remove items from tab
+>>> info
+Information on this page only applies to Minecraft 1.20.1 and newer due to the Creative Tab rework in vanilla.
+<<<
+
+### Add / Remove items from a tab or search
+|> 1.21
 ```js
 StartupEvents.modifyCreativeTab('minecraft:redstone_blocks', event => {
 	// Adds example item after redstone
 	event.addAfter('minecraft:redstone', 'kubejs:example_item')
-	// Removes redstone
-	event.removeDisplay('minecraft:redstone');
+	// Removes redstone from this tab's display, but leaves it visible when using search
+	event.removeFromParent('minecraft:redstone');
+	// Removes redstone from this tab's search stacks
+	// (note that this does NOT remove it from search entirely if another tab still has the item in its search stacks)
+	event.removeFromSearch('minecraft:redstone');
+	// Fully removes redstone from both this tab's display and search stacks
+	event.remove('minecraft:redstone');
 })
 ```
+<||>+ 1.20.1
+StartupEvents.modifyCreativeTab('minecraft:redstone_blocks', event => {
+	// Adds example item after redstone
+	event.addAfter('minecraft:redstone', 'kubejs:example_item')
+	// Removes redstone from this tab's display, but leaves it visible when using search
+	event.removeDisplay('minecraft:redstone');
+	// Removes redstone from this tab's search stacks
+	// (note that this does NOT remove it from search entirely if another tab still has the item in its search stacks)
+	event.removeSearch('minecraft:redstone');
+	// Fully removes redstone from both this tab's display and search stacks
+	event.remove('minecraft:redstone');
+})
+<|
 
 ### Change icon and display name of tab
 ```js

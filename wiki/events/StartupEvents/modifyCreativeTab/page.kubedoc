@@ -18,6 +18,7 @@ StartupEvents.modifyCreativeTab('minecraft:redstone_blocks', event => {
 })
 ```
 <||>+ 1.20.1
+```js
 StartupEvents.modifyCreativeTab('minecraft:redstone_blocks', event => {
 	// Adds example item after redstone
 	event.addAfter('minecraft:redstone', 'kubejs:example_item')
@@ -29,6 +30,7 @@ StartupEvents.modifyCreativeTab('minecraft:redstone_blocks', event => {
 	// Fully removes redstone from both this tab's display and search stacks
 	event.remove('minecraft:redstone');
 })
+```
 <|
 
 ### Change icon and display name of tab

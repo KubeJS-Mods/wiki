@@ -12,11 +12,13 @@ Make sure to also check the README of the wiki repo on GitHub for info on the fi
 - Don't leave trailing commas unless they are used in arrays that span multiple lines.
 - For string literals, use single quotes (`[js]'minecraft:stone'`), unless usage of double quotes will result in less quotes being escaped (`[js]"I'm not escaped!"`).
 - After starting a comment, leave a space (`[js]// This is a comment with a space!`)
-- After operators like `[js]if`, `[js]for`, etc., use a space. Always wrap code in a branch with a block.
+- After operators like `[js]if`, `[js]for`, etc., use a space. Always wrap code in a branch with a block, unless that branch results in an early return.
 ```js
+if (player.hand == "OFF_HAND") return; // Here, `return` doesn't need to be wrapped in a block.
 if (player.hand == "MAIN_HAND") {
   console.log("Right-clicked with main hand")
 }
 ```
+- An 
 
 You can check `https://kubejs.com/wiki/preview/x` for a preview of a currently open PR.

@@ -3,12 +3,14 @@ Make sure to also check the README of the wiki repo on GitHub for info on the fi
 
 # {formatting}
 {formatting-info}
-* Use tab indents in codeblocks
-* Use `event` in event listeners
-* Whenever a Minecraft item is used, use it with the `minecraft:` namespace (did you know you could skip it?)
-* Don't leave trailing commas
-* Use arrow functions (`[js]() => {}`) for all functions
-* Use double quotes
+- In code blocks, use 2 space wide tabs.
+- As a name of the event handler callback parameter, use `event`.
+- Omit parentheses for one-parameter arrow functions. (`[js]ServerEvents.recipes(event => {})`).
+- Use descriptive but concise names for variable names (like `[js]ctx`, `[js]context`), do not use single letter names (`[js]c`) unless it's a commonly used name (`[js]i` and `[js]j` for loop indices, `[js]x`, `[js]y` and `[js]z` for coordinates).
+- Whenever a Minecraft item is used, use it with the `minecraft:` namespace. Did you know you could skip it?
+- Don't leave trailing commas unless they are used in arrays that span multiple lines.
+- Use arrow functions (`[js]() => {}`) for all functions.
+- For string literals, use single quotes (`[js]'minecraft:stone'`), unless usage of double quotes will result in less quotes being escaped (`[js]"I'm not escaped!"`).
 >>> info
 This section is still WIP
 <<<

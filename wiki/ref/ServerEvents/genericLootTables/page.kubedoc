@@ -1,0 +1,141 @@
+>>> warning
+This page is still under development. It is not complete, and subject to change at any time. additionally, it is my first time even trying to make a wiki entry. this won't be pretty.
+<<<
+
+# Loot, Tables, and Anxiety
+
+The genericLootTables event can be used to add, remove, or replace generic loot tables.
+
+Any script that modifies loot tables should be placed in the Server Events folder, and can be reloaded at any time with `/reload`.
+
+A simple example, this creates a generic loot table that the /loot command can (probably, I'm not in-game to test) access, and spawn or insert the loot of:
+
+```js
+ServerEvents.genericLootTables(event => {
+
+    event.addGeneric('kubejs:my_loot_table_name/slashes_are_fine_and_optional', table => {
+        table.addPool(pool => {
+            pool.rolls = [2, 4]//random number between (inclusive) 2 and 4
+            pool.addItem('minecraft:diamond')
+            pool.addItem('minecraft:gold_ingot')//all of these items have the same chance of dropping
+            pool.addItem('minecraft:iron_ingot')
+        })
+    })
+
+})
+```
+
+This table will pull somewhere between 2 and 4 items randomly selected between the diamond, gold, and iron, with no bias
+Simple enough, let's get more complicated
+
+
+This example uses Weight, allowing some items to be rare, and others common!
+
+```js
+ServerEvents.genericLootTables(event => {
+
+    event.addGeneric('kubejs:my_loot_table_name', table => {
+        table.addPool(pool => {
+            pool.rolls = 100//fixed roll it will roll the table 100 times, no more, no less
+            pool.addItem('minecraft:diamond', 1)//this first number represents Weight, the chance of dropping
+            pool.addItem('minecraft:dirt', 99)//out of 100 rolls, on average, the diamond will only drop once, as the dirt has a much higher weight.
+        })
+    })
+
+})
+
+```
+
+Does that make any sense to you? great! let's dive a bit deeper..
+
+
+This example will show off count, allowing more than just one of an item to be dropped in a loot table.
+
+```js
+ServerEvents.genericLootTables(event => {
+
+    event.addGeneric('kubejs:my_loot_table_name', table => {
+        table.addPool(pool => {
+            pool.rolls = 1
+            pool.addItem('minecraft:gold_ingot', 1, [1, 3])// will give somewhere between 1 and 3 gold ingots
+            pool.addItem('minecraft:gold_nugget', 1, [9, 27])//will give somewhere between 9 and 27 nuggets
+        })
+    })
+
+})
+```
+
+So far so good! you can already make a simple loot table (don't worry about inserting it yet, we'll get to that)
+(I'm sure just using a normal number as a count, instead of the random nunber range works fine, but I'm again not in-game, so I'm just being safe by using my own code as an example)
+
+this is a table → ⌐¬
+
+We can get spicer though, let's learn Quality! Quality multiplies the luck of the opener and it's own value (by default 0) and adds the result to the weight of the entry in the loot table
+
+```js
+ServerEvents.genericLootTables(event => {
+
+    event.addGeneric('kubejs:my_loot_table_name', table => {
+        table.addPool(pool => {
+            pool.rolls = 1
+            pool.addItem('minecraft:diamond', 1).quality(10)//every point of luck you have will add 10 weight to the diamond!
+            pool.addItem('minecraft:iron_ingot', 100).quality(-10)//quality can be negative as well! the iron will become less common the higher your luck!
+        })
+    })
+
+})
+```
+
+If weight becomes, or is set to 0, the item will not appear! if Quality pushes it out of the negative, it can appear again, (or stop appearing, in the inverse scenario) so you may be able to hide powerful loot in very common tables!
+
+
+Are you ready for one of the spiciest things a loot table can do?
+Behold, loot table-ception:
+
+```js
+ServerEvents.genericLootTables(event => {
+
+    event.addGeneric('kubejs:my_loot_table_name', table => {
+        table.addPool(pool => {
+            pool.rolls = 1
+            pool.addLootTable('kubejs:my_other_loot_table_name')//This rolls the mentioned loot table as part of this table
+            pool.addLootTable('kubejs:i_am_a_heavy_table').weight(2)//Weight can be entered for these, but it has to be entered like this instead
+            pool.addLootTable('minecraft:chest/simple_dungeon')//Vanilla tables can be entered here as well!
+            pool.addLootTable('kubejs:something_something_yada_yada').weight(2).quality(10)//Quality also works, and these modifiers can be stacked
+
+            //while we're talking about tables..
+            //pool.addEmpty(2)   a chance for nothing to be given, the number provided is Weight.
+        })
+    })
+
+})
+```
+
+Alright, you maybe-hopefully-perhaps know enough to get started with loot table making!...
+
+
+Oh right, you want to see it somewhere, don't you, I'm running out of steam to write this entry so here's a quick piece of code that'll get you started on actually seeing your table spawn:
+
+```js
+ServerEvents.chestLootTables(event => {// ← !NOTICE!, this is NOT a genericLootTables event, this is for chest, put it somewhere different! (it maybe should be moved from this wiki entry to another..)
+
+    //the loot ID of a dungeon chest ↓ is actually 'minecraft:chests/simple_dungeon' but chestLootTables seem to omit this, as the below example is functional
+    event.modify('minecraft:simple_dungeon', table => {//Event.modify adds to the table without erasing the original contents
+    //event.addChest('minecraft:simple_dungeon', table => {  this will (likely) overwrite the original loot table with the new loot.
+        table.addPool(pool => {
+            pool.rolls = [1, 2]//same rules as before apply
+            pool.addItem('minecraft:diamond', 1).quality(10)
+            pool.addItem('minecraft:iron_ingot', 4, [10, 20]).quality(-1)
+            pool.addLootTable('kubejs:tables/loot').weight(2) //addItem and addLootTable can co-exist in the same table, incase you thought they couldn't.
+            pool.addLootTable('kubejs:tables/more_loot')
+        })
+    })
+
+})
+```
+
+And that's about the most I can list off the top of my head, I figured I'd throw all this out here to help anyone who wants to make a good modpack in KJS6, but is intimidated by the lack of a wiki entry for KJS6 Loot Tables
+
+>>> warn
+This is my first ever attempt to contribute to the wiki, and I am 101% confident that this will Need editing, as it reaks of unprofessionalism. regardless of quality, I hope the examples provided can help someone get started, and if not with coding, than cleaning up my mess here.
+<<<

@@ -174,15 +174,15 @@ StartupEvents.registry('item', event => {
      */
     .useAnimation('drink')
     /**
-     * The duration before the item finishs its using,
-     * if you need something like hold-and-charge time (like bow),
-     * consider set this to 72000 (1h) or more.
+     * The duration before the item finishes being used,
+     * if you need something like hold-and-charge time (like a bow),
+     * consider setting this to 72000 (1h) or more.
      * A returned value of 0 or lower will render the item not usable.
      */
     .useDuration(itemstack => 64)
     /**
      * When item is about to be used.
-     * If true, item will starts it use animation if duration > 0.
+     * If true, item will start its use animation if duration > 0.
      */
     .use((level, player, hand) => true)
     // When the item use duration expires.

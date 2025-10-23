@@ -65,7 +65,7 @@ Inline image ![[emoji:test.png|Test]] test [[@000001]]
 ---
 
 Emoji test:
-{no} {yes} {thumbs-up} {thumbs-down} {point-up}
+{no} {yes} {thumbs-up} {thumbs-down} {point-up} {wink} {na}
 
 Script types:
 {st-s}, {se-s}, {cl-s}
@@ -80,7 +80,7 @@ console.log('Hello, World!')
 ```js
 // this code uses space indents
 ServerEvents.recipes(event => {
-  let potting = (output, pottedInput) => {
+  const potting = (output, pottedInput) => {
     event.shaped(output, [
       'BIB',
       ' B '
@@ -100,7 +100,7 @@ ServerEvents.recipes(event => {
 ```js
 // and this uses tab indents
 ServerEvents.recipes(event => {
-	let potting = (output, pottedInput) => {
+	const potting = (output, pottedInput) => {
 		event.shaped(output, [
 			'BIB',
 			' B '

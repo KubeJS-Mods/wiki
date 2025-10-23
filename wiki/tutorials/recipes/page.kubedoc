@@ -277,7 +277,7 @@ Here's a helper function, which allows you to make items by crafting a flower po
 
 ```js
 ServerEvents.recipes(event => {
-  function potting(output, pottedInput) {
+  let potting = (output, pottedInput) => {
     event.shaped(output, [
       'BIB',
       ' B '
@@ -287,7 +287,7 @@ ServerEvents.recipes(event => {
     })
   }
 
-  //Now we can make many 'potting' recipes without typing that huge block over and over!
+  // Now we can make many 'potting' recipes without typing that huge block over and over!
   potting('kubejs:potted_snowball', 'minecraft:snowball')
   potting('kubejs:potted_lava', 'minecraft:lava_bucket')
   potting('minecraft:blast_furnace', 'minecraft:furnace')

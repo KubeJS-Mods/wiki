@@ -19,7 +19,7 @@ if (player.hand == "MAIN_HAND") {
   console.log("Right-clicked with main hand")
 }
 ```
-- Do not use semicolons, unless that's absolutely necessary due to the code being parsed unexpectedly.
+- Do not use semicolons, unless that's absolutely necessary due to the code being parsed unexpectedly. Such cases should be avoided if possible.
 ```js
 console.log("Hello, world!")
 // Here, a semicolon is needed in order for code to be not parsed as:

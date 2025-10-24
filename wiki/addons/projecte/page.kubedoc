@@ -10,17 +10,17 @@ ProjectEEvents.setEMC(event => {
     // this can sometimes result in this emc value not being
     // set, but also it allows for emc values to be generated
     // from this one; i.e crafting recipes
-    event.setEMCBefore('minecraft:stick', 10000);
+    event.setEMCBefore('minecraft:stick', 10000)
 })
 
 ItemEvents.rightClicked('minecraft:stick', event => {
-    const player = event.player;
+    const player = event.player
 
     // getPlayerEMC will always return a string
     // because emc values can get very large
     player.tell('Your emc is ' + ProjectE.getPlayerEMC(player))
 
-    ProjectE.addPlayerEMC(player, 1000);
+    ProjectE.addPlayerEMC(player, 1000)
     // the second argument can be a string because of the above
     // ProjectE.setPlayerEMC also exists
 
@@ -31,6 +31,6 @@ ItemEvents.rightClicked('minecraft:stick', event => {
 Startup events ({st-s}):
 ```js
 ProjectEEvents.registerWorldTransmutations(event => {
-    event.transform('minecraft:tnt', 'minecraft:oak_planks');
+    event.transform('minecraft:tnt', 'minecraft:oak_planks')
 })
 ```

@@ -10,7 +10,7 @@ event.recipes.tconstruct.casting_table(outputItem, inputFluidId, inputFluidAmoun
 ## Casting Basin
 ```js
 event.recipes.tconstruct.casting_basin(output, inputFluidId)
-event.recipes.tconstruct.casting_basin(output, inputFluidId, inputFluidAmount) // defaults to 1296 mb
+event.recipes.tconstruct.casting_basin(output, inputFluidId, inputFluidAmount) // defaults to 1296 (9 * 144) mb
 ```
 
 Supports the same cast methods as casting table!
@@ -33,7 +33,7 @@ This addon isn't available for versions above 1.18.2 yet!
 <||>+ 1.18.2 and below
 ```js
 onEvent('recipes', event => {
-  const { casting_table, casting_basin } = event.recipes.tconstruct;
+  const { casting_table, casting_basin } = event.recipes.tconstruct
   casting_table('minecraft:carrot', 'minecraft:water').singleUseCast('nugget')
   casting_basin('minecraft:coal_block', 'minecraft:lava')
   casting_basin('minecraft:emerald', 'minecraft:water').cast('#forge:dusts/emerald')

@@ -92,8 +92,8 @@ This example here sends a message to everyone, saying who joined or left what pa
 ## After
 ```js
 FTBChunksEvents.after("claim", (event) => {
-  const chunkPos = event.chunk.pos.chunkPos;
-  const player = event.player.username;
+  const chunkPos = event.chunk.pos.chunkPos
+  const player = event.player.username
   event.server.tell(
     Component.aqua(player)
       .append(Component.literal(" has claimed Chunk at: "))

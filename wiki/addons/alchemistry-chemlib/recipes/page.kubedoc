@@ -89,8 +89,8 @@ Example:
 
 ```js
 ServerEvents.recipes(event => {
-  event.recipes.alchemistry.fission("minecraft:diamond", Item.of("minecraft:iron_ingot", 8), "4x minecraft:gold_ingot");
-  event.recipes.alchemistry.fission(Item.of("minecraft:diamond", 2), "8x minecraft:iron_ingot", "4x minecraft:gold_ingot");
+  event.recipes.alchemistry.fission("minecraft:diamond", Item.of("minecraft:iron_ingot", 8), "4x minecraft:gold_ingot")
+  event.recipes.alchemistry.fission(Item.of("minecraft:diamond", 2), "8x minecraft:iron_ingot", "4x minecraft:gold_ingot")
 })
 ```
 
@@ -100,7 +100,7 @@ Syntax: $$fission(input1: Item, input2: Item, output: Item)
 
 ```js
 ServerEvents.recipes(event => {
-  event.recipes.alchemistry.fusion("minecraft:apple", Item.of("minecraft:dirt", 8), "20x minecraft:diamond");
-  event.recipes.alchemistry.fusion(Item.of("minecraft:diamond", 4), "4x minecraft:emerald", "minecraft:nether_star");
+  event.recipes.alchemistry.fusion("minecraft:apple", Item.of("minecraft:dirt", 8), "20x minecraft:diamond")
+  event.recipes.alchemistry.fusion(Item.of("minecraft:diamond", 4), "4x minecraft:emerald", "minecraft:nether_star")
 })
 ```

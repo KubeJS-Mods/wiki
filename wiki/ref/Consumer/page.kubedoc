@@ -7,7 +7,7 @@ If your method looks something like:
 Then the script for this will be:
 ```js
 object.example(obj => {
-  console.log(obj); // obj is a string
+  console.log(obj) // obj is a string
 })
 ```
 Of course, the argument name in callback doesn't matter.

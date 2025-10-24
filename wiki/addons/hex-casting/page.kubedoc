@@ -7,7 +7,7 @@ You can find all the bindings [here](https://github.com/Nanorasmus/HexJS/blob/ma
 Making your own hexcasting pattern/spell is a 2 step process.
 First, Register the pattern with a name, angle signature, and whether it requires enlightenment and/or triggers the `Blind Diversion` advancement.
 ```js
-Hexcasting.registerCustomPattern("Testing", "deewde", false, false);
+Hexcasting.registerCustomPattern("Testing", "deewde", false, false)
 ```
 
 This registered the following pattern with the name "Testing", which does not require enlightenment, not does it trigger the `Blind Diversion` advancement.
@@ -22,7 +22,7 @@ Now for the sake of example, let's make this pattern do the following things:
 HexcastingEvents.registeredPatternCastEvent((e) => {
     // You could get the stack after checking what pattern it is,
     // but this is more convenient if you're going to have multiple patterns
-    const stack = e.getStack();
+    const stack = e.getStack()
 
     // Check if the pattern is the one we registered earlier
     if (e.getPattern().anglesSignature() == "deewde") {
@@ -31,20 +31,20 @@ HexcastingEvents.registeredPatternCastEvent((e) => {
             || !(stack[stack.length - 1] instanceof EntityIota) // Or the top Iota is not an entity
         ) {
             // Schedule the mishap
-            e.scheduleMishap("Expected an entity at the top of the stack");
+            e.scheduleMishap("Expected an entity at the top of the stack")
             // And finish the spell
-            e.finish();
+            e.finish()
         }
         // Now that we know the pattern which was cast is the one we registered and we have an entity on the top of the stack, we can do the logic.
 
         // Remove the top iota from the stack and get the entity from it
-        const entity = stack.pop().getEntity();
+        const entity = stack.pop().getEntity()
 
         // Turn the entity into a position 10 blocks above it and add it to the stack
-        stack.add(new Vec3Iota(entity.blockPosition().offset(0, 10, 0)));
+        stack.add(new Vec3Iota(entity.blockPosition().offset(0, 10, 0)))
 
         // Set the price of the spell to be 5 ametheyst dust (Value is in 10,000s of amtheyst dust)
-        e.setCost(50000);
+        e.setCost(50000)
 
         // For the cypher, we just want to give the caster a new cypher with the *exact* amount of media needed for the spell, in this case 15.125 dust.
         // The cypher should also contain the angle signatures of the patterns we want it to contain.
@@ -58,7 +58,7 @@ HexcastingEvents.registeredPatternCastEvent((e) => {
         )
 
         // And finish the spell (This is mandatory at the end of all code paths where this was the correct pattern)
-        e.finish();
+        e.finish()
     }
 })
 ```

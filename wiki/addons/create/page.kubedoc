@@ -293,10 +293,10 @@ ServerEvents.recipes(event => {
       ]
     )
     .transitionalItem('create:incomplete_precision_mechanism') // Set the transitional item
-    .loops(5); // Set the number of loops
+    .loops(5) // Set the number of loops
 
   // For this code to work, kubejs:incomplete_spore_blossom needs to be added to the game
-  const transitional = 'kubejs:incomplete_spore_blossom'; // Making a constant to store the transitional item makes the code more readable
+  const transitional = 'kubejs:incomplete_spore_blossom' // Making a constant to store the transitional item makes the code more readable
   event.recipes.create.sequenced_assembly(
       // Outputs:
       [
@@ -324,8 +324,8 @@ ServerEvents.recipes(event => {
       ]
     )
     .transitionalItem(transitional) // Set the transitional item
-    .loops(2); // Set the number of loops
-});
+    .loops(2) // Set the number of loops
+})
 ```
 
 ## Transitional Items

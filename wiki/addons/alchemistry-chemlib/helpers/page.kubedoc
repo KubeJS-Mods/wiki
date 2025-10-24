@@ -46,14 +46,14 @@ If the item is a valid chemical element, the script retrieves and displays its `
 
 ```js
 ItemEvents.rightClicked(event => {
-  const { player, item, hand, level } = event;
+  const { player, item, hand, level } = event
 
-  if (level.isClientSide()) return;
+  if (level.isClientSide()) return
 
   if (ElementHelper.isElement(item)) {
-    player.sendSystemMessage("Atomic Number: " + Element.getAtomicNumber(item));
+    player.sendSystemMessage("Atomic Number: " + Element.getAtomicNumber(item))
   }
-});
+})
 ```
 
 # CompoundHelper Methods
@@ -84,16 +84,16 @@ Returns a list of status effects applied by the compound (if any exist)
 
 ```js
 ItemEvents.rightClicked(event => {
-  const { player, item, hand, level } = event;
+  const { player, item, hand, level } = event
 
-  if (level.isClientSide()) return;
+  if (level.isClientSide()) return
 
   if (CompoundHelper.isCompound(item)) {
     player.sendSystemMessage(
       "Compound: " + Compound.getDescription(item)
-    );
+    )
   }
-});
+})
 ```
 
 # PeriodicTableHelper Methods
@@ -130,9 +130,9 @@ Returns all elements that belong to the given **period number** (row)
 
 ```js
 ItemEvents.rightClicked(event => {
-  const { player, item, hand, level } = event;
+  const { player, item, hand, level } = event
 
-  if (level.isClientSide()) return;
+  if (level.isClientSide()) return
 
   const elements = PeriodicTableHelper.getPeriodElements(6)
   elements.forEach(item => player.sendSystemMessage(item.toString()))
@@ -168,17 +168,17 @@ Returns `true` if it is, otherwise `false`
 BlockEvents.rightClicked(event => {
   const { player, block, level } = event
 
-  if (level.isClientSide()) return;
+  if (level.isClientSide()) return
 
   if (ChemicalBlock.isChemicalBlock(block.id)) {
-    const color = ChemicalBlock.getChemicalColor(block);
-    const chemical = ChemicalBlock.getBlockChemical(block);
+    const color = ChemicalBlock.getChemicalColor(block)
+    const chemical = ChemicalBlock.getBlockChemical(block)
 
     player.sendSystemMessage(
       "Chemical Block: " + chemical.getAbbreviation() + ", Color: " + color
-    );
+    )
   }
-});
+})
 ```
 
 >>> warn

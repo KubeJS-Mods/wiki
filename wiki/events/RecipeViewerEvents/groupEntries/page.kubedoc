@@ -1,7 +1,7 @@
 # Example
 ```js
 RecipeViewerEvents.groupEntries('item', event => {
-	event.group(/_pottery_sherd$/, 'kubejs:pottery_sherds', 'Pottery Sherds');
+	event.group(/_pottery_sherd$/, 'kubejs:pottery_sherds', 'Pottery Sherds')
 })
 ```
 

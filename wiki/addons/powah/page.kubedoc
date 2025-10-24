@@ -8,19 +8,19 @@ ServerEvents.recipes(event => {
 
 PowahEvents.registerCoolants(event => {
   // .addFluid(fluid, coolness)
-  event.addFluid('minecraft:lava', 10);
+  event.addFluid('minecraft:lava', 10)
     
   // .addSolid(fluid, coolness)
-  event.addSolid('minecraft:cobblestone', 10);
+  event.addSolid('minecraft:cobblestone', 10)
 })
 
 PowahEvents.registerHeatSource(event => {
   // .add(block, hotness)
-  event.add('minecraft:cobblestone', 10);
+  event.add('minecraft:cobblestone', 10)
 })
 
 PowahEvents.registerMagmaticFluid(event => {
   // .add(fluid, hotness)
-  event.add('minecraft:water', 10);
+  event.add('minecraft:water', 10)
 })
 ```

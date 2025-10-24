@@ -31,17 +31,17 @@ The example above only covers a few of the methods available on the block builde
 See the [[$BlockBuilder|full list here]]!
 
 # Alternate Block Builders
-Besides the base block builder, there are a few additional block builders avaialable which generally all inherit all the base methods from the base builder. Using `[js]event.create(<Name>,<AltBuilderKey>)`, you can use one of these alternate builders.
-| AltBuilderKey | Alternate Builder | notes |
-| "slab" | SlabBlockBuilder |  |
-| "stairs" | StairBlockBuilder |  |
-| "fence" | FenceBlockBuilder |  |
-| "wall" | WallBlockBuilder |  |
-| "fence_gate" | FenceGateBlockBuilder |  |
-| "pressure_plate" | PressurePlateBlockBuilder |  |
-| "button" | ButtonBlockBuilder |  |
-| "falling" | FallingBlockBuilder |  |
-| "crop" | CropBlockBuilder | additional methods include `[js].survive()`, `[js].crop()` and `[js].growTick()`; `[js].item()` refers to the seed item for this crop |
-| "cardinal" | HorizontalDirectionalBlockBuilder |  |
-| "detector" | DetectorBlock$Builder |  |
-| "basic" | BasicBlockJS$Builder | This is the default [[$BlockBuilder|block builder]] |
+Besides the base block builder, there are a few additional block builders avaialable which generally all inherit all the base methods from the base builder. Using `[js]event.create(name, key)`, you can use one of these alternate builders.
+| Key | Example | Note |
+| `basic` | Any block | This is the default |
+| `slab` | Oak Slab |  |
+| `stairs` | Oak Stairs |  |
+| `fence` | Oak Fence |  |
+| `fence_gate` | Oak Fence Gate |  |
+| `pressure_plate` | Oak Pressure Plate |  |
+| `wall` | Cobblestone Wall |  |
+| `button` | Oak Button |  |
+| `falling` | Sand |  |
+| `crop` | Wheat | Additional methods include `[js].survive()`, `[js].crop()` and `[js].growTick()`; `[js].item()` refers to the seed item for this crop |
+| `cardinal` | - |  |
+| `detector` | - |  |

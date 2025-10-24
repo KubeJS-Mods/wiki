@@ -297,3 +297,31 @@ ServerEvents.recipes(event => {
 ## Looping
 
 In addition to helper functions, you can also loop through an array to perform an action on every item in the array.
+
+```js
+ServerEvents.recipes(event => {
+	/** Array of all colors available in Minecraft. */
+	const colors = [
+		'black',
+		'blue',
+		'brown',
+		'cyan',
+		'gray',
+		'green',
+		'light_blue',
+		'light_gray',
+		'lime',
+		'magenta',
+		'orange',
+		'pink',
+		'purple',
+		'red',
+		'white',
+		'yellow',
+	]
+	// Now we can loop over that array without needing to specify a separate recipe for each color!
+	colors.forEach(color => {
+		event.shapeless(`kubejs:${color}_clay`, ['minecraft:clay', `minecraft:${color}_dye`])
+	})
+})
+```

@@ -33,7 +33,7 @@ ItemEvents.tooltip(event => {
 
   // Show the name of the player who owns the skull in a skulls tooltip
   event.addAdvanced('minecraft:player_head', (item, advanced, text) => {
-    let playerName = item.nbt?.SkullOwner?.Name
+    const playerName = item.nbt?.SkullOwner?.Name
     if (playerName) {
       text.add(Text.red(`The head of ${playerName}`))
     }

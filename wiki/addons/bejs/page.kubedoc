@@ -6,7 +6,7 @@ On 1.20 and above, you can register block entities with vanilla KubeJS.
 ```js
 StartupEvents.registry('block', event => {
 	event.create('example_block', 'entity' /*has to be here for the BE builder to work*/).displayName('Example Block')
-	.entity(builder => { // adds a BlockEntity onto this block
+	  .entity(builder => { // adds a BlockEntity onto this block
 	    builder.ticker((level, pos, state, be) => { // a tick method, called on block entity tick
             if(!level.clientSide) { // ALWAYS check side, the tick method is called on both CLIENT and SERVER
                 if(level.levelData.gameTime % 20 == 0) { // only .levelData.gameTime works for some reason??
@@ -77,7 +77,7 @@ All valid methods available on all builders:
 Multiblock builder example:
 ```js
 StartupEvents.registry('block', event => {
-    let CAP_PREDICATE = be => { // has *any* forge capability (item, energy, fluid)
+    const CAP_PREDICATE = be => { // has *any* forge capability (item, energy, fluid)
         return be != null && (be.getCapability(ForgeCapabilities.ITEM_HANDLER).present || be.getCapability(ForgeCapabilities.FLUID_HANDLER).present || be.getCapability(ForgeCapabilities.ENERGY).present)
     }
 
@@ -138,15 +138,16 @@ beJS can also create custom recipe types for your block entities to use!
 ```js
 StartupEvents.registry('recipe_type', event => {
     event.create('name_here')
-        .assembler((recipe, container) => { // optional, but very much suggested
-            let results = recipe.results
+        // Optional, but very much suggested
+        .assembler((recipe, container) => {
+            const results = recipe.results
             for (let i = 0; i < results.size() && i < container.containerSize; ++i) {
                 container.setItem(i, results.get(i))
             }
         })
-        .maxInputs(2) // required
-        .maxOutputs(4) // required
-        .toastSymbol('kubejs:block_id_here') // optional
+        .maxInputs(2) // Required
+        .maxOutputs(4) // Required
+        .toastSymbol('kubejs:block_id_here') // Optional
 })
 ```
 

@@ -134,7 +134,7 @@ ItemEvents.rightClicked(event => {
 
   if (level.isClientSide()) return;
 
-  let elements = PeriodicTableHelper.getPeriodElements(6)
+  const elements = PeriodicTableHelper.getPeriodElements(6)
   elements.forEach(item => player.sendSystemMessage(item.toString()))
 })
 ```

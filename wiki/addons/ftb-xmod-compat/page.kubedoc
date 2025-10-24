@@ -60,8 +60,8 @@ Executes code when a player starts a quest.
 |> playerJoinedParty
 ```js
 FTBTeamsEvents.playerJoinedParty(event => {
-    let team = event.currentTeam.name
-    let player = event.player.username
+    const team = event.currentTeam.name
+    const player = event.player.username
     event.server.tell(
         Component.aqua(player)
         .append(' joined: ')
@@ -72,8 +72,8 @@ FTBTeamsEvents.playerJoinedParty(event => {
 <||> playerLeftParty
 ```js
 FTBTeamsEvents.playerLeftParty(event => {
-    let team = event.currentTeam.name
-    let player = event.player.username
+    const team = event.currentTeam.name
+    const player = event.player.username
     event.server.tell(
         Component.aqua(player)
         .append(' left: ')
@@ -92,8 +92,8 @@ This example here sends a message to everyone, saying who joined or left what pa
 ## After
 ```js
 FTBChunksEvents.after("claim", (event) => {
-  let chunkPos = event.chunk.pos.chunkPos;
-  let player = event.player.username;
+  const chunkPos = event.chunk.pos.chunkPos;
+  const player = event.player.username;
   event.server.tell(
     Component.aqua(player)
       .append(Component.literal(" has claimed Chunk at: "))

@@ -97,7 +97,7 @@ ServerEvents.commandRegistry(event => {
   )
   
   // Helper function
-  let fly = (player) => {
+  const fly = (player) => {
     if (player.abilities.mayfly) {
       player.abilities.mayfly = false
       player.abilities.flying = false
@@ -125,7 +125,7 @@ onEvent('command.registry', event => {
   )
   
   // Helper function
-  let fly = (player) => {
+  const fly = (player) => {
     if (player.abilities.mayfly) {
       player.abilities.mayfly = false
       player.abilities.flying = false

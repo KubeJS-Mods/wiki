@@ -4,6 +4,7 @@ Make sure to also check the README of the wiki repo on GitHub for info on the fi
 # {formatting}
 {formatting-info}
 - In code blocks, use tab characters, not spaces.
+- Use `[js]const` for variables whenever possible.
 - Use arrow functions (`[js]() => {}`) for all functions.
 - As a name of the event handler callback parameter, use `event`.
 - Omit parentheses for one-parameter arrow functions. (`[js]ServerEvents.recipes(event => {})`).
@@ -11,8 +12,8 @@ Make sure to also check the README of the wiki repo on GitHub for info on the fi
 - Whenever a Minecraft item is used, use it with the `minecraft:` namespace. Did you know you could skip it?
 - Don't leave trailing commas unless they are used in arrays that span multiple lines.
 - For string literals, use single quotes (`[js]'minecraft:stone'`), unless usage of double quotes will result in less quotes being escaped (`[js]"I'm not escaped!"`).
-- After starting a comment, leave a space (`[js]// This is a comment with a space!`)
-- Use [[/tips/beans]]
+- After starting a comment, leave a space (`[js]// This is a comment with a space!`).
+- Use [[/tips/beans]].
 - After operators like `[js]if`, `[js]for`, etc., use a space. Always wrap code in a branch with a block, unless that branch results in an early return.
 ```js
 if (player.hand == "OFF_HAND") return // Here, `return` doesn't need to be wrapped in a block.

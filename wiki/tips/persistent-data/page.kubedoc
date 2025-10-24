@@ -6,7 +6,7 @@ Persistent Data is broken on 1.21+!
 Here's an example of persistentData:
 ```js
 PlayerEvents.loggedIn(event => {
-  let pData = event.player.persistentData;
+  const pData = event.player.persistentData;
   if (!pData.firstJoin) {
     pData.firstJoin = true
     // Do stuff only on first join, here we give the player some diamonds and a sword

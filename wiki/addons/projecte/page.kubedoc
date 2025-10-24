@@ -14,7 +14,7 @@ ProjectEEvents.setEMC(event => {
 })
 
 ItemEvents.rightClicked('minecraft:stick', event => {
-    let player = event.player;
+    const player = event.player;
 
     // getPlayerEMC will always return a string
     // because emc values can get very large

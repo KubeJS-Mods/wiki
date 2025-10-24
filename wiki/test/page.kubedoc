@@ -73,7 +73,7 @@ Script types:
 ---
 
 ```js
-let code = 'JavaScript code test';
+const code = 'JavaScript code test';
 console.log('Hello, World!')
 ```
 

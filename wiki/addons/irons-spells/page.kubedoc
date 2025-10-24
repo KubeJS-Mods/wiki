@@ -50,7 +50,7 @@ StartupEvents.registry('irons_spellbooks:spells', event => {
 // The functions for certain methods with callbacks like onCast can go in a global variable if you want it to be reloadable by using /kubejs reload startup_scripts
 // It is recommended to use ProbeJS for this, to see all the available methods and properties in the context object.
 global.bloodfed = (ctx) => {
-	let player = ctx.entity
+	const player = ctx.entity
 	if ((player.getFoodData().getFoodLevel() * (ctx.getSpellLevel() / 2)) < 2
 	|| !ctx.entity.isPlayer()) return
 	player.heal(ctx.getSpellLevel() / 2)

@@ -187,7 +187,7 @@ StartupEvents.registry('item', event => {
     .use((level, player, hand) => true)
     // When the item use duration expires.
     .finishUsing((itemstack, level, entity) => {
-      let effects = entity.potionEffects
+      const effects = entity.potionEffects
       effects.add('minecraft:haste', 120 * 20)
       itemstack.shrink(1)
       if (entity.player) {

@@ -1,0 +1,55 @@
+>>> warn
+This page was created with KubeJS 7.2 (for 1.21.1) in mind. Most of the information you see here will work with your version as well, but code syntax especially might *slightly* differ across versions.
+
+We are working on creating alternate versions of this page for other versions of Minecraft.
+<<<
+
+An `Ingredient` is a filter over items that is used to determine which item stacks  are valid inputs for a given recipe. In their most basic form, they can either match  a single item, a item tag, or any combination of the previous two (as a list).  Additionally, more complex ingredients exist that allow filtering by creative tab or  mod name, or let you subtract one ingredient from another, as elaborated on below.
+
+>>> info
+Ingredients are **unstacked** by default, though NeoForge provides a `SizedIngredient` to fill that gap. SizedIngredients use the same syntax as ingredients, though additionally  support a stack size (see `ItemStack` as well) during parsing.
+<<<
+
+# Creating Ingredients
+KubeJS will automatically try to *wrap* any input to an ingredient in places where it is expected, but you can also use the `Ingredient` wrapper ([source](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/IngredientWrapper.java)) to explicitly create them yourself, specifically using variants of `Ingredient.of`:
+
+## Simple Ingredients
+Most simple ingredient types may simply be written as a string, for example:
+- `'-'` will return an ingredient that matches nothing, while `'*'` returns one that matches anything
+- any item ID (such as `'minecraft:apple'`) will create an Ingredient that matches that specific item (ignoring data)
+- any ID beginning with a `#` will match the tag with the given name, for example `'#c:ingots/iron'` will match all iron ingots
+- an item ID followed by a component filter (using the same syntax as [`/give`](https://minecraft.wiki/w/Argument_types#item_stack)) creates an ingredient that matches that item with the given data
+- '@modid' will match all items added by the mod with the given mod ID
+- '%' followed by an ID will match any items contained in the creative tab with that ID
+- A regular expression (either using the JavaScript regex syntax or as a string) will match all items where the ID matches that regex, for example `/minecraft:(gold|iron)_ingot/`
+
+>>> quote
+Use `/kubejs hand` to get some useful string representations of the item in your hand!
+<<<
+
+## Compound Ingredients
+As mentioned above, Ingredients may also be *nested* by using lists, which means that for example,
+```js
+[
+	"minecraft:apple",      // either an apple
+	"#c:ingots/copper",     // OR any copper ingot
+	"@create",              // OR any item added by Create
+    "-"                     // OR nothing, which does... nothing
+]
+```
+is valid syntax and will match any item that fulfills ANY of these conditions.
+
+Additionally, if you want to create an `Ingredient` that needs to match **multiple** conditions,  you can use the method `ingredient.and(other)` on an existing ingredient to create a so-called `IntersectionIngredient`: `[js]Ingredient.of('#c:ingots').and('@create')` for example will match any ingots that have been added by Create.
+
+Similarly, `ingredient.except(other)` can be used on an ingredient to create a `SubtractionIngredient`,  i.e. an ingredient that matches all items from the first ingredient that are NOT contained in the second ingredient. In the above example, replacing `and` with `except` would thus match any ingot NOT added by Create.
+
+# Using Ingredients
+
+>>> danger
+Ingredients are **lazily resolved** and will cache their results once tested.  For this reason, we do __not__ allow using Ingredient in contexts where ItemStack is expected!
+<<<
+
+## WIP: Explain methods on Ingredient and especially IngredientKJS
+
+# Further Reading
+- [Ingredients | NeoForged docs](https://docs.neoforged.net/docs/1.21.1/resources/server/recipes/ingredients/)

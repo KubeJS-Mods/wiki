@@ -366,7 +366,7 @@ ServerEvents.recipes(event => {
   event.recipes.create.sequenced_assembly(
       // Outputs:
       [
-        CreateItem.of('create:precision_mechanism', 0.130), // Main output, will appear in JEI as the result
+        CreateItem.of('create:precision_mechanism', 0.13), // Main output, will appear in JEI as the result
         CreateItem.of('create:golden_sheet', 0.008), // Rest of these items will be considered Random Salvage
         CreateItem.of('create:andesite_alloy', 0.008),
         CreateItem.of('create:cogwheel', 0.005),

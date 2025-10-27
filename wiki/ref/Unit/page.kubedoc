@@ -1,4 +1,4 @@
-Used in [[/tutorials/paint]]
+Used in [[/tutorials/painter-api]]
 
 # Info
 Units are not really a class, but more its own language. It's very similar to MoLang. It's always represented as a string, and is evaluated on client side while rendering, rather than when code is ran.

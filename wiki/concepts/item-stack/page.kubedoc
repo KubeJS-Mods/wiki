@@ -4,63 +4,33 @@ This page was created with KubeJS 7.2 (for 1.21.1) in mind. Most of the informat
 We are working on creating alternate versions of this page for other versions of Minecraft.
 <<<
 
-An `Ingredient` is a filter over items that is used to determine which item stacks  are valid inputs for a given recipe. In their most basic form, they can either match a single item, a item tag, or any combination of the previous two (as a list).  Additionally, more complex ingredients exist that allow filtering by creative tab or  mod name, or let you subtract one ingredient from another, as elaborated on below.
+An `ItemStack` is an item associated with an amount and optionally some data attached to it. Or to put it slightly differently, it is... well, _a single stack_ of items that all share the same data. It is also the representation of an "
+item" that is most familiar to players, since item stacks are what you hold in your inventory, pick up from the ground, etc.
 
->>> info
-Ingredients are **unstacked** by default, though NeoForge provides a `SizedIngredient` to fill that gap. SizedIngredients use the same syntax as ingredients, though additionally  support a stack size (see `ItemStack` as well) during parsing.
-<<<
-
-# Creating Ingredients
-KubeJS will automatically try to *wrap* any input to an ingredient in places where it is expected, but you can also use the `Ingredient` wrapper ([source](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/IngredientWrapper.java)) to explicitly create them yourself, specifically using the method `[js]Ingredient.of(input)`:
-
-## Simple Ingredients
-Most simple ingredient types may simply be written as a string, for example:
-- `'-'` will return an ingredient that matches nothing, while `'*'` returns one that matches anything
-- any item ID (such as `'minecraft:apple'`) will create an Ingredient that matches that specific item (ignoring data)
-- any ID beginning with a `#` will match the tag with the given name, for example `'#c:ingots/iron'` will match all iron ingots
-- an item ID followed by a **component filter** (using the same syntax as [`/give`](https://minecraft.wiki/w/Argument_types#item_stack)) creates an ingredient that matches that item with the given data
-- `'@modid'` will match all items added by the mod with the given mod ID
-- `%` followed by an ID will match any items contained in the creative tab with that ID
-- A regular expression (either using the JavaScript regex syntax or as a string) will match all items where the ID matches that regex, e.g. `[js]/minecraft:(gold|iron)_ingot/` will match bold Gold and Iron Ingots.
+You may consider the `Item` contained in an `ItemStack` to basically just be the raw "definition" of what that item is; for example, all diamond axes share the same item ID `minecraft:diamond_axe`, they all use the same item, but two
+diamond axes with different amounts of damage in your inventory, like `diamond_axe[damage=123]` and `diamond_axe[damage=456]` would be part of different **item stacks** since their data doesn't overlap. Similarly, two sticks with custom
+lore `stick[lore=[{text:"This Stick is very sticky."}]]` would work as part of the same item stack.
 
 >>> quote
-Use [[/tutorials/hand|`/kubejs hand`]] to get some useful string representations of the item in your hand!
+Since 1.20.4, data on items has changed *significantly* with the transition from NBT to data components. A neat side effect of this is that you can now change and override things that used to be hardcoded into the item definition itself, like the item's max stack size, enchantibility, repair ingredients, etc.
 <<<
 
-## Compound Ingredients
-As mentioned above, Ingredients may also be *nested* by using lists, which means that for example,
-```js
-[
-	"minecraft:apple",      // either an apple
-	"#c:ingots/copper",     // OR any copper ingot
-	"@create",              // OR any item added by Create
-    "-"                     // OR nothing, which does... nothing
-]
-```
-is valid syntax and will match any item that fulfills ANY of these conditions.
+# Creating ItemStacks
 
-Additionally, if you want to create an `[js]Ingredient` that needs to match **multiple** conditions,  you can use the method `[js]ingredient.and(other)` on an existing ingredient to create a so-called `IntersectionIngredient`: `[js]Ingredient.of('#c:ingots').and('@create')` for example will match any ingots that have been added by Create.
+KubeJS will automatically try to *wrap* any input to an item stack in places where it is expected, but you can also use the `Item`
+wrapper ([source](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/ItemWrapper.java)) to explicitly create them yourself, specifically using `[js]Item.of(input)` and
+`[js]Item.of(input, count)`:
 
-Similarly, `[js]ingredient.except(other)` can be used on an ingredient to create a `SubtractionIngredient`,  i.e. an ingredient that matches all items from the first ingredient that are NOT contained in the second ingredient. In the above example, replacing `and` with `except` would thus match any ingot NOT added by Create.
+In this case, the most simple way to write an item (and the one we recommend here) is by specifying its string ID, which you can most easily find by either enabling _advanced tooltips_ in your game (press F3+H) and hovering over the item in
+your inventory, or by using the ever-useful [[/tutorials/hand|`/kubejs hand`]]!
 
-Finally, you can create a SizedIngredient directly by using `[js]Ingredient.of(ingredient, amount)`. 
+Here are some example string inputs that will parse to item stacks:
 
-# Using Ingredients
+- `[js]'minecraft:air'` is the empty item, which... doesn't seem particularly useful, but hey, maybe good to know still!
+- `[js]'minecraft:apple'` is a single apple. (Note: If you're using vanilla items, the `minecraft:` may be omitted as well!)
+- `[js]'2x minecraft:apple'` represents a stack of two apples together.
+- `[js]'3x stick[lore=[{text:"This Stick is very sticky."}]]'` represents a stack of three very sticky sticks (with custom data components!)
+- Bit of a special case, but expressions like this: `[js]/minecraft:.*_ingot/` can also be used to get an item stack (namely an arbitrary item that matches the given regex). Note that *Ingredient in general is **unsupported** however and
+  WILL error if you try to convert it to an ItemStack, just use `ingredient.first`!*
 
->>> danger
-Ingredients are **lazily resolved** and will cache their results once tested.  For this reason, we do __not__ allow using Ingredient in contexts where ItemStack is expected!
-<<<
-
-## Useful Methods and Properties
-- `[js]ingredient.and(other)`: create an ingredient accepting items that match both this ingredient and `other`
-- `[js]ingredient.or(other)`: create an ingredient accepting items that match this ingredient or `other`
-- `[js]ingredient.except(other)`: create an ingredient accepting items that match this ingredient, but not `other`
-- `[js]ingredient.withCount(count)`: Returns a `SizedIngredient` of this ingredient with the given count
-  - `[js]ingredient.asStack()` = `[js]ingredient.withCount(1)`
-- `[js]ingredient.test(item)`: tests if the provided item stack matches this ingredient. **This resolves the ingredient!**
-- `[js]ingredient.items`: **resolves** the ingredient and returns a list of all matching item stacks
-  - (`[js]ingredient.stacks`, `[js]ingredient.stackArray`, `[js]ingredient.displayStacks` are variants of this)
-- `[js]ingredient.first`: **resolves** the ingredient and returns the first stack that matches it
-
-# Further Reading
-- [Ingredients | NeoForged docs](https://docs.neoforged.net/docs/1.21.1/resources/server/recipes/ingredients/)
+# WIP!

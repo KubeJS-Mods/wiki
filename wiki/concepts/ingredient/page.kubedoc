@@ -24,7 +24,7 @@ Most simple ingredient types may simply be written as a string, for example:
 - A regular expression (either using the JavaScript regex syntax or as a string) will match all items where the ID matches that regex, e.g. `[js]/minecraft:(gold|iron)_ingot/` will match bold Gold and Iron Ingots.
 
 >>> quote
-Use `/kubejs hand` to get some useful string representations of the item in your hand!
+Use [[/tutorials/hand|`/kubejs hand`]] to get some useful string representations of the item in your hand!
 <<<
 
 ## Compound Ingredients

@@ -1,32 +1,31 @@
 Edit and create [Blood Magic](https://www.curseforge.com/minecraft/mc-mods/blood-magic) recipes. See the [Recipes page](https://kubejs.com/wiki/tutorials/recipes) for more info.
 
-# Supported Recipe Types
-## Alchemy Table
+# Alchemy Table
 ```js
 event.recipes.bloodmagic.alchemytable(output, input[])
 event.recipes.bloodmagic.alchemytable(output, input[]).syphon(int).ticks(int).upgradeLevel(int)
 ```
 
-## Altar
+# Altar
 ```js
 event.recipes.bloodmagic.altar(output, input)
 event.recipes.bloodmagic.altar(output, input).upgradeLevel(int).altarSyphon(int).consumptionRate(int).drainRate(int)
 ```
 
-## Arc
+# Arc
 ```js
 event.recipes.bloodmagic.arc(output, input, tool)
 event.recipes.bloodmagic.arc(output, input, tool, addedOutput[])
 event.recipes.bloodmagic.arc(output, input, tool, addedOutput[]).consumeIngredient(boolean).outputFluid(fluid)
 ```
 
-## Array
+# Array
 ```js
 event.recipes.bloodmagic.array(output, baseInput, addedInput)
 event.recipes.bloodmagic.array(output, baseInput, addedInput).texture(string)
 ```
 
-## Soul Forge
+# Soul Forge
 ```js
 event.recipes.bloodmagic.soulforge(output, input[])
 event.recipes.bloodmagic.soulforge(output, input[]).minimumDrain(double).drain(double)

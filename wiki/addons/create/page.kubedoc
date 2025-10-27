@@ -374,7 +374,7 @@ ServerEvents.recipes(event => {
         CreateItem.of('create:crushed_gold_ore', 0.002),
         CreateItem.of('2x minecraft:gold_nugget', 0.002),
         CreateItem.of('minecraft:iron_ingot', 0.001),
-        CreateItem.of('minecraft:clock', 0.001),
+        CreateItem.of('minecraft:clock', 0.001)
       ],
       // Input:
       'create:golden_sheet', 
@@ -403,7 +403,7 @@ ServerEvents.recipes(event => {
         CreateItem.of('minecraft:birch_leaves', 0.01),
         CreateItem.of('minecraft:jungle_leaves', 0.01),
         CreateItem.of('minecraft:acacia_leaves', 0.01),
-        CreateItem.of('minecraft:dark_oak_leaves', 0.01),
+        CreateItem.of('minecraft:dark_oak_leaves', 0.01)
       ],
       // Input:
       'minecraft:flowering_azalea_leaves',
@@ -415,7 +415,7 @@ ServerEvents.recipes(event => {
         event.recipes.create.deploying(transitional, [transitional, 'minecraft:hanging_roots']),
         event.recipes.create.filling(transitional, [transitional, Fluid.of('minecraft:water', 420)]),
         event.recipes.create.deploying(transitional, [transitional, 'minecraft:moss_carpet']),
-        event.recipes.create.cutting(transitional, transitional),
+        event.recipes.create.cutting(transitional, transitional)
       ]
     )
     .transitionalItem(transitional) // Set the transitional item
@@ -436,7 +436,7 @@ ServerEvents.recipes(event => {
         Item.of('create:crushed_gold_ore').withChance(2),
         Item.of('2x minecraft:gold_nugget').withChance(2),
         'minecraft:iron_ingot',
-        'minecraft:clock',
+        'minecraft:clock'
       ],
       // Input:
       'create:golden_sheet', 
@@ -446,7 +446,7 @@ ServerEvents.recipes(event => {
         // Like a normal recipe function, it's used as a sequence step in this array. Input and output have the transitional item
         event.recipes.create.deploying('create:incomplete_precision_mechanism', ['create:incomplete_precision_mechanism', 'create:cogwheel',]),
         event.recipes.create.deploying('create:incomplete_precision_mechanism', ['create:incomplete_precision_mechanism', 'create:large_cogwheel',]),
-        event.recipes.create.deploying('create:incomplete_precision_mechanism', ['create:incomplete_precision_mechanism', 'minecraft:iron_nugget',]),
+        event.recipes.create.deploying('create:incomplete_precision_mechanism', ['create:incomplete_precision_mechanism', 'minecraft:iron_nugget',])
       ]
     )
     .transitionalItem('create:incomplete_precision_mechanism') // Set the transitional item
@@ -465,7 +465,7 @@ ServerEvents.recipes(event => {
         'minecraft:birch_leaves',
         'minecraft:jungle_leaves',
         'minecraft:acacia_leaves',
-        'minecraft:dark_oak_leaves',
+        'minecraft:dark_oak_leaves'
       ],
       // Input:
       'minecraft:flowering_azalea_leaves',
@@ -476,7 +476,7 @@ ServerEvents.recipes(event => {
         event.recipes.create.pressing(transitional, transitional),
         event.recipes.create.deploying(transitional, [transitional, 'minecraft:hanging_roots']),
         event.recipes.create.filling(transitional, [transitional, Fluid.of('minecraft:water', 420)]),
-        event.recipes.create.deploying(transitional, [transitional, 'minecraft:moss_carpet']),
+        event.recipes.create.deploying(transitional, [transitional, 'minecraft:moss_carpet'])
         event.recipes.create.cutting(transitional, transitional),
       ]
     )

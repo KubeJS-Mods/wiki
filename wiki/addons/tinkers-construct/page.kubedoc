@@ -1,13 +1,12 @@
 Edit and create [Tinker's Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) recipes. See [Recipes page](https://kubejs.com/wiki/tutorials/recipes) for more info.
 
-# Supported Recipe Types
-## Casting Table
+# Casting Table
 ```js
 event.recipes.tconstruct.casting_table(outputItem, inputFluidId)
 event.recipes.tconstruct.casting_table(outputItem, inputFluidId, inputFluidAmount) // defaults to 144 mB
 ```
 
-## Casting Basin
+# Casting Basin
 ```js
 event.recipes.tconstruct.casting_basin(output, inputFluidId)
 event.recipes.tconstruct.casting_basin(output, inputFluidId, inputFluidAmount) // defaults to 1296 (9 * 144) mb

@@ -7,7 +7,7 @@ We are working on creating alternate versions of this page for other versions of
 An `Ingredient` is a filter over items that is used to determine which item stacks  are valid inputs for a given recipe. In their most basic form, they can either match a single item, a item tag, or any combination of the previous two (as a list).  Additionally, more complex ingredients exist that allow filtering by creative tab or  mod name, or let you subtract one ingredient from another, as elaborated on below.
 
 >>> info
-Ingredients are **unstacked** by default, though NeoForge provides a `SizedIngredient` to fill that gap. SizedIngredients use the same syntax as ingredients, though additionally  support a stack size (see [/concepts/item-stack|`ItemStack`] as well) during parsing.
+Ingredients are **unstacked** by default, though NeoForge provides a `SizedIngredient` to fill that gap. SizedIngredients use the same syntax as ingredients, though additionally  support a stack size (see [[/concepts/item-stack|`ItemStack`]] as well) during parsing.
 <<<
 
 # Creating Ingredients

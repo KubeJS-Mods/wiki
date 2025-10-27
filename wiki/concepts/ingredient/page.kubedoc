@@ -11,7 +11,7 @@ Ingredients are **unstacked** by default, though NeoForge provides a `SizedIngre
 <<<
 
 # Creating Ingredients
-KubeJS will automatically try to *wrap* any input to an ingredient in places where it is expected, but you can also use the `Ingredient` wrapper ([source](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/IngredientWrapper.java)) to explicitly create them yourself, specifically using variants of `Ingredient.of`:
+KubeJS will automatically try to *wrap* any input to an ingredient in places where it is expected, but you can also use the `Ingredient` wrapper ([source](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/IngredientWrapper.java)) to explicitly create them yourself, specifically using the method `[js]Ingredient.of(input)`:
 
 ## Simple Ingredients
 Most simple ingredient types may simply be written as a string, for example:
@@ -21,7 +21,7 @@ Most simple ingredient types may simply be written as a string, for example:
 - an item ID followed by a **component filter** (using the same syntax as [`/give`](https://minecraft.wiki/w/Argument_types#item_stack)) creates an ingredient that matches that item with the given data
 - `'@modid'` will match all items added by the mod with the given mod ID
 - `%` followed by an ID will match any items contained in the creative tab with that ID
-- A regular expression (either using the JavaScript regex syntax or as a string) will match all items where the ID matches that regex, e.g. `/minecraft:(gold|iron)_ingot/` will match bold Gold and Iron Ingots.
+- A regular expression (either using the JavaScript regex syntax or as a string) will match all items where the ID matches that regex, e.g. `[js]/minecraft:(gold|iron)_ingot/` will match bold Gold and Iron Ingots.
 
 >>> quote
 Use `/kubejs hand` to get some useful string representations of the item in your hand!
@@ -39,11 +39,11 @@ As mentioned above, Ingredients may also be *nested* by using lists, which means
 ```
 is valid syntax and will match any item that fulfills ANY of these conditions.
 
-Additionally, if you want to create an `Ingredient` that needs to match **multiple** conditions,  you can use the method `ingredient.and(other)` on an existing ingredient to create a so-called `IntersectionIngredient`: `[js]Ingredient.of('#c:ingots').and('@create')` for example will match any ingots that have been added by Create.
+Additionally, if you want to create an `[js]Ingredient` that needs to match **multiple** conditions,  you can use the method `[js]ingredient.and(other)` on an existing ingredient to create a so-called `IntersectionIngredient`: `[js]Ingredient.of('#c:ingots').and('@create')` for example will match any ingots that have been added by Create.
 
-Similarly, `ingredient.except(other)` can be used on an ingredient to create a `SubtractionIngredient`,  i.e. an ingredient that matches all items from the first ingredient that are NOT contained in the second ingredient. In the above example, replacing `and` with `except` would thus match any ingot NOT added by Create.
+Similarly, `[js]ingredient.except(other)` can be used on an ingredient to create a `SubtractionIngredient`,  i.e. an ingredient that matches all items from the first ingredient that are NOT contained in the second ingredient. In the above example, replacing `and` with `except` would thus match any ingot NOT added by Create.
 
-Finally, you can create a SizedIngredient directly by using `Ingredient.of(ingredient, amount)`. 
+Finally, you can create a SizedIngredient directly by using `[js]Ingredient.of(ingredient, amount)`. 
 
 # Using Ingredients
 
@@ -52,15 +52,15 @@ Ingredients are **lazily resolved** and will cache their results once tested.  F
 <<<
 
 ## Useful Methods and Properties
-- `ingredient.and(other)`: create an ingredient accepting items that match both this ingredient and `other`
-- `ingredient.or(other)`: create an ingredient accepting items that match this ingredient or `other`
-- `ingredient.except(other)`: create an ingredient accepting items that match this ingredient, but not `other`
-- `ingredient.withCount(count)`: Returns a `SizedIngredient` of this ingredient with the given count
-  - `ingredient.asStack()` = `ingredient.withCount(1)`
-- `ingredient.test(item)`: tests if the provided item stack matches this ingredient. **This resolves the ingredient!**
-- `ingredient.items`: **resolves** the ingredient and returns a list of all matching item stacks
-  - (`ingredient.stacks`, `ingredient.stackArray`, `ingredient.displayStacks` are variants of this)
-- `ingredient.first`: **resolves** the ingredient and returns the first stack that matches it
+- `[js]ingredient.and(other)`: create an ingredient accepting items that match both this ingredient and `other`
+- `[js]ingredient.or(other)`: create an ingredient accepting items that match this ingredient or `other`
+- `[js]ingredient.except(other)`: create an ingredient accepting items that match this ingredient, but not `other`
+- `[js]ingredient.withCount(count)`: Returns a `SizedIngredient` of this ingredient with the given count
+  - `[js]ingredient.asStack()` = `[js]ingredient.withCount(1)`
+- `[js]ingredient.test(item)`: tests if the provided item stack matches this ingredient. **This resolves the ingredient!**
+- `[js]ingredient.items`: **resolves** the ingredient and returns a list of all matching item stacks
+  - (`[js]ingredient.stacks`, `[js]ingredient.stackArray`, `[js]ingredient.displayStacks` are variants of this)
+- `[js]ingredient.first`: **resolves** the ingredient and returns the first stack that matches it
 
 # Further Reading
 - [Ingredients | NeoForged docs](https://docs.neoforged.net/docs/1.21.1/resources/server/recipes/ingredients/)

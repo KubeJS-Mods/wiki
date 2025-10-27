@@ -45,7 +45,7 @@ onEvent('recipes', event => {
   altar('minecraft:carrot', 'minecraft:apple')
   arc('minecraft:netherite_ingot', 'minecraft:iron_ingot', 'minecraft:iron_pickaxe', [Item.of('minecraft:cobblestone').withChance(0.4)])
   array('minecraft:spruce_planks', 'minecraft:oak_planks', 'minecraft:birch_planks')
-  soulforge('minecraft:stone', ['minecraft:gold_ore', 'minecraft:diamond_ore', 'minecraft:iron_ore']).drain(1.0)
+  soulforge('minecraft:stone', ['minecraft:gold_ore', 'minecraft:diamond_ore', 'minecraft:iron_ore']).drain(1)
 })
 ```
 <|

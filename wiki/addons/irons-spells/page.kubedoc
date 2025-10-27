@@ -91,8 +91,8 @@ To create a spell school, you'll first need to create two attributes for spell p
 
 StartupEvents.registry("attribute", event => {
 	// Use the `spell` type for these attributes and set all the values needed. The default value has to be higher than the minimum value and lower than the maximum value.
-	event.create("test_spell_power", "irons_spells_js:spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
-	event.create("test_spell_resistance", "irons_spells_js:spell").setDefaultValue(1.0).setMinimumValue(0.0).setMaximumValue(10.0)
+	event.create("test_spell_power", "irons_spells_js:spell").setDefaultValue(1).setMinimumValue(0).setMaximumValue(10)
+	event.create("test_spell_resistance", "irons_spells_js:spell").setDefaultValue(1).setMinimumValue(0).setMaximumValue(10)
 })
 ```
 Then, in the next few lines, you need to apply these attributes to entities.
@@ -151,28 +151,28 @@ StartupEvents.registry("item", event => {
 	// This spell book is given 8 total spell slots and two attributes.
     	event.create("test_attribute_spellbook", "irons_spells_js:spellbook")
         	.setMaxSpellSlots(8)
-        	.addDefaultAttribute("kubejs:test_spell_power", "Test Spell Power", 2.0, "multiply_total")
+        	.addDefaultAttribute("kubejs:test_spell_power", "Test Spell Power", , "multiply_total")
         	.addDefaultAttribute("minecraft:generic.movement_speed", "Test Movement Speed", 1.2, "multiply_total")
 
 	// If you give a spell book default spells, it is converted to a Unique spell book. 
 	// This spell book has been given two extra attributes and a single default spell, being Firebolt at level 1.
     	event.create("test_unique_spellbook", "irons_spells_js:spellbook")
         	.setMaxSpellSlots(4)
-        	.addDefaultAttribute("kubejs:test_spell_power", "Test Spell Power", 2.0, "multiply_total")
+        	.addDefaultAttribute("kubejs:test_spell_power", "Test Spell Power", 2, "multiply_total")
         	.addDefaultAttribute("minecraft:generic.movement_speed", "Test Movement Speed", 1.2, "multiply_total")
         	.addDefaultSpell(SpellRegistry.FIREBOLT_SPELL, 1)
 
 	// You can create custom staves too, and give them additional custom attributes.
 	// This staff deals 50 base damage and gives the user 200% more spell power for the school Test, shown in a previous example.
     	event.create("test_staff", "irons_spells_js:staff")
-        	.addAdditionalAttribute("kubejs:test_spell_power", "Test Spell Power", 2.0, "multiply_total")
+        	.addAdditionalAttribute("kubejs:test_spell_power", "Test Spell Power", 2, "multiply_total")
         	.attackDamageBaseline(50)
         	.speedBaseline(-2.4)
 
 	// Along with custom staves, you can also create custom magic swords that come with default spells.
 	// This sword deals 100 damage, has 3 attack speed, and has two pre-inscribed spells, being Firebolt and Blood Slash.
     	event.create("test_magic_sword", "irons_spells_js:magic_sword")
-        	.addAdditionalAttribute("kubejs:test_spell_power", "Test Spell Power", 2.0, "multiply_total")
+        	.addAdditionalAttribute("kubejs:test_spell_power", "Test Spell Power", 2, "multiply_total")
         	.attackDamageBaseline(100)
         	.speedBaseline(3)
         	.addDefaultSpell(SpellRegistry.FIREBOLT_SPELL, 1)
@@ -180,7 +180,7 @@ StartupEvents.registry("item", event => {
 
 	// Also, you don't need to use a registry object for spells. You can input a string as the spell ID and it works just fine as well. 
     	event.create("test_magic_sword_2", "irons_spells_js:magic_sword")
-        	.addAdditionalAttribute("kubejs:test_spell_power", "Test Spell Power", 2.0, "multiply_total")
+        	.addAdditionalAttribute("kubejs:test_spell_power", "Test Spell Power", 2, "multiply_total")
         	.attackDamageBaseline(100)
         	.speedBaseline(3)
         	.addDefaultSpell("irons_spellbooks:starfall", 1)

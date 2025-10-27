@@ -14,6 +14,7 @@ Make sure to also check the README of the wiki repo on GitHub for info on the fi
 - For string literals, use single quotes (`[js]'minecraft:stone'`), unless usage of double quotes will result in less quotes being escaped (`[js]"I'm not escaped!"`).
 - After starting a comment, leave a space (`[js]// This is a comment with a space!`).
 - Use [[/tips/beans]].
+- Whenever a floating point number is used with the floating point equal to 0 (ie. `[js]5.0`), skip the floating point
 - After operators like `[js]if`, `[js]for`, etc., use a space. Always wrap code in a branch with a block, unless that branch results in an early return.
 ```js
 if (player.hand == "OFF_HAND") return // Here, `return` doesn't need to be wrapped in a block.

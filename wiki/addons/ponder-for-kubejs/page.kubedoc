@@ -127,7 +127,7 @@ Ponder.registry((event) => {
          * [x, y, z] -> the position that the text should point at
          */
         scene
-            .text(60, "Example text", [2.0, 2.5, 2.5])
+            .text(60, "Example text", [2, 2.5, 2.5])
             /**
              * Optional | Sets the color of the text.
              * Possible values:

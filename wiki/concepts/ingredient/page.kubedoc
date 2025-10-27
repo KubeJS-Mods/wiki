@@ -34,7 +34,7 @@ As mentioned above, Ingredients may also be *nested* by using lists, which means
 	"minecraft:apple",      // either an apple
 	"#c:ingots/copper",     // OR any copper ingot
 	"@create",              // OR any item added by Create
-    "-"                     // OR nothing, which does... nothing
+  "-"                     // OR nothing, which does... nothing
 ]
 ```
 is valid syntax and will match any item that fulfills ANY of these conditions.

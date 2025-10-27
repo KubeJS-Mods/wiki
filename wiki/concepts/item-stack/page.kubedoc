@@ -21,7 +21,7 @@ KubeJS will automatically try to *wrap* any input to an item stack in places whe
 wrapper ([source](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/ItemWrapper.java)) to explicitly create them yourself, specifically using `[js]Item.of(input)` and
 `[js]Item.of(input, count)`:
 
-In this case, the most simple way to write an item (and the one we recommend here) is by specifying its string ID, which you can most easily find by either enabling _advanced tooltips_ in your game (press F3+H) and hovering over the item in
+In this case, the most simple way to write an item (and the one we recommend here) is by specifying its string ID, which you can most easily find by either enabling *advanced tooltips* in your game (press F3+H) and hovering over the item in
 your inventory, or by using the ever-useful [[/tutorials/hand|`/kubejs hand`]]!
 
 Here are some example string inputs that will parse to item stacks:
@@ -30,7 +30,6 @@ Here are some example string inputs that will parse to item stacks:
 - `[js]'minecraft:apple'` is a single apple. (Note: If you're using vanilla items, the `minecraft:` may be omitted as well!)
 - `[js]'2x minecraft:apple'` represents a stack of two apples together.
 - `[js]'3x stick[lore=[{text:"This Stick is very sticky."}]]'` represents a stack of three very sticky sticks (with custom data components!)
-- Bit of a special case, but expressions like this: `[js]/minecraft:.*_ingot/` can also be used to get an item stack (namely an arbitrary item that matches the given regex). Note that *Ingredient in general is **unsupported** however and
-  WILL error if you try to convert it to an ItemStack, just use `ingredient.first`!*
+- Bit of a special case, but expressions like this: `[js]/minecraft:.*_ingot/` can also be used to get an item stack (namely an arbitrary item that matches the given regex). Note that Ingredient in general is **unsupported** however and WILL error if you try to convert it to an ItemStack, just use `ingredient.first`!
 
 # WIP!

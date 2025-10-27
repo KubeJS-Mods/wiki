@@ -43,13 +43,24 @@ Additionally, if you want to create an `Ingredient` that needs to match **multip
 
 Similarly, `ingredient.except(other)` can be used on an ingredient to create a `SubtractionIngredient`,  i.e. an ingredient that matches all items from the first ingredient that are NOT contained in the second ingredient. In the above example, replacing `and` with `except` would thus match any ingot NOT added by Create.
 
+Finally, you can create a SizedIngredient directly by using `Ingredient.of(ingredient, amount)`. 
+
 # Using Ingredients
 
 >>> danger
 Ingredients are **lazily resolved** and will cache their results once tested.  For this reason, we do __not__ allow using Ingredient in contexts where ItemStack is expected!
 <<<
 
-## WIP: Explain methods on Ingredient and especially IngredientKJS
+## Useful Methods and Properties
+- `ingredient.and(other)`: create an ingredient accepting items that match both this ingredient and `other`
+- `ingredient.or(other)`: create an ingredient accepting items that match this ingredient or `other`
+- `ingredient.except(other)`: create an ingredient accepting items that match this ingredient, but not `other`
+- `ingredient.withCount(count)`: Returns a `SizedIngredient` of this ingredient with the given count
+  - `ingredient.asStack()` = `ingredient.withCount(1)`
+- `ingredient.test(item)`: tests if the provided item stack matches this ingredient. **This resolves the ingredient!**
+- `ingredient.items`: **resolves** the ingredient and returns a list of all matching item stacks
+  - (`ingredient.stacks`, `ingredient.stackArray`, `ingredient.displayStacks` are variants of this)
+- `ingredient.first`: **resolves** the ingredient and returns the first stack that matches it
 
 # Further Reading
 - [Ingredients | NeoForged docs](https://docs.neoforged.net/docs/1.21.1/resources/server/recipes/ingredients/)

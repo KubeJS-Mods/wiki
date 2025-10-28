@@ -2,17 +2,15 @@
 
 ## Introduction
 
-KubeJS is a multi-modloader Minecraft mod which lets you create scripts in the JavaScript programming language to manage your server using events, change recipes, add ~~and edit~~ (coming soon!) loot tables, customise your world generation, add new blocks and items, or use custom integration with other mods like [FTB Quests](https://mods.latvian.dev/books/kubejs/page/ftb-quests-integration) for even more advanced features!
+KubeJS is a Minecraft mod for NeoForge 1.21.1+ as well as Forge (1.14-1.20.1) and Fabric (1.16-1.20.1) which lets you create scripts in the JavaScript programming language to manage your server using events, change recipes, add ~~and edit~~ (coming soon!) loot tables, customise your world generation, add new blocks and items, or use custom integration with other mods like [FTB Quests](https://mods.latvian.dev/books/kubejs/page/ftb-quests-integration) for even more advanced features!
 
 ## Issues and Feedback
 
-If you think you've found a bug with the mod or want to ask for a new feature, feel free to [open an issue](https://github.com/KubeJS-Mods/KubeJS/issues) here on GitHub, we'll try to get on it as soon as we can! Alternatively, you can also discuss your feature requests and suggestions with others using the [Discussions](https://github.com/KubeJS-Mods/KubeJS/discussions) tab.
-
-And if you're just looking for help with KubeJS overall and the wiki didn't have the answer for what you were looking for, you can join our [Discord server](https://discord.gg/lat) and ask for help in the support channels, as well!
+If you think you've found a bug with the mod or want to ask for a new feature, feel free to submit a ticket in our [Discord server](https://discord.gg/lat), we'll try to get on it as soon as we can! Alternatively, you can also [open an issue](https://github.com/KubeJS-Mods/KubeJS/issues) over on GitHub to discuss things with us.
 
 ## License
 
-KubeJS is distributed under the GNU Lesser General Public License v3.0, or LGPLv3. See our [LICENSE](/LICENSE.txt) file for more information.
+KubeJS is distributed under the GNU Lesser General Public License v3.0, or LGPLv3. See our [LICENSE](https://github.com/KubeJS-Mods/KubeJS/blob/main/LICENSE.txt) file for more information.
 
 ## Creating an addon
 
@@ -58,8 +56,8 @@ repositories {
 	}
 
 	maven {
-		// saps.dev Maven (KubeJS and Rhino)
-		url = "https://maven.saps.dev/releases"
+		// latvian.dev Maven (KubeJS and Rhino)
+		url = "https://maven.latvian.dev/releases"
 		content {
 			includeGroup "dev.latvian.mods"
 		}
@@ -71,8 +69,9 @@ repositories {
 You can then declare KubeJS as a regular `compile`-time dependency in your `dependencies` block:
 |> MDG / modern NG
 ```groovy
-api("dev.latvian.mods:kubejs-neoforge:$kubejs_version")
-interfaceInjectionData("dev.latvian.mods:kubejs-neoforge:$kubejs_version") // optional
+api("dev.latvian.mods:kubejs-neoforge:$kubejs_version") // alternatively use 'implementation'
+// optional, but often used in KubeJS, so we highly recommend adding this
+interfaceInjectionData("dev.latvian.mods:kubejs-neoforge:$kubejs_version") 
 ```
 <||> (Fabric / Architectury) Loom
 ```groovy
@@ -106,7 +105,7 @@ minecraft {
 ```
 <|
 
-We only officially support ModDevGradle and NeoGradle on 1.21+, though if you are an Architectury project using loom, the above should still work fine on modern versions!
+We only officially support ModDevGradle and NeoGradle on 1.21+, though if you are an Architectury project using Loom, the above should still work fine on modern versions!
 
 >>> warning
 A version listing page showing the newest versions of KubeJS is currently NYI, use the latest version from CurseForge or Modrinth where possible!
@@ -114,7 +113,11 @@ A version listing page showing the newest versions of KubeJS is currently NYI, u
 
 ### Creating a plugin
 
-KubeJS [plugins](https://github.com/KubeJS-Mods/KubeJS/blob/1.19/main/common/src/main/java/dev/latvian/mods/kubejs/KubeJSPlugin.java) are the main way to add KubeJS integration to your mods through code. They contain various convenient hooks for addon developers, to allow things such as:
+>>> warning
+This section is currently partially outdated, and needs to cover changes to plugins over multiple versions. WIP!
+<<<
+
+KubeJS [plugins](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/KubeJSPlugin.java) are the main way to add KubeJS integration to your mods through code. They contain various convenient hooks for addon developers, to allow things such as:
 
 - performing certain actions during or after plugin or KubeJS initialisation (`init`, `afterInit`, etc.)
 - adding classes to the class filter (`registerClasses`) as well as custom bindings (`registerBindings`) and type wrappers (`registerWrappers`) for easier interaction with native code in user scripts (See below for an explanation and example use cases)
@@ -123,6 +126,10 @@ KubeJS [plugins](https://github.com/KubeJS-Mods/KubeJS/blob/1.19/main/common/src
 - attaching extra data to players, worlds or the server, such that it can be accessed by script developers later (`attach(Player|World|Server)Data` - [Example](https://github.com/FTBTeam/FTB-Quests/blob/11311be070273008483d4c734ff9b96cc6a85b02/common/src/main/java/dev/ftb/mods/ftbquests/integration/kubejs/KubeJSIntegration.java#L40-L43))
 
 ### Adding recipe handlers
+
+>>> error
+This section is currently out of date and only applies to KubeJS in 1.19!
+<<<
 
 To add custom recipe handlers for your own modded recipe types, use KubeJS plugins as noted above. A concrete example of this can be found [here](https://github.com/KubeJS-Mods/KubeJS-Thermal/blob/1.19/main/src/main/java/dev/latvian/mods/kubejs/thermal/KubeJSThermalPlugin.java) for integration with the Thermal series, but we'll give you a simple outline of the process here as well:
 
@@ -225,7 +232,7 @@ public class MyRecipeJS extends RecipeJS {
 
 ### Adding bindings
 
-Similarly to adding custom recipe types, you may also add **custom bindings** to KubeJS (see [AntimatterAPI](https://github.com/GregTech-Intergalactical/AntimatterAPI/blob/dev-1.18/common/src/main/java/muramasa/antimatter/integration/kubejs/AntimatterKubeJS.java) for a simple example). Bindings can be anything from single value constants (like the global `HOUR = 3600000 (ms)`) to Java class and method wrappers (such as the builtin `Item` binding, which is wrapping the `ItemWrapper` class), and can be constrained to individual scopes, contexts and script types, as well!
+Similarly to adding custom recipe types, you may also add **custom bindings** to KubeJS (refer to KubeJS' own [builtin plugin](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/BuiltinKubeJSPlugin.java) for an example). Bindings can be anything from single value constants (like the global `HOUR = 3600000 (ms)`) to Java class and method wrappers (such as the builtin `Item` binding, which is wrapping the `ItemWrapper` class), and can be constrained to individual scopes, contexts and script types, as well!
 
 ### Setting class filters
 
@@ -251,7 +258,7 @@ and import the gradle project using an IDE of your choice! (Note: Eclipse is lik
 
 ### Building
 
-Building KubeJS from source should be rather straightforward, as well, just run `gradlew build` in the root project, and the corresponding jars for Forge and Fabric should be in the respective module's `build/libs` directory (`kubejs-<loader>-<version>.jar`). The project will also produce a common jar; that one however should not be used in production.
+Building KubeJS from source is rather straightforward, just run `gradlew build` in the root project and check the `build/libs` directory for a `kubejs-neoforge-<version>-local-<timestamp>.jar`. In older versions, Forge and Fabric-specific jars can be found in the respective module's `build/libs` directory. The project will also produce a common jar in these versions; that one however should not be used in production.
 
 ### Creating Pull Requests
 

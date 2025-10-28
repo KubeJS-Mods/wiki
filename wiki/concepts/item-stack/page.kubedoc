@@ -32,4 +32,39 @@ Here are some example string inputs that will parse to item stacks:
 - `[js]'3x stick[lore=[{text:"This Stick is very sticky."}]]'` represents a stack of three very sticky sticks (with custom data components!)
 - Bit of a special case, but expressions like this: `[js]/minecraft:.*_ingot/` can also be used to get an item stack (namely an arbitrary item that matches the given regex). Note that Ingredient in general is **unsupported** however and WILL error if you try to convert it to an ItemStack, just use `ingredient.first`!
 
-# WIP!
+# Using ItemStacks
+
+## Useful Methods and Properties
+- `[js]item.block`: If this item is a `BlockItem`, returns the associated block, else `null`
+- `[js]item.count` (**writable**): The count of this item stack
+  - related: `[js]item.grow(amount)` and `[js]item.shrink(amount)` in- or decrease the current stack's count by `amount`
+  - related: `[js]item.withCount(count)`: Copies this stack with the specified `count`
+- `[js]item.areItemsEqual(other)`: Returns `true` if `item` and `other` have the same item type
+- `[js]item.areComponents(other)`: Returns `true` if `item` and `other` have the same item and data
+
+## Registry Object Functions
+(these functions are all present on `Item` as well)
+- `[js]item.id`: Returns the item's ID in the item registry (as a string)
+  - related: `[js]item.idLocation` (as `ResourceLocation`), `[js]item.key` (as `ResourceKey<Item>`)
+  - related: `[js]item.mod` returns *namespace* the item was registered for
+- `[js]item.holder`: Wraps this item as a Holder (internal registry object)
+- `[js]item.registry`: Returns the item registry
+  - related: `[js]item.registryId`: Returns the *key* of the item registry
+- `[js]item.tags`: Returns a list of all tags for this item
+  - related: `[js]item.tagKeys`: Returns a list of `TagKey` instead of `ResourceLocation`
+  - related: `[js]item.hasTag(tag)`: Checks if this item has a certain tag
+
+## Component Functions
+WIP! (TODO: make a page on Components and KubeJS' ComponentFunctions interface)
+- `[js]componentString`: Returns the item's data components as a string representation
+- `[js]withCustomName(name)`: Copies this item stack with the specified name
+- `[js]enchantments`: Retrieves the item's enchantments
+- `[js]hasEnchantment(enchantment, level)`: Checks if the item has a specific enchantment at or above a given level
+- `[js]enchant(enchantment, level)`: Adds an enchantment to the ItemStack (TODO: enchantments page?)
+- `[js]enchant(enchantments)`: Adds enchantments to the ItemStack (TODO: enchantments page?)
+- `[js]getHarvestSpeed(block?)`: Gets the item's harvest speed for a given block (or default)
+- `[js]typeData`: ??? (is this just a custom map for scripters to use to attach data to item definitions?)
+- `[js]toItemString()`: Converts the ItemStack to its KubeJS string representation
+- `[js]asIngredient()`: Converts the ItemStack to an `Ingredient`
+- `[js]withLore(lore)`: Copies this item stack with the specified lore text
+

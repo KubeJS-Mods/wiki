@@ -12,6 +12,7 @@ ServerEvents.recipes(event => {
 
 - `[js]handler`: A callback function which gets executed when the event is fired. Return value is discarded.
 The function is called with the following parameters:
+
   - `[js]event`: Contains [event fields](#event-fields) that (???)
 
 # Event Fields
@@ -41,7 +42,7 @@ The function is called with the following parameters:
 - `[js]event.replaceInput`: A function, that replaces inputs of all recipes that match a given filter.
 - `[js]event.replaceOutput`: A function, that replaces inputs of all recipes that match a given filter.
 - `[js]event.shaped`: A function, that creates a new shaped crafting recipe.
-- `[js]event.shapeless`: A function, that creates a new shapeless crafting recipe.
+- [[/event-fields/shapeless|`[js]event.shapeless`]]: A function, that creates a new shapeless crafting recipe.
 - `[js]event.smelting`: A function, that creates a new Furnace smelting recipe.
 - `[js]event.smithing`: A function that creates a new Smithing Table smithing recipe.
 - `[js]event.smithingTrim`: A function that creates a new Smithing Table smithing recipe for applying an Armor Trim.

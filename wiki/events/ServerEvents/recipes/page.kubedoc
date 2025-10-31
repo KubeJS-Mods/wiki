@@ -17,40 +17,40 @@ The function is called with the following parameters:
 
 # Event Fields
 ## Unique to this event
-- `[js]event.addRecipe`: TODO
-- `[js]event.addedRecipes`: Contains the list of all added recipes.
-- `[js]event.blasting`: Creates a new recipe for the Blast Furnace.
-- `[js]event.campfireCooking`: Creates a new recipe for the Campfire.
-- `[js]event.containsRecipe`: TODO
-- `[js]event.countRecipes`: TODO
-- `[js]event.custom`: Creates an arbitrary JSON recipe.
-- `[js]event.customFilter`: TODO
-- `[js]event.failedCount`: TODO
-- `[js]event.findRecipeIds`: TODO
-- `[js]event.findRecipes`: TODO
-- `[js]event.forEachRecipe`: Executes a provided function for each recipe that matches a given filter.
-- `[js]event.getRecipeFunction`: TODO
-- `[js]event.getRecipes`: TODO
-- `[js]event.itemErrors` ==Setter only==: TODO
-- `[js]event.originalRecipes`: TODO 
-- `[js]event.printAllTypes`: TODO
-- `[js]event.printExamples`: A function, that prints example recipes into the game console.
-- `[js]event.printTypes`: TODO
-- `[js]event.recipeStream`: TODO
-- `[js]event.recipes`: A map, that contains recipe types for various mods. Addons may add new recipe types here.
-- `[js]event.remove`: A function, that removes all recipes that match a given filter.
-- `[js]event.replaceInput`: A function, that replaces inputs of all recipes that match a given filter.
-- `[js]event.replaceOutput`: A function, that replaces inputs of all recipes that match a given filter.
-- `[js]event.shaped`: A function, that creates a new shaped crafting recipe.
+- [[/events/ServerEvents/recipes/event-fields/addRecipe|`[js]event.addRecipe`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/addedRecipes|`[js]event.addedRecipes`]]: Contains the list of all added recipes.
+- [[/events/ServerEvents/recipes/event-fields/blasting|`[js]event.blasting`]]: Creates a new recipe for the Blast Furnace.
+- [[/events/ServerEvents/recipes/event-fields/campfireCooking|`[js]event.campfireCooking`]]: Creates a new recipe for the Campfire.
+- [[/events/ServerEvents/recipes/event-fields/containsRecipe|`[js]event.containsRecipe`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/countRecipes|`[js]event.countRecipes`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/custom|`[js]event.custom`]]: Creates an arbitrary JSON recipe.
+- [[/events/ServerEvents/recipes/event-fields/customFilter|`[js]event.customFilter`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/failedCount|`[js]event.failedCount`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/findRecipeIds|`[js]event.findRecipeIds`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/findRecipes|`[js]event.findRecipes`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/forEachRecipe|`[js]event.forEachRecipe`]]: Executes a provided function for each recipe that matches a given filter.
+- [[/events/ServerEvents/recipes/event-fields/getRecipeFunction|`[js]event.getRecipeFunction`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/getRecipes|`[js]event.getRecipes`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/itemErrors|`[js]event.itemErrors`]] ==Setter only==: TODO
+- [[/events/ServerEvents/recipes/event-fields/originalRecipes|`[js]event.originalRecipes`]]: TODO 
+- [[/events/ServerEvents/recipes/event-fields/printAllTypes|`[js]event.printAllTypes`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/printExamples|`[js]event.printExamples`]]: A function, that prints example recipes into the game console.
+- [[/events/ServerEvents/recipes/event-fields/printTypes|`[js]event.printTypes`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/recipeStream|`[js]event.recipeStream`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/recipes|`[js]event.recipes`]]: A map, that contains recipe types for various mods. Addons may add new recipe types here.
+- [[/events/ServerEvents/recipes/event-fields/remove|`[js]event.remove`]]: A function, that removes all recipes that match a given filter.
+- [[/events/ServerEvents/recipes/event-fields/replaceInput|`[js]event.replaceInput`]]: A function, that replaces inputs of all recipes that match a given filter.
+- [[/events/ServerEvents/recipes/event-fields/replaceOutput|`[js]event.replaceOutput`]]: A function, that replaces inputs of all recipes that match a given filter.
+- [[/events/ServerEvents/recipes/event-fields/shaped|`[js]event.shaped`]]: A function, that creates a new shaped crafting recipe.
 - [[/events/ServerEvents/recipes/event-fields/shapeless|`[js]event.shapeless`]]: A function, that creates a new shapeless crafting recipe.
-- `[js]event.smelting`: A function, that creates a new Furnace smelting recipe.
-- `[js]event.smithing`: A function that creates a new Smithing Table smithing recipe.
-- `[js]event.smithingTrim`: A function that creates a new Smithing Table smithing recipe for applying an Armor Trim.
-- `[js]event.smoking`: A function, that creates a new Smoker smoking recipe.
-- `[js]event.stage`: TODO
-- `[js]event.stonecutting`: A function, that creates a new Stonecutter stonecutting recipe.
-- `[js]event.takeId`: TODO
-- `[js]event.takenIds`: TODO
+- [[/events/ServerEvents/recipes/event-fields/smelting|`[js]event.smelting`]]: A function, that creates a new Furnace smelting recipe.
+- [[/events/ServerEvents/recipes/event-fields/smithing|`[js]event.smithing`]]: A function that creates a new Smithing Table smithing recipe.
+- [[/events/ServerEvents/recipes/event-fields/smithingTrim|`[js]event.smithingTrim`]]: A function that creates a new Smithing Table smithing recipe for applying an Armor Trim.
+- [[/events/ServerEvents/recipes/event-fields/smoking|`[js]event.smoking`]]: A function, that creates a new Smoker smoking recipe.
+- [[/events/ServerEvents/recipes/event-fields/stage|`[js]event.stage`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/stonecutting|`[js]event.stonecutting`]]: A function, that creates a new Stonecutter stonecutting recipe.
+- [[/events/ServerEvents/recipes/event-fields/takeId|`[js]event.takeId`]]: TODO
+- [[/events/ServerEvents/recipes/event-fields/takenIds|`[js]event.takenIds`]]: TODO
 ## Common to all events
 - `[js]event.cancel`: Cancels the event with a given exit value. Execution will be stopped **immediately**.
 - `[js]event.exit`: Stops the event with default exit value. Execution will be stopped **immediately**.

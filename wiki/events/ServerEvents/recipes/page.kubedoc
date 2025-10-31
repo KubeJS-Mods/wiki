@@ -1,0 +1,56 @@
+The `[js]ServerEvents.recipes` event handler handles recipe addition and removal.
+
+# Syntax
+```js
+ServerEvents.recipes(handler)
+ServerEvents.recipes(event => {
+	// ...
+})
+```
+
+# Parameters
+
+- `[js]handler`: A callback function which gets executed when the event is fired. Return value is discarded.
+The function is called with the following parameters:
+  - `[js]event`: Contains [event fields](#event-fields) that (???)
+
+# Event Fields
+## Unique to this event
+- `[js]event.addRecipe`: TODO
+- `[js]event.addedRecipes`: Contains the list of all added recipes.
+- `[js]event.blasting`: Creates a new recipe for the Blast Furnace.
+- `[js]event.campfireCooking`: Creates a new recipe for the Campfire.
+- `[js]event.containsRecipe`: TODO
+- `[js]event.countRecipes`: TODO
+- `[js]event.custom`: Creates an arbitrary JSON recipe.
+- `[js]event.customFilter`: TODO
+- `[js]event.failedCount`: TODO
+- `[js]event.findRecipeIds`: TODO
+- `[js]event.findRecipes`: TODO
+- `[js]event.forEachRecipe`: Executes a provided function for each recipe that matches a given filter.
+- `[js]event.getRecipeFunction`: TODO
+- `[js]event.getRecipes`: TODO
+- `[js]event.itemErrors` ==Setter only==: TODO
+- `[js]event.originalRecipes`: TODO 
+- `[js]event.printAllTypes`: TODO
+- `[js]event.printExamples`: A function, that prints example recipes into the game console.
+- `[js]event.printTypes`: TODO
+- `[js]event.recipeStream`: TODO
+- `[js]event.recipes`: A map, that contains recipe types for various mods. Addons may add new recipe types here.
+- `[js]event.remove`: A function, that removes all recipes that match a given filter.
+- `[js]event.replaceInput`: A function, that replaces inputs of all recipes that match a given filter.
+- `[js]event.replaceOutput`: A function, that replaces inputs of all recipes that match a given filter.
+- `[js]event.shaped`: A function, that creates a new shaped crafting recipe.
+- `[js]event.shapeless`: A function, that creates a new shapeless crafting recipe.
+- `[js]event.smelting`: A function, that creates a new Furnace smelting recipe.
+- `[js]event.smithing`: A function that creates a new Smithing Table smithing recipe.
+- `[js]event.smithingTrim`: A function that creates a new Smithing Table smithing recipe for applying an Armor Trim.
+- `[js]event.smoking`: A function, that creates a new Smoker smoking recipe.
+- `[js]event.stage`: TODO
+- `[js]event.stonecutting`: A function, that creates a new Stonecutter stonecutting recipe.
+- `[js]event.takeId`: TODO
+- `[js]event.takenIds`: TODO
+## Common to all events
+- `[js]event.cancel`: Cancels the event with a given exit value. Execution will be stopped **immediately**.
+- `[js]event.exit`: Stops the event with default exit value. Execution will be stopped **immediately**.
+- `[js]event.success`: Stops the event as a success with the given exit value. Execution will be stopped **immediately**.

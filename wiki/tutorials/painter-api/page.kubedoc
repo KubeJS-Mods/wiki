@@ -91,7 +91,7 @@ Underlined objects are not something you can create
 - Int is a int32 number, any whole value, e.g. `[js]40`.
 - Float is float64 floating point number, e.g `[js]2.35`.
 - String is a string, e.g. `[js]'example'`. Textures usually need resource location `[js]'namespace:path/to/texture.png'`.
-- Color can be either `[js]0xRRGGBB`, `[js]'#RRGGBB'`, `[js]'#AARRGGBB',` e.g. `[js]'#58AD5B'` or chat colors `[js]'red'`, `[js]'dark_aqua'`, etc. RGBA `[js]color(Float, Float, Float, Float)` is also supported where Float is any number between 0.0 and 1.0 (supports Units).
+- Color can be either `[js]0xRRGGBB`, `[js]'#RRGGBB'`, `[js]'#AARRGGBB'`, `[js]'#58AD5B'` or chat colors, ie. `[js]'red'`, `[js]'dark_aqua'`, etc. RGBA `[js]color(Float, Float, Float, Float)` is also supported where Float is any number between 0 and 1 (supports Units).
 - Text can be a string `[js]'Example'` or `[js]Text.of('Red and italic string example').red().italic()` etc formatted string.
 
 ## Available Unit Variables
@@ -102,8 +102,8 @@ Underlined objects are not something you can create
 - `$mouseY` - Mouse Y position
 
 ## Available Unit Constants
-- `true` - boolean true value, equal to `1.0`
-- `false` - boolean false value, equal to `0.0`
+- `true` - boolean true value, equal to `1`
+- `false` - boolean false value, equal to `0`
 - `PI` - number equal to `3.14159265358979323846`
 - `HALF_PI` - number equal to `1.57079632679`
 - `TWO_PI` - number equal to `6.28318530718`

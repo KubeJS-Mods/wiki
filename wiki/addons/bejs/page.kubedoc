@@ -81,7 +81,7 @@ StartupEvents.registry('block', event => {
         return be != null && (be.getCapability(ForgeCapabilities.ITEM_HANDLER).present || be.getCapability(ForgeCapabilities.FLUID_HANDLER).present || be.getCapability(ForgeCapabilities.ENERGY).present)
     }
 
-	event.create('multi_block', 'multiblock').material('metal').hardness(5.0).displayName('Multiblock')
+	event.create('multi_block', 'multiblock').material('metal').hardness(5).displayName('Multiblock')
 	    .entity(builder => {
 	        builder.ticker((level, pos, state, be) => { // tick me here, but ONLY WHEN MULTIBLOCK IS FORMED!!
                 

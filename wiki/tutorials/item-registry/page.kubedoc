@@ -14,22 +14,22 @@ StartupEvents.registry('item', event => {
   event.create('test_item_2').maxStackSize(16).glow(true)
 
   // You can specify item type as 2nd argument in create(), some types have different available methods
-  event.create('custom_sword', 'sword').tier('diamond').attackDamageBaseline(10.0)
+  event.create('custom_sword', 'sword').tier('diamond').attackDamageBaseline(10)
 })
 ```
 
 Valid item types:
-- `'basic'` (this is the default)
-- `'sword'`
-- `'pickaxe'`
-- `'axe'`
-- `'shovel'`
-- `'shears'`
-- `'hoe'`
-- `'helmet'`
-- `'chestplate'`
-- `'leggings'`
-- `'boots'`
+- `basic` (this is the default)
+- `sword`
+- `pickaxe`
+- `axe`
+- `shovel`
+- `shears`
+- `hoe`
+- `helmet`
+- `chestplate`
+- `leggings`
+- `boots`
 
 Other methods item builder supports (you can chain these methods after `create()`):
 
@@ -69,7 +69,7 @@ Old/Removed methods:
 - `[js]type(type)` - 1.16 and 1.18
 - `[js]tool(type, level)` - 1.16
 
-Methods available if you use a tool type (`'sword'`, `'pickaxe'`, `'axe'`, `'shovel'` or `'hoe'`):
+Methods available if you use a tool type (`sword`, `pickaxe`, `axe`, `shovel` or `hoe`):
 
 - `[js]tier(toolTier)`
 - `[js]modifyTier(tier => ...)` Same syntax as custom tool tier, see [[/tutorials/custom-tiers]]
@@ -80,12 +80,12 @@ Methods available if you use a tool type (`'sword'`, `'pickaxe'`, `'axe'`, `'sho
 
 Default available tool tiers:
 
-- `'wood'`
-- `'stone'`
-- `'iron'`
-- `'gold'`
-- `'diamond'`
-- `'netherite'`
+- `wood`
+- `stone`
+- `iron`
+- `gold`
+- `diamond`
+- `netherite`
 
 Methods available if you use an armor type (`'helmet'`, `'chestplate'`, `'leggings'` or `'boots'`):
 
@@ -94,26 +94,26 @@ Methods available if you use an armor type (`'helmet'`, `'chestplate'`, `'leggin
 
 Default available armor tiers:
 
-- `'leather'`
-- `'chainmail'`
-- `'iron'`
-- `'gold'`
-- `'diamond'`
-- `'turtle'`
-- `'netherite'`
+- `leather`
+- `chainmail`
+- `iron`
+- `gold`
+- `diamond`
+- `turtle`
+- `netherite`
 
 Vanilla group/creative tab IDs:
 
-- `'search'`
-- `'buildingBlocks'`
-- `'decorations'`
-- `'redstone'`
-- `'transportation'`
-- `'misc'`
-- `'food'`
-- `'tools'`
-- `'combat'`
-- `'brewing'`
+- `search`
+- `buildingBlocks`
+- `decorations`
+- `redstone`
+- `transportation`
+- `misc`
+- `food`
+- `tools`
+- `combat`
+- `brewing`
 
 # Examples
 ## Custom Foods
@@ -216,7 +216,7 @@ StartupEvents.registry('item', event => {
      * If the value is below 0, it will be treated as 0.
      * The value is capped at 13, any value over 13 will be considered "full", thus making it not shown
      */
-    .barWidth(itemstack => itemstack.nbt.contains('hit_count') ? itemstack.nbt.getInt('hit_count') / 13.0 : 0)
+    .barWidth(itemstack => itemstack.nbt.contains('hit_count') ? itemstack.nbt.getInt('hit_count') / 13 : 0)
     // Determine what color should the bar be.
     .barColor(itemstack => Color.AQUA)
 })

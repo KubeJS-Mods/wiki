@@ -4,12 +4,9 @@ This page was created with KubeJS 7.2 (for 1.21.1) in mind. Most of the informat
 We are working on creating alternate versions of this page for other versions of Minecraft.
 <<<
 
-An `ItemStack` is an item associated with an amount and optionally some data attached to it. Or to put it slightly differently, it is... well, _a single stack_ of items that all share the same data. It is also the representation of an "
-item" that is most familiar to players, since item stacks are what you hold in your inventory, pick up from the ground, etc.
+An `ItemStack` is an item associated with an amount and optionally some data attached to it. Or to put it slightly differently, it is... well, _a single stack_ of items that all share the same data. It is also the representation of an "item" that is most familiar to players, since item stacks are what you hold in your inventory, pick up from the ground, etc.
 
-You may consider the `Item` contained in an `ItemStack` to basically just be the raw "definition" of what that item is; for example, all diamond axes share the same item ID `minecraft:diamond_axe`, they all use the same item, but two
-diamond axes with different amounts of damage in your inventory, like `diamond_axe[damage=123]` and `diamond_axe[damage=456]` would be part of different **item stacks** since their data doesn't overlap. Similarly, two sticks with custom
-lore `stick[lore=[{text:"This Stick is very sticky."}]]` would work as part of the same item stack.
+You may consider the `Item` contained in an `ItemStack` to basically just be the raw "definition" of what that item is; for example, all diamond axes share the same item ID `minecraft:diamond_axe`, they all use the same item, but two diamond axes with different amounts of damage in your inventory, like `diamond_axe[damage=123]` and `diamond_axe[damage=456]` would be part of different **item stacks** since their data doesn't overlap. Similarly, two sticks with custom lore `stick[lore=[{text:"This Stick is very sticky."}]]` would work as part of the same item stack.
 
 >>> quote
 Since 1.20.4, data on items has changed *significantly* with the transition from NBT to data components. A neat side effect of this is that you can now change and override things that used to be hardcoded into the item definition itself, like the item's max stack size, enchantibility, repair ingredients, etc.
@@ -17,12 +14,9 @@ Since 1.20.4, data on items has changed *significantly* with the transition from
 
 # Creating ItemStacks
 
-KubeJS will automatically try to *wrap* any input to an item stack in places where it is expected, but you can also use the `Item`
-wrapper ([source](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/ItemWrapper.java)) to explicitly create them yourself, specifically using `[js]Item.of(input)` and
-`[js]Item.of(input, count)`:
+KubeJS will automatically try to *wrap* any input to an item stack in places where it is expected, but you can also use the `Item` wrapper ([source](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/ItemWrapper.java)) to explicitly create them yourself, specifically using `[js]Item.of(input)` and `[js]Item.of(input, count)`:
 
-In this case, the most simple way to write an item (and the one we recommend here) is by specifying its string ID, which you can most easily find by either enabling *advanced tooltips* in your game (press F3+H) and hovering over the item in
-your inventory, or by using the ever-useful [[/tutorials/hand|`/kubejs hand`]]!
+In this case, the most simple way to write an item (and the one we recommend here) is by specifying its string ID, which you can most easily find by either enabling *advanced tooltips* in your game (press F3+H) and hovering over the item in  your inventory, or by using the ever-useful [[/tutorials/hand|`/kubejs hand`]]!
 
 Here are some example string inputs that will parse to item stacks:
 

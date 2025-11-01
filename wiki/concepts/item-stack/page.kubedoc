@@ -30,7 +30,8 @@ Here are some example string inputs that will parse to item stacks:
 - `[js]'minecraft:apple'` is a single apple. (Note: If you're using vanilla items, the `minecraft:` may be omitted as well!)
 - `[js]'2x minecraft:apple'` represents a stack of two apples together.
 - `[js]'3x stick[lore=[{text:"This Stick is very sticky."}]]'` represents a stack of three very sticky sticks (with custom data components!)
-- Bit of a special case, but expressions like this: `[js]/minecraft:.*_ingot/` can also be used to get an item stack (namely an arbitrary item that matches the given regex). Note that Ingredient in general is **unsupported** however and WILL error if you try to convert it to an ItemStack, just use `ingredient.first`!
+
+Also note that while possible in some older versions of KubeJS, [[/concepts/ingredient|`Ingredient`]]s are **unsupported** and WILL now error if you try to convert them to an ItemStack implicitly, just use `ingredient.first`!
 
 # Using ItemStacks
 

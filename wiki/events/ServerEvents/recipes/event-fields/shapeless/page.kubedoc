@@ -1,1 +1,20 @@
-Placeholder text
+The `[js]shapeless` method of `[js]event` creates a new shapeless recipe.
+
+# Syntax
+
+```js
+ServerEvents.recipes(event => {
+	event.shapeless(result, ingredients)
+})
+```
+
+# Parameters
+- `result`
+An {itemstack} or anything wrappable into an {itemstack}, that is:
+{itemstack-wrappable}
+- `ingredients`:
+An array of {ingredient}s or anything wrappable into {ingredient}s, that is:
+{ingredient-item-multi-wrappable}
+
+# Return value
+None ([`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined))

@@ -41,7 +41,7 @@ Also note that while possible in some older versions of KubeJS, [[/concepts/ingr
   - related: `[js]item.grow(amount)` and `[js]item.shrink(amount)` in- or decrease the current stack's count by `amount`
   - related: `[js]item.withCount(count)`: Copies this stack with the specified `count`
 - `[js]item.areItemsEqual(other)`: Returns `true` if `item` and `other` have the same item type
-- `[js]item.areComponents(other)`: Returns `true` if `item` and `other` have the same item and data
+- `[js]item.areComponentsEqual(other)`: Returns `true` if `item` and `other` have the same item and data
 
 ## Registry Object Functions
 (these functions are all present on `Item` as well)

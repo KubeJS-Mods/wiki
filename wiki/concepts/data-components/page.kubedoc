@@ -1,4 +1,24 @@
+Data components are a way to attach additional data to certain kinds of content like [[/concepts/item-stack|Items]] and [[/concepts/fluid-stack|Fluids]]. They were introduced in Minecraft 1.20.5 and replace the previously used concept of [NBT Tags for data](/concepts/nbt-data), and are well supported by KubeJS as well.
+
+Components are used for both dynamic data like enchantments, display names, and tool damage, as well as some data that previously used to be baked into the item definition itself, such as max stack size, tool durability, and even food data, which means you can now for example make *any* item edible using components.
+
+# Component Format
+
 WIP!
+
+## Getting data components
+
+The easiest way to find out how a component is encoded (other than looking at its codec in the source code) is by using the [[/tutorials/hand|`/kubejs hand`]] command, which will show you the components the item has attached to it after the item ID. For example, this melon slice with custom lore and food components:
+
+![[melon.png]]
+
+would give you the string representation `minecraft:melon_slice[food={can_always_eat:1b,nutrition:3,saturation:1.0f},lore=['"hey lois look at me i have custom lore text nyehehehehe"']]`, where the components are represented by the values inside the outermost square brackets. (Also note that for a single item, this is the exact same syntax used by the `/give` command!)
+
+## Setting data components
+
+### Component Functions
+
+### Setting arbitrary components
 
 # Further Reading
 - [Minecraft Wiki: Data Component format](https://minecraft.wiki/w/Data_component_format)

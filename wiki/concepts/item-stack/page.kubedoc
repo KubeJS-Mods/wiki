@@ -63,3 +63,5 @@ WIP! (TODO: make a page on Components and KubeJS' ComponentFunctions interface)
 - `[js]asIngredient()`: Converts the ItemStack to an `Ingredient`
 - `[js]withLore(lore)`: Copies this item stack with the specified lore text
 
+# Further Reading
+- [Data Components](/concepts/data-components)

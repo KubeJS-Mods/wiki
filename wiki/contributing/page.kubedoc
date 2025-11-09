@@ -33,3 +33,4 @@ if (player.hand == "MAIN_HAND") {
 ```
 
 You can check `https://kubejs.com/wiki/preview/x` for a preview of a currently open PR.
+Make sure to **NOT** force push. Currently doing so will cause the preview to not update.

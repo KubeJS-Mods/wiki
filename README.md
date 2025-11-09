@@ -5,7 +5,7 @@
 Each page is its own directory, containing these files:
 
 - `meta.yml` - Meta Properties, used to change properties of the page itself
-- `page.kubejsdoc` - Page Document (see below for syntax). Optional - if not present, its assumed that its an auto-index page that only contains links to its sub-pages
+- `page.kubedoc` - Page Document (see below for syntax). Optional - if not present, its assumed that its an auto-index page that only contains links to its sub-pages
 - `en.yml` - English Language Document
 - `<other language>.yml` - Other Language Documents. Language must be specified in [/languages/ directory](/languages/)
 
@@ -43,11 +43,11 @@ description: "Page Description"
 language-key-1: "Hello"
 ```
 
-Documents of other languages will fall back to English if key is missing. Values can contain kubejsdoc syntax like `"Text **bold** text"` and will be recursively parsed. They can contain other language keys, but its recommended to write docs in such way that it's not necessary.
+Documents of other languages will fall back to English if key is missing. Values can contain kubedoc syntax like `"Text **bold** text"` and will be recursively parsed. They can contain other language keys, but its recommended to write docs in such way that it's not necessary.
 
 ## Page Documents
 
-`page.kubejsdoc` files are very similar to markdown, with few differences, mostly related to linking to pages/files. Full spec below.
+`page.kubedoc` files are very similar to markdown, with few differences, mostly related to linking to pages/files. Full spec below.
 
 You can preview some test syntax [here](https://kubejs.com/wiki/test).
 

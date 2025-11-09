@@ -4,7 +4,14 @@ Components are used for both dynamic data like enchantments, display names, and 
 
 # Component Format
 
-WIP!
+There are three types of data structures built around components that are each used in different parts of Minecraft:
+
+- **Data Component Maps** represent *all* the data attached to an element, containing both the "prototype" (i.e., its default components) and any custom components added on top of that.
+- **Data Component Patches** are a set of *changes* applied on top of an existing map of components, such as an element's prototype; they can be used to either set (i.e., add or override existing) values or **remove** existing values from a component map.
+- Finally, **Data Component Predicates** are filters over the component map of an item that may ask for a certain set of components with specific values to be present. (They may also be represented by the map of components that they need to contain)
+
+## WIP: Parsing Components
+(TL;DR - can be parsed from map, from string, or (recommended) using a builder)
 
 ## Getting data components
 
@@ -14,11 +21,19 @@ The easiest way to find out how a component is encoded (other than looking at it
 
 would give you the string representation `minecraft:melon_slice[food={can_always_eat:1b,nutrition:3,saturation:1.0f},lore=['"hey lois look at me i have custom lore text nyehehehehe"']]`, where the components are represented by the values inside the outermost square brackets. (Also note that for a single item, this is the exact same syntax used by the `/give` command!)
 
+Additionally, if you have access to an object within that is a component holder, you can use `obj.componentMap` to retrieve its component map, as well as `obj.get(type)` to get the component value for a specific data component type (or `null` if undefined).
+
 ## Setting data components
 
-### Component Functions
+In KubeJS, updating the data components of a supported object can be done in two ways, the first of which is taking an entire component map or patch and applying it to the object using `obj.set(componentsMap)` and `obj.patch(componentsPatch)` respectively. This will override all specified components with the supplied values. Additionally, `obj.resetComponents()` will restore an object's components to its original prototype, removing any patches added. 
 
-### Setting arbitrary components
+Alternatively, you may also choose to only override single components, which can be done using the methods `obj.set(type, value)`, `obj.remove(type)` and `obj.override(type, value?)` (which sets if value is defined, and removes otherwise). Note that "removing" a component in this case means **overriding** its value with null, **not** resetting it to its prototype value!
+
+### Common Component Functions
+WIP! (TODO: paste common functions here and briefly explain)
+
+### Item Component Functions
+WIP! (see above)
 
 # Further Reading
 - [Minecraft Wiki: Data Component format](https://minecraft.wiki/w/Data_component_format)

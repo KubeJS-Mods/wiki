@@ -120,12 +120,12 @@ To make Totem Carvings unusable with Medicine Bags, you can use the `medicineBag
 
 # Ceremonies
 ## Adding new Ceremonies
-For easier testing, you can store your Ceremony effect in the `[js]global` object. This allows reloading the effect with the `/kubejs reload startup_scripts` command:
+For easier testing, you can store your Ceremony effect callback in the `[js]global` object. This allows reloading the effect with the `/kubejs reload startup_scripts` command:
 In {st-s}:
 |> 1.21.1+
 ```js
 global.myCeremonyEffect = (level, pos, context) => {
-	// Perform the Ceremony effect here
+	// Perform your Ceremony effect here
 }
 StartupEvents.registry('totemic:d_ceremony', event => {
 	event.create('kubejs:example_ceremony')
@@ -140,7 +140,7 @@ StartupEvents.registry('totemic:d_ceremony', event => {
 <||> 1.20.1
 ```js
 global.myCeremonyEffect = (level, pos, context) => {
-	// Perform the Ceremony effect here
+	// Perform your Ceremony effect here
 }
 TotemicEvents.registerCeremonies(event => {
 	event.create('kubejs:example_ceremony')
@@ -161,7 +161,7 @@ TotemicEvents.modifyCeremonies(event => {
 	event.modify('totemic:rain', ceremony => {
 		ceremony.musicNeeded = 7500
 		ceremony.maxStartupTime = 25 * 20
-		ceremony.selectors = ['kubejs:test_instrument', 'totemic:wind_chime']
+		ceremony.selectors = ['kubejs:example_instrument', 'totemic:wind_chime']
 	})
 })
 ```
@@ -179,3 +179,13 @@ TotemicEvents.ceremonyEffectTick('totemic:fertility', event => {
 	event.cancel() // ...and cancel the original effect
 })
 ```
+
+## Ceremony events
+An overview of the different Ceremony events, which are accessible under `[js]TotemicEvents`. All of these events support an optional Ceremony ID target:
+
+| Event | #[[purple|Server]] | #[[orange|Client]] | Description |
+| `ceremonySelection` | {yes} | {no} | Fired when a selection is attempted. Allows changing the selected Ceremony and skipping the selection check (e.g. Buffalo Dance checking for cows). |
+| `ceremonyStartupTick` | {yes} | {yes} | Fired every tick during startup. When canceled, side effects of the startup (e.g. the damage dealt by Sun Dance) will not be applied. |
+| `ceremonyStartupFail` | {yes} | {no} | Fired when the startup time runs out. Cannot be canceled. |
+| `ceremonyStartupSuccess` | {yes} | {no} | Fired when the startup was successful. When canceled, the Ceremony is considered failed and not started. |
+| `ceremonyEffectTick` | {yes} | {yes} | Fired every tick during the effect. When canceled, the effect will not be applied. |

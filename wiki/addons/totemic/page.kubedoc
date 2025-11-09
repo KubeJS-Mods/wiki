@@ -70,8 +70,8 @@ In {st-s}:
 StartupEvents.registry('totemic:c_totem_carving', event => {
 	event.create('kubejs:example_carving')
 		.potion('minecraft:speed') // Adds a simple potion effect to the carving
-		.effect(TotemEffect.potion('minecraft:speed', false, 20)) // You can also add more complicated potion effects (scaleAmplifier = false, interval = 20 ticks)
-		.medicineBagDrain(80) // Optional, sets how much charge to drain from Medicine Bags every 80 ticks
+		.effect(TotemEffect.potion('minecraft:speed', false, 20)) // You can also add more complicated potion totem effects (scaleAmplifier = false, interval = 20 ticks)
+		.medicineBagDrain(80) // Sets how much charge to drain from Medicine Bags every 80 ticks, optional
 		.displayName('My Totem Carving')
 })
 ```
@@ -80,11 +80,14 @@ StartupEvents.registry('totemic:c_totem_carving', event => {
 TotemicEvents.registerTotemCarvings(event => {
 	event.create('kubejs:example_carving')
 		.potion('minecraft:speed') // Adds a simple potion effect to the carving
-		.effect(TotemEffect.potion('minecraft:speed', false, 20)) // You can also add more complicated potion effects (scaleAmplifier = false, interval = 20 ticks)
-		.medicineBagDrain(80) // Optional, sets how much charge to drain from Medicine Bags every 80 ticks
+		.effect(TotemEffect.potion('minecraft:speed', false, 20)) // You can also add more complicated potion totem effects (scaleAmplifier = false, interval = 20 ticks)
+		.medicineBagDrain(80) // Sets how much charge to drain from Medicine Bags every 80 ticks, optional
 		.displayName('My Totem Carving')
 })
 ```
+>>> info
+You need to add a model file (for the above example, 'assets/kubejs/models/block/totem_pole_example_carving.json') to the client resources to make your carving render.
+<<<
 
 ## Modifying existing Totem Carvings
 You can modify the effects and Medicine Bag drain of existing Totem Carvings with `[js]TotemicEvents.modifyTotemCarvings`:
@@ -114,3 +117,65 @@ TotemicEvents.modifyTotemCarvings(event => {
 >>> info
 To make Totem Carvings unusable with Medicine Bags, you can use the `medicineBagBlacklist` option in Totemic's config file.
 <<<
+
+# Ceremonies
+## Adding new Ceremonies
+For easier testing, you can store your Ceremony effect in the `[js]global` object. This allows reloading the effect with the `/kubejs reload startup_scripts` command:
+In {st-s}:
+|> 1.21.1+
+```js
+global.myCeremonyEffect = (level, pos, context) => {
+	// Perform the Ceremony effect here
+}
+StartupEvents.registry('totemic:d_ceremony', event => {
+	event.create('kubejs:example_ceremony')
+		.musicNeeded(12000) // The amount of music needed for starting the Ceremony, mandatory
+		.maxStartupTime(30 * 20) // The time in ticks that a player has for starting the Ceremony, mandatory
+		.selectors('kubejs:example_instrument', 'totemic:flute') // The Ceremony's selecting instruments, mandatory
+		.effect((level, pos, context) => global.myCeremonyEffect(level, pos, context)) // The Ceremony effect, mandatory
+		.effectDuration(5 * 20) // The time in ticks that the Ceremony effect should last, optional
+		.displayName('My Ceremony')
+})
+```
+<||> 1.20.1
+```js
+global.myCeremonyEffect = (level, pos, context) => {
+	// Perform the Ceremony effect here
+}
+TotemicEvents.registerCeremonies(event => {
+	event.create('kubejs:example_ceremony')
+		.musicNeeded(12000) // The amount of music needed for starting the Ceremony, mandatory
+		.maxStartupTime(30 * 20) // The time in ticks that a player has for starting the Ceremony, mandatory
+		.selectors('kubejs:example_instrument', 'totemic:flute') // The Ceremony's selecting instruments, mandatory
+		.effect((level, pos, context) => global.myCeremonyEffect(level, pos, context)) // The Ceremony effect, mandatory
+		.effectDuration(5 * 20) // The time in ticks that the Ceremony effect should last, optional
+		.displayName('My Ceremony')
+})
+```
+
+## Modifying existing Ceremonies
+You can modify the music needed, max startup time and selectors of existing Ceremonies with `[js]TotemicEvents.modifyCeremonies`:
+In {st-s}:
+```js
+TotemicEvents.modifyCeremonies(event => {
+	event.modify('totemic:rain', ceremony => {
+		ceremony.musicNeeded = 7500
+		ceremony.maxStartupTime = 25 * 20
+		ceremony.selectors = ['kubejs:test_instrument', 'totemic:wind_chime']
+	})
+})
+```
+>>> warn
+These values determine which Music Instruments are necessary to successfully perform the Ceremony. Modify them with care.
+<<<
+
+To change an existing Ceremony's effect or its duration, you need to use the `[js]TotemicEvents.ceremonyEffectTick` event:
+In {se-s} and {cl-s}:
+```js
+TotemicEvents.ceremonyEffectTick('totemic:fertility', event => {
+	event.effectTime = 10 * 20 // Changes the effect duration
+
+	// You can perform a different effect here...
+	event.cancel() // ...and cancel the original effect
+})
+```

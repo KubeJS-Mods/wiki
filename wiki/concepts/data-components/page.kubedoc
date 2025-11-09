@@ -19,9 +19,32 @@ The easiest way to find out how a component is encoded (other than looking at it
 
 ![[melon.png]]
 
-would give you the string representation `minecraft:melon_slice[food={can_always_eat:1b,nutrition:3,saturation:1.0f},lore=['"hey lois look at me i have custom lore text nyehehehehe"']]`, where the components are represented by the values inside the outermost square brackets. (Also note that for a single item, this is the exact same syntax used by the `/give` command!)
+would give you the string representation (note: spacing and new lines added for readability):
+```
+minecraft:melon_slice[
+    unbreakable,
+    max_stack_size = 32,
+    lore = [
+        '"hey lois look at me i have custom lore text nyehehehehe"'
+    ],
+    food = {
+        can_always_eat: true,
+        nutrition: 3,
+        saturation: 1.0f
+    }
+]
+```
 
 Additionally, if you have access to an object within that is a component holder, you can use `obj.componentMap` to retrieve its component map, as well as `obj.get(type)` to get the component value for a specific data component type (or `null` if undefined).
+
+Note that in the above representation, components are represented by the values inside the outermost square brackets, and values inside take the shape of one of four different types:
+
+- _Unit types_ such as `minecraft:unbreakable`, which can only be set or unset
+- _Primitive types_ like booleans (`true`/`false`, also as bytes `0b` and `1b`), numbers (supported as both normal integer / decimal format and explicitly using suffixes like `f` or float), and strings (single or double-quoted)
+- _Arrays_ of values (such as the `minecraft:lore` array above, which takes in a list of strings which each represent stringified component JSON)
+- and finally _Maps_ (or _Records_) which in themselves can once again contain a mapping of string keys to any of these value types
+
+(Also note that for a single item, this is the exact same syntax used by the `/give` command!)
 
 ## Setting data components
 

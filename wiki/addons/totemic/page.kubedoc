@@ -61,3 +61,56 @@ TotemicEvents.modifyMusicInstruments(event => {
 >>> warn
 The music values, especially `musicMaximum`, determine which Ceremonies can be performed at a given point in Totemic's progression. Modify these values with care.
 <<<
+
+# Totem Carvings
+## Adding new Totem Carvings
+In {st-s}:
+|> 1.21.1+
+```js
+StartupEvents.registry('totemic:c_totem_carving', event => {
+	event.create('kubejs:example_carving')
+		.potion('minecraft:speed') // Adds a simple potion effect to the carving
+		.effect(TotemEffect.potion('minecraft:speed', false, 20)) // You can also add more complicated potion effects (scaleAmplifier = false, interval = 20 ticks)
+		.medicineBagDrain(80) // Optional, sets how much charge to drain from Medicine Bags every 80 ticks
+		.displayName('My Totem Carving')
+})
+```
+<||> 1.20.1
+```js
+TotemicEvents.registerTotemCarvings(event => {
+	event.create('kubejs:example_carving')
+		.potion('minecraft:speed') // Adds a simple potion effect to the carving
+		.effect(TotemEffect.potion('minecraft:speed', false, 20)) // You can also add more complicated potion effects (scaleAmplifier = false, interval = 20 ticks)
+		.medicineBagDrain(80) // Optional, sets how much charge to drain from Medicine Bags every 80 ticks
+		.displayName('My Totem Carving')
+})
+```
+
+## Modifying existing Totem Carvings
+You can modify the effects and Medicine Bag drain of existing Totem Carvings with `[js]TotemicEvents.modifyTotemCarvings`:
+In {st-s}:
+|> 1.21.1+
+```js
+TotemicEvents.modifyTotemCarvings(event => {
+	event.modify('totemic:horse', carving => {
+		carving.medicineBagDrain = 200
+		carving.effects = [TotemEffect.potion('minecraft:speed'), TotemEffect.potion('minecraft:hunger')] // Replaces the existing effects
+		// carving.effects can be manipulated like a regular JS array in 1.21.1:
+		carving.effects.push(TotemEffect.potion('minecraft:hunger')) // Adds a new effect
+	})
+})
+```
+<||> 1.20.1
+```js
+TotemicEvents.modifyTotemCarvings(event => {
+	event.modify('totemic:horse', carving => {
+		carving.medicineBagDrain = 200
+		carving.effects = [TotemEffect.potion('minecraft:speed'), TotemEffect.potion('minecraft:hunger')] // Replaces the existing effects
+		// To add new effects in 1.20.1, use the addEffect method:
+		carving.addEffect(TotemEffect.potion('minecraft:hunger')) // Adds a new effect
+	})
+})
+```
+>>> info
+To make Totem Carvings unusable with Medicine Bags, you can use the `medicineBagBlacklist` option in Totemic's config file.
+<<<

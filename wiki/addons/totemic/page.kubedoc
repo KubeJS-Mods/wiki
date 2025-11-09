@@ -85,6 +85,7 @@ TotemicEvents.registerTotemCarvings(event => {
 		.displayName('My Totem Carving')
 })
 ```
+<|
 >>> info
 You need to add a model file (for the above example, 'assets/kubejs/models/block/totem_pole_example_carving.json') to the client resources to make your carving render.
 <<<
@@ -114,6 +115,7 @@ TotemicEvents.modifyTotemCarvings(event => {
 	})
 })
 ```
+<|
 >>> info
 To make Totem Carvings unusable with Medicine Bags, you can use the `medicineBagBlacklist` option in Totemic's config file.
 <<<
@@ -152,6 +154,7 @@ TotemicEvents.registerCeremonies(event => {
 		.displayName('My Ceremony')
 })
 ```
+<|
 
 ## Modifying existing Ceremonies
 You can modify the music needed, max startup time and selectors of existing Ceremonies with `[js]TotemicEvents.modifyCeremonies`:

@@ -20,7 +20,7 @@ The easiest way to find out how a component is encoded (other than looking at it
 ![[melon.png]]
 
 would give you the string representation (note: spacing and new lines added for readability):
-```nbtt
+```snbt
 minecraft:melon_slice[
     unbreakable = {},
     max_stack_size = 32,
@@ -35,7 +35,7 @@ minecraft:melon_slice[
 ]
 ```
 
-Additionally, if you have access to an object within that is a component holder, you can use `obj.componentMap` to retrieve its component map, as well as `obj.get(type)` to get the component value for a specific data component type (or `null` if undefined).
+Additionally, if you have access to an object within that is a component holder, you can use `[js]obj.componentMap` to retrieve its component map, as well as `[js]obj.get(type)` to get the component value for a specific data component type (or `[js]null` if undefined).
 
 Note that in the above representation, components are represented by the values inside the outermost square brackets, and values inside take the shape of one of four different types:
 
@@ -48,9 +48,9 @@ Note that in the above representation, components are represented by the values 
 
 ## Setting data components
 
-In KubeJS, updating the data components of a supported object can be done in two ways, the first of which is taking an entire component map or patch and applying it to the object using `obj.set(componentsMap)` and `obj.patch(componentsPatch)` respectively. This will override all specified components with the supplied values. Additionally, `obj.resetComponents()` will restore an object's components to its original prototype, removing any patches added. 
+In KubeJS, updating the data components of a supported object can be done in two ways, the first of which is taking an entire component map or patch and applying it to the object using `[js]obj.set(componentsMap)` and `[js]obj.patch(componentsPatch)` respectively. This will override all specified components with the supplied values. Additionally, `[js]obj.resetComponents()` will restore an object's components to its original prototype, removing any patches added. 
 
-Alternatively, you may also choose to only override single components, which can be done using the methods `obj.set(type, value)`, `obj.remove(type)` and `obj.override(type, value?)` (which sets if value is defined, and removes otherwise). Note that "removing" a component in this case means **overriding** its value with null, **not** resetting it to its prototype value!
+Alternatively, you may also choose to only override single components, which can be done using the methods `[js]obj.set(type, value)`, `[js]obj.remove(type)` and `[js]obj.override(type, value?)` (which sets if value is defined, and removes otherwise). Note that "removing" a component in this case means **overriding** its value with null, **not** resetting it to its prototype value!
 
 ### Common Component Functions
 WIP! (TODO: paste common functions here and briefly explain)

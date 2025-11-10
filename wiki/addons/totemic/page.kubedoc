@@ -128,10 +128,7 @@ In {st-s}:
 |> 1.21.1+
 ```js
 global.myCeremonyEffect = (level, pos, context) => {
-	// Perform your Ceremony effect here, for example:
-	level.getEntitiesWithin(AABB.ofSize(pos, 6, 6, 6)).forEach(entity => {
-		entity.tell('Successfully performed the Ceremony!')
-	})
+	// Perform your Ceremony effect here
 }
 StartupEvents.registry('totemic:d_ceremony', event => {
 	event.create('kubejs:example_ceremony')
@@ -146,10 +143,7 @@ StartupEvents.registry('totemic:d_ceremony', event => {
 <||> 1.20.1
 ```js
 global.myCeremonyEffect = (level, pos, context) => {
-	// Perform your Ceremony effect here, for example:
-	level.getEntitiesWithin(AABB.ofSize(pos, 6, 6, 6)).forEach(entity => {
-		entity.tell('Successfully performed the Ceremony!')
-	})
+	// Perform your Ceremony effect here
 }
 TotemicEvents.registerCeremonies(event => {
 	event.create('kubejs:example_ceremony')

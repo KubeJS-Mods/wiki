@@ -5,7 +5,7 @@ You can add custom Music Instruments, Totem Carvings and Ceremonies for Totemic,
 In {st-s}:
 |> 1.21.1+
 ```js
-StartupEvents.registry('totemic:a_instrument', event => { // note the 'a_' in the registry ID, which is unfortunately necessary
+StartupEvents.registry('totemic:a_instrument', event => { // Note the 'a_' in the registry ID, which is unfortunately necessary
 	event.create('kubejs:example_instrument')
 		.baseOutput(240) // The instrument's default music output, mandatory
 		.musicMaximum(3000) // The maximum amount of music that a Totem Base accepts from this instrument before getting saturated, mandatory
@@ -34,10 +34,11 @@ Example for an item, similar to the Flute, that simply plays music when right-cl
 StartupEvents.registry('item', event => {
 	event.create('kubejs:example_instr_item')
 		.use((level, player, hand) => {
-			if (player.isShiftKeyDown()) // make sure that the selector mode is used when the player is sneaking
+			if (player.isShiftKeyDown()) { // Make sure that the selector mode is used when the player is sneaking
 				TotemicAPI.music().playSelector(player, 'kubejs:example_instrument')
-			else
+			} else {
 				TotemicAPI.music().playMusic(player, 'kubejs:example_instrument')
+			}
 			player.cooldowns.addCooldown('kubejs:example_instr_item', 20) // Put this item on a one second cooldown after use
 			return true
 		})
@@ -127,7 +128,10 @@ In {st-s}:
 |> 1.21.1+
 ```js
 global.myCeremonyEffect = (level, pos, context) => {
-	// Perform your Ceremony effect here
+	// Perform your Ceremony effect here, for example:
+	level.getEntitiesWithin(AABB.ofSize(pos, 6, 6, 6)).forEach(entity => {
+		entity.tell('Successfully performed the Ceremony!')
+	})
 }
 StartupEvents.registry('totemic:d_ceremony', event => {
 	event.create('kubejs:example_ceremony')
@@ -142,7 +146,10 @@ StartupEvents.registry('totemic:d_ceremony', event => {
 <||> 1.20.1
 ```js
 global.myCeremonyEffect = (level, pos, context) => {
-	// Perform your Ceremony effect here
+	// Perform your Ceremony effect here, for example:
+	level.getEntitiesWithin(AABB.ofSize(pos, 6, 6, 6)).forEach(entity => {
+		entity.tell('Successfully performed the Ceremony!')
+	})
 }
 TotemicEvents.registerCeremonies(event => {
 	event.create('kubejs:example_ceremony')

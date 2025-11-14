@@ -4,14 +4,12 @@ Components are used for both dynamic data like enchantments, display names, and 
 
 # Component Format
 
-There are three types of data structures built around components that are each used in different parts of Minecraft:
+There are two fundamental data structures built around components that are each used in different parts of Minecraft:
 
-- **Data Component Maps** represent *all* the data attached to an element, containing both the "prototype" (i.e., its default components) and any custom components added on top of that.
+- **Data Component Maps** represent *all* the data attached to an element, containing both the "prototype" (i.e., its default components, which are set during registry and may be changed by kubejs during [[/tutorials/item-modification]]) and any custom components added on top of that. They are read only and can be changed by using component patches.
 - **Data Component Patches** are a set of *changes* applied on top of an existing map of components, such as an element's prototype; they can be used to either set (i.e., add or override existing) values or **remove** existing values from a component map.
-- Finally, **Data Component Predicates** are filters over the component map of an item that may ask for a certain set of components with specific values to be present. (They may also be represented by the map of components that they need to contain)
 
-## WIP: Parsing Components
-(TL;DR - can be parsed from map, from string, or (recommended) using a builder)
+In addition to these two types, **Data Component Predicates** are also used sometimes, for example in commands or ingredients; they represent **filters** over the component map of an item that may ask for a certain set of components with specific values to be present. (which for all intents in purposes, is just a component map in itself)
 
 ## Getting data components
 
@@ -46,6 +44,32 @@ Note that in the above representation, components are represented by the values 
 
 (Also note that for a single item, this is the exact same syntax used by the `/give` command!)
 
+## Parsing Components
+To create component maps or patches from JavaScript, you may use one of the following formats:
+
+- A **string** that represents a component map, following the same format as vanilla (see above for an example of a component map on an item), wrapped using square brackets; when writing a component patch, you may also use `!namespaced:id` in place of a component definition to **remove** the given component from the patched object. If an NBT tag is supplied in curly braces, that value will be written to the `custom_data` component.
+- A **JSON Object** or **NBT Compound Tag**, which will be parsed directly using the relevant codec.
+- A **JS Object** in the form of a component map; keys need to be valid component types (as namespaced IDs), while values will be wrapped to the respective value type automatically.
+- A **function** that uses in a builder (specifically, `DataComponentMap.Builder` and `DataComponentPatch.Builder`, respectively) as its only argument, where individual components can be set using the `builder.set(type, value)` method, and in the case of component patches, marked as removed using the `builder.remove(type)` method. As above, components will be wrapped to the relevant type automatically.
+
+>>> success
+We recommend using the builder function or JS object over the string format where possible since it is more flexible for components; for example, it allows for the lore component to be specified using the `Text` wrapper rather than as a stringified JSON:
+
+```js
+{
+    "minecraft:lore": Text.lore([
+        Text.gray("I'm ").append(Text.blue("blue")),
+        Text.gray("da-ba-dee da-ba-die"),
+        Text.gray("If I was ").append(Text.green("green")).append(", I would-- HELP.")
+    ])
+}
+```
+
+which in turn would give us
+
+![apple.png](apple.png)
+<<<
+
 ## Setting data components
 
 In KubeJS, updating the data components of a supported object can be done in two ways, the first of which is taking an entire component map or patch and applying it to the object using `[js]obj.set(componentsMap)` and `[js]obj.patch(componentsPatch)` respectively. This will override all specified components with the supplied values. Additionally, `[js]obj.resetComponents()` will restore an object's components to its original prototype, removing any patches added. 
@@ -57,6 +81,9 @@ WIP! (TODO: paste common functions here and briefly explain)
 
 ### Item Component Functions
 WIP! (see above)
+
+# Notes for Addon Devs
+WIP!
 
 # Further Reading
 - [Minecraft Wiki: Data Component format](https://minecraft.wiki/w/Data_component_format)

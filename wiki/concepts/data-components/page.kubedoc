@@ -64,10 +64,7 @@ We recommend using the builder function or JS object over the string format wher
     ])
 }
 ```
-
-which in turn would give us
-
-![apple.png](apple.png)
+![[apple.png]]
 <<<
 
 ## Setting data components

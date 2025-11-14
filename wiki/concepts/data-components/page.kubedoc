@@ -53,14 +53,14 @@ To create component maps or patches from JavaScript, you may use one of the foll
 - A **function** that uses in a builder (specifically, `DataComponentMap.Builder` and `DataComponentPatch.Builder`, respectively) as its only argument, where individual components can be set using the `builder.set(type, value)` method, and in the case of component patches, marked as removed using the `builder.remove(type)` method. As above, components will be wrapped to the relevant type automatically.
 
 >>> success
-We recommend using the builder function or JS object over the string format where possible since it is more flexible for components; for example, it allows for the lore component to be specified using the `Text` wrapper rather than as a stringified JSON:
+We recommend using the builder function or JS object over the string format when writing component maps yourself since it offers a lot more flexibility; for example, it allows for the lore component to be specified using the `Text` wrapper rather than as a stringified JSON:
 
 ```js
 {
     "minecraft:lore": Text.lore([
         Text.gray("I'm ").append(Text.blue("blue")),
         Text.gray("da-ba-dee da-ba-die"),
-        Text.gray("If I was ").append(Text.green("green")).append(", I would-- HELP.")
+        Text.gray("If I was ").append("§agreen").append(", I would-- oh no.")
     ])
 }
 ```

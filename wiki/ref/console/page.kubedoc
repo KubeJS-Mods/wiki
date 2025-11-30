@@ -15,19 +15,19 @@ A collection of all warning messages logged to this console.
 ---
 # Methods
 ---
-## $$.log(...message: Object[]): void
+## $$.log(message: ...Object[]): void
 Logs one or more messages as info-level messages. This is the most common method for general output.
 ---
 ## $$.info(message: Object): ConsoleLine
 Logs a single message at info level. Returns a ConsoleLine object.
 ---
-## $$.infof(message: string, ...args: Object[]): ConsoleLine
+## $$.infof(message: string, args: ...Object[]): ConsoleLine
 Logs a formatted message at info level. Uses string formatting (like `"Hello %s"` with `args`).
 ---
 ## $$.warn(message: Object): ConsoleLine
 Logs a warning message. Warnings indicate something that might be wrong but doesn't prevent the script from running.
 ---
-## $$.warnf(message: string, ...args: Object[]): ConsoleLine
+## $$.warnf(message: string, args: ...Object[]): ConsoleLine
 Logs a formatted warning message.
 ---
 ## $$.warn(message: string, error: Throwable): ConsoleLine
@@ -36,7 +36,7 @@ Logs a warning with an associated error/exception.
 ## $$.error(message: Object): ConsoleLine
 Logs an error message. Errors indicate problems that may prevent functionality from working correctly.
 ---
-## $$.errorf(message: string, ...args: Object[]): ConsoleLine
+## $$.errorf(message: string, args: ...Object[]): ConsoleLine
 Logs a formatted error message.
 ---
 ## $$.error(message: string, error: Throwable): ConsoleLine
@@ -45,7 +45,7 @@ Logs an error with an associated error/exception.
 ## $$.debug(message: Object): ConsoleLine | null
 Logs a debug message. Debug messages are only shown when debug mode is enabled.
 ---
-## $$.debugf(message: string, ...args: Object[]): ConsoleLine | null
+## $$.debugf(message: string, args: ...Object[]): ConsoleLine | null
 Logs a formatted debug message.
 
 |> 1.21.1

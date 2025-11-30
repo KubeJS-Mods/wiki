@@ -1,0 +1,64 @@
+The `console` binding provides a logging interface for outputting messages to the game's console and log files. This is essential for debugging your scripts and understanding what your code is doing.
+
+All console messages are written to the KubeJS log files, and errors/warnings are also displayed in-game when they occur.
+
+**Java Class:** `dev.latvian.mods.kubejs.script.ConsoleJS` - [View on GitHub](https://github.com/KubeJS-Mods/KubeJS)
+
+---
+# Properties
+---
+## $$.errors: Collection<ConsoleLine>
+A collection of all error messages logged to this console.
+---
+## $$.warnings: Collection<ConsoleLine>
+A collection of all warning messages logged to this console.
+---
+# Methods
+---
+## $$.log(...message: Object[]): void
+Logs one or more messages as info-level messages. This is the most common method for general output.
+---
+## $$.info(message: Object): ConsoleLine
+Logs a single message at info level. Returns a ConsoleLine object.
+---
+## $$.infof(message: string, ...args: Object[]): ConsoleLine
+Logs a formatted message at info level. Uses string formatting (like `"Hello %s"` with `args`).
+---
+## $$.warn(message: Object): ConsoleLine
+Logs a warning message. Warnings indicate something that might be wrong but doesn't prevent the script from running.
+---
+## $$.warnf(message: string, ...args: Object[]): ConsoleLine
+Logs a formatted warning message.
+---
+## $$.warn(message: string, error: Throwable): ConsoleLine
+Logs a warning with an associated error/exception.
+---
+## $$.error(message: Object): ConsoleLine
+Logs an error message. Errors indicate problems that may prevent functionality from working correctly.
+---
+## $$.errorf(message: string, ...args: Object[]): ConsoleLine
+Logs a formatted error message.
+---
+## $$.error(message: string, error: Throwable): ConsoleLine
+Logs an error with an associated error/exception.
+---
+## $$.debug(message: Object): ConsoleLine | null
+Logs a debug message. Debug messages are only shown when debug mode is enabled.
+---
+## $$.debugf(message: string, ...args: Object[]): ConsoleLine | null
+Logs a formatted debug message.
+
+|> 1.21.1
+
+**Source:** [ConsoleJS.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/script/ConsoleJS.java)
+
+<||> 1.20.1
+
+**Source:** [ConsoleJS.java](https://github.com/KubeJS-Mods/KubeJS/blob/2001/common/src/main/java/dev/latvian/mods/kubejs/util/ConsoleJS.java)
+
+<||> 1.19.2
+
+**Source:** [ConsoleJS.java](https://github.com/KubeJS-Mods/KubeJS/blob/1902/common/src/main/java/dev/latvian/mods/kubejs/util/ConsoleJS.java)
+
+<|
+

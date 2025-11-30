@@ -1,0 +1,62 @@
+# global
+
+**Java Class:** `Map<String, Object>` - [View Java Documentation](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html)
+
+Global object map for sharing data between scripts. You can use this to set objects and callbacks in startup script and reference them from server or client scripts.
+
+|> 1.21.1
+
+**Note:** This is a standard Java `Map` object. It's registered as a binding in [BuiltinKubeJSPlugin.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/BuiltinKubeJSPlugin.java).
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+This is a standard JavaScript Map/object. You can set and get properties on it directly.
+
+## Examples
+
+WIP
+
+<||> 1.20.1
+
+**Note:** This is a standard Java `Map` object. It's registered as a binding in [BuiltinKubeJSPlugin.java](https://github.com/KubeJS-Mods/KubeJS/blob/2001/common/src/main/java/dev/latvian/mods/kubejs/BuiltinKubeJSPlugin.java).
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+This is a standard JavaScript Map/object. You can set and get properties on it directly.
+
+## Examples
+
+WIP
+
+<||> 1.19.2
+
+**Note:** This is a standard Java `Map` object. It's registered as a binding in [BuiltinKubeJSPlugin.java](https://github.com/KubeJS-Mods/KubeJS/blob/1902/common/src/main/java/dev/latvian/mods/kubejs/BuiltinKubeJSPlugin.java).
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+This is a standard JavaScript Map/object. You can set and get properties on it directly.
+
+## Examples
+
+WIP
+
+<|
+

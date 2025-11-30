@@ -1,0 +1,134 @@
+# Platform
+
+**Java Class:** `dev.latvian.mods.kubejs.script.PlatformWrapper` - [View on GitHub](https://github.com/KubeJS-Mods/KubeJS)
+
+Platform information and utilities for accessing mod and Minecraft version information.
+
+|> 1.21.1
+
+**Source:** [PlatformWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/script/PlatformWrapper.java)
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+### Static Methods
+
+- `getMcVersion()`: string - Returns the Minecraft version string
+- `getModVersion()`: string - Returns the KubeJS mod version
+- `getMinecraftVersion()`: number - Returns the Minecraft version number
+- `getMinecraftVersionString()`: string - Returns the Minecraft version string
+- `getList()`: Set<string> - Returns a set of all loaded mod IDs
+- `isLoaded(modId: string)`: boolean - Checks if a mod with the given ID is loaded
+- `getInfo(modId: string)`: ModInfo - Gets information about a mod
+- `getMods()`: Map<string, ModInfo> - Returns a map of all loaded mods
+- `isDevelopmentEnvironment()`: boolean - Checks if running in development environment
+- `isClientEnvironment()`: boolean - Checks if running in client environment
+- `setModName(modId: string, name: string)`: void - Sets the display name of a mod
+- `isGeneratingData()`: boolean - Checks if data generation is running
+- `breakpoint(...args)`: void - Debug breakpoint function
+- `getCurrentThreadName()`: string - Returns the current thread name
+- `getPackMode()`: string - Returns the current pack mode
+
+### ModInfo Class
+
+- `getId()`: string - Returns the mod ID
+- `getName()`: string - Returns the mod name
+- `getVersion()`: string - Returns the mod version
+- `getCustomName()`: string - Returns the custom name
+- `setName(name: string)`: void - Sets the mod name
+
+## Examples
+
+WIP
+
+<||> 1.20.1
+
+**Source:** [PlatformWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/2001/common/src/main/java/dev/latvian/mods/kubejs/script/PlatformWrapper.java)
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+### Static Methods
+
+- `getMcVersion()`: string - Returns the Minecraft version string
+- `getModVersion()`: string - Returns the KubeJS mod version
+- `getMinecraftVersion()`: number - Returns the Minecraft version number
+- `getMinecraftVersionString()`: string - Returns the Minecraft version string
+- `getList()`: Set<string> - Returns a set of all loaded mod IDs
+- `isLoaded(modId: string)`: boolean - Checks if a mod with the given ID is loaded
+- `getInfo(modId: string)`: ModInfo - Gets information about a mod
+- `getMods()`: Map<string, ModInfo> - Returns a map of all loaded mods
+- `isDevelopmentEnvironment()`: boolean - Checks if running in development environment
+- `isClientEnvironment()`: boolean - Checks if running in client environment
+- `setModName(modId: string, name: string)`: void - Sets the display name of a mod
+- `isGeneratingData()`: boolean - Checks if data generation is running
+- `breakpoint(...args)`: void - Debug breakpoint function
+- `getCurrentThreadName()`: string - Returns the current thread name
+- `getPackMode()`: string - Returns the current pack mode
+
+### ModInfo Class
+
+- `getId()`: string - Returns the mod ID
+- `getName()`: string - Returns the mod name
+- `getVersion()`: string - Returns the mod version
+- `getCustomName()`: string - Returns the custom name
+- `setName(name: string)`: void - Sets the mod name
+
+## Examples
+
+WIP
+
+<||> 1.19.2
+
+**Source:** [PlatformWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/1902/common/src/main/java/dev/latvian/mods/kubejs/script/PlatformWrapper.java)
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+### Static Methods
+
+- `getMcVersion()`: string - Returns the Minecraft version string
+- `getModVersion()`: string - Returns the KubeJS mod version
+- `getMinecraftVersion()`: number - Returns the Minecraft version number
+- `getMinecraftVersionString()`: string - Returns the Minecraft version string
+- `getList()`: Set<string> - Returns a set of all loaded mod IDs
+- `isLoaded(modId: string)`: boolean - Checks if a mod with the given ID is loaded
+- `getInfo(modId: string)`: ModInfo - Gets information about a mod
+- `getMods()`: Map<string, ModInfo> - Returns a map of all loaded mods
+- `isDevelopmentEnvironment()`: boolean - Checks if running in development environment
+- `isClientEnvironment()`: boolean - Checks if running in client environment
+- `setModName(modId: string, name: string)`: void - Sets the display name of a mod
+- `isGeneratingData()`: boolean - Checks if data generation is running
+- `breakpoint(...args)`: void - Debug breakpoint function
+- `getCurrentThreadName()`: string - Returns the current thread name
+- `getPackMode()`: string - Returns the current pack mode
+
+### ModInfo Class
+
+- `getId()`: string - Returns the mod ID
+- `getName()`: string - Returns the mod name
+- `getVersion()`: string - Returns the mod version
+- `getCustomName()`: string - Returns the custom name
+- `setName(name: string)`: void - Sets the mod name
+
+## Examples
+
+WIP
+
+<|
+

@@ -5,7 +5,6 @@ Each binding is registered for specific script types (startup, server, or client
 |> 1.21.1
 
 | Binding | Startup | Server | Client | Description | Source |
-|---------|---------|--------|--------|-------------|--------|
 | `global` | ✓ | ✓ | ✓ | Global object map for sharing data between scripts | [KubeJS](https://github.com/KubeJS-Mods/KubeJS/blob/371dcb1644cf2177368880880bbeb6947fecc0b9/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/BuiltinKubeJSPlugin.java#L408) |
 | `Platform` | ✓ | ✓ | ✓ | Platform information and utilities | [KubeJS](https://github.com/KubeJS-Mods/KubeJS/blob/371dcb1644cf2177368880880bbeb6947fecc0b9/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/BuiltinKubeJSPlugin.java#L409) |
 | `console` | ✓ | ✓ | ✓ | Console object for logging | [KubeJS](https://github.com/KubeJS-Mods/KubeJS/blob/371dcb1644cf2177368880880bbeb6947fecc0b9/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/BuiltinKubeJSPlugin.java#L410) |
@@ -80,7 +79,6 @@ Each binding is registered for specific script types (startup, server, or client
 <||> 1.20.1
 
 | Binding | Startup | Server | Client | Description | Source |
-|---------|---------|--------|--------|-------------|--------|
 | `global` | ✓ | ✓ | ✓ | Global object map for sharing data between scripts | [KubeJS](https://github.com/KubeJS-Mods/KubeJS/blob/d4a217db34464c94fbbe85495385d43c2b581d41/common/src/main/java/dev/latvian/mods/kubejs/BuiltinKubeJSPlugin.java#L341) |
 | `Platform` | ✓ | ✓ | ✓ | Platform information and utilities | [KubeJS](https://github.com/KubeJS-Mods/KubeJS/blob/d4a217db34464c94fbbe85495385d43c2b581d41/common/src/main/java/dev/latvian/mods/kubejs/BuiltinKubeJSPlugin.java#L342) |
 | `console` | ✓ | ✓ | ✓ | Console object for logging | [KubeJS](https://github.com/KubeJS-Mods/KubeJS/blob/d4a217db34464c94fbbe85495385d43c2b581d41/common/src/main/java/dev/latvian/mods/kubejs/BuiltinKubeJSPlugin.java#L343) |
@@ -148,7 +146,6 @@ Each binding is registered for specific script types (startup, server, or client
 <||> 1.19.2
 
 | Binding | Startup | Server | Client | Description | Source |
-|---------|---------|--------|--------|-------------|--------|
 | `global` | ✓ | ✓ | ✓ | Global object map for sharing data between scripts | [KubeJS](https://github.com/KubeJS-Mods/KubeJS/blob/9e04493853cf69ccb0dcd794c0322c8176276a30/common/src/main/java/dev/latvian/mods/kubejs/BuiltinKubeJSPlugin.java#L330) |
 | `Platform` | ✓ | ✓ | ✓ | Platform information and utilities | [KubeJS](https://github.com/KubeJS-Mods/KubeJS/blob/9e04493853cf69ccb0dcd794c0322c8176276a30/common/src/main/java/dev/latvian/mods/kubejs/BuiltinKubeJSPlugin.java#L331) |
 | `console` | ✓ | ✓ | ✓ | Console object for logging | [KubeJS](https://github.com/KubeJS-Mods/KubeJS/blob/9e04493853cf69ccb0dcd794c0322c8176276a30/common/src/main/java/dev/latvian/mods/kubejs/BuiltinKubeJSPlugin.java#L332) |

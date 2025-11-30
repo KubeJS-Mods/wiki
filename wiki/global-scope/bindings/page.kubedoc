@@ -211,3 +211,4 @@ Each binding is registered for specific script types (startup, server, or client
 | `Client` | ✓ | - | ✓ | Minecraft client instance (client-side only) | [KubeJS](https://github.com/KubeJS-Mods/KubeJS/blob/9e04493853cf69ccb0dcd794c0322c8176276a30/common/src/main/java/dev/latvian/mods/kubejs/client/BuiltinKubeJSClientPlugin.java#L22) |
 | `Painter` | ✓ | - | ✓ | Painter instance (client-side only) | [KubeJS](https://github.com/KubeJS-Mods/KubeJS/blob/9e04493853cf69ccb0dcd794c0322c8176276a30/common/src/main/java/dev/latvian/mods/kubejs/client/BuiltinKubeJSClientPlugin.java#L23) |
 
+<|

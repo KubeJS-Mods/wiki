@@ -1,2 +1,4 @@
+title: "BlockEvents.broken"
+description: "Called when block broken by player"
 script: "common"
 event-result: true

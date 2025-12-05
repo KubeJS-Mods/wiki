@@ -1,0 +1,5 @@
+title: "Event fields"
+description: "List of all Event fields for `ServerEvents.recipes`"
+
+intro: "This is a list of all event fields for `ServerEvents.recipes`. It's possible that not all event fields are listed here, but this list will be updated regularly."
+click: "Click on event field to open its class and see information, fields, and methods."

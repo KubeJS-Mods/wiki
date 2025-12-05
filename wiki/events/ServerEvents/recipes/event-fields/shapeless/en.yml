@@ -32,7 +32,6 @@ itemstack-wrappable: |
       nbt: CompoundTag, // or anything wrappable to CompoundTag
     }
   ```
-  - A [`[js]RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
 
 item-wrappable: |
   - A string representing an item (`[js]'minecraft:stone'`)

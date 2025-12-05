@@ -9,12 +9,30 @@ ServerEvents.recipes(event => {
 ```
 
 # Parameters
-- `result`
+- `result`:
 An {itemstack} or anything wrappable into an {itemstack}, that is:
-{itemstack-wrappable}
+  - A string representing an item (`[js]'minecraft:stone'`)
+  - A string representing both item and count (`[js]'2x minecraft:stone'`)
+  - An object:
+  ```js
+    {
+      item: Item, // or anything wrappable to Item
+      count: number, // integer number
+      nbt: CompoundTag, // or anything wrappable to CompoundTag
+    }
+  ```
+
 - `ingredients`:
-An array of {ingredient}s or anything wrappable into {ingredient}s, that is:
-{ingredient-item-multi-wrappable}
+An array of `[js]Ingredient`s or anything wrappable into `[js]Ingredient`s, that is:
+  - A string representing both item and count (`[js]'2x minecraft:stone'`)
+  - An object: `[js]{ item: ItemStack, count: number }` where `[js]ItemStack` stands for anything wrappable to an `[js]ItemStack` and `[js]number` stands for any integer number
+  - A string representing an item (`[js]'minecraft:stone'`),
+  - A string representing a tag (`[js]'#minecraft:logs'`)
+  - A string representing a mod (`[js]'@minecraft'`)
+  - A string representing a creative mod tab (`[js]`),
+  - A [`[js]RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) - the resulting `[js]Ingredient` is any item whose ID matches a given regular expression,
+  - An `[js]ItemStack`,
+  - An object: `[js]{ item: ItemStack }` where `[js]ItemStack` stands for anything wrappable to an `[js]ItemStack`
 
 # Return value
-None ([`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined))
+A new recipe.

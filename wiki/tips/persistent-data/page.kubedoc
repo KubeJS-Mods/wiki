@@ -44,12 +44,12 @@ PlayerEvents.loggedIn(event => {
 ```
 <|
 
-## NBT Compound methods
+# NBT Compound methods
 
 These are the methods usable on NBT compound tags like `persistentData`.
 In code snippets below, `compound` will refer to the compound tag.
 
-### Generic key access
+## Generic key access
 
 - `[js]compound.put(name, tag)`
   - `name`: The name of the key to put to.
@@ -68,7 +68,7 @@ This is equivalent to the `[js]compound[name] = tag` bean.
 This is equivalent to the `[js]const tag = compound[name]` bean.
 <<<
 
-### Typed key access
+## Typed key access
 
 | Data type     | Getter                                   | Setter                            |
 | Boolean       | `[js]compound.putBoolean(name, value)`                               | `[js]compound.getBoolean(name)`   |
@@ -88,18 +88,18 @@ This is equivalent to the `[js]const tag = compound[name]` bean.
 - `name`: The name of the key to get from/put to.
 - `value`: The value of the appropriate type. Type conversions will happen if necessary.
 - Setters return the appropriate value type.
-  - If there's an attempt to read a different type than one actually stored at that key,
-  the return value will be cast to the appropriate type if possible.
-  - Conversions that succeed:
-    - UUIDs can be converted to integer arrays of exactly 4 elements, and vice versa.
-    - Number types can be cast between each other.
-  - Conversions that fail:
-    - Conversion of a number type to string will result in an empty string.
-    - Conversion of a string into a number type will result in a 0.
-    - Conversion of between number arrays will result in an empty array.
-    - Conversion of any other type into UUID will result in an exception being thrown.
 
-### Other useful methods
+If there's an attempt to read a different type than one actually stored at that key, the return value will be cast to the appropriate type if possible.
+- Conversions that succeed:
+  - UUIDs can be converted to integer arrays of exactly 4 elements, and vice versa.
+  - Number types can be cast between each other.
+- Conversions that fail:
+  - Conversion of a number type to string will result in an empty string.
+  - Conversion of a string into a number type will result in a 0.
+  - Conversion of between number arrays will result in an empty array.
+  - Conversion of any other type into UUID will result in an exception being thrown.
+
+## Other useful methods
 
 - `[js]compound.remove(name)`
   - `name`: The name of the key to remove from the tag.

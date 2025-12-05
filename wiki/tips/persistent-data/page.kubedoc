@@ -70,7 +70,7 @@ This is equivalent to the `[js]const tag = compound[name]` bean.
 
 ## Typed key access
 
-| Data type     | Getter                                                               | Setter                            |
+| Data type     | Setter                                                               | Getter                            |
 | Boolean       | `[js]compound.putBoolean(name, value)`                               | `[js]compound.getBoolean(name)`   |
 | Byte          | `[js]compound.putByte(name, value)`                                  | `[js]compound.getByte(name)`      |
 | Byte array    | `[js]compound['putByteArray(java.lang.String,byte[])'](name, value)` | `[js]compound.getByteArray(name)` |

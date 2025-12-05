@@ -70,7 +70,7 @@ This is equivalent to the `[js]const tag = compound[name]` bean.
 
 ## Typed key access
 
-| Data type     | Getter                                   | Setter                            |
+| Data type     | Getter                                                               | Setter                            |
 | Boolean       | `[js]compound.putBoolean(name, value)`                               | `[js]compound.getBoolean(name)`   |
 | Byte          | `[js]compound.putByte(name, value)`                                  | `[js]compound.getByte(name)`      |
 | Byte array    | `[js]compound['putByteArray(java.lang.String,byte[])'](name, value)` | `[js]compound.getByteArray(name)` |
@@ -101,6 +101,9 @@ If there's an attempt to read a different type than one actually stored at that 
 
 ## Other useful methods
 
+- `[js]compound.getAllKeys()`
+  - Returns: A set of the names of all keys in the compound tag.
+
 - `[js]compound.remove(name)`
   - `name`: The name of the key to remove from the tag.
   - Returns: The NBT compound as string.
@@ -112,3 +115,19 @@ If there's an attempt to read a different type than one actually stored at that 
 - `[js]compound.merge(otherCompound)`
   - `otherCompound`: Another NBT compound tag.
   - Returns: The compound tag that is the result of merging two compound tags together.
+
+- `[js]compound.copy()`
+  - Returns: A shallow clone of the compound tag.
+
+- `[js]compound.isEmpty()`
+  - Returns: `true` if the compound tag is empty, `false` otherwise.
+
+>>> info
+Also available as a bean: `[js]compound.empty`.
+<<<
+
+- `[js]compound.size()`
+  - Returns: The number of keys in the compound tag.
+
+- `[js]compound.sizeInBytes()`
+  - Returns: The size in bytes of the compound tag.

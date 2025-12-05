@@ -30,7 +30,7 @@ PlayerEvents.loggedIn(event => {
   }
 })
 ```
-<||> 1.20.1-
+<||> 1.20.1 - 1.19.2gi
 ```js
 PlayerEvents.loggedIn(event => {
 	const pData = event.player.persistentData

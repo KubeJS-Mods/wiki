@@ -1,9 +1,24 @@
-`persistentData` is an object available on players, levels, and servers.
-It's useful for simple data storage.
+`persistentData` is an NBT compound tag object available on players, levels, and servers.
+It's useful for simple, persistent data storage.
+
 >>> danger
-Persistent Data is broken on 1.21+!
+Persistent Data does not use beans in 1.21+!
 <<<
 Here's an example of persistentData:
+
+|> 1.21.1+
+```js
+PlayerEvents.loggedIn(event => {
+	const pData = event.player.persistentData
+	if (!pData.getBoolean('firstJoin')) {
+		pData.putBoolean('firstJoin', true)
+		// Do stuff only on first join, here we give the player some diamonds and a sword
+		event.player.give('29x diamond')
+		event.player.give('minecraft:diamond_sword[damage=2]')
+	}
+})
+```
+<||> 1.20.4
 ```js
 PlayerEvents.loggedIn(event => {
   const pData = event.player.persistentData
@@ -15,3 +30,104 @@ PlayerEvents.loggedIn(event => {
   }
 })
 ```
+<||> 1.20.1 - 1.19.2
+```js
+PlayerEvents.loggedIn(event => {
+	const pData = event.player.persistentData
+	if (!pData.firstJoin) {
+		pData.firstJoin = true
+		// Do stuff only on first join, here we give the player some diamonds and a sword
+		event.player.give('29x diamond')
+		event.player.give(Item.of('minecraft:diamond_sword', '{Damage:2}'))
+	}
+})
+```
+<|
+
+# NBT Compound methods
+
+These are the methods usable on NBT compound tags like `persistentData`.
+In code snippets below, `compound` will refer to the compound tag.
+
+## Generic key access
+
+- `[js]compound.put(name, tag)`
+  - `name`: The name of the key to put to.
+  - `tag`: The NBT tag to insert. Plain numbers and strings can also be inserted, being automatically wrapped into NBT tags.  
+  Please note that JS numbers are doubles!
+
+>>> info
+This is equivalent to the `[js]compound[name] = tag` bean.
+<<<
+
+- `[js]compound.get(name)`
+  - `name`: The name of the key to get from.
+  - Returns: The NBT tag stored at that key.
+
+>>> info
+This is equivalent to the `[js]const tag = compound[name]` bean.
+<<<
+
+## Typed key access
+
+| Data type     | Setter                                                               | Getter                            |
+| Boolean       | `[js]compound.putBoolean(name, value)`                               | `[js]compound.getBoolean(name)`   |
+| Byte          | `[js]compound.putByte(name, value)`                                  | `[js]compound.getByte(name)`      |
+| Byte array    | `[js]compound['putByteArray(java.lang.String,byte[])'](name, value)` | `[js]compound.getByteArray(name)` |
+| Double        | `[js]compound.putDouble(name, value)`                                | `[js]compound.getDouble(name)`    |
+| Float         | `[js]compound.putFloat(name, value)`                                 | `[js]compound.getFloat(name)`     |
+| Integer       | `[js]compound.putInt(name, value)`                                   | `[js]compound.getInt(name)`       |
+| Integer array | `[js]compound['putIntArray(java.lang.String,int[])'](name, value)`   | `[js]compound.getIntArray(name)`  |
+| Long          | `[js]compound.putLong(name, value)`                                  | `[js]compound.getLong(name)`      |
+| Long array    | `[js]compound['putLongArray(java.lang.String,long[])'](name, value)` | `[js]compound.getLongArray(name)` |
+| Short         | `[js]compound.putShort(name, value)`                                 | `[js]compound.getShort(name)`     |
+| String        | `[js]compound.putString(name, value)`                                | `[js]compound.getString(name)`    |
+| UUID          | `[js]compound.putUUID(name, value)`                                  | `[js]compound.getUUID(name)`      |
+
+
+- `name`: The name of the key to get from/put to.
+- `value`: The value of the appropriate type. Type conversions will happen if necessary.
+- Getters return the appropriate value type.
+
+If there's an attempt to read a different type than one actually stored at that key, the return value will be cast to the appropriate type if possible.
+- Conversions that succeed:
+  - UUIDs can be converted to integer arrays of exactly 4 elements, and vice versa.
+  - Number types can be cast between each other.
+- Conversions that fail:
+  - Conversion of a number type to string will result in an empty string.
+  - Conversion of a string into a number type will result in a 0.
+  - Conversion of between number arrays will result in an empty array.
+  - Conversion of any other type into UUID will result in an exception being thrown.
+
+## Other useful methods
+
+- `[js]compound.getAllKeys()`
+  - Returns: A set of the names of all keys in the compound tag.
+
+- `[js]compound.remove(name)`
+  - `name`: The name of the key to remove from the tag.
+  - Returns: The NBT compound as string.
+
+- `[js]compound.getAsString()`
+- `[js]compound.toString()`
+  - Returns: The NBT compound as string.
+
+- `[js]compound.merge(otherCompound)`
+  - `otherCompound`: Another NBT compound tag.
+  - Returns: The compound tag that is the result of merging two compound tags together.
+
+- `[js]compound.copy()`
+  - Returns: A shallow clone of the compound tag.
+
+- `[js]compound.isEmpty()`
+  - Returns: `true` if the compound tag is empty, `false` otherwise.
+
+>>> info
+Also available as a bean: `[js]compound.empty`.
+<<<
+
+- `[js]compound.size()`
+  - Returns: The number of keys in the compound tag.
+
+- `[js]compound.sizeInBytes()`
+  - Returns: The size in bytes of the compound tag.

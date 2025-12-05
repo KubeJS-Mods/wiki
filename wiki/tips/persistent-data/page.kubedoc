@@ -87,7 +87,7 @@ This is equivalent to the `[js]const tag = compound[name]` bean.
 
 - `name`: The name of the key to get from/put to.
 - `value`: The value of the appropriate type. Type conversions will happen if necessary.
-- Setters return the appropriate value type.
+- Getters return the appropriate value type.
 
 If there's an attempt to read a different type than one actually stored at that key, the return value will be cast to the appropriate type if possible.
 - Conversions that succeed:

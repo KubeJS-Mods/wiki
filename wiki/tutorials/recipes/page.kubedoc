@@ -297,3 +297,8 @@ ServerEvents.recipes(event => {
 ## Looping
 
 In addition to helper functions, you can also loop through an array to perform an action on every item in the array.
+
+>>> info
+[[[/events/ServerEvents/recipes]]]
+View event page for more reference
+<<<

@@ -1,0 +1,67 @@
+This event used to create new or modify existing [tags](https://minecraft.wiki/w/Tag).
+
+>>> info
+Tags used for grouping different registry objects (for example: tag `#minecraft:logs` groups all of the tree logs).
+
+Tags commonly used by mods and recipes for example instead of making bunch of [stick's](https://minecraft.wiki/w/Stick) recipes for each wood type you can create just one that uses tags.
+Because when tags being used as recipe ingredient they can be replaced by any of tagged items.
+<<<
+
+## Syntax
+```js
+ServerEvents.tags("<registry>", event => {
+    event.add("<tag>", "<registry object>");
+    event.add("<tag>", "#<tag>");
+    event.remove("<tag>", "<registry object>");
+    event.removeAll("<tag>");
+    event.removeAllTagsFrom("<tag>");
+    event.get("<tag>");
+})
+```
+
+`<regestry>` can be any of registries even modded ones! For modded registries you must include namespace.
+List of vanilla registries avalible at [minecraft wiki](https://minecraft.wiki/w/Resource_location#Registries_and_registry_objects);
+
+
+### event.add
+`event.add` function adds specified regestry object or tag to another tag. For example:
+```js
+event.add('forge:cobblestone', 'minecraft:diamond_ore')
+```
+will add `minecraft:diamond_ore` to `#forge:cobblestone` tag.
+
+Adding tag to different tag will add all of the objects in child tag to parent one.
+```js
+event.add('c:stones', '#forge:stone')
+```
+so this will add **all** of regestry objects that are tagged now or will tagged later `#c:stones` in `#forge:stone` tag.
+
+
+### event.remove
+`event.remove` function does exactly opposite of previous function. So,
+```js
+event.remove('forge:cobblestone', 'minecraft:mossy_cobblestone')
+```
+will remove `minecraft:mossy_cobblestone` from `#forge:cobblestone` tag.
+
+### event.removeAll
+This function removes all entries from the tag. For example:
+```js
+event.removeAll('forge:ingots/copper')
+```
+will remove everything from `#forge:ingots/copper` tag.
+
+### event.removeAllTagsFrom
+This function is really similar to `event.removeAll` but it removes only other tags that are in tag.
+
+### event.get
+This function returns tag object.
+
+For example this can be used to get list of all tag entries.
+```
+const stones = event.get('forge:stone').getObjectIds()
+```
+this code will put list of resource locations that are in `#forge:stone` tag into stones varible
+
+## Usage example
+[[[/tutorials/tags]]]

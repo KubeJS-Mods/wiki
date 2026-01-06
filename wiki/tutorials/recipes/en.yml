@@ -1,2 +1,5 @@
 title: "Editing Recipes"
 description: "Adding, removing, and modifying recipes"
+
+color: "color"
+metal: "metal"

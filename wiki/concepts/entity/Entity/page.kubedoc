@@ -210,7 +210,156 @@ Checks, whether the entity is on portal cooldown.
 **Return value**
 `[js]true` if the entity is on portal cooldown, `[js]false` if it isn't.
 
+
 ---
+
+### `dampensVibrations`
+
+```js
+entity.dampensVibrations()
+```
+
+Checks, whether the entity should not emit vibrations, that could be picked up by a Sculk Sensor or Sculk Shrieker.
+
+In vanilla, only wood and carpet [[/concepts/entity/ItemEntity|item entities]] and Wardens do not emit vibrations.
+
+**Return value**
+`[js]true` if the entity doesn't emit vibrations, `[js]false` if it can.
+
+---
+
+### `getBlockPosBelowThatAffectsMyMovement`
+
+```js
+entity.getBlockPosBelowThatAffectsMyMovement()
+entity.blockPosBelowThatAffectsMyMovement // read-only bean
+```
+
+Gets a `BlockPos` corresponding to a block that may affect its movement.
+Used by Minecraft to apply special effects to entity's movement, such as ice slipperiness, slime block stickiness, etc.
+
+**Return value**
+A `BlockPos` a bit more than 0.5 blocks below the feet of the `[js]entity` (to be specific, `[js]0.500001` blocks below) corresponding to a block that may affect its movement.
+
+---
+
+### `getOnPos`
+
+```js
+entity.getOnPos()
+entity.onPos // read-only bean
+```
+
+Gets a `BlockPos` of a block right below the feet of the entity.
+
+**Return value**
+A `BlockPos` of a block right below the feet of the entity.
+
+---
+
+### `getGravity`
+
+```js
+entity.getGravity()
+entity.gravity // read-only bean
+```
+
+**Return value**
+The current entity gravity (in blocks per tick²).
+For most entities, that will be the entity's default gravity (which varies between entities), or `[js]0` if the entity has [no gravity](#isnogravity-setnogravity).
+
+---
+
+### `isInWater`
+
+```js
+entity.isInWater()
+entity.inWater // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity is in water (that is - if it touches water), `[js]false` if it isn't.
+
+---
+
+### `isUnderWater`
+
+```js
+entity.isUnderWater()
+entity.underWater // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity is underwater (that is - if it's both touching water and its eyes are in water), `[js]false` if it isn't.
+
+---
+
+### `isInWaterOrRain`
+
+```js
+entity.isInWaterOrRain()
+entity.inWaterOrRain // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity is in water or rain, `[js]false` if it isn't.
+
+---
+
+### `isInWaterRainOrBubble`
+
+```js
+entity.isInWaterRainOrBubble()
+entity.inWaterRainOrBubble // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity is in water, rain or a bubble column, `[js]false` if it isn't.
+
+---
+
+### `isInWaterOrBubble`
+
+```js
+entity.isInWaterRainOrBubble()
+entity.inWaterRainOrBubble // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity is in water or a bubble column, `[js]false` if it isn't.
+
+---
+
+### `isInLiquid`
+
+```js
+entity.isInLiquid()
+entity.inLiquid // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity is in a liquid (water or lava), `[js]false` if it isn't.
+
+---
+
+### `isNoGravity`, `setNoGravity`
+
+```js
+entity.isNoGravity()
+
+entity.setNoGravity(noGravity)
+
+entity.noGravity // bean
+```
+
+Gets or sets the entity's ability to be affected by gravity.
+Corresponds to `NoGravity` NBT tag on the entity.
+
+**Setter parameter**
+- `[js]noGravity`: A boolean: `[js]true` to make the entity ignore gravity (that is - its gravity is set to 0), `[js]false` to make it fall normally again.
+
+**Getter return value**
+The entity's gravity state: `[js]true` if it has no gravity, `[js]false` if it has gravity.
 
 ## Relation
 
@@ -234,7 +383,7 @@ Checks, whether `[js]otherEntity` is within a cylinder-shaped area of `[js]horiz
 
 ---
 
-## Damage
+## Removal
 
 ### `kill`
 
@@ -245,7 +394,25 @@ entity.kill()
 Kills an entity, removing it from the world.
 In other words, it acts as a `/kill` command.
 
+**Return value**
+None (`[js]undefined`). 
+
 ---
+
+### `discard`
+
+```js
+entity.discard()
+```
+
+Despawns an entity, removing it from the world.
+
+**Return value**
+None (`[js]undefined`). 
+
+---
+
+## Damage
 
 **Return value**
 None (`[js]undefined`). 
@@ -305,7 +472,7 @@ entity.remainingFireTicks // bean
 Sets or gets the entity's remaining ticks of being on fire.
 
 **Setter parameter**
-- `ticks`: The remaining fire ticks to set.
+- `[js]ticks`: The remaining fire ticks to set.
 
 **Getter return value**
 The entity's remaining fire ticks.
@@ -338,6 +505,35 @@ None (`[js]undefined`).
 
 ---
 
+### `fireImmune`
+
+```js
+entity.fireImmune()
+```
+
+**Return value**
+`[js]true` if the entity is immune to fire, `[js]false` if it isn't.
+
+---
+
+### `causeFallDamage`
+
+```js
+entity.causeFallDamage(fallDistance, multiplier, damageSource)
+```
+
+In vanilla, it's called whenever the entity falls.
+
+**Parameters**
+- `[js]fallDistance`: The distance that the entity fell.
+- `[js]multiplier`: The fall damage multiplier. Some blocks may decrease fall damage (like Hay Bales or Beds), others may increase it (like Dripstone).
+- `[js]damageSource`: The `DamageSource` to apply. It may be a string representing a damage type ID, for example `[js]'minecraft:fall'`.
+
+**Return value**
+`[js]true` if the fall should play a sound when falling on a Honey Block, `[js]false` if it shouldn't.
+In vanilla, the return value is always `[js]false` except for equine (Horses, Donkeys, Mules) and Llamas
+
+
 ## Vehicle related
 
 ### `unRide`
@@ -351,6 +547,46 @@ If the entity is a passenger, it dismounts from the vehicle.
 **Return value**
 None (`[js]undefined`). 
 
+## Sound related
+
+### `playSound`
+
+```js
+entity.playSound(sound)
+entity.playSound(sound, volume, pitch)
+```
+
+Plays a specified `sound` from the entity, unless it's [silent](#issilent-setsilent).
+
+**Parameters**
+
+- `[js]sound`: A `SoundEvent` representing sound to play. It may be a string representing a sound ID, for example `[js]'minecraft:entity.pig.ambient'`.
+- `[js]volume` {optional}: A number between `[js]0` and `[js]1` representing the volume. Values outside of range will be clamped. Defaults to `[js]1` if not provided. If provided, `[js]pitch` must be provided as well.
+- `[js]pitch` {optional}: A number between `[js]0` and `[js]2` representing the pitch. Values outside of range will be clamped. Defaults to `[js]1` if not provided.
+
+**Return value**
+None (`[js]undefined`).
+
+### `isSilent`, `setSilent`
+
+```js
+entity.isSilent()
+
+entity.setSilent(isSilent)
+
+entity.silent // bean
+```
+
+Gets or sets the entity's ability to produce sounds.
+Corresponds to `Silent` NBT tag on the entity.
+
+**Setter parameter**
+- `[js]isSilent`: A boolean: `[js]true` to make the entity silent, `[js]false` to make it produce sounds again.
+
+**Getter return value**
+The entity's silence state: `[js]true` if it's silent, `[js]false` if it can produce sounds.
+
+---
 
 ## Scoreboard related
 
@@ -380,7 +616,3 @@ entity.spectator // read-only bean
 **Return value**
 `[js]true` if the entity is a spectator, `[js]false` otherwise.
 In vanilla, only [[/concepts/entity/Player|`Player`]] instances may be spectators, so for any other entity this will be `[js]false`.
-
-[Test](#getportalcooldown-setportalcooldown)
-
-[Test2](/wiki/ref/wrappers/JavaWrapper#createconsole)

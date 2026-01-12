@@ -88,7 +88,7 @@ Removes a specified `tag` from the entity.
 entity.setPos(x, y, z)
 ```
 
-Sets the position of the entity (x, y, z).
+Sets the position of the entity (x, y, z) and refreshes its bounding box.
 
 **Parameters**
 - `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity. 
@@ -106,7 +106,7 @@ entity.turn(pitch, yaw)
 Sets the rotation of the entity (pitch, yaw).
 
 **Parameters**
-- `[js]pitch`: The new pitch of the entity, in degrees. Will be clamped to `<-90, 90>` range.
+- `[js]pitch`: The new pitch of the entity, in degrees. Will be clamped to `<​-90, 90>` range.
 - `[js]yaw`: The new yaw of the entity, in degrees.
 
 **Return value**
@@ -125,6 +125,100 @@ Tries to move the entity by the specified vector, applying various in-world phys
 **Parameters**
 - `[js]moverType`: What type of mover caused the movement. It may be a string representing a mover type, that is: one of `[js]'piston'`, `[js]'player'`, `[js]'self'`, `[js]'shulker'`, `[js]'shulker_box'`.
 - `[js]movementVector`: A [[/ref/utils/Vec3|`Vec3`]] which defines the movement vector. It may be an array with three elements specifying respectively x, y and z component, for example `[js]\[0, 1.5, 1\]`.
+
+**Return value**
+None (`[js]undefined`).
+
+---
+
+### `moveRelative`
+
+```js
+entity.moveRelative(speed, inputVector)
+```
+
+Applies `[js]speed` to the entity, in direction of cross product of normalized `[js]inputVector` and entity's yaw.
+
+**Parameters**
+- `[js]speed`: Speed (in blocks per tick) to apply.
+- `[js]inputVector`: A [[/ref/utils/Vec3|`Vec3`]] which is the component of the resulting speed vector. If longer than 1, it will be normalized to a vector with length of 1. It may be an array with three elements specifying respectively x, y and z component, for example `[js]\[0, 1.5, 1\]`.
+
+**Return value**
+None (`[js]undefined`).
+
+---
+
+### `absMoveTo`
+
+```js
+entity.absMoveTo(x, y, z, pitch, yaw)
+entity.absMoveTo(x, y, z)
+```
+
+Sets the position of the entity (x, y, z) and its facing direction (yaw and pitch) while clamping the position to the confines of the Minecraft world (that is, no more than ±30 million blocks in x or z direction) and entity's yaw and pitch to valid values, that is - pitch must be within range `<0, 360)`, yaw must be within range `<​-90, 90>`.
+
+**Parameters**
+- `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity. 
+- `[js]pitch`, `[js]yaw` {optional}: The new facing direction of the entity.
+
+**Return value**
+None (`[js]undefined`).
+
+---
+
+### `absRotateTo`
+
+```js
+entity.absRotateTo(pitch, yaw)
+```
+
+Sets the entity's facing direction (yaw and pitch) while clamping the entity's yaw and pitch to valid values, that is - pitch must be within range `<0, 360)`, yaw must be within range `<​-90, 90>`.
+
+**Parameters**
+- `[js]pitch`, `[js]yaw`: The new facing direction of the entity.
+
+**Return value**
+None (`[js]undefined`).
+
+---
+
+### `moveTo`
+
+```js
+entity.moveTo(positionVector)
+entity.moveTo(x, y, z)
+entity.moveTo(blockPos, pitch, yaw)
+entity.moveTo(positionVector, pitch, yaw)
+entity.moveTo(x, y, z, pitch, yaw)
+```
+
+Sets the entity's position and facing direction.
+
+>>>warn
+Usage of the following overloads:
+```js
+entity.moveTo(blockPos, pitch, yaw)
+entity.moveTo(positionVector, pitch, yaw)
+```
+using a 3-element JS array like `[js]\[64, 50, -20\]` as a first parameter is ambiguous, as the array can be interpreted as either [[/ref/utils/Vec3|`Vec3`]] or a `BlockPos`.
+
+In this case either:
+- Use an explicit overload, like one of these:
+```js
+entity['moveTo(net.minecraft.core.BlockPos,float,float)']([64, 50, -20], 90, 0)
+entity['moveTo(net.minecraft.world.phys.Vec3,float,float)']([64, 50, -20], 90, 0)
+```
+- Create [[/ref/utils/Vec3|`Vec3d`]] or `BlockPos` explicitly. Both classes are exposed to global scope by default, so you don't need to load them.
+```js
+entity.moveTo(new BlockPos(64, 50, -20), 90, 0)
+entity.moveTo(new Vec3d(64, 50, -20), pitch, yaw)
+```
+<<<
+**Parameters**
+- `[js]positionVector`: [[/ref/utils/Vec3|`Vec3`]] representing the position to move the entity to. It may be a 3-element JS array representing the vector, like `[js]\[64, 50, -20\]`.
+- `[js]blockPos`: A [[/ref/utils/BlockPos|`BlockPos`]] to move the entity to. The resulting position will be the center of the block. It may be a 3-element JS array representing the block position, like `[js]\[64, 50, -20\]`.
+- `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity. 
+- `[js]pitch`, `[js]yaw`: The new facing direction of the entity.
 
 **Return value**
 None (`[js]undefined`).
@@ -251,9 +345,25 @@ entity.onPos // read-only bean
 ```
 
 Gets a `BlockPos` of a block right below the feet of the entity.
+Can be thought of as a `BlockPos` of a block the entity is standing on.
 
 **Return value**
 A `BlockPos` of a block right below the feet of the entity.
+
+---
+
+### `getBlockStateOn`
+
+```js
+entity.getBlockStateOn()
+entity.blockStateOn // read-only bean
+```
+
+Gets a [[/concepts/block/BlockState|`BlockState`]] of a block right below the feet of the entity.
+Can be thought of as a [[/concepts/block/BlockState|`BlockState`]] of a block the entity is standing on.
+
+**Return value**
+A [[/concepts/block/BlockState|`BlockState`]] of a block right below the feet of the entity.
 
 ---
 
@@ -321,8 +431,8 @@ entity.inWaterRainOrBubble // read-only bean
 ### `isInWaterOrBubble`
 
 ```js
-entity.isInWaterRainOrBubble()
-entity.inWaterRainOrBubble // read-only bean
+entity.isInWaterOrBubble()
+entity.inWaterOrBubble // read-only bean
 ```
 
 **Return value**
@@ -360,6 +470,29 @@ Corresponds to `NoGravity` NBT tag on the entity.
 
 **Getter return value**
 The entity's gravity state: `[js]true` if it has no gravity, `[js]false` if it has gravity.
+
+---
+
+### `canSpawnSprintParticle`
+
+```js
+entity.canSpawnSprintParticle()
+```
+
+**Return value**
+`[js]true` if the entity can spawn sprint particles, `[js]false` if it isn't.
+
+---
+
+### `isInLava`
+
+```js
+entity.isInLava()
+entity.inLava // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity is in lava, `[js]false` if it isn't.
 
 ## Relation
 
@@ -413,11 +546,6 @@ None (`[js]undefined`).
 ---
 
 ## Damage
-
-**Return value**
-None (`[js]undefined`). 
-
----
 
 ### `lavaHurt`
 
@@ -596,10 +724,6 @@ The entity's silence state: `[js]true` if it's silent, `[js]false` if it can pro
 entity.getTeamColor()
 entity.teamColor // read-only bean
 ```
-
-**Parameters**
-- `blockPos` - The position of the block as `BlockPos`. It may be a 3-element array of integers containing x, y and z coordinates, for example `[js]\[0, 64, 0\]`.
-- `blockState` - The [[/concepts/block/BlockState|`BlockState`]] to check. It may be a string representing a block state, for example `[js]'minecraft:oak_log\[axis=x\]'`.
 
 **Return value**
 The team color as a packed integer, in `0xRRGGBB` format.

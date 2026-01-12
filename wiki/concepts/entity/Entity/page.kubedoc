@@ -200,18 +200,12 @@ Usage of the following overloads:
 entity.moveTo(blockPos, pitch, yaw)
 entity.moveTo(positionVector, pitch, yaw)
 ```
-using a 3-element JS array like `[js]\[64, 50, -20\]` as a first parameter is ambiguous, as the array can be interpreted as either [[/ref/utils/Vec3|`Vec3`]] or a `BlockPos`.
+using a 3-element JS array like `[js]\[64, 50, -20\]`, [[/ref/utils/Vec3|`Vec3`]] or [[/ref/utils/BlockPos|`BlockPos`]] as a first parameter is ambiguous, as the object can be interpreted as either [[/ref/utils/Vec3|`Vec3`]] or a [[/ref/utils/BlockPos|`BlockPos`]].
 
-In this case either:
-- Use an explicit overload, like one of these:
+In this case use an explicit overload depending on what do you mean:
 ```js
 entity['moveTo(net.minecraft.core.BlockPos,float,float)']([64, 50, -20], 90, 0)
 entity['moveTo(net.minecraft.world.phys.Vec3,float,float)']([64, 50, -20], 90, 0)
-```
-- Create [[/ref/utils/Vec3|`Vec3d`]] or `BlockPos` explicitly. Both classes are exposed to global scope by default, so you don't need to load them.
-```js
-entity.moveTo(new BlockPos(64, 50, -20), 90, 0)
-entity.moveTo(new Vec3d(64, 50, -20), pitch, yaw)
 ```
 <<<
 **Parameters**

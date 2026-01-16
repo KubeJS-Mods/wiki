@@ -1,0 +1,18 @@
+# Info
+
+Invoked when the server finishes loading (after all data packs are loaded).
+
+# Available Event Fields
+
+- `event.server` - The Minecraft server instance
+
+# Example
+
+```js
+ServerEvents.loaded(event => {
+	console.log('Server has loaded!')
+	
+	// Broadcast to all players (if any are already connected)
+	event.server.tell('Server reloaded!')
+})
+```

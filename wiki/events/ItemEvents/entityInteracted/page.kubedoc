@@ -1,0 +1,36 @@
+# Info
+
+Invoked when a player right clicks on an entity with an item.
+
+# Available Event Fields
+
+- `event.player` - The player that interacted with the entity
+- `event.hand` - The hand used (`MAIN_HAND` or `OFF_HAND`)
+- `event.item` - The item used to interact
+- `event.target` - The entity that was interacted with
+- `event.level` - The level the interaction occurred in
+
+# Example
+
+```js
+ItemEvents.entityInteracted(event => {
+	console.log(`${event.player.name.string} interacted with ${event.target.type} using ${event.item.id}`)
+})
+
+// Listen for specific item
+ItemEvents.entityInteracted('minecraft:name_tag', event => {
+	event.player.tell(`You're naming a ${event.target.type}!`)
+})
+
+// Custom interaction with villagers
+ItemEvents.entityInteracted('minecraft:emerald', event => {
+	if (event.target.type === 'minecraft:villager') {
+		event.player.tell('The villager appreciates your gift!')
+		event.item.shrink(1)
+	}
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the default interaction.

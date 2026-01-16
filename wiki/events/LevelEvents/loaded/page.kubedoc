@@ -1,0 +1,20 @@
+# Info
+
+Invoked when a level/dimension is loaded.
+
+# Available Event Fields
+
+- `event.level` - The level that was loaded
+
+# Example
+
+```js
+LevelEvents.loaded(event => {
+	console.log(`Level loaded: ${event.level.dimension}`)
+})
+
+// Listen for specific dimension
+LevelEvents.loaded('minecraft:the_nether', event => {
+	console.log('The Nether has been loaded!')
+})
+```

@@ -1,0 +1,2 @@
+title: "EntityEvents.spawned"
+description: "Fired when an entity is added to the world"

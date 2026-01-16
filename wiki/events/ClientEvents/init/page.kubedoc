@@ -1,0 +1,11 @@
+# Info
+
+Invoked when the client is initializing. This is a **startup** event.
+
+# Example
+
+```js
+ClientEvents.init(event => {
+	console.log('Client is initializing!')
+})
+```

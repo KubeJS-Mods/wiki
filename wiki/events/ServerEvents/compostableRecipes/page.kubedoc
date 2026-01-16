@@ -1,0 +1,19 @@
+# Info
+
+Invoked when compostable item recipes are being loaded. This allows you to define which items can be composted and their compost chance.
+
+# Example
+
+```js
+ServerEvents.compostableRecipes(event => {
+	// Add an item to the composter
+	// Second argument is the chance (0.0 to 1.0) to add a layer
+	event.add('minecraft:apple', 0.65)
+	
+	// Remove an item from the composter
+	event.remove('minecraft:wheat_seeds')
+	
+	// Add custom items
+	event.add('kubejs:organic_matter', 1.0) // 100% chance
+})
+```

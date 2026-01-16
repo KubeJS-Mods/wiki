@@ -1,0 +1,44 @@
+# Info
+
+Invoked when a player right clicks on a block.
+
+# Available Event Fields
+
+- `event.player` - The player that right clicked the block
+- `event.block` - The block that was right clicked (`LevelBlock`)
+- `event.hand` - The hand used to right click (`MAIN_HAND` or `OFF_HAND`)
+- `event.item` - The item held in the hand
+- `event.facing` - The face of the block that was clicked (`Direction`)
+- `event.level` - The level where the block is located
+
+# Example
+
+```js
+BlockEvents.rightClicked(event => {
+	console.log(`${event.player.name.string} right clicked ${event.block.id} with ${event.item.id}`)
+})
+
+// Listen for a specific block
+BlockEvents.rightClicked('minecraft:chest', event => {
+	event.player.tell('You opened a chest!')
+})
+
+// Check which hand was used
+BlockEvents.rightClicked('minecraft:lever', event => {
+	if (event.hand === 'main_hand') {
+		console.log('Lever clicked with main hand')
+	}
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the default interaction.
+
+```js
+BlockEvents.rightClicked('minecraft:ender_chest', event => {
+	// Prevent ender chest from being opened
+	event.cancel()
+	event.player.tell('Ender chests are disabled!')
+})
+```

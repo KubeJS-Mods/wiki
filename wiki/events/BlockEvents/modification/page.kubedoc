@@ -1,0 +1,45 @@
+# Info
+
+Invoked during startup to modify existing blocks. This is a **startup** event.
+
+>>> warning
+Tag predicates are **not** supported for this event.
+<<<
+
+# Available Methods
+
+- `event.modify(filter, callback)` - Modifies blocks matching the filter
+
+# Example
+
+```js
+BlockEvents.modification(event => {
+	// Make all stone blocks harder to break
+	event.modify('minecraft:stone', block => {
+		block.setDestroySpeed(10.0)
+	})
+
+	// Use regex to modify blocks
+	event.modify(/minecraft:.*_ore/, block => {
+		block.setDestroySpeed(5.0)
+		block.setExplosionResistance(10.0)
+	})
+})
+```
+
+# Block Modification Methods
+
+Methods available in the callback:
+
+- `setDestroySpeed(float)` - How long it takes to mine the block
+- `setExplosionResistance(float)` - Resistance to explosions
+- `setLightEmission(int)` - Light level emitted (0-15)
+- `setSoundType(SoundType)` - The sound the block makes
+- `setFriction(float)` - Affects entity movement on the block
+- `setSpeedFactor(float)` - Movement speed multiplier
+- `setJumpFactor(float)` - Jump height multiplier
+- `setHasCollision(boolean)` - Whether the block has collision
+- `setIsRandomlyTicking(boolean)` - Whether the block randomly ticks
+- `setRandomTickCallback(callback)` - Set a custom random tick callback
+- `setRequiresTool(boolean)` - Whether the block requires a tool to drop items
+- `setNameKey(string)` - Set the translation key for the block name

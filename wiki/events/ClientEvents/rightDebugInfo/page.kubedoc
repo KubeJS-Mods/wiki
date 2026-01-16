@@ -1,0 +1,16 @@
+# Info
+
+Invoked when rendering the right side of the F3 debug screen, allowing you to add custom debug lines.
+
+# Available Methods
+
+- `event.add(text)` - Add a line to the debug screen
+
+# Example
+
+```js
+ClientEvents.rightDebugInfo(event => {
+	event.add('Custom Info: World!')
+	event.add(`Biome: ${event.player.block.biomeId}`)
+})
+```

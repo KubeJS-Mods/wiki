@@ -1,0 +1,2 @@
+title: "ServerEvents.unloaded"
+description: "Fired when the server is stopping"

@@ -1,0 +1,2 @@
+title: "PlayerEvents.respawned"
+description: "Fired when a player respawns after death or returning from the End"

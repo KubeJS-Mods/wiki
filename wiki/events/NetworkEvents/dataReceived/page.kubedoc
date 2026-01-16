@@ -1,0 +1,29 @@
+# Info
+
+Invoked when network data is received from the server (client-side) or from a client (server-side).
+
+This event allows for custom networking between client and server scripts.
+
+# Available Event Fields
+
+- `event.player` - The player associated with the data (on server, the sender; on client, the local player)
+- `event.data` - The data that was received
+
+# Example
+
+```js
+// Server-side: receive data from clients
+NetworkEvents.dataReceived('my_channel', event => {
+	console.log(`Received data from ${event.player.name.string}: ${event.data}`)
+})
+
+// To send data from client to server:
+// Client.sendToServer('my_channel', { key: 'value' })
+
+// To send data from server to client:
+// player.sendData('my_channel', { key: 'value' })
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`.

@@ -1,0 +1,42 @@
+# Info
+
+Invoked during startup to register custom armor tiers (armor materials). This is a **startup** event.
+
+Armor materials define the protection values, durability, and other properties for armor.
+
+# Example
+
+```js
+StartupEvents.registry('armor_material', event => {
+	event.create('kubejs:super_armor')
+		.durabilityMultiplier(45)
+		.defense(3, 6, 8, 3) // Boots, Leggings, Chestplate, Helmet
+		.enchantmentValue(20)
+		.toughness(3)
+		.knockbackResistance(0.1)
+		.repairIngredient('minecraft:netherite_ingot')
+})
+```
+
+# Armor Material Properties
+
+- `durabilityMultiplier` - Base durability multiplier
+- `defense(boots, leggings, chestplate, helmet)` - Defense values for each slot
+- `enchantmentValue` - How enchantable the armor is
+- `toughness` - Armor toughness (damage reduction against strong attacks)
+- `knockbackResistance` - Resistance to knockback
+- `repairIngredient` - Item used to repair armor in an anvil
+- `equipSound` - Sound played when equipping
+
+# Using Custom Armor Materials
+
+After registering a material, use it when creating armor:
+
+```js
+StartupEvents.registry('item', event => {
+	event.create('super_helmet', 'helmet').armorMaterial('kubejs:super_armor')
+	event.create('super_chestplate', 'chestplate').armorMaterial('kubejs:super_armor')
+	event.create('super_leggings', 'leggings').armorMaterial('kubejs:super_armor')
+	event.create('super_boots', 'boots').armorMaterial('kubejs:super_armor')
+})
+```

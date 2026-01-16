@@ -1,0 +1,33 @@
+# Info
+
+Invoked when a player's chat message is being decorated/formatted. This event fires before `PlayerEvents.chat` and is primarily used for formatting the message.
+
+# Available Event Fields
+
+- `event.player` - The player that sent the message
+- `event.username` - The player's username
+- `event.message` - The raw message content (string)
+- `event.component` - The message as a `Component` (can be modified)
+- `event.server` - The Minecraft server
+
+# Example
+
+```js
+PlayerEvents.decorateChat(event => {
+	// Add colored name based on player rank
+	let prefix = ''
+	if (event.player.stages.has('vip')) {
+		prefix = Text.gold('[VIP] ')
+	} else if (event.player.stages.has('admin')) {
+		prefix = Text.red('[Admin] ')
+	}
+	
+	if (prefix) {
+		event.component = Text.of(prefix).append(event.component)
+	}
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`.

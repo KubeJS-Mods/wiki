@@ -1,0 +1,36 @@
+# Info
+
+Invoked when an entity is about to be added to the world.
+
+>>> info
+This event also fires for existing entities when they are loaded from a save file.
+<<<
+
+# Available Event Fields
+
+- `event.entity` - The entity being added to the world
+- `event.level` - The level the entity is being added to
+
+# Example
+
+```js
+EntityEvents.spawned(event => {
+	console.log(`${event.entity.type} spawned at ${event.entity.x}, ${event.entity.y}, ${event.entity.z}`)
+})
+
+// Modify entities when they spawn
+EntityEvents.spawned('minecraft:zombie', event => {
+	// Give all zombies a diamond sword
+	event.entity.setItemSlot('mainhand', 'minecraft:diamond_sword')
+})
+
+// Prevent specific entities from being added
+EntityEvents.spawned('minecraft:phantom', event => {
+	// Remove phantoms
+	event.cancel()
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the entity from being added to the world.

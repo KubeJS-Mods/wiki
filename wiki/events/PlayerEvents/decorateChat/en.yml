@@ -1,0 +1,2 @@
+title: "PlayerEvents.decorateChat"
+description: "Fired to decorate/format a player's chat message"

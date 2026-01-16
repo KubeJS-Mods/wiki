@@ -1,0 +1,53 @@
+# Info
+
+Invoked right after an explosion happens, allowing you to modify the results.
+
+# Available Event Fields
+
+- `event.level` - The level where the explosion occurred
+- `event.position` - The position of the explosion (`Vec3`)
+- `event.x`, `event.y`, `event.z` - The coordinates of the explosion
+- `event.block` - The block at the explosion center
+- `event.exploder` - The entity that caused the explosion (can be `null`)
+- `event.affectedEntities` - List of entities affected by the explosion
+- `event.affectedBlocks` - List of blocks affected by the explosion
+
+# Available Methods
+
+- `event.removeAffectedEntity(entity)` - Remove an entity from the affected list
+- `event.removeAllAffectedEntities()` - Remove all entities from the affected list
+- `event.removeAffectedBlock(block)` - Remove a block from the affected list
+- `event.removeAllAffectedBlocks()` - Remove all blocks from the affected list
+- `event.removeKnockback()` - Remove knockback from all affected players
+
+# Example
+
+```js
+LevelEvents.afterExplosion(event => {
+	console.log(`Explosion affected ${event.affectedEntities.length} entities and ${event.affectedBlocks.length} blocks`)
+})
+
+// Prevent block destruction from explosions
+LevelEvents.afterExplosion(event => {
+	event.removeAllAffectedBlocks()
+})
+
+// Prevent entity damage from explosions
+LevelEvents.afterExplosion(event => {
+	event.removeAllAffectedEntities()
+})
+
+// Only prevent knockback
+LevelEvents.afterExplosion(event => {
+	event.removeKnockback()
+})
+
+// Protect specific blocks
+LevelEvents.afterExplosion(event => {
+	for (let block of event.affectedBlocks) {
+		if (block.id === 'minecraft:chest') {
+			event.removeAffectedBlock(block)
+		}
+	}
+})
+```

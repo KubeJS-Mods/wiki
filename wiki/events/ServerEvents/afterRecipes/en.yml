@@ -1,0 +1,2 @@
+title: "ServerEvents.afterRecipes"
+description: "Fired after all recipes are loaded"

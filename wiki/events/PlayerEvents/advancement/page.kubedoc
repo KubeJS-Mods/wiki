@@ -1,0 +1,36 @@
+# Info
+
+Invoked when a player earns an advancement.
+
+# Available Event Fields
+
+- `event.player` - The player that earned the advancement
+- `event.advancement` - The advancement node that was earned
+- `event.server` - The Minecraft server
+
+# Example
+
+```js
+PlayerEvents.advancement(event => {
+	// Announce all advancements
+	event.server.tell(Text.green(`${event.player.name.string} has made the advancement "${event.advancement.holder().value().name().getString()}"!`))
+})
+
+// Listen for specific advancement
+PlayerEvents.advancement('minecraft:story/mine_diamond', event => {
+	event.player.tell('You found your first diamonds!')
+	event.player.give('minecraft:diamond', 5)
+})
+
+// Listen for all advancements in a category
+PlayerEvents.advancement(event => {
+	let id = event.advancement.holder().id().toString()
+	if (id.startsWith('minecraft:nether/')) {
+		event.player.tell('Nether explorer!')
+	}
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the advancement from being granted.

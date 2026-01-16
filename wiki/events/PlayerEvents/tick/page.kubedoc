@@ -1,0 +1,34 @@
+# Info
+
+Invoked every tick for each player.
+
+>>> warning
+This event fires 20 times per second per player. Be careful with performance-heavy operations!
+<<<
+
+# Available Event Fields
+
+- `event.player` - The player being ticked
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+PlayerEvents.tick(event => {
+	// Check every 20 ticks (1 second)
+	if (event.player.age % 20 !== 0) return
+	
+	// Apply effects in certain areas
+	let pos = event.player.block.pos
+	if (pos.y < 0) {
+		event.player.potionEffects.add('minecraft:wither', 100, 0)
+	}
+})
+
+// Give regeneration while holding a golden apple
+PlayerEvents.tick(event => {
+	if (event.player.mainHandItem.id === 'minecraft:golden_apple') {
+		event.player.potionEffects.add('minecraft:regeneration', 40, 0)
+	}
+})
+```

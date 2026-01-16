@@ -1,0 +1,39 @@
+# Info
+
+Invoked during startup to modify existing items. This is a **startup** event.
+
+# Available Methods
+
+- `event.modify(filter, callback)` - Modifies items matching the filter
+
+# Example
+
+```js
+ItemEvents.modification(event => {
+	// Make all swords do more damage
+	event.modify('minecraft:diamond_sword', item => {
+		// Modify item properties
+	})
+
+	// Modify multiple items using regex
+	event.modify(/minecraft:.*_pickaxe/, item => {
+		item.maxStackSize = 16
+	})
+
+	// Make food items stack higher
+	event.modify('minecraft:golden_apple', item => {
+		item.maxStackSize = 16
+	})
+})
+```
+
+# Item Properties
+
+Properties you can modify include:
+
+- `maxStackSize` - Maximum stack size (1-64)
+- `maxDamage` - Maximum durability
+- `craftRemainder` - Item left after crafting
+- `burnTime` - Burn time in ticks when used as fuel
+- `fireResistant` - Whether the item is immune to fire/lava
+- `rarity` - Item rarity (COMMON, UNCOMMON, RARE, EPIC)

@@ -1,0 +1,25 @@
+# Info
+
+Invoked when a player respawns. This can be triggered by death or by returning from the End dimension after defeating the Ender Dragon.
+
+# Available Event Fields
+
+- `event.player` - The player that respawned
+- `event.endConquered` - `true` if the player is returning from conquering the End, `false` if respawning after death
+- `event.server` - The Minecraft server
+- `event.level` - The level the player respawned in
+
+# Example
+
+```js
+PlayerEvents.respawned(event => {
+	if (event.endConquered) {
+		event.player.tell('Congratulations on defeating the Ender Dragon!')
+		event.player.give('minecraft:dragon_egg', 1)
+	} else {
+		event.player.tell('You died! Be more careful next time.')
+		// Give some food after respawning
+		event.player.give('minecraft:bread', 3)
+	}
+})
+```

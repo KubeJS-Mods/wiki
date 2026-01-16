@@ -1,0 +1,11 @@
+# Info
+
+Invoked during startup initialization. This is one of the first events to fire.
+
+# Example
+
+```js
+StartupEvents.init(event => {
+	console.log('KubeJS is initializing!')
+})
+```

@@ -1,0 +1,43 @@
+# Info
+
+Invoked when an entity attempts to trample farmland.
+
+# Available Event Fields
+
+- `event.entity` - The entity that is attempting to trample the farmland
+- `event.block` - The farmland block (`LevelBlock`)
+- `event.distance` - The fall distance of the entity
+- `event.level` - The level where the farmland is located
+
+# Example
+
+```js
+BlockEvents.farmlandTrampled(event => {
+	console.log(`${event.entity.type} is trampling farmland from ${event.distance} blocks`)
+})
+
+// Check if it's a player
+BlockEvents.farmlandTrampled(event => {
+	if (event.entity.player) {
+		event.entity.tell('Watch where you step!')
+	}
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the farmland from being trampled.
+
+```js
+// Prevent all farmland trampling
+BlockEvents.farmlandTrampled(event => {
+	event.cancel()
+})
+
+// Only allow players to trample farmland
+BlockEvents.farmlandTrampled(event => {
+	if (!event.entity.player) {
+		event.cancel()
+	}
+})
+```

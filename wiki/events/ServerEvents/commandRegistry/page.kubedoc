@@ -1,0 +1,35 @@
+# Info
+
+Invoked when commands are being registered. This is where you can register custom commands.
+
+# Example
+
+```js
+ServerEvents.commandRegistry(event => {
+	// Register a simple command
+	event.register(
+		Commands.literal('hello')
+			.executes(ctx => {
+				ctx.source.sendSuccess(() => Text.green('Hello, World!'), false)
+				return 1
+			})
+	)
+	
+	// Command with arguments
+	event.register(
+		Commands.literal('greet')
+			.then(
+				Commands.argument('player', Arguments.PLAYER.create(event))
+					.executes(ctx => {
+						let player = Arguments.PLAYER.getResult(ctx, 'player')
+						ctx.source.sendSuccess(() => Text.of(`Hello, ${player.name.string}!`), false)
+						return 1
+					})
+			)
+	)
+})
+```
+
+>>> info
+For simple commands, consider using `ServerEvents.basicCommand` instead, which provides a simpler API.
+<<<

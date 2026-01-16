@@ -1,0 +1,26 @@
+# Info
+
+Invoked when a KubeJS detector block receives a block update. This event fires for any state change of the detector block.
+
+For powered/unpowered specific events, see [[/events/BlockEvents/detectorPowered]] and [[/events/BlockEvents/detectorUnpowered]].
+
+# Available Event Fields
+
+- `event.detectorId` - The id of the detector block when it was registered
+- `event.block` - The detector block (`LevelBlock`)
+- `event.powered` - Whether the detector block is currently powered
+- `event.level` - The level where the detector block is located
+
+# Example
+
+```js
+// First, register a detector block in startup scripts
+StartupEvents.registry('block', event => {
+	event.create('my_detector', 'kubejs:detector')
+})
+
+// Then, listen for changes in server/client scripts
+BlockEvents.detectorChanged('my_detector', event => {
+	console.log(`Detector ${event.detectorId} is now ${event.powered ? 'powered' : 'unpowered'}`)
+})
+```

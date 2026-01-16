@@ -1,0 +1,16 @@
+# Info
+
+Invoked when the client player leaves a world.
+
+# Available Event Fields
+
+- `event.player` - The client player that logged out
+- `event.level` - The level the player was in
+
+# Example
+
+```js
+ClientEvents.loggedOut(event => {
+	console.log('Left world!')
+})
+```

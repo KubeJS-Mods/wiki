@@ -1,0 +1,34 @@
+# Info
+
+Invoked when a player closes a chest.
+
+# Available Event Fields
+
+- `event.player` - The player that closed the chest
+- `event.inventory` - The chest's inventory container
+- `event.block` - The chest block (can be `null` for ender chests or mobile chests)
+- `event.inventoryContainer` - The container menu
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+PlayerEvents.chestClosed(event => {
+	if (event.block) {
+		console.log(`${event.player.name.string} closed a chest at ${event.block.pos}`)
+	}
+})
+
+// Log chest contents when closed
+PlayerEvents.chestClosed(event => {
+	let inv = event.inventory
+	let items = []
+	for (let i = 0; i < inv.containerSize; i++) {
+		let item = inv.getItem(i)
+		if (!item.isEmpty()) {
+			items.push(`${item.count}x ${item.id}`)
+		}
+	}
+	console.log(`Chest contents: ${items.join(', ')}`)
+})
+```

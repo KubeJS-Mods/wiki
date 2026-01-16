@@ -1,0 +1,42 @@
+# Info
+
+Invoked before an entity is spawned into the world to check if the spawn should be allowed.
+
+>>> info
+Only entities from a `BaseSpawner` (mob spawners) or world generation will trigger this event. Use `EntityEvents.spawned` for a more general spawn event.
+<<<
+
+# Available Event Fields
+
+- `event.entity` - The entity being spawned
+- `event.block` - The block at the spawn location
+- `event.type` - The spawn type (e.g., `SPAWNER`, `NATURAL`, `CHUNK_GENERATION`)
+- `event.spawner` - The spawner that spawned the entity (if applicable)
+- `event.level` - The level the entity is being spawned into
+- `event.x`, `event.y`, `event.z` - The spawn coordinates
+
+# Example
+
+```js
+EntityEvents.checkSpawn(event => {
+	console.log(`${event.entity.type} trying to spawn via ${event.type}`)
+})
+
+// Prevent zombies from spawning naturally
+EntityEvents.checkSpawn('minecraft:zombie', event => {
+	if (event.type.toString() === 'NATURAL') {
+		event.cancel()
+	}
+})
+
+// Prevent all hostile mobs from spawning in a certain Y range
+EntityEvents.checkSpawn(event => {
+	if (event.entity.type.category.toString() === 'MONSTER' && event.y > 100) {
+		event.cancel()
+	}
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the entity from spawning.

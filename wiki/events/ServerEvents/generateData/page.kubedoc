@@ -1,0 +1,15 @@
+# Info
+
+Invoked to generate data files dynamically. This can be used to create JSON data files programmatically.
+
+# Example
+
+```js
+ServerEvents.generateData('kubejs:my_data', event => {
+	// Generate custom data files
+	event.json('my_data/custom.json', {
+		key: 'value',
+		numbers: [1, 2, 3]
+	})
+})
+```

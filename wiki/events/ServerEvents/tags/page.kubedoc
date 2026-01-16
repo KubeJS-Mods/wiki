@@ -1,0 +1,48 @@
+# Info
+
+Invoked when tags are being loaded. This is where you add or remove entries from tags.
+
+For detailed tag documentation, see [[/tutorials/tags]].
+
+# Available Methods
+
+- `event.add(tag, ...ids)` - Add entries to a tag
+- `event.remove(tag, ...ids)` - Remove entries from a tag
+- `event.removeAll(tag)` - Remove all entries from a tag
+- `event.removeAllTagsFrom(...ids)` - Remove items/blocks from all tags
+- `event.get(tag)` - Get the tag wrapper for modifications
+
+# Example
+
+```js
+// Item tags
+ServerEvents.tags('item', event => {
+	// Add items to a tag
+	event.add('minecraft:logs', 'kubejs:custom_log')
+	
+	// Remove items from a tag
+	event.remove('minecraft:planks', 'minecraft:oak_planks')
+	
+	// Remove all from a tag
+	event.removeAll('minecraft:coals')
+	
+	// Using tag wrapper
+	event.get('minecraft:beacon_payment_items')
+		.add('minecraft:emerald')
+		.add('minecraft:diamond')
+})
+
+// Block tags
+ServerEvents.tags('block', event => {
+	// Make a block mineable with pickaxe
+	event.add('minecraft:mineable/pickaxe', 'kubejs:custom_block')
+	
+	// Set mining level
+	event.add('minecraft:needs_diamond_tool', 'kubejs:custom_block')
+})
+
+// Entity type tags
+ServerEvents.tags('entity_type', event => {
+	event.add('minecraft:raiders', 'minecraft:zombie')
+})
+```

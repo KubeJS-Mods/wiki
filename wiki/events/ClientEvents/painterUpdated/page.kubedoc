@@ -1,0 +1,13 @@
+# Info
+
+Invoked when the Painter API is updated/refreshed. The Painter API allows drawing custom HUD elements.
+
+For detailed Painter documentation, see [[/tutorials/painter-api]].
+
+# Example
+
+```js
+ClientEvents.painterUpdated(event => {
+	// Update painter elements
+})
+```

@@ -1,0 +1,11 @@
+# Info
+
+Invoked to generate high-priority assets that should be loaded before other assets. This is a **client** event for asset generation.
+
+# Example
+
+```js
+ClientEvents.highPriorityAssets(event => {
+	// Generate high-priority assets
+})
+```

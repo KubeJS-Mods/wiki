@@ -1,0 +1,2 @@
+title: "BlockEvents.detectorUnpowered"
+description: "Fired when a KubeJS detector block becomes unpowered"

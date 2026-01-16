@@ -1,0 +1,20 @@
+# Info
+
+Invoked to modify existing creative tabs, allowing you to add or remove items.
+
+# Example
+
+```js
+StartupEvents.modifyCreativeTab('minecraft:building_blocks', event => {
+	// Add custom blocks to the building blocks tab
+	event.add('kubejs:my_block')
+	
+	// Remove items from the tab
+	event.remove('minecraft:dirt')
+})
+
+StartupEvents.modifyCreativeTab('minecraft:combat', event => {
+	// Add custom weapons
+	event.add('kubejs:super_sword')
+})
+```

@@ -1,0 +1,32 @@
+# Info
+
+Invoked every server tick (20 times per second).
+
+>>> warning
+This event fires very frequently. Be careful with performance-heavy operations!
+<<<
+
+# Available Event Fields
+
+- `event.server` - The Minecraft server instance
+
+# Example
+
+```js
+ServerEvents.tick(event => {
+	// Only run every second (20 ticks)
+	if (event.server.tickCount % 20 !== 0) return
+	
+	// Do something every second
+	console.log(`Server tick: ${event.server.tickCount}`)
+})
+
+// Run something every minute
+ServerEvents.tick(event => {
+	if (event.server.tickCount % 1200 !== 0) return
+	
+	// Broadcast server status
+	let playerCount = event.server.playerList.playerCount
+	event.server.tell(`There are ${playerCount} players online!`)
+})
+```

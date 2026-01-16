@@ -1,0 +1,12 @@
+# Info
+
+Invoked to register custom recipe types and schemas. This is advanced functionality for creating new recipe types.
+
+# Example
+
+```js
+ServerEvents.recipeTypeRegistry(event => {
+	// Register custom recipe schema
+	// This is advanced functionality - see the KubeJS documentation for details
+})
+```

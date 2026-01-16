@@ -1,0 +1,37 @@
+# Info
+
+Invoked to register custom content like blocks, items, fluids, etc. This is the main event for adding new content.
+
+For detailed registry documentation, see [[/tutorials/block-registry]] and [[/tutorials/item-registry]].
+
+# Available Registries
+
+- `block` - Register custom blocks
+- `item` - Register custom items
+- `fluid` - Register custom fluids
+- `sound_event` - Register custom sounds
+- `mob_effect` - Register custom potion effects
+- `potion` - Register custom potions
+- `creative_mode_tab` - Register custom creative tabs
+- And more...
+
+# Example
+
+```js
+// Register items
+StartupEvents.registry('item', event => {
+	event.create('my_item')
+	event.create('my_sword', 'sword')
+})
+
+// Register blocks
+StartupEvents.registry('block', event => {
+	event.create('my_block')
+	event.create('my_slab', 'slab')
+})
+
+// Register fluids
+StartupEvents.registry('fluid', event => {
+	event.create('my_fluid')
+})
+```

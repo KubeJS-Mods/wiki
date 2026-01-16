@@ -1,0 +1,40 @@
+# Info
+
+Invoked when a player right clicks with an item **without targeting anything** (air click).
+
+>>> info
+Not to be confused with `BlockEvents.rightClicked` (clicking on a block) or `ItemEvents.entityInteracted` (clicking on an entity).
+<<<
+
+# Available Event Fields
+
+- `event.player` - The player that clicked with the item
+- `event.hand` - The hand used (`MAIN_HAND` or `OFF_HAND`)
+- `event.item` - The item that was clicked with
+- `event.target` - The ray trace result of the click
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+ItemEvents.rightClicked(event => {
+	console.log(`${event.player.name.string} right clicked with ${event.item.id}`)
+})
+
+// Listen for specific item
+ItemEvents.rightClicked('minecraft:stick', event => {
+	event.player.tell('You waved a stick!')
+})
+
+// Create a custom "wand" effect
+ItemEvents.rightClicked('minecraft:blaze_rod', event => {
+	// Spawn fireballs
+	let fireball = event.level.createEntity('minecraft:small_fireball')
+	fireball.setPos(event.player.x, event.player.y + 1.5, event.player.z)
+	fireball.spawn()
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`.

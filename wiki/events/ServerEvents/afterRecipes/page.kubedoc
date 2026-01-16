@@ -1,0 +1,18 @@
+# Info
+
+Invoked after all recipes have been loaded and processed. This is useful for inspecting the final recipe state or performing post-processing.
+
+# Available Event Fields
+
+- `event.server` - The Minecraft server instance
+- Access to recipe information through the server's recipe manager
+
+# Example
+
+```js
+ServerEvents.afterRecipes(event => {
+	console.log('All recipes have been loaded!')
+	
+	// Log recipe counts or perform analysis
+})
+```

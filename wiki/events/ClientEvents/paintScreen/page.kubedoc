@@ -1,0 +1,17 @@
+# Info
+
+Invoked every frame when rendering the game screen, allowing you to draw custom overlays using the Painter API.
+
+For detailed Painter documentation, see [[/tutorials/painter-api]].
+
+>>> warning
+This event fires every frame (potentially 60+ times per second). Keep drawing operations simple!
+<<<
+
+# Example
+
+```js
+ClientEvents.paintScreen(event => {
+	// Draw custom HUD elements
+})
+```

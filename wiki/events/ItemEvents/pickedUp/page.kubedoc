@@ -1,0 +1,30 @@
+# Info
+
+Invoked when a player picks up an item.
+
+For preventing item pickup, use `ItemEvents.canPickUp` instead.
+
+# Available Event Fields
+
+- `event.player` - The player that picked up the item
+- `event.item` - The item that was picked up
+- `event.itemEntity` - The item entity that was picked up
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+ItemEvents.pickedUp(event => {
+	console.log(`${event.player.name.string} picked up ${event.item.id}`)
+})
+
+// Listen for specific item
+ItemEvents.pickedUp('minecraft:experience_bottle', event => {
+	event.player.tell('You picked up XP bottles!')
+})
+
+// Track item pickups
+ItemEvents.pickedUp('minecraft:diamond', event => {
+	console.log(`Diamond picked up at ${event.player.x}, ${event.player.y}, ${event.player.z}`)
+})
+```

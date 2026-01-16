@@ -1,0 +1,2 @@
+title: "ClientEvents.loggedOut"
+description: "Fired when the client player leaves a world"

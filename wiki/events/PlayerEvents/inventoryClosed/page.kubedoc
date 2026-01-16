@@ -1,0 +1,22 @@
+# Info
+
+Invoked when a player closes a container/inventory screen.
+
+# Available Event Fields
+
+- `event.player` - The player that closed the container
+- `event.inventoryContainer` - The container menu that was closed
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+PlayerEvents.inventoryClosed(event => {
+	console.log(`${event.player.name.string} closed an inventory`)
+})
+
+// Listen for a specific menu type
+PlayerEvents.inventoryClosed('minecraft:crafting', event => {
+	event.player.tell('Done crafting?')
+})
+```

@@ -1,0 +1,26 @@
+# Info
+
+Invoked when a player **first** right clicks with an item. This event only fires on the initial click, not when holding the button down.
+
+This event requires networking and will only fire if the player is connected to a server or in single player.
+
+# Available Event Fields
+
+- `event.player` - The player that clicked with the item
+- `event.hand` - The hand used (`MAIN_HAND` or `OFF_HAND`)
+- `event.item` - The item that was clicked with
+- `event.target` - The ray trace result of the click
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+ItemEvents.firstRightClicked('minecraft:bow', event => {
+	event.player.tell('Starting to draw bow!')
+})
+
+// Track click timing
+ItemEvents.firstRightClicked('minecraft:shield', event => {
+	console.log(`${event.player.name.string} started blocking`)
+})
+```

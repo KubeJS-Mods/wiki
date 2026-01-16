@@ -1,0 +1,21 @@
+# Info
+
+Invoked when a player leaves the server.
+
+# Available Event Fields
+
+- `event.player` - The player that logged out
+- `event.server` - The Minecraft server
+- `event.level` - The level the player was in
+
+# Example
+
+```js
+PlayerEvents.loggedOut(event => {
+	// Broadcast to all players
+	event.server.tell(Text.gray(`${event.player.name.string} has left!`))
+	
+	// Log player's playtime
+	console.log(`${event.player.name.string} disconnected. Stats: ${event.player.stats.get('minecraft:play_time')} ticks played`)
+})
+```

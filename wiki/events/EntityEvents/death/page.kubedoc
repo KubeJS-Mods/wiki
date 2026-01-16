@@ -1,0 +1,37 @@
+# Info
+
+Invoked before a living entity dies.
+
+>>> warning
+You need to set the entity's health to > 0 in addition to cancelling the event to prevent the entity from dying.
+<<<
+
+# Available Event Fields
+
+- `event.entity` - The entity that is dying
+- `event.source` - The damage source that caused the death
+- `event.level` - The level the entity is in
+
+# Example
+
+```js
+EntityEvents.death(event => {
+	console.log(`${event.entity.type} is dying from ${event.source.type}`)
+})
+
+// Prevent specific entity types from dying
+EntityEvents.death('minecraft:villager', event => {
+	event.entity.health = 1
+	event.cancel()
+	event.entity.tell('A villager has been saved!')
+})
+
+// Log all player deaths
+EntityEvents.death('minecraft:player', event => {
+	console.log(`${event.entity.name.string} died from ${event.source.type}`)
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, but you must also restore the entity's health to prevent death.

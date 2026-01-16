@@ -1,0 +1,46 @@
+# Info
+
+Invoked when recipes are being loaded. This is where you add, remove, or modify recipes.
+
+For detailed recipe documentation, see [[/tutorials/recipes]].
+
+# Available Methods
+
+- `event.remove(filter)` - Remove recipes matching the filter
+- `event.shaped(output, pattern, key)` - Add a shaped crafting recipe
+- `event.shapeless(output, ingredients)` - Add a shapeless crafting recipe
+- `event.smelting(output, input)` - Add a furnace recipe
+- `event.blasting(output, input)` - Add a blast furnace recipe
+- `event.smoking(output, input)` - Add a smoker recipe
+- `event.campfireCooking(output, input)` - Add a campfire recipe
+- `event.stonecutting(output, input)` - Add a stonecutting recipe
+- `event.smithing(output, template, base, addition)` - Add a smithing recipe
+- `event.replaceInput(filter, original, replacement)` - Replace ingredients in recipes
+- `event.replaceOutput(filter, original, replacement)` - Replace outputs in recipes
+
+# Example
+
+```js
+ServerEvents.recipes(event => {
+	// Remove a recipe by ID
+	event.remove({ id: 'minecraft:diamond_sword' })
+	
+	// Remove recipes by output
+	event.remove({ output: 'minecraft:oak_planks' })
+	
+	// Add a shaped recipe
+	event.shaped('minecraft:diamond', [
+		'CCC',
+		'CCC',
+		'CCC'
+	], {
+		C: 'minecraft:coal'
+	})
+	
+	// Add a shapeless recipe
+	event.shapeless('minecraft:diamond', ['minecraft:coal', 'minecraft:coal', 'minecraft:coal'])
+	
+	// Add a smelting recipe
+	event.smelting('minecraft:iron_ingot', 'minecraft:raw_iron')
+})
+```

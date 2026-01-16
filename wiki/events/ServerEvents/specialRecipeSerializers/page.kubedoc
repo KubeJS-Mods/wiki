@@ -1,0 +1,14 @@
+# Info
+
+Invoked to register special recipe serializers. Special recipes are dynamic recipes that can't be defined in JSON (like map cloning, firework crafting, etc.).
+
+# Example
+
+```js
+ServerEvents.specialRecipeSerializers(event => {
+	// Hide special recipe from recipe viewers
+	event.ignoreSpecialRecipe('minecraft:crafting_special_armordye')
+	
+	// You can also register custom special recipes here
+})
+```

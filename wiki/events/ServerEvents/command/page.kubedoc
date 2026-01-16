@@ -1,0 +1,28 @@
+# Info
+
+Invoked when a command is executed, allowing you to intercept and modify command behavior.
+
+# Available Event Fields
+
+- `event.commandName` - The name of the command being executed
+- `event.input` - The full command input
+- `event.server` - The Minecraft server
+
+# Example
+
+```js
+ServerEvents.command('give', event => {
+	console.log(`Give command used: ${event.input}`)
+	// You can cancel or modify the command
+})
+
+// Prevent certain commands
+ServerEvents.command('op', event => {
+	event.cancel()
+	console.log('OP command blocked!')
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the command from executing.

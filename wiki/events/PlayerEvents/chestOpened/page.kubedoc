@@ -1,0 +1,28 @@
+# Info
+
+Invoked when a player opens a chest. This is similar to `PlayerEvents.inventoryOpened` but specifically for chests, providing additional chest-specific data.
+
+# Available Event Fields
+
+- `event.player` - The player that opened the chest
+- `event.inventory` - The chest's inventory container
+- `event.block` - The chest block (can be `null` for ender chests or mobile chests)
+- `event.inventoryContainer` - The container menu
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+PlayerEvents.chestOpened(event => {
+	if (event.block) {
+		console.log(`${event.player.name.string} opened a chest at ${event.block.pos}`)
+	}
+})
+
+// Prevent opening trapped chests
+PlayerEvents.chestOpened('minecraft:generic_9x3', event => {
+	if (event.block?.id === 'minecraft:trapped_chest') {
+		event.player.tell('Trapped chests are dangerous!')
+	}
+})
+```

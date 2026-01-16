@@ -1,0 +1,37 @@
+# Info
+
+Invoked during startup to register custom item model properties. This is a **startup** event.
+
+Model properties allow items to have different visual states based on conditions (like the bow drawing animation or durability bar).
+
+# Example
+
+```js
+ItemEvents.modelProperties(event => {
+	// Register a property for custom items
+	event.register('kubejs:my_item', 'kubejs:power_level', (stack, level, entity, seed) => {
+		// Return a value between 0 and 1
+		let nbt = stack.nbt
+		if (nbt && nbt.contains('power')) {
+			return nbt.getInt('power') / 100.0
+		}
+		return 0
+	})
+})
+```
+
+# Using Model Properties
+
+After registering a property, reference it in your item model JSON:
+
+```json
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "kubejs:item/my_item"
+  },
+  "overrides": [
+    { "predicate": { "kubejs:power_level": 0.5 }, "model": "kubejs:item/my_item_charged" }
+  ]
+}
+```

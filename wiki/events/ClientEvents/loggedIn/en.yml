@@ -1,0 +1,2 @@
+title: "ClientEvents.loggedIn"
+description: "Fired when the client player joins a world"

@@ -1,0 +1,20 @@
+# Info
+
+Invoked when a level/dimension is unloaded.
+
+# Available Event Fields
+
+- `event.level` - The level that was unloaded
+
+# Example
+
+```js
+LevelEvents.unloaded(event => {
+	console.log(`Level unloaded: ${event.level.dimension}`)
+})
+
+// Listen for specific dimension
+LevelEvents.unloaded('minecraft:the_end', event => {
+	console.log('The End has been unloaded!')
+})
+```

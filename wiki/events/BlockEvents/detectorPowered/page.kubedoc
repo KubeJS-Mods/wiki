@@ -1,0 +1,25 @@
+# Info
+
+Invoked when a KubeJS detector block becomes powered.
+
+# Available Event Fields
+
+- `event.detectorId` - The id of the detector block when it was registered
+- `event.block` - The detector block (`LevelBlock`)
+- `event.powered` - Always `true` for this event
+- `event.level` - The level where the detector block is located
+
+# Example
+
+```js
+// First, register a detector block in startup scripts
+StartupEvents.registry('block', event => {
+	event.create('my_detector', 'kubejs:detector')
+})
+
+// Listen for when the detector becomes powered
+BlockEvents.detectorPowered('my_detector', event => {
+	console.log('Detector was powered!')
+	// Do something when powered
+})
+```

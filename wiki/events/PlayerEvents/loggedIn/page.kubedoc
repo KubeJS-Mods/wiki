@@ -1,0 +1,27 @@
+# Info
+
+Invoked when a player joins the server.
+
+# Available Event Fields
+
+- `event.player` - The player that logged in
+- `event.server` - The Minecraft server
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+PlayerEvents.loggedIn(event => {
+	// Welcome message
+	event.player.tell('Welcome to the server!')
+	
+	// Broadcast to all players
+	event.server.tell(Text.yellow(`${event.player.name.string} has joined!`))
+	
+	// Give starter items to new players
+	if (!event.player.stages.has('joined_before')) {
+		event.player.give('minecraft:bread', 16)
+		event.player.stages.add('joined_before')
+	}
+})
+```

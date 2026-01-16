@@ -1,0 +1,49 @@
+# Info
+
+There are two entity hurt events:
+
+- `EntityEvents.beforeHurt` - Fires before damage is applied, allowing you to modify or cancel the damage
+- `EntityEvents.afterHurt` - Fires after damage is applied (read-only)
+
+# Available Event Fields
+
+Both events provide:
+- `event.entity` - The entity that was hurt
+- `event.source` - The damage source
+- `event.damage` - The amount of damage
+
+`beforeHurt` also allows:
+- `event.setDamage(float)` - Modify the damage amount
+
+# Example
+
+```js
+// Modify damage before it's applied
+EntityEvents.beforeHurt(event => {
+	// Double all damage
+	event.setDamage(event.damage * 2)
+})
+
+// Reduce damage for specific entity types
+EntityEvents.beforeHurt('minecraft:iron_golem', event => {
+	// Iron golems take half damage
+	event.setDamage(event.damage * 0.5)
+})
+
+// Log damage after it's applied
+EntityEvents.afterHurt(event => {
+	console.log(`${event.entity.type} took ${event.damage} damage from ${event.source.type}`)
+})
+
+// Prevent damage from certain sources
+EntityEvents.beforeHurt(event => {
+	if (event.source.type === 'fall') {
+		event.setDamage(0)
+		event.cancel()
+	}
+})
+```
+
+# Cancellation
+
+`EntityEvents.beforeHurt` can be cancelled using `event.cancel()`, which will prevent the damage entirely.

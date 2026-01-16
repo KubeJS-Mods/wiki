@@ -1,0 +1,23 @@
+# Info
+
+Invoked every client tick (20 times per second).
+
+>>> warning
+This event fires very frequently. Be careful with performance-heavy operations!
+<<<
+
+# Available Event Fields
+
+- `event.player` - The client player
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+ClientEvents.tick(event => {
+	// Only run every second (20 ticks)
+	if (event.player.age % 20 !== 0) return
+	
+	// Do something every second
+})
+```

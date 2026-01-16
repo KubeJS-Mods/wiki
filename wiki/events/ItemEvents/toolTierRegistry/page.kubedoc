@@ -1,0 +1,39 @@
+# Info
+
+Invoked during startup to register custom tool tiers. This is a **startup** event.
+
+Tool tiers define the mining level, durability, speed, and other properties for tools.
+
+# Example
+
+```js
+ItemEvents.toolTierRegistry(event => {
+	// Register a new tool tier
+	event.add('kubejs:super_tier', tier => {
+		tier.uses = 5000 // Durability
+		tier.speed = 15 // Mining speed
+		tier.attackDamageBonus = 5 // Bonus attack damage
+		tier.enchantmentValue = 25 // Enchantability
+		tier.repairIngredient = 'minecraft:netherite_ingot'
+	})
+})
+```
+
+# Tier Properties
+
+- `uses` - Durability of tools with this tier
+- `speed` - Mining speed
+- `attackDamageBonus` - Bonus attack damage
+- `enchantmentValue` - How enchantable the tier is
+- `repairIngredient` - Item used to repair tools in an anvil
+- `incorrectBlocksForDrops` - Tag of blocks that don't drop items when mined (mining level)
+
+# Using Custom Tiers
+
+After registering a tier, use it when creating tools:
+
+```js
+StartupEvents.registry('item', event => {
+	event.create('super_pickaxe', 'pickaxe').tier('kubejs:super_tier')
+})
+```

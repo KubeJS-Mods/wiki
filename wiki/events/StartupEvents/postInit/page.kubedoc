@@ -1,0 +1,11 @@
+# Info
+
+Invoked after startup initialization is complete. This fires after `StartupEvents.init` and after registry events.
+
+# Example
+
+```js
+StartupEvents.postInit(event => {
+	console.log('KubeJS initialization complete!')
+})
+```

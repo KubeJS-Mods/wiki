@@ -1,0 +1,17 @@
+# Info
+
+Invoked when the client player joins a world (either single player or multiplayer).
+
+# Available Event Fields
+
+- `event.player` - The client player that logged in
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+ClientEvents.loggedIn(event => {
+	console.log('Joined world!')
+	event.player.tell('Welcome!')
+})
+```

@@ -1,0 +1,27 @@
+# Info
+
+Invoked when a player takes an item from a furnace output slot (when the item is smelted).
+
+# Available Event Fields
+
+- `event.player` - The player that smelted the item
+- `event.item` - The item that was smelted
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+ItemEvents.smelted(event => {
+	console.log(`${event.player.name.string} smelted ${event.item.id}`)
+})
+
+// Listen for specific smelted item
+ItemEvents.smelted('minecraft:iron_ingot', event => {
+	event.player.tell('Iron is ready!')
+})
+
+// Give bonus XP for smelting
+ItemEvents.smelted('minecraft:gold_ingot', event => {
+	event.player.giveExperiencePoints(10)
+})
+```

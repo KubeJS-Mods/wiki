@@ -1,0 +1,35 @@
+# Info
+
+Invoked when a block is destroyed by a player.
+
+# Available Event Fields
+
+- `event.player` - The player that broke the block
+- `event.block` - The block that was broken (`LevelBlock`)
+- `event.level` - The level where the block was broken
+
+# Example
+
+```js
+BlockEvents.broken(event => {
+	// Log when any block is broken
+	console.log(`${event.player.name.string} broke ${event.block.id}`)
+})
+
+// Listen for a specific block
+BlockEvents.broken('minecraft:diamond_ore', event => {
+	event.player.tell('You found diamonds!')
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the block from being broken.
+
+```js
+BlockEvents.broken('minecraft:bedrock', event => {
+	// Prevent bedrock from being broken
+	event.cancel()
+	event.player.tell('You cannot break bedrock!')
+})
+```

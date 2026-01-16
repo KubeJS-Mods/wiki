@@ -1,0 +1,2 @@
+title: "ServerEvents.loaded"
+description: "Fired when the server finishes loading"

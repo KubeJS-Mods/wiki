@@ -1,0 +1,36 @@
+# Info
+
+Invoked when a player sends a chat message.
+
+# Available Event Fields
+
+- `event.player` - The player that sent the message
+- `event.username` - The player's username
+- `event.message` - The raw message content (string)
+- `event.component` - The message as a `Component` (can be modified)
+- `event.server` - The Minecraft server
+
+# Example
+
+```js
+PlayerEvents.chat(event => {
+	// Log all chat messages
+	console.log(`[Chat] ${event.username}: ${event.message}`)
+	
+	// Simple word filter
+	if (event.message.includes('bad_word')) {
+		event.cancel()
+		event.player.tell(Text.red('Watch your language!'))
+	}
+})
+
+// Modify chat messages
+PlayerEvents.chat(event => {
+	// Add a prefix to all messages
+	event.component = Text.of('[Server] ').append(event.component)
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the message from being sent.

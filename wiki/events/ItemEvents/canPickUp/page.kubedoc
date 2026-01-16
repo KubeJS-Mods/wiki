@@ -1,0 +1,32 @@
+# Info
+
+Invoked when a player is about to pick up an item, allowing you to prevent the pickup.
+
+# Available Event Fields
+
+- `event.player` - The player trying to pick up the item
+- `event.item` - The item being picked up
+- `event.itemEntity` - The item entity being picked up
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+// Prevent picking up specific items
+ItemEvents.canPickUp('minecraft:poisonous_potato', event => {
+	event.cancel()
+	event.player.tell("You can't pick up poisonous potatoes!")
+})
+
+// Only allow certain players to pick up items
+ItemEvents.canPickUp('minecraft:nether_star', event => {
+	if (!event.player.stages.has('boss_slayer')) {
+		event.cancel()
+		event.player.tell('Only boss slayers can pick up Nether Stars!')
+	}
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the item from being picked up.

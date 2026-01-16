@@ -1,0 +1,33 @@
+# Info
+
+Invoked when a player drops an item.
+
+# Available Event Fields
+
+- `event.player` - The player that dropped the item
+- `event.item` - The item that was dropped
+- `event.itemEntity` - The item entity that was spawned
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+ItemEvents.dropped(event => {
+	console.log(`${event.player.name.string} dropped ${event.item.id}`)
+})
+
+// Listen for specific item
+ItemEvents.dropped('minecraft:diamond', event => {
+	event.player.tell('Be careful with those diamonds!')
+})
+
+// Prevent dropping certain items
+ItemEvents.dropped('minecraft:totem_of_undying', event => {
+	event.cancel()
+	event.player.tell("You can't drop your totem!")
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the item from being dropped.

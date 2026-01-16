@@ -1,0 +1,46 @@
+# Info
+
+Invoked when an entity eats food.
+
+# Available Event Fields
+
+- `event.entity` - The entity that ate the food
+- `event.item` - The food item that was eaten
+- `event.level` - The level the entity is in
+
+# Example
+
+```js
+ItemEvents.foodEaten(event => {
+	if (event.entity.player) {
+		console.log(`${event.entity.name.string} ate ${event.item.id}`)
+	}
+})
+
+// Listen for specific food
+ItemEvents.foodEaten('minecraft:golden_apple', event => {
+	if (event.entity.player) {
+		event.entity.tell('You feel powerful!')
+	}
+})
+
+// Add effects when eating certain foods
+ItemEvents.foodEaten('minecraft:pufferfish', event => {
+	// Already poisonous, but let's add more!
+	event.entity.potionEffects.add('minecraft:blindness', 200, 0)
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the food from being consumed.
+
+```js
+// Prevent eating rotten flesh
+ItemEvents.foodEaten('minecraft:rotten_flesh', event => {
+	if (event.entity.player) {
+		event.cancel()
+		event.entity.tell("That's not healthy!")
+	}
+})
+```

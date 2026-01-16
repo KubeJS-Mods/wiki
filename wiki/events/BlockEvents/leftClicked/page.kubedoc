@@ -1,0 +1,36 @@
+# Info
+
+Invoked when a player left clicks on a block.
+
+# Available Event Fields
+
+- `event.player` - The player that left clicked the block
+- `event.block` - The block that was left clicked (`LevelBlock`)
+- `event.item` - The item held in the hand
+- `event.facing` - The face of the block that was clicked (`Direction`)
+- `event.level` - The level where the block is located
+
+# Example
+
+```js
+BlockEvents.leftClicked(event => {
+	console.log(`${event.player.name.string} left clicked ${event.block.id}`)
+})
+
+// Listen for a specific block
+BlockEvents.leftClicked('minecraft:note_block', event => {
+	event.player.tell('You hit a note block!')
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the default left click interaction.
+
+```js
+BlockEvents.leftClicked('minecraft:spawner', event => {
+	// Prevent spawner from being attacked
+	event.cancel()
+	event.player.tell('You cannot break spawners this way!')
+})
+```

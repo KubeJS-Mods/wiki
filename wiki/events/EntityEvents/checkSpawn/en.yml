@@ -1,0 +1,2 @@
+title: "EntityEvents.checkSpawn"
+description: "Fired before an entity spawns to check if the spawn is allowed"

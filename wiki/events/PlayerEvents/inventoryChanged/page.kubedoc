@@ -1,0 +1,31 @@
+# Info
+
+Invoked when a player's inventory changes (item added, removed, or modified).
+
+# Available Event Fields
+
+- `event.player` - The player whose inventory changed
+- `event.item` - The item that was changed
+- `event.slot` - The slot index that was changed
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+PlayerEvents.inventoryChanged(event => {
+	console.log(`Slot ${event.slot} changed to ${event.item.id}`)
+})
+
+// Listen for a specific item
+PlayerEvents.inventoryChanged('minecraft:diamond', event => {
+	event.player.tell(`You now have diamonds in slot ${event.slot}!`)
+})
+
+// Track when player picks up certain items
+PlayerEvents.inventoryChanged('minecraft:nether_star', event => {
+	if (!event.item.isEmpty()) {
+		event.player.tell('You picked up a Nether Star!')
+		event.server.tell(Text.gold(`${event.player.name.string} obtained a Nether Star!`))
+	}
+})
+```

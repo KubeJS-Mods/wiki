@@ -1,0 +1,27 @@
+# Info
+
+Invoked every tick for each loaded level/dimension.
+
+>>> warning
+This event fires very frequently (20 times per second per dimension). Be careful with performance-heavy operations!
+<<<
+
+# Available Event Fields
+
+- `event.level` - The level being ticked
+
+# Example
+
+```js
+LevelEvents.tick(event => {
+	// Only run every second (20 ticks)
+	if (event.level.time % 20 !== 0) return
+	
+	console.log(`${event.level.dimension} tick: ${event.level.time}`)
+})
+
+// Listen for specific dimension
+LevelEvents.tick('minecraft:the_nether', event => {
+	// Do something in the Nether every tick
+})
+```

@@ -1,0 +1,36 @@
+# Info
+
+Invoked when a block is placed in the world.
+
+# Available Event Fields
+
+- `event.player` - The entity that placed the block (can be `null` if placed by a dispenser or other mechanism)
+- `event.block` - The block that was placed (`LevelBlock`)
+- `event.level` - The level where the block was placed
+
+# Example
+
+```js
+BlockEvents.placed(event => {
+	// Log when any block is placed
+	console.log(`Block placed: ${event.block.id}`)
+})
+
+// Listen for a specific block
+BlockEvents.placed('minecraft:stone', event => {
+	console.log('Stone was placed!')
+	event.player?.tell('You placed a stone block!')
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the block from being placed.
+
+```js
+BlockEvents.placed('minecraft:tnt', event => {
+	// Prevent TNT from being placed
+	event.cancel()
+	event.player?.tell('TNT placement is disabled!')
+})
+```

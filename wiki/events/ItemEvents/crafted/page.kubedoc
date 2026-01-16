@@ -1,0 +1,29 @@
+# Info
+
+Invoked when a player crafts an item.
+
+# Available Event Fields
+
+- `event.player` - The player that crafted the item
+- `event.item` - The item that was crafted
+- `event.inventory` - The crafting inventory
+- `event.level` - The level the player is in
+
+# Example
+
+```js
+ItemEvents.crafted(event => {
+	console.log(`${event.player.name.string} crafted ${event.item.id}`)
+})
+
+// Listen for specific item
+ItemEvents.crafted('minecraft:enchanting_table', event => {
+	event.player.tell('You crafted an enchanting table!')
+})
+
+// Give bonus items when crafting
+ItemEvents.crafted('minecraft:cake', event => {
+	event.player.give('minecraft:sugar', 3)
+	event.player.tell('Bonus sugar for baking!')
+})
+```

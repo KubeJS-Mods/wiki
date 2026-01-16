@@ -1,0 +1,18 @@
+# Info
+
+Invoked when the server is stopping/unloading.
+
+# Available Event Fields
+
+- `event.server` - The Minecraft server instance
+
+# Example
+
+```js
+ServerEvents.unloaded(event => {
+	console.log('Server is stopping!')
+	
+	// Perform cleanup tasks
+	// Note: Be quick, the server is shutting down
+})
+```

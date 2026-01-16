@@ -1,0 +1,16 @@
+# Info
+
+Invoked when rendering the left side of the F3 debug screen, allowing you to add custom debug lines.
+
+# Available Methods
+
+- `event.add(text)` - Add a line to the debug screen
+
+# Example
+
+```js
+ClientEvents.leftDebugInfo(event => {
+	event.add('Custom Info: Hello!')
+	event.add(`Player Position: ${Math.floor(event.player.x)}, ${Math.floor(event.player.y)}, ${Math.floor(event.player.z)}`)
+})
+```

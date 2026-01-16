@@ -1,0 +1,2 @@
+title: "BlockEvents.detectorChanged"
+description: "Fired when a KubeJS detector block receives a block update"

@@ -1,0 +1,41 @@
+# Info
+
+Invoked right before an explosion happens, allowing you to modify or cancel it.
+
+# Available Event Fields
+
+- `event.level` - The level where the explosion is occurring
+- `event.position` - The position of the explosion (`Vec3`)
+- `event.x`, `event.y`, `event.z` - The coordinates of the explosion
+- `event.block` - The block at the explosion center
+- `event.exploder` - The entity that caused the explosion (can be `null`)
+- `event.size` - The size/radius of the explosion (can be modified)
+
+# Example
+
+```js
+LevelEvents.beforeExplosion(event => {
+	console.log(`Explosion at ${event.x}, ${event.y}, ${event.z} with size ${event.size}`)
+})
+
+// Reduce all explosion sizes
+LevelEvents.beforeExplosion(event => {
+	event.size = event.size * 0.5
+})
+
+// Prevent explosions in certain areas
+LevelEvents.beforeExplosion(event => {
+	if (event.y > 100) {
+		event.cancel()
+	}
+})
+
+// Listen for specific dimension
+LevelEvents.beforeExplosion('minecraft:overworld', event => {
+	// Only affects overworld explosions
+})
+```
+
+# Cancellation
+
+This event can be cancelled using `event.cancel()`, which will prevent the explosion entirely.

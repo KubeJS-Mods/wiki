@@ -80,6 +80,19 @@ Removes a specified `tag` from the entity.
 
 ---
 
+### `getEncodeId`
+
+```js
+entity.getEncodeId()
+entity.encodeId // read-only bean
+```
+
+**Return value**
+If the entity can be serialized, returns a string representing the resource location of the entity.
+If it can't, returns `[js]null`.
+
+---
+
 ## Position
 
 ### `setPos`
@@ -159,7 +172,7 @@ Sets the position of the entity (x, y, z) and its facing direction (yaw and pitc
 
 **Parameters**
 - `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity. 
-- `[js]pitch`, `[js]yaw` {optional}: The new facing direction of the entity.
+- `[js]pitch`, `[js]yaw` {optional}: The new pitch and yaw of the entity, in degrees.
 
 **Return value**
 None (`[js]undefined`).
@@ -175,7 +188,7 @@ entity.absRotateTo(pitch, yaw)
 Sets the entity's facing direction (yaw and pitch) while clamping the entity's yaw and pitch to valid values, that is - pitch must be within range `<0, 360)`, yaw must be within range `<​-90, 90>`.
 
 **Parameters**
-- `[js]pitch`, `[js]yaw`: The new facing direction of the entity.
+- `[js]pitch`, `[js]yaw`: The new pitch and yaw of the entity, in degrees.
 
 **Return value**
 None (`[js]undefined`).
@@ -187,37 +200,66 @@ None (`[js]undefined`).
 ```js
 entity.moveTo(positionVector)
 entity.moveTo(x, y, z)
-entity.moveTo(blockPos, pitch, yaw)
-entity.moveTo(positionVector, pitch, yaw)
+entity['moveTo(net.minecraft.core.BlockPos,float,float)'](blockPos, pitch, yaw)
+entity['moveTo(net.minecraft.world.phys.Vec3,float,float)'](positionVector, pitch, yaw)
 entity.moveTo(x, y, z, pitch, yaw)
 ```
 
 Sets the entity's position and facing direction.
 
->>>warn
-Usage of the following overloads:
-```js
-entity.moveTo(blockPos, pitch, yaw)
-entity.moveTo(positionVector, pitch, yaw)
-```
-using a 3-element JS array like `[js]\[64, 50, -20\]`, [[/ref/utils/Vec3|`Vec3`]] or [[/ref/utils/BlockPos|`BlockPos`]] as a first parameter is ambiguous, as the object can be interpreted as either [[/ref/utils/Vec3|`Vec3`]] or a [[/ref/utils/BlockPos|`BlockPos`]].
-
-In this case use an explicit overload depending on what do you mean:
-```js
-entity['moveTo(net.minecraft.core.BlockPos,float,float)']([64, 50, -20], 90, 0)
-entity['moveTo(net.minecraft.world.phys.Vec3,float,float)']([64, 50, -20], 90, 0)
-```
-<<<
 **Parameters**
 - `[js]positionVector`: [[/ref/utils/Vec3|`Vec3`]] representing the position to move the entity to. It may be a 3-element JS array representing the vector, like `[js]\[64, 50, -20\]`.
 - `[js]blockPos`: A [[/ref/utils/BlockPos|`BlockPos`]] to move the entity to. The resulting position will be the center of the block. It may be a 3-element JS array representing the block position, like `[js]\[64, 50, -20\]`.
 - `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity. 
-- `[js]pitch`, `[js]yaw`: The new facing direction of the entity.
+- `[js]pitch`, `[js]yaw`: The new pitch and yaw of the entity, in degrees.
 
 **Return value**
 None (`[js]undefined`).
 
 ---
+
+### `addMotion`
+
+>>> info
+This overload has its name changed from vanilla: `push`.
+Other overloads for this method are still referred to as [`push`](#push).
+<<<
+
+```js
+entity.push(x, y, z)
+```
+
+Adds motion to the entity with specified x, y and z velocity.
+
+**Parameters**
+- `[js]x`, `[js]y`, `[js]z`: Speed (in blocks per tick) to apply to the entity in the corresponding coordinates. 
+
+**Return value**
+None (`[js]undefined`).
+
+---
+
+### `push`
+
+>>> info
+There is one more overload: `[js]entity.push(entity)`, but it's used for entity-to-entity interactions and not particularly useful in scripts.
+<<<
+
+```js
+entity.push(vector)
+```
+
+Adds motion to the entity in direction of the provided velocity vector.
+
+**Parameters**
+- `vector`: A [[/ref/utils/Vec3|`Vec3`]] specifying the velocity to apply to the entity. Per-coordinate values of the vector refer to the vector's components (in block per tick). It may be a JS array representing a vector, for example `[js]\[0, 1.5, 2\]`.
+
+**Return value**
+None (`[js]undefined`).
+
+---
+
+
 
 ## Interaction
 
@@ -467,6 +509,56 @@ The entity's gravity state: `[js]true` if it has no gravity, `[js]false` if it h
 
 ---
 
+### `isInLava`
+
+```js
+entity.isInLava()
+entity.inLava // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity is in lava, `[js]false` if it isn't.
+
+---
+
+### `canCollideWith`
+
+```js
+entity.canCollideWith(otherEntity)
+```
+
+**Parameters**
+- `[js]otherEntity`: Another `Entity`.
+
+**Return value**
+`[js]true` if the entity can collide with `[js]otherEntity`, `[js]false` if it can't.
+
+---
+
+### `canBeCollidedWith`
+
+```js
+entity.canBeCollidedWith()
+```
+
+**Return value**
+`[js]true` if the entity can be collided with, `[js]false` if it can't.
+
+---
+
+## Properties
+
+### `fireImmune`
+
+```js
+entity.fireImmune()
+```
+
+**Return value**
+`[js]true` if the entity is immune to fire, `[js]false` if it isn't.
+
+---
+
 ### `canSpawnSprintParticle`
 
 ```js
@@ -478,15 +570,67 @@ entity.canSpawnSprintParticle()
 
 ---
 
-### `isInLava`
+### `canBeHitByProjectile`
 
 ```js
-entity.isInLava()
-entity.inLava // read-only bean
+entity.canBeHitByProjectile()
 ```
 
 **Return value**
-`[js]true` if the entity is in lava, `[js]false` if it isn't.
+`[js]true` if the entity can be hit by projectiles, `[js]false` if it can't.
+
+---
+
+### `isPickable`
+
+```js
+entity.isPickable()
+entity.pickable // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity can be hit.
+More precisely - if it can be hit by projectiles or be targeted by the player crosshairs.
+`[js]false` if it can't be hit.
+
+---
+
+### `isPushable`
+
+```js
+entity.isPushable()
+entity.pushable // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity can be pushed by other entities, `[js]false` if it can't.
+
+---
+
+### `isAlive`
+
+```js
+entity.isAlive()
+entity.alive // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity is alive, `[js]false` if it's dead.
+
+---
+
+### `isInWall`
+
+```js
+entity.isInWall()
+entity.inWall // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity is inside the wall, `[js]false` if it isn't.
+
+---
+
 
 ## Relation
 
@@ -509,6 +653,44 @@ Checks, whether `[js]otherEntity` is within a cylinder-shaped area of `[js]horiz
 `[js]true` if `[js]otherEntity` is within range, `[js]false` otherwise.
 
 ---
+
+### `distanceTo`
+
+```js
+entity.distanceTo(otherEntity)
+```
+
+Returns the distance of `[js]entity` to `[js]otherEntity`.
+
+**Parameters**
+- `[js]otherEntity`: The `Entity` to measure distance to.
+**Return value**
+The distance to `[js]otherEntity`.
+
+---
+
+### `distanceToSqr`
+
+```js
+entity.distanceToSqr(x, y, z)
+entity.distanceToSqr(otherEntity)
+entity.distanceToSqr(positionVector)
+```
+
+Returns the **squared** distance of `[js]entity` to `[js]otherEntity`.
+To get the distance, take a square root of the result using [`Math.sqrt()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt).
+
+In case of sorting entities by distance, you can leave the squared distance as-is.
+
+**Parameters**
+- `[js]x`, `[js]y`, `[js]z`: The coordinates of point in 3D space to measure distance to.
+- `[js]otherEntity`: The `Entity` to measure distance to.
+- `[js]positionVector`: [[/ref/utils/Vec3|`Vec3`]] representing the position in 3D space. It may be a 3-element JS array representing the vector, like `[js]\[64, 50, -20\]`.
+**Return value**
+The **square** of distance to `[js]otherEntity` or a point in 3D space.
+
+---
+
 
 ## Removal
 
@@ -540,6 +722,23 @@ None (`[js]undefined`).
 ---
 
 ## Damage
+
+### `hurt`
+
+```js
+entity.hurt(damageSource, amount)
+```
+
+Deals `[js]amount` damage to the `[js]entity`. The type of damage dealt is of the specified `[js]damageSource`.
+
+**Parameters**
+- `[js]damageSource`: The `DamageSource` to apply. It may be a string representing a damage type ID, for example `[js]'minecraft:mob_attack'`.
+- `[js]amount`: The amount of damage to apply.
+
+**Return value**
+`[js]true` if `[js]entity` has been successfully damaged, `[js]false` if the entity did not take any damage.
+
+---
 
 ### `lavaHurt`
 
@@ -624,17 +823,6 @@ Sets the entity's remaining fire ticks to 0, effectively extinguishing it, and p
 
 **Return value**
 None (`[js]undefined`). 
-
----
-
-### `fireImmune`
-
-```js
-entity.fireImmune()
-```
-
-**Return value**
-`[js]true` if the entity is immune to fire, `[js]false` if it isn't.
 
 ---
 
@@ -734,3 +922,29 @@ entity.spectator // read-only bean
 **Return value**
 `[js]true` if the entity is a spectator, `[js]false` otherwise.
 In vanilla, only [[/concepts/entity/Player|`Player`]] instances may be spectators, so for any other entity this will be `[js]false`.
+
+---
+
+### `spawnAtLocation`
+
+```js
+entity['spawnAtLocation(net.minecraft.world.level.ItemLike)'](item)
+entity['spawnAtLocation(net.minecraft.world.level.ItemLike,int)'](item, offsetY)
+entity['spawnAtLocation(net.minecraft.world.item.ItemStack)'](itemStack)
+entity['spawnAtLocation(net.minecraft.world.item.ItemStack,float)'](itemStack, offsetY)
+```
+
+Spawns an item entity at the position of the `[js]entity`, optionally moved up/down by the specified `[js]offsetY`. The spawned item entity will gain random momentum.
+
+**Parameters**
+
+- `[js]item`: Instance of anything that can be represented as an item.
+This includes [[/concepts/block/Block|`Block`]], [[/concepts/item|`Item`]] and anything derived from those classes, like [[/concepts/block/BlockState|`BlockState`]], [[/concepts/item-stack|`ItemStack`]], etc.
+It may be a string representing an item, for example `[js]'minecraft:oak_log'`.
+- `[js]itemStack`: An [[/concepts/item-stack|`ItemStack`]].
+It may be a string representing an item stack, for example `[js]'2x minecraft:oak_log'`.
+- `[js]offsetY` {optional}:
+  - If `[js]item` was specified, it's an **integer** representing the Y offset of the newly spawned item entity relative to the position of `[js]entity`.
+  - If `[js]itemStack` was specified, it's a **floating-point number** representing the Y offset of the newly spawned item entity relative to the position of `[js]entity`.
+**Return value**
+The reference to the [[/concepts/entity/ItemEntity|`ItemEntity`]] spawned.

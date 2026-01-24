@@ -137,7 +137,7 @@ Tries to move the entity by the specified vector, applying various in-world phys
 
 **Parameters**
 - `[js]moverType`: What type of mover caused the movement. It may be a string representing a mover type, that is: one of `[js]'piston'`, `[js]'player'`, `[js]'self'`, `[js]'shulker'`, `[js]'shulker_box'`.
-- `[js]movementVector`: A [[/ref/utils/Vec3|`Vec3`]] which defines the movement vector. It may be an array with three elements specifying respectively x, y and z component, for example `[js]\[0, 1.5, 1\]`.
+- `[js]movementVector`: A {vec3} which defines the movement vector. It may be an array with three elements specifying respectively x, y and z component, for example `[js]\[0, 1.5, 1\]`.
 
 **Return value**
 None (`[js]undefined`).
@@ -154,7 +154,7 @@ Applies `[js]speed` to the entity, in direction of cross product of normalized `
 
 **Parameters**
 - `[js]speed`: Speed (in blocks per tick) to apply.
-- `[js]inputVector`: A [[/ref/utils/Vec3|`Vec3`]] which is the component of the resulting speed vector. If longer than 1, it will be normalized to a vector with length of 1. It may be an array with three elements specifying respectively x, y and z component, for example `[js]\[0, 1.5, 1\]`.
+- `[js]inputVector`: A {vec3} which is the component of the resulting speed vector. If longer than 1, it will be normalized to a vector with length of 1. It may be an array with three elements specifying respectively x, y and z component, for example `[js]\[0, 1.5, 1\]`.
 
 **Return value**
 None (`[js]undefined`).
@@ -208,7 +208,7 @@ entity.moveTo(x, y, z, pitch, yaw)
 Sets the entity's position and facing direction.
 
 **Parameters**
-- `[js]positionVector`: [[/ref/utils/Vec3|`Vec3`]] representing the position to move the entity to. It may be a 3-element JS array representing the vector, like `[js]\[64, 50, -20\]`.
+- `[js]positionVector`: {vec3} representing the position to move the entity to. It may be a 3-element JS array representing the vector, like `[js]\[64, 50, -20\]`.
 - `[js]blockPos`: A [[/ref/utils/BlockPos|`BlockPos`]] to move the entity to. The resulting position will be the center of the block. It may be a 3-element JS array representing the block position, like `[js]\[64, 50, -20\]`.
 - `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity. 
 - `[js]pitch`, `[js]yaw`: The new pitch and yaw of the entity, in degrees.
@@ -226,7 +226,7 @@ Other overloads for this method are still referred to as [`push`](#push).
 <<<
 
 ```js
-entity.push(x, y, z)
+entity.addMotion(x, y, z)
 ```
 
 Adds motion to the entity with specified x, y and z velocity.
@@ -252,14 +252,56 @@ entity.push(vector)
 Adds motion to the entity in direction of the provided velocity vector.
 
 **Parameters**
-- `vector`: A [[/ref/utils/Vec3|`Vec3`]] specifying the velocity to apply to the entity. Per-coordinate values of the vector refer to the vector's components (in block per tick). It may be a JS array representing a vector, for example `[js]\[0, 1.5, 2\]`.
+- `vector`: A {vec3} specifying the velocity to apply to the entity. Per-coordinate values of the vector refer to the vector's components (in block per tick). It may be a 3-element JS array representing a vector, for example `[js]\[0, 1.5, 2\]`.
 
 **Return value**
 None (`[js]undefined`).
 
 ---
 
+### `getLookAngle`
 
+```js
+entity.getLookAngle()
+entity.lookAngle // read-only bean
+```
+
+Gets a 3-dimensional view vector of the entity. Its direction represents the direction the entity is looking at.
+
+**Return value**
+A {vec3} which is a view vector of the entity.
+
+---
+
+### `getForward`
+
+```js
+entity.getForward()
+entity.forward // read-only bean
+```
+
+Gets a 3-dimensional view vector of the entity. Its direction represents the **client-side** direction the entity is looking at. Similar to [`getLookAngle`](#getlookangle), but the resulting vector is calculated using the rotation vector obtained via [`getRotationVector`](#getrotationvector) instead of being calculated directly from entity's rotation.
+
+**Return value**
+A {vec3} which is a view vector of the entity.
+
+---
+
+### `getRotationVector`
+
+```js
+entity.getRotationVector()
+entity.rotationVector // read-only bean
+```
+
+Gets a 2-dimensional rotation vector of the entity. Its `x` component stores entity's pitch, and its `y` component stores entity's yaw.
+
+Note that this is a reverse order from what is seen in F3 debug screen - the debug screen shows player's yaw first, then pitch.
+
+**Return value**
+A {vec2} containing respectively pitch and yaw of the entity.
+
+---
 
 ## Interaction
 
@@ -322,7 +364,7 @@ entity.portalCooldown // bean
 Sets or gets the entity portal cooldown.
 
 **Setter parameter**
-- `cooldown` {optional} - The cooldown in ticks. Defaults to entity's dimension changing delay (`[js]300` in case of most entities, `[js]10` in case of [[concepts/entity/ServerPlayer|`ServerPlayer`]] instances) if not provided.
+- `cooldown` {optional} - The cooldown in ticks. Defaults to entity's [dimension changing delay](#getdimensionchangingdelay) (`[js]300` in case of most entities, `[js]10` in case of [[concepts/entity/ServerPlayer|`ServerPlayer`]] instances) if not provided.
 **Getter return value**
 The entity's portal cooldown, in ticks.
 
@@ -546,6 +588,217 @@ entity.canBeCollidedWith()
 
 ---
 
+### `getDimensionChangingDelay`
+
+```js
+entity.getDimensionChangingDelay()
+entity.dimensionChangingDelay
+```
+
+**Return value**
+The entity's default dimension changing delay, as an integer.
+
+---
+
+### `isOnFire`
+
+```js
+entity.isOnFire()
+entity.onFire // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity is on fire, `[js]false` if it isn't.
+
+---
+
+### `isPassenger`
+
+```js
+entity.isPassenger()
+entity.passenger // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity is mounted on some vehicle, that is - the entity is a passenger of some vehicle, `[js]false` if it isn't.
+
+---
+
+### `isShiftKeyDown`, `setShiftKeyDown`
+```js
+entity.isShiftKeyDown()
+
+entity.setShiftKeyDown(keyDown)
+
+entity.shiftKeyDown // bean
+```
+
+Sets or gets whether the entity presses the "Sneak" key - Shift by default.
+
+**Setter parameter**
+- `[js]keyDown`: Specifies, whether the sneak key is pressed (`[js]true`) or released (`[js]false`). 
+**Getter return value**
+`[js]true` if the "Sneak" key is pressed, `[js]false` if it's released.
+
+---
+
+### `isSteppingCarefully`
+
+```js
+entity.isSteppingCarefully()
+entity.steppingCarefully // read-only bean
+```
+
+Checks if the entity is stepping carefully.
+
+In vanilla, entities that step carefully:
+- won't take damage from stepping on Magma Blocks,
+- won't light up Redstone Ore when stepping on it,
+- won't bounce on Slime Blocks,
+- won't crack Turtle Eggs,
+- won't trigger vibrations that could be picked up by Sculk Sensor, Sculk Shrieker or a Warden.
+
+By default, all entities that [press the "Sneak" key](#isshiftkeydown-setshiftkeydown) are considered to be stepping carefully, but Cats and Ocelots will step carefully if they [are crouching](#iscrouching) in addition to the previous rule.
+
+**Return value**
+`[js]true` if the entity is stepping carefully, `[js]false` if it isn't.
+
+---
+
+### `isSuppressingBounce`
+
+```js
+entity.isSuppressingBounce()
+entity.suppressingBounce // read-only bean
+```
+
+Checks if the entity is suppressing bounces.
+
+In vanilla, entities that suppress bounces won't bounce on bouncy blocks, like Slime Blocks or Beds.
+
+By default, all entities that [press the "Sneak" key](#isshiftkeydown-setshiftkeydown) are considered to be suppressing bounces.
+
+**Return value**
+`[js]true` if the entity is suppressing bounces, `[js]false` if it isn't.
+
+---
+
+### `isDiscrete`
+
+```js
+entity.isDiscrete()
+entity.discrete // read-only bean
+```
+
+Checks if the entity is considered discrete / sneaky.
+
+In vanilla, discrete entities hide their name tags behind blocks. Foxes won't avoid (run away from) discrete players.
+
+By default, all entities that [press the "Sneak" key](#isshiftkeydown-setshiftkeydown) are considered to be discrete.
+
+**Return value**
+`[js]true` if the entity is considered discrete, `[js]false` if it isn't.
+
+---
+
+### `isDescending`
+
+```js
+entity.isDescending()
+entity.descending // read-only bean
+```
+
+Checks if the entity is descending.
+
+By default, all entities that [press the "Sneak" key](#isshiftkeydown-setshiftkeydown) are considered to be descending.
+
+**Return value**
+`[js]true` if the entity is considered to be descending, `[js]false` if it isn't.
+
+---
+
+### `isSprinting`, `setSprinting`
+```js
+entity.isSprinting()
+
+entity.setSprinting(sprinting)
+
+entity.sprinting // bean
+```
+
+Sets or gets whether the entity is sprinting.
+
+**Setter parameter**
+- `[js]sprinting`: `[js]true` if the entity should start sprinting, `[js]false` if the entity should stop sprinting.
+**Getter return value**
+`[js]true` if the entity is sprinting, `[js]false` if it isn't sprinting.
+
+---
+
+### `isSwimming`, `setSwimming`
+```js
+entity.isSwimming()
+
+entity.setSwimming(swimming)
+
+entity.swimming // bean
+```
+
+Sets or gets whether the entity is swimming.
+
+**Setter parameter**
+- `[js]swimming`: `[js]true` if the entity should start swimming, `[js]false` if the entity should stop swimming.
+**Getter return value**
+`[js]true` if the entity is swimming, `[js]false` if it isn't swimming.
+
+---
+
+### `isVisuallySwimming`
+
+```js
+entity.isVisuallySwimming()
+entity.visuallySwimming // read-only bean
+```
+
+Checks if the entity is visually swimming.
+
+By default, entities are visually swimming if they are in the `SWIMMING` pose, but entities may override this behavior. For example, Drowned are visually swimming if they are [actually swimming](#isswimming-setswimming).
+
+**Return value**
+`[js]true` if the entity is visually swimming, `[js]false` if it isn't.
+
+---
+
+### `isVisuallyCrawling`
+
+```js
+entity.isVisuallyCrawling()
+entity.visuallyCrawling // read-only bean
+```
+
+Checks if the entity is visually crawling.
+
+By default, entities are visually crawling if they are [visually swimming](#isvisuallyswimming), but they are **not** in water nor in any liquid the entity can swim in.
+
+**Return value**
+`[js]true` if the entity is visually crawling, `[js]false` if it isn't.
+
+---
+
+### `isOnRails`
+
+```js
+entity.isOnRails()
+entity.onRails // read-only bean
+```
+
+**Return value**
+Always returns `[js]false` if the entity is not a Minecart.
+If the entity is a Minecart, returns `[js]true` if the minecart is on rails, `[js]false` if it isn't.
+
+---
+
+
 ## Properties
 
 ### `fireImmune`
@@ -631,6 +884,145 @@ entity.inWall // read-only bean
 
 ---
 
+### `isVehicle`
+
+```js
+entity.isVehicle()
+entity.vehicle // read-only bean
+```
+
+**Return value**
+`[js]true` if the entity is a vehicle, `[js]false` if it isn't.
+
+---
+
+### `dismountsUnderwater`
+
+```js
+entity.dismountsUnderwater()
+```
+
+Checks if the entity will dismount its passengers when fully submerged.
+
+By default, these are all entities which are a part of `[js]'minecraft:dismounts_underwater'` entity type tag.
+
+In vanilla, all rideable animals except Skeleton Horses possess this tag.
+
+**Return value**
+`[js]true` if the entity will dismount its passengers underwater, `[js]false` if it won't.
+
+---
+
+### `canControlVehicle`
+
+```js
+entity.canControlVehicle()
+```
+
+Checks if the entity can control a vehicle if the entity is a passenger of such vehicle.
+
+By default, all entities can control vehicles, except those with `[js]'minecraft:non_controlling_rider'` entity type tag, which in vanilla contains Slimes and Magma Cubes.
+
+**Return value**
+`[js]true` if the entity can control vehicles, `[js]false` if it can't.
+
+---
+
+### `setGlowing`
+
+>>> info
+This method has its name changed from vanilla: `setGlowingTag`.
+<<<
+
+```js
+entity.setGlowing()
+entity.glowing // write-only bean
+```
+
+Sets the glowing state of the entity on both client and server side.
+
+>>> warn
+The `[js]entity.glowing` bean is **write-only**. Attempting to read it will result in `[js]undefined`.
+
+```js
+const glowing = entity.glowing
+console.log(glowing) // undefined
+```
+
+To read, whether the entity is glowing, use [`hasGlowingTag`](#hasglowingtag) or [`isCurrentlyGlowing`](#iscurrentlyglowing).
+<<<
+
+**Parameters**
+
+- `[js]glowing`: A boolean value representing the new glowing state of the entity. `[js]true` will make the entity glow, `[js]false` will make it no longer glow.
+
+**Return value**
+None (`[js]undefined`).
+
+---
+
+### `hasGlowingTag`
+
+```js
+entity.hasGlowingTag()
+```
+
+Gets the server-side glowing state of the entity.
+
+**Return value**
+`[js]true` if the entity is glowing server-side, `[js]false` if it isn't.
+
+---
+
+### `isCurrentlyGlowing`
+
+```js
+entity.isCurrentlyGlowing()
+entity.currentlyGlowing // read-only bean
+```
+
+Gets the client or server side glowing state of the entity, depending on the side the current [[/concepts/level|`Level`]] is in.
+
+**Return value**
+`[js]true` if the entity is glowing, `[js]false` if it isn't.
+
+---
+
+### `isInvisible`, `setInvisible`
+```js
+entity.isInvisible()
+
+entity.setInvisible(invisible)
+
+entity.invisible // bean
+```
+
+Sets or gets whether the entity is invisible.
+
+**Setter parameter**
+- `[js]invisible`: `[js]true` if the entity should become invisible, `[js]false` if the entity should stop being invisible.
+**Getter return value**
+`[js]true` if the entity is invisible, `[js]false` if it isn't invisible.
+
+---
+
+### `isInvisibleTo`
+
+```js
+entity.isInvisibleTo(player)
+```
+
+Checks, whether the `[js]entity` is invisible to the provided `[js]player`.
+
+Similar to [`isInvisible`](#isinvisible-setinvisible), except in the following cases:
+- Spectators can see invisible entities.
+- Teammates that are on a team with the `seeFriendlyInvisibles` property set to `true` can see each other, even if invisible.
+
+**Parameters**
+- `[js]player`: A [[/concepts/entity/Player|`Player`]].
+
+**Return value**
+`[js]true` if the entity is invisible to the provided `[js]player`, `[js]false` if it is visible.
 
 ## Relation
 
@@ -685,7 +1077,7 @@ In case of sorting entities by distance, you can leave the squared distance as-i
 **Parameters**
 - `[js]x`, `[js]y`, `[js]z`: The coordinates of point in 3D space to measure distance to.
 - `[js]otherEntity`: The `Entity` to measure distance to.
-- `[js]positionVector`: [[/ref/utils/Vec3|`Vec3`]] representing the position in 3D space. It may be a 3-element JS array representing the vector, like `[js]\[64, 50, -20\]`.
+- `[js]positionVector`: {vec3} representing the position in 3D space. It may be a 3-element JS array representing the vector, like `[js]\[64, 50, -20\]`.
 **Return value**
 The **square** of distance to `[js]otherEntity` or a point in 3D space.
 
@@ -855,7 +1247,48 @@ If the entity is a vehicle, it ejects all of its passengers.
 If the entity is a passenger, it dismounts from the vehicle.
 
 **Return value**
-None (`[js]undefined`). 
+None (`[js]undefined`).
+
+---
+
+### `startRiding`
+```js
+entity.startRiding(vehicle)
+entity.startRiding(vehicle, isForced)
+```
+
+Tries to mount the `[js]entity` on a `[js]vehicle`.
+
+**Parameters**
+- `[js]vehicle`: The `Entity` to start riding on.
+- `[js]isForced` {optional}: Whether the mounting is forced. If `[js]false`, the entity will only be mounted if the `[js]entity` can ride vehicles and `[js]vehicle` has room for seating passengers. Defaults to `[js]false` if not provided.
+
+**Return value**
+`[js]true` if the `[js]entity` has been successfully mounted, `[js]false` if it hasn't.
+
+---
+
+### `stopRiding`
+```js
+entity.stopRiding()
+```
+
+Dismounts the `[js]entity` from a vehicle, if entity is riding on one.
+
+**Return value**
+None (`[js]undefined`).
+
+---
+
+### `ejectPassengers`
+```js
+entity.ejectPassengers()
+```
+
+Dismounts all passengers of the `[js]entity`.
+
+**Return value**
+None (`[js]undefined`).
 
 ## Sound related
 

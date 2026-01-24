@@ -2,3 +2,4 @@ title: "Entity"
 description: "Everything any entity can do"
 
 optional: "#[[#c3c7cb;border:1px solid #51565d;font-size:0.8rem;padding:0.2em 0.3em; border-radius: 1em|Optional]]"
+vec3: "[[/ref/utils/Vec3|`Vec3`]]"

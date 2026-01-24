@@ -928,36 +928,26 @@ By default, all entities can control vehicles, except those with `[js]'minecraft
 
 ---
 
-### `setGlowing`
+### `isGlowing`, `setGlowing`
 
 >>> info
-This method has its name changed from vanilla: `setGlowingTag`.
+These methods have their name changed from vanilla: `isCurrentlyGlowing`, `setGlowingTag`.
 <<<
 
 ```js
+entity.isGlowing()
+
 entity.setGlowing()
-entity.glowing // write-only bean
+
+entity.glowing // bean
 ```
 
 Sets the glowing state of the entity on both client and server side.
 
->>> warn
-The `[js]entity.glowing` bean is **write-only**. Attempting to read it will result in `[js]undefined`.
-
-```js
-const glowing = entity.glowing
-console.log(glowing) // undefined
-```
-
-To read, whether the entity is glowing, use [`hasGlowingTag`](#hasglowingtag) or [`isCurrentlyGlowing`](#iscurrentlyglowing).
-<<<
-
-**Parameters**
-
+**Setter parameter**
 - `[js]glowing`: A boolean value representing the new glowing state of the entity. `[js]true` will make the entity glow, `[js]false` will make it no longer glow.
-
-**Return value**
-None (`[js]undefined`).
+**Getter return value**
+`[js]true` if the entity is glowing, `[js]false` if it isn't.
 
 ---
 
@@ -971,20 +961,6 @@ Gets the server-side glowing state of the entity.
 
 **Return value**
 `[js]true` if the entity is glowing server-side, `[js]false` if it isn't.
-
----
-
-### `isCurrentlyGlowing`
-
-```js
-entity.isCurrentlyGlowing()
-entity.currentlyGlowing // read-only bean
-```
-
-Gets the client or server side glowing state of the entity, depending on the side the current [[/concepts/level|`Level`]] is in.
-
-**Return value**
-`[js]true` if the entity is glowing, `[js]false` if it isn't.
 
 ---
 

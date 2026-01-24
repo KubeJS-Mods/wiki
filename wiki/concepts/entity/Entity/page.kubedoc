@@ -1037,28 +1037,63 @@ The distance to `[js]otherEntity`.
 
 ---
 
-### `distanceToSqr`
+### `getDistanceSq`
+
+>>> info
+This overload has its name changed from vanilla: `distanceToSqr`.
+<<<
 
 ```js
-entity.distanceToSqr(x, y, z)
-entity.distanceToSqr(otherEntity)
-entity.distanceToSqr(positionVector)
+entity.getDistanceSq(x, y, z)
 ```
 
-Returns the **squared** distance of `[js]entity` to `[js]otherEntity`.
-To get the distance, take a square root of the result using [`Math.sqrt()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt).
+Returns the **squared** distance of `[js]entity` to a point in 3D space specified by `[js]x`, `[js]y` and `[js]z` coordinates.
 
-In case of sorting entities by distance, you can leave the squared distance as-is.
+In case of sorting entities by distance, sorting by squares of distances is more efficient than sorting by distances, because there's no need to take a square root of the squared distance.
 
 **Parameters**
 - `[js]x`, `[js]y`, `[js]z`: The coordinates of point in 3D space to measure distance to.
-- `[js]otherEntity`: The `Entity` to measure distance to.
-- `[js]positionVector`: {vec3} representing the position in 3D space. It may be a 3-element JS array representing the vector, like `[js]\[64, 50, -20\]`.
 **Return value**
-The **square** of distance to `[js]otherEntity` or a point in 3D space.
+The **square** of distance to a point in 3D space.
 
 ---
 
+### `distanceToEntitySqr`
+
+>>> info
+This overload has its name changed from vanilla: `distanceToSqr`.
+<<<
+
+```js
+entity.distanceToSqr(otherEntity)
+```
+
+Returns the **squared** distance of `[js]entity` to `[js]otherEntity`.
+In case of sorting entities by distance, sorting by squares of distances is more efficient than sorting by distances, because there's no need to take a square root of the squared distance.
+
+**Parameters**
+- `[js]otherEntity`: The `Entity` to measure distance to.
+**Return value**
+The **square** of distance to `[js]otherEntity`.
+
+---
+
+### `distanceToSqr`
+
+```js
+entity.distanceToSqr(positionVector)
+```
+
+Returns the **squared** distance of `[js]entity` to a point in 3D space specified by a given position vector.
+
+In case of sorting entities by distance, sorting by squares of distances is more efficient than sorting by distances, because there's no need to take a square root of the squared distance.
+
+**Parameters**
+- `[js]positionVector`: {vec3} representing the position of a point in 3D space. It may be a 3-element JS array representing the vector, like `[js]\[64, 50, -20\]`.
+**Return value**
+The **square** of distance to a point in 3D space.
+
+---
 
 ## Removal
 
@@ -1091,10 +1126,14 @@ None (`[js]undefined`).
 
 ## Damage
 
-### `hurt`
+### `attack`
+
+>>> info
+This method has its name changed from vanilla: `hurt`.
+<<<
 
 ```js
-entity.hurt(damageSource, amount)
+entity.attack(damageSource, amount)
 ```
 
 Deals `[js]amount` damage to the `[js]entity`. The type of damage dealt is of the specified `[js]damageSource`.

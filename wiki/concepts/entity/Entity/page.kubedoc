@@ -45,11 +45,10 @@ entity.entityType // read-only bean
 **Return value**
 An `EntityType` of the item. 
 
-
 <<<
 
 | <#getEntityType> |
-|[bg=#1F1E21] <#getEntityType-description> |
+|[bg=#00000024] <#getEntityType-description> |
 ---
 
 ### `getTags`

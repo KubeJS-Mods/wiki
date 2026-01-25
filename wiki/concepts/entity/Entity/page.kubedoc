@@ -9,6 +9,13 @@ As it's abstract, it cannot be directly constructed. Other entity classes extend
 
 # Instance methods
 
+>>> #invulnerable-info
+>>> info
+Entities are invulnerable to all damages, if they are removed from the world.
+Entities that are invulnerable to all damages can also be only damaged by void damage or Creative mode players.
+<<<
+<<<
+
 >>> info
 Only a select subset of all public methods will be documented here.
 <<<
@@ -41,6 +48,12 @@ entity.getTags()
 entity.tags // read-only bean
 ```
 
+Gets the entity's entity tags.
+Note that these are **not** entity **type** tags, but entity tags which are strings and can be listed using a command:
+```
+/tag <entity> list
+```
+
 **Return value**
 A [[ref/java/set|Set]] of entity tags, as strings. 
 
@@ -53,6 +66,10 @@ entity.addTag(tag)
 ```
 
 Adds a specified `tag` to the entity.
+Note that this is **not** an entity **type** tag, but entity tag which can be applied to using a command:
+```
+/tag <entity> add <name>
+```
 
 **Parameters**
 
@@ -70,6 +87,10 @@ entity.removeTag(tag)
 ```
 
 Removes a specified `tag` from the entity.
+Note that this is **not** an entity **type** tag, but entity tag which can be removed using a command:
+```
+/tag <entity> remove <name>
+```
 
 **Parameters**
 
@@ -90,6 +111,59 @@ entity.encodeId // read-only bean
 **Return value**
 If the entity can be serialized, returns a string representing the resource location of the entity.
 If it can't, returns `[js]null`.
+
+---
+
+### `getId`, `setId`
+
+```js
+entity.getId()
+
+entity.setId(id)
+
+entity.id // bean
+```
+
+Sets or gets the entity's **network** ID.
+Used internally by network logic to sync entities between client and server.
+
+**Setter parameter**
+- `[js]id`: An integer, which is the new entity's **network** ID.
+
+>>> warn
+The setter shouldn't be used server-side, as entity network IDs are already properly set up there.
+<<<
+
+**Getter return value**
+An integer, which is the entity's **network** ID.
+
+---
+
+### `getName`
+
+```js
+entity.getName()
+entity.name // read-only bean
+```
+
+**Return value**
+
+A text [[/ref/utils/Component|`Component`]] representing the entity's custom name, or type name if a custom name is absent.
+
+---
+
+### `is`
+
+```js
+entity.is(otherEntity)
+```
+
+**Parameters**
+- `[js]otherEntity`: An `Entity`.
+
+**Return value**
+`true` is `[js]entity` and `[js]otherEntity` refer to the same exact object.
+Ender Dragons are composed of `EnderDragonPart` mobs, so `is` will also return `[js]true` if the `EnderDragonPart` is a part of the exact `EnderDragon` provided.
 
 ---
 
@@ -300,6 +374,66 @@ Note that this is a reverse order from what is seen in F3 debug screen - the deb
 
 **Return value**
 A {vec2} containing respectively pitch and yaw of the entity.
+
+---
+
+### `getYHeadRot`, `setYHeadRot`
+
+```js
+entity.getYHeadRot()
+
+entity.setYHeadRot(yHeadRot)
+
+entity.YHeadRot // bean
+```
+
+Sets or gets the entity's head yaw.
+
+Has actual effects only on [[/concepts/entity/LivingEntity|`LivingEntity`]] instances.
+On non-living entities, the setter does nothing, and the getter always returns `[js]0`.
+
+**Setter parameter**
+- `[js]yHeadRot`: A floating point number, which is the new head yaw, in degrees.
+
+**Getter return value**
+A floating point number, which is the entity's head yaw, in degrees.
+
+---
+
+### `setYBodyRot`
+
+```js
+entity.setYBodyRot(yBodyRot)
+entity.YBodyRot // write-only bean
+```
+
+Sets the entity's body yaw.
+
+Has actual effects only on [[/concepts/entity/LivingEntity|`LivingEntity`]] instances.
+On non-living entities, the setter does nothing.
+
+**Parameters**
+- `[js]yBodyRot`: A floating point number, which is the new body yaw, in degrees.
+
+**Return value**
+None (`[js]undefined`).
+
+---
+
+### `copyPosition`
+
+```js
+entity.copyPosition(otherEntity)
+```
+
+Copies the `[js]otherEntity`'s position, yaw and pitch onto the `[js]entity`.
+In other words, it teleports `[js]entity` to `[js]otherEntity` and makes it look at the same direction as `[js]otherEntity`.
+
+**Parameters**
+- `[js]otherEntity`: Another `Entity`.
+
+**Return value**
+None (`[js]undefined`).
 
 ---
 
@@ -848,6 +982,27 @@ More precisely - if it can be hit by projectiles or be targeted by the player cr
 
 ---
 
+### `isAttackable`
+
+```js
+entity.isAttackable()
+entity.attackable // read-only bean
+```
+
+Checks if the entity can be attacked by players.
+Most entities can be attacked, except for the following:
+- arrows,
+- XP orbs,
+- Eyes of Ender,
+- falling blocks,
+- fireworks,
+- [[/concepts/entity/ItemEntity|item entities]].
+
+**Return value**
+`[js]true` if the entity can be attacked by players, `[js]false` if it can't.
+
+---
+
 ### `isPushable`
 
 ```js
@@ -1000,6 +1155,43 @@ Similar to [`isInvisible`](#isinvisible-setinvisible), except in the following c
 **Return value**
 `[js]true` if the entity is invisible to the provided `[js]player`, `[js]false` if it is visible.
 
+---
+
+### `getMaxAirSupply`
+
+```js
+entity.getMaxAirSupply()
+entity.maxAirSupply // read-only bean
+```
+
+Gets the maximum air supply of the entity.
+For most entities, that value is `[js]300`, but there are a few exceptions:
+- Axolotls have a max air supply of `[js]6000`,
+- Dolphins have a max air supply of `[js]4800`.
+
+**Return value**
+An integer, that is the maximum air supply of the entity
+
+---
+
+### `getAirSupply`, `setAirSupply`
+```js
+entity.getAirSupply()
+
+entity.setAirSupply(air)
+
+entity.airSupply // bean
+```
+
+Sets or gets the entity's current air supply.
+
+**Setter parameter**
+- `[js]air`: An integer number, that is the air supply to set.
+**Getter return value**
+An integer, that is the entity's current air supply.
+
+---
+
 ## Relation
 
 ### `closerThan`
@@ -1065,7 +1257,7 @@ This overload has its name changed from vanilla: `distanceToSqr`.
 <<<
 
 ```js
-entity.distanceToSqr(otherEntity)
+entity.distanceToEntitySqr(otherEntity)
 ```
 
 Returns the **squared** distance of `[js]entity` to `[js]otherEntity`.
@@ -1207,10 +1399,14 @@ The entity's remaining fire ticks.
 
 ---
 
-### `clearFire`
+### `extinguish`
+
+>>> info
+This overload has its name changed from vanilla: `clearFire`.
+<<<
 
 ```js
-entity.clearFire()
+entity.extinguish()
 ```
 
 Sets the entity's remaining fire ticks to 0, effectively extinguishing it with no other side effects.
@@ -1226,7 +1422,7 @@ None (`[js]undefined`).
 entity.extinguishFire()
 ```
 
-Sets the entity's remaining fire ticks to 0, effectively extinguishing it, and plays the fire extinguish at the position of the entity.
+Sets the entity's remaining fire ticks to 0, effectively extinguishing it, and plays the fire extinguish sound at the position of the entity.
 
 **Return value**
 None (`[js]undefined`). 
@@ -1248,8 +1444,122 @@ In vanilla, it's called whenever the entity falls.
 
 **Return value**
 `[js]true` if the fall should play a sound when falling on a Honey Block, `[js]false` if it shouldn't.
-In vanilla, the return value is always `[js]false` except for equine (Horses, Donkeys, Mules) and Llamas
+In vanilla, the return value is always `[js]false` except for equine (Horses, Donkeys, Mules) and Llamas.
 
+---
+
+### `getTicksFrozen`, `setTicksFrozen`
+```js
+entity.getTicksFrozen()
+
+entity.setTicksFrozen(ticksFrozen)
+
+entity.ticksFrozen // bean
+```
+
+Sets or gets the entity's current progress on being frozen.
+
+**Setter parameter**
+- `[js]ticksFrozen`: An integer number, that is the amount of ticks the entity is being frozen for to set.
+**Getter return value**
+An integer, that is the current amount of ticks the entity is being frozen for.
+
+---
+
+### `getPercentFrozen`
+
+```js
+entity.getPercentFrozen()
+entity.percentFrozen // read-only bean
+```
+
+**Return value**
+Despite the name, this method returns a float number between 0 and 1 inclusive which is a ratio between [current ticks frozen](#getticksfrozen-setticksfrozen) and [ticks required to freeze](#getticksrequiredtofreeze).
+
+---
+
+### `isFullyFrozen`
+
+```js
+entity.isFullyFrozen()
+entity.fullyFrozen // read-only bean
+```
+
+**Return value**
+A boolean: `[js]true` if the entity is fully frozen (so it starts taking freezing damage), `[js]false` if it isn't.
+
+---
+
+### `getTicksRequiredToFreeze`
+
+```js
+entity.getTicksRequiredToFreeze()
+entity.ticksRequiredToFreeze // read-only bean
+```
+
+Get the amount of ticks required for the entity to be fully frozen.
+In vanilla, this value is `[js]140` for all entities, though modded entities can specify a custom amount of ticks.
+
+**Return value**
+An integer, which is the amount of ticks required for the entity to be fully frozen.
+
+---
+
+### `resetFallDistance`
+
+```js
+entity.resetFallDistance()
+```
+
+Sets the entity's fall distance to 0.
+
+**Return value**
+None (`[js]undefined`). 
+
+---
+
+### `isInvulnerableTo`
+
+```js
+entity.isInvulnerableTo(damageSource)
+```
+
+Checks if the entity is invulnerable to the provided `[js]damageSource`.
+
+<#invulnerable-info>
+
+**Parameters**
+- `[js]damageSource`: A `DamageSource`.
+It may also be:
+- A [[/concepts/entity/LivingEntity|`LivingEntity`]]: Will result in a `[js]'minecraft:mob_attack'` damage sourced from the living entity provided,
+- A [[/concepts/entity/Player|`Player`]]: Will result in a `[js]'minecraft:player_attack'` damage sourced from the player provided,
+- A string representing a damage source, for example `[js]'minecraft:cramming'`.
+
+**Return value**
+`[js]true` if the entity is invulnerable to the provided damage source, `[js]false` if it isn't.
+
+---
+
+### `isInvulnerable`, `setInvulnerable`
+```js
+entity.isInvulnerable()
+
+entity.setInvulnerable(isInvulnerable)
+
+entity.invulnerable // bean
+```
+
+Sets or gets the entity's invulnerability state.
+Corresponds to `Invulnerable` NBT tag.
+
+<#invulnerable-info>
+
+**Setter parameter**
+- `[js]isInvulnerable`: A boolean, which is the entity's new invulnerability state. `[js]true` will make the entity invulnerable to all damage sources, `[js]false` will make it vulnerable again.
+**Getter return value**
+`[js]true` if the entity is invulnerable to all damage sources, `[js]false` if it is vulnerable.
+
+---
 
 ## Vehicle related
 
@@ -1358,6 +1668,58 @@ entity.teamColor // read-only bean
 **Return value**
 The team color as a packed integer, in `0xRRGGBB` format.
 
+---
+
+### `getTeam`
+
+```js
+entity.getTeam()
+entity.team // read-only bean
+```
+
+**Return value**
+The `PlayerTeam` the entity is on if the entity is a teammate of one, or `[js]null` if the entity is not in any team.
+
+---
+
+### `isOnSameTeam`
+
+>>> info
+This overload has its name changed from vanilla: `isAlliedTo`.
+<<<
+
+```js
+entity.isOnSameTeam(otherEntity)
+```
+
+**Parameters**
+- `[js]otherEntity`: Another `Entity`.
+
+**Return value**
+A boolean: `[js]true` if both `entity` and `otherEntity` are on the same team, `[js]false` otherwise.
+
+---
+
+### `isAlliedTo`
+
+```js
+entity.isAlliedTo(team)
+```
+
+**Parameters**
+- `[js]team`: A `Team`. In vanilla, there's only one class that conforms to this abstract class - `PlayerTeam`.
+
+`PlayerTeam` instances can be looked up by name by using a method that exists on `ServerScoreboard`. For example, this is a reference to the `MyTeam` team:
+
+```js
+const myTeam = server.scoreboard.getPlayerTeam("MyTeam")
+```
+
+where `[js]server` is a reference to `MinecraftServer`, for example `[js]event.server` in many server events.
+
+**Return value**
+A boolean: `[js]true` if both `entity` and `otherEntity` are on the same team, `[js]false` otherwise.
+
 ## Other
 
 ### `isSpectator`
@@ -1396,3 +1758,15 @@ It may be a string representing an item stack, for example `[js]'2x minecraft:oa
   - If `[js]itemStack` was specified, it's a **floating-point number** representing the Y offset of the newly spawned item entity relative to the position of `[js]entity`.
 **Return value**
 The reference to the [[/concepts/entity/ItemEntity|`ItemEntity`]] spawned.
+
+---
+
+### `toString`
+
+```js
+entity.toString()
+```
+
+**Return value**
+
+The entity represented as string.

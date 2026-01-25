@@ -24,7 +24,13 @@ In the following examples, `[js]entity` will be referring to the instance of `En
 
 ## Identification
 
+
+
+>>> #getEntityType
 ### `getEntityType`
+<<<
+
+>>> #getEntityType-description
 
 >>> info
 This method has its name changed from vanilla: `getType`.
@@ -39,6 +45,11 @@ entity.entityType // read-only bean
 **Return value**
 An `EntityType` of the item. 
 
+
+<<<
+
+| <#getEntityType> |
+|[bg=#1F1E21] <#getEntityType-description> |
 ---
 
 ### `getTags`
@@ -1529,11 +1540,10 @@ Checks if the entity is invulnerable to the provided `[js]damageSource`.
 <#invulnerable-info>
 
 **Parameters**
-- `[js]damageSource`: A `DamageSource`.
-It may also be:
-- A [[/concepts/entity/LivingEntity|`LivingEntity`]]: Will result in a `[js]'minecraft:mob_attack'` damage sourced from the living entity provided,
-- A [[/concepts/entity/Player|`Player`]]: Will result in a `[js]'minecraft:player_attack'` damage sourced from the player provided,
-- A string representing a damage source, for example `[js]'minecraft:cramming'`.
+- `[js]damageSource`: A `DamageSource`. It may also be:
+  - A [[/concepts/entity/LivingEntity|`LivingEntity`]]: Will result in a `[js]'minecraft:mob_attack'` damage sourced from the living entity provided,
+  - A [[/concepts/entity/Player|`Player`]]: Will result in a `[js]'minecraft:player_attack'` damage sourced from the player provided,
+  - A string representing a damage source, for example `[js]'minecraft:cramming'`.
 
 **Return value**
 `[js]true` if the entity is invulnerable to the provided damage source, `[js]false` if it isn't.

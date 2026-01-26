@@ -47,8 +47,8 @@ An `EntityType` of the item.
 
 <<<
 
-|[emoji=true] <#getEntityType> |
-|[bg=#00000024] <#getEntityType-description> |
+|<#getEntityType> |
+[bg=#00000024]| <#getEntityType-description> |
 ---
 
 ### `getTags`

@@ -43,15 +43,17 @@ entity.entityType // read-only bean
 ```
 
 **Return value**
-An `EntityType` of the item. 
-
-<<<
+An `EntityType` of the item. <<<
 
 |<#getEntityType> |
 |<#getEntityType-description> |
 ---
 
+>>> #getTags
 ### `getTags`
+<<<
+
+>>> #getTags-description
 
 ```js
 entity.getTags()
@@ -66,10 +68,17 @@ Note that these are **not** entity **type** tags, but entity tags which are stri
 
 **Return value**
 A [[ref/java/set|Set]] of entity tags, as strings. 
+<<<
 
+| <#getTags> |
+| <#getTags-description> |
 ---
 
+>>> #addTag
 ### `addTag`
+<<<
+
+>>> #addTag-description
 
 ```js
 entity.addTag(tag)
@@ -87,10 +96,17 @@ Note that this is **not** an entity **type** tag, but entity tag which can be ap
 
 **Return value**
 None (`[js]undefined`). 
+<<<
 
+| <#addTag> |
+| <#addTag-description> |
 ---
 
+>>> #removeTag
 ### `removeTag`
+<<<
+
+>>> #removeTag-description
 
 ```js
 entity.removeTag(tag)
@@ -108,10 +124,17 @@ Note that this is **not** an entity **type** tag, but entity tag which can be re
 
 **Return value**
 `[js]true` if the tag was in set of entity tags, and thus has been successfully removed, `[js]false` otherwise.
+<<<
 
+| <#removeTag> |
+| <#removeTag-description> |
 ---
 
+>>> #getEncodeId
 ### `getEncodeId`
+<<<
+
+>>> #getEncodeId-description
 
 ```js
 entity.getEncodeId()
@@ -121,10 +144,17 @@ entity.encodeId // read-only bean
 **Return value**
 If the entity can be serialized, returns a string representing the resource location of the entity.
 If it can't, returns `[js]null`.
+<<<
 
+| <#getEncodeId> |
+| <#getEncodeId-description> |
 ---
 
-### `getId`, `setId`
+>>> #getIdsetId
+### `getIdsetId`
+<<<
+
+>>> #getIdsetId-description
 
 ```js
 entity.getId()
@@ -146,10 +176,17 @@ The setter shouldn't be used server-side, as entity network IDs are already prop
 
 **Getter return value**
 An integer, which is the entity's **network** ID.
+<<<
 
+| <#getIdsetId> |
+| <#getIdsetId-description> |
 ---
 
+>>> #getName
 ### `getName`
+<<<
+
+>>> #getName-description
 
 ```js
 entity.getName()
@@ -159,10 +196,17 @@ entity.name // read-only bean
 **Return value**
 
 A text [[/ref/utils/Component|`Component`]] representing the entity's custom name, or type name if a custom name is absent.
+<<<
 
+| <#getName> |
+| <#getName-description> |
 ---
 
+>>> #is
 ### `is`
+<<<
+
+>>> #is-description
 
 ```js
 entity.is(otherEntity)
@@ -174,12 +218,19 @@ entity.is(otherEntity)
 **Return value**
 `true` is `[js]entity` and `[js]otherEntity` refer to the same exact object.
 Ender Dragons are composed of `EnderDragonPart` mobs, so `is` will also return `[js]true` if the `EnderDragonPart` is a part of the exact `EnderDragon` provided.
+<<<
 
+| <#is> |
+| <#is-description> |
 ---
 
 ## Position
 
+>>> #setPos
 ### `setPos`
+<<<
+
+>>> #setPos-description
 
 ```js
 entity.setPos(x, y, z)
@@ -191,10 +242,17 @@ Sets the position of the entity (x, y, z) and refreshes its bounding box.
 - `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity. 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#setPos> |
+| <#setPos-description> |
 ---
 
+>>> #turn
 ### `turn`
+<<<
+
+>>> #turn-description
 
 ```js
 entity.turn(pitch, yaw)
@@ -208,10 +266,17 @@ Sets the rotation of the entity (pitch, yaw).
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#turn> |
+| <#turn-description> |
 ---
 
+>>> #move
 ### `move`
+<<<
+
+>>> #move-description
 
 ```js
 entity.move(moverType, movementVector)
@@ -225,10 +290,17 @@ Tries to move the entity by the specified vector, applying various in-world phys
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#move> |
+| <#move-description> |
 ---
 
+>>> #moveRelative
 ### `moveRelative`
+<<<
+
+>>> #moveRelative-description
 
 ```js
 entity.moveRelative(speed, inputVector)
@@ -242,10 +314,17 @@ Applies `[js]speed` to the entity, in direction of cross product of normalized `
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#moveRelative> |
+| <#moveRelative-description> |
 ---
 
+>>> #absMoveTo
 ### `absMoveTo`
+<<<
+
+>>> #absMoveTo-description
 
 ```js
 entity.absMoveTo(x, y, z, pitch, yaw)
@@ -260,10 +339,17 @@ Sets the position of the entity (x, y, z) and its facing direction (yaw and pitc
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#absMoveTo> |
+| <#absMoveTo-description> |
 ---
 
+>>> #absRotateTo
 ### `absRotateTo`
+<<<
+
+>>> #absRotateTo-description
 
 ```js
 entity.absRotateTo(pitch, yaw)
@@ -276,10 +362,17 @@ Sets the entity's facing direction (yaw and pitch) while clamping the entity's y
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#absRotateTo> |
+| <#absRotateTo-description> |
 ---
 
+>>> #moveTo
 ### `moveTo`
+<<<
+
+>>> #moveTo-description
 
 ```js
 entity.moveTo(positionVector)
@@ -299,10 +392,17 @@ Sets the entity's position and facing direction.
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#moveTo> |
+| <#moveTo-description> |
 ---
 
+>>> #addMotion
 ### `addMotion`
+<<<
+
+>>> #addMotion-description
 
 >>> info
 This overload has its name changed from vanilla: `push`.
@@ -320,10 +420,17 @@ Adds motion to the entity with specified x, y and z velocity.
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#addMotion> |
+| <#addMotion-description> |
 ---
 
+>>> #push
 ### `push`
+<<<
+
+>>> #push-description
 
 >>> info
 There is one more overload: `[js]entity.push(entity)`, but it's used for entity-to-entity interactions and not particularly useful in scripts.
@@ -340,10 +447,17 @@ Adds motion to the entity in direction of the provided velocity vector.
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#push> |
+| <#push-description> |
 ---
 
+>>> #getLookAngle
 ### `getLookAngle`
+<<<
+
+>>> #getLookAngle-description
 
 ```js
 entity.getLookAngle()
@@ -354,10 +468,17 @@ Gets a 3-dimensional view vector of the entity. Its direction represents the dir
 
 **Return value**
 A {vec3} which is a view vector of the entity.
+<<<
 
+| <#getLookAngle> |
+| <#getLookAngle-description> |
 ---
 
+>>> #getForward
 ### `getForward`
+<<<
+
+>>> #getForward-description
 
 ```js
 entity.getForward()
@@ -368,10 +489,17 @@ Gets a 3-dimensional view vector of the entity. Its direction represents the **c
 
 **Return value**
 A {vec3} which is a view vector of the entity.
+<<<
 
+| <#getForward> |
+| <#getForward-description> |
 ---
 
+>>> #getRotationVector
 ### `getRotationVector`
+<<<
+
+>>> #getRotationVector-description
 
 ```js
 entity.getRotationVector()
@@ -384,10 +512,17 @@ Note that this is a reverse order from what is seen in F3 debug screen - the deb
 
 **Return value**
 A {vec2} containing respectively pitch and yaw of the entity.
+<<<
 
+| <#getRotationVector> |
+| <#getRotationVector-description> |
 ---
 
+>>> #getYHeadRot-setYHeadRot
 ### `getYHeadRot`, `setYHeadRot`
+<<<
+
+>>> #getYHeadRot`, `setYHeadRot-description
 
 ```js
 entity.getYHeadRot()
@@ -407,10 +542,17 @@ On non-living entities, the setter does nothing, and the getter always returns `
 
 **Getter return value**
 A floating point number, which is the entity's head yaw, in degrees.
+<<<
 
+| <#getYHeadRot-setYHeadRot> |
+| <#getYHeadRot-setYHeadRot-description> |
 ---
 
+>>> #setYBodyRot
 ### `setYBodyRot`
+<<<
+
+>>> #setYBodyRot-description
 
 ```js
 entity.setYBodyRot(yBodyRot)
@@ -427,10 +569,17 @@ On non-living entities, the setter does nothing.
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#setYBodyRot> |
+| <#setYBodyRot-description> |
 ---
 
+>>> #copyPosition
 ### `copyPosition`
+<<<
+
+>>> #copyPosition-description
 
 ```js
 entity.copyPosition(otherEntity)
@@ -444,12 +593,19 @@ In other words, it teleports `[js]entity` to `[js]otherEntity` and makes it look
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#copyPosition> |
+| <#copyPosition-description> |
 ---
 
 ## Interaction
 
+>>> #isColliding
 ### `isColliding`
+<<<
+
+>>> #isColliding-description
 
 ```js
 entity.isColliding(blockPos, blockState)
@@ -463,10 +619,17 @@ Checks, whether the entity is colliding with a given block.
 
 **Return value**
 `[js]true` if the entity is colliding with a block, `[js]false` otherwise.
+<<<
 
+| <#isColliding> |
+| <#isColliding-description> |
 ---
 
+>>> #isFree
 ### `isFree`
+<<<
+
+>>> #isFree-description
 
 ```js
 entity.isFree(x, y, z)
@@ -479,10 +642,17 @@ Checks, whether the entity is free to move by given x, y and z.
 
 **Return value**
 `[js]true` if the entity is free to move there, `[js]false` if it isn't.
+<<<
 
+| <#isFree> |
+| <#isFree-description> |
 ---
 
+>>> #onGround
 ### `onGround`
+<<<
+
+>>> #onGround-description
 
 ```js
 entity.onGround()
@@ -492,10 +662,17 @@ Checks, whether the entity is on the ground.
 
 **Return value**
 `[js]true` if the entity is on the ground, `[js]false` if it isn't.
+<<<
 
+| <#onGround> |
+| <#onGround-description> |
 ---
 
+>>> #getPortalCooldown-setPortalCooldown
 ### `getPortalCooldown`, `setPortalCooldown`
+<<<
+
+>>> #getPortalCooldown-setPortalCooldown-description
 ```js
 entity.getPortalCooldown()
 
@@ -511,10 +688,17 @@ Sets or gets the entity portal cooldown.
 - `cooldown` {optional} - The cooldown in ticks. Defaults to entity's [dimension changing delay](#getdimensionchangingdelay) (`[js]300` in case of most entities, `[js]10` in case of [[concepts/entity/ServerPlayer|`ServerPlayer`]] instances) if not provided.
 **Getter return value**
 The entity's portal cooldown, in ticks.
+<<<
 
+| <#getPortalCooldown-setPortalCooldown> |
+| <#getPortalCooldown-setPortalCooldown-description> |
 ---
 
+>>> #isOnPortalCooldown
 ### `isOnPortalCooldown`
+<<<
+
+>>> #isOnPortalCooldown-description
 
 ```js
 entity.isOnPortalCooldown()
@@ -526,10 +710,17 @@ Checks, whether the entity is on portal cooldown.
 **Return value**
 `[js]true` if the entity is on portal cooldown, `[js]false` if it isn't.
 
+<<<
 
+| <#isOnPortalCooldown> |
+| <#isOnPortalCooldown-description> |
 ---
 
+>>> #dampensVibrations
 ### `dampensVibrations`
+<<<
+
+>>> #dampensVibrations-description
 
 ```js
 entity.dampensVibrations()
@@ -541,10 +732,17 @@ In vanilla, only wood and carpet [[/concepts/entity/ItemEntity|item entities]] a
 
 **Return value**
 `[js]true` if the entity doesn't emit vibrations, `[js]false` if it can.
+<<<
 
+| <#dampensVibrations> |
+| <#dampensVibrations-description> |
 ---
 
+>>> #getBlockPosBelowThatAffectsMyMovement
 ### `getBlockPosBelowThatAffectsMyMovement`
+<<<
+
+>>> #getBlockPosBelowThatAffectsMyMovement-description
 
 ```js
 entity.getBlockPosBelowThatAffectsMyMovement()
@@ -556,10 +754,17 @@ Used by Minecraft to apply special effects to entity's movement, such as ice sli
 
 **Return value**
 A `BlockPos` a bit more than 0.5 blocks below the feet of the `[js]entity` (to be specific, `[js]0.500001` blocks below) corresponding to a block that may affect its movement.
+<<<
 
+| <#getBlockPosBelowThatAffectsMyMovement> |
+| <#getBlockPosBelowThatAffectsMyMovement-description> |
 ---
 
+>>> #getOnPos
 ### `getOnPos`
+<<<
+
+>>> #getOnPos-description
 
 ```js
 entity.getOnPos()
@@ -571,10 +776,17 @@ Can be thought of as a `BlockPos` of a block the entity is standing on.
 
 **Return value**
 A `BlockPos` of a block right below the feet of the entity.
+<<<
 
+| <#getOnPos> |
+| <#getOnPos-description> |
 ---
 
+>>> #getBlockStateOn
 ### `getBlockStateOn`
+<<<
+
+>>> #getBlockStateOn-description
 
 ```js
 entity.getBlockStateOn()
@@ -586,10 +798,17 @@ Can be thought of as a [[/concepts/block/BlockState|`BlockState`]] of a block th
 
 **Return value**
 A [[/concepts/block/BlockState|`BlockState`]] of a block right below the feet of the entity.
+<<<
 
+| <#getBlockStateOn> |
+| <#getBlockStateOn-description> |
 ---
 
+>>> #getGravity
 ### `getGravity`
+<<<
+
+>>> #getGravity-description
 
 ```js
 entity.getGravity()
@@ -599,10 +818,17 @@ entity.gravity // read-only bean
 **Return value**
 The current entity gravity (in blocks per tick²).
 For most entities, that will be the entity's default gravity (which varies between entities), or `[js]0` if the entity has [no gravity](#isnogravity-setnogravity).
+<<<
 
+| <#getGravity> |
+| <#getGravity-description> |
 ---
 
+>>> #isInWater
 ### `isInWater`
+<<<
+
+>>> #isInWater-description
 
 ```js
 entity.isInWater()
@@ -611,10 +837,17 @@ entity.inWater // read-only bean
 
 **Return value**
 `[js]true` if the entity is in water (that is - if it touches water), `[js]false` if it isn't.
+<<<
 
+| <#isInWater> |
+| <#isInWater-description> |
 ---
 
+>>> #isUnderWater
 ### `isUnderWater`
+<<<
+
+>>> #isUnderWater-description
 
 ```js
 entity.isUnderWater()
@@ -623,10 +856,17 @@ entity.underWater // read-only bean
 
 **Return value**
 `[js]true` if the entity is underwater (that is - if it's both touching water and its eyes are in water), `[js]false` if it isn't.
+<<<
 
+| <#isUnderWater> |
+| <#isUnderWater-description> |
 ---
 
+>>> #isInWaterOrRain
 ### `isInWaterOrRain`
+<<<
+
+>>> #isInWaterOrRain-description
 
 ```js
 entity.isInWaterOrRain()
@@ -635,10 +875,17 @@ entity.inWaterOrRain // read-only bean
 
 **Return value**
 `[js]true` if the entity is in water or rain, `[js]false` if it isn't.
+<<<
 
+| <#isInWaterOrRain> |
+| <#isInWaterOrRain-description> |
 ---
 
+>>> #isInWaterRainOrBubble
 ### `isInWaterRainOrBubble`
+<<<
+
+>>> #isInWaterRainOrBubble-description
 
 ```js
 entity.isInWaterRainOrBubble()
@@ -647,10 +894,17 @@ entity.inWaterRainOrBubble // read-only bean
 
 **Return value**
 `[js]true` if the entity is in water, rain or a bubble column, `[js]false` if it isn't.
+<<<
 
+| <#isInWaterRainOrBubble> |
+| <#isInWaterRainOrBubble-description> |
 ---
 
+>>> #isInWaterOrBubble
 ### `isInWaterOrBubble`
+<<<
+
+>>> #isInWaterOrBubble-description
 
 ```js
 entity.isInWaterOrBubble()
@@ -659,10 +913,17 @@ entity.inWaterOrBubble // read-only bean
 
 **Return value**
 `[js]true` if the entity is in water or a bubble column, `[js]false` if it isn't.
+<<<
 
+| <#isInWaterOrBubble> |
+| <#isInWaterOrBubble-description> |
 ---
 
+>>> #isInLiquid
 ### `isInLiquid`
+<<<
+
+>>> #isInLiquid-description
 
 ```js
 entity.isInLiquid()
@@ -671,10 +932,17 @@ entity.inLiquid // read-only bean
 
 **Return value**
 `[js]true` if the entity is in a liquid (water or lava), `[js]false` if it isn't.
+<<<
 
+| <#isInLiquid> |
+| <#isInLiquid-description> |
 ---
 
+>>> #isNoGravity-setNoGravity
 ### `isNoGravity`, `setNoGravity`
+<<<
+
+>>> #isNoGravity`, `setNoGravity-description
 
 ```js
 entity.isNoGravity()
@@ -692,10 +960,17 @@ Corresponds to `NoGravity` NBT tag on the entity.
 
 **Getter return value**
 The entity's gravity state: `[js]true` if it has no gravity, `[js]false` if it has gravity.
+<<<
 
+| <#isNoGravity-setNoGravity> |
+| <#isNoGravity-setNoGravity-description> |
 ---
 
+>>> #isInLava
 ### `isInLava`
+<<<
+
+>>> #isInLava-description
 
 ```js
 entity.isInLava()
@@ -704,10 +979,17 @@ entity.inLava // read-only bean
 
 **Return value**
 `[js]true` if the entity is in lava, `[js]false` if it isn't.
+<<<
 
+| <#isInLava> |
+| <#isInLava-description> |
 ---
 
+>>> #canCollideWith
 ### `canCollideWith`
+<<<
+
+>>> #canCollideWith-description
 
 ```js
 entity.canCollideWith(otherEntity)
@@ -718,10 +1000,17 @@ entity.canCollideWith(otherEntity)
 
 **Return value**
 `[js]true` if the entity can collide with `[js]otherEntity`, `[js]false` if it can't.
+<<<
 
+| <#canCollideWith> |
+| <#canCollideWith-description> |
 ---
 
+>>> #canBeCollidedWith
 ### `canBeCollidedWith`
+<<<
+
+>>> #canBeCollidedWith-description
 
 ```js
 entity.canBeCollidedWith()
@@ -729,10 +1018,17 @@ entity.canBeCollidedWith()
 
 **Return value**
 `[js]true` if the entity can be collided with, `[js]false` if it can't.
+<<<
 
+| <#canBeCollidedWith> |
+| <#canBeCollidedWith-description> |
 ---
 
+>>> #getDimensionChangingDelay
 ### `getDimensionChangingDelay`
+<<<
+
+>>> #getDimensionChangingDelay-description
 
 ```js
 entity.getDimensionChangingDelay()
@@ -741,10 +1037,17 @@ entity.dimensionChangingDelay
 
 **Return value**
 The entity's default dimension changing delay, as an integer.
+<<<
 
+| <#getDimensionChangingDelay> |
+| <#getDimensionChangingDelay-description> |
 ---
 
+>>> #isOnFire
 ### `isOnFire`
+<<<
+
+>>> #isOnFire-description
 
 ```js
 entity.isOnFire()
@@ -753,10 +1056,17 @@ entity.onFire // read-only bean
 
 **Return value**
 `[js]true` if the entity is on fire, `[js]false` if it isn't.
+<<<
 
+| <#isOnFire> |
+| <#isOnFire-description> |
 ---
 
+>>> #isPassenger
 ### `isPassenger`
+<<<
+
+>>> #isPassenger-description
 
 ```js
 entity.isPassenger()
@@ -765,10 +1075,17 @@ entity.passenger // read-only bean
 
 **Return value**
 `[js]true` if the entity is mounted on some vehicle, that is - the entity is a passenger of some vehicle, `[js]false` if it isn't.
+<<<
 
+| <#isPassenger> |
+| <#isPassenger-description> |
 ---
 
+>>> #isShiftKeyDown`, `setShiftKeyDown
 ### `isShiftKeyDown`, `setShiftKeyDown`
+<<<
+
+>>> #isShiftKeyDown-setShiftKeyDown-description
 ```js
 entity.isShiftKeyDown()
 
@@ -783,10 +1100,17 @@ Sets or gets whether the entity presses the "Sneak" key - Shift by default.
 - `[js]keyDown`: Specifies, whether the sneak key is pressed (`[js]true`) or released (`[js]false`). 
 **Getter return value**
 `[js]true` if the "Sneak" key is pressed, `[js]false` if it's released.
+<<<
 
+| <#isShiftKeyDown-setShiftKeyDown> |
+| <#isShiftKeyDown-setShiftKeyDown-description> |
 ---
 
+>>> #isSteppingCarefully
 ### `isSteppingCarefully`
+<<<
+
+>>> #isSteppingCarefully-description
 
 ```js
 entity.isSteppingCarefully()
@@ -806,10 +1130,17 @@ By default, all entities that [press the "Sneak" key](#isshiftkeydown-setshiftke
 
 **Return value**
 `[js]true` if the entity is stepping carefully, `[js]false` if it isn't.
+<<<
 
+| <#isSteppingCarefully> |
+| <#isSteppingCarefully-description> |
 ---
 
+>>> #isSuppressingBounce
 ### `isSuppressingBounce`
+<<<
+
+>>> #isSuppressingBounce-description
 
 ```js
 entity.isSuppressingBounce()
@@ -824,10 +1155,17 @@ By default, all entities that [press the "Sneak" key](#isshiftkeydown-setshiftke
 
 **Return value**
 `[js]true` if the entity is suppressing bounces, `[js]false` if it isn't.
+<<<
 
+| <#isSuppressingBounce> |
+| <#isSuppressingBounce-description> |
 ---
 
+>>> #isDiscrete
 ### `isDiscrete`
+<<<
+
+>>> #isDiscrete-description
 
 ```js
 entity.isDiscrete()
@@ -842,10 +1180,17 @@ By default, all entities that [press the "Sneak" key](#isshiftkeydown-setshiftke
 
 **Return value**
 `[js]true` if the entity is considered discrete, `[js]false` if it isn't.
+<<<
 
+| <#isDiscrete> |
+| <#isDiscrete-description> |
 ---
 
+>>> #isDescending
 ### `isDescending`
+<<<
+
+>>> #isDescending-description
 
 ```js
 entity.isDescending()
@@ -858,10 +1203,17 @@ By default, all entities that [press the "Sneak" key](#isshiftkeydown-setshiftke
 
 **Return value**
 `[js]true` if the entity is considered to be descending, `[js]false` if it isn't.
+<<<
 
+| <#isDescending> |
+| <#isDescending-description> |
 ---
 
+>>> #isSprinting-setSprinting
 ### `isSprinting`, `setSprinting`
+<<<
+
+>>> #isSprinting`, `setSprinting-description
 ```js
 entity.isSprinting()
 
@@ -876,10 +1228,17 @@ Sets or gets whether the entity is sprinting.
 - `[js]sprinting`: `[js]true` if the entity should start sprinting, `[js]false` if the entity should stop sprinting.
 **Getter return value**
 `[js]true` if the entity is sprinting, `[js]false` if it isn't sprinting.
+<<<
 
+| <#isSprinting-setSprinting> |
+| <#isSprinting-setSprinting-description> |
 ---
 
+>>> #isSwimming-setSwimming
 ### `isSwimming`, `setSwimming`
+<<<
+
+>>> #isSwimming`, `setSwimming-description
 ```js
 entity.isSwimming()
 
@@ -894,10 +1253,17 @@ Sets or gets whether the entity is swimming.
 - `[js]swimming`: `[js]true` if the entity should start swimming, `[js]false` if the entity should stop swimming.
 **Getter return value**
 `[js]true` if the entity is swimming, `[js]false` if it isn't swimming.
+<<<
 
+| <#isSwimming-setSwimming> |
+| <#isSwimming-setSwimming-description> |
 ---
 
+>>> #isVisuallySwimming
 ### `isVisuallySwimming`
+<<<
+
+>>> #isVisuallySwimming-description
 
 ```js
 entity.isVisuallySwimming()
@@ -910,10 +1276,17 @@ By default, entities are visually swimming if they are in the `SWIMMING` pose, b
 
 **Return value**
 `[js]true` if the entity is visually swimming, `[js]false` if it isn't.
+<<<
 
+| <#isVisuallySwimming> |
+| <#isVisuallySwimming-description> |
 ---
 
+>>> #isVisuallyCrawling
 ### `isVisuallyCrawling`
+<<<
+
+>>> #isVisuallyCrawling-description
 
 ```js
 entity.isVisuallyCrawling()
@@ -926,10 +1299,17 @@ By default, entities are visually crawling if they are [visually swimming](#isvi
 
 **Return value**
 `[js]true` if the entity is visually crawling, `[js]false` if it isn't.
+<<<
 
+| <#isVisuallyCrawling> |
+| <#isVisuallyCrawling-description> |
 ---
 
+>>> #isOnRails
 ### `isOnRails`
+<<<
+
+>>> #isOnRails-description
 
 ```js
 entity.isOnRails()
@@ -939,13 +1319,20 @@ entity.onRails // read-only bean
 **Return value**
 Always returns `[js]false` if the entity is not a Minecart.
 If the entity is a Minecart, returns `[js]true` if the minecart is on rails, `[js]false` if it isn't.
+<<<
 
+| <#isOnRails> |
+| <#isOnRails-description> |
 ---
 
 
 ## Properties
 
+>>> #fireImmune
 ### `fireImmune`
+<<<
+
+>>> #fireImmune-description
 
 ```js
 entity.fireImmune()
@@ -953,10 +1340,17 @@ entity.fireImmune()
 
 **Return value**
 `[js]true` if the entity is immune to fire, `[js]false` if it isn't.
+<<<
 
+| <#fireImmune> |
+| <#fireImmune-description> |
 ---
 
+>>> #canSpawnSprintParticle
 ### `canSpawnSprintParticle`
+<<<
+
+>>> #canSpawnSprintParticle-description
 
 ```js
 entity.canSpawnSprintParticle()
@@ -964,10 +1358,17 @@ entity.canSpawnSprintParticle()
 
 **Return value**
 `[js]true` if the entity can spawn sprint particles, `[js]false` if it isn't.
+<<<
 
+| <#canSpawnSprintParticle> |
+| <#canSpawnSprintParticle-description> |
 ---
 
+>>> #canBeHitByProjectile
 ### `canBeHitByProjectile`
+<<<
+
+>>> #canBeHitByProjectile-description
 
 ```js
 entity.canBeHitByProjectile()
@@ -975,10 +1376,17 @@ entity.canBeHitByProjectile()
 
 **Return value**
 `[js]true` if the entity can be hit by projectiles, `[js]false` if it can't.
+<<<
 
+| <#canBeHitByProjectile> |
+| <#canBeHitByProjectile-description> |
 ---
 
+>>> #isPickable
 ### `isPickable`
+<<<
+
+>>> #isPickable-description
 
 ```js
 entity.isPickable()
@@ -989,10 +1397,17 @@ entity.pickable // read-only bean
 `[js]true` if the entity can be hit.
 More precisely - if it can be hit by projectiles or be targeted by the player crosshairs.
 `[js]false` if it can't be hit.
+<<<
 
+| <#isPickable> |
+| <#isPickable-description> |
 ---
 
+>>> #isAttackable
 ### `isAttackable`
+<<<
+
+>>> #isAttackable-description
 
 ```js
 entity.isAttackable()
@@ -1010,10 +1425,17 @@ Most entities can be attacked, except for the following:
 
 **Return value**
 `[js]true` if the entity can be attacked by players, `[js]false` if it can't.
+<<<
 
+| <#isAttackable> |
+| <#isAttackable-description> |
 ---
 
+>>> #isPushable
 ### `isPushable`
+<<<
+
+>>> #isPushable-description
 
 ```js
 entity.isPushable()
@@ -1022,10 +1444,17 @@ entity.pushable // read-only bean
 
 **Return value**
 `[js]true` if the entity can be pushed by other entities, `[js]false` if it can't.
+<<<
 
+| <#isPushable> |
+| <#isPushable-description> |
 ---
 
+>>> #isAlive
 ### `isAlive`
+<<<
+
+>>> #isAlive-description
 
 ```js
 entity.isAlive()
@@ -1034,10 +1463,17 @@ entity.alive // read-only bean
 
 **Return value**
 `[js]true` if the entity is alive, `[js]false` if it's dead.
+<<<
 
+| <#isAlive> |
+| <#isAlive-description> |
 ---
 
+>>> #isInWall
 ### `isInWall`
+<<<
+
+>>> #isInWall-description
 
 ```js
 entity.isInWall()
@@ -1046,10 +1482,17 @@ entity.inWall // read-only bean
 
 **Return value**
 `[js]true` if the entity is inside the wall, `[js]false` if it isn't.
+<<<
 
+| <#isInWall> |
+| <#isInWall-description> |
 ---
 
+>>> #isVehicle
 ### `isVehicle`
+<<<
+
+>>> #isVehicle-description
 
 ```js
 entity.isVehicle()
@@ -1058,10 +1501,17 @@ entity.vehicle // read-only bean
 
 **Return value**
 `[js]true` if the entity is a vehicle, `[js]false` if it isn't.
+<<<
 
+| <#isVehicle> |
+| <#isVehicle-description> |
 ---
 
+>>> #dismountsUnderwater
 ### `dismountsUnderwater`
+<<<
+
+>>> #dismountsUnderwater-description
 
 ```js
 entity.dismountsUnderwater()
@@ -1075,10 +1525,17 @@ In vanilla, all rideable animals except Skeleton Horses possess this tag.
 
 **Return value**
 `[js]true` if the entity will dismount its passengers underwater, `[js]false` if it won't.
+<<<
 
+| <#dismountsUnderwater> |
+| <#dismountsUnderwater-description> |
 ---
 
+>>> #canControlVehicle
 ### `canControlVehicle`
+<<<
+
+>>> #canControlVehicle-description
 
 ```js
 entity.canControlVehicle()
@@ -1090,10 +1547,17 @@ By default, all entities can control vehicles, except those with `[js]'minecraft
 
 **Return value**
 `[js]true` if the entity can control vehicles, `[js]false` if it can't.
+<<<
 
+| <#canControlVehicle> |
+| <#canControlVehicle-description> |
 ---
 
+>>> #isGlowing-setGlowing
 ### `isGlowing`, `setGlowing`
+<<<
+
+>>> #isGlowing-setGlowing-description
 
 >>> info
 These methods have their name changed from vanilla: `isCurrentlyGlowing`, `setGlowingTag`.
@@ -1113,10 +1577,17 @@ Sets the glowing state of the entity on both client and server side.
 - `[js]glowing`: A boolean value representing the new glowing state of the entity. `[js]true` will make the entity glow, `[js]false` will make it no longer glow.
 **Getter return value**
 `[js]true` if the entity is glowing, `[js]false` if it isn't.
+<<<
 
+| <#isGlowing-setGlowing> |
+| <#isGlowing-setGlowing-description> |
 ---
 
+>>> #hasGlowingTag
 ### `hasGlowingTag`
+<<<
+
+>>> #hasGlowingTag-description
 
 ```js
 entity.hasGlowingTag()
@@ -1126,10 +1597,17 @@ Gets the server-side glowing state of the entity.
 
 **Return value**
 `[js]true` if the entity is glowing server-side, `[js]false` if it isn't.
+<<<
 
+| <#hasGlowingTag> |
+| <#hasGlowingTag-description> |
 ---
 
+>>> #isInvisible-setInvisible
 ### `isInvisible`, `setInvisible`
+<<<
+
+>>> #isInvisible`, `setInvisible-description
 ```js
 entity.isInvisible()
 
@@ -1144,10 +1622,17 @@ Sets or gets whether the entity is invisible.
 - `[js]invisible`: `[js]true` if the entity should become invisible, `[js]false` if the entity should stop being invisible.
 **Getter return value**
 `[js]true` if the entity is invisible, `[js]false` if it isn't invisible.
+<<<
 
+| <#isInvisible-setInvisible> |
+| <#isInvisible-setInvisible-description> |
 ---
 
+>>> #isInvisibleTo
 ### `isInvisibleTo`
+<<<
+
+>>> #isInvisibleTo-description
 
 ```js
 entity.isInvisibleTo(player)
@@ -1164,10 +1649,17 @@ Similar to [`isInvisible`](#isinvisible-setinvisible), except in the following c
 
 **Return value**
 `[js]true` if the entity is invisible to the provided `[js]player`, `[js]false` if it is visible.
+<<<
 
+| <#isInvisibleTo> |
+| <#isInvisibleTo-description> |
 ---
 
+>>> #getMaxAirSupply
 ### `getMaxAirSupply`
+<<<
+
+>>> #getMaxAirSupply-description
 
 ```js
 entity.getMaxAirSupply()
@@ -1181,10 +1673,17 @@ For most entities, that value is `[js]300`, but there are a few exceptions:
 
 **Return value**
 An integer, that is the maximum air supply of the entity
+<<<
 
+| <#getMaxAirSupply> |
+| <#getMaxAirSupply-description> |
 ---
 
+>>> #getAirSupply-setAirSupply
 ### `getAirSupply`, `setAirSupply`
+<<<
+
+>>> #getAirSupply-setAirSupply-description
 ```js
 entity.getAirSupply()
 
@@ -1199,12 +1698,19 @@ Sets or gets the entity's current air supply.
 - `[js]air`: An integer number, that is the air supply to set.
 **Getter return value**
 An integer, that is the entity's current air supply.
+<<<
 
+| <#getAirSupply-setAirSupply> |
+| <#getAirSupply-setAirSupply-description> |
 ---
 
 ## Relation
 
+>>> #closerThan
 ### `closerThan`
+<<<
+
+>>> #closerThan-description
 
 ```js
 entity.closerThan(otherEntity, distance)
@@ -1221,10 +1727,17 @@ Checks, whether `[js]otherEntity` is within a cylinder-shaped area of `[js]horiz
 
 **Return value**
 `[js]true` if `[js]otherEntity` is within range, `[js]false` otherwise.
+<<<
 
+| <#closerThan> |
+| <#closerThan-description> |
 ---
 
+>>> #distanceTo
 ### `distanceTo`
+<<<
+
+>>> #distanceTo-description
 
 ```js
 entity.distanceTo(otherEntity)
@@ -1236,10 +1749,17 @@ Returns the distance of `[js]entity` to `[js]otherEntity`.
 - `[js]otherEntity`: The `Entity` to measure distance to.
 **Return value**
 The distance to `[js]otherEntity`.
+<<<
 
+| <#distanceTo> |
+| <#distanceTo-description> |
 ---
 
+>>> #getDistanceSq
 ### `getDistanceSq`
+<<<
+
+>>> #getDistanceSq-description
 
 >>> info
 This overload has its name changed from vanilla: `distanceToSqr`.
@@ -1257,10 +1777,17 @@ In case of sorting entities by distance, sorting by squares of distances is more
 - `[js]x`, `[js]y`, `[js]z`: The coordinates of point in 3D space to measure distance to.
 **Return value**
 The **square** of distance to a point in 3D space.
+<<<
 
+| <#getDistanceSq> |
+| <#getDistanceSq-description> |
 ---
 
+>>> #distanceToEntitySqr
 ### `distanceToEntitySqr`
+<<<
+
+>>> #distanceToEntitySqr-description
 
 >>> info
 This overload has its name changed from vanilla: `distanceToSqr`.
@@ -1277,10 +1804,17 @@ In case of sorting entities by distance, sorting by squares of distances is more
 - `[js]otherEntity`: The `Entity` to measure distance to.
 **Return value**
 The **square** of distance to `[js]otherEntity`.
+<<<
 
+| <#distanceToEntitySqr> |
+| <#distanceToEntitySqr-description> |
 ---
 
+>>> #distanceToSqr
 ### `distanceToSqr`
+<<<
+
+>>> #distanceToSqr-description
 
 ```js
 entity.distanceToSqr(positionVector)
@@ -1294,12 +1828,19 @@ In case of sorting entities by distance, sorting by squares of distances is more
 - `[js]positionVector`: {vec3} representing the position of a point in 3D space. It may be a 3-element JS array representing the vector, like `[js]\[64, 50, -20\]`.
 **Return value**
 The **square** of distance to a point in 3D space.
+<<<
 
+| <#distanceToSqr> |
+| <#distanceToSqr-description> |
 ---
 
 ## Removal
 
+>>> #kill
 ### `kill`
+<<<
+
+>>> #kill-description
 
 ```js
 entity.kill()
@@ -1310,10 +1851,17 @@ In other words, it acts as a `/kill` command.
 
 **Return value**
 None (`[js]undefined`). 
+<<<
 
+| <#kill> |
+| <#kill-description> |
 ---
 
+>>> #discard
 ### `discard`
+<<<
+
+>>> #discard-description
 
 ```js
 entity.discard()
@@ -1323,12 +1871,19 @@ Despawns an entity, removing it from the world.
 
 **Return value**
 None (`[js]undefined`). 
+<<<
 
+| <#discard> |
+| <#discard-description> |
 ---
 
 ## Damage
 
+>>> #attack
 ### `attack`
+<<<
+
+>>> #attack-description
 
 >>> info
 This method has its name changed from vanilla: `hurt`.
@@ -1346,10 +1901,17 @@ Deals `[js]amount` damage to the `[js]entity`. The type of damage dealt is of th
 
 **Return value**
 `[js]true` if `[js]entity` has been successfully damaged, `[js]false` if the entity did not take any damage.
+<<<
 
+| <#attack> |
+| <#attack-description> |
 ---
 
+>>> #lavaHurt
 ### `lavaHurt`
+<<<
+
+>>> #lavaHurt-description
 
 ```js
 entity.lavaHurt()
@@ -1361,10 +1923,17 @@ Note that classes inheriting from `Entity` may change this behavior for their en
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#lavaHurt> |
+| <#lavaHurt-description> |
 ---
 
+>>> #igniteForSeconds
 ### `igniteForSeconds`
+<<<
+
+>>> #igniteForSeconds-description
 
 ```js
 entity.igniteForSeconds(seconds)
@@ -1374,10 +1943,17 @@ Sets the entity on fire for the specified amount of seconds.
 
 **Return value**
 None (`[js]undefined`). 
+<<<
 
+| <#igniteForSeconds> |
+| <#igniteForSeconds-description> |
 ---
 
+>>> #igniteForTicks
 ### `igniteForTicks`
+<<<
+
+>>> #igniteForTicks-description
 
 ```js
 entity.igniteForTicks(ticks)
@@ -1387,10 +1963,17 @@ Sets the entity on fire for the specified amount of ticks.
 
 **Return value**
 None (`[js]undefined`). 
+<<<
 
+| <#igniteForTicks> |
+| <#igniteForTicks-description> |
 ---
 
+>>> #getRemainingFireTicks-setRemainingFireTicks
 ### `getRemainingFireTicks`, `setRemainingFireTicks`
+<<<
+
+>>> #getRemainingFireTicks-setRemainingFireTicks-description
 ```js
 entity.getRemainingFireTicks()
 
@@ -1406,10 +1989,17 @@ Sets or gets the entity's remaining ticks of being on fire.
 
 **Getter return value**
 The entity's remaining fire ticks.
+<<<
 
+| <#getRemainingFireTicks-setRemainingFireTicks> |
+| <#getRemainingFireTicks-setRemainingFireTicks-description> |
 ---
 
+>>> #extinguish
 ### `extinguish`
+<<<
+
+>>> #extinguish-description
 
 >>> info
 This overload has its name changed from vanilla: `clearFire`.
@@ -1423,10 +2013,17 @@ Sets the entity's remaining fire ticks to 0, effectively extinguishing it with n
 
 **Return value**
 None (`[js]undefined`). 
+<<<
 
+| <#extinguish> |
+| <#extinguish-description> |
 ---
 
+>>> #extinguishFire
 ### `extinguishFire`
+<<<
+
+>>> #extinguishFire-description
 
 ```js
 entity.extinguishFire()
@@ -1436,10 +2033,17 @@ Sets the entity's remaining fire ticks to 0, effectively extinguishing it, and p
 
 **Return value**
 None (`[js]undefined`). 
+<<<
 
+| <#extinguishFire> |
+| <#extinguishFire-description> |
 ---
 
+>>> #causeFallDamage
 ### `causeFallDamage`
+<<<
+
+>>> #causeFallDamage-description
 
 ```js
 entity.causeFallDamage(fallDistance, multiplier, damageSource)
@@ -1455,10 +2059,17 @@ In vanilla, it's called whenever the entity falls.
 **Return value**
 `[js]true` if the fall should play a sound when falling on a Honey Block, `[js]false` if it shouldn't.
 In vanilla, the return value is always `[js]false` except for equine (Horses, Donkeys, Mules) and Llamas.
+<<<
 
+| <#causeFallDamage> |
+| <#causeFallDamage-description> |
 ---
 
+>>> #getTicksFrozen-setTicksFrozen
 ### `getTicksFrozen`, `setTicksFrozen`
+<<<
+
+>>> #getTicksFrozen-setTicksFrozen-description
 ```js
 entity.getTicksFrozen()
 
@@ -1473,10 +2084,17 @@ Sets or gets the entity's current progress on being frozen.
 - `[js]ticksFrozen`: An integer number, that is the amount of ticks the entity is being frozen for to set.
 **Getter return value**
 An integer, that is the current amount of ticks the entity is being frozen for.
+<<<
 
+| <#getTicksFrozen-setTicksFrozen> |
+| <#getTicksFrozen-setTicksFrozen-description> |
 ---
 
+>>> #getPercentFrozen
 ### `getPercentFrozen`
+<<<
+
+>>> #getPercentFrozen-description
 
 ```js
 entity.getPercentFrozen()
@@ -1485,10 +2103,17 @@ entity.percentFrozen // read-only bean
 
 **Return value**
 Despite the name, this method returns a float number between 0 and 1 inclusive which is a ratio between [current ticks frozen](#getticksfrozen-setticksfrozen) and [ticks required to freeze](#getticksrequiredtofreeze).
+<<<
 
+| <#getPercentFrozen> |
+| <#getPercentFrozen-description> |
 ---
 
+>>> #isFullyFrozen
 ### `isFullyFrozen`
+<<<
+
+>>> #isFullyFrozen-description
 
 ```js
 entity.isFullyFrozen()
@@ -1497,10 +2122,17 @@ entity.fullyFrozen // read-only bean
 
 **Return value**
 A boolean: `[js]true` if the entity is fully frozen (so it starts taking freezing damage), `[js]false` if it isn't.
+<<<
 
+| <#isFullyFrozen> |
+| <#isFullyFrozen-description> |
 ---
 
+>>> #getTicksRequiredToFreeze
 ### `getTicksRequiredToFreeze`
+<<<
+
+>>> #getTicksRequiredToFreeze-description
 
 ```js
 entity.getTicksRequiredToFreeze()
@@ -1512,10 +2144,17 @@ In vanilla, this value is `[js]140` for all entities, though modded entities can
 
 **Return value**
 An integer, which is the amount of ticks required for the entity to be fully frozen.
+<<<
 
+| <#getTicksRequiredToFreeze> |
+| <#getTicksRequiredToFreeze-description> |
 ---
 
+>>> #resetFallDistance
 ### `resetFallDistance`
+<<<
+
+>>> #resetFallDistance-description
 
 ```js
 entity.resetFallDistance()
@@ -1525,10 +2164,17 @@ Sets the entity's fall distance to 0.
 
 **Return value**
 None (`[js]undefined`). 
+<<<
 
+| <#resetFallDistance> |
+| <#resetFallDistance-description> |
 ---
 
+>>> #isInvulnerableTo
 ### `isInvulnerableTo`
+<<<
+
+>>> #isInvulnerableTo-description
 
 ```js
 entity.isInvulnerableTo(damageSource)
@@ -1546,10 +2192,17 @@ Checks if the entity is invulnerable to the provided `[js]damageSource`.
 
 **Return value**
 `[js]true` if the entity is invulnerable to the provided damage source, `[js]false` if it isn't.
+<<<
 
+| <#isInvulnerableTo> |
+| <#isInvulnerableTo-description> |
 ---
 
+>>> #isInvulnerable-setInvulnerable
 ### `isInvulnerable`, `setInvulnerable`
+<<<
+
+>>> #isInvulnerable-setInvulnerable-description
 ```js
 entity.isInvulnerable()
 
@@ -1567,12 +2220,19 @@ Corresponds to `Invulnerable` NBT tag.
 - `[js]isInvulnerable`: A boolean, which is the entity's new invulnerability state. `[js]true` will make the entity invulnerable to all damage sources, `[js]false` will make it vulnerable again.
 **Getter return value**
 `[js]true` if the entity is invulnerable to all damage sources, `[js]false` if it is vulnerable.
+<<<
 
+| <#isInvulnerable-setInvulnerable> |
+| <#isInvulnerable-setInvulnerable-description> |
 ---
 
 ## Vehicle related
 
+>>> #unRide
 ### `unRide`
+<<<
+
+>>> #unRide-description
 ```js
 entity.unRide()
 ```
@@ -1582,10 +2242,17 @@ If the entity is a passenger, it dismounts from the vehicle.
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#unRide> |
+| <#unRide-description> |
 ---
 
+>>> #startRiding
 ### `startRiding`
+<<<
+
+>>> #startRiding-description
 ```js
 entity.startRiding(vehicle)
 entity.startRiding(vehicle, isForced)
@@ -1599,10 +2266,17 @@ Tries to mount the `[js]entity` on a `[js]vehicle`.
 
 **Return value**
 `[js]true` if the `[js]entity` has been successfully mounted, `[js]false` if it hasn't.
+<<<
 
+| <#startRiding> |
+| <#startRiding-description> |
 ---
 
+>>> #stopRiding
 ### `stopRiding`
+<<<
+
+>>> #stopRiding-description
 ```js
 entity.stopRiding()
 ```
@@ -1611,10 +2285,17 @@ Dismounts the `[js]entity` from a vehicle, if entity is riding on one.
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#stopRiding> |
+| <#stopRiding-description> |
 ---
 
+>>> #ejectPassengers
 ### `ejectPassengers`
+<<<
+
+>>> #ejectPassengers-description
 ```js
 entity.ejectPassengers()
 ```
@@ -1623,10 +2304,18 @@ Dismounts all passengers of the `[js]entity`.
 
 **Return value**
 None (`[js]undefined`).
+<<<
+
+| <#ejectPassengers> |
+| <#ejectPassengers-description> |
 
 ## Sound related
 
+>>> #playSound
 ### `playSound`
+<<<
+
+>>> #playSound-description
 
 ```js
 entity.playSound(sound)
@@ -1643,8 +2332,17 @@ Plays a specified `sound` from the entity, unless it's [silent](#issilent-setsil
 
 **Return value**
 None (`[js]undefined`).
+<<<
 
+| <#playSound> |
+| <#playSound-description> |
+---
+
+>>> #isSilent-setSilent
 ### `isSilent`, `setSilent`
+<<<
+
+>>> #isSilent-setSilent-description
 
 ```js
 entity.isSilent()
@@ -1662,12 +2360,19 @@ Corresponds to `Silent` NBT tag on the entity.
 
 **Getter return value**
 The entity's silence state: `[js]true` if it's silent, `[js]false` if it can produce sounds.
+<<<
 
+| <#isSilent-setSilent> |
+| <#isSilent-setSilent-description> |
 ---
 
 ## Scoreboard related
 
+>>> #getTeamColor
 ### `getTeamColor`
+<<<
+
+>>> #getTeamColor-description
 
 ```js
 entity.getTeamColor()
@@ -1676,10 +2381,17 @@ entity.teamColor // read-only bean
 
 **Return value**
 The team color as a packed integer, in `0xRRGGBB` format.
+<<<
 
+| <#getTeamColor> |
+| <#getTeamColor-description> |
 ---
 
+>>> #getTeam
 ### `getTeam`
+<<<
+
+>>> #getTeam-description
 
 ```js
 entity.getTeam()
@@ -1688,10 +2400,17 @@ entity.team // read-only bean
 
 **Return value**
 The `PlayerTeam` the entity is on if the entity is a teammate of one, or `[js]null` if the entity is not in any team.
+<<<
 
+| <#getTeam> |
+| <#getTeam-description> |
 ---
 
+>>> #isOnSameTeam
 ### `isOnSameTeam`
+<<<
+
+>>> #isOnSameTeam-description
 
 >>> info
 This overload has its name changed from vanilla: `isAlliedTo`.
@@ -1706,10 +2425,17 @@ entity.isOnSameTeam(otherEntity)
 
 **Return value**
 A boolean: `[js]true` if both `entity` and `otherEntity` are on the same team, `[js]false` otherwise.
+<<<
 
+| <#isOnSameTeam> |
+| <#isOnSameTeam-description> |
 ---
 
+>>> #isAlliedTo
 ### `isAlliedTo`
+<<<
+
+>>> #isAlliedTo-description
 
 ```js
 entity.isAlliedTo(team)
@@ -1728,10 +2454,18 @@ where `[js]server` is a reference to `MinecraftServer`, for example `[js]event.s
 
 **Return value**
 A boolean: `[js]true` if both `entity` and `otherEntity` are on the same team, `[js]false` otherwise.
+<<<
 
+| <#isAlliedTo> |
+| <#isAlliedTo-description> |
+---
 ## Other
 
+>>> #isSpectator
 ### `isSpectator`
+<<<
+
+>>> #isSpectator-description
 
 ```js
 entity.isSpectator()
@@ -1740,11 +2474,17 @@ entity.spectator // read-only bean
 
 **Return value**
 `[js]true` if the entity is a spectator, `[js]false` otherwise.
-In vanilla, only [[/concepts/entity/Player|`Player`]] instances may be spectators, so for any other entity this will be `[js]false`.
+In vanilla, only [[/concepts/entity/Player|`Player`]] instances may be spectators, so for any other entity this will be `[js]false`.<<<
 
+| <#isSpectator> |
+| <#isSpectator-description> |
 ---
 
+>>> #spawnAtLocation
 ### `spawnAtLocation`
+<<<
+
+>>> #spawnAtLocation-description
 
 ```js
 entity['spawnAtLocation(net.minecraft.world.level.ItemLike)'](item)
@@ -1767,10 +2507,17 @@ It may be a string representing an item stack, for example `[js]'2x minecraft:oa
   - If `[js]itemStack` was specified, it's a **floating-point number** representing the Y offset of the newly spawned item entity relative to the position of `[js]entity`.
 **Return value**
 The reference to the [[/concepts/entity/ItemEntity|`ItemEntity`]] spawned.
+<<<
 
+| <#spawnAtLocation> |
+| <#spawnAtLocation-description> |
 ---
 
+>>> #toString
 ### `toString`
+<<<
+
+>>> #toString-description
 
 ```js
 entity.toString()
@@ -1779,3 +2526,7 @@ entity.toString()
 **Return value**
 
 The entity represented as string.
+<<<
+
+| <#toString> |
+| <#toString-description> |

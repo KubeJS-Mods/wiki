@@ -43,7 +43,8 @@ entity.entityType // read-only bean
 ```
 
 **Return value**
-An `EntityType` of the item. <<<
+An `EntityType` of the item.
+<<<
 
 |<#getEntityType> |
 |<#getEntityType-description> |

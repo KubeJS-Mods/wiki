@@ -47,7 +47,7 @@ An `EntityType` of the item.
 
 <<<
 
-| <#getEntityType> |
+|[test] <#getEntityType> |
 |[bg=#00000024] <#getEntityType-description> |
 ---
 

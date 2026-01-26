@@ -523,7 +523,7 @@ A {vec2} containing respectively pitch and yaw of the entity.
 ### `getYHeadRot`, `setYHeadRot`
 <<<
 
->>> #getYHeadRot`, `setYHeadRot-description
+>>> #getYHeadRot-setYHeadRot-description
 
 ```js
 entity.getYHeadRot()
@@ -943,7 +943,7 @@ entity.inLiquid // read-only bean
 ### `isNoGravity`, `setNoGravity`
 <<<
 
->>> #isNoGravity`, `setNoGravity-description
+>>> #isNoGravity-setNoGravity-description
 
 ```js
 entity.isNoGravity()
@@ -1082,7 +1082,7 @@ entity.passenger // read-only bean
 | <#isPassenger-description> |
 ---
 
->>> #isShiftKeyDown`, `setShiftKeyDown
+>>> #isShiftKeyDown-setShiftKeyDown
 ### `isShiftKeyDown`, `setShiftKeyDown`
 <<<
 
@@ -1214,7 +1214,7 @@ By default, all entities that [press the "Sneak" key](#isshiftkeydown-setshiftke
 ### `isSprinting`, `setSprinting`
 <<<
 
->>> #isSprinting`, `setSprinting-description
+>>> #isSprinting-setSprinting-description
 ```js
 entity.isSprinting()
 
@@ -1239,7 +1239,7 @@ Sets or gets whether the entity is sprinting.
 ### `isSwimming`, `setSwimming`
 <<<
 
->>> #isSwimming`, `setSwimming-description
+>>> #isSwimming-setSwimming-description
 ```js
 entity.isSwimming()
 
@@ -1608,7 +1608,7 @@ Gets the server-side glowing state of the entity.
 ### `isInvisible`, `setInvisible`
 <<<
 
->>> #isInvisible`, `setInvisible-description
+>>> #isInvisible-setInvisible-description
 ```js
 entity.isInvisible()
 
@@ -2475,7 +2475,8 @@ entity.spectator // read-only bean
 
 **Return value**
 `[js]true` if the entity is a spectator, `[js]false` otherwise.
-In vanilla, only [[/concepts/entity/Player|`Player`]] instances may be spectators, so for any other entity this will be `[js]false`.<<<
+In vanilla, only [[/concepts/entity/Player|`Player`]] instances may be spectators, so for any other entity this will be `[js]false`.
+<<<
 
 | <#isSpectator> |
 | <#isSpectator-description> |

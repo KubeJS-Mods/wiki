@@ -7,33 +7,33 @@ Everything will go under the `ResearchTree.research` event
 Return `true` or `false` depending if a research node exists or not.
 
 - $$remove(id: ResourceLocation)
-Removes a research node (eg. `some_other_mod:epic_researchable`)
+Removes a research node (eg, `some_other_mod:epic_researchable`)
 
 - $$modify(id: ResourceLocation)
-Modifies a research node (eg. `another_mod:super_cool_researchable`). For methods, see below
+Modifies a research node (eg, `another_mod:super_cool_researchable`). For methods, see below
 
 - $$create(id: ResourceLocation)
 >>> info
-Internally, this constructs a `ResourceLocation` that get's set to `kubejs:[the id you chose]`.
+Internally, this constructs a `ResourceLocation` that gets set to `kubejs:[the id you chose]`.
 For example, `create('my_research_node')` will get constructed as `kubejs:my_research_node`.
 <<<
 
 ## Methods
 
 - $$.icon(icon: Item)
-The icon is just an item to point render. (eg, `minecraft:dirt` would render dirt for example)
+The icon is just an item to point rto ender. (eg, `minecraft:dirt` would render dirt, for example)
 
 - $$.pos(x: int, y: int)
-There is also `position` that does the exact same thing
+There is also `position` that does the same thing
 
 - $$.title(title: Text)
-Overrides the default name (the id of the node formatted) to a custom one. Use `Text#of` for the argument
+Overrides the default name (the node's id formatted) with a custom one. Use `Text#of` for the argument
 
 - $$.description(description: Text)
 Creates a description for the research node
 
 - $$.prerequisite(prerequisite: ResourceLocation)
-This can be attached multipule times to make other research nodes required to unlock this node. 
+This can be attached multiple times to make other research nodes required to unlock this node. 
 To get the research node id, enable advanced tooltips via `F3+H`
 
 - $$.requires(requirement: ResearchRequirement)

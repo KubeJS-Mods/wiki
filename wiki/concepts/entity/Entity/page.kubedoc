@@ -381,7 +381,7 @@ entity.hasCustomName()
 ```
 
 **Return value**
-`[js]true` if the entity has a [custom name](#getcustomname-setcustomname) set, `[false]` if not.
+`[js]true` if the entity has a [custom name](#getcustomname-setcustomname) set, `[js]false` if not.
 <<<
 
 | <#has-custom-name>             |

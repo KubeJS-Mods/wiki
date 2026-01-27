@@ -46,7 +46,7 @@ See (link the `helpers#Rewards` here) for possible rewards.
 Links the node to a category
 
 - $$.hidden()
-Hides the research from being viewed
+Hides the node until the parent is completed. The rest of the branch will also show up.
 
 - $$.ticksPerPercent(ticksPerPercent: int)
 For every `1%` of research, the player must wait the ticks set in `ticksPerPercent` for `1%` of progression.

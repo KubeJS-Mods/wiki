@@ -33,10 +33,13 @@ In the following examples, `[js]entity` will be referring to the instance of `En
 >>> #getEntityType-description
 
 >>> info
+
 This method has its name changed from vanilla: `getType`.
 In KubeJS, [[ref/utils/EntityKJS|`getType`]] refers to a more script-friendly method that returns the entity's ID as string. It comes from the [[ref/utils/EntityKJS|`EntityKJS`]] interface.
+
 <<<
 
+**Syntax**
 ```js
 entity.getEntityType()
 entity.entityType // read-only bean
@@ -56,6 +59,7 @@ An `EntityType` of the item.
 
 >>> #getTags-description
 
+**Syntax**
 ```js
 entity.getTags()
 entity.tags // read-only bean
@@ -81,6 +85,7 @@ A [[ref/java/set|Set]] of entity tags, as strings.
 
 >>> #addTag-description
 
+**Syntax**
 ```js
 entity.addTag(tag)
 ```
@@ -109,6 +114,7 @@ None (`[js]undefined`).
 
 >>> #removeTag-description
 
+**Syntax**
 ```js
 entity.removeTag(tag)
 ```
@@ -137,6 +143,7 @@ Note that this is **not** an entity **type** tag, but entity tag which can be re
 
 >>> #getEncodeId-description
 
+**Syntax**
 ```js
 entity.getEncodeId()
 entity.encodeId // read-only bean
@@ -151,12 +158,13 @@ If it can't, returns `[js]null`.
 | <#getEncodeId-description> |
 ---
 
->>> #getIdsetId
-### `getIdsetId`
+>>> #getId-setId
+### `getId`, `setId`
 <<<
 
->>> #getIdsetId-description
+>>> #getId-setId-description
 
+**Syntax**
 ```js
 entity.getId()
 
@@ -179,8 +187,8 @@ The setter shouldn't be used server-side, as entity network IDs are already prop
 An integer, which is the entity's **network** ID.
 <<<
 
-| <#getIdsetId> |
-| <#getIdsetId-description> |
+| <#getId-setId> |
+| <#getId-setId-description> |
 ---
 
 >>> #getName
@@ -189,6 +197,7 @@ An integer, which is the entity's **network** ID.
 
 >>> #getName-description
 
+**Syntax**
 ```js
 entity.getName()
 entity.name // read-only bean
@@ -209,6 +218,7 @@ A text [[/ref/utils/Component|`Component`]] representing the entity's custom nam
 
 >>> #is-description
 
+**Syntax**
 ```js
 entity.is(otherEntity)
 ```
@@ -225,6 +235,186 @@ Ender Dragons are composed of `EnderDragonPart` mobs, so `is` will also return `
 | <#is-description> |
 ---
 
+>>> #get-uuid-set-uuid
+### `getUuid`, `setUuid`
+<<<
+
+>>> #get-uuid-set-uuid-description
+>>> info
+This method has its name *slightly* changed from vanilla: `setUUID`, `getUUID`.
+These have been lowercased to make the beans created from those lowercase as well.
+<<<
+
+**Syntax**
+```js
+entity.getUuid()
+
+entity.setUuid(uuid)
+
+entity.uuid // bean
+```
+
+**Setter parameter**
+- `[js]uuid`: A [universally unique identifier (UUID)](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html) to set. It may be a string representing a UUID, for example `[js]'9839ba5f-87fa-4718-aeab-f2b6d74a2385'`.
+
+**Getter return value**
+A [universally unique identifier (UUID)](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html) of the entity.
+<<<
+
+| <#get-uuid-set-uuid>             |
+| <#get-uuid-set-uuid-description> |
+
+---
+
+>>> #get-string-uuid
+### `getStringUUID`
+<<<
+
+>>> #get-string-uuid-description
+>>> info
+This method has its name *slightly* changed from vanilla: `getStringUUID`.
+Note that `UUID` has been lowercased to `Uuid`.
+<<<
+
+**Syntax**
+```js
+entity.getStringUuid()
+entity.stringUuid // read-only bean
+```
+
+**Return value**
+The entity's UUID as string.
+<<<
+
+| <#get-string-uuid>             |
+| <#get-string-uuid-description> |
+
+---
+
+>>> #get-username
+### `getUsername`
+<<<
+
+>>> #get-username-description
+>>> info
+This method has its name changed from vanilla: `getScoreboardName`.
+<<<
+
+**Syntax**
+```js
+entity.getUsername()
+entity.username // read-only bean
+```
+
+**Return value**
+The entity's UUID as string.
+If the entity is a [[/concepts/entity/Player|`Player`]], it returns the player's username as string instead.
+This is the same name as seen when an entity or player is added to scoreboard.
+<<<
+
+| <#get-username>             |
+| <#get-username-description> |
+
+---
+
+>>> #get-display-name
+### `getDisplayName`
+<<<
+
+>>> #get-display-name-description
+**Syntax**
+```js
+entity.getDisplayName()
+entity.displayName // read-only bean
+```
+
+**Return value**
+A text [[/ref/utils/Component|`Component`]] representing the entity's [name](#getname), formatted according to the team the entity is in, with a hover event that displays the entity's custom name, type and UUID in a tooltip.
+
+![[get-display-name.png|The result of hovering over the entity's name in chat]]
+<<<
+
+| <#get-display-name>             |
+| <#get-display-name-description> |
+
+---
+
+>>> #set-custom-name-get-custom-name
+### `getCustomName`, `setCustomName`
+<<<
+
+>>> #set-custom-name-get-custom-name-description
+**Syntax**
+```js
+entity.getCustomName()
+
+entity.setCustomName(name)
+
+entity.customName // bean
+```
+
+Sets or gets the entity's custom name.
+
+**Setter parameter**
+- `[js]name`: A text [[/ref/utils/Component|`Component`]] which is the new entity's custom name. The following are also accepted:
+  - `[js]null`: This will remove the entity's custom name,
+  - A string,
+  - A JS object representing the text component. See [Minecraft Wiki](https://minecraft.wiki/w/Text_component_format) for more info.
+
+**Getter return value**
+A text [[/ref/utils/Component|`Component`]], which is the entity's custom name.
+<<<
+
+| <#set-custom-name-get-custom-name>             |
+| <#set-custom-name-get-custom-name-description> |
+
+---
+
+>>> #has-custom-name
+### `hasCustomName`
+<<<
+
+>>> #has-custom-name-description
+**Syntax**
+```js
+entity.hasCustomName()
+```
+
+**Return value**
+`[js]true` if the entity has a [custom name](#getcustomname-setcustomname) set, `[false]` if not.
+<<<
+
+| <#has-custom-name>             |
+| <#has-custom-name-description> |
+
+---
+
+>>> #is-custom-name-visible-set-custom-name-visible
+### `isCustomNameVisible`, `setCustomNameVisible`
+<<<
+
+>>> #is-custom-name-visible-set-custom-name-visible-description
+**Syntax**
+```js
+entity.isCustomNameVisible()
+
+entity.setCustomNameVisible(alwaysRenderNameTag)
+
+entity.customNameVisible // bean
+```
+
+**Setter parameter**
+- `[js]alwaysRenderNameTag`: A boolean, specifying whether to always render the entity's name tag. `[js]true` will make the name tag always render, `[js]false` will, for most entities, only make the name tag visible when the player targets the entity with their crosshair. Some entities do not display name tags when not forced, such as Armor Stands.
+
+**Getter return value**
+`[js]true` if the entity's name tag is forced to be visible at all times, `[js]false` if not.
+<<<
+
+| <#is-custom-name-visible-set-custom-name-visible>             |
+| <#is-custom-name-visible-set-custom-name-visible-description> |
+
+---
+
 ## Position
 
 >>> #setPos
@@ -233,6 +423,7 @@ Ender Dragons are composed of `EnderDragonPart` mobs, so `is` will also return `
 
 >>> #setPos-description
 
+**Syntax**
 ```js
 entity.setPos(x, y, z)
 ```
@@ -255,6 +446,7 @@ None (`[js]undefined`).
 
 >>> #turn-description
 
+**Syntax**
 ```js
 entity.turn(pitch, yaw)
 ```
@@ -279,6 +471,7 @@ None (`[js]undefined`).
 
 >>> #move-description
 
+**Syntax**
 ```js
 entity.move(moverType, movementVector)
 ```
@@ -303,6 +496,7 @@ None (`[js]undefined`).
 
 >>> #moveRelative-description
 
+**Syntax**
 ```js
 entity.moveRelative(speed, inputVector)
 ```
@@ -327,6 +521,7 @@ None (`[js]undefined`).
 
 >>> #absMoveTo-description
 
+**Syntax**
 ```js
 entity.absMoveTo(x, y, z, pitch, yaw)
 entity.absMoveTo(x, y, z)
@@ -352,6 +547,7 @@ None (`[js]undefined`).
 
 >>> #absRotateTo-description
 
+**Syntax**
 ```js
 entity.absRotateTo(pitch, yaw)
 ```
@@ -375,6 +571,7 @@ None (`[js]undefined`).
 
 >>> #moveTo-description
 
+**Syntax**
 ```js
 entity.moveTo(positionVector)
 entity.moveTo(x, y, z)
@@ -410,6 +607,7 @@ This overload has its name changed from vanilla: `push`.
 Other overloads for this method are still referred to as [`push`](#push).
 <<<
 
+**Syntax**
 ```js
 entity.addMotion(x, y, z)
 ```
@@ -437,6 +635,7 @@ None (`[js]undefined`).
 There is one more overload: `[js]entity.push(entity)`, but it's used for entity-to-entity interactions and not particularly useful in scripts.
 <<<
 
+**Syntax**
 ```js
 entity.push(vector)
 ```
@@ -460,6 +659,7 @@ None (`[js]undefined`).
 
 >>> #getLookAngle-description
 
+**Syntax**
 ```js
 entity.getLookAngle()
 entity.lookAngle // read-only bean
@@ -481,6 +681,7 @@ A {vec3} which is a view vector of the entity.
 
 >>> #getForward-description
 
+**Syntax**
 ```js
 entity.getForward()
 entity.forward // read-only bean
@@ -502,6 +703,7 @@ A {vec3} which is a view vector of the entity.
 
 >>> #getRotationVector-description
 
+**Syntax**
 ```js
 entity.getRotationVector()
 entity.rotationVector // read-only bean
@@ -525,6 +727,7 @@ A {vec2} containing respectively pitch and yaw of the entity.
 
 >>> #getYHeadRot-setYHeadRot-description
 
+**Syntax**
 ```js
 entity.getYHeadRot()
 
@@ -555,6 +758,7 @@ A floating point number, which is the entity's head yaw, in degrees.
 
 >>> #setYBodyRot-description
 
+**Syntax**
 ```js
 entity.setYBodyRot(yBodyRot)
 entity.YBodyRot // write-only bean
@@ -582,6 +786,7 @@ None (`[js]undefined`).
 
 >>> #copyPosition-description
 
+**Syntax**
 ```js
 entity.copyPosition(otherEntity)
 ```
@@ -608,6 +813,7 @@ None (`[js]undefined`).
 
 >>> #isColliding-description
 
+**Syntax**
 ```js
 entity.isColliding(blockPos, blockState)
 ```
@@ -632,6 +838,7 @@ Checks, whether the entity is colliding with a given block.
 
 >>> #isFree-description
 
+**Syntax**
 ```js
 entity.isFree(x, y, z)
 ```
@@ -655,6 +862,7 @@ Checks, whether the entity is free to move by given x, y and z.
 
 >>> #onGround-description
 
+**Syntax**
 ```js
 entity.onGround()
 ```
@@ -674,6 +882,7 @@ Checks, whether the entity is on the ground.
 <<<
 
 >>> #getPortalCooldown-setPortalCooldown-description
+**Syntax**
 ```js
 entity.getPortalCooldown()
 
@@ -701,6 +910,7 @@ The entity's portal cooldown, in ticks.
 
 >>> #isOnPortalCooldown-description
 
+**Syntax**
 ```js
 entity.isOnPortalCooldown()
 entity.onPortalCooldown // read-only bean
@@ -717,12 +927,37 @@ Checks, whether the entity is on portal cooldown.
 | <#isOnPortalCooldown-description> |
 ---
 
+>>> #can-use-portal
+### `canUsePortal`
+<<<
+
+>>> #can-use-portal-description
+**Syntax**
+```js
+entity.canUsePortal(allowPassengers)
+```
+
+Checks, whether the entity can use a portal.
+
+**Parameters**
+- `[js]allowPassengers`: Whether to allow passengers during this check.
+
+**Return value**
+`[js]true` if the entity can use portals, `[js]false` if it can't.
+<<<
+
+| <#can-use-portal>             |
+| <#can-use-portal-description> |
+
+---
+
 >>> #dampensVibrations
 ### `dampensVibrations`
 <<<
 
 >>> #dampensVibrations-description
 
+**Syntax**
 ```js
 entity.dampensVibrations()
 ```
@@ -737,6 +972,31 @@ In vanilla, only wood and carpet [[/concepts/entity/ItemEntity|item entities]] a
 
 | <#dampensVibrations> |
 | <#dampensVibrations-description> |
+
+---
+
+>>> #is-ignoring-block-triggers
+### `isIgnoringBlockTriggers`
+<<<
+
+>>> #is-ignoring-block-triggers-description
+**Syntax**
+```js
+entity.isIgnoringBlockTriggers()
+entity.ignoringBlockTriggers // read-only bean
+```
+
+Checks, whether the entity can trigger traps such as Pressure Plates and Tripwire Hooks.
+
+In vanilla, only Bats ignore traps.
+
+**Return value**
+`[js]true` if entity ignores traps, `[js]false` if it respects them.
+<<<
+
+| <#is-ignoring-block-triggers>             |
+| <#is-ignoring-block-triggers-description> |
+
 ---
 
 >>> #getBlockPosBelowThatAffectsMyMovement
@@ -745,6 +1005,7 @@ In vanilla, only wood and carpet [[/concepts/entity/ItemEntity|item entities]] a
 
 >>> #getBlockPosBelowThatAffectsMyMovement-description
 
+**Syntax**
 ```js
 entity.getBlockPosBelowThatAffectsMyMovement()
 entity.blockPosBelowThatAffectsMyMovement // read-only bean
@@ -767,6 +1028,7 @@ A `BlockPos` a bit more than 0.5 blocks below the feet of the `[js]entity` (to b
 
 >>> #getOnPos-description
 
+**Syntax**
 ```js
 entity.getOnPos()
 entity.onPos // read-only bean
@@ -789,6 +1051,7 @@ A `BlockPos` of a block right below the feet of the entity.
 
 >>> #getBlockStateOn-description
 
+**Syntax**
 ```js
 entity.getBlockStateOn()
 entity.blockStateOn // read-only bean
@@ -811,6 +1074,7 @@ A [[/concepts/block/BlockState|`BlockState`]] of a block right below the feet of
 
 >>> #getGravity-description
 
+**Syntax**
 ```js
 entity.getGravity()
 entity.gravity // read-only bean
@@ -831,6 +1095,7 @@ For most entities, that will be the entity's default gravity (which varies betwe
 
 >>> #isInWater-description
 
+**Syntax**
 ```js
 entity.isInWater()
 entity.inWater // read-only bean
@@ -850,6 +1115,7 @@ entity.inWater // read-only bean
 
 >>> #isUnderWater-description
 
+**Syntax**
 ```js
 entity.isUnderWater()
 entity.underWater // read-only bean
@@ -869,6 +1135,7 @@ entity.underWater // read-only bean
 
 >>> #isInWaterOrRain-description
 
+**Syntax**
 ```js
 entity.isInWaterOrRain()
 entity.inWaterOrRain // read-only bean
@@ -888,6 +1155,7 @@ entity.inWaterOrRain // read-only bean
 
 >>> #isInWaterRainOrBubble-description
 
+**Syntax**
 ```js
 entity.isInWaterRainOrBubble()
 entity.inWaterRainOrBubble // read-only bean
@@ -907,6 +1175,7 @@ entity.inWaterRainOrBubble // read-only bean
 
 >>> #isInWaterOrBubble-description
 
+**Syntax**
 ```js
 entity.isInWaterOrBubble()
 entity.inWaterOrBubble // read-only bean
@@ -926,6 +1195,7 @@ entity.inWaterOrBubble // read-only bean
 
 >>> #isInLiquid-description
 
+**Syntax**
 ```js
 entity.isInLiquid()
 entity.inLiquid // read-only bean
@@ -945,6 +1215,7 @@ entity.inLiquid // read-only bean
 
 >>> #isNoGravity-setNoGravity-description
 
+**Syntax**
 ```js
 entity.isNoGravity()
 
@@ -973,6 +1244,7 @@ The entity's gravity state: `[js]true` if it has no gravity, `[js]false` if it h
 
 >>> #isInLava-description
 
+**Syntax**
 ```js
 entity.isInLava()
 entity.inLava // read-only bean
@@ -992,6 +1264,7 @@ entity.inLava // read-only bean
 
 >>> #canCollideWith-description
 
+**Syntax**
 ```js
 entity.canCollideWith(otherEntity)
 ```
@@ -1013,6 +1286,7 @@ entity.canCollideWith(otherEntity)
 
 >>> #canBeCollidedWith-description
 
+**Syntax**
 ```js
 entity.canBeCollidedWith()
 ```
@@ -1031,6 +1305,7 @@ entity.canBeCollidedWith()
 
 >>> #getDimensionChangingDelay-description
 
+**Syntax**
 ```js
 entity.getDimensionChangingDelay()
 entity.dimensionChangingDelay
@@ -1050,6 +1325,7 @@ The entity's default dimension changing delay, as an integer.
 
 >>> #isOnFire-description
 
+**Syntax**
 ```js
 entity.isOnFire()
 entity.onFire // read-only bean
@@ -1069,6 +1345,7 @@ entity.onFire // read-only bean
 
 >>> #isPassenger-description
 
+**Syntax**
 ```js
 entity.isPassenger()
 entity.passenger // read-only bean
@@ -1087,6 +1364,7 @@ entity.passenger // read-only bean
 <<<
 
 >>> #isShiftKeyDown-setShiftKeyDown-description
+**Syntax**
 ```js
 entity.isShiftKeyDown()
 
@@ -1113,6 +1391,7 @@ Sets or gets whether the entity presses the "Sneak" key - Shift by default.
 
 >>> #isSteppingCarefully-description
 
+**Syntax**
 ```js
 entity.isSteppingCarefully()
 entity.steppingCarefully // read-only bean
@@ -1143,6 +1422,7 @@ By default, all entities that [press the "Sneak" key](#isshiftkeydown-setshiftke
 
 >>> #isSuppressingBounce-description
 
+**Syntax**
 ```js
 entity.isSuppressingBounce()
 entity.suppressingBounce // read-only bean
@@ -1168,6 +1448,7 @@ By default, all entities that [press the "Sneak" key](#isshiftkeydown-setshiftke
 
 >>> #isDiscrete-description
 
+**Syntax**
 ```js
 entity.isDiscrete()
 entity.discrete // read-only bean
@@ -1193,6 +1474,7 @@ By default, all entities that [press the "Sneak" key](#isshiftkeydown-setshiftke
 
 >>> #isDescending-description
 
+**Syntax**
 ```js
 entity.isDescending()
 entity.descending // read-only bean
@@ -1215,6 +1497,7 @@ By default, all entities that [press the "Sneak" key](#isshiftkeydown-setshiftke
 <<<
 
 >>> #isSprinting-setSprinting-description
+**Syntax**
 ```js
 entity.isSprinting()
 
@@ -1240,6 +1523,7 @@ Sets or gets whether the entity is sprinting.
 <<<
 
 >>> #isSwimming-setSwimming-description
+**Syntax**
 ```js
 entity.isSwimming()
 
@@ -1266,6 +1550,7 @@ Sets or gets whether the entity is swimming.
 
 >>> #isVisuallySwimming-description
 
+**Syntax**
 ```js
 entity.isVisuallySwimming()
 entity.visuallySwimming // read-only bean
@@ -1289,6 +1574,7 @@ By default, entities are visually swimming if they are in the `SWIMMING` pose, b
 
 >>> #isVisuallyCrawling-description
 
+**Syntax**
 ```js
 entity.isVisuallyCrawling()
 entity.visuallyCrawling // read-only bean
@@ -1312,6 +1598,7 @@ By default, entities are visually crawling if they are [visually swimming](#isvi
 
 >>> #isOnRails-description
 
+**Syntax**
 ```js
 entity.isOnRails()
 entity.onRails // read-only bean
@@ -1335,6 +1622,7 @@ If the entity is a Minecart, returns `[js]true` if the minecart is on rails, `[j
 
 >>> #fireImmune-description
 
+**Syntax**
 ```js
 entity.fireImmune()
 ```
@@ -1353,6 +1641,7 @@ entity.fireImmune()
 
 >>> #canSpawnSprintParticle-description
 
+**Syntax**
 ```js
 entity.canSpawnSprintParticle()
 ```
@@ -1371,6 +1660,7 @@ entity.canSpawnSprintParticle()
 
 >>> #canBeHitByProjectile-description
 
+**Syntax**
 ```js
 entity.canBeHitByProjectile()
 ```
@@ -1389,6 +1679,7 @@ entity.canBeHitByProjectile()
 
 >>> #isPickable-description
 
+**Syntax**
 ```js
 entity.isPickable()
 entity.pickable // read-only bean
@@ -1410,6 +1701,7 @@ More precisely - if it can be hit by projectiles or be targeted by the player cr
 
 >>> #isAttackable-description
 
+**Syntax**
 ```js
 entity.isAttackable()
 entity.attackable // read-only bean
@@ -1438,6 +1730,7 @@ Most entities can be attacked, except for the following:
 
 >>> #isPushable-description
 
+**Syntax**
 ```js
 entity.isPushable()
 entity.pushable // read-only bean
@@ -1457,6 +1750,7 @@ entity.pushable // read-only bean
 
 >>> #isAlive-description
 
+**Syntax**
 ```js
 entity.isAlive()
 entity.alive // read-only bean
@@ -1476,6 +1770,7 @@ entity.alive // read-only bean
 
 >>> #isInWall-description
 
+**Syntax**
 ```js
 entity.isInWall()
 entity.inWall // read-only bean
@@ -1495,6 +1790,7 @@ entity.inWall // read-only bean
 
 >>> #isVehicle-description
 
+**Syntax**
 ```js
 entity.isVehicle()
 entity.vehicle // read-only bean
@@ -1514,6 +1810,7 @@ entity.vehicle // read-only bean
 
 >>> #dismountsUnderwater-description
 
+**Syntax**
 ```js
 entity.dismountsUnderwater()
 ```
@@ -1538,6 +1835,7 @@ In vanilla, all rideable animals except Skeleton Horses possess this tag.
 
 >>> #canControlVehicle-description
 
+**Syntax**
 ```js
 entity.canControlVehicle()
 ```
@@ -1564,6 +1862,7 @@ By default, all entities can control vehicles, except those with `[js]'minecraft
 These methods have their name changed from vanilla: `isCurrentlyGlowing`, `setGlowingTag`.
 <<<
 
+**Syntax**
 ```js
 entity.isGlowing()
 
@@ -1590,6 +1889,7 @@ Sets the glowing state of the entity on both client and server side.
 
 >>> #hasGlowingTag-description
 
+**Syntax**
 ```js
 entity.hasGlowingTag()
 ```
@@ -1609,6 +1909,7 @@ Gets the server-side glowing state of the entity.
 <<<
 
 >>> #isInvisible-setInvisible-description
+**Syntax**
 ```js
 entity.isInvisible()
 
@@ -1635,6 +1936,7 @@ Sets or gets whether the entity is invisible.
 
 >>> #isInvisibleTo-description
 
+**Syntax**
 ```js
 entity.isInvisibleTo(player)
 ```
@@ -1662,6 +1964,7 @@ Similar to [`isInvisible`](#isinvisible-setinvisible), except in the following c
 
 >>> #getMaxAirSupply-description
 
+**Syntax**
 ```js
 entity.getMaxAirSupply()
 entity.maxAirSupply // read-only bean
@@ -1685,6 +1988,7 @@ An integer, that is the maximum air supply of the entity
 <<<
 
 >>> #getAirSupply-setAirSupply-description
+**Syntax**
 ```js
 entity.getAirSupply()
 
@@ -1713,6 +2017,7 @@ An integer, that is the entity's current air supply.
 
 >>> #closerThan-description
 
+**Syntax**
 ```js
 entity.closerThan(otherEntity, distance)
 entity.closerThan(otherEntity, horizontalDistance, verticalDistance)
@@ -1740,6 +2045,7 @@ Checks, whether `[js]otherEntity` is within a cylinder-shaped area of `[js]horiz
 
 >>> #distanceTo-description
 
+**Syntax**
 ```js
 entity.distanceTo(otherEntity)
 ```
@@ -1766,6 +2072,7 @@ The distance to `[js]otherEntity`.
 This overload has its name changed from vanilla: `distanceToSqr`.
 <<<
 
+**Syntax**
 ```js
 entity.getDistanceSq(x, y, z)
 ```
@@ -1794,6 +2101,7 @@ The **square** of distance to a point in 3D space.
 This overload has its name changed from vanilla: `distanceToSqr`.
 <<<
 
+**Syntax**
 ```js
 entity.distanceToEntitySqr(otherEntity)
 ```
@@ -1817,6 +2125,7 @@ The **square** of distance to `[js]otherEntity`.
 
 >>> #distanceToSqr-description
 
+**Syntax**
 ```js
 entity.distanceToSqr(positionVector)
 ```
@@ -1843,6 +2152,7 @@ The **square** of distance to a point in 3D space.
 
 >>> #kill-description
 
+**Syntax**
 ```js
 entity.kill()
 ```
@@ -1864,6 +2174,7 @@ None (`[js]undefined`).
 
 >>> #discard-description
 
+**Syntax**
 ```js
 entity.discard()
 ```
@@ -1890,6 +2201,7 @@ None (`[js]undefined`).
 This method has its name changed from vanilla: `hurt`.
 <<<
 
+**Syntax**
 ```js
 entity.attack(damageSource, amount)
 ```
@@ -1914,6 +2226,7 @@ Deals `[js]amount` damage to the `[js]entity`. The type of damage dealt is of th
 
 >>> #lavaHurt-description
 
+**Syntax**
 ```js
 entity.lavaHurt()
 ```
@@ -1936,6 +2249,7 @@ None (`[js]undefined`).
 
 >>> #igniteForSeconds-description
 
+**Syntax**
 ```js
 entity.igniteForSeconds(seconds)
 ```
@@ -1956,6 +2270,7 @@ None (`[js]undefined`).
 
 >>> #igniteForTicks-description
 
+**Syntax**
 ```js
 entity.igniteForTicks(ticks)
 ```
@@ -1975,6 +2290,7 @@ None (`[js]undefined`).
 <<<
 
 >>> #getRemainingFireTicks-setRemainingFireTicks-description
+**Syntax**
 ```js
 entity.getRemainingFireTicks()
 
@@ -2006,6 +2322,7 @@ The entity's remaining fire ticks.
 This overload has its name changed from vanilla: `clearFire`.
 <<<
 
+**Syntax**
 ```js
 entity.extinguish()
 ```
@@ -2026,6 +2343,7 @@ None (`[js]undefined`).
 
 >>> #extinguishFire-description
 
+**Syntax**
 ```js
 entity.extinguishFire()
 ```
@@ -2046,6 +2364,7 @@ None (`[js]undefined`).
 
 >>> #causeFallDamage-description
 
+**Syntax**
 ```js
 entity.causeFallDamage(fallDistance, multiplier, damageSource)
 ```
@@ -2071,6 +2390,7 @@ In vanilla, the return value is always `[js]false` except for equine (Horses, Do
 <<<
 
 >>> #getTicksFrozen-setTicksFrozen-description
+**Syntax**
 ```js
 entity.getTicksFrozen()
 
@@ -2097,6 +2417,7 @@ An integer, that is the current amount of ticks the entity is being frozen for.
 
 >>> #getPercentFrozen-description
 
+**Syntax**
 ```js
 entity.getPercentFrozen()
 entity.percentFrozen // read-only bean
@@ -2116,6 +2437,7 @@ Despite the name, this method returns a float number between 0 and 1 inclusive w
 
 >>> #isFullyFrozen-description
 
+**Syntax**
 ```js
 entity.isFullyFrozen()
 entity.fullyFrozen // read-only bean
@@ -2135,6 +2457,7 @@ A boolean: `[js]true` if the entity is fully frozen (so it starts taking freezin
 
 >>> #getTicksRequiredToFreeze-description
 
+**Syntax**
 ```js
 entity.getTicksRequiredToFreeze()
 entity.ticksRequiredToFreeze // read-only bean
@@ -2157,6 +2480,7 @@ An integer, which is the amount of ticks required for the entity to be fully fro
 
 >>> #resetFallDistance-description
 
+**Syntax**
 ```js
 entity.resetFallDistance()
 ```
@@ -2177,6 +2501,7 @@ None (`[js]undefined`).
 
 >>> #isInvulnerableTo-description
 
+**Syntax**
 ```js
 entity.isInvulnerableTo(damageSource)
 ```
@@ -2204,6 +2529,7 @@ Checks if the entity is invulnerable to the provided `[js]damageSource`.
 <<<
 
 >>> #isInvulnerable-setInvulnerable-description
+**Syntax**
 ```js
 entity.isInvulnerable()
 
@@ -2234,6 +2560,7 @@ Corresponds to `Invulnerable` NBT tag.
 <<<
 
 >>> #unRide-description
+**Syntax**
 ```js
 entity.unRide()
 ```
@@ -2254,6 +2581,7 @@ None (`[js]undefined`).
 <<<
 
 >>> #startRiding-description
+**Syntax**
 ```js
 entity.startRiding(vehicle)
 entity.startRiding(vehicle, isForced)
@@ -2278,6 +2606,7 @@ Tries to mount the `[js]entity` on a `[js]vehicle`.
 <<<
 
 >>> #stopRiding-description
+**Syntax**
 ```js
 entity.stopRiding()
 ```
@@ -2297,6 +2626,7 @@ None (`[js]undefined`).
 <<<
 
 >>> #ejectPassengers-description
+**Syntax**
 ```js
 entity.ejectPassengers()
 ```
@@ -2318,6 +2648,7 @@ None (`[js]undefined`).
 
 >>> #playSound-description
 
+**Syntax**
 ```js
 entity.playSound(sound)
 entity.playSound(sound, volume, pitch)
@@ -2345,6 +2676,7 @@ None (`[js]undefined`).
 
 >>> #isSilent-setSilent-description
 
+**Syntax**
 ```js
 entity.isSilent()
 
@@ -2375,6 +2707,7 @@ The entity's silence state: `[js]true` if it's silent, `[js]false` if it can pro
 
 >>> #getTeamColor-description
 
+**Syntax**
 ```js
 entity.getTeamColor()
 entity.teamColor // read-only bean
@@ -2394,6 +2727,7 @@ The team color as a packed integer, in `0xRRGGBB` format.
 
 >>> #getTeam-description
 
+**Syntax**
 ```js
 entity.getTeam()
 entity.team // read-only bean
@@ -2417,6 +2751,7 @@ The `PlayerTeam` the entity is on if the entity is a teammate of one, or `[js]nu
 This overload has its name changed from vanilla: `isAlliedTo`.
 <<<
 
+**Syntax**
 ```js
 entity.isOnSameTeam(otherEntity)
 ```
@@ -2438,6 +2773,7 @@ A boolean: `[js]true` if both `entity` and `otherEntity` are on the same team, `
 
 >>> #isAlliedTo-description
 
+**Syntax**
 ```js
 entity.isAlliedTo(team)
 ```
@@ -2447,6 +2783,7 @@ entity.isAlliedTo(team)
 
 `PlayerTeam` instances can be looked up by name by using a method that exists on `ServerScoreboard`. For example, this is a reference to the `MyTeam` team:
 
+**Syntax**
 ```js
 const myTeam = server.scoreboard.getPlayerTeam("MyTeam")
 ```
@@ -2468,6 +2805,7 @@ A boolean: `[js]true` if both `entity` and `otherEntity` are on the same team, `
 
 >>> #isSpectator-description
 
+**Syntax**
 ```js
 entity.isSpectator()
 entity.spectator // read-only bean
@@ -2488,6 +2826,7 @@ In vanilla, only [[/concepts/entity/Player|`Player`]] instances may be spectator
 
 >>> #spawnAtLocation-description
 
+**Syntax**
 ```js
 entity['spawnAtLocation(net.minecraft.world.level.ItemLike)'](item)
 entity['spawnAtLocation(net.minecraft.world.level.ItemLike,int)'](item, offsetY)
@@ -2521,6 +2860,7 @@ The reference to the [[/concepts/entity/ItemEntity|`ItemEntity`]] spawned.
 
 >>> #toString-description
 
+**Syntax**
 ```js
 entity.toString()
 ```

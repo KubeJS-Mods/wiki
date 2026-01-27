@@ -21,7 +21,7 @@ For example, `create('my_research_node')` will get constructed as `kubejs:my_res
 ## Methods
 
 - $$.icon(icon: Item)
-The icon is just an item to point rto ender. (eg, `minecraft:dirt` would render dirt, for example)
+The icon that will be rendered for the node. (eg, `minecraft:dirt` would render dirt, for example)
 
 - $$.pos(x: int, y: int)
 There is also `position` that does the same thing

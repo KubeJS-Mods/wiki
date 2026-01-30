@@ -254,6 +254,8 @@ entity.setUuid(uuid)
 entity.uuid // bean
 ```
 
+Gets or sets the entity's UUID. Corresponds to `UUID` NBT tag on the entity.
+
 **Setter parameter**
 - `[js]uuid`: A [universally unique identifier (UUID)](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html) to set. It may be a string representing a UUID, for example `[js]'9839ba5f-87fa-4718-aeab-f2b6d74a2385'`.
 
@@ -402,6 +404,9 @@ entity.setCustomNameVisible(alwaysRenderNameTag)
 
 entity.customNameVisible // bean
 ```
+
+Gets or sets whether the entity's name tag is forced to be visible.
+Corresponds to `CustomNameVisible` NBT tag on the entity.
 
 **Setter parameter**
 - `[js]alwaysRenderNameTag`: A boolean, specifying whether to always render the entity's name tag. `[js]true` will make the name tag always render, `[js]false` will, for most entities, only make the name tag visible when the player targets the entity with their crosshair. Some entities do not display name tags when not forced, such as Armor Stands.
@@ -805,6 +810,47 @@ None (`[js]undefined`).
 | <#copyPosition-description> |
 ---
 
+>>> #teleport-to
+### `teleportTo`
+<<<
+
+>>> #teleport-to-description
+**Syntax**
+```js
+entity.teleportTo(x, y, z)
+```
+
+Teleports an entity to specified x, y and z coordinates.
+
+**Parameters**
+- `[js]x`, `[js]y`, `[js]z`: The coordinates to teleport to.
+
+**Return value**
+None (`[js]undefined`).
+
+---
+
+**Syntax**
+```js
+entity.teleportTo(dimensionID, x, y, z, yaw, pitch)
+```
+
+Teleports an entity to specified dimension, x, y and z coordinates and sets the entity's rotation.
+
+Also triggers pre-teleport command NeoForge events, so the final destination may differ from the one provided if one of `EntityTeleportEvent.TeleportCommand` listeners decides to change the destination.
+
+- `[js]x`, `[js]y`, `[js]z`: The coordinates to teleport to.
+
+**Return value**
+None (`[js]undefined`).
+
+<<<
+
+| <#teleport-to>             |
+| <#teleport-to-description> |
+
+---
+
 ## Interaction
 
 >>> #isColliding
@@ -893,6 +939,8 @@ entity.portalCooldown // bean
 ```
 
 Sets or gets the entity portal cooldown.
+Corresponds to `PortalCooldown` NBT tag on the entity.
+
 
 **Setter parameter**
 - `cooldown` {optional} - The cooldown in ticks. Defaults to entity's [dimension changing delay](#getdimensionchangingdelay) (`[js]300` in case of most entities, `[js]10` in case of [[concepts/entity/ServerPlayer|`ServerPlayer`]] instances) if not provided.
@@ -1998,6 +2046,7 @@ entity.airSupply // bean
 ```
 
 Sets or gets the entity's current air supply.
+Corresponds to `Air` NBT tag on the entity.
 
 **Setter parameter**
 - `[js]air`: An integer number, that is the air supply to set.
@@ -2300,6 +2349,7 @@ entity.remainingFireTicks // bean
 ```
 
 Sets or gets the entity's remaining ticks of being on fire.
+Corresponds to `Fire` NBT tag on the entity.
 
 **Setter parameter**
 - `[js]ticks`: The remaining fire ticks to set.
@@ -2400,6 +2450,8 @@ entity.ticksFrozen // bean
 ```
 
 Sets or gets the entity's current progress on being frozen.
+Corresponds to `TicksFrozen` NBT tag on the entity.
+
 
 **Setter parameter**
 - `[js]ticksFrozen`: An integer number, that is the amount of ticks the entity is being frozen for to set.

@@ -10,7 +10,7 @@ ItemEvents.toolTierRegistry(event => {
 		tier.uses = 250
 		tier.speed = 6
 		tier.attackDamageBonus = 2
-		tier.incorrectBlocksForDropsTag = '#minecraft:incorrect_for_iron_tool'
+		tier.incorrectBlocksForDropsTag = 'minecraft:incorrect_for_iron_tool'
 		tier.enchantmentValue = 14
 		tier.repairIngredient = '#forge:ingots/iron'
 	})

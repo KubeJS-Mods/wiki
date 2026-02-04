@@ -123,22 +123,23 @@ StartupEvents.registry('item', event => {
 
 # Calling overloads
 
-Unlike JavaScript, Java allows the programmer to specify different implementations of a method based on parameter types provided.
+Unlike JavaScript, Java allows the programmer to specify different implementations of a method based on types of provided parameters.
 
-This creates a problem for JavaScript, since JavaScript only has a limited set of types which can't be provided directly.
+This creates a problem for JavaScript, since JavaScript only has a limited set of types which can't be specified directly.
 In JavaScript:
+- typing is dynamic and weak,
 - types are inferred from whatever is assigned to variable,
 - there are no number types besides `number`, which represents a 64-bit floating point number (`double` in Java).
 
 Java on the other hand is statically, strongly typed, so all types are known upfront.
 
-To solve this, Rhino uses what's known as "overload resolution" to try to guess which overload to use based on provided parameters.
+To solve this, Rhino uses what's known as "overload resolution" to try to infer which overload to use based on provided parameters.
 For each parameter, type wrappers are invoked to try to convert the input to the appropriate parameter type.
 If overload resolution results in only one overload, that overload is called.
 
 But if it results in more than one overload, an ambiguous method call exception is thrown.
 
-**Example**
+**Ambiguous method example**
 The following example is loosely adapted from [Disambiguating Java class overloads](https://discordapp.com/channels/303440391124942858/1441611912512147566) post on latvian.dev Discord server.
 
 Here, one would attempt to create an EMI stack like this:
@@ -148,7 +149,7 @@ const $EmiStack = Java.loadClass('dev.emi.emi.api.stack.EmiStack')
 console.log($EmiStack.of('minecraft:stone'))
 ```
 
-However, after running the script like this, an exception is thrown because in KubeJS, strings can be converted to many types, like `ItemStack`, `Fluid`, `Ingredient`, etc.
+However, after running the script like this, an exception is thrown because in KubeJS, due to plentiful amount of type wrappers, strings can be implicitly converted to many types, like `ItemStack`, `Fluid`, `Ingredient`, etc.
 ```
 [Server thread/ERROR] [KubeJS Server/]: example.js#8: The choice of Java method dev.emi.emi.api.stack.EmiStack.of matching JavaScript argument types (string) is ambiguous; candidate methods are: 
     class dev.emi.emi.api.stack.EmiStack of(net.minecraft.world.level.material.Fluid)
@@ -159,8 +160,8 @@ However, after running the script like this, an exception is thrown because in K
 ```
 
 To fix this, a specific overload must be chosen by calling a function named as the full **method signature** of one of the following candidate methods from the error.
-Here, we want to call the method: `[java]public static EmiStack of(ItemStack stack)`. To do this, we need to call the "`of(net.minecraft.world.item.ItemStack)`" method on the class reference.
-But wait - JavaScript identifiers can't have parentheses and dots in them! But you can still call it we provide the name as string inside square brackets like so:
+Here, we want to call the specific overloaded method: `[java]public static EmiStack of(ItemStack stack)`. To do this, we need to call the "`of(net.minecraft.world.item.ItemStack)`" method on the class reference.
+But wait - JavaScript identifiers can't have parentheses and dots in them! But the method can still be called it we provide the name as string inside square brackets like so:
 
 ```js
 const $EmiStack = Java.loadClass('dev.emi.emi.api.stack.EmiStack')
@@ -168,3 +169,61 @@ console.log($EmiStack['of(net.minecraft.world.item.ItemStack)']('minecraft:stone
 ```
 
 Now the script works as expected.
+
+---
+
+**Ambiguous constructor example**
+Because constructors are special methods in Java which role is to construct a new instance of an object, constructors may also be overloaded.
+Here's an __impractical__ example of setting the newly spawned entity's walk target to a block at coordinates `[0, 0, 0]`
+
+To do this, an instance of `WalkTarget` needs to be constructed in order to save the memory to the living entity's brain.
+
+The `WalkTarget` class has the following overloaded constructors:
+```java
+public class WalkTarget {
+    public WalkTarget(BlockPos pos, float speedModifier, int closeEnoughDist);
+    public WalkTarget(Vec3 vectorPos, float speedModifier, int closeEnoughDist);
+    public WalkTarget(Entity targetEntity, float speedModifier, int closeEnoughDist);
+    public WalkTarget(PositionTracker target, float speedModifier, int closeEnoughDist);
+}
+```
+
+One would attempt to construct the `WalkTarget` like in the script below:
+
+```js
+EntityEvents.spawned(event => {
+	if (!event.entity.isLiving() && event.entity.isPlayer()) return
+	const $WalkTarget = Java.loadClass('net.minecraft.world.entity.ai.memory.WalkTarget')
+
+	const livingEntity = event.entity
+	livingEntity.brain.setMemory('walk_target', new $WalkTarget([0, 0, 0], 3, 5))
+})
+```
+
+However, in KubeJS, a 3-element JS array may be interpreted as both `Vec3` and `BlockPos`. Thus, an exception is thrown:
+```
+[Server thread/ERROR] [KubeJS Server/]: other.js#9: Error in 'EntityEvents.spawned': dev.latvian.mods.rhino.EvaluatorException: The choice of Java constructor net.minecraft.world.entity.ai.memory.WalkTarget matching JavaScript argument types (object,number,number) is ambiguous; candidate constructors are: 
+    net.minecraft.world.entity.ai.memory.WalkTarget net.minecraft.world.entity.ai.memory.WalkTarget(net.minecraft.core.BlockPos,float,int)
+    net.minecraft.world.entity.ai.memory.WalkTarget net.minecraft.world.entity.ai.memory.WalkTarget(net.minecraft.world.phys.Vec3,float,int)
+```
+
+To specify a constructor, construct an instance from the property of the class reference named as the parameter types in parentheses from one of the candidate constructors from the above error.
+
+We want to construct an instance using the `[java]public WalkTarget(BlockPos pos, float speedModifier, int closeEnoughDist)` constructor, so the appropriate syntax is:
+```js
+new $WalkTarget['(net.minecraft.core.BlockPos,float,int)']([0, 0, 0], 3, 5)
+```
+
+After the script is modified (and the `setMemory` method is disambiguated too), the script runs fine.
+```js
+EntityEvents.spawned(event => {
+	if (!event.entity.isLiving() && event.entity.isPlayer()) return
+	const $WalkTarget = Java.loadClass('net.minecraft.world.entity.ai.memory.WalkTarget')
+
+	const livingEntity = event.entity
+	livingEntity.brain['setMemory(net.minecraft.world.entity.ai.memory.MemoryModuleType,java.lang.Object)'](
+		'walk_target',
+		new $WalkTarget['(net.minecraft.core.BlockPos,float,int)']([0, 0, 0], 3, 5)
+	)
+})
+```

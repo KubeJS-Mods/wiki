@@ -174,7 +174,7 @@ Now the script works as expected.
 
 **Ambiguous constructor example**
 Because constructors are special methods in Java which role is to construct a new instance of an object, constructors may also be overloaded.
-Here's an __impractical__ example of setting the newly spawned entity's walk target to a block at coordinates `[0, 0, 0]`
+Here's an __impractical__ example of setting the newly spawned entity's walk target to a block at coordinates `\[0, 0, 0\]`.
 
 To do this, an instance of `WalkTarget` needs to be constructed in order to save the memory to the living entity's brain.
 

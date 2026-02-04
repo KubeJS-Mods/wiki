@@ -34,14 +34,15 @@ Now `[js]$Double` should refer to Java `Double` class, and `[js]$ItemProperties`
 
 Now, what we can do with the `[js]$Double` and `[js]$ItemProperties` classes?
 Using [`Java.loadClass`](/wiki/ref/wrappers/JavaWrapper#loadClass), we obtained a reference to the `Double` **class**.
-References to **classes** contain all #[[orange|`public static`]] methods and fields of the class.
+From references to **classes**, we can call all #[[orange|`public static`]] methods, read #[[orange|`public static`]] fields and assign to #[[orange|`public static`]] fields that aren't #[[orange|`final`]].
 
 **Syntax**
 ```js
 $Class = Java.loadClass(/* fully qualified class name */)
 
 $Class.publicStaticMethod(arg1, arg2, /* … */, argN)
-$Class.publicStaticField
+const value = $Class.publicStaticField
+$Class.publicStaticField = value
 ```
 
 **Example** (using [`java.lang.Double`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html))
@@ -79,6 +80,18 @@ $Class(arg1, arg2, /* … */, argN)
 In both cases, this will result in a new instance of the class, but using `[js]new` is recommended to avoid confusion while reading the code.
 <<<
 
+From instances, we can call all #[[orange|`public`]] methods, read #[[orange|`public`]] fields and assign to #[[orange|`public`]] fields that aren't #[[orange|`final`]].
+
+**Syntax**
+```js
+$Class = Java.loadClass(/* fully qualified class name */)
+const instance = new $Class(arg1, arg2, /* … */, argN)
+
+$Class.publicMethod(arg1, arg2, /* … */, argN)
+const value = $Class.publicField
+$Class.publicField = value
+```
+
 **Example**
 Let's use `ChorusFruitItem` and `Item.Properties` classes to create our very own, custom Chorus Fruit, separate from the vanilla one.
 
@@ -96,7 +109,7 @@ StartupEvents.registry('item', event => {
 			// Construct a new instance of `ChorusFruitItem`.
 			// Its constructor takes one argument, which is an instance of `Item.Properties`.
 			new $ChorusFruitItem(
-				// Let's construct it, and set food properties so the fruit is, well, edible.
+				// Let's construct it, and set food properties on the fresh instance so the fruit is, well, edible.
 				new $ItemProperties().food({
 					canAlwaysEat: true,
 					nutrition: 4,

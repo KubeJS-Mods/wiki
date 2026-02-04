@@ -120,3 +120,51 @@ StartupEvents.registry('item', event => {
 	)
 })
 ```
+
+# Calling overloads
+
+Unlike JavaScript, Java allows the programmer to specify different implementations of a method based on parameter types provided.
+
+This creates a problem for JavaScript, since JavaScript only has a limited set of types which can't be provided directly.
+In JavaScript:
+- types are inferred from whatever is assigned to variable,
+- there are no number types besides `number`, which represents a 64-bit floating point number (`double` in Java).
+
+Java on the other hand is statically, strongly typed, so all types are known upfront.
+
+To solve this, Rhino uses what's known as "overload resolution" to try to guess which overload to use based on provided parameters.
+For each parameter, type wrappers are invoked to try to convert the input to the appropriate parameter type.
+If overload resolution results in only one overload, that overload is called.
+
+But if it results in more than one overload, an ambiguous method call exception is thrown.
+
+**Example**
+The following example is loosely adapted from [Disambiguating Java class overloads](https://discordapp.com/channels/303440391124942858/1441611912512147566) post on latvian.dev Discord server.
+
+Here, one would attempt to create an EMI stack like this:
+
+```js
+const $EmiStack = Java.loadClass('dev.emi.emi.api.stack.EmiStack')
+console.log($EmiStack.of('minecraft:stone'))
+```
+
+However, after running the script like this, an exception is thrown because in KubeJS, strings can be converted to many types, like `ItemStack`, `Fluid`, `Ingredient`, etc.
+```
+[Server thread/ERROR] [KubeJS Server/]: example.js#8: The choice of Java method dev.emi.emi.api.stack.EmiStack.of matching JavaScript argument types (string) is ambiguous; candidate methods are: 
+    class dev.emi.emi.api.stack.EmiStack of(net.minecraft.world.level.material.Fluid)
+    class dev.emi.emi.api.stack.EmiStack of(net.minecraft.world.item.ItemStack)
+    class dev.emi.emi.api.stack.EmiStack of(net.minecraft.world.level.ItemLike)
+    interface dev.emi.emi.api.stack.EmiIngredient of(java.util.List)
+    interface dev.emi.emi.api.stack.EmiIngredient of(net.minecraft.world.item.crafting.Ingredient)
+```
+
+To fix this, a specific overload must be chosen by calling a function named as the full **method signature** of one of the following candidate methods from the error.
+Here, we want to call the method: `[java]public static EmiStack of(ItemStack stack)`. To do this, we need to call the "`of(net.minecraft.world.item.ItemStack)`" method on the class reference.
+But wait - JavaScript identifiers can't have parentheses and dots in them! But you can still call it we provide the name as string inside square brackets like so:
+
+```js
+const $EmiStack = Java.loadClass('dev.emi.emi.api.stack.EmiStack')
+console.log($EmiStack['of(net.minecraft.world.item.ItemStack)']('minecraft:stone')) // logs "stone x1"
+```
+
+Now the script works as expected.

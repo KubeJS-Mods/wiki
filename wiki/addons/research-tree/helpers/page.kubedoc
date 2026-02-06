@@ -46,6 +46,10 @@ Creates a `DimensionRequirement` requiring the player to visit the dimension (eg
 - $$.time(ticks: int)
 Creates a `TimeRequirement` requiring the player to wait a certain amount of time
 
+## Stage Requirement
+- $$.requireStage(stage: String)
+Creates `PlayerStageRequirement` requiring the player to have a stage unlocked/added. (Note: This only works with KubeJS stages).
+
 ## Custom Requirements
 - $$.custom(kubeRequirement: ResourceLocation)
 Allows you to use a requirement created with KubeJS
@@ -101,6 +105,10 @@ Gives the player an effect. To make `MobEffectInstance`, see `MobEffectUtil`
 ## Recipe Unlocking
 - $$.unlockRecipes(recipes: ResourceLocation[])
 Unlocks the given recipes to the player
+
+## Stage Unlocking
+- $$.grantStage(stage: String)
+Creates a `PlayerUnlockStageReward` which grants the player a stage. (Note: This only works with KubeJS stages).
 
 ## Custom Rewards
 - $$.custom(kubeReward: ResourceLocation)

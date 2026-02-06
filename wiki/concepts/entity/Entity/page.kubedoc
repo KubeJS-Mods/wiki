@@ -421,7 +421,7 @@ Corresponds to `CustomNameVisible` NBT tag on the entity.
 ## Position
 
 >>> #teleport-to
-### `setPos`
+### `teleportTo`
 <<<
 
 >>> #teleport-to-description

@@ -24,8 +24,6 @@ In the following examples, `[js]entity` will be referring to the instance of `En
 
 ## Identification
 
-
-
 >>> #getEntityType
 ### `getEntityType`
 <<<
@@ -421,6 +419,119 @@ Corresponds to `CustomNameVisible` NBT tag on the entity.
 ---
 
 ## Position
+
+>>> #teleport-to
+### `setPos`
+<<<
+
+>>> #teleport-to-description
+
+**Syntax**
+```js
+entity.teleportTo(dimension, x, y, z, yaw, pitch)
+```
+
+Teleports an entity to a specified dimension, coordinates and rotation using logic similar to that of a `/tp` command.
+Provided dimension, coordinates and rotation are checked for validity:
+- Dimension must exist in registry.
+- The target block coordinate must be within the bounds of a Minecraft world, so no more than 30 million blocks in x or z direction, and no more than 20 million blocks in y direction.
+- Yaw or pitch must not be `[js]NaN`.
+
+>>>warn
+Since `/tp` command logic is used here, in an __unlikely__ scenario, the destination may be changed by NeoForge's `EntityTeleportEvent.TeleportCommand` event listener.
+<<<
+
+**Parameters**
+- `[js]dimension`: A `ResourceLocation` of a destination dimension. It may be a string representing a dimension ID, like `[js]'minecraft:the_nether'`.
+- `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity.
+- `[js]yaw`, `[js]pitch`: The target rotation of the entity. 
+**Return value**
+None (`[js]undefined`).
+
+---
+
+
+**Syntax**
+```js
+entity.teleportTo(level, x, y, z, relativeMovements, yaw, pitch)
+```
+
+Teleports an entity to a specified dimension, coordinates and rotation.
+
+**Parameters**
+- `[js]level`: A `ServerLevel` to teleport to. `[js]server.getOverworld()` is a quick way to get the `ServerLevel` corresponding to the Overworld.
+- `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity.
+- `[js]relativeMovements`: A set, containing info, which coordinates refer to relative movements rather than absolute ones. Used only on the version of the method used on [[/concepts/entity/Player|`Player`]] instances. It may be a JS array containing strings representing coordinate types. This example array contains all of them: `[js]\['x', 'y', 'z', 'y_rot', 'x_rot'\]`.
+- `[js]yaw`, `[js]pitch`: The target rotation of the entity. 
+**Return value**
+`[js]true` if teleportation succeeded, `[js]false` if not.
+
+---
+
+**Syntax**
+```js
+entity.teleportTo(x, y, z)
+```
+
+Teleports the entity to the specified coordinates (x, y, z).
+
+**Parameters**
+- `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity. 
+**Return value**
+None (`[js]undefined`).
+<<<
+
+| <#teleport-to> |
+| <#teleport-to-description> |
+
+---
+
+>>> #set-position
+### `setPosition`
+<<<
+
+>>> #set-position-description
+
+**Syntax**
+```js
+entity.setPosition(x, y, z)
+```
+
+Teleports the entity to specified (x, y, z), using `/tp` command logic.
+
+**Parameters**
+- `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity. 
+**Return value**
+None (`[js]undefined`).
+<<<
+
+| <#set-position> |
+| <#set-position-description> |
+---
+
+>>> #teleport-relative
+### `teleportRelative`
+<<<
+
+>>> #teleport-relative-description
+
+**Syntax**
+```js
+entity.teleportRelative(dx, dy, dz)
+```
+
+Teleports the entity by given (dx, dy, dz) relative to the entity's current position.
+
+**Parameters**
+- `[js]dx`, `[js]dy`, `[js]dz`: Offset of `x`, `y` and `z` coordinate compared to the current entity position.
+**Return value**
+None (`[js]undefined`).
+<<<
+
+| <#teleport-relative> |
+| <#teleport-relative-description> |
+
+---
 
 >>> #setPos
 ### `setPos`

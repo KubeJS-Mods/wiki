@@ -40,10 +40,16 @@ From references to **classes**, we can call all #[[orange|`public static`]] meth
 ```js
 $Class = Java.loadClass(/* fully qualified class name */)
 
+$Class.publicStaticMethod()
+$Class.publicStaticMethod(arg1)
+$Class.publicStaticMethod(arg1, arg2)
 $Class.publicStaticMethod(arg1, arg2, /* … */, argN)
+
 const value = $Class.publicStaticField
 $Class.publicStaticField = value
 ```
+**Parameters**
+- `[js]arg1`, `[js]arg2`, …, `[js]argN`: The arguments to pass to the method. The number of arguments depends on how many does a Java method need.
 
 **Example** (using [`java.lang.Double`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html))
 ```js
@@ -57,7 +63,7 @@ const fiveInt = boxedFive.intValue()
 // Note that in Rhino, Java primitives stay as Java primitives unless a JavaScript operation is done on them.
 // So the number stored inside `fiveInt` is an `int`, not a `double` (JS `number`).
 
-console.log(5) // Logs '5.0'
+console.log(5) // Logs '5.0', as internally JS `number`s are represented as `double` numbers.
 console.log(fiveInt) // Logs '5', because `fiveInt` is a Java int
 
 console.log($Double.MAX_VALUE) // Logs '1.7976931348623157E308'
@@ -70,8 +76,15 @@ To do that, **call** the reference, providing appropriate constructor arguments 
 ```js
 $Class = Java.loadClass(/* fully qualified class name */)
 
+new $Class()
+new $Class(arg1)
+new $Class(arg1, arg2)
 new $Class(arg1, arg2, /* … */, argN)
 ```
+
+**Parameters**
+- `[js]arg1`, `[js]arg2`, …, `[js]argN`: The arguments to pass to the constructor. The number of arguments depends on how many does a Java constructor need.
+
 >>>info
 Java class references may be called with or without `[js]new`.
 ```js
@@ -227,3 +240,5 @@ EntityEvents.spawned(event => {
 	)
 })
 ```
+
+[TODO: Interfaces, `JavaAdapter`]: #

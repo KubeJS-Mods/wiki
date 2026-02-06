@@ -919,46 +919,6 @@ None (`[js]undefined`).
 
 | <#copyPosition> |
 | <#copyPosition-description> |
----
-
->>> #teleport-to
-### `teleportTo`
-<<<
-
->>> #teleport-to-description
-**Syntax**
-```js
-entity.teleportTo(x, y, z)
-```
-
-Teleports an entity to specified x, y and z coordinates.
-
-**Parameters**
-- `[js]x`, `[js]y`, `[js]z`: The coordinates to teleport to.
-
-**Return value**
-None (`[js]undefined`).
-
----
-
-**Syntax**
-```js
-entity.teleportTo(dimensionID, x, y, z, yaw, pitch)
-```
-
-Teleports an entity to specified dimension, x, y and z coordinates and sets the entity's rotation.
-
-Also triggers pre-teleport command NeoForge events, so the final destination may differ from the one provided if one of `EntityTeleportEvent.TeleportCommand` listeners decides to change the destination.
-
-- `[js]x`, `[js]y`, `[js]z`: The coordinates to teleport to.
-
-**Return value**
-None (`[js]undefined`).
-
-<<<
-
-| <#teleport-to>             |
-| <#teleport-to-description> |
 
 ---
 

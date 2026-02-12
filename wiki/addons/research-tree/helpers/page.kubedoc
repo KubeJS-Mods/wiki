@@ -1,9 +1,13 @@
+>>> info
+For a more detailed list of everything listed, visit the [Research Tree General Knowledge](https://github.com/wolfieboy09/ResearchTree/wiki/General-Knowledge) page.
+<<<
+
 # Requirements
-Requirements are used for research nodes where certain things need to be met before researching can actually beign.
+Requirements are used for research nodes where certain things need to be met before researching can actually begin.
 
 >>> info
 These listed methods will all be under `Requirements`.
-`ItemRequirement`s are also **not** bound to the limit of 99 item count (as what an `ItemStack` would have. You could have 500 and it'll still work)
+`ItemRequirement`s are also **not** bound to the limit of 99 item count (as what an `ItemStack` would have. You could have 500 and it'll still work.)
 <<<
 
 ## Items
@@ -33,14 +37,24 @@ Creates an `AdvancementRequirement` requiring the player to have the given advan
 
 ## Dimension
 >>> info
-When research has begun, the player must visit the dimension in order for it to be counted as fulfilled
+When research has begun, the player must visit the dimension for it to be counted as fulfilled
 <<<
 
 - $$.dimension(dimension: RegistryKey<Level>)
 Creates a `DimensionRequirement` requiring the player to visit the dimension (eg. `minecraft:the_end`)
 
-- $$.dimension(dimensions: RegistryKey<Level>[])
+- $$.dimensions(dimensions: RegistryKey<Level>[])
 Creates a `DimensionRequirement` requiring the player to visit the dimension (eg. `minecraft:the_end` and `minecraft:the_nether`)
+
+## Timed Dimension
+This is the same thing as `Dimension`, but with the number of ticks the player has been in each dimension.
+
+- $$.dimension(dimension: RegistryKey<Level>, int duration)
+Now, with a second parameter, the amount of time the player has to be in each dimension. Creates a `TimedDimensionRequirement`.
+
+- $$.dimensions(dimensions: RegistryKey<Level>[], int duration). 
+Creates a `TimedDimensionRequirement` with a list of dimensions.
+
 
 ## Time
 - $$.time(ticks: int)

@@ -1,0 +1,51 @@
+>>> info
+This guide assumes that you know about:
+- Java types and JavaScript types,
+- Various types of Java classes (`class`, `interface`, `enum`, `record`)
+
+<<<
+In order to abstract away the knowledge of underlying types from the scripter, Rhino and KubeJS add what's known as **type wrappers**. Their role is to attempt to convert the type provided as an argument of a function, assigned to a variable or assigned to an object to the intended Java type.
+
+Below is the comprehensive table describing all the implicit type conversions possible in KubeJS. Types are Java types by default, unless prepended with "JS".
+
+# To `AABB`
+
+>>> #aabb-blockpos
+`BlockPos`
+<<<
+
+>>> #aabb-blockpos-method
+Creates an axis aligned bounding box encompassing the block at the provided `BlockPos` only.
+<<<
+
+>>> #aabb-array-3
+JS array with 3 `number` elements:
+`[js]\[x, y, z\]`
+<<<
+
+>>> #aabb-array-3-method
+Creates an axis aligned bounding box of size `[js]x`, `[js]y`, `[js]z` centered at the origin (0, 0, 0).
+<<<
+
+>>> #aabb-array-6
+JS array with 6 `number` elements:
+`[js]\[x1, y1, z1, x2, y2, z2\]`
+<<<
+
+>>> #aabb-array-6-method
+Creates an axis aligned bounding box between coordinates `[js]x1`, `[js]y1`, `[js]z1` and `[js]x2`, `[js]y2`, `[js]z2`.
+<<<
+
+>>> #aabb-default
+Other types
+<<<
+
+>>> #aabb-default-method
+Creates an empty AABB (__**fails silently!**__)
+<<<
+
+| From type        | Method                  |
+| <#aabb-blockpos> | <#aabb-blockpos-method> |
+| <#aabb-array-3>  | <#aabb-array-3-method>  |
+| <#aabb-array-6>  | <#aabb-array-6-method>  |
+| <#aabb-default>  | <#aabb-default-method>  |

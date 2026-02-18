@@ -151,3 +151,208 @@ Returns the `ColorWrapper.NONE` color (__**fails silently!**__).
 | <#kubecolor-string>   | <#kubecolor-string-method>  |
 | <#kubecolor-number>   | <#kubecolor-number-method>  |
 | <#kubecolor-default>  | <#kubecolor-default-method> |
+
+# To `TextColor`
+
+Conversion mostly identical to [`KubeColor`](#to-kubecolor), but the resulting `KubeColor` is converted to `TextColor` by using the `kjs$createTextColor` method on it, which creates a `TextColor` from the color held by the `KubeColor`.
+
+
+# To `ColorRGBA`
+
+Conversion mostly identical to [`KubeColor`](#to-kubecolor), but the resulting `KubeColor` is converted to `ColorRGBA` by constructing a new instance of it with the color held by the `KubeColor`.
+
+# To `DamageSource`
+
+>>> #damagesource-player
+[[/concepts/entity/Player|`Player`]]
+<<<
+
+>>> #damagesource-player-method
+Returns the `[js]'minecraft:player_attack'` damage source caused by the provided `Player`.
+<<<
+
+>>> #damagesource-livingentity
+[[/concepts/entity/LivingEntity|`LivingEntity`]]
+<<<
+
+>>> #damagesource-livingentity-method
+Returns the `[js]'minecraft:mob_attack'` damage source caused by the provided `LivingEntity`.
+<<<
+
+>>> #damagesource-default
+Other types (`string`, `ResourceLocation`, `ResourceKey`, etc.)
+<<<
+
+>>> #damagesource-default-method
+First, the object is [converted to `ResourceLocation`](#to-resourcelocation). If the object is a string, and it has no namespace part (like `[js]'mob_attack'`), `[js]'minecraft'` is assumed.
+This conversion may throw for invalid inputs.
+Then, a registry lookup is performed.
+If the resource location is in the registry, the corresponding `DamageSource` is returned. Its causing entity and direct entity will be both `[js]null`.
+Otherwise, an exception is thrown.
+<<<
+
+| From type                    | Method                               |
+| <#damagesource-player>       | <#damagesource-player-method>        |
+| <#damagesource-livingentity> | <#damagesource-livingentity-method>  |
+| <#damagesource-default>      | <#damagesource-default-method>       |
+
+# To `EntitySelector`
+There are multiple classes in Minecraft with that name, so to avoid ambiguity, this refers to the `net.minecraft.commands.arguments.selector.EntitySelector` class.
+
+>>> #entityselector-null
+`[js]null`
+<<<
+
+>>> #entityselector-null-method
+Returns an `EntitySelector` selecting all entities - equivalent to `[js]'@e'` used in commands.
+<<<
+
+>>> #entityselector-default
+Other types (including JS `string`)
+<<<
+
+>>> #entityselector-default-method
+The object is converted to string using its `toString` method.
+Then, the string is passed to the `EntitySelectorParser` to try to parse the entity selector, using logic used in the command interpreter.
+The expected string format is explained in detail in the [Target selectors](https://minecraft.wiki/w/Target_selectors) article on the [minecraft.wiki](https://minecraft.wiki).
+If the parsing fails, it fails __**semi-silently**__:
+- An error is printed into the console that says: `Error parsing entity selector, falling back to all`,
+- Returns an `EntitySelector` selecting all entities - equivalent to `[js]'@e'` used in commands.
+<<<
+
+| From type                  | Method                           |
+| <#entityselector-null>     | <#entityselector-null-method>    |
+| <#entityselector-default>  | <#entityselector-default-method> |
+
+# To `Ingredient`
+
+>>> #ingredient-wrapper
+`Wrapper`
+<<<
+
+>>> #ingredient-wrapper-method
+Will be recursively unwrapped, until the object is no longer a `Wrapper`, then conversion will happen according to the following steps.
+<<<
+
+>>> #ingredient-null
+`[js]null`
+`ItemStack` (if it's empty)
+`ItemLike` (if it represents Air)
+<<<
+
+>>> #ingredient-null-method
+Returns an empty `Ingredient`.
+<<<
+
+>>> #ingredient-ingredientsupplierkjs
+`IngredientSupplierKJS`, implemented/extended by:
+- `ICustomIngredient`
+- `Ingredient`
+- `SizedIngredient`
+- `ItemStack`
+- `Item`
+- `ItemPredicate`
+<<<
+
+>>> #ingredient-ingredientsupplierkjs-method
+Will call a `kjs$getIngredient` method on the object, which will convert an object into an `Ingredient` appropriately.
+<<<
+
+>>> #ingredient-itemlike
+`ItemLike`
+<<<
+
+>>> #ingredient-itemlike-method
+Will use vanilla `Ingredient.of` method to create an ingredient.
+<<<
+
+>>> #ingredient-tagkey
+`TagKey`
+<<<
+
+>>> #ingredient-tagkey-method
+Will use vanilla `Ingredient.of` method to create an ingredient matching items belonging to the given tag in `TagKey`.
+<<<
+
+>>> #ingredient-regex
+`Pattern` / JS `RegExp`
+<<<
+
+>>> #ingredient-regex-method
+Will construct an ingredient which will match all items whose ID matches the given regular expression.
+<<<
+
+>>> #ingredient-json
+`JsonElement`
+<<<
+
+>>> #ingredient-json-method
+If the `JsonElement` is:
+- `[js]null`, `JsonNull`, `JsonArray` if the array is empty: returns an empty ingredient,
+- `JsonPrimitive` (represents non-object, non-array types in JSON): converted to string, then the type wrapper is invoked on that string,
+- Otherwise, the GSON `JsonElement` is passed into the vanilla `Ingredient.CODEC` to be decoded into an `Ingredient`.
+<<<
+
+>>> #ingredient-string
+`CharacterSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #ingredient-string-method
+If the string is:
+- `[js]''` (empty string), `[js]'-'`, `[js]'air'`, `[js]'minecraft:air'` - returns an empty ingredient,
+- `[js]'*'` - returns an ingredient that matches every item in the game,
+Otherwise, a `StringReader` is constructed from the string and analyzed.
+All whitespaces are skipped while reading the string.
+If the string consists of whitespaces only, an empty ingredient is returned.
+Otherwise, if the first non-space character is a:
+- `[js]'-'` - returns an empty ingredient,
+- `[js]'*'` - returns an ingredient that matches every item in the game,
+- `[js]'#'` - All following characters are interpreted as a `ResourceLocation` of an item tag, until a character is encountered which isn't allowed in a `ResourceLocation`. Then, returns a tag ingredient that is constructed from that tag.
+- `[js]'@'` - All following characters are interpreted as a namespace (mod name), until a character is encountered which isn't allowed in an unquoted string in SNBT. Then, returns a namespace ingredient that matches all items belonging in a given namespace.
+- `[js]'%'` - All following characters are interpreted as a `ResourceLocation` of a creative mode tab, until a character is encountered which isn't allowed in a `ResourceLocation`. If the creative mod tab exists at the given location, returns a creative tab ingredient that matches all items in a given creative mode tab.
+- `[js]'/'` - All following characters, up to another unescaped `'/'` are interpreted as a regular expression pattern. Regex flags may appear after the last slash, just like in the JS `RegExp` literal. Returns an ingredient which will match all items whose ID matches the given regular expression.
+- `[js]'\['` - All following characters up to the closing bracket `']'` will be interpreted as a compound ingredient (list of ingredients). Different ingredients must be separated by commas. If the list is empty, an empty ingredient is returned. If the list has only one ingredient, that ingredient will be returned. Otherwise, returns the resulting compound ingredient.
+Otherwise, all characters are interpreted as a `ResourceLocation` of an item tag, until a character is encountered which isn't allowed in a `ResourceLocation`.
+Then, if the location is followed by `[js]'\['` or `[js]'{'`, it will be interpreted as a component predicate for the item ingredient.
+Predicates starting with `[js]'{'` correspond to `[js]'minecraft:custom_data'` component and must be formatted as SNBT, like the format used in commands. Otherwise, the syntax is similar to that used in the [item predicate command argument](https://minecraft.wiki/w/Argument_types#minecraft:item_predicate).
+<<<
+
+>>> #ingredient-list
+`List`, `Iterable` or Java array
+JS array
+<<<
+
+>>> #ingredient-list-method
+The collections will be first normalized to a `List`.
+Then, each element of the list will be converted to `Ingredient` if possible by invoking the type wrapper on each element.
+If the list is empty, an empty ingredient is returned. If the list has only one ingredient, that ingredient will be returned. Otherwise, returns the resulting compound ingredient.
+<<<
+
+>>> #ingredient-map
+`Map`
+<<<
+
+>>> #ingredient-list-method
+Will be passed to the vanilla `Ingredient.CODEC` to be decoded into an `Ingredient`.
+<<<
+
+>>> #ingredient-default
+Other types
+<<<
+
+>>> #ingredient-default
+Will be converted to `ItemStack` if possible, then will be converted into an `Ingredient` by calling the `kjs$getIngredient` method on the item stack.
+<<<
+
+| From type                           | Method                                     |
+| <#ingredient-wrapper>               | <#ingredient-wrapper-method>               |
+| <#ingredient-ingredientsupplierkjs> | <#ingredient-ingredientsupplierkjs-method> |
+| <#ingredient-itemlike>              | <#ingredient-itemlike-method>              |
+| <#ingredient-tagkey>                | <#ingredient-tagkey-method>                |
+| <#ingredient-regex>                 | <#ingredient-regex-method>                 |
+| <#ingredient-json>                  | <#ingredient-json-method>                  |
+| <#ingredient-string>                | <#ingredient-string-method>                |
+| <#ingredient-list>                  | <#ingredient-list-method>                  |
+| <#ingredient-map>                   | <#ingredient-map-method>                   |
+| <#ingredient-default>               | <#ingredient-default-method>               |

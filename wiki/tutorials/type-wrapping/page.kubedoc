@@ -330,7 +330,7 @@ If the list is empty, an empty ingredient is returned. If the list has only one 
 <<<
 
 >>> #ingredient-map
-`Map`
+`Map`, JS `object`
 <<<
 
 >>> #ingredient-map-method

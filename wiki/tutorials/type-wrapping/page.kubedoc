@@ -333,7 +333,7 @@ If the list is empty, an empty ingredient is returned. If the list has only one 
 `Map`
 <<<
 
->>> #ingredient-list-method
+>>> #ingredient-map-method
 Will be passed to the vanilla `Ingredient.CODEC` to be decoded into an `Ingredient`.
 <<<
 
@@ -341,7 +341,7 @@ Will be passed to the vanilla `Ingredient.CODEC` to be decoded into an `Ingredie
 Other types
 <<<
 
->>> #ingredient-default
+>>> #ingredient-default-method
 Will be converted to `ItemStack` if possible, then will be converted into an `Ingredient` by calling the `kjs$getIngredient` method on the item stack.
 <<<
 

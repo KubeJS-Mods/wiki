@@ -49,3 +49,105 @@ Creates an empty AABB (__**fails silently!**__)
 | <#aabb-array-3>  | <#aabb-array-3-method>  |
 | <#aabb-array-6>  | <#aabb-array-6-method>  |
 | <#aabb-default>  | <#aabb-default-method>  |
+
+# To `BlockSetType`
+
+>>> #blocksettype-string
+`CharacterSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #blocksettype-string-method
+Tries to find a `BlockSetType` in the `BlockSetType.VALUES` set by name. The lookup ignores casing of characters.
+If the lookup finds a block set type, it returns that block set type.
+Otherwise, returns `[js]null`.
+<<<
+
+>>> #blocksettype-default
+Other types
+<<<
+
+>>> #blocksettype-default-method
+A record conversion (???)
+<<<
+
+| From type               | Method                         |
+| <#blocksettype-string>  | <#blocksettype-string-method>  |
+| <#blocksettype-default> | <#blocksettype-default-method> |
+
+# To `BlockState`
+
+>>> #blockstate-null
+`[js]null`
+<<<
+
+>>> #blockstate-null-method
+Returns the default block state of Air.
+<<<
+
+>>> #blockstate-block
+`Block`
+<<<
+
+>>> #blockstate-block-method
+Returns the default block state of the provided `Block`.
+<<<
+
+>>> #blockstate-default
+Other types (including JS `string`)
+<<<
+
+>>> #blockstate-default-method
+The provided object is converted to string using its `toString` method.
+If the resulting string is empty, the default block state of Air is returned.
+Otherwise, a `BlockStateParser.parseForBlock` method is invoked to try to parse the block state.
+The expected string follows the format used in commands like `/setblock`: A block, like `[js]'minecraft:stone'`, or a block with properties, like `[js]'minecraft:oak_log\[axis=x\]'`.
+If parsing fails, __**it does so silently**__, returning the default block state of Air.
+<<<
+
+| From type             | Method                       |
+| <#blockstate-null>    | <#blockstate-null-method>    |
+| <#blockstate-block>   | <#blockstate-block-method>   |
+| <#blockstate-default> | <#blockstate-default-method> |
+
+# To `KubeColor`
+
+>>> #kubecolor-string
+`CharacterSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #kubecolor-string-method
+The character sequence is converted to string using its `toString` method.
+If the string is found as a key of the `ColorWrapper.MAP` map, the color returned is the value found at that key.
+Otherwise, if the string starts with `#`:
+- All characters past `#` are interpreted as a hexadecimal long integer.
+- If the string is 7 characters long (so, 6 hex digits), a `SimpleColor` is returned corresponding to the provided RGB color.
+- Otherwise, a `SimpleColorWithAlpha` is returned corresponding to the provided ARGB color.
+
+If no color is found, a `ColorWrapper.NONE` color is returned (__**fails silently!**__).
+<<<
+
+>>> #kubecolor-number
+JS `number`, unless it's `0`
+<<<
+
+>>> #kubecolor-number-method
+The provided number is converted to `int`, then a `SimpleColor` corresponding to the provided RGB color is returned.
+>>>warn
+ARGB colors aren't handled here.
+<<<
+<<<
+
+>>> #kubecolor-default
+Other types
+<<<
+
+>>> #kubecolor-default-method
+Returns the `ColorWrapper.NONE` color (__**fails silently!**__).
+<<<
+
+| From type             | Method                      |
+| <#kubecolor-string>   | <#kubecolor-string-method>  |
+| <#kubecolor-number>   | <#kubecolor-number-method>  |
+| <#kubecolor-default>  | <#kubecolor-default-method> |

@@ -1,7 +1,7 @@
 >>> info
 This guide assumes that you know about:
 - Java types and JavaScript types,
-- Various types of Java classes (`class`, `interface`, `enum`, `record`)
+- Various types of Java classes (`[java]class`, `[java]interface`, `[java]enum`, `[java]record`)
 
 <<<
 In order to abstract away the knowledge of underlying types from the scripter, Rhino and KubeJS add what's known as **type wrappers**. Their role is to attempt to convert the type provided as an argument of a function, assigned to a variable or assigned to an object to the intended Java type.
@@ -11,11 +11,11 @@ Below is the comprehensive table describing all the implicit type conversions po
 # To `AABB`
 
 >>> #aabb-blockpos
-`BlockPos`
+`[java]BlockPos`
 <<<
 
 >>> #aabb-blockpos-method
-Creates an axis aligned bounding box encompassing the block at the provided `BlockPos` only.
+Creates an axis aligned bounding box encompassing the block at the provided `[java]BlockPos` only.
 <<<
 
 >>> #aabb-array-3
@@ -41,7 +41,7 @@ Other types
 <<<
 
 >>> #aabb-default-method
-Creates an empty AABB (__**fails silently!**__)
+Creates an empty `[java]AABB` (__**fails silently!**__)
 <<<
 
 | From type        | Method                  |
@@ -53,12 +53,12 @@ Creates an empty AABB (__**fails silently!**__)
 # To `BlockSetType`
 
 >>> #blocksettype-string
-`CharacterSequence`
+`[java]CharacterSequence`
 (encompasses string types, including JS `string`)
 <<<
 
 >>> #blocksettype-string-method
-Tries to find a `BlockSetType` in the `BlockSetType.VALUES` set by name. The lookup ignores casing of characters.
+Tries to find a `[java]BlockSetType` in the `[java]BlockSetType.VALUES` set by name. The lookup ignores casing of characters.
 If the lookup finds a block set type, it returns that block set type.
 Otherwise, returns `[js]null`.
 <<<
@@ -86,11 +86,11 @@ Returns the default block state of Air.
 <<<
 
 >>> #blockstate-block
-`Block`
+`[java]Block`
 <<<
 
 >>> #blockstate-block-method
-Returns the default block state of the provided `Block`.
+Returns the default block state of the provided `[java]Block`.
 <<<
 
 >>> #blockstate-default
@@ -98,9 +98,9 @@ Other types (including JS `string`)
 <<<
 
 >>> #blockstate-default-method
-The provided object is converted to string using its `toString` method.
+The provided object is converted to string using its `[java]toString()` method.
 If the resulting string is empty, the default block state of Air is returned.
-Otherwise, a `BlockStateParser.parseForBlock` method is invoked to try to parse the block state.
+Otherwise, a `[java]BlockStateParser.parseForBlock()` method is invoked to try to parse the block state.
 The expected string follows the format used in commands like `/setblock`: A block, like `[js]'minecraft:stone'`, or a block with properties, like `[js]'minecraft:oak_log\[axis=x\]'`.
 If parsing fails, __**it does so silently**__, returning the default block state of Air.
 <<<
@@ -113,27 +113,27 @@ If parsing fails, __**it does so silently**__, returning the default block state
 # To `KubeColor`
 
 >>> #kubecolor-string
-`CharacterSequence`
+`[java]CharacterSequence`
 (encompasses string types, including JS `string`)
 <<<
 
 >>> #kubecolor-string-method
-The character sequence is converted to string using its `toString` method.
-If the string is found as a key of the `ColorWrapper.MAP` map, the color returned is the value found at that key.
+The character sequence is converted to string using its `[java]toString()` method.
+If the string is found as a key of the `[java]ColorWrapper.MAP` map, the color returned is the value found at that key.
 Otherwise, if the string starts with `#`:
 - All characters past `#` are interpreted as a hexadecimal long integer.
-- If the string is 7 characters long (so, 6 hex digits), a `SimpleColor` is returned corresponding to the provided RGB color.
-- Otherwise, a `SimpleColorWithAlpha` is returned corresponding to the provided ARGB color.
+- If the string is 7 characters long (so, 6 hex digits), a `[java]SimpleColor` is returned corresponding to the provided RGB color.
+- Otherwise, a `[java]SimpleColorWithAlpha` is returned corresponding to the provided ARGB color.
 
-If no color is found, a `ColorWrapper.NONE` color is returned (__**fails silently!**__).
+If no color is found, a `[java]ColorWrapper.NONE` color is returned (__**fails silently!**__).
 <<<
 
 >>> #kubecolor-number
-JS `number`, unless it's `0`
+JS `number`, unless it's `[js]0`
 <<<
 
 >>> #kubecolor-number-method
-The provided number is converted to `int`, then a `SimpleColor` corresponding to the provided RGB color is returned.
+The provided number is converted to `[java]int`, then a `[java]SimpleColor` corresponding to the provided RGB color is returned.
 >>>warn
 ARGB colors aren't handled here.
 <<<
@@ -144,7 +144,7 @@ Other types
 <<<
 
 >>> #kubecolor-default-method
-Returns the `ColorWrapper.NONE` color (__**fails silently!**__).
+Returns the `[java]ColorWrapper.NONE` color (__**fails silently!**__).
 <<<
 
 | From type             | Method                      |
@@ -154,12 +154,12 @@ Returns the `ColorWrapper.NONE` color (__**fails silently!**__).
 
 # To `TextColor`
 
-Conversion mostly identical to [`KubeColor`](#to-kubecolor), but the resulting `KubeColor` is converted to `TextColor` by using the `kjs$createTextColor` method on it, which creates a `TextColor` from the color held by the `KubeColor`.
+Conversion mostly identical to [`KubeColor`](#to-kubecolor), but the resulting `[java]KubeColor` is converted to `[java]TextColor` by using the `[java]kjs$createTextColor()` method on it, which creates a `[java]TextColor` from the color held by the `[java]KubeColor`.
 
 
 # To `ColorRGBA`
 
-Conversion mostly identical to [`KubeColor`](#to-kubecolor), but the resulting `KubeColor` is converted to `ColorRGBA` by constructing a new instance of it with the color held by the `KubeColor`.
+Conversion mostly identical to [`KubeColor`](#to-kubecolor), but the resulting `[java]KubeColor` is converted to `[java]ColorRGBA` by constructing a new instance of it with the color held by the `[java]KubeColor`.
 
 # To `DamageSource`
 
@@ -168,7 +168,7 @@ Conversion mostly identical to [`KubeColor`](#to-kubecolor), but the resulting `
 <<<
 
 >>> #damagesource-player-method
-Returns the `[js]'minecraft:player_attack'` damage source caused by the provided `Player`.
+Returns the `[js]'minecraft:player_attack'` damage source caused by the provided `[java]Player`.
 <<<
 
 >>> #damagesource-livingentity
@@ -176,18 +176,18 @@ Returns the `[js]'minecraft:player_attack'` damage source caused by the provided
 <<<
 
 >>> #damagesource-livingentity-method
-Returns the `[js]'minecraft:mob_attack'` damage source caused by the provided `LivingEntity`.
+Returns the `[js]'minecraft:mob_attack'` damage source caused by the provided `[java]LivingEntity`.
 <<<
 
 >>> #damagesource-default
-Other types (`string`, `ResourceLocation`, `ResourceKey`, etc.)
+Other types (`string`, `[java]ResourceLocation`, `[java]ResourceKey`, etc.)
 <<<
 
 >>> #damagesource-default-method
 First, the object is [converted to `ResourceLocation`](#to-resourcelocation). If the object is a string, and it has no namespace part (like `[js]'mob_attack'`), `[js]'minecraft'` is assumed.
 This conversion may throw for invalid inputs.
 Then, a registry lookup is performed.
-If the resource location is in the registry, the corresponding `DamageSource` is returned. Its causing entity and direct entity will be both `[js]null`.
+If the resource location is in the registry, the corresponding `[java]DamageSource` is returned. Its causing entity and direct entity will be both `[js]null`.
 Otherwise, an exception is thrown.
 <<<
 
@@ -204,7 +204,7 @@ There are multiple classes in Minecraft with that name, so to avoid ambiguity, t
 <<<
 
 >>> #entityselector-null-method
-Returns an `EntitySelector` selecting all entities - equivalent to `[js]'@e'` used in commands.
+Returns an `[java]EntitySelector` selecting all entities - equivalent to `[js]'@e'` used in commands.
 <<<
 
 >>> #entityselector-default
@@ -212,12 +212,12 @@ Other types (including JS `string`)
 <<<
 
 >>> #entityselector-default-method
-The object is converted to string using its `toString` method.
-Then, the string is passed to the `EntitySelectorParser` to try to parse the entity selector, using logic used in the command interpreter.
+The object is converted to string using its `[java]toString()` method.
+Then, the string is passed to the `[java]EntitySelectorParser` to try to parse the entity selector, using logic used in the command interpreter.
 The expected string format is explained in detail in the [Target selectors](https://minecraft.wiki/w/Target_selectors) article on the [minecraft.wiki](https://minecraft.wiki).
 If the parsing fails, it fails __**semi-silently**__:
 - An error is printed into the console that says: `Error parsing entity selector, falling back to all`,
-- Returns an `EntitySelector` selecting all entities - equivalent to `[js]'@e'` used in commands.
+- Returns an `[java]EntitySelector` selecting all entities - equivalent to `[js]'@e'` used in commands.
 <<<
 
 | From type                  | Method                           |
@@ -227,55 +227,55 @@ If the parsing fails, it fails __**semi-silently**__:
 # To `Ingredient`
 
 >>> #ingredient-wrapper
-`Wrapper`
+`[java]Wrapper`
 <<<
 
 >>> #ingredient-wrapper-method
-Will be recursively unwrapped, until the object is no longer a `Wrapper`, then conversion will happen according to the following steps.
+Will be recursively unwrapped, until the object is no longer a `[java]Wrapper`, then conversion will happen according to the following steps.
 <<<
 
 >>> #ingredient-null
 `[js]null`
-`ItemStack` (if it's empty)
-`ItemLike` (if it represents Air)
+`[java]ItemStack` (if it's empty)
+`[java]ItemLike` (if it represents Air)
 <<<
 
 >>> #ingredient-null-method
-Returns an empty `Ingredient`.
+Returns an empty `[java]Ingredient`.
 <<<
 
 >>> #ingredient-ingredientsupplierkjs
-`IngredientSupplierKJS`, implemented/extended by:
-- `ICustomIngredient`
-- `Ingredient`
-- `SizedIngredient`
-- `ItemStack`
-- `Item`
-- `ItemPredicate`
+`[java]IngredientSupplierKJS`, implemented/extended by:
+- `[java]ICustomIngredient`
+- `[java]Ingredient`
+- `[java]SizedIngredient`
+- `[java]ItemStack`
+- `[java]Item`
+- `[java]ItemPredicate`
 <<<
 
 >>> #ingredient-ingredientsupplierkjs-method
-Will call a `kjs$getIngredient` method on the object, which will convert an object into an `Ingredient` appropriately.
+Will call a `[java]kjs$getIngredient()` method on the object, which will convert an object into an `[java]Ingredient` appropriately.
 <<<
 
 >>> #ingredient-itemlike
-`ItemLike`
+`[java]ItemLike`
 <<<
 
 >>> #ingredient-itemlike-method
-Will use vanilla `Ingredient.of` method to create an ingredient.
+Will use vanilla `[java]Ingredient.of()` method to create an ingredient.
 <<<
 
 >>> #ingredient-tagkey
-`TagKey`
+`[java]TagKey`
 <<<
 
 >>> #ingredient-tagkey-method
-Will use vanilla `Ingredient.of` method to create an ingredient matching items belonging to the given tag in `TagKey`.
+Will use vanilla `[java]Ingredient.of()` method to create an ingredient matching items belonging to the given tag in `[java]TagKey`.
 <<<
 
 >>> #ingredient-regex
-`Pattern` / JS `RegExp`
+`[java]Pattern` / JS `[js]RegExp`
 <<<
 
 >>> #ingredient-regex-method
@@ -283,18 +283,18 @@ Will construct an ingredient which will match all items whose ID matches the giv
 <<<
 
 >>> #ingredient-json
-`JsonElement`
+`[java]JsonElement`
 <<<
 
 >>> #ingredient-json-method
-If the `JsonElement` is:
-- `[js]null`, `JsonNull`, `JsonArray` if the array is empty: returns an empty ingredient,
-- `JsonPrimitive` (represents non-object, non-array types in JSON): converted to string, then the type wrapper is invoked on that string,
-- Otherwise, the GSON `JsonElement` is passed into the vanilla `Ingredient.CODEC` to be decoded into an `Ingredient`.
+If the `[java]JsonElement` is:
+- `[js]null`, `[java]JsonNull`, `[java]JsonArray` if the array is empty: returns an empty ingredient,
+- `[java]JsonPrimitive` (represents non-object, non-array types in JSON): converted to string, then the type wrapper is invoked on that string,
+- Otherwise, the GSON `[java]JsonElement` is passed into the vanilla `[java]Ingredient.CODEC` to be decoded into an `[java]Ingredient`.
 <<<
 
 >>> #ingredient-string
-`CharacterSequence`
+`[java]CharacterSequence`
 (encompasses string types, including JS `string`)
 <<<
 
@@ -302,40 +302,40 @@ If the `JsonElement` is:
 If the string is:
 - `[js]''` (empty string), `[js]'-'`, `[js]'air'`, `[js]'minecraft:air'` - returns an empty ingredient,
 - `[js]'*'` - returns an ingredient that matches every item in the game,
-Otherwise, a `StringReader` is constructed from the string and analyzed.
+Otherwise, a `[java]StringReader` is constructed from the string and analyzed.
 All whitespaces are skipped while reading the string.
 If the string consists of whitespaces only, an empty ingredient is returned.
 Otherwise, if the first non-space character is a:
 - `[js]'-'` - returns an empty ingredient,
 - `[js]'*'` - returns an ingredient that matches every item in the game,
-- `[js]'#'` - All following characters are interpreted as a `ResourceLocation` of an item tag, until a character is encountered which isn't allowed in a `ResourceLocation`. Then, returns a tag ingredient that is constructed from that tag.
+- `[js]'#'` - All following characters are interpreted as a `[java]ResourceLocation` of an item tag, until a character is encountered which isn't allowed in a `[java]ResourceLocation`. Then, returns a tag ingredient that is constructed from that tag.
 - `[js]'@'` - All following characters are interpreted as a namespace (mod name), until a character is encountered which isn't allowed in an unquoted string in SNBT. Then, returns a namespace ingredient that matches all items belonging in a given namespace.
-- `[js]'%'` - All following characters are interpreted as a `ResourceLocation` of a creative mode tab, until a character is encountered which isn't allowed in a `ResourceLocation`. If the creative mod tab exists at the given location, returns a creative tab ingredient that matches all items in a given creative mode tab.
-- `[js]'/'` - All following characters, up to another unescaped `'/'` are interpreted as a regular expression pattern. Regex flags may appear after the last slash, just like in the JS `RegExp` literal. Returns an ingredient which will match all items whose ID matches the given regular expression.
-- `[js]'\['` - All following characters up to the closing bracket `']'` will be interpreted as a compound ingredient (list of ingredients). Different ingredients must be separated by commas. If the list is empty, an empty ingredient is returned. If the list has only one ingredient, that ingredient will be returned. Otherwise, returns the resulting compound ingredient.
-Otherwise, all characters are interpreted as a `ResourceLocation` of an item tag, until a character is encountered which isn't allowed in a `ResourceLocation`.
+- `[js]'%'` - All following characters are interpreted as a `[java]ResourceLocation` of a creative mode tab, until a character is encountered which isn't allowed in a `[java]ResourceLocation`. If the creative mod tab exists at the given location, returns a creative tab ingredient that matches all items in a given creative mode tab.
+- `[js]'/'` - All following characters, up to another unescaped `[js]'/'` are interpreted as a regular expression pattern. Regex flags may appear after the last slash, just like in the JS `[js]RegExp` literal. Returns an ingredient which will match all items whose ID matches the given regular expression.
+- `[js]'\['` - All following characters up to the closing bracket `[js]'\]'` will be interpreted as a compound ingredient (list of ingredients). Different ingredients must be separated by commas. If the list is empty, an empty ingredient is returned. If the list has only one ingredient, that ingredient will be returned. Otherwise, returns the resulting compound ingredient.
+Otherwise, all characters are interpreted as a `[java]ResourceLocation` of an item tag, until a character is encountered which isn't allowed in a `[java]ResourceLocation`.
 Then, if the location is followed by `[js]'\['` or `[js]'{'`, it will be interpreted as a component predicate for the item ingredient.
 Predicates starting with `[js]'{'` correspond to `[js]'minecraft:custom_data'` component and must be formatted as SNBT, like the format used in commands. Otherwise, the syntax is similar to that used in the [item predicate command argument](https://minecraft.wiki/w/Argument_types#minecraft:item_predicate).
 <<<
 
 >>> #ingredient-list
-`List`, `Iterable` or Java array
+`[java]List`, `[java]Iterable` or Java array
 JS array
 <<<
 
 >>> #ingredient-list-method
-The collections will be first normalized to a `List`.
-Then, each element of the list will be converted to `Ingredient` if possible by invoking the type wrapper on each element.
+The collections will be first normalized to a `[java]List`.
+Then, each element of the list will be converted to `[java]Ingredient` if possible by invoking the type wrapper on each element.
 If the list is empty, an empty ingredient is returned. If the list has only one ingredient, that ingredient will be returned. Otherwise, returns the resulting compound ingredient.
 <<<
 
 >>> #ingredient-map
-`Map`, JS `object`
+`[java]Map`, JS `object`
 <<<
 
 >>> #ingredient-map-method
-The provided object will be first normalized to `Map<String, Object>`.
-Then the map will be passed to the vanilla `Ingredient.CODEC` to be decoded into an `Ingredient`.
+The provided object will be first normalized to `[java]Map<String, Object>`.
+Then the map will be passed to the vanilla `[java]Ingredient.CODEC` to be decoded into an `[java]Ingredient`.
 <<<
 
 >>> #ingredient-default
@@ -343,7 +343,7 @@ Other types
 <<<
 
 >>> #ingredient-default-method
-[Will be converted to `ItemStack` if possible](#to-itemstack), then the resulting `ItemStack` will be converted into an `Ingredient` by calling the `kjs$getIngredient` method on the item stack.
+[Will be converted to `ItemStack` if possible](#to-itemstack), then the resulting `[java]ItemStack` will be converted into an `[java]Ingredient` by calling the `[java]kjs$getIngredient()` method on the item stack.
 <<<
 
 | From type                           | Method                                     |
@@ -382,7 +382,7 @@ Returns an empty `[java]ItemStack`.
 <<<
 
 >>> #itemstack-ingredient-method
-__**Will throw an exception**__. As of KubeJS 1.21.1, ingredients are not implicitly convertible into `ItemStack` objects due to them being lazily fetched now.
+__**Will throw an exception**__. As of KubeJS 1.21.1, `[java]Ingredient` objects are not implicitly convertible into `[java]ItemStack` objects due to them being lazily fetched now.
 To get the first `[java]ItemStack` that matches the `[java]Ingredient`: `[js]ingredient`, use `[js]ingredient.getFirst()` (bean: `[js]ingredient.first`).
 To get the first `[java]ItemStack` that matches the `[java]SizedIngredient`: `[js]sizedIngredient`, use `[js]sizedIngredient.getIngredient().getFirst()` (bean: `[js]sizedIngredient.ingredient.first`).
 <<<
@@ -406,7 +406,7 @@ Performs registry lookup for the `[java]Item` at specified `[java]ResourceLocati
 <<<
 
 >>> #itemstack-json
-`JsonElement`
+`[java]JsonElement`
 <<<
 
 >>> #itemstack-json-method

@@ -343,7 +343,7 @@ Other types
 <<<
 
 >>> #ingredient-default-method
-Will be converted to `ItemStack` if possible, then will be converted into an `Ingredient` by calling the `kjs$getIngredient` method on the item stack.
+[Will be converted to `ItemStack` if possible](#to-itemstack), then the resulting `ItemStack` will be converted into an `Ingredient` by calling the `kjs$getIngredient` method on the item stack.
 <<<
 
 | From type                           | Method                                     |
@@ -361,48 +361,48 @@ Will be converted to `ItemStack` if possible, then will be converted into an `In
 # To `ItemStack`
 
 >>> #itemstack-wrapper
-`Wrapper`
+`[java]Wrapper`
 <<<
 
 >>> #itemstack-wrapper-method
-Will be recursively unwrapped, until the object is no longer a `Wrapper`, then conversion will happen according to the following steps.
+Will be recursively unwrapped, until the object is no longer a `[java]Wrapper`, then conversion will happen according to the following steps.
 <<<
 
 >>> #itemstack-null
 `[js]null`
-`ItemLike` (if it represents Air)
+`[java]ItemLike` (if it represents Air)
 <<<
 
 >>> #itemstack-null-method
-Returns an empty `ItemStack`.
+Returns an empty `[java]ItemStack`.
 <<<
 
 >>> #itemstack-ingredient
-`Ingredient`, `SizedIngredient`
+`[java]Ingredient`, `[java]SizedIngredient`
 <<<
 
 >>> #itemstack-ingredient-method
 __**Will throw an exception**__. As of KubeJS 1.21.1, ingredients are not implicitly convertible into `ItemStack` objects due to them being lazily fetched now.
-To get the first `ItemStack` that matches the `Ingredient`: `[js]ingredient`, use `[js]ingredient.getFirst()` (bean: `[js]ingredient.first`).
-To get the first `ItemStack` that matches the `SizedIngredient`: `[js]sizedIngredient`, use `[js]sizedIngredient.getIngredient().getFirst()` (bean: `[js]sizedIngredient.ingredient.first`).
+To get the first `[java]ItemStack` that matches the `[java]Ingredient`: `[js]ingredient`, use `[js]ingredient.getFirst()` (bean: `[js]ingredient.first`).
+To get the first `[java]ItemStack` that matches the `[java]SizedIngredient`: `[js]sizedIngredient`, use `[js]sizedIngredient.getIngredient().getFirst()` (bean: `[js]sizedIngredient.ingredient.first`).
 <<<
 
 >>> #itemstack-itemlike
-`ItemLike`
+`[java]ItemLike`
 <<<
 
 >>> #itemstack-itemlike-method
-Will be converted to `ItemStack` by doing the following:
-- First, the `ItemLike` is converted into `Item` by using the `asItem` method.
-- Then, the `Item` is converted to `ItemStack` by using the `getDefaultInstance` method.
+Will be converted to `[java]ItemStack` by doing the following:
+- First, the `[java]ItemLike` is converted into `[java]Item` by using the `[java]asItem` method.
+- Then, the `[java]Item` is converted to `[java]ItemStack` by using the `[java]getDefaultInstance` method.
 <<<
 
 >>> #itemstack-resourcelocation
-`ResourceLocation`
+`[java]ResourceLocation`
 <<<
 
 >>> #itemstack-resourcelocation-method
-Performs registry lookup for the `Item` at specified `ResourceLocation`, then uses a `getDefaultInstance` method to get the `ItemStack`.
+Performs registry lookup for the `[java]Item` at specified `[java]ResourceLocation`, then uses a `[java]getDefaultInstance` method to get the `[java]ItemStack`.
 <<<
 
 >>> #itemstack-json
@@ -411,14 +411,14 @@ Performs registry lookup for the `Item` at specified `ResourceLocation`, then us
 
 >>> #itemstack-json-method
 If the `JsonElement` is:
-- `[js]null`, `JsonNull`: returns an empty `ItemStack`,
-- `JsonPrimitive` (represents non-object, non-array types in JSON): converted to string, then the type wrapper is invoked on that string,
-- `JsonObject`: is passed into the vanilla `ItemStack.OPTIONAL_CODEC` to be decoded into an `ItemStack`.
+- `[js]null`, `[java]JsonNull`: returns an empty `[java]ItemStack`,
+- `[java]JsonPrimitive` (represents non-object, non-array types in JSON): converted to string, then the type wrapper is invoked on that string,
+- `[java]JsonObject`: is passed into the vanilla `[java]ItemStack.OPTIONAL_CODEC` to be decoded into an `[java]ItemStack`.
 - Otherwise, an exception is thrown.
 <<<
 
 >>> #itemstack-stringtag
-`StringTag` (NBT)
+`[java]StringTag` (NBT)
 <<<
 
 >>> #itemstack-stringtag-method
@@ -426,7 +426,7 @@ Gets converted to string, then the type wrapper is invoked on that string.
 <<<
 
 >>> #itemstack-string
-`CharacterSequence`
+`[java]CharacterSequence`
 (encompasses string types, including JS `string`)
 <<<
 
@@ -438,21 +438,22 @@ If no `[js]'x '` sequence is found, the count is assumed to be 1.
 
 Then, the remainder of the string (after the `[js]'x '` sequence, if it was present) is interpreted as an item ID, optionally with components.
 If the first non-space character is a:
-- `[js]'-'` or string already ended: an empty `ItemStack` is returned.
+- `[js]'-'` or string already ended: an empty `[java]ItemStack` is returned.
 - A digit: All following characters are interpreted as a real number (`double`) until a character that can't be a part of a number is found, then the final count will be rounded up. If this count is below 1, an error will be thrown. A character `[js]'x'` must follow the number. Space is not required after that `[js]'x'`. (This behavior is possibly a bug.)
 
-Then, the remainder of the string (after `[js]'#x'` sequence, where `#` is a number) is interpreted as an item ID, until a character is encountered which isn't allowed in a `ResourceLocation`. If the namespace part is omitted, `[js]'minecraft'` is assumed.
-Then, if the location is followed by `[js]'\['` or `[js]'{'`, it will be interpreted as component modifications for the `ItemStack`.
-Both the location and the component syntax follow the one used in the [`item stack command argument`](https://minecraft.wiki/w/Argument_types#minecraft:item_stack).
+Then, the remainder of the string (after `[js]'#x'` sequence, where `#` is a number) is interpreted as an item ID, until a character is encountered which isn't allowed in a `[java]ResourceLocation`. If the namespace part is omitted, `[js]'minecraft'` is assumed.
+Then, if the location is followed by `[js]'\['` or `[js]'{'`, it will be interpreted as component modifications for the `[java]ItemStack`.
+Both the location and the component syntax follow the one used in the [item stack command argument](https://minecraft.wiki/w/Argument_types#minecraft:item_stack).
 <<<
 
 >>> #itemstack-default
-Other types (including `Map`, JS `object`)
+Other types (including `[java]Map`, JS `object`)
 <<<
 
 >>> #itemstack-default-method
-The object provided will be normalized to a `Map<String, Object>` if possible.
-Then, the map will be passed into the vanilla `ItemStack.OPTIONAL_CODEC` to be decoded into an `ItemStack`.
+The object provided will be normalized to a `[java]Map<String, Object>` if possible.
+Then, the map will be passed into the vanilla `[java]ItemStack.OPTIONAL_CODEC` to be decoded into an `[java]ItemStack`.
+If after the normalization the map ends up being `[js]null`, an error is thrown.
 <<<
 
 | From type                         | Method                                   |

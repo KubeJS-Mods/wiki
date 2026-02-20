@@ -456,13 +456,277 @@ Then, the map will be passed into the vanilla `[java]ItemStack.OPTIONAL_CODEC` t
 If after the normalization the map ends up being `[js]null`, an error is thrown.
 <<<
 
-| From type                         | Method                                   |
-| <#itemstack-wrapper>              | <#itemstack-wrapper-method>              |
-| <#itemstack-null>                 | <#itemstack-null-method>                 |
-| <#itemstack-ingredient>           | <#itemstack-ingredient-method>           |
-| <#itemstack-itemlike>             | <#itemstack-itemlike-method>             |
-| <#itemstack-resourcelocation>     | <#itemstack-resourcelocation-method>     |
-| <#itemstack-stringtag>            | <#itemstack-stringtag-method>            |
-| <#itemstack-json>                 | <#itemstack-json-method>                 |
-| <#itemstack-string>               | <#itemstack-string-method>               |
-| <#itemstack-default>              | <#itemstack-default-method>              |
+| From type                     | Method                               |
+| <#itemstack-wrapper>          | <#itemstack-wrapper-method>          |
+| <#itemstack-null>             | <#itemstack-null-method>             |
+| <#itemstack-ingredient>       | <#itemstack-ingredient-method>       |
+| <#itemstack-itemlike>         | <#itemstack-itemlike-method>         |
+| <#itemstack-resourcelocation> | <#itemstack-resourcelocation-method> |
+| <#itemstack-stringtag>        | <#itemstack-stringtag-method>        |
+| <#itemstack-json>             | <#itemstack-json-method>             |
+| <#itemstack-string>           | <#itemstack-string-method>           |
+| <#itemstack-default>          | <#itemstack-default-method>          |
+
+# To `IntProvider`
+
+>>> #intprovider-number
+`[java]Number`, JS `number`
+<<<
+
+>>> #intprovider-number-method
+Will result in an `[java]ConstantInt` provider that provides the specified constant number converted to integer.
+<<<
+
+>>> #intprovider-list
+`[java]List`, JS array
+List must not be empty
+<<<
+
+>>> #intprovider-list-method
+Will result in an `[java]UniformInt` provider.
+Its minimum is the first element of the list.
+Its maximum depends on the length of the list:
+- If it has 2 elements or more, maximum is the second element of the list.
+- Otherwise (the list has only one element), maximum will be equal to minimum.
+
+Effectively, the conversions will happen as follows for these examples (`[js]_` means that this element is ignored):
+- `[js]\[min\]` (`[js]max = min`)
+- `[js]\[min, max\]`
+- `[js]\[min, max, _\]`
+- `[js]\[min, max, _, _, _, /* … */, _\]`
+<<<
+
+>>> #intprovider-map
+`[java]Map<String, Object>`, JS `object`
+(examples will use JS object syntax)
+<<<
+
+>>> #intprovider-map-method
+## Int bounds parsing
+If the object is `[js]\{ bounds: \[min, max\] \}`:
+- Will result in an `[java]UniformInt` provider. Its minimum will be the first element (`[js]min`) of the list, its maximum will be the second element (`[js]max`) of the list  at the `bounds` key. Note that the elements of the list will be parsed from string. If parsing fails, __**it does so silently**__ and the default value of `[js]0` is used. Also, the list length is unchecked. If the list is shorter than 2 elements, an `[java]IndexOutOfBoundsException` will be thrown.
+
+If the object is `[js]\{ min: minVal, max: maxVal \}`:
+- Will result in an `[java]UniformInt` provider. Its minimum will be the number value at the `min` key (`minVal`), its maximum will be the number value at the `max` key (`maxVal`).
+
+If the object is `[js]\{ min_inclusive: minVal, max_inclusive: maxVal \}`:
+- Will result in an `[java]UniformInt` provider. Its minimum will be the number value at the `min_inclusive` key (`minVal`), its maximum will be the number value at the `max_inclusive` key (`maxVal`). (Yes, that's the exact same method as the previous object, just different key names)
+
+If the object is `[js]\{ value: val \}`:
+- Will result in an `[java]UniformInt` provider. Its minimum and maximum will be the number value at the `value` key (`val`).
+
+If the object does not conform to any of the above schemas, `[js]null` is returned.
+
+---
+
+The object provided will be treated as `[java]Map<String, Object>`.
+Then, [int bounds are parsed](#int-bounds-parsing).
+If the resulting object is not `[js]null` (and thus the object conforms to one of the schemas):
+- The returned `[java]UniformInt` provider is returned.
+Else, if the object contains the `clamped` key, thus the object looks like for example:
+```js
+{
+	clamped: {
+		min: 20,
+		max: 50,
+	}
+}
+```
+- The object inside the `clamped` key has its [int bounds parsed](#int-bounds-parsing), then the outer object itself has its [int bounds parsed](#int-bounds-parsing). As the outer object's int bounds are parsed as `[js]null` (or else, the first case would pass), nothing is returned here, and the next case is checked.
+Else, if the object contains the `clamped_normal` key, thus the object looks like for example:
+```js
+{
+	clamped_normal: {
+		mean: 20,
+		deviation: 10,
+	}
+}
+```
+- The outer object has its [int bounds parsed](#int-bounds-parsing).
+- Then, the provider's mean becomes the number at the `mean` key converted to integer.
+- Then, the provider's deviation becomes the number at the `deviation` key converted to integer.
+- As the outer object's int bounds are parsed as `[js]null` (or else, the first case would pass), nothing is returned here, and the next case is checked.
+
+If all the checks above fail, the object is wrapped into an NBT compound tag and passed into the vanilla `[java]IntProvider.CODEC` to be hopefully decoded into an `[java]IntProvider`.
+<<<
+
+
+>>> #intprovider-default
+Other types
+(including non-conformant `Map`s and `object`s)
+<<<
+
+>>> #intprovider-default-method
+Will result in a `[java]ConstantInt` provider that provides `[js]0` (__**fails silently!**__).
+<<<
+
+| From type                        | Method                                  |
+| <#intprovider-number>            | <#intprovider-number-method>            |
+| <#intprovider-list>              | <#intprovider-list-method>              |
+| <#intprovider-map>               | <#intprovider-map-method>               |
+| <#intprovider-default>           | <#intprovider-default-method>           |
+
+# To `FloatProvider`
+
+>>> #floatprovider-number
+`[java]Number`, JS `number`
+<<<
+
+>>> #floatprovider-number-method
+Will result in an `[java]ConstantFloat` provider that provides the specified constant number converted to 32-bit float.
+<<<
+
+>>> #floatprovider-list
+`[java]List`, JS array
+List must not be empty
+<<<
+
+>>> #floatprovider-list-method
+Will result in an `[java]UniformFloat` provider.
+Its minimum is the first element of the list.
+Its maximum depends on the length of the list:
+- If it has 2 elements or more, maximum is the second element of the list.
+- Otherwise (the list has only one element), maximum will be equal to minimum.
+
+Effectively, the conversions will happen as follows for these examples (`[js]_` means that this element is ignored):
+- `[js]\[min\]` (`[js]max = min`)
+- `[js]\[min, max\]`
+- `[js]\[min, max, _\]`
+- `[js]\[min, max, _, _, _, /* … */, _\]`
+<<<
+
+>>> #floatprovider-map
+`[java]Map<String, Object>`, JS `object`
+(examples will use JS object syntax)
+<<<
+
+>>> #floatprovider-map-method
+## Float bounds parsing
+If the object is `[js]\{ bounds: \[min, max\] \}`:
+- Will result in an `[java]UniformFloat` provider. Its minimum will be the first element (`[js]min`) of the list, its maximum will be the second element (`[js]max`) of the list  at the `bounds` key. Note that the elements of the list will be parsed from string. If parsing fails, __**it does so silently**__ and the default value of `[js]0` is used. Also, the list length is unchecked. If the list is shorter than 2 elements, an `[java]IndexOutOfBoundsException` will be thrown.
+
+If the object is `[js]\{ min: minVal, max: maxVal \}`:
+- Will result in an `[java]UniformFloat` provider. Its minimum will be the number value at the `min` key (`minVal`), its maximum will be the number value at the `max` key (`maxVal`).
+
+If the object is `[js]\{ min_inclusive: minVal, max_inclusive: maxVal \}`:
+- Will result in an `[java]UniformFloat` provider. Its minimum will be the number value at the `min_inclusive` key (`minVal`), its maximum will be the number value at the `max_inclusive` key (`maxVal`). (Yes, that's the exact same method as the previous object, just different key names)
+
+If the object is `[js]\{ value: val \}`:
+- Will result in an `[java]UniformFloat` provider. Its minimum and maximum will be the number value at the `value` key (`val`).
+
+If the object does not conform to any of the above schemas, `[js]null` is returned.
+
+---
+
+The object provided will be treated as `[java]Map<String, Object>`.
+Then, [float bounds are parsed](#float-bounds-parsing).
+If the resulting object is not `[js]null` (and thus the object conforms to one of the schemas):
+- The returned `[java]UniformFloat` provider is returned.
+Else, if the object contains the `clamped_normal` key, thus the object looks like for example:
+```js
+{
+	clamped_normal: {
+		mean: 20,
+		deviation: 10,
+	}
+}
+```
+- The outer object has its [float bounds parsed](#float-bounds-parsing).
+- Then, the provider's mean becomes the number at the `mean` key converted to integer (sic!).
+- Then, the provider's deviation becomes the number at the `deviation` key converted to integer (sic!).
+- As the outer object's float bounds are parsed as `[js]null` (or else, the first case would pass), nothing is returned here, and the next case is checked.
+
+If all the checks above fail, the object is wrapped into an NBT compound tag and then passed into the vanilla `[java]FloatProvider.CODEC` to be hopefully decoded into an `[java]FloatProvider`.
+<<<
+
+>>> #floatprovider-default
+Other types
+(including non-conformant `Map`s and `object`s)
+<<<
+
+>>> #floatprovider-default-method
+Will result in a `[java]ConstantFloat` provider that provides `[js]0` (__**fails silently!**__).
+<<<
+
+| From type                | Method                          |
+| <#floatprovider-number>  | <#floatprovider-number-method>  |
+| <#floatprovider-list>    | <#floatprovider-list-method>    |
+| <#floatprovider-map>     | <#floatprovider-map-method>     |
+| <#floatprovider-default> | <#floatprovider-default-method> |
+
+# To `NumberProvider`
+
+>>> #numberprovider-number
+`[java]Number`, JS `number`
+<<<
+
+>>> #numberprovider-number-method
+Will result in an `[java]UniformGenerator` whose min and max is set to the provided number converted to a 32-bit float.
+<<<
+
+>>> #numberprovider-list
+`[java]List`, JS array
+List must not be empty
+<<<
+
+>>> #numberprovider-list-method
+Will result in an `[java]UniformGenerator`.
+Its minimum is the first element of the list.
+Its maximum depends on the length of the list:
+- If it has 2 elements or more, maximum is the second element of the list.
+- Otherwise (the list has only one element), maximum will be equal to minimum.
+
+Effectively, the conversions will happen as follows for these examples (`[js]_` means that this element is ignored):
+- `[js]\[min\]` (`[js]max = min`)
+- `[js]\[min, max\]`
+- `[js]\[min, max, _\]`
+- `[js]\[min, max, _, _, _, /* … */, _\]`
+<<<
+
+>>> #numberprovider-map
+`[java]Map<String, Object>`, JS `object`
+(examples will use JS object syntax)
+<<<
+
+>>> #numberprovider-map-method
+## Float bounds parsing
+If the object is `[js]\{ bounds: \[min, max\] \}`:
+- Will result in an `[java]UniformFloat` provider. Its minimum will be the first element (`[js]min`) of the list, its maximum will be the second element (`[js]max`) of the list  at the `bounds` key. Note that the elements of the list will be parsed from string. If parsing fails, __**it does so silently**__ and the default value of `[js]0` is used. Also, the list length is unchecked. If the list is shorter than 2 elements, an `[java]IndexOutOfBoundsException` will be thrown.
+
+If the object is `[js]\{ min: minVal, max: maxVal \}`:
+- Will result in an `[java]UniformFloat` provider. Its minimum will be the number value at the `min` key (`minVal`), its maximum will be the number value at the `max` key (`maxVal`).
+
+If the object is `[js]\{ min_inclusive: minVal, max_inclusive: maxVal \}`:
+- Will result in an `[java]UniformFloat` provider. Its minimum will be the number value at the `min_inclusive` key (`minVal`), its maximum will be the number value at the `max_inclusive` key (`maxVal`). (Yes, that's the exact same method as the previous object, just different key names)
+
+If the object is `[js]\{ value: val \}`:
+- Will result in an `[java]UniformFloat` provider. Its minimum and maximum will be the number value at the `value` key (`val`).
+
+If the object does not conform to any of the above schemas, `[js]null` is returned.
+
+---
+
+If the object is `[js]\{ min: minVal, max: maxVal \}`:
+- Will result in an `[java]UniformGenerator`. Its minimum will be the number value at the `min` key (`minVal`), its maximum will be the number value at the `max` key (`maxVal`).
+
+If the object is `[js]\{ n: nVal, p: pVal \}`:
+- Will result in an `[java]BinomialDistributionGenerator`. Its `n` will be set to the number value at the `n` key (`nVal`) converted to an integer, its `p` will be the number value at the `p` key (`pVal`) converted to a 32-bit float. The `n` and `p` relate to the parameters of the [binominal distribution](https://en.wikipedia.org/wiki/Binomial_distribution).
+
+If the object is `[js]\{ value: val \}`:
+- Will result in an `[java]UniformGenerator`. Its min and max will be set to a number value at the `value` key converted to a 32-bit float.
+<<<
+
+>>> #numberprovider-default
+Other types
+(including non-conformant `Map`s and `object`s)
+<<<
+
+>>> #numberprovider-default-method
+Will result in a `[java]ConstantValue` provider that provides `[js]0` (__**fails silently!**__).
+<<<
+
+| From type                | Method                          |
+| <#numberprovider-number>  | <#numberprovider-number-method>  |
+| <#numberprovider-list>    | <#numberprovider-list-method>    |
+| <#numberprovider-map>     | <#numberprovider-map-method>     |
+| <#numberprovider-default> | <#numberprovider-default-method> |

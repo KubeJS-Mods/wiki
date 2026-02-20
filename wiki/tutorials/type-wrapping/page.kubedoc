@@ -689,23 +689,6 @@ Effectively, the conversions will happen as follows for these examples (`[js]_` 
 <<<
 
 >>> #numberprovider-map-method
-## Float bounds parsing
-If the object is `[js]\{ bounds: \[min, max\] \}`:
-- Will result in an `[java]UniformFloat` provider. Its minimum will be the first element (`[js]min`) of the list, its maximum will be the second element (`[js]max`) of the list  at the `bounds` key. Note that the elements of the list will be parsed from string. If parsing fails, __**it does so silently**__ and the default value of `[js]0` is used. Also, the list length is unchecked. If the list is shorter than 2 elements, an `[java]IndexOutOfBoundsException` will be thrown.
-
-If the object is `[js]\{ min: minVal, max: maxVal \}`:
-- Will result in an `[java]UniformFloat` provider. Its minimum will be the number value at the `min` key (`minVal`), its maximum will be the number value at the `max` key (`maxVal`).
-
-If the object is `[js]\{ min_inclusive: minVal, max_inclusive: maxVal \}`:
-- Will result in an `[java]UniformFloat` provider. Its minimum will be the number value at the `min_inclusive` key (`minVal`), its maximum will be the number value at the `max_inclusive` key (`maxVal`). (Yes, that's the exact same method as the previous object, just different key names)
-
-If the object is `[js]\{ value: val \}`:
-- Will result in an `[java]UniformFloat` provider. Its minimum and maximum will be the number value at the `value` key (`val`).
-
-If the object does not conform to any of the above schemas, `[js]null` is returned.
-
----
-
 If the object is `[js]\{ min: minVal, max: maxVal \}`:
 - Will result in an `[java]UniformGenerator`. Its minimum will be the number value at the `min` key (`minVal`), its maximum will be the number value at the `max` key (`maxVal`).
 

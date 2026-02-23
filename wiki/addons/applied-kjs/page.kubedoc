@@ -1,0 +1,340 @@
+This addon adds KubeJS support for [Applied Energistics 2 (AE2)](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2), including recipe helpers, AE2-specific events, and utility APIs for inspecting networks, keys, crafting state, and devices.
+
+Most examples below go in {se-s}. Recipe helper examples specifically go inside `[js]ServerEvents.recipes`.
+
+>>> info
+Global bindings are exposed with both `AE2*` names and `AppliedKJS*` aliases (for example, `[js]AE2Recipes` and `[js]AppliedKJSRecipes` refer to the same object).
+<<<
+
+# Global bindings
+The addon registers the following global bindings:
+
+- `[js]AE2` (root API object)
+- `[js]AE2Compat`
+- `[js]AE2Utils`
+- `[js]AE2Recipes`
+- `[js]AE2Network`
+- `[js]AE2Keys`
+- `[js]AE2Crafting`
+- `[js]AE2Devices`
+- `[js]AE2Debug`
+- `[js]AE2Progression`
+- Matching aliases with the `[js]AppliedKJS*` prefix
+
+## Quick compatibility checks
+```js
+ServerEvents.loaded(event => {
+  console.log('Applied KJS mod id:', AE2Compat.modId())
+  console.log('Version matrix:', JSON.stringify(AE2Compat.versionMatrix()))
+
+  // Feature flags are controlled by the addon's server config (kjsae2bridge-server.toml)
+  console.log('Network events enabled?', AE2Compat.hasFeature('network_events'))
+  console.log('Craft request API enabled?', AE2Compat.hasFeature('craft_request_api'))
+})
+```
+
+# Recipe helpers
+`AE2Recipes` can build and add AE2 recipe JSON for the main AE2 recipe types:
+
+- `charger`
+- `inscriber`
+- `transform`
+- `entropy`
+- `matter_cannon`
+
+It also provides validators and convenient removal helpers.
+
+## Charger and inscriber
+Put this in {se-s}:
+```js
+ServerEvents.recipes(event => {
+  // Charger
+  AE2Recipes.charger(
+    event,
+    'minecraft:certus_quartz_crystal',
+    'ae2:charged_certus_quartz_crystal',
+    'kubejs:ae2/charger/certus'
+  )
+
+  // Pressing recipe (mode = press)
+  AE2Recipes.inscriberPress(
+    event,
+    'minecraft:diamond',
+    'ae2:engineering_processor_press',
+    'ae2:printed_engineering_processor',
+    'kubejs:ae2/inscriber/printed_engineering_processor'
+  )
+
+  // Full inscriber helper with explicit mode/top/bottom/result/id
+  // bottom can be null on purpose
+  AE2Recipes.inscriber(
+    event,
+    'inscribe',
+    'ae2:printed_silicon',
+    'ae2:redstone',
+    null,
+    'ae2:logic_processor',
+    'kubejs:ae2/inscriber/logic_processor'
+  )
+})
+```
+
+>>> warn
+If you use the object-heavy inscriber overloads and Rhino picks the wrong overload, use the explicit helper names `[js]AE2Recipes.inscriberNoBottom(...)` or `[js]AE2Recipes.inscriberWithBottom(...)`.
+<<<
+
+## Transform, entropy and matter cannon
+Put this in {se-s}:
+```js
+ServerEvents.recipes(event => {
+  // Fluid transform (supports fluid id or #tag for the fluid circumstance)
+  AE2Recipes.transformFluid(
+    event,
+    'minecraft:water',
+    ['ae2:charged_certus_quartz_crystal', 'minecraft:redstone', 'minecraft:quartz'],
+    'ae2:fluix_crystal',
+    2,
+    'kubejs:ae2/transform/fluix_from_water'
+  )
+
+  // Explosion transform
+  AE2Recipes.transformExplosion(
+    event,
+    ['minecraft:sand'],
+    'minecraft:glass',
+    1,
+    'kubejs:ae2/transform/explosion_glass'
+  )
+
+  // Entropy manipulator helpers
+  AE2Recipes.entropyHeat(event, 'minecraft:cobblestone', 'minecraft:stone', 'kubejs:ae2/entropy/heat_stone')
+  AE2Recipes.entropyCool(event, 'minecraft:water', 'minecraft:ice', 'kubejs:ae2/entropy/cool_ice')
+
+  // Matter cannon ammo weight
+  AE2Recipes.matterCannon(event, 'minecraft:iron_ingot', 6.5, 'kubejs:ae2/matter_cannon/iron_ingot')
+})
+```
+
+>>> info
+The helper methods accept strings, tags (for ingredients), maps/JSON objects, and AE2 key wrappers in many places. Using the helper methods is the easiest way to avoid version-specific AE2 JSON shape changes.
+<<<
+
+## Build JSON first, validate, then add
+You can also build recipe JSON first and inspect it before adding it:
+
+```js
+ServerEvents.recipes(event => {
+  const json = AE2Recipes.inscriberPress(
+    'minecraft:gold_ingot',
+    'ae2:logic_processor_press',
+    'ae2:printed_logic_processor'
+  )
+
+  AE2Recipes.validateOrThrow(json)
+  console.log('AE2 recipe JSON:', AE2Recipes.stringify(json))
+
+  AE2Recipes.add(event, json, 'kubejs:ae2/inscriber/printed_logic_processor')
+})
+```
+
+## Removal helpers
+```js
+ServerEvents.recipes(event => {
+  // Type may be passed as "inscriber" or "ae2:inscriber"
+  AE2Recipes.removeByType(event, 'matter_cannon')
+
+  // Remove by output item
+  AE2Recipes.removeByOutput(event, 'inscriber', 'ae2:printed_logic_processor')
+
+  // Remove by matching JSON text inside the recipe (broad but sometimes useful)
+  AE2Recipes.removeByPredicateJsonContains(event, 'transform', 'fluix_crystal')
+})
+```
+
+# AE2 events
+The addon registers the `[js]AE2Events` event group (server-side) with the following handlers:
+
+| Event | Description |
+| `networkCreated` | Fired when a tracked AE2 network is first seen. |
+| `networkRemoved` | Fired when a tracked AE2 network disappears. |
+| `networkChanged` | Fired when tracked network shape/channel usage changes. |
+| `networkPowerState` | Fired when power/online/controller state changes. |
+| `storageDelta` | Fired for storage changes (insert/extract deltas). |
+| `storageThreshold` | Fired when a configured threshold watch is crossed. |
+| `craftingRequested` | Fired when requested amount changes for a craftable key. |
+| `craftingJobStarted` | Fired when an AE2 crafting CPU starts a job. |
+| `craftingJobCompleted` | Fired when a job completes. |
+| `craftingJobStopped` | Fired when a job stops/cancels. |
+| `craftingJobStuck` | Fired when a job appears stuck for multiple scans. |
+| `terminalOpened` | Fired when a detectable AE2 terminal menu is opened. |
+| `playerMilestone` | Fired for milestone/progression hooks tracked by the addon. |
+
+## Event examples
+```js
+AE2Events.networkCreated(event => {
+  console.log(`[AE2] Grid ${event.gridId} created in ${event.dimension} (nodes=${event.nodeCount})`)
+})
+
+AE2Events.storageDelta(event => {
+  if (event.keyId === 'ae2:fluix_crystal') {
+    console.log(`[AE2] Fluix changed by ${event.delta} on grid ${event.gridId}`)
+  }
+})
+
+AE2Events.terminalOpened(event => {
+  console.log(`[AE2] ${event.player.name.string} opened ${event.menuClass}`)
+})
+```
+
+>>> info
+Several event families can be enabled/disabled in the addon's server config. If an event never fires, check `[js]AE2Compat.hasFeature(...)` and the `kjsae2bridge-server.toml` config file first.
+<<<
+
+# Keys and network helpers
+## AE2Keys
+`AE2Keys` wraps and parses AE2 keys for use in scripts.
+
+```js
+ServerEvents.loaded(event => {
+  const itemKey = AE2Keys.fromString('item:ae2:fluix_crystal')
+  const fluidKey = AE2Keys.fromString('fluid:minecraft:water')
+
+  if (itemKey) {
+    console.log(itemKey.id())
+    console.log(itemKey.displayName())
+    console.log(AE2Keys.prettyAmount(itemKey, 4096))
+    console.log(itemKey.toJsonString())
+  }
+
+  if (fluidKey) {
+    console.log(fluidKey.toString())
+  }
+})
+```
+
+## AE2Network
+`AE2Network` exposes tracked grid summaries and threshold watches.
+
+```js
+ServerEvents.loaded(event => {
+  // See currently tracked grids (array of summary maps)
+  const grids = AE2Network.grids()
+  console.log(`Tracked AE2 grids: ${grids.length}`)
+
+  // Example threshold watch: fire storageThreshold when fluix rises above 256 on a known grid
+  // Replace 'your-grid-id' with a real grid id from AE2Network.grids()
+  AE2Network.watchThreshold('fluix_above_256', 'your-grid-id', 'item:ae2:fluix_crystal', 256, 'up')
+})
+
+AE2Events.storageThreshold(event => {
+  console.log(`[AE2] Threshold '${event.watchName}' crossed: ${event.keyId} -> ${event.newAmount}`)
+})
+```
+
+# Crafting, devices, debug and progression helpers
+## AE2Crafting
+The crafting helper can simulate plans and submit jobs through an AE2 crafting requester host.
+
+>>> warn
+The craft request API is disabled by default in the addon's server config (`enableCraftRequestApi = false`). Enable it before using `[js]AE2Crafting.plan(...)` or `[js]AE2Crafting.submitViaHost(...)`.
+<<<
+
+Example (inside any server callback where you already have a `[js]player` and `[js]level` reference):
+```js
+const plan = AE2Crafting.plan(player, level, 100, 64, 100, 'item:ae2:fluix_crystal', 64)
+if (plan.ok) {
+  console.log(`Plan bytes: ${plan.bytes}`)
+  console.log(`Missing entries: ${plan.missingItems.length}`)
+} else {
+  console.log(`Plan failed: ${plan.error}`)
+}
+```
+
+## AE2Devices
+`AE2Devices.inspect(level, x, y, z)` returns a map with information about an AE2 block entity (power/channel state, drive/cell summaries when available, and linked grid info).
+
+## AE2Debug
+- `[js]AE2Debug.grids()` returns tracked grid summaries
+- `[js]AE2Debug.stats()` returns addon tracker stats
+- `[js]AE2Debug.dumpSummaryToFile()` writes a debug dump and returns the output path
+
+## AE2Progression
+`AE2Progression` stores/query milestone strings for players:
+
+```js
+PlayerEvents.loggedIn(event => {
+  if (!AE2Progression.hasMilestone(event.player, 'example:first_login')) {
+    AE2Progression.grantMilestone(event.player, 'example:first_login', 'Logged in while AE2 addon is installed')
+  }
+})
+
+AE2Events.playerMilestone(event => {
+  console.log(`[AE2] Milestone ${event.milestoneId} for ${event.player.name.string} (${event.detail})`)
+})
+```
+
+# 1.20.1 vs 1.21.1 differences
+For most scripts, the API is intentionally the same between the provided `1.20.1 Forge` and `1.21.1 NeoForge` versions.
+
+## What stays the same
+- Global binding names (`AE2Recipes`, `AE2Events`, `AE2Network`, etc.)
+- Event names (`networkCreated`, `storageDelta`, `craftingJobStarted`, etc.)
+- Main helper method names and general argument order
+
+## Practical differences you may care about
+### Loader / dependency targets
+|> 1.21.1
+- NeoForge target (`21.1.x`)
+- KubeJS `2101.7.2+`
+- AE2 `19.2.17+`
+<||> 1.20.1
+- Forge target (`47.x`)
+- KubeJS `2001.6.5+`
+- AE2 `15.4.10+`
+<|
+
+### Raw AE2 recipe JSON shape (important if you use `event.custom` directly)
+|> 1.21.1
+AE2 recipe results use an item stack object with an `[js]id` field (the addon also writes an `[js]item` alias for KubeJS parser compatibility when using `[js]AE2Recipes`).
+
+```js
+ServerEvents.recipes(event => {
+  event.custom({
+    type: 'ae2:inscriber',
+    mode: 'press',
+    ingredients: {
+      middle: { item: 'minecraft:diamond' },
+      top: { item: 'ae2:engineering_processor_press' }
+    },
+    result: { id: 'ae2:printed_engineering_processor' }
+  })
+})
+```
+<||> 1.20.1
+AE2 recipe results commonly use `[js]item` in raw JSON.
+
+```js
+ServerEvents.recipes(event => {
+  event.custom({
+    type: 'ae2:inscriber',
+    mode: 'press',
+    ingredients: {
+      middle: { item: 'minecraft:diamond' },
+      top: { item: 'ae2:engineering_processor_press' }
+    },
+    result: { item: 'ae2:printed_engineering_processor' }
+  })
+})
+```
+<|
+
+### AE2 transform validation behavior in the addon
+|> 1.21.1
+`[js]AE2Recipes.validate(...)` allows `ae2:transform` recipes without a `circumstance` key (AE2 1.21.1 supports this for some recipes).
+<||> 1.20.1
+`[js]AE2Recipes.validate(...)` expects a `circumstance` key on `ae2:transform` recipes.
+<|
+
+>>> info
+If you stick to the `[js]AE2Recipes` helper methods instead of hand-writing AE2 recipe JSON, your scripts will usually need little or no changes between the two versions.
+<<<

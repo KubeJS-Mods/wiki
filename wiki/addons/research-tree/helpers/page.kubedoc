@@ -127,7 +127,3 @@ Creates a `PlayerUnlockStageReward` which grants the player a stage. (Note: This
 ## Custom Rewards
 `[java].custom(kubeReward: ResourceLocation)`
 Allows you to use a reward created with KubeJS
-
-
-
-=== Code Execution Successful ===

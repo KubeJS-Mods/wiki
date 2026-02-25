@@ -1,6 +1,3 @@
-A Guide on how to register custom requirements and rewards
-All the following code goes into {st-s}
-
 # Custom Requirements
 ```js
 StartupEvents.registry("researchtree:requirement_types", event => {

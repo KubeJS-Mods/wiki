@@ -11,28 +11,28 @@ These listed methods will all be under `Requirements`.
 <<<
 
 ## Items
-- $$.item(item: Item, amount: int)
+`[java].item(item: Item, amount: int)`
 Creates an `ItemRequirement` requiring an item with the required amount.
 
-- $$.item(item: TagKey<Item>, amount: int)
+`[java].item(item: TagKey<Item>, amount: int)`
 Creates an `ItemRequirement` allowing any item tag (eg. `#c:ingots/lead`), with the required amount
 
 ## Fluids
-- $$.fluid(fluid: Fluid, amount: int)
+`[java].fluid(fluid: Fluid, amount: int)`
 Creates a `FluidRequirement` allowing any fluid (eg. `minecraft:water`), with the required amount (in mB)
 
-- $$.fluid(fluid: TagKey<Fluid>, amount: int)
+`[java].fluid(fluid: TagKey<Fluid>, amount: int)`
 Creates a `FluidRequirement` allowing any fluid tag (eg. `kubejs:deadly_liquid`), with the required amount (in mB)
 
 ## Energy
-- $$.energy(amount: int)
+`[java].energy(amount: int)`
 Creates an `EnergyRequirement` with the required amount of energy (FE)
 
 ## Advancement
-- $$.advancement(advancement: ResourceLocation)
+`[java].advancement(advancement: ResourceLocation)`
 Creates an `AdvancementRequirement` requiring the player to have the advancement before proceeding
 
-- $$.advancement(advancements: ResourceLocation[])
+`[java].advancement(advancements: ResourceLocation[])`
 Creates an `AdvancementRequirement` requiring the player to have the given advancements before proceeding
 
 ## Dimension
@@ -40,32 +40,32 @@ Creates an `AdvancementRequirement` requiring the player to have the given advan
 When research has begun, the player must visit the dimension for it to be counted as fulfilled
 <<<
 
-- $$.dimension(dimension: RegistryKey<Level>)
+`[java].dimension(dimension: RegistryKey<Level>)`
 Creates a `DimensionRequirement` requiring the player to visit the dimension (eg. `minecraft:the_end`)
 
-- $$.dimensions(dimensions: RegistryKey<Level>[])
+`[java].dimensions(dimensions: RegistryKey<Level>[])`
 Creates a `DimensionRequirement` requiring the player to visit the dimension (eg. `minecraft:the_end` and `minecraft:the_nether`)
 
 ## Timed Dimension
 This is the same thing as `Dimension`, but with the number of ticks the player has been in each dimension.
 
-- $$.dimension(dimension: RegistryKey<Level>, int duration)
+`[java].dimension(dimension: RegistryKey<Level>, int duration)`
 Now, with a second parameter, the amount of time the player has to be in each dimension. Creates a `TimedDimensionRequirement`.
 
-- $$.dimensions(dimensions: RegistryKey<Level>[], int duration). 
+`[java].dimensions(dimensions: RegistryKey<Level>[], int duration). `
 Creates a `TimedDimensionRequirement` with a list of dimensions.
 
 
 ## Time
-- $$.time(ticks: int)
+`[java].time(ticks: int)`
 Creates a `TimeRequirement` requiring the player to wait a certain amount of time
 
 ## Stage Requirement
-- $$.requireStage(stage: String)
+`[java].requireStage(stage: String)`
 Creates `PlayerStageRequirement` requiring the player to have a stage unlocked/added. (Note: This only works with KubeJS stages).
 
 ## Custom Requirements
-- $$.custom(kubeRequirement: ResourceLocation)
+`[java].custom(kubeRequirement: ResourceLocation)`
 Allows you to use a requirement created with KubeJS
 
 # Rewards
@@ -74,10 +74,10 @@ These listed methods will all be under `Rewards`.
 <<<
 
 ## Items
-- $$.item(item: Item, amount: int)
+`[java].item(item: Item, amount: int)`
 Creates an `ItemReward` granting the player the item(s)
 
-- $$.item(stack: ItemStack)
+`[java].item(stack: ItemStack)`
 Creates an `ItemReward` from a given `ItemStack`
 
 ## Command Execution
@@ -87,17 +87,17 @@ To target the player, you can do `@s` or `@p` for the player who has been reward
 Commands are not required to have a `/` at the start (eg. `/kill @p` will do the same as `kill @p`)
 <<<
 
-- $$.command(command: String)
+`[java].command(command: String)`
 Executes a command as the player (eg `title @p title {"text":"Research Complete!","color":"gold"}`)
 
-- $$.command(command: String, diplayName: Text)
+`[java].command(command: String, diplayName: Text)`
 Executes a command as the player. Display name will show up instead of the command (eg: you can do `kill @s` and have the display name as `Text.of("200 diamond blocks!!")`)
 
 ## Experience Points
-- $$.xp(amount: int)
+`[java].xp(amount: int)`
 Grants the player an amount of xp points (**NOT** levels)
 
-- $$.xpLevels(amount: int)
+`[java].xpLevels(amount: int)`
 Grants the player an amount of xp levels
 
 ## Attribute Modification
@@ -105,25 +105,29 @@ Grants the player an amount of xp levels
 Any attributes changed to the player (eg max health) are **permanent** changes.
 The modifier id must also be unique.
 <<<
-- $$.attribute(attribute: ResourceLocation, modifierId: ResourceLocation, amount: double, operation: AttributeModifierOperation?)
+`[java].attribute(attribute: ResourceLocation, modifierId: ResourceLocation, amount: double, operation: AttributeModifierOperation?)`
 Modifies the player's attributes to one via the reward. If the `operation` argument is not present, it will default to `AttributeModifier.Operation.ADD_VALUE`.
 
 ## Loot Tables
-- $$.lootTable(lootTableId: ResourceLocation)
+`[java].lootTable(lootTableId: ResourceLocation)`
 Grants the player a loot table that is rolled.
 
 ## Mob Effects
-- $$.effect(effectInstance: MobEffectInstance)
+`[java].effect(effectInstance: MobEffectInstance)`
 Gives the player an effect. To make `MobEffectInstance`, see `MobEffectUtil`
 
 ## Recipe Unlocking
-- $$.unlockRecipes(recipes: ResourceLocation[])
+`[java].unlockRecipes(recipes: ResourceLocation[])`
 Unlocks the given recipes to the player
 
 ## Stage Unlocking
-- $$.grantStage(stage: String)
+`[java].grantStage(stage: String)`
 Creates a `PlayerUnlockStageReward` which grants the player a stage. (Note: This only works with KubeJS stages).
 
 ## Custom Rewards
-- $$.custom(kubeReward: ResourceLocation)
+`[java].custom(kubeReward: ResourceLocation)`
 Allows you to use a reward created with KubeJS
+
+
+
+=== Code Execution Successful ===

@@ -52,6 +52,3 @@ Removes the requirement for another research node to be completed
 
 `[java].removePrerequisites(category: ResourceLocation)`
 Removes the requirement for another category to be unlocked
-
-
-=== Code Execution Successful ===

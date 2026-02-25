@@ -3,16 +3,16 @@ All the following scripts go into {se-s}
 # Creating Research Nodes
 Everything will go under the `ResearchTree.research` event
 
-- $$exists(id: ResourceLocation)
+`[java]exists(id: ResourceLocation)`
 Return `true` or `false` depending if a research node exists or not.
 
-- $$remove(id: ResourceLocation)
+`[java]remove(id: ResourceLocation)`
 Removes a research node (eg, `some_other_mod:epic_researchable`)
 
-- $$modify(id: ResourceLocation)
+`[java]modify(id: ResourceLocation)`
 Modifies a research node (eg, `another_mod:super_cool_researchable`). For methods, see below
 
-- $$create(id: ResourceLocation)
+`[java]create(id: ResourceLocation)`
 >>> info
 Internally, this constructs a `ResourceLocation` that gets set to `kubejs:[the id you chose]`.
 For example, `create('my_research_node')` will get constructed as `kubejs:my_research_node`.
@@ -20,35 +20,35 @@ For example, `create('my_research_node')` will get constructed as `kubejs:my_res
 
 ## Methods
 
-- $$.icon(icon: Item)
+`[java].icon(icon: Item)`
 The item icon that will be rendered for the node. (eg, `minecraft:dirt` would render dirt, for example)
 
-- $$.pos(x: int, y: int)
+`[java].pos(x: int, y: int)`
 There is also `position` that does the same thing
 
-- $$.title(title: Text)
+`[java].title(title: Text)`
 Overrides the default name (the node's id formatted) with a custom one. Use `Text#of` for the argument
 
-- $$.description(description: Text)
+`[java].description(description: Text)`
 Creates a description for the research node
 
-- $$.prerequisite(prerequisite: ResourceLocation)
+`[java].prerequisite(prerequisite: ResourceLocation)`
 This can be attached multiple times to make other research nodes required to unlock this node. 
 To get the research node id, enable advanced tooltips via `F3+H`
 
-- $$.requires(requirement: ResearchRequirement)
+`[java].requires(requirement: ResearchRequirement)`
 See (link the `helpers#Requirements` here) for possible requirements.
 
-- $$.reward(reward: ResearchReward)
+`[java].reward(reward: ResearchReward)`
 See (link the `helpers#Rewards` here) for possible rewards.
 
-- $$.category(category: ResourceLocation)
+`[java].category(category: ResourceLocation)`
 Links the node to a category
 
-- $$.hidden()
+`[java].hidden()`
 Hides the node until the parent is completed. The rest of the branch will also show up.
 
-- $$.ticksPerPercent(ticksPerPercent: int)
+`[java].ticksPerPercent(ticksPerPercent: int)`
 For every `1%` of research, the player must wait the ticks set in `ticksPerPercent` for `1%` of progression.
 
 | Method | Type         | Notes |

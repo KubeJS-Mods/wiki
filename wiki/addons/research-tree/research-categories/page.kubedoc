@@ -3,38 +3,38 @@ All the following scripts go into {se-s}
 # Creating Research Categories
 Everything will go under the `ResearchTree.category` event
 
-- $$exists(id: ResourceLocation)
+`[java]exists(id: ResourceLocation)`
 Return `true` or `false` depending if a research category exists or not.
 
-- $$modify(id: ResourceLocation)
+`[java]modify(id: ResourceLocation)`
 Modifies a research category. For methods, see below. **There are extra methods for modifications!**
 
-- $$create(id: ResourceLocation)
+`[java]create(id: ResourceLocation)`
 >>> info
 Internally, this constructs a `ResourceLocation` that get's set to `kubejs:[the id you chose]`.
 For example, `create('super_cool_category')` will get constructed as `kubejs:super_cool_category`.
 <<<
 
 ## Methods
-- $$.name(name: Text)
+`[java].name(name: Text)`
 Overrides the default name (the id of the category formatted) to a custom one.
 
-- $$.description(description: Text)
+`[java].description(description: Text)`
 Creates a description for the category
 
-- $$.icon(icon: Item)
+`[java].icon(icon: Item)`
 Sets the categories icon as an item
 
-- $$.unlockRequirement(unlockRequirement: ResourceLocation)
+`[java].unlockRequirement(unlockRequirement: ResourceLocation)`
 Unlocks the category after a research node has been completed
 
-- $$.addPrerequisite(prerequisite: ResourceLocation)
+`[java].addPrerequisite(prerequisite: ResourceLocation)`
 Requires another category to be unlocked before this category
 
-- $$.addPrerequisites(prerequisites: ResourceLocation[])
+`[java].addPrerequisites(prerequisites: ResourceLocation[])`
 Same thing as above, but as a list (adds it to the current ones)
 
-- $$.sortOrder(order: int)
+`[java].sortOrder(order: int)`
 Display order. Defaults to `0`
 
 | Method | Type | Notes |
@@ -47,8 +47,11 @@ Display order. Defaults to `0`
 
 The following is for category modification - methods above are also included with modifications:
 ## Methods
-- $$.removeUnlockRequirement()
+`[java].removeUnlockRequirement()`
 Removes the requirement for another research node to be completed
 
-- $$.removePrerequisites(category: ResourceLocation)
+`[java].removePrerequisites(category: ResourceLocation)`
 Removes the requirement for another category to be unlocked
+
+
+=== Code Execution Successful ===

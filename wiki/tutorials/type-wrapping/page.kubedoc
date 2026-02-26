@@ -708,8 +708,131 @@ Other types
 Will result in a `[java]ConstantValue` provider that provides `[js]0` (__**fails silently!**__).
 <<<
 
-| From type                | Method                          |
+| From type                 | Method                           |
 | <#numberprovider-number>  | <#numberprovider-number-method>  |
 | <#numberprovider-list>    | <#numberprovider-list-method>    |
 | <#numberprovider-map>     | <#numberprovider-map-method>     |
 | <#numberprovider-default> | <#numberprovider-default-method> |
+
+# To `RegistryPredicate`
+
+Note that this interface is generic, and this type wrapper's behavior will depend on the generic type parameter of the target type.
+The type parameter is the target registry.
+
+>>> #registrypredicate-null
+`[js]null`
+<<<
+
+>>> #registrypredicate-null-method
+Will result in an `[java]EntireRegistryPredicate.FALSE` predicate. (matches no registry items)
+<<<
+
+>>> #registrypredicate-regex
+`[java]Pattern` / JS `[js]RegExp`
+<<<
+
+>>> #registrypredicate-regex-method
+Will result in a `[java]RegistryRegExpPredicate`. It will match all registry items whose `ResourceLocation`s converted to string match the provided regex.
+<<<
+
+>>> #registrypredicate-string
+`[java]CharacterSequence`
+(encompasses string types, including JS `string`)
+`[java]JsonPrimitive` (GSON)
+<<<
+
+>>> #registrypredicate-string-method
+The object is first converted to string.
+
+If the string:
+- is `[js]'*'`: Will result in an `[java]EntireRegistryPredicate.TRUE` predicate (matches every registry item in the target registry)
+- is `[js]'-'`: Will result in an `[java]EntireRegistryPredicate.FALSE` predicate (matches no registry items)
+- starts with `[js]'#'`: The remainder of string is interpreted as a resource location of an registry item. If the namespace part is omitted, `[js]'minecraft'` is assumed. If the target registry is not `[js]null`, the result is a `[java]RegistryTagKeyPredicate` (matches all registry items in a given tag). Otherwise, the result is a `[java]RegistryTagIDPredicate` (matches only if the provided tag key is equal to the one in the registry) (???).
+- starts with `[js]'@`: The remainder of string is interpreted as a namespace. The result is a `[java]RegistryNamespacePredicate` (matches all registry items in a given namespace).
+
+Otherwise, the string is converted to a `[java]Pattern` (regex).
+Effectively, this will only happen if the string starts with `[js]'/`, so it's a string that looks like a `[js]RegExp` literal.
+If the conversion succeeds, the result is a `[java]RegistryRegExpPredicate` (will match all registry items whose `[java]ResourceLocation`s converted to string match the provided regex).
+Otherwise, if the conversion results in `[js]null` (so, conversion failed), the string is interpreted as a `[java]ResourceLocation` of a registry item. If the namespace part is omitted, `[js]'minecraft'` is assumed.
+
+If the target registry is not `[js]null`:
+- a registry lookup is performed on a target registry,
+- if the registry item is present in the target registry, the result is a `[java]RegistryHolderPredicate` (matches only the given registry item).
+
+Otherwise, the result is a `[java]RegistryIDPredicate` (matches only the registry item with the provided resource location) (???)
+<<<
+
+>>> #registrypredicate-function
+JS function, effectively:
+`[ts](item: Holder<T>) => boolean`
+<<<
+
+>>> #registrypredicate-function-method
+The function is converted to `[java]Predicate<Holder<T>>`, where `T` is the target registry type.
+<<<
+
+>>> #registrypredicate-default
+Other types
+<<<
+
+>>> #registrypredicate-default-method
+A object (which is assumed to be a registry item) is wrapped into a direct holder (`[java]Holder.Direct`).
+The result is a `[java]RegistryHolderPredicate` (matches only the given registry item).
+<<<
+
+| From type                     | Method                               |
+| <#registrypredicate-null>     | <#registrypredicate-null-method>     |
+| <#registrypredicate-regex>    | <#registrypredicate-regex-method>    |
+| <#registrypredicate-string>   | <#registrypredicate-string-method>   |
+| <#registrypredicate-function> | <#registrypredicate-function-method> |
+| <#registrypredicate-default>  | <#registrypredicate-default-method>  |
+
+# To `UUID`
+
+If the object is `[js]null`, the result is `[js]null`.
+Otherwise, the object is converted to string using its `[java]toString()` method.
+
+If the string is not exactly 32 or 36 characters long, the result is `[js]null`.
+If the string contains dashes (`[js]'-'`) (and thus is 36 characters long), then it's assumed that the string [conforms to the standard string representation of UUID](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html#toString()), so it's converted to UUID using a standard Java [`UUID.fromString`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html#fromString(java.lang.String)) method.
+Example of conformant UUID representation: `[js]'45e65f84-2731-40b1-8f2a-618783dc7d5b'`.
+
+Otherwise, the wrapper silently fixes the string by appending dashes where they are expected to create a string [conformant to the standard string representation of UUID](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html#toString()), then the string is passed to the standard Java [`UUID.fromString`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html#fromString(java.lang.String)) method to create the resulting UUID.
+Example of this non-conformant but still valid UUID representation: `[js]'45e65f84273140b18f2a618783dc7d5b'`
+
+If the conversion fails, it fails __**semi-silently**__:
+- The stack trace is printed into the game logs,
+- The conversion results in `[js]null`.
+
+# To `Pattern`
+
+If the provided object is either a string or a JS `RegExp`:
+- The object is converted to string using its `[java]toString()` method,
+- The string is interpreted as a regex pattern using the JS [literal notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions), including the slashes. If the string doesn't start with a slash or is shorter than 3 character (so could only fit an empty regex pattern), the result is `[js]null`.
+Otherwise, the result is `[js]null`.
+
+# To `JsonObject`
+To be exact, a `JsonObject` object from GSON.
+
+>>> #jsonobject-string
+`[java]CharacterSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #jsonobject-string-method
+The string is parsed to JSON.
+If the string does not represent a JSON object, an exception is thrown.
+<<<
+
+>>> #jsonobject-default
+Other objects
+<<<
+
+>>> #jsonobject-default-method
+The object is treated as a `[java]Map`.
+Then, the conversion is straightforward, with a caveat: numbers smaller than long bounds with decimal points will be rounded towards zero to the integer or long value.
+If the object can't be treated as a `[java]Map`, the result is `[js]null`.
+<<<
+
+| From type             | Method                              |
+| <#jsonobject-string>  | <#registrypredicate-string-method>  |
+| <#jsonobject-default> | <#registrypredicate-default-method> |

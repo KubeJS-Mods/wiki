@@ -937,8 +937,17 @@ Other types
 Results in `[java]JsonNull.INSTANCE` which represents `[js]null` in JSON.
 <<<
 
+| From type                       | Method                                 |
+| <#jsonelement-jsonserializable> | <#jsonelement-jsonserializable-method> |
+| <#jsonelement-primitive>        | <#jsonelement-primitive-method>        |
+| <#jsonelement-null>             | <#jsonelement-null-method>             |
+| <#jsonelement-map>              | <#jsonelement-map-method>              |
+| <#jsonelement-list>             | <#jsonelement-list-method>             |
+| <#jsonelement-default>          | <#jsonelement-default-method>          |
+
+
 # To `JsonPrimitive`
 To be exact, a `[java]JsonPrimitive` object from GSON.
 
 Conversion happens according to the [`JsonElement` conversion](#to-jsonelement).
-If the result of this conversion is not a `JsonPrimitive`, `[js]null` is the result.
+If the result of this conversion is not a `[java]JsonPrimitive`, `[js]null` is the result.

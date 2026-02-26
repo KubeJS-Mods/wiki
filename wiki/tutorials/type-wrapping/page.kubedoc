@@ -812,6 +812,7 @@ Otherwise, the result is `[js]null`.
 
 # To `JsonObject`
 To be exact, a `JsonObject` object from GSON.
+`[js]null` result means that the conversion failed.
 
 >>> #jsonobject-string
 `[java]CharacterSequence`
@@ -820,7 +821,7 @@ To be exact, a `JsonObject` object from GSON.
 
 >>> #jsonobject-string-method
 The string is parsed to JSON.
-If the string does not represent a JSON object, an exception is thrown.
+If the string does not represent a JSON object, the result is `[js]null`.
 <<<
 
 >>> #jsonobject-default
@@ -833,6 +834,111 @@ Then, the conversion is straightforward, with a caveat: numbers smaller than lon
 If the object can't be treated as a `[java]Map`, the result is `[js]null`.
 <<<
 
-| From type             | Method                              |
+| From type             | Method                       |
 | <#jsonobject-string>  | <#jsonobject-string-method>  |
 | <#jsonobject-default> | <#jsonobject-default-method> |
+
+# To `JsonArray`
+To be exact, a `[java]JsonArray` object from GSON.
+`[js]null` result means that the conversion failed.
+
+>>> #jsonarray-string
+`[java]CharacterSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #jsonarray-string-method
+The string is parsed to JSON.
+If the string does not represent a JSON array, the result is `[js]null`.
+<<<
+
+>>> #jsonarray-iterable
+`[java]Iterable`
+JS array
+<<<
+
+>>> #jsonarray-iterable-method
+All elements of the iterable object are added to the `[java]JsonArray`, then the result is that `[java]JsonArray`.
+<<<
+
+>>> #jsonarray-default
+Other types (including `[js]null`)
+<<<
+
+>>> #jsonarray-default-method
+The result is `[js]null`.
+<<<
+
+| From type             | Method                       |
+| <#jsonarray-string>   | <#jsonarray-string-method>   |
+| <#jsonarray-iterable> | <#jsonarray-iterable-method> |
+| <#jsonarray-default>  | <#jsonarray-default-method>  |
+
+# To `JsonElement`
+To be exact, a `[java]JsonElement` object from GSON.
+It's an object representing any element in JSON - primitives, arrays and objects.
+
+>>> #jsonelement-jsonserializable
+`[java]JsonSerializable` from KubeJS, implemented/extended by:
+- `[java]ClickEvent`
+- `[java]FluidIngredient`
+- `[java]FluidStack`
+- `[java]Ingredient`
+- `[java]ItemStack`
+- `[java]MutableComponent`
+- `[java]WithCodec`
+<<<
+
+>>> #jsonelement-jsonserializable-method
+The object is converted to JSON using its `[java]toJson()` method.
+<<<
+
+>>> #jsonelement-primitive
+`[java]CharacterSequence`
+(encompasses string types, including JS `string`)
+`[java]Boolean`, JS `boolean`
+`[java]Number`, JS `number`
+`[java]Character`
+<<<
+
+>>> #jsonelement-primitive-method
+Results in a `[java]JsonPrimitive` object representing the provided JSON primitive.
+<<<
+
+>>> #jsonelement-null
+`[js]null`
+<<<
+
+>>> #jsonelement-null-method
+Results in `[java]JsonNull.INSTANCE` which represents `[js]null` in JSON.
+<<<
+
+>>> #jsonelement-map
+`[java]Map`, JS `object`
+<<<
+
+>>> #jsonelement-map-method
+Results in `[java]JsonObject` or `[js]null` according to the [`JsonObject` conversion](#to-jsonobject).
+<<<
+
+>>> #jsonelement-list
+`[java]List`, Java array, JS array
+<<<
+
+>>> #jsonelement-list-method
+Results in `[java]JsonArray` or `[js]null` according to the [`JsonArray` conversion](#to-jsonarray).
+<<<
+
+>>> #jsonelement-default
+Other types
+<<<
+
+>>> #jsonelement-default-method
+Results in `[java]JsonNull.INSTANCE` which represents `[js]null` in JSON.
+<<<
+
+# To `JsonPrimitive`
+To be exact, a `[java]JsonPrimitive` object from GSON.
+
+Conversion happens according to the [`JsonElement` conversion](#to-jsonelement).
+If the result of this conversion is not a `JsonPrimitive`, `[js]null` is the result.

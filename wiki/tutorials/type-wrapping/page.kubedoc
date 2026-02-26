@@ -834,5 +834,5 @@ If the object can't be treated as a `[java]Map`, the result is `[js]null`.
 <<<
 
 | From type             | Method                              |
-| <#jsonobject-string>  | <#registrypredicate-string-method>  |
-| <#jsonobject-default> | <#registrypredicate-default-method> |
+| <#jsonobject-string>  | <#jsonobject-string-method>  |
+| <#jsonobject-default> | <#jsonobject-default-method> |

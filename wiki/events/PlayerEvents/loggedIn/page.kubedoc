@@ -1,0 +1,44 @@
+# Info
+Invoked when a player joins the server. This is one of the most commonly used events for setting up player data, sending welcome messages, or applying default configurations.
+
+# Available Event Fields
+- `event.player` - the player that logged in (ServerPlayer)
+- `event.server` - the server instance
+- `event.level` - the level/world the player is in
+
+# Example
+
+```js
+// Send a welcome message when a player joins
+PlayerEvents.loggedIn(event => {
+	event.server.tell(event.player.username + ' has joined the server!')
+	event.player.tell('Welcome back!')
+})
+```
+
+```js
+// Give new players a starter kit
+PlayerEvents.loggedIn(event => {
+	// Check if the player has the 'received_starter_kit' stage
+	if (!event.player.stages.has('received_starter_kit')) {
+		event.player.give('minecraft:stone_sword')
+		event.player.give('minecraft:bread', 16)
+		event.player.give('minecraft:torch', 32)
+		event.player.stages.add('received_starter_kit')
+		event.player.tell('Welcome! Here is a starter kit to get you going.')
+	}
+})
+```
+
+# Practical Uses
+
+```js
+// Apply potion effects on login
+PlayerEvents.loggedIn(event => {
+	event.player.potionEffects.add('minecraft:regeneration', 200, 0, false, true)
+})
+```
+
+>>> info
+Any server script errors will be sent to the player as a chat message when they log in, unless disabled in `common.properties`.
+<<<

@@ -1,0 +1,33 @@
+# Info
+Invoked when a player closes any container (chest, furnace, hopper, crafting table, anvil, etc.). For chest-specific handling, see [[/events/PlayerEvents/chestClosed]].
+
+This event supports **menu type targeting** - you can filter for specific container types by passing a menu type ID as the first argument.
+
+# Available Event Fields
+- `event.player` - the player that closed the container
+- `event.inventoryContainer` - the container menu that was closed (AbstractContainerMenu)
+
+# Example
+
+```js
+// Listen for any container being closed
+PlayerEvents.inventoryClosed(event => {
+	console.log(event.player.username + ' closed a container')
+})
+```
+
+```js
+// Listen for a specific menu type being closed
+PlayerEvents.inventoryClosed('minecraft:crafting', event => {
+	event.player.tell('Closed the crafting table.')
+})
+```
+
+# Practical Uses
+
+```js
+// Notify when a player finishes using an anvil
+PlayerEvents.inventoryClosed('minecraft:anvil', event => {
+	event.player.tell('Done with the anvil!')
+})
+```

@@ -1,0 +1,52 @@
+# Info
+Invoked when commands are being registered. Use this to register custom commands with full access to Minecraft's command system (Brigadier).
+
+# Available Event Fields and Methods
+- `event.dispatcher` - the Brigadier command dispatcher
+- `event.registry` - the command build context (registry access)
+- `event.commands` - access to the `Commands` class for building literals and arguments
+- `event.arguments` - access to argument type wrappers
+- `event.register(command)` - register a command literal
+- `event.isForSinglePlayer()` - whether this is for integrated server
+- `event.isForMultiPlayer()` - whether this is for dedicated server
+
+# Example
+
+```js
+ServerEvents.commandRegistry(event => {
+	const { commands: Commands, arguments: Arguments } = event
+
+	// Register a simple command
+	event.register(
+		Commands.literal('hello')
+			.executes(ctx => {
+				ctx.source.sendSuccess(() => Component.literal('Hello, World!'), true)
+				return 1
+			})
+	)
+})
+```
+
+```js
+ServerEvents.commandRegistry(event => {
+	const { commands: Commands, arguments: Arguments } = event
+
+	// Register a command with arguments
+	event.register(
+		Commands.literal('heal')
+			.requires(source => source.hasPermission(2))
+			.then(
+				Commands.argument('targets', Arguments.players())
+					.executes(ctx => {
+						let players = Arguments.getPlayers(ctx, 'targets')
+						players.forEach(player => player.heal(player.maxHealth))
+						return players.size()
+					})
+			)
+	)
+})
+```
+
+>>> info
+For simple commands (just a name, optional input), consider using [[/events/ServerEvents/basicCommand]] instead - it's much simpler for basic use cases.
+<<<

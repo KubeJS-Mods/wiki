@@ -1,0 +1,52 @@
+# Info
+Invoked during game startup to register custom game objects like blocks, items, fluids, and more. This is one of the most important startup events and is how you add new content to the game.
+
+This event **requires a registry target** - you must specify which registry you want to add objects to (e.g. `'minecraft:item'`, `'minecraft:block'`).
+
+# Available Event Fields
+- `event.registryKey` - the registry key being targeted
+
+# Available Methods
+- `event.create(id)` - creates a new object with the given ID using the default builder type
+- `event.create(id, type)` - creates a new object with the given ID and a specific builder type
+- `event.createCustom(id, object)` - creates a custom object directly
+
+# Example
+
+## Registering a basic item
+```js
+StartupEvents.registry('minecraft:item', event => {
+	event.create('kubejs:my_item')
+	event.create('kubejs:my_food')
+		.food(food => {
+			food.hunger(6)
+			food.saturation(0.8)
+		})
+})
+```
+
+## Registering a basic block
+```js
+StartupEvents.registry('minecraft:block', event => {
+	event.create('kubejs:my_block')
+	event.create('kubejs:my_slab', 'slab')
+})
+```
+
+## Registering a fluid
+```js
+StartupEvents.registry('minecraft:fluid', event => {
+	event.create('kubejs:my_fluid')
+		.displayName('My Fluid')
+		.stillTexture('kubejs:block/my_fluid_still')
+		.flowingTexture('kubejs:block/my_fluid_flowing')
+})
+```
+
+>>> info
+For detailed guides on creating items, blocks, and fluids, see the tutorials section.
+<<<
+
+>>> warning
+Registry events fire very early during startup. Objects registered here cannot be changed later - if you need to modify existing objects, use other events like `[js]ServerEvents.tags`.
+<<<

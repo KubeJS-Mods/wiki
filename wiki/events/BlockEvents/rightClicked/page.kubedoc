@@ -1,0 +1,43 @@
+# Info
+Invoked when a player right clicks on a block. Cancelling this event prevents the interaction.
+
+This event supports **block targeting** - you can filter for specific blocks by passing a block ID as the first argument.
+
+# Available Event Fields
+- `event.player` - the player that right clicked the block
+- `event.block` - the block that was right clicked (LevelBlock)
+- `event.hand` - the hand used to right click (`MAIN_HAND` or `OFF_HAND`)
+- `event.item` - the item held when right clicking (ItemStack)
+- `event.facing` - the face of the block that was clicked (Direction)
+- `event.level` - the level/world
+
+# Example
+
+```js
+// Listen for right clicking any block
+BlockEvents.rightClicked(event => {
+	event.player.tell('You right clicked: ' + event.block.id)
+})
+```
+
+```js
+// Add custom interaction to a specific block
+BlockEvents.rightClicked('minecraft:gold_block', event => {
+	event.player.tell('The gold block shimmers!')
+	event.player.giveExperiencePoints(5)
+	event.cancel() // Prevent normal interaction
+})
+```
+
+```js
+// Use held item to interact with a block
+BlockEvents.rightClicked('minecraft:cauldron', event => {
+	if (event.item.id == 'minecraft:water_bucket') {
+		event.player.tell('You filled the cauldron!')
+	}
+})
+```
+
+>>> info
+This event fires when right clicking on a block specifically. For right clicking in the air with an item, see `ItemEvents.rightClicked`.
+<<<

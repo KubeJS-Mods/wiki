@@ -1,0 +1,13 @@
+# Info
+Invoked on the client side when the player disconnects from a server or leaves a singleplayer world. This is useful for cleanup or saving client-side state.
+
+# Available Event Fields
+- `event.player` - the local player that logged out (`LocalPlayer`)
+
+# Example
+
+```js
+ClientEvents.loggedOut(event => {
+	console.log('Disconnected from server!')
+})
+```

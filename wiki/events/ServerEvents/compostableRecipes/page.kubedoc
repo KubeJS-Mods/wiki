@@ -1,0 +1,21 @@
+# Info
+Invoked when compostable items are being registered. Use this to add or modify which items can be composted in a composter block and their composting chances.
+
+# Available Event Fields and Methods
+- `event.add(item, chance)` - add an item as compostable with a given chance (0.0 to 1.0)
+- `event.remove(item)` - remove an item from the compostable list
+
+# Example
+
+```js
+ServerEvents.compostableRecipes(event => {
+	// Make diamonds compostable with a 100% chance
+	event.add('minecraft:diamond', 1.0)
+
+	// Make custom items compostable
+	event.add('kubejs:organic_matter', 0.65)
+
+	// Remove an item from being compostable
+	event.remove('minecraft:oak_leaves')
+})
+```

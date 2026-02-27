@@ -1,0 +1,47 @@
+# Info
+Invoked when a player sends a chat message. This event fires at **low priority**, meaning it runs after `PlayerEvents.decorateChat`. Cancelling this event prevents the message from being sent.
+
+# Available Event Fields
+- `event.player` - the player that sent the message (ServerPlayer)
+- `event.username` - the player's username (String)
+- `event.message` - the raw text content of the message (String)
+- `event.component` - the chat component to be displayed (Component)
+- `event.server` - the server instance
+
+# Available Methods
+- `event.setComponent(component)` - sets the chat component that will be displayed
+
+# Example
+
+```js
+// Cancel messages containing specific words
+PlayerEvents.chat(event => {
+	if (event.message.includes('bad_word')) {
+		event.cancel()
+		event.player.tell('Watch your language!')
+	}
+})
+```
+
+```js
+// Modify the displayed chat message
+PlayerEvents.chat(event => {
+	// Add a prefix to all messages
+	event.setComponent(
+		Component.string('[Chat] ').append(event.component)
+	)
+})
+```
+
+# Practical Uses
+
+```js
+// Simple chat logging
+PlayerEvents.chat(event => {
+	console.log('[CHAT] ' + event.username + ': ' + event.message)
+})
+```
+
+>>> info
+If you want to modify the chat message before other mods process it, use [[/events/PlayerEvents/decorateChat]] instead. That event fires at the **highest** priority.
+<<<

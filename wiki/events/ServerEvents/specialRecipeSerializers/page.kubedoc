@@ -1,0 +1,20 @@
+# Info
+Invoked to register special recipe serializers. Special recipes are recipes that don't follow the standard JSON recipe format (like firework crafting, banner patterns, etc.).
+
+>>> warning
+This is an advanced event. Most users will not need to use this directly.
+<<<
+
+# Example
+
+```js
+ServerEvents.specialRecipeSerializers(event => {
+	// Ignore specific special recipes so they can be overridden
+	// by custom recipes in ServerEvents.recipes
+	event.ignoreSpecialFlag('minecraft:crafting_special_armordye')
+})
+```
+
+>>> info
+By default, special recipes are not processed by `ServerEvents.recipes`. Use this event to mark special recipe serializers as ignorable so their recipes appear in the recipe event.
+<<<

@@ -1,0 +1,31 @@
+# Info
+Invoked when a player picks up a smelted item from a furnace, blast furnace, or smoker.
+
+This event supports **item targeting** - you can filter by specific items.
+
+# Available Event Fields
+- `event.player` - the player that took the smelted item
+- `event.item` - the item that was smelted (ItemStack)
+
+# Example
+
+```js
+// Give bonus XP when smelting iron ingots
+ItemEvents.smelted('minecraft:iron_ingot', event => {
+	event.player.giveExperiencePoints(10)
+	event.player.tell('Bonus XP for smelting iron!')
+})
+```
+
+```js
+// Track total items smelted
+ItemEvents.smelted(event => {
+	event.player.server.runCommandSilent(
+		'scoreboard players add ' + event.player.username + ' items_smelted 1'
+	)
+})
+```
+
+>>> info
+This event also triggers `PlayerEvents.inventoryChanged` for the smelted item.
+<<<

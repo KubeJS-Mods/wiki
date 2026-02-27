@@ -1,0 +1,54 @@
+# Info
+The main recipe event. Invoked when recipes are loaded or reloaded. Use this to add, remove, and modify recipes.
+
+This is one of the most important events in KubeJS - it's fired whenever the server loads resources (on startup and when `/reload` is run).
+
+For a full guide on recipes, see [[/tutorials/recipes]].
+
+# Available Event Fields and Methods
+- `event.recipes` - access recipe functions by mod/type (e.g. `event.recipes.minecraft.shaped(...)`)
+- `event.shaped(...)` - shortcut for shaped crafting recipes
+- `event.shapeless(...)` - shortcut for shapeless crafting recipes
+- `event.smelting(...)` - shortcut for smelting recipes
+- `event.blasting(...)` - shortcut for blasting recipes
+- `event.smoking(...)` - shortcut for smoking recipes
+- `event.campfireCooking(...)` - shortcut for campfire cooking recipes
+- `event.stonecutting(...)` - shortcut for stonecutting recipes
+- `event.smithing(...)` - shortcut for smithing recipes
+- `event.remove(filter)` - remove recipes matching filter
+- `event.replaceInput(filter, oldInput, newInput)` - replace an input ingredient
+- `event.replaceOutput(filter, oldOutput, newOutput)` - replace an output item
+
+# Example
+
+```js
+ServerEvents.recipes(event => {
+	// Remove a recipe by ID
+	event.remove({ id: 'minecraft:oak_planks' })
+
+	// Remove all recipes with a specific output
+	event.remove({ output: 'minecraft:diamond_sword' })
+
+	// Add a shaped crafting recipe
+	event.shaped('minecraft:diamond', [
+		'CCC',
+		'CCC',
+		'CCC'
+	], {
+		C: 'minecraft:coal'
+	})
+
+	// Add a shapeless crafting recipe
+	event.shapeless('4x minecraft:oak_planks', ['minecraft:oak_log'])
+
+	// Add a smelting recipe
+	event.smelting('minecraft:iron_ingot', 'minecraft:raw_iron')
+
+	// Replace input in all recipes
+	event.replaceInput({}, 'minecraft:oak_planks', 'minecraft:birch_planks')
+})
+```
+
+>>> info
+Recipe changes are applied every time the server reloads (on startup and `/reload`). You do not need to restart the game.
+<<<

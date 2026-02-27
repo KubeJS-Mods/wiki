@@ -1,0 +1,14 @@
+# Info
+Invoked on the client side when the player connects to a server or loads a singleplayer world. This is useful for running client-side initialization logic when joining a world.
+
+# Available Event Fields
+- `event.player` - the local player that logged in (`LocalPlayer`)
+
+# Example
+
+```js
+ClientEvents.loggedIn(event => {
+	console.log('Connected to server!')
+	console.log('Player name: ' + event.player.name.string)
+})
+```

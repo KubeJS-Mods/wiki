@@ -1,0 +1,33 @@
+# Info
+Invoked every client tick when a level and player exist. This fires approximately 20 times per second on the client side.
+
+# Available Event Fields
+- `event.player` - the local player (`LocalPlayer`)
+
+# Example
+
+```js
+ClientEvents.tick(event => {
+	// Check something every client tick
+	if (event.player.isCrouching()) {
+		// Do something while crouching
+	}
+})
+```
+
+>>> warning
+This event fires **every tick** (20 times per second). Avoid doing heavy computation here as it will impact client performance. Consider using a counter to run logic less frequently if needed.
+<<<
+
+```js
+// Example: run logic every second (20 ticks) instead of every tick
+let tickCounter = 0
+
+ClientEvents.tick(event => {
+	tickCounter++
+	if (tickCounter % 20 === 0) {
+		// Runs once per second
+		console.log('One second has passed')
+	}
+})
+```

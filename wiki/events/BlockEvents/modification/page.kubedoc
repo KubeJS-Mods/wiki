@@ -1,0 +1,64 @@
+# Info
+A startup event that allows you to modify the properties of existing blocks. This event runs during startup and changes are applied before the game fully loads.
+
+# Available Methods
+- `event.modify(predicate, callback)` - modifies blocks matching the given predicate
+
+The `callback` provides the following modification methods:
+- `setHasCollision(boolean)` - enable or disable block collision
+- `setExplosionResistance(float)` - set explosion resistance
+- `setIsRandomlyTicking(boolean)` - enable or disable random ticking
+- `setRandomTickCallback(callback)` - set a custom random tick handler
+- `setSoundType(soundType)` - change the block's sound type
+- `setFriction(float)` - set friction (slipperiness)
+- `setSpeedFactor(float)` - set movement speed multiplier
+- `setJumpFactor(float)` - set jump height multiplier
+- `setDestroySpeed(float)` - set mining/destroy speed
+- `setLightEmission(int)` - set light level (0-15)
+- `setRequiresTool(boolean)` - whether the block requires the correct tool
+
+# Example
+
+```js
+// Make dirt blocks glow
+BlockEvents.modification(event => {
+	event.modify('minecraft:dirt', block => {
+		block.setLightEmission(10)
+	})
+})
+```
+
+```js
+// Make obsidian easier to break
+BlockEvents.modification(event => {
+	event.modify('minecraft:obsidian', block => {
+		block.setDestroySpeed(10) // Default is 50
+		block.setExplosionResistance(100) // Default is 1200
+	})
+})
+```
+
+```js
+// Make ice extra slippery
+BlockEvents.modification(event => {
+	event.modify('minecraft:ice', block => {
+		block.setFriction(0.99)
+		block.setSpeedFactor(1.5)
+	})
+})
+```
+
+# Practical Uses
+
+```js
+// Disable collision for tall grass (walk through it)
+BlockEvents.modification(event => {
+	event.modify('minecraft:tall_grass', block => {
+		block.setHasCollision(false)
+	})
+})
+```
+
+>>> warning
+Tag predicates are **not** supported in `event.modify()` at this time. Use individual block IDs or regex patterns.
+<<<

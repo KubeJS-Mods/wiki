@@ -1,0 +1,45 @@
+# Info
+Invoked when a player earns an advancement. This event supports **advancement targeting** - you can filter for specific advancements by passing their ID as the first argument. Cancelling this event prevents the advancement from being granted.
+
+# Available Event Fields
+- `event.player` - the player that earned the advancement (ServerPlayer)
+- `event.advancement` - the advancement node that was earned (AdvancementNode)
+- `event.server` - the server instance
+
+# Example
+
+```js
+// Listen for any advancement
+PlayerEvents.advancement(event => {
+	event.server.tell(
+		event.player.username + ' just earned an advancement!'
+	)
+})
+```
+
+```js
+// Listen for a specific advancement
+PlayerEvents.advancement('minecraft:story/mine_diamond', event => {
+	event.player.tell('You found diamonds! Here is a reward.')
+	event.player.give('minecraft:diamond', 5)
+})
+```
+
+```js
+// Prevent a specific advancement from being granted
+PlayerEvents.advancement('minecraft:end/kill_dragon', event => {
+	event.cancel()
+	event.player.tell('Dragon advancements are disabled on this server.')
+})
+```
+
+# Practical Uses
+
+```js
+// Give rewards for completing advancement milestones
+PlayerEvents.advancement('minecraft:story/enter_the_nether', event => {
+	event.player.give('minecraft:golden_apple', 3)
+	event.player.give('minecraft:fire_resistance_potion')
+	event.server.tell(event.player.username + ' has entered the Nether!')
+})
+```

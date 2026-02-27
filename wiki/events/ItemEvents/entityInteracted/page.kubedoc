@@ -1,0 +1,46 @@
+# Info
+Invoked when a player right clicks on an entity while holding an item. **Cancelling** this event will prevent the interaction.
+
+This event supports **item targeting** - you can filter by what item the player is holding.
+
+# Available Event Fields
+- `event.player` - the player that interacted
+- `event.item` - the item the player was holding (ItemStack)
+- `event.target` - the entity that was right clicked on
+- `event.hand` - the hand used (MAIN_HAND or OFF_HAND)
+
+# Example
+
+```js
+// Right clicking a cow with a stick heals the cow
+ItemEvents.entityInteracted('minecraft:stick', event => {
+	if (event.target.type == 'minecraft:cow') {
+		event.target.heal(10)
+		event.player.tell('You healed the cow!')
+		event.cancel()
+	}
+})
+```
+
+```js
+// Prevent interacting with villagers using emeralds (block trading)
+ItemEvents.entityInteracted('minecraft:emerald', event => {
+	if (event.target.type == 'minecraft:villager') {
+		event.player.tell('Trading is disabled!')
+		event.cancel()
+	}
+})
+```
+
+```js
+// Tame any animal by right clicking with a golden carrot
+ItemEvents.entityInteracted('minecraft:golden_carrot', event => {
+	if (event.target.living) {
+		event.player.tell('You befriended ' + event.target.type + '!')
+	}
+})
+```
+
+>>> warning
+Not to be confused with `[js]ItemEvents.rightClicked` which fires when right clicking into the air, or `[js]BlockEvents.rightClicked` which fires when right clicking a block.
+<<<

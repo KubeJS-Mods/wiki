@@ -1,0 +1,16 @@
+# Info
+Invoked very early during game startup, in the KubeJS constructor. This is the first event that fires and can be used to run code at the earliest possible point.
+
+This event has no special fields - it simply signals that KubeJS has started initializing.
+
+>>> warning
+This event fires before most of the game systems are ready. For most use cases, you should use `[js]StartupEvents.postInit` or `[js]StartupEvents.registry` instead.
+<<<
+
+# Example
+
+```js
+StartupEvents.init(event => {
+	console.log('KubeJS is initializing!')
+})
+```

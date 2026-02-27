@@ -1,0 +1,26 @@
+# Info
+Invoked when a player left clicks with an item for the **first time** (initial click only). This fires once per click rather than continuously.
+
+This event supports **item targeting** - you can filter by specific items.
+
+# Available Event Fields
+- `event.player` - the player that clicked with the item
+- `event.item` - the item that was clicked with (ItemStack)
+- `event.hand` - the hand used (MAIN_HAND or OFF_HAND)
+
+# Example
+
+```js
+// React when a player first left clicks with a specific item
+ItemEvents.firstLeftClicked('minecraft:stick', event => {
+	event.player.tell('Whoosh!')
+})
+```
+
+```js
+// Create a "magic wand" that fires on left click
+ItemEvents.firstLeftClicked('minecraft:blaze_rod', event => {
+	event.player.tell('Spell cast!')
+	event.player.giveExperiencePoints(1)
+})
+```

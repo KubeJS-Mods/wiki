@@ -1,0 +1,52 @@
+# Info
+Invoked every server tick (20 times per second) for each player on the server. Use this for periodic checks, status effects, or time-based mechanics.
+
+# Available Event Fields
+- `event.player` - the player being ticked (ServerPlayer)
+- `event.server` - the server instance
+- `event.level` - the level/world the player is in
+
+# Example
+
+```js
+// Heal players slowly when they are standing still
+PlayerEvents.tick(event => {
+	let player = event.player
+	// Only check every 100 ticks (5 seconds)
+	if (player.age % 100 !== 0) return
+	
+	if (player.health < player.maxHealth && player.getDeltaMovement().length() < 0.01) {
+		player.heal(1)
+	}
+})
+```
+
+```js
+// Give night vision to players in the End
+PlayerEvents.tick(event => {
+	if (event.player.age % 200 !== 0) return
+	
+	if (event.level.dimension == 'minecraft:the_end') {
+		event.player.potionEffects.add('minecraft:night_vision', 300, 0, false, false)
+	}
+})
+```
+
+>>> warning
+This event fires **every tick** for **every player**. Always add an early return condition (such as `player.age % N !== 0`) to avoid running expensive operations 20 times per second per player. This is critical for server performance.
+<<<
+
+# Practical Uses
+
+```js
+// Check if a player is in a forbidden area
+PlayerEvents.tick(event => {
+	if (event.player.age % 20 !== 0) return // Check once per second
+	
+	let pos = event.player.blockPosition()
+	if (pos.y > 300) {
+		event.player.tell('You are too high! Teleporting down...')
+		event.player.teleportTo(pos.x, 200, pos.z)
+	}
+})
+```

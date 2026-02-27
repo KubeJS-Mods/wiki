@@ -1,0 +1,42 @@
+# Info
+Invoked before a living entity dies. Cancelling this event prevents the entity from dying.
+
+This event supports **entity type targeting** - you can filter for specific entity types by passing an entity type ID as the first argument.
+
+>>> warning
+You need to set the entity's HP to > 0 **in addition** to cancelling the event to properly prevent the entity from dying.
+<<<
+
+# Available Event Fields
+- `event.entity` - the entity that is dying (LivingEntity)
+- `event.source` - the damage source that caused the death
+- `event.player` - the player, if the entity is a player (may be `null`)
+- `event.level` - the level/world
+- `event.server` - the server
+
+# Example
+
+```js
+// Prevent all zombie deaths
+EntityEvents.death('minecraft:zombie', event => {
+	event.entity.setHealth(1)
+	event.cancel()
+})
+```
+
+```js
+// Log all entity deaths
+EntityEvents.death(event => {
+	console.log(event.entity.type + ' died from ' + event.source.type)
+})
+```
+
+```js
+// Prevent player death from falling
+EntityEvents.death('minecraft:player', event => {
+	if (event.source.type == 'fall') {
+		event.entity.setHealth(1)
+		event.cancel()
+	}
+})
+```

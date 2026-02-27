@@ -1,0 +1,49 @@
+# Info
+Invoked when a player's inventory contents change. This fires when items are picked up, moved, crafted, smelted, or otherwise added/removed from the player's inventory.
+
+This event supports **item targeting** - you can filter for specific items by passing an item ID as the first argument.
+
+# Available Event Fields
+- `event.player` - the player whose inventory changed
+- `event.item` - the item stack that changed (ItemStack)
+- `event.slot` - the inventory slot index that changed (Number), or `-1` for events triggered by crafting/smelting
+
+# Example
+
+```js
+// Listen for any inventory change
+PlayerEvents.inventoryChanged(event => {
+	console.log(event.player.username + ' inventory changed: ' + event.item + ' in slot ' + event.slot)
+})
+```
+
+```js
+// Listen for a specific item entering the inventory
+PlayerEvents.inventoryChanged('minecraft:diamond', event => {
+	event.player.tell('You got a diamond!')
+})
+```
+
+```js
+// Detect when a player picks up a quest item
+PlayerEvents.inventoryChanged('minecraft:nether_star', event => {
+	if (!event.player.stages.has('found_nether_star')) {
+		event.player.stages.add('found_nether_star')
+		event.server.tell(event.player.username + ' has obtained a Nether Star!')
+	}
+})
+```
+
+# Practical Uses
+
+```js
+// Give an advancement-like reward when collecting specific items
+PlayerEvents.inventoryChanged('minecraft:elytra', event => {
+	event.player.tell('You found an Elytra! Take to the skies!')
+	event.player.potionEffects.add('minecraft:slow_falling', 600, 0, false, true)
+})
+```
+
+>>> info
+This event is also triggered by `ItemEvents.crafted` and `ItemEvents.smelted` - when a player crafts or smelts an item, both the item-specific event and `inventoryChanged` fire. In those cases, the `slot` will be `-1`.
+<<<

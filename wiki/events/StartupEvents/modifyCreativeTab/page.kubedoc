@@ -1,0 +1,52 @@
+# Info
+Invoked during startup to modify creative mode tabs. You can add items, remove items, change the display name, and set the icon of any creative tab.
+
+This event **requires a creative tab ID target** - you must specify which creative tab to modify.
+
+# Available Event Fields
+- `event.tab` - the creative tab being modified
+
+# Available Methods
+- `event.setDisplayName(text)` - sets the display name of the tab
+- `event.setIcon(item)` - sets the icon of the tab
+- `event.add(items)` - adds items to the tab
+- `event.addAfter(target, items)` - adds items after a specific item in the tab
+- `event.addBefore(target, items)` - adds items before a specific item in the tab
+- `event.remove(items)` - removes items from the tab
+- `event.removeFromParent(items)` - removes items from the tab, keeping them in search
+- `event.removeFromSearch(items)` - removes items from the search tab only
+
+# Example
+
+## Adding items to a creative tab
+```js
+StartupEvents.modifyCreativeTab('minecraft:building_blocks', event => {
+	event.add('kubejs:my_block')
+	event.add(['kubejs:block_a', 'kubejs:block_b'])
+})
+```
+
+## Inserting items at specific positions
+```js
+StartupEvents.modifyCreativeTab('minecraft:ingredients', event => {
+	// Add custom items after diamonds
+	event.addAfter('minecraft:diamond', 'kubejs:my_gem')
+	// Add custom items before iron ingots
+	event.addBefore('minecraft:iron_ingot', 'kubejs:my_ingot')
+})
+```
+
+## Removing items from a tab
+```js
+StartupEvents.modifyCreativeTab('minecraft:combat', event => {
+	event.remove('minecraft:wooden_sword')
+})
+```
+
+## Customizing tab appearance
+```js
+StartupEvents.modifyCreativeTab('kubejs:my_tab', event => {
+	event.setDisplayName('My Custom Tab')
+	event.setIcon('kubejs:my_icon_item')
+})
+```

@@ -1,0 +1,24 @@
+# Info
+Invoked at startup to register custom tool tiers (material levels) for tools like pickaxes, axes, shovels, and hoes.
+
+This is a **startup** event and cannot be reloaded.
+
+# Example
+
+```js
+// Register a custom tool tier
+ItemEvents.toolTierRegistry(event => {
+	event.add('kubejs:my_tier', tier => {
+		tier.uses = 500          // Durability
+		tier.speed = 7.0         // Mining speed
+		tier.attackDamageBonus = 3.0  // Attack damage bonus
+		tier.enchantmentValue = 20   // Enchantability
+		tier.level = 3           // Mining level (3 = diamond)
+		tier.repairIngredient = 'minecraft:amethyst_shard'
+	})
+})
+```
+
+>>> info
+See also [[/events/StartupEvents/registry]] for registering custom items that use this tier.
+<<<

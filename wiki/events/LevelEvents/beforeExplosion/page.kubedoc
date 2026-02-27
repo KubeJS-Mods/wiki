@@ -1,0 +1,47 @@
+# Info
+Invoked right before an explosion happens. Cancelling this event prevents the explosion entirely.
+
+This event supports **dimension targeting** - you can filter for specific dimensions by passing a dimension ID as the first argument.
+
+# Available Event Fields
+- `event.level` - the level/world
+- `event.position` - the position of the explosion (Vec3)
+- `event.x` - the x coordinate of the explosion
+- `event.y` - the y coordinate of the explosion
+- `event.z` - the z coordinate of the explosion
+- `event.block` - the block at the explosion center
+- `event.exploder` - the entity that caused the explosion (may be `null`)
+- `event.size` - the radius/size of the explosion (can be modified with `event.size = value`)
+- `event.server` - the server
+
+# Example
+
+```js
+// Prevent all explosions
+LevelEvents.beforeExplosion(event => {
+	event.cancel()
+})
+```
+
+```js
+// Double the size of all explosions
+LevelEvents.beforeExplosion(event => {
+	event.size = event.size * 2
+})
+```
+
+```js
+// Prevent creeper explosions only
+LevelEvents.beforeExplosion(event => {
+	if (event.exploder && event.exploder.type == 'minecraft:creeper') {
+		event.cancel()
+	}
+})
+```
+
+```js
+// Only prevent explosions in the overworld
+LevelEvents.beforeExplosion('minecraft:overworld', event => {
+	event.cancel()
+})
+```

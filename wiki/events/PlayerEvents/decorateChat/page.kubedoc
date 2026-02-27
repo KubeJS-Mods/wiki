@@ -1,0 +1,43 @@
+# Info
+Invoked when a player sends a chat message, but fires at the **highest** priority before `PlayerEvents.chat` and other mods. Use this event to modify or decorate chat messages before they are processed by anything else.
+
+This event uses the same event class as `PlayerEvents.chat`, so the available fields and methods are identical.
+
+# Available Event Fields
+- `event.player` - the player that sent the message (ServerPlayer)
+- `event.username` - the player's username (String)
+- `event.message` - the raw text content of the message (String)
+- `event.component` - the chat component to be displayed (Component)
+- `event.server` - the server instance
+
+# Available Methods
+- `event.setComponent(component)` - sets the chat component that will be displayed
+
+# Example
+
+```js
+// Add colored name prefixes based on player stages
+PlayerEvents.decorateChat(event => {
+	if (event.player.stages.has('vip')) {
+		event.setComponent(
+			Component.string('[VIP] ').gold().append(event.component)
+		)
+	}
+})
+```
+
+```js
+// Replace all chat messages with a custom format
+PlayerEvents.decorateChat(event => {
+	event.setComponent(
+		Component.string('<')
+			.append(Component.string(event.username).aqua())
+			.append('> ')
+			.append(event.message)
+	)
+})
+```
+
+>>> info
+This event fires at the **highest** priority. Changes made here will be visible to `PlayerEvents.chat` and any other mods listening for chat events.
+<<<

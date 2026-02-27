@@ -1,0 +1,48 @@
+# Info
+Invoked when a player respawns after dying or returning from the End. Use this event to restore effects, send messages, or apply post-respawn logic.
+
+# Available Event Fields
+- `event.player` - the player that respawned (ServerPlayer)
+- `event.endConquered` - `true` if the player returned from killing the Ender Dragon, `false` if they died and respawned
+- `event.server` - the server instance
+- `event.level` - the level/world the player respawned in
+
+# Example
+
+```js
+// Give players a short protection buff after respawning from death
+PlayerEvents.respawned(event => {
+	if (!event.endConquered) {
+		// They died, give them temporary resistance
+		event.player.potionEffects.add('minecraft:resistance', 200, 1, false, true)
+		event.player.potionEffects.add('minecraft:regeneration', 100, 1, false, true)
+		event.player.tell('You have 10 seconds of protection.')
+	}
+})
+```
+
+```js
+// Congratulate players returning from the End
+PlayerEvents.respawned(event => {
+	if (event.endConquered) {
+		event.server.tell(event.player.username + ' has conquered the End!')
+		event.player.give('minecraft:dragon_egg')
+	}
+})
+```
+
+# Practical Uses
+
+```js
+// Teleport players to a custom spawn point after death
+PlayerEvents.respawned(event => {
+	if (!event.endConquered) {
+		event.player.teleportTo(0, 100, 0)
+		event.player.tell('You have been returned to spawn.')
+	}
+})
+```
+
+>>> info
+Player stages are automatically re-synced after respawning. The player entity is a new object - the old entity was removed when the player died.
+<<<

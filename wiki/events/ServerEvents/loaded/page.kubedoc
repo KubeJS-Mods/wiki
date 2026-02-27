@@ -1,0 +1,20 @@
+# Info
+Invoked when the server starts. This is the main event for running code when the server (or singleplayer world) has finished loading.
+
+# Available Event Fields
+- `event.server` - the Minecraft server instance
+
+# Example
+
+```js
+ServerEvents.loaded(event => {
+	console.log('Server has loaded!')
+})
+```
+
+```js
+ServerEvents.loaded(event => {
+	// Send a welcome message to all online players (useful for dedicated servers)
+	event.server.tell('Server scripts have been reloaded!')
+})
+```

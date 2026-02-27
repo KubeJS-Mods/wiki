@@ -1,0 +1,45 @@
+# Info
+Invoked before an entity is hurt by a damage source. Cancelling this event prevents the damage from being applied.
+
+This event supports **entity type targeting** - you can filter for specific entity types by passing an entity type ID as the first argument.
+
+>>> info
+In 1.21, this event is split into two: `EntityEvents.beforeHurt` (cancellable, fires before damage) and `EntityEvents.afterHurt` (fires after damage is applied). The `hurt` event name refers to `beforeHurt`.
+<<<
+
+# Available Event Fields
+- `event.entity` - the entity that was hurt (LivingEntity)
+- `event.source` - the damage source
+- `event.damage` - the amount of damage (can be modified with `event.damage = value`)
+- `event.player` - the player, if the entity is a player (may be `null`)
+- `event.level` - the level/world
+- `event.server` - the server
+
+# Example
+
+```js
+// Reduce all damage to players by half
+EntityEvents.beforeHurt('minecraft:player', event => {
+	event.damage = event.damage / 2
+})
+```
+
+```js
+// Make zombies immune to fire damage
+EntityEvents.beforeHurt('minecraft:zombie', event => {
+	if (event.source.type == 'inFire' || event.source.type == 'onFire') {
+		event.cancel()
+	}
+})
+```
+
+```js
+// Log all damage dealt to entities
+EntityEvents.beforeHurt(event => {
+	console.log(event.entity.type + ' took ' + event.damage + ' damage from ' + event.source.type)
+})
+```
+
+>>> warning
+Setting `event.damage = 0` is similar to cancelling the event but not identical - cancelling prevents the knockback and hurt animation as well.
+<<<

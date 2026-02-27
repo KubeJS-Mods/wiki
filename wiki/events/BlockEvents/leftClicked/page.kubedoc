@@ -1,0 +1,39 @@
+# Info
+Invoked when a player left clicks (punches) a block. Cancelling this event prevents the interaction.
+
+This event supports **block targeting** - you can filter for specific blocks by passing a block ID as the first argument.
+
+# Available Event Fields
+- `event.player` - the player that left clicked the block
+- `event.block` - the block that was left clicked (LevelBlock)
+- `event.item` - the item held when left clicking (ItemStack)
+- `event.facing` - the face of the block that was left clicked (Direction), may be `null`
+- `event.level` - the level/world
+
+# Example
+
+```js
+// Listen for left clicking any block
+BlockEvents.leftClicked(event => {
+	event.player.tell('You punched: ' + event.block.id)
+})
+```
+
+```js
+// Add custom behavior when punching specific blocks
+BlockEvents.leftClicked('minecraft:bell', event => {
+	event.player.tell('Dong!')
+})
+```
+
+```js
+// Prevent left clicking specific blocks
+BlockEvents.leftClicked('minecraft:spawner', event => {
+	event.cancel()
+	event.player.tell('Spawners cannot be broken on this server!')
+})
+```
+
+>>> info
+This event fires when the player starts to break a block, not when the block is fully broken. For the block being fully broken, see [[/events/BlockEvents/broken]].
+<<<

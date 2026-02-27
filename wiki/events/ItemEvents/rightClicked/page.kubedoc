@@ -1,0 +1,42 @@
+# Info
+Invoked when a player right clicks with an item **without targeting anything** (no block or entity).
+
+Not to be confused with `[js]BlockEvents.rightClicked` (right clicking a block) or `[js]ItemEvents.entityInteracted` (right clicking an entity).
+
+This event can be **cancelled** to prevent the default right click behavior.
+
+This event supports **item targeting** - you can filter by specific items using the first argument.
+
+# Available Event Fields
+- `event.player` - the player that clicked with the item
+- `event.item` - the item that was right clicked with (ItemStack)
+- `event.hand` - the hand used (MAIN_HAND or OFF_HAND)
+- `event.target` - the ray trace result showing where the player is looking
+
+# Example
+
+```js
+// Listen for right clicking with a specific item
+ItemEvents.rightClicked('minecraft:stick', event => {
+	// Strike lightning where the player is looking
+	let pos = event.target.block
+	if (pos) {
+		event.player.level.spawnLightning(pos.x, pos.y, pos.z, true)
+		event.player.tell('Thunder!')
+	}
+})
+```
+
+```js
+// Make a custom "healing wand" with a blaze rod
+ItemEvents.rightClicked('minecraft:blaze_rod', event => {
+	event.player.heal(6) // Heal 3 hearts
+	event.player.tell('You feel refreshed!')
+	// Cancel so it doesn't do the normal right click action
+	event.cancel()
+})
+```
+
+>>> warning
+This event only fires when right clicking into the air or at something out of reach. If the player right clicks on a block, `BlockEvents.rightClicked` fires instead. If they right click on an entity, `ItemEvents.entityInteracted` fires instead.
+<<<

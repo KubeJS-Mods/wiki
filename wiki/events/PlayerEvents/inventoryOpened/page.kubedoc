@@ -1,0 +1,35 @@
+# Info
+Invoked when a player opens any container (chest, furnace, hopper, crafting table, anvil, etc.). For chest-specific handling, see [[/events/PlayerEvents/chestOpened]].
+
+This event supports **menu type targeting** - you can filter for specific container types by passing a menu type ID as the first argument.
+
+# Available Event Fields
+- `event.player` - the player that opened the container
+- `event.inventoryContainer` - the container menu that was opened (AbstractContainerMenu)
+
+# Example
+
+```js
+// Listen for any container being opened
+PlayerEvents.inventoryOpened(event => {
+	console.log(event.player.username + ' opened a container')
+})
+```
+
+```js
+// Listen for a specific menu type being opened
+PlayerEvents.inventoryOpened('minecraft:generic_9x3', event => {
+	event.player.tell('You opened a chest-type container!')
+})
+```
+
+```js
+// Listen for anvil use
+PlayerEvents.inventoryOpened('minecraft:anvil', event => {
+	event.player.tell('Anvil opened - repairs cost double XP on this server!')
+})
+```
+
+>>> info
+This event also sets up the inventory change listener, so `PlayerEvents.inventoryChanged` will track items in the opened container.
+<<<

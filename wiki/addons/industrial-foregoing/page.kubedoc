@@ -8,7 +8,7 @@ ServerEvents.recipes(event => {
         'minecraft:sand', // output item
         100 // time
     )
-    //     .outputFluid('minecraft:water'); // output fluid
+    //     .outputFluid('minecraft:water') // output fluid
 
     event.recipes.industrialforegoing.fluid_extractor(
         'minecraft:tnt', // input block

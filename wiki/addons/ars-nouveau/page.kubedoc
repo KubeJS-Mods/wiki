@@ -19,8 +19,8 @@ ServerEvents.recipes(event => {
     event.recipes.ars_nouveau.crush(
         'minecraft:tnt', // input block
         [
-            Item.of('minecraft:sand').withChance(1.0)
-            //{ item: Item.of('minecraft:sand').withChance(1.0), maxRolls: 4 }
+            Item.of('minecraft:sand').withChance(1)
+            //{ item: Item.of('minecraft:sand').withChance(1), maxRolls: 4 }
         ] // loot table
         // true // drop the item in world?
     )
@@ -51,8 +51,8 @@ ServerEvents.recipes(event => {
             16718260, // color
             {
                 family: 'ars_nouveau:default',
-                pitch: 1.0,
-                volume: 1.0
+                pitch: 1,
+                volume: 1
             }
         )
         .id('kubejs:not_glow')

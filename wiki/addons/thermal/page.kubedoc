@@ -31,7 +31,7 @@ event.recipes.thermal.insolator('minecraft:bone', '#forge:dyes/black').water(400
 - `insolator_catalyst`
 
 ```js
-event.recipes.thermal.pulverizer_catalyst('minecraft:coal').primaryMod(1.0).secondaryMod(1.0).energyMod(1.0).minChance(0.0).useChance(1.0)
+event.recipes.thermal.pulverizer_catalyst('minecraft:coal').primaryMod(1).secondaryMod(1).energyMod(1).minChance(0).useChance(1)
 ```
 
 - `stirling_fuel`

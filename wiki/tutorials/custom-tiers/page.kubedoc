@@ -7,8 +7,8 @@ They are not reloadable without restarting the game.
 ItemEvents.toolTierRegistry(event => {
   event.add('tier_id', tier => {
     tier.uses = 250
-    tier.speed = 6.0
-    tier.attackDamageBonus = 2.0
+    tier.speed = 6
+    tier.attackDamageBonus = 2
     tier.level = 2
     tier.enchantmentValue = 14
     tier.repairIngredient = '#forge:ingots/iron'
@@ -26,8 +26,8 @@ ItemEvents.armorTierRegistry(event => {
     tier.enchantmentValue = 9
     tier.equipSound = 'minecraft:item.armor.equip_iron'
     tier.repairIngredient = '#forge:ingots/iron'
-    tier.toughness = 0.0 // diamond has 2.0, netherite 3.0
-    tier.knockbackResistance = 0.0
+    tier.toughness = 0 // diamond has 2, netherite 3
+    tier.knockbackResistance = 0
   })
 })
 ```

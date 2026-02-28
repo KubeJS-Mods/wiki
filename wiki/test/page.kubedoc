@@ -65,7 +65,7 @@ Inline image ![[emoji:test.png|Test]] test [[@000001]]
 ---
 
 Emoji test:
-{no} {yes} {thumbs-up} {thumbs-down} {point-up}
+{no} {yes} {thumbs-up} {thumbs-down} {point-up} {wink} {na}
 
 Script types:
 {st-s}, {se-s}, {cl-s}
@@ -73,13 +73,14 @@ Script types:
 ---
 
 ```js
-let code = 'JavaScript code test';
+const code = 'JavaScript code test'
 console.log('Hello, World!')
 ```
 
 ```js
+// this code uses space indents
 ServerEvents.recipes(event => {
-  let potting = (output, pottedInput) => {
+  const potting = (output, pottedInput) => {
     event.shaped(output, [
       'BIB',
       ' B '
@@ -93,6 +94,26 @@ ServerEvents.recipes(event => {
   potting('kubejs:potted_snowball', 'minecraft:snowball')
   potting('kubejs:potted_lava', 'minecraft:lava_bucket')
   potting('minecraft:blast_furnace', 'minecraft:furnace')
+})
+```
+
+```js
+// and this uses tab indents
+ServerEvents.recipes(event => {
+	const potting = (output, pottedInput) => {
+		event.shaped(output, [
+			'BIB',
+			' B '
+		], {
+			B: 'minecraft:brick',
+			I: pottedInput
+		})
+	}
+
+	//Now we can make many 'potting' recipes without typing that huge block over and over!
+	potting('kubejs:potted_snowball', 'minecraft:snowball')
+	potting('kubejs:potted_lava', 'minecraft:lava_bucket')
+	potting('minecraft:blast_furnace', 'minecraft:furnace')
 })
 ```
 

@@ -1,4 +1,4 @@
-Used in [[/tutorials/paint]]
+Used in [[/tutorials/painter-api]]
 
 # Info
 Units are not really a class, but more its own language. It's very similar to MoLang. It's always represented as a string, and is evaluated on client side while rendering, rather than when code is ran.
@@ -12,10 +12,10 @@ Units are not really a class, but more its own language. It's very similar to Mo
 # Constants
 ---
 ## `[js]true`
-Boolean true value, equal to `[js]1.0`
+Boolean true value, equal to `[js]1`
 ---
 ## `[js]false`
-Boolean false value, equal to `[js]0.0`
+Boolean false value, equal to `[js]0`
 ---
 ## `[js]PI`
 Number equal to `[js]3.14159265358979323846`
@@ -119,7 +119,7 @@ Less or Equal Than
 # Functions
 ---
 ## $$random(): Unit
-Random number between `0.0` and `1.0`.
+Random number between `0` and `1`.
 ---
 ## $$time(): Unit
 Current time in seconds (includes milliseconds).
@@ -182,4 +182,4 @@ Round `a` down to nearest integer.
 Round `a` up to nearest integer.
 ---
 ## $$if(statement: Unit, trueUnit: Unit, falseUnit: Unit): Unit
-Returns `trueUnit` if `statement` is not equal to `0.0`, otherwise `falseUnit`.
+Returns `trueUnit` if `statement` is not equal to `0`, otherwise `falseUnit`.

@@ -1,7 +1,7 @@
 # Example
 ```js
 RecipeViewerEvents.addEntries('item', event => {
-	event.add('minecraft:stone_sword[custom_data={a:2},enchantment_glint_override=true,damage=40]');
+	event.add('minecraft:stone_sword[custom_data={a:2},enchantment_glint_override=true,damage=40]')
 })
 ```
 

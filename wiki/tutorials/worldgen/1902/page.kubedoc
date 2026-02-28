@@ -198,7 +198,7 @@ onEvent('worldgen.add', event => {
 
 onEvent('worldgen.remove', event => {
   console.info('HELP')
-  //console.debugEnabled = true;
+  //console.debugEnabled = true
 
   // print all features for a given biome filter
   event.printFeatures('', 'minecraft:plains')

@@ -47,7 +47,7 @@ PortalEvents.register(event => {
     // (Optional) Event handling before/after the entity gets teleported
     .beforeTeleportation(entity => {
       // Example logic: cancel for non-player entities
-      return entity instanceof Player ? ShouldTP.CONTINUE : ShouldTP.CANCEL;
+      return entity instanceof Player ? ShouldTP.CONTINUE : ShouldTP.CANCEL
     })
     .afterTeleportation(entity => {
        // Example logic for after teleportation

@@ -29,7 +29,7 @@ StartupEvents.registry('fluid', event => {
     .bucketColor(0xFF33FF)
 
   // Fluid with a modified bucket item
-  let tacoSauce = event
+  const tacoSauce = event
     .create('taco_sauce')
     .thickTexture(0xff0000)
     .bucketColor(0xff0000)
@@ -62,7 +62,7 @@ onEvent('fluid.registry', event => {
     .bucketColor(0xFF33FF)
   
   // Fluid with a modified bucket item
-  let tacoSauce = event
+  const tacoSauce = event
     .create('taco_sauce')
     .thickTexture(0xff0000)
     .bucketColor(0xff0000)

@@ -1,0 +1,42 @@
+# Meta
+recipes-url: "[[/tutorials/recipes]]"
+addons-url: "[[/addons]]"
+tutorials-url: "[[/tutorials]]"
+arch-api: "[Architectury](https://www.curseforge.com/minecraft/mc-mods/architectury-api)"
+
+title: "KubeJS"
+description: "¡Personaliza tu modpack o servidor con JavaScript!"
+
+q-info: "¿Qué hace este mod?"
+a-info: "Este mod te permite crear scripts en lenguaje JavaScript para administrar tu servidor, agregar nuevos bloques y objetos, cambiar recetas, añadir manejadores personalizados para mods de misiones y más."
+
+q-how-use: "¿Cómo usarlo?"
+a-how-use: "Ejecuta el juego con el mod instalado una vez. Esto debería generar una carpeta `kubejs` en tu directorio de Minecraft con scripts de ejemplo y un README.txt. ¡Léelo!"
+
+q-js-help: "No sé JavaScript"
+a-js-help: "Aquí hay ejemplos y scripts prehechos. Además, siempre puedes preguntar en el canal de soporte de Discord para ayuda con scripts, pero sé específico."
+
+q-reload: "¿Puedo recargar scripts?"
+a-reload-st: "{st-s}: Reinicia el juego o usa `/kubejs reload startup_scripts`. No todo es recargable; algunas cosas requieren reiniciar el juego (por ejemplo, registros) o el mundo (por ejemplo, generación de mundo)."
+a-reload-se: "{se-s}: Usa `/reload` para recargar scripts, recetas, etiquetas y todos los datos, o `/kubejs reload server_scripts` para recargar solo los scripts."
+a-reload-cl: "{cl-s}: Usa `F3 + T` para recargar scripts y recursos, o `/kubejs reload client_scripts` para recargar solo los scripts."
+
+q-mod-support: "¿Qué recetas de mods soporta / está soportado el mod X?"
+a-mod-support: "Si el mod usa recetas de datapack, entonces está soportado por defecto. Algunos mods más complicados requieren mods adicionales, pero en teoría, todavía funcionarían con recetas de datapack. Consulta las secciones {recipes-url} y {addons-url} para más información."
+
+q-features: "¿Qué características tiene este mod?"
+a-features: "Consulta {tutorials-url}."
+
+q-how-work: "¿Cómo funciona este mod?"
+a-how-work: "Usa un fork de Rhino, un motor de JavaScript de Mozilla, para convertir código JS en clases Java en tiempo de ejecución. KubeJS envuelve las clases de Minecraft y añade utilidades que simplifican mucho el proceso y eliminan la necesidad de mappings. {arch-api} permite que casi el mismo código fuente se compile tanto para Forge como para Fabric, haciendo que portar sea extremadamente fácil."
+
+q-support: "Ok, pero ¿y si no funciona?"
+a-support: "Puedes reportar problemas [aquí]({support-url})."
+
+q-discussion: "¡Tengo más preguntas / sugerencias!"
+a-discussion: "Si la wiki no tiene la respuesta que buscas, puedes unirte al [servidor de Discord]({discord-url}) y pedir ayuda en el canal [#kubejs-support]({discord-url})"
+
+website: "Sitio web"
+source: "Código fuente"
+download: "Descargar"
+no-support: "La última versión de Minecraft soportada es {last-supported-version}; cualquier versión inferior queda bajo tu responsabilidad."

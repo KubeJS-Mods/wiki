@@ -1,0 +1,32 @@
+# Research Events
+## Research Started
+```js
+// The first argument (where "namespace:node_id" is) is required.
+// This will get ran when that research node has started
+ResearchTree.researchStarted("namespace:node_id", event => {
+    // This gets the player that has started this research
+    event.getPlayer()
+
+    // This gets the level where the player is located
+    event.getLevel()
+
+    // Gets the research node that has been started
+    event.node()
+})
+```
+
+## Research Started
+```js
+// The first argument (where "namespace:node_id" is) is required.
+// This will get ran when that research node has completed
+ResearchTree.researchCompleted("namespace:node_id", event => {
+    // This gets the player that has completed this research
+    event.getPlayer()
+
+    // This gets the level where the player is located
+    event.getLevel()
+
+    // Gets the research node that has been completed
+    event.node()
+})
+```

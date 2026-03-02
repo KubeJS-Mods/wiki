@@ -1,0 +1,56 @@
+# Custom Requirements
+```js
+StartupEvents.registry("researchtree:requirement_types", event => {
+    // This is the requirement type. This will be kubejs:my_requirement
+    // This is important for defining requirements on research nodes.
+    event.create("my_requirement")
+
+        // This determines if the requirement is currently met
+        // Should return true or false
+        .isMet(player => {
+            // Example: check if player has a specific item in inventory
+            return player.inventory.contains('minecraft:diamond')
+        })
+
+        // Returns a progress value between 0.0 and 1.0
+        // Used to show partial completion in the UI
+        .progress(player => {
+            // Example: check diamond count (max 64)
+            let count = 0
+            player.inventory.allItems.forEach(stack => {
+                if (stack.id == 'minecraft:diamond') {
+                    count += stack.count
+                }
+            })
+            return count / 64.0
+        })
+
+        // Display text is OPTIONAL
+        // By default, the lang key would be "requirement.kubejs.<requirement id>"
+        // So this example would be "requirement.kubejs.my_requirement"
+        // You can define a lang key, or use this method
+        .displayText(Text.of("Must have diamonds"))
+})
+```
+
+
+# Custom Rewards
+```js
+StartupEvents.registry("researchtree:reward_types", event => {
+    // This is the reward type. This will be kubejs:my_reward
+    // This is important for defining rewards on research nodes (and category dependencies)
+    event.create("my_reward")
+
+        // This is OPTIONAL. You should have this because you're making a custom reward...
+        // This gives you both the player and the level
+        .grant((player, level) => {
+            // Here you can do anything that involves the player and level
+        })
+
+        // Display text is OPTIONAL
+        // By default, the lang key would be "reward.kubejs.<requirement id>"
+        // So this example would be "reward.kubejs.my_reward"
+        // You can define a lang key, or this method
+        .displayText(Text.of("My epic reward"))
+})
+```

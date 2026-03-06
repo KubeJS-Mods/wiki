@@ -1,0 +1,15 @@
+# Info
+Invoked when recipe type schemas are being registered. This is an advanced event used to register custom recipe schema types for recipe event processing.
+
+>>> warning
+This is an advanced event. Most users will not need to use this directly. It's primarily useful for addon developers who need to define how their mod's recipes are processed by KubeJS.
+<<<
+
+# Example
+
+```js
+ServerEvents.recipeTypeRegistry(event => {
+	// Register custom recipe schema handling
+	// This is typically used by addon developers
+})
+```

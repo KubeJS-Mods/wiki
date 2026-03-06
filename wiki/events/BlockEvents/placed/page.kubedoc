@@ -1,0 +1,44 @@
+# Info
+Invoked when a block is placed in the world. Cancelling this event prevents the block from being placed.
+
+This event supports **block targeting** - you can filter for specific blocks by passing a block ID as the first argument.
+
+# Available Event Fields
+- `event.entity` - the entity that placed the block (can be `null`, e.g. when placed by a dispenser)
+- `event.player` - the player that placed the block (may be `null`)
+- `event.block` - the block that was placed (LevelBlock)
+- `event.level` - the level/world
+
+# Example
+
+```js
+// Listen for any block being placed
+BlockEvents.placed(event => {
+	if (event.player) {
+		event.player.tell('You placed: ' + event.block.id)
+	}
+})
+```
+
+```js
+// Listen for a specific block being placed
+BlockEvents.placed('minecraft:tnt', event => {
+	if (event.player) {
+		event.player.tell('TNT placed - be careful!')
+	}
+})
+```
+
+```js
+// Prevent placing specific blocks
+BlockEvents.placed('minecraft:lava', event => {
+	event.cancel()
+	if (event.player) {
+		event.player.tell('Lava placement is disabled!')
+	}
+})
+```
+
+>>> warning
+The `event.entity` can be `null` when blocks are placed by non-player mechanisms (dispensers, pistons, etc.). Always check before accessing player-specific methods.
+<<<

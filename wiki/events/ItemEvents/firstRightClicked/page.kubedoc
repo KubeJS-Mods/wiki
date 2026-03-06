@@ -1,0 +1,29 @@
+# Info
+Invoked when a player right clicks with an item for the **first time** (initial click only, not while holding). This fires once per click rather than continuously.
+
+Not to be confused with `[js]ItemEvents.rightClicked` which fires on every right click tick while the button is held.
+
+This event supports **item targeting** - you can filter by specific items.
+
+# Available Event Fields
+- `event.player` - the player that clicked with the item
+- `event.item` - the item that was clicked with (ItemStack)
+- `event.hand` - the hand used (MAIN_HAND or OFF_HAND)
+
+# Example
+
+```js
+// Trigger an effect on first right click only
+ItemEvents.firstRightClicked('minecraft:compass', event => {
+	event.player.tell('Compass activated!')
+})
+```
+
+```js
+// Make a wand that fires once per click
+ItemEvents.firstRightClicked('minecraft:blaze_rod', event => {
+	event.player.level.spawnLightning(
+		event.player.x, event.player.y, event.player.z, false
+	)
+})
+```

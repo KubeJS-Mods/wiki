@@ -1,0 +1,32 @@
+# Info
+Invoked after a player has picked up an item from the ground. Unlike `[js]ItemEvents.canPickUp`, this event fires **after** the pickup has already happened and cannot be cancelled.
+
+This event supports **item targeting** - you can filter by specific items.
+
+# Available Event Fields
+- `event.player` - the player that picked up the item
+- `event.item` - the item that was picked up (ItemStack)
+- `event.itemEntity` - the item entity that was picked up
+
+# Example
+
+```js
+// Notify the player when they pick up nether stars
+ItemEvents.pickedUp('minecraft:nether_star', event => {
+	event.player.tell('You picked up a Nether Star! Use it wisely.')
+})
+```
+
+```js
+// Give bonus XP when picking up any item
+ItemEvents.pickedUp(event => {
+	event.player.giveExperiencePoints(1)
+})
+```
+
+```js
+// Log when players pick up specific items (useful for modpacks)
+ItemEvents.pickedUp('minecraft:elytra', event => {
+	event.player.server.tell(event.player.username + ' found an Elytra!')
+})
+```

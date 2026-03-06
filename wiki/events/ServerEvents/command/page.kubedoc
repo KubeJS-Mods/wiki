@@ -1,0 +1,35 @@
+# Info
+Invoked when a command is executed. Cancelling this event prevents the command from running.
+
+This event supports **command name targeting** - you can filter for specific commands by passing the command name as the first argument.
+
+# Available Event Fields
+- `event.commandName` - the name of the command being executed (the first word after `/`)
+- `event.input` - the full command input string
+- `event.parseResults` - the parsed command results
+- `event.exception` - any exception from command parsing (may be `null`)
+- `event.server` - the server
+
+# Example
+
+```js
+// Prevent the /gamemode command
+ServerEvents.command('gamemode', event => {
+	event.cancel()
+})
+```
+
+```js
+// Log all commands
+ServerEvents.command(event => {
+	console.log('Command executed: /' + event.input)
+})
+```
+
+```js
+// Prevent specific commands for non-ops
+ServerEvents.command('give', event => {
+	// The command source info is available through parseResults
+	console.log('Someone tried to use /give')
+})
+```

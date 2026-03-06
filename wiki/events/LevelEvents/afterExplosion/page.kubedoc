@@ -1,0 +1,55 @@
+# Info
+Invoked right after an explosion happens, before the results are applied. You can modify affected blocks, entities, and knockback.
+
+This event supports **dimension targeting** - you can filter for specific dimensions by passing a dimension ID as the first argument.
+
+# Available Event Fields
+- `event.level` - the level/world
+- `event.position` - the position of the explosion (Vec3)
+- `event.x` - the x coordinate of the explosion
+- `event.y` - the y coordinate of the explosion
+- `event.z` - the z coordinate of the explosion
+- `event.block` - the block at the explosion center
+- `event.exploder` - the entity that caused the explosion (may be `null`)
+- `event.affectedEntities` - list of entities affected by the explosion
+- `event.affectedBlocks` - list of blocks affected by the explosion
+- `event.server` - the server
+
+# Available Event Methods
+- `event.removeAffectedEntity(entity)` - remove an entity from the affected list
+- `event.removeAllAffectedEntities()` - remove all entities from the affected list
+- `event.removeAffectedBlock(block)` - remove a block from the affected list
+- `event.removeAllAffectedBlocks()` - remove all blocks from the affected list
+- `event.removeKnockback()` - remove all knockback from affected players
+
+# Example
+
+```js
+// Prevent explosions from destroying blocks but keep entity damage
+LevelEvents.afterExplosion(event => {
+	event.removeAllAffectedBlocks()
+})
+```
+
+```js
+// Prevent explosions from hurting entities but keep block destruction
+LevelEvents.afterExplosion(event => {
+	event.removeAllAffectedEntities()
+})
+```
+
+```js
+// Remove knockback from all explosions
+LevelEvents.afterExplosion(event => {
+	event.removeKnockback()
+})
+```
+
+```js
+// Log explosion details
+LevelEvents.afterExplosion(event => {
+	let entities = event.affectedEntities
+	let blocks = event.affectedBlocks
+	console.log('Explosion at ' + event.x + ', ' + event.y + ', ' + event.z + ' affected ' + entities.size() + ' entities and ' + blocks.size() + ' blocks')
+})
+```

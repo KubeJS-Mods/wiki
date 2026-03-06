@@ -1,0 +1,24 @@
+# Info
+Invoked at startup to register custom item model properties. Model properties are used to change an item's model based on conditions (like a bow drawing back or a clock rotating).
+
+This is a **startup** event and cannot be reloaded.
+
+# Example
+
+```js
+// Register a custom model property for an item
+ItemEvents.modelProperties(event => {
+	event.register('kubejs:my_item', 'kubejs:custom_state', (stack, level, entity, seed) => {
+		// Return a float value between 0 and 1
+		// This value is used in the item model JSON to pick the right texture
+		if (stack.nbt && stack.nbt.active) {
+			return 1.0
+		}
+		return 0.0
+	})
+})
+```
+
+>>> info
+This is a **startup/client** event for controlling item model rendering. You need corresponding item model JSON files that reference your custom property to make visual changes.
+<<<

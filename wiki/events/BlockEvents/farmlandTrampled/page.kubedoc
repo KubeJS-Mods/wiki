@@ -1,0 +1,45 @@
+# Info
+Invoked when an entity attempts to trample farmland. Cancelling this event prevents the farmland from being trampled back into dirt.
+
+This event supports **block targeting** - you can filter for specific blocks by passing a block ID as the first argument.
+
+# Available Event Fields
+- `event.entity` - the entity that is attempting to trample the farmland
+- `event.player` - the player (if the entity is a player, otherwise `null`)
+- `event.block` - the farmland block being trampled (LevelBlock)
+- `event.distance` - the fall distance of the entity (Float)
+- `event.level` - the level/world
+
+# Example
+
+```js
+// Prevent all farmland trampling
+BlockEvents.farmlandTrampled(event => {
+	event.cancel()
+})
+```
+
+```js
+// Only prevent player trampling (allow mobs to trample)
+BlockEvents.farmlandTrampled(event => {
+	if (event.player) {
+		event.cancel()
+	}
+})
+```
+
+# Practical Uses
+
+```js
+// Notify players when their crops are in danger
+BlockEvents.farmlandTrampled(event => {
+	if (event.player) {
+		event.player.tell('Watch your step! You almost trampled the crops.')
+		event.cancel()
+	}
+})
+```
+
+>>> info
+This is one of the most popular events for quality-of-life modpacks. Many modpack developers cancel this event entirely to prevent accidental crop destruction.
+<<<

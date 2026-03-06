@@ -1,0 +1,38 @@
+# Info
+Invoked when a KubeJS detector block receives a block update and its powered state changes. This event fires for **both** power-on and power-off transitions. For separate events, see [[/events/BlockEvents/detectorPowered]] and [[/events/BlockEvents/detectorUnpowered]].
+
+Detector blocks are special blocks registered through KubeJS that react to redstone signals.
+
+This event supports **detector ID targeting** - you can filter for specific detectors by passing the detector ID as the first argument.
+
+# Available Event Fields
+- `event.detectorId` - the ID of the detector block (String)
+- `event.level` - the level/world where the detector is located
+- `event.powered` - `true` if the detector is now powered, `false` if unpowered
+- `event.block` - the detector block (LevelBlock)
+
+# Example
+
+```js
+// Listen for any detector block state change
+BlockEvents.detectorChanged(event => {
+	console.log('Detector ' + event.detectorId + ' is now ' + (event.powered ? 'powered' : 'unpowered'))
+})
+```
+
+```js
+// Listen for a specific detector
+BlockEvents.detectorChanged('my_detector', event => {
+	if (event.powered) {
+		// Do something when powered
+		console.log('My detector was activated!')
+	} else {
+		// Do something when unpowered
+		console.log('My detector was deactivated!')
+	}
+})
+```
+
+>>> info
+You need to register a detector block in a startup script using `StartupEvents.registry('block', ...)` before you can listen for its events. The detector ID is determined by the block's registration name.
+<<<

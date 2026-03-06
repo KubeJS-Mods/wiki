@@ -1,0 +1,33 @@
+# Info
+Invoked when a player is about to pick up an item from the ground. **Cancelling** this event will prevent the item from being picked up.
+
+This event supports **item targeting** - you can filter by specific items.
+
+# Available Event Fields
+- `event.player` - the player trying to pick up the item
+- `event.item` - the item being picked up (ItemStack)
+- `event.itemEntity` - the item entity on the ground
+
+# Example
+
+```js
+// Prevent players from picking up diamonds
+ItemEvents.canPickUp('minecraft:diamond', event => {
+	event.player.tell('You cannot pick up diamonds!')
+	event.cancel()
+})
+```
+
+```js
+// Prevent picking up items in a specific dimension
+ItemEvents.canPickUp(event => {
+	if (event.player.level.dimension == 'minecraft:the_nether') {
+		event.player.tell('No item pickup in the Nether!')
+		event.cancel()
+	}
+})
+```
+
+>>> info
+If you want to react to an item **after** it has been picked up, use `[js]ItemEvents.pickedUp` instead. `canPickUp` fires before the pickup happens and can prevent it.
+<<<

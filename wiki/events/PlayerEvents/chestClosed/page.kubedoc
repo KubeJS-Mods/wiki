@@ -1,0 +1,43 @@
+# Info
+Invoked when a player closes a chest. This is a specialized version of [[/events/PlayerEvents/inventoryClosed]] that only fires for chest containers specifically.
+
+This event supports **menu type targeting** - you can filter for specific container types.
+
+# Available Event Fields
+- `event.player` - the player that closed the chest
+- `event.inventoryContainer` - the container menu that was closed (AbstractContainerMenu)
+- `event.inventory` - the chest's inventory (Container)
+- `event.block` - the block entity of the chest (LevelBlock), or `null` if not a block entity
+
+# Example
+
+```js
+// Log when a player closes a chest
+PlayerEvents.chestClosed(event => {
+	let block = event.block
+	if (block) {
+		console.log(event.player.username + ' closed a chest at ' + block.pos)
+	}
+})
+```
+
+```js
+// Check chest contents when closing
+PlayerEvents.chestClosed(event => {
+	let inventory = event.inventory
+	let empty = true
+	for (let i = 0; i < inventory.containerSize; i++) {
+		if (!inventory.getItem(i).isEmpty()) {
+			empty = false
+			break
+		}
+	}
+	if (empty) {
+		event.player.tell('You left the chest empty!')
+	}
+})
+```
+
+>>> info
+If you need to listen for **all** container types being closed (furnaces, hoppers, etc.), use [[/events/PlayerEvents/inventoryClosed]] instead.
+<<<

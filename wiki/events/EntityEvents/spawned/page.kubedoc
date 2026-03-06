@@ -1,0 +1,40 @@
+# Info
+Invoked when an entity is about to be added to the world. Cancelling this event prevents the entity from spawning.
+
+This event supports **entity type targeting** - you can filter for specific entity types by passing an entity type ID as the first argument.
+
+>>> warning
+This event fires for **all** entities joining the world, including entities loaded from saves. If you only want to target naturally spawned or spawner-spawned mobs, use [[/events/EntityEvents/checkSpawn]] instead.
+<<<
+
+# Available Event Fields
+- `event.entity` - the entity being added to the world
+- `event.level` - the level the entity is being added to
+- `event.player` - the player, if the entity is a player (may be `null`)
+- `event.server` - the server
+
+# Example
+
+```js
+// Prevent all creepers from spawning
+EntityEvents.spawned('minecraft:creeper', event => {
+	event.cancel()
+})
+```
+
+```js
+// Log all entity spawns
+EntityEvents.spawned(event => {
+	console.log(event.entity.type + ' spawned at ' + event.entity.x + ', ' + event.entity.y + ', ' + event.entity.z)
+})
+```
+
+```js
+// Replace all skeletons with wither skeletons
+EntityEvents.spawned('minecraft:skeleton', event => {
+	event.cancel()
+	let wither = event.level.createEntity('minecraft:wither_skeleton')
+	wither.setPosition(event.entity.x, event.entity.y, event.entity.z)
+	wither.spawn()
+})
+```

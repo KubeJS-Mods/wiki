@@ -1,0 +1,30 @@
+# Info
+Invoked during data generation. Use this to generate custom datapack resources (JSON files) dynamically from scripts.
+
+This event requires a **stage target** - different stages generate data at different points in the loading process.
+
+# Available Event Fields and Methods
+- `event.add(path, json)` - add a JSON resource at the given path
+- `event.addJson(path, json)` - add a JSON file
+
+# Example
+
+```js
+ServerEvents.generateData('kubejs:main', event => {
+	// Generate a custom loot table
+	event.addJson('loot_tables/blocks/custom_block.json', {
+		type: 'minecraft:block',
+		pools: [{
+			rolls: 1,
+			entries: [{
+				type: 'minecraft:item',
+				name: 'minecraft:diamond'
+			}]
+		}]
+	})
+})
+```
+
+>>> info
+Generated data is treated as part of the KubeJS datapack. It's loaded alongside other resources and will be applied on every reload.
+<<<

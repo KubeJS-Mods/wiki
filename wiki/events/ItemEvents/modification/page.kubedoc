@@ -1,0 +1,66 @@
+# Info
+Invoked after all items are registered, allowing you to modify existing item properties. This is a **startup** event, meaning it runs once when the game starts and cannot be reloaded.
+
+Use this event to change properties of vanilla or mod items without creating new ones.
+
+# Available Methods
+- `event.modify(filter, modifications => { ... })` - Modify items matching the given filter
+
+# Available Modifications
+Inside the `modify` callback, you can call these methods:
+- `setBurnTime(ticks)` - set the item's burn time as fuel
+- `setCraftingRemainder(item)` - set the remaining item after crafting (e.g. bucket for milk bucket)
+- `setMaxStackSize(size)` - change the max stack size
+- `setMaxDamage(durability)` - change the max durability
+- `setRepairCost(cost)` - change the repair cost
+- `setFood(nutrition, saturation)` - make the item edible
+- `setFireResistant()` - make the item fire resistant (like netherite)
+- `setNameKey(key)` - change the translation key
+- `disableRepair()` - make the item unrepairable
+- `setTier(builder => { ... })` - modify tool tier (only for tools/weapons)
+
+# Example
+
+```js
+// Make dirt stackable to 16
+ItemEvents.modification(event => {
+	event.modify('minecraft:dirt', item => {
+		item.setMaxStackSize(16)
+	})
+})
+```
+
+```js
+// Make golden tools fire resistant
+ItemEvents.modification(event => {
+	event.modify(/minecraft:golden_/, item => {
+		item.setFireResistant()
+	})
+})
+```
+
+```js
+// Add burn time to custom items (make them furnace fuel)
+ItemEvents.modification(event => {
+	event.modify('minecraft:stick', item => {
+		item.setBurnTime(100) // Burns for 5 seconds (100 ticks)
+	})
+})
+```
+
+```js
+// Make all wooden tools more durable
+ItemEvents.modification(event => {
+	event.modify(/minecraft:wooden_/, item => {
+		item.setMaxDamage(200)
+	})
+})
+```
+
+>>> warning
+Tag predicates (like `#minecraft:planks`) are **not supported** in `event.modify()`. Use regex patterns or specific item IDs instead.
+<<<
+
+>>> info
+This is a **startup** event. Changes made here apply permanently until the game is restarted. You cannot reload these changes with `/reload`.
+<<<

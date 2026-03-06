@@ -1,0 +1,26 @@
+# Info
+Invoked when a KubeJS detector block loses power (redstone signal removed). This is a more specific version of [[/events/BlockEvents/detectorChanged]] that only fires when powering off.
+
+This event supports **detector ID targeting** - you can filter for specific detectors by passing the detector ID as the first argument.
+
+# Available Event Fields
+- `event.detectorId` - the ID of the detector block (String)
+- `event.level` - the level/world where the detector is located
+- `event.powered` - always `false` for this event
+- `event.block` - the detector block (LevelBlock)
+
+# Example
+
+```js
+// Listen for a specific detector losing power
+BlockEvents.detectorUnpowered('my_detector', event => {
+	console.log('Detector deactivated at ' + event.block.pos)
+})
+```
+
+```js
+// Trigger cleanup when any detector loses power
+BlockEvents.detectorUnpowered(event => {
+	console.log('Detector ' + event.detectorId + ' lost power!')
+})
+```

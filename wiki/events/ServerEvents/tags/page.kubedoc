@@ -1,0 +1,52 @@
+# Info
+Invoked when tags are loaded or reloaded. Use this to add or remove entries from tags for items, blocks, fluids, entity types, and more.
+
+This event requires a **registry target** - you must specify which registry's tags you want to modify. Common registries include `minecraft:item`, `minecraft:block`, `minecraft:fluid`, `minecraft:entity_type`, etc.
+
+For a full guide on tags, see [[/tutorials/tags]].
+
+# Available Event Fields and Methods
+- `event.type` - the registry type being tagged (e.g. `minecraft:item`)
+- `event.add(tag, ...entries)` - add entries to a tag
+- `event.remove(tag, ...entries)` - remove entries from a tag
+- `event.get(tag)` - get a tag wrapper for advanced operations
+- `event.removeAllTagsFrom(...entries)` - remove all tags from specified entries
+
+# Example
+
+```js
+// Add items to tags
+ServerEvents.tags('minecraft:item', event => {
+	// Add modded ores to the forge ores tag
+	event.add('c:ores', 'kubejs:custom_ore')
+
+	// Remove an item from a tag
+	event.remove('minecraft:planks', 'minecraft:oak_planks')
+
+	// Remove all tags from an item
+	event.removeAllTagsFrom('minecraft:diamond')
+})
+```
+
+```js
+// Modify block tags
+ServerEvents.tags('minecraft:block', event => {
+	// Make custom blocks mineable with a pickaxe
+	event.add('minecraft:mineable/pickaxe', 'kubejs:custom_block')
+
+	// Add a block to the needs_diamond_tool tag
+	event.add('minecraft:needs_diamond_tool', 'kubejs:custom_block')
+})
+```
+
+```js
+// Modify entity type tags
+ServerEvents.tags('minecraft:entity_type', event => {
+	// Make a custom entity immune to arrows
+	event.add('minecraft:arrows', 'kubejs:custom_entity')
+})
+```
+
+>>> info
+Tag changes are applied every time the server reloads (on startup and `/reload`). You do not need to restart the game.
+<<<

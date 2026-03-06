@@ -1,0 +1,32 @@
+# Info
+Invoked after all recipes have been loaded and processed. Use this to inspect or modify the final recipe list after all modifications from `ServerEvents.recipes` have been applied.
+
+# Available Event Fields and Methods
+- `event.recipes` - the list of all loaded recipes
+- `event.forEachRecipe(filter, callback)` - iterate over recipes matching a filter
+- `event.countRecipes(filter)` - count recipes matching a filter
+- `event.remove(filter)` - remove recipes matching a filter (marks the recipe list as changed)
+- `event.getRecipeIds()` - get all recipe IDs
+
+# Example
+
+```js
+ServerEvents.afterRecipes(event => {
+	// Count all smelting recipes
+	let count = event.countRecipes({ type: 'minecraft:smelting' })
+	console.log('There are ' + count + ' smelting recipes')
+})
+```
+
+```js
+ServerEvents.afterRecipes(event => {
+	// Log all recipe IDs
+	event.forEachRecipe({}, recipe => {
+		console.log(recipe.id)
+	})
+})
+```
+
+>>> info
+This event fires **after** `ServerEvents.recipes`, so all custom recipe additions and removals will already be applied.
+<<<

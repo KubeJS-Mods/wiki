@@ -1,0 +1,29 @@
+# Info
+Invoked when the F3 debug screen is rendered, allowing you to add or modify the **left side** of the debug overlay. The left side typically shows information about coordinates, facing direction, biome, etc.
+
+# Available Event Fields
+- `event.player` - the local player (`LocalPlayer`)
+- `event.lines` - a mutable list of strings representing the left debug info lines
+- `event.showDebug` - whether the debug screen is currently visible
+
+# Example
+
+```js
+ClientEvents.leftDebugInfo(event => {
+	event.lines.add('')
+	event.lines.add('My Custom Info:')
+	event.lines.add('Health: ' + event.player.health)
+	event.lines.add('Food: ' + event.player.foodLevel)
+})
+```
+
+```js
+// Remove a specific line from the debug screen
+ClientEvents.leftDebugInfo(event => {
+	for (let i = event.lines.size() - 1; i >= 0; i--) {
+		if (event.lines.get(i).startsWith('Targeted Block')) {
+			event.lines.remove(i)
+		}
+	}
+})
+```

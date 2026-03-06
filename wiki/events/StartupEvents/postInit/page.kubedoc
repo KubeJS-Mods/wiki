@@ -1,0 +1,12 @@
+# Info
+Invoked after all KubeJS plugins have finished initializing. This fires later than `[js]StartupEvents.init` and is a safer place to run startup logic that depends on plugins being loaded.
+
+This event has no special fields - it simply signals that the post-initialization phase is complete.
+
+# Example
+
+```js
+StartupEvents.postInit(event => {
+	console.log('All KubeJS plugins have loaded!')
+})
+```

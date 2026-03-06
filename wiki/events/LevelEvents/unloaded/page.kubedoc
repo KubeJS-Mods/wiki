@@ -1,0 +1,24 @@
+# Info
+Invoked when a server level (dimension) is unloaded. This fires for each dimension as it unloads.
+
+This event supports **dimension targeting** - you can filter for specific dimensions by passing a dimension ID as the first argument.
+
+# Available Event Fields
+- `event.level` - the level/world that is being unloaded
+- `event.server` - the server
+
+# Example
+
+```js
+// Run code when any level unloads
+LevelEvents.unloaded(event => {
+	console.log('Level unloaded: ' + event.level.dimension)
+})
+```
+
+```js
+// Run cleanup code when the overworld unloads
+LevelEvents.unloaded('minecraft:overworld', event => {
+	console.log('Overworld is unloading')
+})
+```

@@ -1,0 +1,28 @@
+# Info
+Invoked when a player disconnects from the server. Use this event to save player data, clean up resources, or log disconnections.
+
+# Available Event Fields
+- `event.player` - the player that logged out (ServerPlayer)
+- `event.server` - the server instance
+- `event.level` - the level/world the player was in
+
+# Example
+
+```js
+// Announce when a player leaves
+PlayerEvents.loggedOut(event => {
+	event.server.tell(event.player.username + ' has left the server.')
+})
+```
+
+```js
+// Save custom data on logout
+PlayerEvents.loggedOut(event => {
+	let data = event.player.persistentData
+	data.putLong('last_logout', Date.now())
+})
+```
+
+>>> warning
+The player is still in the world when this event fires, but they will be removed immediately after. Avoid sending network packets to the disconnecting player.
+<<<

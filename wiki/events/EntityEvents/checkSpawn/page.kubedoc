@@ -1,0 +1,47 @@
+# Info
+Invoked before a living entity is spawned into the world from a spawner or world generation. Cancelling this event prevents the entity from spawning.
+
+This event supports **entity type targeting** - you can filter for specific entity types by passing an entity type ID as the first argument.
+
+>>> info
+This event only fires for entities spawned by `BaseSpawner` (mob spawners) or world generation. For all entities joining the world (including loaded from save), use [[/events/EntityEvents/spawned]] instead.
+<<<
+
+# Available Event Fields
+- `event.entity` - the entity being spawned (LivingEntity)
+- `event.level` - the level the entity is being spawned into
+- `event.x` - the x coordinate of the spawn position
+- `event.y` - the y coordinate of the spawn position
+- `event.z` - the z coordinate of the spawn position
+- `event.block` - the block at the spawn position
+- `event.type` - the type of spawn (e.g. `SPAWNER`, `NATURAL`, `CHUNK_GENERATION`)
+- `event.spawner` - the spawner that spawned the entity (can be empty)
+- `event.player` - the player, if the entity is a player (may be `null`)
+- `event.server` - the server
+
+# Example
+
+```js
+// Prevent phantoms from naturally spawning
+EntityEvents.checkSpawn('minecraft:phantom', event => {
+	event.cancel()
+})
+```
+
+```js
+// Only allow zombies to spawn below Y=40
+EntityEvents.checkSpawn('minecraft:zombie', event => {
+	if (event.y > 40) {
+		event.cancel()
+	}
+})
+```
+
+```js
+// Log spawner-based spawns
+EntityEvents.checkSpawn(event => {
+	if (event.type == 'SPAWNER') {
+		console.log(event.entity.type + ' spawned from spawner at ' + event.x + ', ' + event.y + ', ' + event.z)
+	}
+})
+```

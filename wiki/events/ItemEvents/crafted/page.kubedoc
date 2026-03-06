@@ -1,0 +1,44 @@
+# Info
+Invoked when a player crafts an item in a crafting table or inventory crafting grid.
+
+This event supports **item targeting** - you can filter by specific items using the first argument.
+
+# Available Event Fields
+- `event.player` - the player that crafted the item
+- `event.item` - the item that was crafted (ItemStack)
+- `event.inventory` - the crafting inventory/container
+
+# Example
+
+```js
+// Listen for any item being crafted
+ItemEvents.crafted(event => {
+	// Give the player some XP every time they craft something
+	event.player.giveExperiencePoints(5)
+	event.player.tell('You crafted: ' + event.item)
+})
+```
+
+```js
+// Listen for a specific item being crafted
+ItemEvents.crafted('minecraft:diamond_sword', event => {
+	// Send a message when a diamond sword is crafted
+	event.player.tell('You forged a mighty blade!')
+	event.player.giveExperiencePoints(50)
+})
+```
+
+# Practical Uses
+
+```js
+// Track crafting statistics via scoreboard
+ItemEvents.crafted(event => {
+	event.player.server.runCommandSilent(
+		'scoreboard players add ' + event.player.username + ' items_crafted 1'
+	)
+})
+```
+
+>>> info
+This event also triggers `PlayerEvents.inventoryChanged` for the crafted item.
+<<<

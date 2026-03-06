@@ -1,0 +1,57 @@
+# Info
+Invoked when a custom network packet is received. This event can be used in both server and client scripts to handle custom data sent between the client and server using `[js]player.sendData(channel, data)` or `[js]server.sendData(channel, data)`.
+
+The behavior depends on the **script type**:
+- In `server_scripts`, this event fires on the server when a packet is received **from a client**
+- In `client_scripts`, this event fires on the client when a packet is received **from the server**
+
+This event **requires a channel name target** - you must specify which channel to listen on.
+
+# Available Event Fields
+- `event.player` - the player that sent the packet (in server scripts) or `Minecraft.player` (in client scripts)
+- `event.channel` - the channel name of the packet
+- `event.data` - the NBT `CompoundTag` data of the packet (may be null)
+
+# Example
+
+## Server-side: receiving data from a client
+```js
+// server_scripts
+NetworkEvents.dataReceived('my_channel', event => {
+	let data = event.data
+	console.log(event.player.name.string + ' sent data on channel: ' + event.channel)
+
+	if (data) {
+		console.log('Received value: ' + data.getString('myKey'))
+	}
+})
+```
+
+## Client-side: receiving data from the server
+```js
+// client_scripts
+NetworkEvents.dataReceived('my_channel', event => {
+	let data = event.data
+	console.log('Received data from server on channel: ' + event.channel)
+})
+```
+
+## Sending data (used with this event)
+```js
+// Send data from server to a specific player
+ServerEvents.loaded(event => {
+	// Later, when you want to send data:
+	// player.sendData('my_channel', {myKey: 'hello'})
+})
+```
+
+```js
+// Send data from client to server
+ClientEvents.loggedIn(event => {
+	event.player.sendData('my_channel', {myKey: 'hello from client'})
+})
+```
+
+>>> info
+The channel name is an arbitrary string you define. Both the sender and receiver must use the same channel name. You can use any naming convention, e.g. `'mymod:sync_data'` or `'my_channel'`.
+<<<

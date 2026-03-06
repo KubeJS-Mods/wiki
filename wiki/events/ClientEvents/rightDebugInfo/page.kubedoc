@@ -1,0 +1,17 @@
+# Info
+Invoked when the F3 debug screen is rendered, allowing you to add or modify the **right side** of the debug overlay. The right side typically shows information about the Java runtime, memory usage, GPU, and display.
+
+# Available Event Fields
+- `event.player` - the local player (`LocalPlayer`)
+- `event.lines` - a mutable list of strings representing the right debug info lines
+- `event.showDebug` - whether the debug screen is currently visible
+
+# Example
+
+```js
+ClientEvents.rightDebugInfo(event => {
+	event.lines.add('')
+	event.lines.add('[KubeJS] Custom Debug Info')
+	event.lines.add('Gamemode: ' + event.player.gameMode)
+})
+```

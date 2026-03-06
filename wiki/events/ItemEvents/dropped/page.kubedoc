@@ -1,0 +1,39 @@
+# Info
+Invoked when a player drops an item (by pressing Q or dragging it out of the inventory). **Cancelling** this event will prevent the item from being dropped.
+
+This event supports **item targeting** - you can filter by specific items.
+
+# Available Event Fields
+- `event.player` - the player that dropped the item
+- `event.item` - the item that was dropped (ItemStack)
+- `event.itemEntity` - the item entity that was spawned when dropping
+
+# Example
+
+```js
+// Prevent players from dropping diamonds
+ItemEvents.dropped('minecraft:diamond', event => {
+	event.player.tell('You cannot drop diamonds!')
+	event.cancel()
+})
+```
+
+```js
+// Log when a player drops any item
+ItemEvents.dropped(event => {
+	console.log(event.player.username + ' dropped ' + event.item)
+})
+```
+
+```js
+// Prevent dropping items in creative mode
+ItemEvents.dropped(event => {
+	if (event.player.creative) {
+		event.cancel()
+	}
+})
+```
+
+>>> info
+The `event.itemEntity` gives you access to the dropped item's entity in the world. You can modify its properties like lifespan, pickup delay, and position.
+<<<

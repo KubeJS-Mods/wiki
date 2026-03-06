@@ -1,0 +1,26 @@
+# Info
+Invoked when a KubeJS detector block becomes powered (receives a redstone signal). This is a more specific version of [[/events/BlockEvents/detectorChanged]] that only fires when powering on.
+
+This event supports **detector ID targeting** - you can filter for specific detectors by passing the detector ID as the first argument.
+
+# Available Event Fields
+- `event.detectorId` - the ID of the detector block (String)
+- `event.level` - the level/world where the detector is located
+- `event.powered` - always `true` for this event
+- `event.block` - the detector block (LevelBlock)
+
+# Example
+
+```js
+// Listen for a specific detector being powered
+BlockEvents.detectorPowered('my_detector', event => {
+	console.log('Detector activated at ' + event.block.pos)
+})
+```
+
+```js
+// Trigger an action when any detector is powered
+BlockEvents.detectorPowered(event => {
+	console.log('Detector ' + event.detectorId + ' received power!')
+})
+```

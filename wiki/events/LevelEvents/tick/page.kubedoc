@@ -1,0 +1,33 @@
+# Info
+Invoked every game tick (20 times per second) for each server level. Use this for periodic checks or continuous logic.
+
+This event supports **dimension targeting** - you can filter for specific dimensions by passing a dimension ID as the first argument.
+
+>>> warning
+This event fires **every tick** (20 times per second). Avoid expensive operations here as it will significantly impact server performance. Consider using `event.level.gameTime % N == 0` to run code less frequently.
+<<<
+
+# Available Event Fields
+- `event.level` - the level/world being ticked
+- `event.server` - the server
+
+# Example
+
+```js
+// Run something every 5 seconds (100 ticks) in the overworld
+LevelEvents.tick('minecraft:overworld', event => {
+	if (event.level.gameTime % 100 == 0) {
+		// Do something every 5 seconds
+		console.log('5 seconds have passed in the overworld')
+	}
+})
+```
+
+```js
+// Check for a condition every second
+LevelEvents.tick(event => {
+	if (event.level.gameTime % 20 == 0) {
+		// This runs once per second in every dimension
+	}
+})
+```

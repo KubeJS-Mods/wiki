@@ -1,0 +1,46 @@
+# Info
+Invoked when a player opens a chest. This is a specialized version of [[/events/PlayerEvents/inventoryOpened]] that only fires for chest containers specifically.
+
+This event supports **menu type targeting** - you can filter for specific container types.
+
+# Available Event Fields
+- `event.player` - the player that opened the chest
+- `event.inventoryContainer` - the container menu that was opened (AbstractContainerMenu)
+- `event.inventory` - the chest's inventory (Container)
+- `event.block` - the block entity of the chest (LevelBlock), or `null` if not a block entity
+
+# Example
+
+```js
+// Log when a player opens a chest
+PlayerEvents.chestOpened(event => {
+	let block = event.block
+	if (block) {
+		console.log(event.player.username + ' opened a chest at ' + block.pos)
+	}
+})
+```
+
+```js
+// Prevent opening chests in certain areas
+PlayerEvents.chestOpened(event => {
+	let block = event.block
+	if (block && block.pos.y < 0) {
+		event.player.tell('Chests below Y=0 are locked!')
+		event.player.closeMenu()
+	}
+})
+```
+
+# Practical Uses
+
+```js
+// Play a sound when opening a chest
+PlayerEvents.chestOpened(event => {
+	event.player.tell('You peeked inside...')
+})
+```
+
+>>> info
+If you need to listen for **all** container types (furnaces, hoppers, etc.), use [[/events/PlayerEvents/inventoryOpened]] instead.
+<<<

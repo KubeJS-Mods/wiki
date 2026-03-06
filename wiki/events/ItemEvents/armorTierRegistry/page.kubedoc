@@ -1,0 +1,26 @@
+# Info
+Invoked at startup to register custom armor tiers (material levels) for armor items.
+
+This is a **startup** event and cannot be reloaded.
+
+# Example
+
+```js
+// Register a custom armor tier
+ItemEvents.armorTierRegistry(event => {
+	event.add('kubejs:my_armor', tier => {
+		tier.durabilityMultiplier = 30   // Multiplied by slot-specific values
+		tier.enchantmentValue = 20       // Enchantability
+		tier.equipSound = 'minecraft:item.armor.equip_diamond'
+		tier.repairIngredient = 'minecraft:amethyst_shard'
+		// Protection values per slot [boots, leggings, chestplate, helmet]
+		tier.slotProtections = [3, 6, 8, 3]
+		tier.toughness = 2.0
+		tier.knockbackResistance = 0.1
+	})
+})
+```
+
+>>> info
+See also [[/events/StartupEvents/registry]] for registering custom armor items that use this tier.
+<<<

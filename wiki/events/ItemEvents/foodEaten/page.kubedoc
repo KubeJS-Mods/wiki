@@ -1,0 +1,41 @@
+# Info
+Invoked when any living entity eats food. This includes players and other mobs.
+
+This event supports **item targeting** - you can filter by specific food items.
+
+# Available Event Fields
+- `event.entity` - the entity that ate the food (LivingEntity, not always a player)
+- `event.item` - the food item that was eaten (ItemStack)
+
+# Example
+
+```js
+// React when any entity eats a golden apple
+ItemEvents.foodEaten('minecraft:golden_apple', event => {
+	if (event.entity.player) {
+		event.entity.tell('You feel powerful!')
+	}
+})
+```
+
+```js
+// Give extra effects when eating specific foods
+ItemEvents.foodEaten('minecraft:cooked_beef', event => {
+	if (event.entity.player) {
+		event.entity.potionEffects.add('minecraft:strength', 200, 0)
+	}
+})
+```
+
+```js
+// Log all food consumed by players
+ItemEvents.foodEaten(event => {
+	if (event.entity.player) {
+		console.log(event.entity.username + ' ate ' + event.item)
+	}
+})
+```
+
+>>> warning
+The entity that eats the food is not always a player. Check `event.entity.player` before using player-specific methods. Other mobs like villagers and zombies can also eat food.
+<<<

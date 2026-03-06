@@ -1,6 +1,44 @@
 WIP!
+**Data components** are structured data consisting of key-value pairs, that define various properties of items and block entities, such as their name, lore, enchantments, inventory, etc. Data components can be attached to Items (and thus [[/concepts/item-stack|ItemStacks]]), and block entities.
+
+This article will discuss how you can create data component types and manipulate them.
+
+# Creating DataComponentMaps
+
+In places where DataComponentMap is expected (such as the second argument of `[js]Item.of(item, components)`), you can write:
+- String literals with the same string format as you would use in [`/give`](https://minecraft.wiki/w/Argument_types#item_stack).
+`minecraft` namespace may be omitted for Minecraft's own data components.
+
+Example: `[js]Item.of('minecraft:diamond_sword', '\[damage=2,lore=[{text:"This item is cool."}]\]')`
+
+- JS objects, representing the key-value pairs. Values will be converted into appropriate NBT objects.
+`minecraft` namespace may be omitted for Minecraft's own data components.
+
+Example: `[js]Item.of('minecraft:diamond_sword', { damage: 2, lore: [{ text: "This item is cool." }] })`
+
+# Using DataComponentMaps
+
+In the following examples, `components` will refer to the DataComponentMap.
+
+- `[js]components.get(type)`
+  - `type` - A component type. It can be a string representing a type, for example `[js]'minecraft:lore'`.
+  - **Return value**: Value associated with the component type.
+- `[js]components.has(type)`
+  - `type` - A component type. It can be a string representing a type, for example `[js]'minecraft:lore'`.
+  - **Return value**: `true` is the component has data associated with a type, `false` otherwise.
+- `[js]components.isEmpty()`
+  - **Return value**: `true` is the component contains no data, `false` otherwise.
+>>>info
+Also available as a **read-only** bean: `components.empty`.
+<<<
+- `[js]components.keySet()`
+  - **Return value**: A set of all types (as implementations of `DataComponentType` interface) in the component map.
+- `[js]components.size()`
+  - **Return value**: The amount of keys in the component map.
+
+Just like other read-only maps, `components` also contain `filter` and `forEach` methods. 
 
 # Further Reading
 - [Minecraft Wiki: Data Component format](https://minecraft.wiki/w/Data_component_format)
-- [Data Components | NeoForged docs](https://docs.neoforged.net/docs/1.21.1/items/datacomponents)
+- [Data Components | NeoForge docs](https://docs.neoforged.net/docs/1.21.1/items/datacomponents)
 - [NBT Data](/concepts/nbt-data)

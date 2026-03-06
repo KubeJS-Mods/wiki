@@ -1215,4 +1215,3 @@ Steps identical to [`ResourceLocation` conversion](#to-resourcelocation), except
 If the string does not have any `[js]':'` characters (that is, no namespace is provided), `[js]'kubejs'` is assumed. This is done by appending `[js]'kubejs:'` to the back of the string.
 
 Then, the resulting `[java]ResourceLocation` is passed to `[java]KubeResourceLocation`'s constructor.
-<br><br>

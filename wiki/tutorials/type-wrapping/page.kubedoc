@@ -53,7 +53,7 @@ Creates an empty `[java]AABB` (__**fails silently!**__)
 # To `BlockSetType`
 
 >>> #blocksettype-string
-`[java]CharacterSequence`
+`[java]CharSequence`
 (encompasses string types, including JS `string`)
 <<<
 
@@ -113,7 +113,7 @@ If parsing fails, __**it does so silently**__, returning the default block state
 # To `KubeColor`
 
 >>> #kubecolor-string
-`[java]CharacterSequence`
+`[java]CharSequence`
 (encompasses string types, including JS `string`)
 <<<
 
@@ -294,7 +294,7 @@ If the `[java]JsonElement` is:
 <<<
 
 >>> #ingredient-string
-`[java]CharacterSequence`
+`[java]CharSequence`
 (encompasses string types, including JS `string`)
 <<<
 
@@ -426,7 +426,7 @@ Gets converted to string, then the type wrapper is invoked on that string.
 <<<
 
 >>> #itemstack-string
-`[java]CharacterSequence`
+`[java]CharSequence`
 (encompasses string types, including JS `string`)
 <<<
 
@@ -736,7 +736,7 @@ Will result in a `[java]RegistryRegExpPredicate`. It will match all registry ite
 <<<
 
 >>> #registrypredicate-string
-`[java]CharacterSequence`
+`[java]CharSequence`
 (encompasses string types, including JS `string`)
 `[java]JsonPrimitive` (GSON)
 <<<
@@ -815,7 +815,7 @@ To be exact, a `JsonObject` object from GSON.
 `[js]null` result means that the conversion failed.
 
 >>> #jsonobject-string
-`[java]CharacterSequence`
+`[java]CharSequence`
 (encompasses string types, including JS `string`)
 <<<
 
@@ -843,7 +843,7 @@ To be exact, a `[java]JsonArray` object from GSON.
 `[js]null` result means that the conversion failed.
 
 >>> #jsonarray-string
-`[java]CharacterSequence`
+`[java]CharSequence`
 (encompasses string types, including JS `string`)
 <<<
 
@@ -894,7 +894,7 @@ The object is converted to JSON using its `[java]toJson()` method.
 <<<
 
 >>> #jsonelement-primitive
-`[java]CharacterSequence`
+`[java]CharSequence`
 (encompasses string types, including JS `string`)
 `[java]Boolean`, JS `boolean`
 `[java]Number`, JS `number`
@@ -951,3 +951,192 @@ To be exact, a `[java]JsonPrimitive` object from GSON.
 
 Conversion happens according to the [`JsonElement` conversion](#to-jsonelement).
 If the result of this conversion is not a `[java]JsonPrimitive`, `[js]null` is the result.
+
+# To `Path`
+
+>>> #path-path
+`[java]Path`
+<<<
+
+>>> #path-path-method
+Will be first **sanitized** - attempting to pass a `[java]Path` that points outside the game directory will result in an error being thrown, with message: `You can't access files outside Minecraft directory!`. Then, the path will be returned as-is.
+<<<
+
+>>> #path-null
+`[js]null`
+<<<
+
+>>> #path-null-method
+Converts to `[js]null`.
+<<<
+
+>>> #path-default
+Other types (including JS `string`)
+<<<
+
+>>> #path-default-method
+The object will be first converted to string using its `[java]toString()` method. If the string is empty, `[js]null` is the result.<br>
+Then, the path provided will be resolved against the game directory (usually `.minecraft` or `minecraft`), then **sanitized**, and then returned.
+If any of the aforementioned steps throws an exception, `[js]null` is the result (__**fails silently!**__)
+<<<
+
+
+| From type       | Method                 |
+| <#path-path>    | <#path-path-method>    |
+| <#path-null>    | <#path-null-method>    |
+| <#path-default> | <#path-default-method> |
+
+
+# To `File`
+
+Steps identical to [`Path` conversion](#to-path), except the resulting path is converted to `[java]File` using its `[java]toFile()` method.
+
+# To `TemporalAmount`
+
+>>> #temporalamount-number
+`[java]Number`
+JS `number`
+<<<
+
+>>> #temporalamount-number-method
+Will be converted to long, then the result is a `[java]Duration` of that many milliseconds.
+For example: `[js]120` will be converted to `[java]Duration` of 120 ms.
+<<<
+
+>>> #temporalamount-string
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #temporalamount-string-method
+The string will be matched against [the following regex](https://regex101.com/r/RZ3QSF/2): `[js]/(\\d+)\\s*(y|M|d|w|h|m|s|ms|ns|t)\\b/`, representing the sequence:
+- number,
+- any number of spaces, or none at all,
+- unit.
+The result of a match will be:
+. Number (like `[js]'2'`)
+. Unit (like `[js]ms`)
+Amount of ticks is handled specially and initialized to `[js]NaN` - more on that later.
+Then, matches will be iterated one-by-one:
+- Number will be parsed into double.
+- Then, depending on unit:
+  - `[js]'t'`: Interpreted as amount of ticks. First, if ticks were `[js]NaN` then they are set to 0. Then the amount is added to the tick count.
+  - `[js]'ns'`: Interpreted as nanoseconds, the amount is added to nanoseconds. (1 millionth of a millisecond)
+  - `[js]'ms'`: Interpreted as milliseconds, the amount is added to milliseconds.
+  - `[js]'s'`: Interpreted as seconds, the milliseconds are __**set**__ to the specified amount of seconds (1000 milliseconds).
+  - `[js]'m'`: Interpreted as minutes, the milliseconds are __**set**__ to the specified amount of minutes (60 seconds).
+  - `[js]'h'`: Interpreted as hours, the milliseconds are __**set**__ to the specified amount of hours (60 minutes).
+  - `[js]'d'`: Interpreted as days, the milliseconds are __**set**__ to the specified amount of days (24 hours).
+  - `[js]'M'`: Interpreted as months, the milliseconds are __**set**__ to the specified amount of months (1/12th of a year).
+  - `[js]'y'`: Interpreted as years, the milliseconds are __**set**__ to the specified amount of years (31,556,952 seconds).
+  - Otherwise, an exception is thrown: `Invalid temporal unit: <unit>`, but this shouldn't happen as the regex doesn't capture any other units.
+
+Note the lack of microseconds.
+If ticks aren't `[js]NaN` (so, the string did include ticks), the result is a `[java]TickDuration` representing the amount of ticks plus the amount of milliseconds divided by 50, rounded towards zero to a long value. Nanoseconds are ignored, if any.
+
+Example: `[js]'2t 60ms'` will result in `[java]TickDuration` of 3 ticks.
+
+Otherwise, the result is a `[java]Duration` of the amount of milliseconds plus microseconds.
+
+Examples:
+- `[js]'35 s 350 ms'` will result in a `[java]Duration` of 35.350 seconds, or 35350 ms.
+- `[js]'2h'` will result in a `[java]Duration` of 2 hours (7200 seconds, or 7,200,000 ms).
+
+>>>danger
+Units that are seconds or longer will __**set**__ the amount of time to milliseconds, not add to that amount!
+Because of that, `[js]'2m 30s'` will result in a `[java]Duration` of 30 seconds, not 150 seconds!
+<<<
+<<<
+
+>>> #temporalamount-default
+`[js]null` and other types
+<<<
+
+>>> #temporalamount-default-method
+Will throw an exception.
+<<<
+
+| From type                 | Method                           |
+| <#temporalamount-number>  | <#temporalamount-number-method>  |
+| <#temporalamount-string>  | <#temporalamount-string-method>  |
+| <#temporalamount-default> | <#temporalamount-default-method> |
+
+# To `Duration`
+
+First, the object is converted to `[java]TemporalAmount` according to the [`TemporalAmount` conversion](#to-temporalamount).
+
+>>> #duration-duration
+`[java]Duration`
+<<<
+
+>>> #duration-duration-method
+Returned as-is.
+<<<
+
+>>> #duration-tickduration
+`[java]TickDuration`
+<<<
+
+>>> #duration-tickduration-method
+Results in a `[java]Duration` of the number of ticks represented by the `[java]TickDuration` multiplied by 50 ms.
+<<<
+
+>>> #duration-default
+Other classes that implement `[java]TemporalAmount`
+<<<
+
+>>> #duration-default-method
+The object will be normalized to `[java]Duration` by looping over the time units and adding the durations from the `[java]TemporalAmount` to the resulting `[java]Duration`.
+<<<
+
+| From type                 | Method                           |
+| <#duration-duration>      | <#duration-duration-method>      |
+| <#duration-tickduration>  | <#duration-tickduration-method>  |
+| <#duration-default>       | <#duration-default-method>       |
+
+# To `TickDuration`
+
+>>> #tickduration-null
+`[js]null`
+<<<
+
+>>> #tickduration-null-method
+Results in a `[java]TickDuration` of 0 ticks.
+<<<
+
+>>> #tickduration-number
+`[java]Number`
+JS `number`
+<<<
+
+>>> #tickduration-number-method
+Results in a `[java]TickDuration` of the specified amount of ticks, rounded towards zero to a long value.
+<<<
+
+>>> #tickduration-jsonprimitive
+`[java]JsonPrimitive` (GSON)
+<<<
+
+>>> #tickduration-jsonprimitive-method
+The `[java]JsonPrimitive` is converted to long number using its `[java]getAsLong()` method.
+The result is a `[java]TickDuration` of that number of ticks.
+
+>>>warn
+`[java]JsonPrimitive` objects that represent strings are treated as a string representation of a long number, so they will be converted to long using `[java]Long.parseLong()` method.
+Strings aren't treated specially here.
+<<<
+<<<
+
+>>> #tickduration-default
+Other types (including JS `string`)
+<<<
+
+>>> #tickduration-default-method
+Will be [converted to `Duration`](#to-duration), then the resulting amount of ticks is the amount of milliseconds represented by that `[java]Duration` divided by 50 ms, rounded towards zero to the nearest long value.
+<<<
+
+| From type                     | Method                               |
+| <#tickduration-null>          | <#tickduration-null-method>          |
+| <#tickduration-number>        | <#tickduration-number-method>        |
+| <#tickduration-jsonprimitive> | <#tickduration-jsonprimitive-method> |
+| <#tickduration-default>       | <#tickduration-default-method>       |

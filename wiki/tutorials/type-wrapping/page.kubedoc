@@ -975,7 +975,7 @@ Other types (including JS `string`)
 <<<
 
 >>> #path-default-method
-The object will be first converted to string using its `[java]toString()` method. If the string is empty, `[js]null` is the result.<br>
+The object will be first converted to string using its `[java]toString()` method. If the string is empty, `[js]null` is the result.
 Then, the path provided will be resolved against the game directory (usually `.minecraft` or `minecraft`), then **sanitized**, and then returned.
 If any of the aforementioned steps throws an exception, `[js]null` is the result (__**fails silently!**__)
 <<<
@@ -1140,3 +1140,78 @@ Will be [converted to `Duration`](#to-duration), then the resulting amount of ti
 | <#tickduration-number>        | <#tickduration-number-method>        |
 | <#tickduration-jsonprimitive> | <#tickduration-jsonprimitive-method> |
 | <#tickduration-default>       | <#tickduration-default-method>       |
+
+# To `ResourceLocation`
+Also describes `ResourceLocation` conversions where `[js]'minecraft'` is the implicit namespace.
+
+>>> #resourcelocation-null
+`[js]null`
+<<<
+
+>>> #resourcelocation-null-method
+Results in `[js]null`.
+<<<
+
+>>> #resourcelocation-resourcekey
+`[java]ResourceKey`
+<<<
+
+>>> #resourcelocation-resourcekey-method
+The `[java]ResourceKey` is converted to `[java]ResourceLocation` using its `[java]location()` method.
+<<<
+
+>>> #resourcelocation-holder
+`[java]Holder`
+<<<
+
+>>> #resourcelocation-resourcekey-method
+The `[java]Holder` is converted to `[java]ResourceLocation` by:
+. Getting a `[java]ResourceKey` from a `[java]Holder` using its `[java]getKey()` method,
+. Getting a `[java]ResourceLocation` from a `[java]ResourceKey` using its `[java]location()` method.
+<<<
+
+>>> #resourcelocation-registryobjectkjs
+`[java]RegistryObjectKJS`, implemented/extended by:
+- `[java]BlockBehaviour`
+- `[java]Block`
+- `[java]BlockProviderKJS`
+- `[java]CachedLevelBlock`
+- `[java]LevelBlock`
+- `[java]EntityType`
+- `[java]Fluid`
+- `[java]FluidStack`
+- `[java]Item`
+- `[java]ItemStack`
+- `[java]MenuType`
+<<<
+
+>>> #resourcelocation-registryobjectkjs-method
+The `[java]RegistryObjectKJS` is converted to `[java]ResourceLocation` using its `[java]kjs$getIdLocation()` method.
+<<<
+
+>>> #resourcelocation-default
+Other types (including JS `string`)
+<<<
+
+>>> #resourcelocation-default-method
+If the object is a `[java]JsonPrimitive`, it's converted to string using its `[java]getAsString()` method.
+Otherwise, the object is converted to string using its `[java]toString()` method.
+
+If the string does not have any `[js]':'` characters (that is, no namespace is provided), `[js]'minecraft'` is assumed. This is done by not appending any namespace to the string before passing it to the resource location parser, as Minecraft's parser already assumes `[js]'minecraft'` as an implicit namespace.
+
+Then, a `[java]ResourceLocation` is parsed from the string using `[java]ResourceLocation.parse()` method. If parsing throws an exception, another exception is thrown with a message: `Could not create ID from <stringified object>!`
+<<<
+
+| From type                             | Method                                       |
+| <#resourcelocation-null>              | <#resourcelocation-null-method>              |
+| <#resourcelocation-resourcekey>       | <#resourcelocation-resourcekey-method>       |
+| <#resourcelocation-registryobjectkjs> | <#resourcelocation-registryobjectkjs-method> |
+| <#resourcelocation-default>           | <#resourcelocation-default-method>           |
+
+# To `KubeResourceLocation`
+
+Steps identical to [`ResourceLocation` conversion](#to-resourcelocation), except for a change in string parsing:
+
+If the string does not have any `[js]':'` characters (that is, no namespace is provided), `[js]'kubejs'` is assumed. This is done by appending `[js]'kubejs:'` to the back of the string.
+
+Then, the resulting `[java]ResourceLocation` is passed to `[java]KubeResourceLocation`'s constructor.

@@ -1,0 +1,269 @@
+# Basic Recipes
+## Fire Crafting
+>>> info
+Fire Crafting allows you to light a specific block on fire. After a bit of time, the fire will go out and the block will spawn items from the specified loot table.
+To avoid loot explosions when using a loot table with a lot of items, you can also limit the item amount.
+<<<
+### Examples:
+```js
+ServerEvents.recipes(event => {
+  // removes all fire crafting recipes
+  event.remove({ type: "enderio:fire_crafting" });
+
+  // spawn items from the simple_dungeon loot table when igniting dirt or any kind of glass
+  // this example uses a block tag
+  // this craft will result in a loot explosion because the amount is not limited and the table is very large
+  // limited to the overworld by default
+  event.recipes.enderio.fire_crafting(
+      ["minecraft:dirt", "#forge:glass"],
+      "minecraft:chests/simple_dungeon"
+  );
+
+  // spawn items from the simple_dungeon loot table when igniting obsidian
+  // limited to 5 item drops
+  // limited to the overworld and the nether
+  event.recipes.enderio.fire_crafting(
+      ["minecraft:obsidian"],
+      "minecraft:chests/simple_dungeon",
+      5,
+      ["minecraft:overworld", "minecraft:the_nether"]
+  );
+
+  // spawn items from the simple_dungeon loot table when igniting white wool
+  // this example uses the KubeJS block wrapper
+  // limited to 3 item drops
+  // limited to the overworld and the end
+  // uses chaining functions for the max item drops and dimensions
+  event.recipes.enderio
+      .fire_crafting([Block.id('minecraft:white_wool')], 'minecraft:chests/simple_dungeon')
+      .maxItemDrops(3)
+      .dimensions(['minecraft:overworld', 'minecraft:end']);
+});
+```
+## Grinding Ball
+>>> info
+The Grinding Ball recipe type allows you to define custom grinding balls that are used in the Sag Mill to alter the recipe processing.
+Although the modifiers are passed as floats, they are internally converted to percentages.
+<<<
+```js
+ServerEvents.recipes(event => {
+
+  // removes all grinding ball recipes
+  event.remove({ type: "enderio:grinding_ball" });
+
+  // adds a stick as grinding ball
+  // uses default values for all modifiers
+  // has a durability of 10
+  event.recipes.enderio.grinding_ball("stick");
+
+  // adds a potato as grinding ball
+  // default output doubling chance
+  // bonus multiplier of 2
+  // power use multiplier of 2
+  // durability of 100
+  event.recipes.enderio.grinding_ball("potato", 1, 2, 2, 100);
+
+  // adds a stone as grinding ball
+  // output doubling chance of 3
+  // bonus multiplier of 2
+  // power use multiplier of 2
+  // durability of 100
+  // uses chaining functions for all modifiers
+  event.recipes.enderio.grinding_ball("stone")
+    .doublingChance(3)
+    .bonusMultiplier(2)
+    .powerUse(2)
+    .durability(100);
+});
+```
+# Machine Recipes
+## Alloy smelting
+>>> info
+The Alloy Smelter (not the primitive version) inherits all vanilla smelting recipes automatically. Removing them is not possible via the remove function by KubeJS inside the recipes event. Instead, use the EnderIO recipes binding this mod exposes.
+<<<
+```js
+ServerEvents.recipes(event => {
+
+  // removes all alloy smelting recipes
+  event.remove({ type: "enderio:alloy_smelting" });
+
+  // adds a recipe that smelts a gold ingot into an iron ingot
+  // uses default values for energy and experience
+  event.recipes.enderio.alloy_smelting(Item.of("minecraft:iron_ingot"), Ingredient.of("minecraft:gold_ingot"));
+
+  // adds a recipe that smelts an iron ingot and a gold ingot into 2 sticks
+  // energy usage of 5000
+  // experience of 5.5
+  event.recipes.enderio.alloy_smelting(
+      Item.of("minecraft:stick", 2),
+      [Item.of("minecraft:iron_ingot"), Ingredient.of("minecraft:gold_ingot")],
+      5000,
+      5.5
+  );
+
+  // adds a recipe that smelts a carrot, a potato, and 2 apples into a diamond
+  // energy usage of 10000
+  // experience of 3
+  // uses chaining functions for energy and experience
+  event.recipes.enderio.alloy_smelting(
+      Item.of("minecraft:diamond"),
+      [Ingredient.of("minecraft:carrot"), "minecraft:potato", "2x minecraft:apple"]
+  ).energy(10000).experience(3);
+});
+```
+## Enchanting
+>>> info
+The Enchanter automatically generates recipes for all levels of the provided enchantment. The cost multiplier is applied to each level of the enchantment.
+<<<
+```js
+ServerEvents.recipes(event => {
+
+  // removes all enchanting recipes
+  event.remove({ type: "enderio:enchanting" });
+
+  // adds a recipe that gives sharpness from granite
+  // uses the default value for the cost multiplier
+  event.recipes.enderio.enchanting("minecraft:sharpness", "granite");
+
+  // adds a recipe that gives thorns from 5 diorite
+  // cost multiplier of 3
+  event.recipes.enderio.enchanting("minecraft:thorns", Ingredient.of("diorite", 5), 3);
+
+  // adds a recipe that gives protection from 2 glass blocks
+  // cost multiplier of 2
+  // uses chaining functions for the cost multiplier
+  event.recipes.enderio.enchanting("minecraft:protection", Ingredient.of("glass", 2)).costMultiplier(2);
+});
+```
+## Painting
+
+```js
+ServerEvents.recipes(event => {
+
+  // removes all painting recipes
+  event.remove({ type: "enderio:painting" });
+
+  // adds a recipe that paints an apple into a stick
+  event.recipes.enderio.painting("stick", "apple");
+
+  // adds a recipe that paints any glass block into a potato
+  event.recipes.enderio.painting("potato", Ingredient.of("glass"));
+});
+```
+## Sag Milling
+
+```js
+ServerEvents.recipes(event => {
+
+  // removes all sag milling recipes
+  event.remove({ type: "enderio:sag_milling" });
+
+  // adds a recipe that mills an apple into a potato and a carrot
+  // uses default values for energy and bonus type
+  event.recipes.enderio.sag_milling(["potato", "carrot"], "apple");
+
+  // adds a recipe that mills any ingot into 3 glass blocks, 15 stone with a 50% chance, and 3 iron ingots
+  // energy usage of 10000
+  // no bonus
+  event.recipes.enderio.sag_milling(
+      [
+          Ingredient.of("glass", 3),
+          Item.of("stone", 15).withChance(0.5),
+          "3x iron_ingot"
+      ],
+      "#forge:ingots",
+      10000,
+      EnderIOBonusType.NONE
+  );
+
+  // adds a recipe that mills white wool into a stick
+  // energy usage of 500
+  // bonus type of chance only
+  // uses chaining functions for energy and bonus type
+  event.recipes.enderio.sag_milling(["stick"], "white_wool")
+    .energy(500)
+    .bonus(EnderIOBonusType.CHANCE_ONLY);
+});
+```
+## Slicing 'n Splicing
+>>> info
+ A recipe for the Slice 'n Splice must have exactly 6 inputs. The same item can be used multiple times. The order of the inputs defines the pattern of the recipe.
+<<<
+```js
+ServerEvents.recipes(event => {
+
+  // removes all slicing recipes
+  event.remove({ type: "enderio:slicing" });
+
+  // adds a recipe that slices 2 apples, a bone, 2 rotten flesh, and an egg into a stick
+  // uses the default value for energy
+  event.recipes.enderio.slicing("stick", ["apple", "bone", "apple", "rotten_flesh", "egg", "rotten_flesh"]);
+
+  // adds a recipe that slices any 3 glass, a stick, any ingot, 15 granite, any 3 iron ingots, and an apple into 15 stone
+  // energy usage of 5000
+  // uses the chaining function for energy
+  event.recipes.enderio.slicing(Item.of("stone", 15), [
+      "3x #forge:glass",
+      "stick",
+      Ingredient.of("#forge:ingots"),
+      Item.of("granite", 15),
+      "3x #forge:ingots/iron",
+      "apple"
+  ]).energy(5000);
+```
+## Soul Binding
+>>> info
+A Soul Binder recipe can only have one property that can define the entity type. This means entity_type, mob_category, and soul_data are mutually exclusive.
+<<<
+```js
+ServerEvents.recipes(event => {
+
+  // removes all soul binding recipes
+  event.remove({ type: "enderio:soul_binding" });
+
+  // adds a recipe that converts an apple to a stick
+  // uses default values for energy and exp
+  // no entity type, mob category, or soul data
+  event.recipes.enderio.soul_binding("stick", "apple");
+
+  // adds a recipe that converts a carrot to a potato
+  // energy usage of 5000
+  // exp of 3
+  // no entity type, mob category, or soul data
+  event.recipes.enderio.soul_binding("potato", "carrot", 5000, 3);
+
+  // adds a recipe that converts a stick to a stone
+  // energy usage of 5000
+  // no exp
+  // mob category of axolotls
+  // uses the chaining function for the mob category
+  event.recipes.enderio.soul_binding("stone", "stick", 5000).mobCategory(MobCategory.AXOLOTLS);
+
+  // adds a recipe that converts white wool to bread
+  // default values for energy and exp
+  // entity type of minecraft:zombie
+  // uses the chaining function for the entity type
+  event.recipes.enderio.soul_binding("bread", "white_wool").entityType("minecraft:zombie");
+});
+```
+## Tank
+```js
+ServerEvents.recipes(event => {
+
+  // removes all tank recipes
+  event.remove({ type: "enderio:tank" });
+
+  // adds a recipe that converts an apple to a stick with water
+  // not emptying the tank
+  event.recipes.enderio.tank("stick", "apple", "water");
+
+  // adds a recipe that converts a carrot to a potato with 5 buckets of lava
+  // emptying the tank
+  event.recipes.enderio.tank("potato", "carrot", Fluid.of("lava", 5000), true);
+
+  // adds a recipe that converts a stick to a stone with water
+  // emptying the tank
+  // uses the chaining function for emptying
+  event.recipes.enderio.tank("stone", "stick", "water").emptying();
+});
+```

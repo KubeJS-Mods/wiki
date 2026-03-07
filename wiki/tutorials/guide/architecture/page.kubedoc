@@ -1,0 +1,293 @@
+# Programmers Guide to KubeJS's Architecture
+
+This guide assumes you have some base level information about general programming paradigms like Object Oriented Programming (OOP) and basic level JavaScript syntax.
+
+## Layers
+
+It's important to understand that KubeJS is not the same as NodeJS or browser JavaScript.
+To understand why let's break down the layers that make KubeJS possible.
+
+### Layer 0: Computer OS
+
+Your computer OS doesn't play much of a difference, with the exception of file paths.
+If you aren't doing file operations then skip ahead to the next layer.
+
+When writing scripts that read and write data, it is important to understand that Windows file system and Linux file system have different path structures.
+All paths should be written in a relative file syntax.
+Example: `"world/data/example.nbt"`
+Avoid using absolute paths like: `"/world/data/example.nbt"` (Linux) or `"C://Users/Example/Curse/…"` (Windows)
+Note the difference between a "relative" path and an "absolute" path is based on two things:
+
+Prefix:
+- The Prefix `C://` is the drive letter prefix on a windows machine. Not everyone installs things to the default C letter drive. And the full path is often dependent on the Username set when windows is installed.
+- The Prefix `/` denotes an absolute path on Unix file systems. Minecraft modpacks get installed to their own folder. The user has full control over this folder, so naturally what yours is set to will not apply to every user.
+- The Prefix `./` is typically used to denote a relative path as well. Relative to where is the tricky part. It ultimately depends on context, but the simplest way is to simply drop this part of the path altogether.
+Dropping the `./` in the path can help with edge cases where somebody takes one path and concatenates it with the provided path, resulting in a broken path altogether.
+
+Slash Direction:
+- Try to avoid putting back slack `\` in your paths whenever possible, in favor of forward slash `/`. When copying paths directly from windows, you may find that it uses a back slash instead of a forward slash.
+There are some exceptions, when you need to "escape" a special character, but that is a technical edge case that won't pop-up often enough to worry about.
+
+### Layer 1: Java Virtual Machine (JVM)
+
+Minecraft *Java* edition runs on top of the *Java* Virtual Machine.
+Java as a whole is both a programming language and a machine code language.
+The programming language (files that end in `.java`) are compiled by the java compiler into machine readable code (files that end in `.class`).
+This does not happen at runtime (while the game is launched), this instead happens when a project compiles their source code into byte code to form a single archive file (`.jar`).
+These files are in a byte code format that specific Java versions can load into the JVM.
+Java compresses and archives groups of these `.class` files (as well as other files added by each app) into a single `.jar` file. You can open these files in tools like 7zip or WinRAR as if they were like any other zip file.
+
+When you launch Minecraft, in the background, the Java executable `javaw.exe` is being used on a mixed combination of archive files (`.jar`) and class files (`.class`). (Different OSes may use different files).
+The version of the game, mod loader library, and installation method all effect what exactly is ran.
+
+### Layer 2: Class Loader
+
+When the JVM is created, it loads all the class files into memory using something called a ClassLoader. This class loader manages what classes exist in the JVM runtime, and where they can be access from.
+They also help manage accessing resources. So if extra files were compiled into a jar file, the class loader can be used to access them. Examples such as mod provided resource packs, textures, data-packs, and other assets.
+
+Different mod loaders such as Fabric or NeoForge have the means of controlling these class loaders and implementing their own.
+
+They do this for a few reasons. The first reason is so they can modify vanilla class data to make it easier work with for mod authors.
+This process of injecting instructions into classes before they are loaded is called runtime byte code modification.
+There is a library called ASM that makes modifying byte code quite a bit easier. And another library named Mixins is built on top of ASM to make it even easier for Mods to inject their own instructions, interfaces, and fields into existing classes they wouldn't normally have access to.
+
+In a similar vein there are things called Access Wideners, which change the "access modifiers" on particular fields and methods so that they can be accessed by a mod.
+It's a tool to break Java's encapsulated design because some code was not designed with external modification in mind.
+
+Typically when mod loaders start up, they scan the mods folder to find any and all mods that contain their own mixin instructions and access widener instructions.
+
+After collecting these mixins, they then attempt to apply and load the mod's class data in a particular order.
+The only way they know what classes *are* mixins is because of a config file included in the jar that points the modloader to the mixin classes.
+(Location and definition varies by modloader).
+
+The purpose of Mixins is to make accessible, what was not originally accessible.
+If the code was not originally designed in a way that let you modify it, you are often times forced to use mixins to control how the underlying logic behaves.
+
+### Layer 3: Mod Layer
+
+Each Minecraft mod is made up of a single compiled archive file (`.jar`) that is tailored to the mod loader it was compiled for. (That is why you typically see Fabric, Forge, and NeoForge as separate downloads).
+
+Each mod loader defines a different standard for how the mod loader expects a mod to be initialized and hooked into the Minecraft runtime.
+Each mod loader also provides a different set of tools for interacting with the based minecraft code.
+Typically what is common for each mod loader is that they define a set of events that can be hooked into and listened to.
+Allowing for mods to apply changes, register new content, and cancel events from occurring altogether.
+Not every possible scenario will have an event defined by the mod loader. For example, when a block is placed during terrain generation.
+This is done on purpose to optimize performance and is often delegated to individual mods to handle the more specific situations.
+Every instruction adds up over time, and the longer it takes to execute, the easier it is for a player to notice performance issues.
+
+There are libraries to help make developing for multiple modloaders easier such as Architectury.
+Where they define a "common" layer that is compatible with multiple mod loaders, and then compiled differently for each mod loader.
+It does this by defining multiple sub-projects within one gradle project.
+With a single common project that is used as a dependency for each version specific project.
+You won't need to learn or understand gradle to learn KubeJS.
+
+KubeJS used Architectury library up until 1.21 when it dropped support for Fabric.
+This means most source code for previous versions will exist in the "common" folder on GitHub, with modloader specific code existing in the fabric and forge folders respectively.
+
+Also, prior to 1.18.2, all Mojang provided Minecraft code was obfuscated and so all methods, fields, and class names for Minecraft data had to be wrapped in an object like `EntityJS`, `ItemStackJS`, `BlockContainerJS`, etc…
+Without these, you'd have field names like: `f_32270_` which is supposed to be `Creeper.swell`.
+
+Starting in 1.18.2, Lat added Rhino Remapping which made it so that official mapping files would be downloaded, and used to map fields, classes, and methods to their human readable versions.
+And the `EntityJS` and `ItemStackJS` classes would eventually become Mixins to add additional functionality to the Minecraft classes they originally wrapped.
+
+Starting in 1.21, This remapping became unnecessary.
+
+And in Minecraft 26.1, Mojang stopped obfuscating their source code, which made this process unnecessary, and improved the modding experience as a whole.
+
+### Layer 4: JS Interpreter Layer
+
+Rhino is a library ***originally*** maintained by Mozilla. This library has an entire JavaScript interpreter that runs on top of the Java runtime.
+Lat made a copy of this library (forked the code) several years back and made several modifications to it in order to make it fit the Minecraft ecosystem more easily.
+
+Because of this, the version of Rhino referred to here, is the one Lat modified and maintains. **Mozilla is not affiliated with the Minecraft mod Rhino in any way.**
+This library is LARGE and hard to maintain, which is why Lat made an effort to rewrite it in the form of Ichor. But this library is likely going to stay a prototype for a while and not directly integrated with KubeJS for the foreseeable future.
+
+Rhino uses Java's Reflection library to call access data, execute functions, and create proxy classes during runtime.
+What this means is that Rhino can take an object of an unknown type, determine what methods it can call, what fields it has access to, and manipulate them as needed.
+This ability makes it possible for Rhino translate text in the style of JavaScript, and translate that to instructions within the JVM.
+This is why you may have seen some people say that KubeJS is not the exact same as JavaScript.
+This is because Rhino does not implement every standard JavaScript feature and does not have a "JS runtime" like most JS applications do.
+
+The five most important things to understand about KubeJS are:
+
+- Script Types
+- Bindings + Events
+- Type Wrappers
+- Beans
+- Functional Interface Proxies
+
+### Script Type
+
+Script Types are fairly straight forward.
+They are used to separate logic by mod life cycle.
+For example, startup scripts are used when the client or server is first starting up.
+You can think of this as a mod initialization phase.
+There is quite a lot of Minecraft logic that both the client and server need to agree on to be compatible.
+For example, the items, blocks, and entities that exist in the game.
+If the client is missing an item that the server registered at startup, then the client will not be compatible with the server.
+
+On the opposite side, there are also some things that should only occur on the client side or server side, but never both.
+
+For example, a server is not concerned with the rendering of the game.
+It does not need to care about visuals, as long as it knows the physical attributes of everything such as hit box size, position, rotation, etc…
+
+That is why Server Scripts and Client Scripts exist.
+They allow for code to be run specifically for clients and specifically for servers.
+
+If you play Single Player, you are technically running both Client and Server Scripts at the same time.
+This is because Single Player uses an "Internal Server".
+It's the same reason why you can open up your single player world to LAN.
+All it is doing is exposing the port the internal server was running on.
+
+You'll sometimes see oddities in startup code where an event fires twice, once for client and once for server.
+
+### Bindings
+
+Bindings are a way for KubeJS and addons to add script-type based global constants.
+It is the fundamental reason why KubeJS can connect Minecraft to JS code.
+By adding a binding like: "ItemEvents" to a script type, it enables the JS script to reference Java code from the JS file.
+Rhino knows that anytime you type `ItemEvents` in JS, you want to do something with that specific java object.
+
+Bindings are what links JavaScript to Java.
+
+Bindings are also responsible for providing your script with the ability to listen to Minecraft events.
+
+From 1.16.5 to 1.18.2 there was a single binding that let you listen to events called `onEvent(string, handler)` where the string was an arbitrarily defined id which was really hard to document automatically. This was because the strings did not need to be registered and listening to these events made it impossible to detect typos and mistakes.
+
+Fast forward to 1.19+ and now we have Event Groups like `BlockEvents` and `ClientEvents` which have script type based event handlers which are easier to generate documentation for.
+For example KubeJS Offline Documentation can scan the registered Bindings for these event handlers.
+
+[KubeJS Offline](https://hunter19823.github.io/kubejsoffline/1.20.1/forge/#?focus=global-bindings-header&global-bindings-expanded=true)
+
+### Type Wrappers
+
+JavaScript is a loosely typed language.
+What this means is that you do not need to explicitly declare what type a variable or value is in order to store and use it.
+Functions, fields, methods may not care what type of value you are passing to them.
+
+Java is a strictly typed language.
+Which means that you always (with very few exceptions) need to declare the type of variable you are storing, accepting, or returning.
+If you have a method that expects a specific class, you must *always* provide an object that inherits from that class.
+
+If you are already familiar with these two concepts, you may already see the issue with going between Java and JavaScript.
+Which is why Rhino has the super neat and handy feature called "TypeWrappers".
+TypeWrappers are a way for Java mods to convert JS values and objects to a specific Java type.
+For example, if a Java function requires an ItemStack, KubeJS provides a Type Wrapper that will convert text like "minecraft:stick" into an ItemStack of size 1. If you pass in an Item, it will make an ItemStack out of it.
+TypeWrappers are everywhere and make working with Java objects from JS much much easier.
+
+Rhino will automatically convert Strings to Enumerate values, if the string exactly matches the ENUM's name.
+
+In 1.19.2+ Rhino will automatically map JSON objects to Records.
+
+There is one exception which is Ambiguous arguments.
+
+Ambiguous argument exceptions occur when you have overloaded java methods, where both methods support type wrapping in their arguments.
+The edge case stems from this question:
+You have one method accepts a string.
+You have another method, with the same name, but that accepts a ResourceLocation.
+How do you know which method to use, if both methods support type wrapping?
+
+Anything you pass from the JS context is loosely typed. Which means you can't make assumptions about what type is being intentionally passed to Java from JS.
+
+Rhino will throw an exception in these cases and the solution to them typically involves using the fully qualified method name on the object.
+
+See the example below:
+
+```java
+public interface Example {
+    public String getNameOfItem(ResourceLocation itemId);
+
+    public String getNameOfItem(ItemStack itemStackInstance);
+}
+```
+
+And if you were to try and use this from the JS side:
+
+```js
+example.getNameOfItem("minecraft:stick");
+example.getNameOfItem(Item.of("minecraft:stick"));
+```
+
+In the example above, you might think that this would be a valid way of distinguishing the two methods.
+The problem, is the translation layer that Rhino implements.
+
+Rhino could convert the string, "minecraft:stick", into a ResourceLocation because there is a type wrapper registered for doing exactly that.
+But Rhino could just as easily convert that same string into an ItemStack, because there is also a type wrapper registered for converting strings into ItemStacks as well.
+
+The fact that both support converting a string into an ItemStack isn't the issue here. The issue is that we have two identically named methods, with different parameters that have different type wrappers registered.
+Rhino does not know how to prioritize one over the other, so it chooses to fail in such cases.
+
+### Beans
+
+In short Beans are just syntactical sugar that make it easier to write setter and getter methods.
+
+Anytime a Java object has .setX and .getX, on the JS side you can reference X as if it were a field and mutate it like a field.
+
+There is a wiki entry regarding beans: [[/tips/beans]].
+
+### Functional Interface Proxies
+
+This one is a bit tricky to understand, but put simply:
+
+There is a global type wrapper that converts JS functions into Java Functional Interfaces automatically.
+
+A functional interface in Java, is an Interface with a single, non-default, non static, method.
+
+Here is an example:
+
+```java
+package com.example;
+
+public static class ExampleClass {
+  // Example Class fields.
+  private int a;
+  private int b;
+
+  // Constructor that takes two numbers;
+  public ExampleClass(int a, int b) {
+      this.a = a;
+      this.b = b;
+  }
+  // Definition of the Functional Interface
+  // The @FunctionalInterface is not required in java, just know that if you see this annotation it is safe to assume it is a functional interface.
+  @FunctionalInterface
+  public interface MagicHandler {
+      // The method that one would need to provide from JS.
+      public int applyMagic(int a, int b);
+  }
+  // Static method that accepts the Functional Interface
+  public static int performMagic(MagicHandler magicHandler) {
+      return magicHandler.applyMagic(9, 10);
+  }
+  // Non Static Method that applies magic to the MagicHandler's fields a and b.
+  public int performMagicOnThisObject(MagicHandler magicHandler) {
+      return magicHandler.applyMagic(this.a, this.b);
+  }
+}
+```
+
+You can call this method in any of the following ways:
+
+```js
+const $EXAMPLE = Java.loadClass('com.example.ExampleClass');
+// "performMagic" is a Static method on Example Class inside the com.example package.
+// Which means that I can load the class using the Java binding and call it's static method via Rhino's Reflection.
+
+// Here is an example using JS Lambda functions
+$EXAMPLE.performMagic((a, b) => return a * b);
+// Here is an example using JS functions
+$EXAMPLE.performMagic(function(a, b) {
+  return a + b;
+});
+// Here is an example of storing this function and then using it.
+function magicDivide(a, b) {
+  return a / b;
+}
+$EXAMPLE.performMagic(magicDivide);
+// Let's now make an instance of the ExampleClass and call the non-static performMagicTwice method
+const EXAMPLE_INSTANCE = new $EXAMPLE(1, 2);
+// Call the non-static method on the newly made ExampleClass object.
+EXAMPLE_INSTANCE.performMagicOnThisObject(magicDivide);
+```
+
+Functional Interfaces are the reason you can listen to events in KubeJS at all. All event handlers are just FunctionalInterfaces.

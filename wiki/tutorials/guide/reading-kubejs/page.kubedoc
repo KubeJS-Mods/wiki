@@ -1,0 +1,175 @@
+# Reading KubeJS
+
+An important part of becoming a proficient KubeJS developer is being able to read and understand KubeJS scripts.
+This guide will cover the basics of reading KubeJS scripts and how to debug them on your own.
+
+## Prerequisites
+
+- Knowing how to access your modpack's "instance" folder. (The folder that contains your modpack's data.)
+- Understanding how to save a javascript `.js` file to your computer.
+- todo: add prerequisites
+
+## Understanding the KubeJS Script Structure
+
+KubeJS scripts are stored in the `instance` folder of your modpack in the `kubejs` folder.
+Inside the `kubejs` folder, you will find a folder for each script type.
+Where a script is located is important because it determines what events and bindings are available to the script.
+A common source of confusion is when a script is located in the wrong folder, or outside of any of the correct folders.
+This can not only cause the script to not run, but can also cause the script to run twice, not at all, or crash the game entirely.
+
+>>> info
+If you are ever asked in the KubeJS Discord server to provide your script, make sure to include the folder it is located in.
+This can help greatly in diagnosing the problem.
+<<<
+
+Each script type has a specific purpose and is designed to be used in a specific way.
+Knowing it's use can help you better debug your scripts to make sure they are in the right place.
+
+### Server Scripts
+
+Server scripts are some of the most common scripts you will find in a KubeJS modpack.
+They are scripts that are run whenever you start a single player world, or run a dedicated minecraft server.
+Server scripts are stored in the `server_scripts` folder.
+With some additional configuration, you can also use server scripts when a client does not have kubejs installed.
+Server scripts are used to control the server-side logic of your modpack.
+
+Including, but not limited to:
+ - Interaction related events
+    - Block placed
+    - Block broken
+    - Item used
+    - Food eaten
+ - Player specific events
+   - Player joins the server
+   - Player leaves the server
+   - Player interacts with a block
+   - Player interacts with an item
+   - Player interacts with a entity
+   - Player performing some action every game tick.
+ - Entity specific events
+   - Entity attempts to spawn
+   - Entity spawns
+   - Entity dies
+   - Entity performing some action every game tick.
+ - World ("Level") specific events
+   - World generating
+   - World loaded
+   - World saving
+   - World unloading
+   - Dimension loading
+      - Dimension loading
+      - Dimension unloading
+   - Chunk or Section related events
+    - Entities going in and out of a chunk or section
+ - Server specific events
+   - Server starting
+   - Server stopping
+   - Server performing some action every game tick.
+ - Data related events
+   - Recipe related events
+   - Loot table related events
+   - Advancement related events
+   - Tag related events
+
+### Client Scripts
+
+Client scripts are scripts that are run whenever you are in a single player world, or on a client connected to a server.
+Client scripts are stored in the `client_scripts` folder.
+Client scripts can run even when the server you are connected to doesn't have kubejs installed.
+This is ussually the least common script type, and is only used in very specific cases.
+This script type will do nothing when placed on a dedicated server.
+
+The goal of client scripts is to control the client-side logic of your game.
+Including, but not limited to:
+ - Render specific events
+    - A server doesn't need to render a block to know it exists, but a client does.
+ - Localization related information
+    - Changing the language of the game, updating names of items, blocks, etc...
+    - Translating text into the language of the player.
+ - Client-side specific events
+   - Receiving a chat message from the server
+ - Hiding JEI items.
+ - Registering custom JEI categories.
+ 
+
+### Startup Scripts
+
+Startup scripts are scripts that are run whenever the game is started.
+Startup scripts are stored in the `startup_scripts` folder.
+Startup scripts are used to control the startup logic of your modpack.
+They run on both the client and server, and often types support bindings from other script types.
+This script type is known to produce some unexpected behavior in single-player worlds, such as events firing twice.
+This is because the client and server both trigger the event, and the event is fired twice in total.
+
+Anything related to registering new content should be placed in a startup script.
+The reason for this is that the game starts up in a very specific order, and registering new content is part of the startup process.
+If you register new content on a server, and try to join the server from a client that does not share the same content, the client will be rejected.
+This is because Minecraft forces the client and server to agree on what content is registered before joining a world.
+
+This script type includes, but is not limited to:
+ - Registering items, blocks, entities, etc...
+ - Registering listeners to "Native" events
+ - Client-server synchronized events.
+  - Such as canceling the placement of a block.
+
+
+## Deep diving into a simple example
+
+Let's take a look at a simple example of a KubeJS script.
+
+The following script is located in the `startup_scripts` folder, and is named `example.js`.
+
+```js
+PlayerEvents.chat(event => {
+  // Check if message equals creeper, ignoring case
+  if (event.message.trim().toLowerCase() == 'creeper') {
+    // Schedule task in 1 tick, because if you reply immediately, it will print before player's message
+    event.server.scheduleInTicks(1, event.server, ctx => {
+      // Tell everyone "Aw man", colored green. Callback data is the server
+      ctx.data.tell(Text.green('Aw man'))
+    })
+  }
+})
+```
+
+Let's break down what this script does and identify where it is connected to the java code.
+
+### Event Group
+
+Starting with the first line, we see `[js]PlayerEvents.chat(event => {`.
+The `PlayerEvents` object is a server-side event group, provided to the script as a binding.
+How do I know this?
+KubeJS uses a plugin system to register the bindings and events available to the script.
+And in each version it ships a "BuiltinKubeJSPlugin" class that registers the common bindings and events.
+In 1.19.2, the binding for `PlayerEvents` is defined in this Plugin class: [BuiltinKubeJSPlugin](https://github.com/KubeJS-Mods/KubeJS/blob/1902/common/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/BuiltinKubeJSPlugin.java#L250).
+In 1.20.1, it was also defined in the same Plugin class: [BuiltinKubeJSPlugin](https://github.com/KubeJS-Mods/KubeJS/blob/2001/common/src/main/java/dev/latvian/mods/kubejs/plugin/builtinBuiltinKubeJSPlugin.java#L261).
+In 1.21.1, the location where it was defined changed, and the way you register Event groups changed, but it is more or less the same still: [BuiltinKubeJSPlugin](https://github.com/KubeJS-Mods/KubeJS/blob/99655ced4fbb3627ed5d2a50745cc525a4161c7c/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/BuiltinKubeJSPlugin.java#L402).
+
+If you were using KubeJS Offline Documentation, you would find this information on the homepage.
+ - [1.19.2 Forge](https://hunter19823.github.io/kubejsoffline/1.19.2/forge/#?focus=global-bindings-PlayerEvents&dev.latvian.mods.kubejs.event.EventJS-expanded=false&global-bindings-expanded=true)
+ - [1.19.2 Fabric](https://hunter19823.github.io/kubejsoffline/1.19.2/fabric/#?focus=global-bindings-PlayerEvents&dev.latvian.mods.kubejs.event.EventJS-expanded=false&global-bindings-expanded=true)
+ - [1.20.1 Forge](https://hunter19823.github.io/kubejsoffline/1.20.1/forge/#?focus=global-bindings-PlayerEvents&dev.latvian.mods.kubejs.event.EventJS-expanded=false&global-bindings-expanded=true)
+ - [1.20.1 Fabric](https://hunter19823.github.io/kubejsoffline/1.20.1/fabric/#?focus=global-bindings-PlayerEvents&dev.latvian.mods.kubejs.event.EventJS-expanded=false&global-bindings-expanded=true)
+ - TODO: 1.21 and 1.21.1 links here.
+
+Now that we know where PlayerEvents comes from, what exactly is it? What can I do with it?
+In order to answer that question, we need to find the source code for the `PlayerEvents` class itself.
+
+In 1.19.2, the source code for the `PlayerEvents` class is located in this file: [PlayerEvents](https://github.com/KubeJS-Mods/KubeJS/blob/1902/common/src/main/java/dev/latvian/mods/kubejs/bindings/event/PlayerEvents.java#L38).
+In 1.20.1, the source code for the `PlayerEvents` class was also located in this file: [PlayerEvents](https://github.com/KubeJS-Mods/KubeJS/blob/2001/common/src/main/java/dev/latvian/mods/kubejs/bindings/event/PlayerEvents.java#L38).
+In 1.21.1, the source code for the `PlayerEvents` class was moved to this file: [PlayerEvents](https://github.com/KubeJS-Mods/KubeJS/blob/2101/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/event/PlayerEvents.java#L25).
+
+>>> info
+How did I find the source code for the `PlayerEvents` class in github?
+It is almost universal that every java class imports the classes it uses.
+Which means that you can find the "package" name of the class near the top of the plugin file.
+Example: [import dev.latvian.mods.kubejs.plugin.builtin.event.PlayerEvents;](https://github.com/KubeJS-Mods/KubeJS/blob/99655ced4fbb3627ed5d2a50745cc525a4161c7c/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/BuiltinKubeJSPlugin.java#L80)
+This means that, starting from the `src` folder, you can navigate to the `dev/latvian/mods/kubejs/plugin/builtin/event` folder, and find the `PlayerEvents.java` file inside it.
+<<<
+
+### Event Handler
+
+Now that we know where the `PlayerEvents` class is located, we can take a look at the `chat` method.
+The `chat` method is special kind of method that is provided to the script like it was always a property of the `PlayerEvents` class.
+It takes a single argument, a function that is called when a player sends a chat message.
+That function is called an "event handler".

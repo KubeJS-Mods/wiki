@@ -1242,7 +1242,7 @@ Parsing exceptions will be re-thrown, adding context, like the script line.
 `[java]JsonPrimitive` (GSON)
 <<<
 
->>> #compoundtag-string-method
+>>> #compoundtag-jsonprimitive-method
 The `[java]JsonPrimitive` is converted to string using its `[java]getAsString()` method.
 Then, the string is passed into the vanilla `[java]TagParser.parseTag()` method to parse NBT compound tag from string.
 The expected string format is the same one as used in commands.
@@ -1270,7 +1270,7 @@ Note that it is impossible to encode strict typing data in a JSON object, becaus
 <<<
 
 >>> #compoundtag-default-method
-The object will be converted according to the (`Tag` conversion)[#to-tag].
+The object will be converted according to the [`Tag` conversion](#to-tag).
 Then, if the resulting object is `[java]CompoundTag`, then it is the result of the conversion.
 Otherwise, the result is `[js]null`.
 <<<
@@ -1328,11 +1328,11 @@ The provided object is cast into `[java]Collection`, then each element of that c
 Depending on the common type of the arguments (byte tag, int tag or long tag), the array of `[java]Tag`s will become a `[java]ByteArrayTag`, `[java]IntArrayTag` or `[java]LongArrayTag` respectively. If there are no types in common, `[java]ListTag` is the result.
 <<<
 
-| From type                | Method                          |
-| <#compoundtag-null>      | <#compoundtag-null-method>      |
-| <#compoundtag-string>    | <#compoundtag-string-method>    |
-| <#compoundtag-jsonarray> | <#compoundtag-jsonarray-method> |
-| <#compoundtag-default>   | <#compoundtag-default-method>   |
+| From type                  | Method                            |
+| <#collectiontag-null>      | <#collectiontag-null-method>      |
+| <#collectiontag-string>    | <#collectiontag-string-method>    |
+| <#collectiontag-jsonarray> | <#collectiontag-jsonarray-method> |
+| <#collectiontag-default>   | <#collectiontag-default-method>   |
 
 # To `ListTag`
 

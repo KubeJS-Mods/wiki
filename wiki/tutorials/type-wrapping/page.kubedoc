@@ -1215,3 +1215,264 @@ Steps identical to [`ResourceLocation` conversion](#to-resourcelocation), except
 If the string does not have any `[js]':'` characters (that is, no namespace is provided), `[js]'kubejs'` is assumed. This is done by appending `[js]'kubejs:'` to the back of the string.
 
 Then, the resulting `[java]ResourceLocation` is passed to `[java]KubeResourceLocation`'s constructor.
+
+# To `CompoundTag`
+
+>>> #compoundtag-null
+`[js]null`
+<<<
+
+>>> #compoundtag-null-method
+The result is `[js]null`.
+<<<
+
+>>> #compoundtag-string
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #compoundtag-string-method
+The object is converted to string using its `[java]toString()` method.
+Then, the string is passed into the vanilla `[java]TagParser.parseTag()` method to parse NBT compound tag from string.
+The expected string format is the same one as used in commands.
+Parsing exceptions will be re-thrown, adding context, like the script line.
+<<<
+
+>>> #compoundtag-jsonprimitive
+`[java]JsonPrimitive` (GSON)
+<<<
+
+>>> #compoundtag-string-method
+The `[java]JsonPrimitive` is converted to string using its `[java]getAsString()` method.
+Then, the string is passed into the vanilla `[java]TagParser.parseTag()` method to parse NBT compound tag from string.
+The expected string format is the same one as used in commands.
+Parsing exceptions will be re-thrown, adding context, like the script line.
+<<<
+
+>>> #compoundtag-jsonobject
+`[java]JsonObject` (GSON)
+<<<
+
+>>> #compoundtag-jsonobject-method
+The `[java]JsonObject` is converted to string using its `[java]toString()` method.
+Then, the string is passed into the vanilla `[java]TagParser.parseTag()` method to parse NBT compound tag from string.
+The expected string format is the same one as used in commands.
+Parsing exceptions will be re-thrown, adding context, like the script line.
+
+>>>info
+Note that it is impossible to encode strict typing data in a JSON object, because JSON does not support number type suffixes, so all numbers will become double tags.
+<<<
+<<<
+
+>>> #compoundtag-default
+`[js]undefined`
+`[java]Map`, JS `object`
+<<<
+
+>>> #compoundtag-default-method
+The object will be converted according to the (`Tag` conversion)[#to-tag].
+Then, if the resulting object is `[java]CompoundTag`, then it is the result of the conversion.
+Otherwise, the result is `[js]null`.
+<<<
+
+| From type                    | Method                              |
+| <#compoundtag-null>          | <#compoundtag-null-method>          |
+| <#compoundtag-string>        | <#compoundtag-string-method>        |
+| <#compoundtag-jsonprimitive> | <#compoundtag-jsonprimitive-method> |
+| <#compoundtag-jsonobject>    | <#compoundtag-jsonobject-method>    |
+| <#compoundtag-default>       | <#compoundtag-default-method>       |
+
+# To `CollectionTag`
+Encompasses various collection tags, like `[java]ByteArrayTag`, `[java]IntArrayTag`, `[java]LongArrayTag` and `[java]ListTag`.
+
+>>> #collectiontag-null
+`[js]null`
+<<<
+
+>>> #collectiontag-null-method
+The result is `[js]null`.
+<<<
+
+>>> #collectiontag-string
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #collectiontag-string-method
+The object is converted to string using its `[java]toString()` method. Then, the string is concatenated with the following strings to form a stringified representation of a compound tag, where `string` is the provided string:
+```js
+'{a:' + string + '}'`
+```
+Then, the string is passed into the vanilla `[java]TagParser.parseTag()` method to parse NBT compound tag from string.
+The expected string format is the same one as used in commands.
+The result of the conversion is the tag at `[js]'a'` key, cast to `[java]CollectionTag`.
+Parsing and casting exceptions will be re-thrown, adding context, like the script line.
+<<<
+
+>>> #collectiontag-jsonarray
+`[java]JsonArray` (GSON)
+<<<
+
+>>> #collectiontag-jsonarray-method
+Each element of the `[java]JsonArray` is put into an `[java]ArrayList`. Then, each element of the list will be [converted to `Tag`](#to-tag).
+Depending on the common type of the arguments (byte tag, int tag or long tag), the array of `[java]Tag`s will become a `[java]ByteArrayTag`, `[java]IntArrayTag` or `[java]LongArrayTag` respectively. If there are no types in common, `[java]ListTag` is the result.
+<<<
+
+>>> #collectiontag-default
+`[js]undefined`
+`[java]Collection`, JS array
+<<<
+
+>>> #collectiontag-default-method
+The provided object is cast into `[java]Collection`, then each element of that collection is put into an `[java]ArrayList`. Then, each element of the list will be [converted to `Tag`](#to-tag).
+Depending on the common type of the arguments (byte tag, int tag or long tag), the array of `[java]Tag`s will become a `[java]ByteArrayTag`, `[java]IntArrayTag` or `[java]LongArrayTag` respectively. If there are no types in common, `[java]ListTag` is the result.
+<<<
+
+| From type                | Method                          |
+| <#compoundtag-null>      | <#compoundtag-null-method>      |
+| <#compoundtag-string>    | <#compoundtag-string-method>    |
+| <#compoundtag-jsonarray> | <#compoundtag-jsonarray-method> |
+| <#compoundtag-default>   | <#compoundtag-default-method>   |
+
+# To `ListTag`
+
+The object provided will be [converted into a `CollectionTag`](#to-collectiontag), then the result will be cast to `[java]ListTag`.
+
+# To `Tag`
+
+>>> #tag-null
+`[js]null`
+`[java]EndTag`
+<<<
+
+>>> #tag-null-method
+The result is `[js]null`.
+<<<
+
+>>> #tag-nbtserializable
+`[java]NBTSerializable` from KubeJS, implemented/extended by:
+- `[java]ClickEvent`
+- `[java]FluidIngredient`
+- `[java]FluidStack`
+- `[java]Ingredient`
+- `[java]ItemStack`
+- `[java]MutableComponent`
+- `[java]WithCodec`
+<<<
+
+>>> #tag-nbtserializable-method
+Will be converted to NBT `[java]Tag` using its `[java]toNBT()` method.
+<<<
+
+>>> #tag-nbtserializable
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #tag-nbtserializable-method
+Will result in a `[java]StringTag` representing the string contained in the provided character sequence.
+<<<
+
+>>> #tag-string
+`[java]Character`
+(boxed `char` primitive)
+<<<
+
+>>> #tag-string-method
+Will result in a `[java]StringTag` representing the string containing a single character provided.
+<<<
+
+>>> #tag-boolean
+`[java]Boolean`, JS `boolean`
+<<<
+
+>>> #tag-boolean-method
+Will result in a `[java]BooleanTag` representing the boolean.
+<<<
+
+>>> #tag-number
+`[java]Number`, JS `number`
+<<<
+
+>>> #tag-number-method
+Depending on the `[java]Number`'s type, the result is:
+- `[java]Byte`: `[java]ByteTag`,
+- `[java]Short`: `[java]ShortTag`,
+- `[java]Integer`: `[java]IntTag`,
+- `[java]Long`: `[java]LongTag`,
+- `[java]Float`: `[java]FloatTag`,
+- Other (effectively `[java]Double`): `[java]DoubleTag`.
+
+>>>info
+Providing a JS number here will result in a `[java]DoubleTag`, because JS numbers are doubles. Other conversions are possible, if the number provided comes as a result of a Java method call - as Java number stays as a Java number until a JS operation is performed on it.
+<<<
+<<<
+
+>>> #tag-jsonprimitive
+`[java]JsonPrimitive` (GSON)
+<<<
+
+>>> #tag-jsonprimitive-method
+Depending on `[java]JsonPrimitive`'s type, it will be converted to `[java]Number`, `[java]boolean` or `[java]String`, then appropriate conversions will be invoked on those.
+<<<
+
+>>> #tag-map
+`[java]Map`, JS object
+<<<
+
+>>> #tag-map-method
+A new compound tag is created. Then, for each entry in the provided `[java]Map`/JS object:
+- Value will be [converted to `Tag`](#to-tag) recursively,
+- If the resulting tag is not `[js]null`, it is put to the compound tag under the entry's key converted to string.
+The result is that compound tag.
+<<<
+
+>>> #tag-jsonobject
+`[java]JsonObject` (GSON)
+<<<
+
+>>> #tag-jsonobject-method
+A new compound tag is created. Then, for each entry in the provided `[java]JsonObject`:
+- Value (being `[java]JsonElement`) will be [converted to `Tag`](#to-tag) recursively,
+- If the resulting tag is not `[js]null`, it is put to the compound tag under the entry's key.
+The result is that compound tag.
+<<<
+
+>>> #tag-collection
+`[java]Collection`, JS array
+<<<
+
+>>> #tag-collection-method
+Each element of the collection is put into an `[java]ArrayList`. Then, each element of the list will be [converted to `Tag`](#to-tag).
+Depending on the common type of the arguments (byte tag, int tag or long tag), the array of `[java]Tag`s will become a `[java]ByteArrayTag`, `[java]IntArrayTag` or `[java]LongArrayTag` respectively. If there are no types in common, `[java]ListTag` is the result.
+<<<
+
+>>> #tag-jsonarray
+`[java]JsonArray` (GSON)
+<<<
+
+>>> #tag-jsonarray-method
+Each element of the `[java]JsonArray` is put into an `[java]ArrayList`. Then, each element of the list will be [converted to `Tag`](#to-tag).
+Depending on the common type of the arguments (byte tag, int tag or long tag), the array of `[java]Tag`s will become a `[java]ByteArrayTag`, `[java]IntArrayTag` or `[java]LongArrayTag` respectively. If there are no types in common, `[java]ListTag` is the result.
+<<<
+
+>>> #tag-default
+Other types
+<<<
+
+>>> #tag-default-method
+The result is `[js]null`.
+<<<
+
+| From type              | Method                        |
+| <#tag-null>            | <#tag-null-method>            |
+| <#tag-nbtserializable> | <#tag-nbtserializable-method> |
+| <#tag-string>          | <#tag-string-method>          |
+| <#tag-boolean>         | <#tag-boolean-method>         |
+| <#tag-number>          | <#tag-number-method>          |
+| <#tag-jsonprimitive>   | <#tag-jsonprimitive-method>   |
+| <#tag-map>             | <#tag-map-method>             |
+| <#tag-jsonobject>      | <#tag-jsonobject-method>      |
+| <#tag-collection>      | <#tag-collection-method>      |
+| <#tag-jsonarray>       | <#tag-jsonarray-method>       |
+| <#tag-default>         | <#tag-default-method>         |

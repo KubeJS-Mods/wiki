@@ -1,0 +1,19 @@
+Java does not feature [first-class functions](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function) like JavaScript does.
+That doesn't mean that Java can't represent callbacks (functions passed into functions as an argument)!
+
+To represent them, Java uses **functional interfaces**.
+
+Functional interfaces are interfaces, that feature only one abstract method. That method will be the target for lambda expressions in Java.
+
+In JavaScript scripts, they can be represented by passing in a function that roughly matches the signature (parameters and return type) of the single abstract method.
+
+# Common functional interfaces
+
+[[[/ref/java/functional-interface/Consumer]]]
+[[[/ref/java/functional-interface/Supplier]]]
+[[[/ref/java/functional-interface/Predicate]]]
+[[[/ref/java/functional-interface/Function]]]
+
+# Reference
+
+[JavaDocs for `java.util.function` package](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/package-summary.html)

@@ -1,0 +1,20 @@
+title: "Eventos"
+description: "Lista de todos los eventos"
+
+intro: "Esta es una lista de todos los eventos. Es posible que no todos estén incluidos aquí, pero esta lista se actualizará regularmente."
+click: "Haz clic en el ID del evento para abrir su clase y ver información, campos y métodos."
+event-types: "Tipos de eventos"
+
+event-type-server: "Servidor"
+startup: "Los scripts van en la carpeta {st-s}. Los scripts de inicio se ejecutan una vez, al iniciar, tanto en el cliente como en el servidor. La mayoría de los eventos que requieren registrar o modificar algo al inicio del juego (como bloques, objetos y fluidos personalizados) serán eventos de inicio."
+
+event-type-startup: "Inicio"
+
+server: "Los scripts van en la carpeta {se-s}. Se recargarán al ejecutar el comando `/reload`. Los eventos del servidor siempre están disponibles, incluso en mundos de un solo jugador. La mayoría de los eventos que realizan cambios en el mundo mientras el juego está en ejecución (como romper bloques, teletransportar jugadores o agregar recetas) van aquí."
+
+event-type-client: "Cliente"
+client: "Los scripts van en la carpeta {cl-s}. Se recargarán al presionar `F3+T`. La mayoría de los cambios que son por cliente (como paquetes de recursos, Painter y JEI) son eventos del cliente."
+
+folder: "Carpeta"
+event: "Evento"
+has-result: "Tiene resultado"

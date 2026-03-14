@@ -1,0 +1,10 @@
+title: "Cambiar Título e Icono de la Ventana"
+description: "Sí, también puedes hacer eso con KubeJS."
+pdn-url: "[Paint.NET](https://www.getpaint.net/download.html#download)"
+
+title-info: "Para cambiar el título, solo tienes que modificar `title` en `kubejs/config/client.properties`."
+icon-info: "Para cambiar el icono, crea una imagen `kubejs/config/packicon.png` con el tamaño estándar de textura de Minecraft (preferiblemente 64x64, 128x128 o 256x256)."
+icon-32-bit: "La imagen debe guardarse como PNG de 32 bits, no Auto-detect/24-bit, ¡de lo contrario tendrás un fallo en la JVM!"
+pdn: "Así es como se hace en {pdn-url}:"
+result: "Ejemplo de resultado:"
+incompatible: "Actualmente incompatible con Fancy Menu!"

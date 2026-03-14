@@ -88,10 +88,10 @@ Commands are not required to have a `/` at the start (eg. `/kill @p` will do the
 <<<
 
 `[java].command(command: String)`
-Executes a command as the player (eg `title @p title {"text":"Research Complete!","color":"gold"}`)
+Executes a command as the player (eg `title @p title {'text':'Research Complete!','color':'gold'}`)
 
 `[java].command(command: String, diplayName: Text)`
-Executes a command as the player. Display name will show up instead of the command (eg: you can do `kill @s` and have the display name as `Text.of("200 diamond blocks!!")`)
+Executes a command as the player. Display name will show up instead of the command (eg: you can do `kill @s` and have the display name as `Text.of('200 diamond blocks!!')`)
 
 ## Experience Points
 `[java].xp(amount: int)`

@@ -9,7 +9,7 @@ Modifies a research category. For methods, see below. **There are extra methods 
 
 `[java]create(id: ResourceLocation)`
 >>> info
-Internally, this constructs a `ResourceLocation` that get's set to `kubejs:[the id you chose]`.
+Internally, this constructs a `ResourceLocation` that gets set to `kubejs:[the id you chose]`.
 For example, `create('super_cool_category')` will get constructed as `kubejs:super_cool_category`.
 <<<
 
@@ -33,7 +33,7 @@ Requires another category to be unlocked before this category
 Same thing as above, but as a list (adds it to the current ones)
 
 `[java].sortOrder(order: int)`
-Display order. Defaults to `0`
+Display order. Defaults to `0`.
 
 | Method | Type | Notes |
 | `name` | ==OPTIONAL== | Defaults to formatted id |

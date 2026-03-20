@@ -1,0 +1,298 @@
+`UtilsWrapper` is an interface containing many useful methods for interacting with Java classes.
+It's exposed to [[/global-scope|global scope]] as `Utils`.
+
+# Static methods
+
+## RNG
+
+### `getRandom`
+
+```js
+Utils.getRandom()
+Utils.random // read-only bean
+```
+
+**Return value**
+The shared instance of `RandomSource` to generate random numbers from.
+This method will always return the same `RandomSource` instance.
+
+---
+
+### `newRandom`
+
+```js
+Utils.newRandom()
+```
+
+**Return value**
+A **new** instance of `RandomSource` to generate random numbers from.
+
+---
+
+### `randomOf`
+
+```js
+Utils.randomOf(random, collection)
+```
+
+>>> #random
+`[js]random`: An instance of [`Random`]({random-link}).
+Note that unlike `RandomSource` obtained via `[js]Utils.getRandom()` or `[js]Utils.randomOf(random, collection)`, this [`Random`]({random-link}) comes from a built-in Java package ([`java.util.Random`]({random-link})) and not from Minecraft (`net.minecraft.util.RandomSource`), and are not assignable to each other, since they have not in a common ancestor tree.
+<<<
+
+**Parameters**
+- <#random>
+- `[js]collection` - Any Java collection. This includes all sorts of lists, but not maps. It may be also a JS array, like `[js]\['one', 'two', 'three'\]`.
+
+**Return value**
+A random element from the collection.
+
+---
+
+## Collections
+
+### `emptyList`
+
+```js
+Utils.emptyList()
+```
+**Return value**
+A new empty, immutable (read-only) `ArrayList`.
+
+---
+
+### `emptyMap`
+
+```js
+Utils.emptyMap()
+```
+**Return value**
+A new empty, immutable (read-only) `Map`.
+
+---
+
+### `newList`
+
+```js
+Utils.newList()
+```
+**Return value**
+A new empty, mutable `ArrayList`.
+
+---
+
+### `newMap`
+
+```js
+Utils.newMap()
+```
+**Return value**
+A new empty, mutable `LinkedHashMap`.
+
+---
+
+### `newCountingMap`
+
+```js
+Utils.newCountingMap()
+```
+**Return value**
+A new empty, mutable `CountingMap`.
+
+---
+
+## Java Regex
+
+### `regex`
+
+```js
+Utils.regex(regexLike)
+```
+
+**Parameters**
+- `[js]regexLike`: Any value, but preferably one of the following:
+  - A JavaScript [`RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp),
+  - A JavaScript string (which will be used to create a regular expression object)
+  - A Java character sequence (that includes Java strings)
+  - A Java [`Pattern`]({pattern-link}).
+
+**Return value**
+If the `[js]regexLike` was:
+- a [`Pattern`]({pattern-link}) - returns the same Pattern
+- a [`RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) - returns a `Pattern` corresponding to the RegExp,
+- a string or a character sequence - If the string is formed similarly to a JavaScript regex literal, returns a `Pattern` corresponding to the string.
+
+If `[js]regexLike` was of a different type, this returns `[js]null`.
+
+===Throws===
+If the given string doesn't start with a `/`, this throws an exception.
+Other malformations are silently ignored, until the string is passed into the [`Pattern.compile`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/regex/Pattern.html#compile(java.lang.String) method, which may throw an exception on an improper pattern.
+
+```js
+Utils.regex(regexString, flags)
+```
+- `[js]regexString`: A string that represents the regular expression pattern.
+- `[js]flags`: A bit mask of regular expression flags to use. See the field summary of the [`Pattern`]({pattern-link}) class to learn more.
+
+**Return value**
+
+A new [`Pattern`]({pattern-link}) with the given pattern and flags.
+
+===Throws===
+If the given string doesn't start with a `/`, this throws an exception.
+Other malformations are silently ignored, until the string is passed into the [`Pattern.compile`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/regex/Pattern.html#compile(java.lang.String) method, which may throw an exception on an improper pattern.
+
+---
+
+## Registry lookup
+
+### `getStat`
+
+```js
+Utils.getStat(id)
+```
+
+**Parameters**
+- `[js]id`: The stat's `ResourceLocation`.
+
+>>> danger
+Do NOT pass strings in place of the `ResourceLocation` here!
+Stats are referred to by **reference**, not by resource location's string value.
+
+Unless you are making your own stat and have a reference to `ResourceLocation` on hand, do not use this method.
+<<<
+
+**Return value**
+A `Stat` coming from the `CUSTOM` field corresponding to the provided `id`.
+
+---
+
+### `getSound`
+
+```js
+Utils.getSound(id)
+```
+
+**Parameters**
+- `[js]id`: The sound's resource location. It may be a string.
+
+**Return value**
+A `SoundEvent` corresponding to the given `id`, or `[js]null` if the sound event doesn't exist under the provided ID.
+
+---
+
+### `findCreativeTab`
+
+```js
+Utils.findCreativeTab(id)
+```
+
+**Parameters**
+- `[js]id`: The creative tab's resource location. It may be a string representing the creative mode tab, for example `[js]'minecraft:building_blocks'`.
+
+**Return value**
+A `CreativeModeTab` corresponding to the given `id`, or `[js]null` if the creative mode tab doesn't exist under the provided ID.
+
+---
+
+## Lazy and asynchronous Java
+
+### `lazy`
+
+```js
+Utils.lazy(supplier)
+```
+
+Creates a lazy supplier. After the first `get` call to the resulting supplier, its return value is [memoized](https://en.wikipedia.org/wiki/Memoization) and never forgotten, unless done explicitly with its `forget` method.
+
+**Parameters**
+- `[js]supplier`: A [[/ref/java/functional-interface/Supplier|`Supplier`]]. It may be a JS function that takes no parameters and returns a value, for example `[js]() => { return 42 }`.
+
+**Return value**
+A [[/ref/java/utils/Lazy|`Lazy`]] supplier corresponding to the given `[js]supplier`.
+
+---
+
+### `expiringLazy`
+
+```js
+Utils.expiringLazy(supplier, duration)
+```
+
+Creates an expiring lazy supplier. Its [memoized](https://en.wikipedia.org/wiki/Memoization) value expires after the specified duration.
+
+**Parameters**
+- `[js]supplier`: A [[/ref/java/functional-interface/Supplier|`Supplier`]]. It may be a JS function that takes no arguments and returns a value, for example `[js]() => { return 42 }`.
+- `[js]duration`: A [`Duration`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html). It may be also:
+  - a number representing milliseconds, for example `[js]2000`,
+  - or a string representing a duration, with format being the one used in [`Duration#parse`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html#parse(java.lang.CharSequence)) static method. For example, `[js]'PT2S'` represents a duration of 2 seconds.
+
+**Return value**
+A [[/ref/java/utils/Lazy|`Lazy`]] supplier corresponding to the given `[js]supplier`, which forgets about its [memoized](https://en.wikipedia.org/wiki/Memoization) value after the specified `[js]duration`.
+
+---
+
+### `runAsync`
+
+```js
+Utils.runAsync(runnable)
+```
+
+Runs the provided runnable function in KubeJS' background thread.
+
+**Parameters**
+- `[js]runnable`: Any Java class that implements the [`Runnable`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html) interface. It may be also a JS function that takes no arguments and doesn't return anything, for example `[js]() => { console.log('Ran asynchronously!') }`
+
+**Return value**
+A [`CompletableFuture`]({future-link}) representing the eventual completion or failure of the asynchronous call.
+The return type of this asynchronous call is `void` (does not return anything).
+(`CompletableFuture` in Java fulfills similar role to [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) found in JavaScript)
+
+---
+
+### `supplyAsync`
+
+```js
+Utils.supplyAsync(supplier)
+```
+
+Runs the provided supplier function in KubeJS' background thread.
+
+**Parameters**
+- `[js]supplier`: A [[/ref/java/functional-interface/Supplier|`Supplier`]]. It may be also a JS function that takes no arguments and returns a value, for example `[js]() => { return 'Asynchronously supplied!' }`
+
+**Return value**
+A [`CompletableFuture`]({future-link}) representing the eventual completion or failure of the asynchronous call.
+The return type of this asynchronous call is `Object` (represents anything that the provided `supplier` can supply).
+(`CompletableFuture` in Java fulfills similar role to [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) found in JavaScript)
+
+---
+# Other
+
+### `getSystemTime`
+
+```js
+Utils.getSystemTime()
+Utils.systemTime // read-only bean
+```
+
+**Return value**
+The difference between current time and midnight, January 1, 1970, UTC, in milliseconds.
+Also known as [Unix time](https://en.wikipedia.org/wiki/Unix_time).
+
+---
+
+### `isWrapped`
+
+```js
+Utils.isWrapped(object)
+```
+
+**Return value**
+`[js]true` if object's class implements the [`WrappedJS`](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/util/WrappedJS.java) marker interface, `[js]false` if it does not.
+
+---
+
+# Source
+
+([UtilsWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/UtilsWrapper.java))

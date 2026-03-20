@@ -1,0 +1,132 @@
+`KubeColor` is an interface that abstracts away many cases of handling colors, like colors from `DyeColor`, `ChatFormatting` or `TextColor`.
+
+KubeJS injects an implementation of `KubeColor` into the aforementioned classes, so the following instance methods will be present on them as well.
+
+# Instance methods
+
+The following examples will refer to the instance of a class implementing `KubeColor` as `[js]color`.
+
+### `getArgb`
+
+```js
+color.getArgb()
+color.argb // read-only bean
+```
+
+**Return value**
+An integer representing the color in `AARRGGBB` format.
+
+---
+
+### `getRgb`
+
+```js
+color.getRgb()
+color.rgb // read-only bean
+```
+
+**Return value**
+An integer representing the color in `RRGGBB` format.
+
+In case the implementing class is:
+- `DyeColor`: it returns its text color in `RRGGBB`.
+- `TextColor`: it returns its value.
+
+---
+
+### `getFireworkRGB`
+
+```js
+color.getFireworkRGB()
+color.fireworkRGB // read-only bean
+```
+
+**Return value**
+An integer representing the color in `RRGGBB` format.
+In case the implementing class is `DyeColor`, it returns its firework color in `RRGGBB` instead, which is different from text color returned by `[js]getRgb()`.
+
+The table below shows all the firework colors for every `DyeColor` in the game.
+Note that `DyeColor` enum is not exposed to global scope.
+>>> #firework-color
+Firework color (`#RRGGBB`)
+<<<
+
+>>> #dyecolor-enum
+`DyeColor` enumerations
+<<<
+
+| <#dyecolor-enum>           | <#firework-color>    |
+| `[js]DyeColor.WHITE`       |[bg=#F0F0F0]`#F0F0F0` |
+| `[js]DyeColor.ORANGE`      |[bg=#EB8844]`#EB8844` |
+| `[js]DyeColor.MAGENTA`     |[bg=#C354CD]`#C354CD` |
+| `[js]DyeColor.LIGHT_BLUE`  |[bg=#6689D3]`#6689D3` |
+| `[js]DyeColor.YELLOW`      |[bg=#DECF2A]`#DECF2A` |
+| `[js]DyeColor.LIME`        |[bg=#41CD34]`#41CD34` |
+| `[js]DyeColor.PINK`        |[bg=#D88198]`#D88198` |
+| `[js]DyeColor.GRAY`        |[bg=#434343]`#434343` |
+| `[js]DyeColor.LIGHT_GRAY`  |[bg=#ABABAB]`#ABABAB` |
+| `[js]DyeColor.CYAN`        |[bg=#287697]`#287697` |
+| `[js]DyeColor.PURPLE`      |[bg=#7B2FBE]`#7B2FBE` |
+| `[js]DyeColor.BLUE`        |[bg=#253192]`#253192` |
+| `[js]DyeColor.BROWN`       |[bg=#51301A]`#51301A` |
+| `[js]DyeColor.GREEN`       |[bg=#3B511A]`#3B511A` |
+| `[js]DyeColor.RED`         |[bg=#B3312C]`#B3312C` |
+| `[js]DyeColor.BLACK`       |[bg=#1E1B1B]`#1E1B1B` |
+
+---
+
+### `toHexString`
+
+```js
+color.toHexString()
+```
+
+**Return value**
+The color represented as string in `[js]'#AARRGGBB'` format.
+
+---
+
+### `serialize`
+
+```js
+color.serialize()
+```
+
+**Return value**
+By default, it returns color represented as string in `[js]'#AARRGGBB'` format, just like `[js]toHexString()`.
+
+In case the implementing class is:
+- `NoColor`: returns the string `[js]'none'`,
+- `TextColor`: Returns the color's legacy format color name (like `[js]'AQUA'`) if present, otherwise it returns color represented as string in `[js]'#RRGGBB'` format.
+
+---
+
+### `createTextColor`
+
+```js
+color.createTextColor()
+```
+
+**Return value**
+The `TextColor` created from the `color` in RGB format.
+
+---
+
+### `specialEquals`
+
+```js
+color.specialEquals(object, testAlpha)
+```
+
+**Parameters**
+- `[js]object` - Any object. Will be converted into `KubeColor`.
+- `[js]testAlpha` - Whether to compare color's alpha (transparency) as well as it's RGB value.
+
+**Return value**
+`[js]true` if two colors are considered equal. `[js]false` if colors aren't equal. 
+
+---
+
+# Source
+
+([KubeColor.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/color/KubeColor.java))

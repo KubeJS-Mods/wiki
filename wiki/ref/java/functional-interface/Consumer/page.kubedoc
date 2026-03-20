@@ -1,0 +1,24 @@
+**Consumer** functional interfaces represent functions, that take a value of a type (specified in type argument) and return nothing.
+
+They are commonly used in KubeJS events - the event is passed as a parameter to event handler function.
+
+Examples:
+```js
+// A function that takes `event` and returns nothing
+const handler = event => {
+  // When passed into `ServerEvents.recipes` event handler,
+  // `event` will be of type RecipesKubeEvent
+  event.shaped('minecraft:brick_slab', ['BBB'], { B: 'minecraft:brick' })
+}
+
+// handler's expected type is Consumer<RecipesKubeEvent>
+ServerEvents.recipes(handler)
+```
+
+```js
+// Or more commonly, put the function directly inside of the parameter
+ServerEvents.recipes(event => {
+  // `event` will be of type RecipesKubeEvent
+  event.shaped('minecraft:brick_slab', ['BBB'], { B: 'minecraft:brick' })
+})
+```

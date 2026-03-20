@@ -1299,7 +1299,7 @@ The result is `[js]null`.
 <<<
 
 >>> #collectiontag-string-method
-The object is converted to string using its `[java]toString()` method. Then, the string is concatenated with the following strings to form a stringified representation of a compound tag, where `string` is the provided string:
+The object is converted to string using its `[java]toString()` method. Then, the string is concatenated with the following strings to form a stringified representation of a compound tag, where `[js]string` is the provided string:
 ```js
 '{a:' + string + '}'`
 ```
@@ -1476,3 +1476,9 @@ The result is `[js]null`.
 | <#tag-collection>      | <#tag-collection-method>      |
 | <#tag-jsonarray>       | <#tag-jsonarray-method>       |
 | <#tag-default>         | <#tag-default-method>         |
+
+# To `DataComponentType`
+
+If the object is not `[java]DataComponentType` already, it will be [converted to `ResourceLocation`](#to-resourcelocation), then a registry lookup will be performed on the `[java]DATA_COMPONENT_TYPE` registry. The result is the `[java]DataComponentType` under the given resource location, or `[js]null` if there's no such registry item.
+
+# To `DataComponentMap`

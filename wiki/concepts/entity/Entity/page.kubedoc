@@ -922,7 +922,157 @@ None (`[js]undefined`).
 
 ---
 
+>>> #getHorizontalFacing
+### `getHorizontalFacing`
+<<<
+
+>>> #getHorizontalFacing-description
+>>> info
+This method has its name changed from vanilla: `getDirection`.
+<<<
+
+**Syntax**
+```js
+entity.getHorizontalFacing()
+entity.horizontalFacing // read-only bean
+```
+
+Gets the entity's horizontal facing direction - that is, the cardinal direction to which the entity's yaw is closer to.
+
+**Return value**
+A `Direction` enumeration member representing the horizontal direction the entity is facing. String representations of possible values are: `[js]'north'`, `[js]'south'`, `[js]'east'`, `[js]'west'`. Can be loosely compared to by its string name.
+
+**Example**
+
+```js
+if (entity.horizontalFacing == "south") {
+	// do something...
+}
+```
+<<<
+
+| <#getHorizontalFacing>             |
+| <#getHorizontalFacing-description> |
+
+---
+
+>>> #getFacing
+### `getFacing`
+<<<
+
+>>> #getFacing-description
+**Syntax**
+```js
+entity.getFacing()
+entity.facing // read-only bean
+```
+
+Gets the entity's facing direction - that is, the cardinal direction to which the entity's yaw is closer to.
+If the entity looks 45 degrees up or down, `[js]'up'` and `[js]'down'` directions are returned respectively. Otherwise, the direction returned is the same as one returned by [`entity.getHorizontalFacing()`](#gethorizontalfacing)
+
+**Return value**
+A `Direction` enumeration member representing the horizontal direction the entity is facing. String representations of possible values are: `[js]'up'`, `[js]'down'`, `[js]'north'`, `[js]'south'`, `[js]'east'`, `[js]'west'`. Can be loosely compared to by its string name.
+
+**Example**
+
+```js
+if (entity.facing == "south") {
+	// do something...
+}
+```
+<<<
+
+| <#getFacing>             |
+| <#getFacing-description> |
+
+---
+
+>>> #geteyeheight
+### `getEyeHeight`
+<<<
+
+>>> #geteyeheight-description
+**Syntax**
+```js
+entity.getEyeHeight()
+entity.eyeHeight // read-only bean
+```
+
+**Return value**
+A number, representing the entity's current eye height relative to its position (feet).
+
+---
+
+**Syntax**
+```js
+entity.getEyeHeight(pose)
+```
+
+**Parameters**
+- `[js]pose`: A `Pose` to check eye height for.
+
+**Return value**
+A number, representing the entity's eye height for the given `[js]pose` relative to its position (feet).
+
+<<<
+
+| <#geteyeheight>             |
+| <#geteyeheight-description> |
+
+---
+
 ## Interaction
+
+>>> #getboundingbox-setboundingbox
+### `getBoundingBox`, `setBoundingBox`
+<<<
+
+>>> #getboundingbox-setboundingbox-description
+**Syntax**
+```js
+entity.getBoundingBox()
+
+entity.setBoundingBox(aabb)
+
+entity.boundingBox // bean
+```
+
+Sets or gets the entity's bounding box.
+
+**Setter parameter**
+- `[js]aabb`: An axis aligned bounding box (`AABB`) which is the new entity's bounding box. It may be a 3-element JS array: `[js]\[x, y, z]` representing the `AABB`'s size, or 6-element JS array: `[js]\[x1, y1, z1, x2, y2, z2\]` representing the two corners of the resulting `AABB`. For example `[js]\[1, 2.5, 1]`
+
+**Getter return value**
+The entity's bounding box, as `AABB`.
+<<<
+
+| <#getboundingbox-setboundingbox>             |
+| <#getboundingbox-setboundingbox-description> |
+
+---
+
+>>> #getboundingboxforculling
+### `getBoundingBoxForCulling`
+<<<
+
+>>> #getboundingboxforculling-description
+**Syntax**
+```js
+entity.getBoundingBoxForCulling()
+
+entity.boundingBoxForCulling // read-only bean
+```
+
+Gets the entity's bounding box for culling. Used by Minecraft's entity renderer to know, when the entity can be culled - that is, not rendered due to being outside the camera's viewport.
+
+**Return value**
+The entity's bounding box for culling, as `AABB`.
+<<<
+
+| <#getboundingboxforculling>             |
+| <#getboundingboxforculling-description> |
+
+---
 
 >>> #isColliding
 ### `isColliding`
@@ -1730,6 +1880,29 @@ If the entity is a Minecart, returns `[js]true` if the minecart is on rails, `[j
 
 | <#isOnRails> |
 | <#isOnRails-description> |
+---
+
+>>> #shouldShowName
+### `shouldShowName`
+<<<
+
+>>> #shouldShowName-description
+**Syntax**
+```js
+entity.shouldShowName()
+```
+
+Specifies, whether the entity's name should be rendered or not.
+
+**Return value**
+`[js]true` if the entity's name should be shown, `[js]false` otherwise.
+For [[/concepts/entity/Player|`Player`]] instances, this method always returns `[js]true`.
+For other entities, return value is the same as [`isCustomNameVisible()`](#iscustomnamevisible-setcustomnamevisible).
+<<<
+
+| <#shouldShowName>             |
+| <#shouldShowName-description> |
+
 ---
 
 
@@ -2674,6 +2847,30 @@ Corresponds to `Invulnerable` NBT tag.
 
 | <#isInvulnerable-setInvulnerable> |
 | <#isInvulnerable-setInvulnerable-description> |
+---
+
+## Inventory related
+
+>>> #getSlot
+### `getSlot`
+<<<
+
+>>> #getSlot-description
+**Syntax**
+```js
+entity.getSlot(slot)
+```
+
+**Parameters**
+- `[js]slot`: An integer number of slot to access.
+
+**Return value**
+A [[/ref/utils/SlotAccess|`SlotAccess`]] object, allowing one to access the given slot.
+<<<
+
+| <#getSlot>             |
+| <#getSlot-description> |
+
 ---
 
 ## Vehicle related

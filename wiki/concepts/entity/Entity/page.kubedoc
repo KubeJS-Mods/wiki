@@ -16,11 +16,17 @@ Entities that are invulnerable to all damages can also be only damaged by void d
 <<<
 <<<
 
+>>> #runcommand-note
+
+<<<
+
 >>> info
 Only a select subset of all public methods will be documented here.
 <<<
 
 In the following examples, `[js]entity` will be referring to the instance of `Entity`.
+
+---
 
 ## Identification
 
@@ -33,7 +39,7 @@ In the following examples, `[js]entity` will be referring to the instance of `En
 >>> info
 
 This method has its name changed from vanilla: `getType`.
-In KubeJS, [[ref/utils/EntityKJS|`getType`]] refers to a more script-friendly method that returns the entity's ID as string. It comes from the [[ref/utils/EntityKJS|`EntityKJS`]] interface.
+In KubeJS, [`getType`](#gettype) refers to a more script-friendly method that returns the entity's ID as string.
 
 <<<
 
@@ -579,6 +585,79 @@ None (`[js]undefined`).
 
 | <#turn> |
 | <#turn-description> |
+
+---
+
+>>> #rotate
+### `rotate`
+<<<
+
+>>> #rotate-description
+```js
+entity.rotate(rotation)
+```
+
+Rotates the entity by a given, pre-determined rotation.
+
+**Parameters**
+- `[js]rotation`: A `Rotation` enumeration. String representations of possible values are: `[js]'none'`, `[js]'clockwise_90'`, `[js]'counterclockwise_90'`, `[js]'180'`.
+
+**Return value**
+The new yaw of the entity.
+<<<
+
+| <#rotate>             |
+| <#rotate-description> |
+
+---
+
+>>> #mirror
+### `mirror`
+<<<
+
+>>> #mirror-description
+```js
+entity.mirror(mirror)
+```
+
+Mirrors the entity using a specified mirroring strategy.
+
+**Parameters**
+- `[js]mirror`: A `Mirror` enumeration. String representations of possible values are: `[js]'none'`, `[js]'front_back'`, `[js]'left_right'`.
+
+**Return value**
+The new yaw of the entity.
+<<<
+
+| <#mirror>             |
+| <#mirror-description> |
+
+---
+
+>>> #lookat
+### `lookAt`
+<<<
+
+>>> #lookat-description
+```js
+entity.lookAt(anchor, targetPos)
+```
+
+Makes the entity look at the point in 3D space respecting the provided `[js]anchor`. Usually, the anchor should be `[js]'eyes'` for realistic "looking at" logic.
+
+**Parameters**
+- `[js]anchor`: A `EntityAnchorArgument.Anchor` enumeration, that specifies the initial point. String representations of possible values are:
+  - `[js]'eyes'` - Position of the eyes of the entity will be the initial point.
+  - `[js]'feet'` - Position of the entity (its feet) will be the initial point.
+- `[js]targetPos`: A `Vec3` representing a point in 3D space at which the entity will look at. It may be a JS array of 3 numbers, for example `[js]\[70.5, -60, 108.5\]`.
+
+**Return value**
+None (`[js]undefined`).
+<<<
+
+| <#lookat>             |
+| <#lookat-description> |
+
 ---
 
 >>> #move
@@ -1018,6 +1097,28 @@ A number, representing the entity's eye height for the given `[js]pose` relative
 
 | <#geteyeheight>             |
 | <#geteyeheight-description> |
+
+---
+
+>>> #getcommandsenderworld
+### `getCommandSenderWorld`
+<<<
+
+>>> #getcommandsenderworld-description
+**Syntax**
+```js
+entity.getCommandSenderWorld()
+entity.commandSenderWorld // read-only bean
+```
+
+Gets the world the entity is in.
+
+**Return value**
+A [[/concepts/level/Level|`Level`]] the entity is in.
+<<<
+
+| <#getcommandsenderworld>             |
+| <#getcommandsenderworld-description> |
 
 ---
 
@@ -1905,6 +2006,24 @@ For other entities, return value is the same as [`isCustomNameVisible()`](#iscus
 
 ---
 
+>>> #touchingunloadedchunk
+### `touchingUnloadedChunk`
+<<<
+
+>>> #touchingunloadedchunk-description
+**Syntax**
+```js
+entity.shouldShowName()
+```
+
+**Return value**
+`[js]true` if the entity is touching an unloaded chunk, `[js]false` if it isn't.
+<<<
+
+| <#touchingunloadedchunk>             |
+| <#touchingunloadedchunk-description> |
+
+---
 
 ## Properties
 
@@ -2960,6 +3079,371 @@ None (`[js]undefined`).
 | <#ejectPassengers> |
 | <#ejectPassengers-description> |
 
+---
+
+>>> #getdismountlocationforpassenger
+### `getDismountLocationForPassenger`
+<<<
+
+>>> #getdismountlocationforpassenger-description
+**Syntax**
+```js
+entity.getDismountLocationForPassenger(passenger)
+```
+
+Gets coordinates, at which the `[js]passenger` would be dismounted.
+
+**Parameters**
+- `[js]passenger`: The entity's passenger.
+
+**Return value**
+A `Vec3` that contains coordinates, where would the `[js]passenger` be dismounted.
+<<<
+
+| <#getdismountlocationforpassenger>             |
+| <#getdismountlocationforpassenger-description> |
+
+---
+
+>>> #getvehicle
+### `getVehicle`
+<<<
+
+>>> #getvehicle-description
+**Syntax**
+```js
+entity.getVehicle()
+entity.vehicle // read-only bean
+```
+
+**Return value**
+A vehicle (`Entity`) that `[js]entity` is riding, or `[js]null` if `[js]entity` isn't riding anything.
+<<<
+
+| <#getvehicle>             |
+| <#getvehicle-description> |
+
+---
+
+>>> #getcontrolledvehicle
+### `getControlledVehicle`
+<<<
+
+>>> #getcontrolledvehicle-description
+**Syntax**
+```js
+entity.getControlledVehicle()
+entity.controlledVehicle // read-only bean
+```
+
+**Return value**
+A vehicle (`Entity`) that `[js]entity` is riding and controlling, or `[js]null` if `[js]entity` isn't riding anything.
+<<<
+
+| <#getcontrolledvehicle>             |
+| <#getcontrolledvehicle-description> |
+
+---
+
+>>> #getcontrollingpassenger
+### `getControllingPassenger`
+<<<
+
+>>> #getcontrollingpassenger-description
+**Syntax**
+```js
+entity.getControllingPassenger()
+entity.controllingPassenger // read-only bean
+```
+
+**Return value**
+A passenger (`Entity`) that controls the `[js]entity` or `[js]null` if `[js]entity` is controlling the `[js]entity`.
+<<<
+
+| <#getcontrollingpassenger>             |
+| <#getcontrollingpassenger-description> |
+
+---
+
+>>> #hascontrollingpassenger
+### `hasControllingPassenger`
+<<<
+
+>>> #hascontrollingpassenger-description
+**Syntax**
+```js
+entity.hasControllingPassenger()
+```
+
+**Return value**
+`[js]true` if the `[js]entity` has a passenger that controls it, otherwise `[js]false`.
+<<<
+
+| <#hascontrollingpassenger>             |
+| <#hascontrollingpassenger-description> |
+
+---
+
+>>> #getPassengers
+### `getPassengers`
+<<<
+
+>>> #getPassengers-description
+**Syntax**
+```js
+entity.getPassengers()
+entity.passengers // read-only bean
+```
+
+Gets all passengers of the entity.
+
+**Return value**
+An `EntityArrayList` containing all entities that are passengers of this entity.
+<<<
+
+| <#getPassengers>             |
+| <#getPassengers-description> |
+
+---
+
+>>> #getfirstpassenger
+### `getFirstPassenger`
+<<<
+
+>>> #getfirstpassenger-description
+**Syntax**
+```js
+entity.getFirstPassenger()
+entity.firstPassenger // read-only bean
+```
+
+Gets the first passenger of the entity.
+
+**Return value**
+An `Entity` that is the first passenger of the entity, or `[js]null` if the entity has no passengers.
+<<<
+
+| <#getfirstpassenger>             |
+| <#getfirstpassenger-description> |
+
+---
+
+>>> #haspassenger
+### `hasPassenger`
+<<<
+
+>>> #haspassenger-description
+**Syntax**
+```js
+entity.hasPassenger(otherEntity)
+entity.hasPassenger(entityPredicate)
+```
+
+Specifies, whether the given entity is a passenger of this entity, or if one of the entity's passengers matches the given predicate.
+
+**Parameters**
+- `[js]otherEntity`: Another `Entity`.
+- `[js]entityPredicate`: A `Predicate` to check entity's passengers against. It may be a JS function, which should return a boolean value. The predicate gets called with the following argument:
+  - `[js]passenger`: The entity's passenger. 
+
+**Return value**
+An `Entity` that is the first passenger of the entity, or `[js]null` if the entity has no passengers.
+
+**Example**
+
+```js
+const isCowMounted = entity.hasPassenger(passenger => passenger.type == 'minecraft:cow')
+```
+<<<
+
+| <#haspassenger>             |
+| <#haspassenger-description> |
+
+---
+
+>>> #getSelfAndPassengers
+### `fullName`
+<<<
+
+>>> #getSelfAndPassengers-description
+**Syntax**
+```js
+entity.getSelfAndPassengers()
+entity.selfAndPassengers // read-only bean
+```
+
+Gets the stream containing this entity, its passengers, passengers' passengers, and so on. The stream is constructed like this:
+. `[js]entity` itself is pushed into the stream.
+. For each passenger of the `[js]entity`, apply the same process - go to step 1.
+. The entire stream is flattened.
+
+**Return value**
+The resulting `Stream` containing the `[js]entity` and its direct and indirect passengers.
+<<<
+
+| <#getSelfAndPassengers>             |
+| <#getSelfAndPassengers-description> |
+
+---
+
+>>> #getpassengersandself
+### `getPassengersAndSelf`
+<<<
+
+>>> #getpassengersandself-description
+**Syntax**
+```js
+entity.getPassengersAndSelf()
+entity.passengersAndSelf // read-only bean
+```
+
+Gets the stream containing this entity's passengers, passengers' passengers, and so on., and then itself. The stream is constructed like this:
+. For each passenger of the `[js]entity`, apply this process - go to step 1.
+. `[js]entity` itself is pushed into the stream.
+. The entire stream is flattened.
+
+**Return value**
+The resulting `Stream` containing the `[js]entity`'s direct and indirect passengers and itself.
+<<<
+
+| <#getpassengersandself>             |
+| <#getpassengersandself-description> |
+
+---
+
+>>> #getindirectpassengers
+### `getIndirectPassengers`
+<<<
+
+>>> #getindirectpassengers-description
+**Syntax**
+```js
+entity.getIndirectPassengers()
+entity.indirectPassengers // read-only bean
+```
+
+Gets the iterable containing this entity's passengers, passengers' passengers, and so on. The iterable is constructed from the stream, which is constructed like this:
+. Passenger itself is pushed into the stream.
+. For each passenger of the passenger, apply the same process - go to step 1.
+. The entire stream is flattened.
+
+**Return value**
+The resulting `Iterable` containing the `[js]entity`'s direct and indirect passengers. It can be a target for a [`for...of`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) loop.
+
+**Example**
+```js
+for (let passenger of entity.indirectPassengers) {
+	console.log(passenger.type)
+}
+```
+<<<
+
+| <#getindirectpassengers>             |
+| <#getindirectpassengers-description> |
+
+---
+
+>>> #countplayerpassengers
+### `countPlayerPassengers`
+<<<
+
+>>> #countplayerpassengers-description
+**Syntax**
+```js
+entity.countPlayerPassengers()
+```
+
+Counts, how many players are this entity's direct or indirect passengers.
+
+**Return value**
+An integer, that is the amount of `Player`s that are this entity's direct or indirect passengers.
+<<<
+
+| <#countplayerpassengers>             |
+| <#countplayerpassengers-description> |
+
+---
+
+>>> #hasexactlyoneplayerpassenger
+### `hasExactlyOnePlayerPassenger`
+<<<
+
+>>> #hasexactlyoneplayerpassenger-description
+**Syntax**
+```js
+entity.hasExactlyOnePlayerPassenger()
+```
+**Return value**
+`[js]true` if this entity has only one [direct or indirect `Player` passenger](#countplayerpassengers), `[js]false` otherwise.
+<<<
+
+| <#hasexactlyoneplayerpassenger>             |
+| <#hasexactlyoneplayerpassenger-description> |
+
+---
+
+>>> #getrootvehicle
+### `getRootVehicle`
+<<<
+
+>>> #getrootvehicle-description
+**Syntax**
+```js
+entity.getRootVehicle()
+```
+
+Finds and gets the `[js]entity`'s root vehicle - that is, the entity that is not a passenger of any other entity.
+
+**Return value**
+The `Entity` that is the root vehicle, or `[js]null` if the `[js]entity` is not riding anything.
+<<<
+
+| <#getrootvehicle>             |
+| <#getrootvehicle-description> |
+
+---
+
+>>> #ispassengerofsamevehicle
+### `isPassengerOfSameVehicle`
+<<<
+
+>>> #ispassengerofsamevehicle-description
+**Syntax**
+```js
+entity.isPassengerOfSameVehicle(otherEntity)
+```
+**Parameters**
+- `[js]otherEntity`: Another `Entity`.
+
+**Return value**
+`[js]true` if both `[js]entity` and `[js]otherEntity` are sharing the same [root vehicle](#getrootvehicle), otherwise `[js]false`.
+<<<
+
+| <#ispassengerofsamevehicle>             |
+| <#ispassengerofsamevehicle-description> |
+
+---
+
+>>> #hasindirectpassenger
+### `hasIndirectPassenger`
+<<<
+
+>>> #hasindirectpassenger-description
+**Syntax**
+```js
+entity.hasIndirectPassenger(otherEntity)
+```
+**Parameters**
+- `[js]otherEntity`: Another `Entity`.
+
+**Return value**
+`[js]true` if `[js]otherEntity` is a direct or indirect passenger of the `[js]entity`, otherwise `[js]false`.
+<<<
+
+| <#hasindirectpassenger>             |
+| <#hasindirectpassenger-description> |
+
+---
 ## Sound related
 
 >>> #playSound
@@ -3019,6 +3503,189 @@ The entity's silence state: `[js]true` if it's silent, `[js]false` if it can pro
 | <#isSilent-setSilent-description> |
 ---
 
+>>> #getsoundsource
+### `getSoundSource`
+<<<
+
+>>> #getsoundsource-description
+**Syntax**
+```js
+entity.getSoundSource()
+entity.soundSource // read-only bean
+```
+
+**Return value**
+A `SoundSource` enumeration member representing the entity's sound source. String representations of possible values are: `[js]'master'`, `[js]'music'`, `[js]'records'`, `[js]'weather'`, `[js]'blocks'`, `[js]'hostile'`, `[js]'neutral'`, `[js]'players'`, `[js]'ambient'`, `[js]'voice'`. Can be loosely compared to by its string name.
+<<<
+
+| <#getsoundsource>             |
+| <#getsoundsource-description> |
+
+---
+
+## Commands related
+
+>>> #runcommand
+### `runCommand`
+<<<
+
+>>> #runcommand-description
+**Syntax**
+```js
+entity.runCommand(command)
+```
+
+Runs the specified command as the entity, with entity's permission level. Will do nothing if the entity is client-side.
+
+<#runcommand-note>
+
+**Parameters**
+- `[js]command`: A string that contains a Minecraft command to run as the entity. Slash at the beginning is optional, just like in command blocks and `mcfunction` files.
+
+**Return value**
+None (`[js]undefined`). 
+<<<
+
+| <#runcommand>             |
+| <#runcommand-description> |
+
+---
+
+>>> #runcommandsilent
+### `runCommandSilent`
+<<<
+
+>>> #runcommandsilent-description
+**Syntax**
+```js
+entity.runCommandSilent(command)
+```
+
+Runs the specified command as the entity, with entity's permission level, and suppresses its output. Will do nothing if the entity is client-side.
+
+<#runcommand-note>
+
+**Parameters**
+- `[js]command`: A string that contains a Minecraft command to run as the entity. Slash at the beginning is optional, just like in command blocks and `mcfunction` files.
+
+**Return value**
+None (`[js]undefined`). 
+<<<
+
+| <#runcommandsilent>             |
+| <#runcommandsilent-description> |
+
+---
+
+>>> #createcommandsourcestack
+### `createCommandSourceStack`
+<<<
+
+>>> #createcommandsourcestack-description
+**Syntax**
+```js
+entity.createCommandSourceStack()
+```
+
+**Return value**
+A `CommandSourceStack` that represents this entity.
+<<<
+
+| <#createcommandsourcestack>             |
+| <#createcommandsourcestack-description> |
+
+---
+
+>>> #haspermissions
+### `fullName`
+<<<
+
+>>> #haspermissions-description
+**Syntax**
+```js
+entity.hasPermissions(permissionLevel)
+```
+
+Checks, whether the entity has the specified permission level.
+
+>>>info
+All non-player entities have a permission level of `[js]0`.
+<<<
+
+**Parameters**
+- `[js]permissionLevel`: An integer representing the permission level to check for.
+
+**Return value**
+None (`[js]undefined`). 
+<<<
+
+| <#haspermissions>             |
+| <#haspermissions-description> |
+
+---
+
+>>> #acceptssuccess
+### `acceptsSuccess`
+<<<
+
+>>> #acceptssuccess-description
+**Syntax**
+```js
+entity.acceptsSuccess()
+```
+
+Checks, whether the entity can receive command feedback for successful commands.
+
+**Return value**
+`[js]true` if the entity can receive command feedback for successful commands, `[js]false` if it can't.
+<<<
+
+| <#acceptssuccess>             |
+| <#acceptssuccess-description> |
+
+---
+
+>>> #acceptsfailure
+### `acceptsFailure`
+<<<
+
+>>> #acceptsfailure-description
+**Syntax**
+```js
+entity.acceptsFailure()
+```
+
+Checks, whether the entity can receive command feedback for failed commands.
+
+**Return value**
+`[js]true` if the entity can receive command feedback for failed commands, `[js]false` if it can't.
+<<<
+
+| <#acceptsfailure>             |
+| <#acceptsfailure-description> |
+
+---
+
+>>> #shouldinformadmins
+### `shouldInformAdmins`
+<<<
+
+>>> #shouldinformadmins-description
+**Syntax**
+```js
+entity.shouldinformadmins()
+```
+
+Checks, whether admins (server operators) can be informed about commands sourced from this entity.
+
+**Return value**
+`[js]true` if admins should be informed about commands sourced from this entity, `[js]false` if it shouldn't.
+<<<
+
+| <#shouldinformadmins>             |
+| <#shouldinformadmins-description> |
+
+---
 ## Scoreboard related
 
 >>> #getTeamColor
@@ -3118,6 +3785,25 @@ A boolean: `[js]true` if both `entity` and `otherEntity` are on the same team, `
 | <#isAlliedTo-description> |
 ---
 ## Other
+
+>>> #getServer
+### `getServer`
+<<<
+
+>>> #getServer-description
+```js
+entity.getServer()
+entity.server // read-only bean
+```
+
+**Return value**
+A `MinecraftServer` this entity is part of, or `[js]null`, if this method is called client-side.
+<<<
+
+| <#getServer>             |
+| <#getServer-description> |
+
+---
 
 >>> #isSpectator
 ### `isSpectator`

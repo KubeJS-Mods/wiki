@@ -426,6 +426,127 @@ Corresponds to `CustomNameVisible` NBT tag on the entity.
 
 ## Position
 
+>>> #position
+### `position`
+<<<
+
+>>> #position-description
+**Syntax**
+```js
+entity.position()
+```
+
+**Return value**
+A `Vec3` that contains the position of the entity (feet position).
+<<<
+
+| <#position>             |
+| <#position-description> |
+
+---
+
+>>> #set-position
+### `setPosition`
+<<<
+
+>>> #set-position-description
+
+**Syntax**
+```js
+entity.setPosition(x, y, z)
+```
+
+Teleports the entity to specified (x, y, z), using `/tp` command logic.
+
+**Parameters**
+- `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity. 
+**Return value**
+None (`[js]undefined`).
+<<<
+
+| <#set-position> |
+| <#set-position-description> |
+---
+
+>>> #trackingposition
+### `trackingPosition`
+<<<
+
+>>> #trackingposition-description
+**Syntax**
+```js
+entity.trackingPosition()
+```
+
+**Return value**
+A `Vec3` that contains the tracking position of the entity. Usually, it's identical to the position returned by [`entity.position`](#position-1), except for paintings - those return the lower corner of the block position where paining is attached to.
+<<<
+
+| <#trackingposition>             |
+| <#trackingposition-description> |
+
+---
+
+>>> #blockposition
+### `blockPosition`
+<<<
+
+>>> #blockposition-description
+**Syntax**
+```js
+entity.trackingPosition()
+```
+
+**Return value**
+A `BlockPos` of the entity - represents the block position in which entity stands.
+<<<
+
+| <#blockposition>             |
+| <#blockposition-description> |
+
+---
+
+>>> #getinblockstate
+### `getInBlockState`
+<<<
+
+>>> #getinblockstate-description
+**Syntax**
+```js
+entity.getInBlockState()
+entity.inBlockState // read-only bean
+```
+
+**Return value**
+A `BlockState` of a block the entity [is standing in](#blockposition).
+The result of this call is cached for the remainder of the tick, unless the entity is teleported.
+<<<
+
+| <#getinblockstate>             |
+| <#getinblockstate-description> |
+
+---
+
+>>> #chunkposition
+### `chunkPosition`
+<<<
+
+>>> #chunkposition-description
+**Syntax**
+```js
+entity.chunkPosition()
+```
+
+**Return value**
+A `ChunkPos` instance that contains the chunk position of the entity.
+
+<<<
+
+| <#chunkposition>             |
+| <#chunkposition-description> |
+
+---
+
 >>> #teleport-to
 ### `teleportTo`
 <<<
@@ -490,29 +611,6 @@ None (`[js]undefined`).
 | <#teleport-to> |
 | <#teleport-to-description> |
 
----
-
->>> #set-position
-### `setPosition`
-<<<
-
->>> #set-position-description
-
-**Syntax**
-```js
-entity.setPosition(x, y, z)
-```
-
-Teleports the entity to specified (x, y, z), using `/tp` command logic.
-
-**Parameters**
-- `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity. 
-**Return value**
-None (`[js]undefined`).
-<<<
-
-| <#set-position> |
-| <#set-position-description> |
 ---
 
 >>> #teleport-relative
@@ -2025,6 +2123,95 @@ entity.shouldShowName()
 
 ---
 
+>>> #getfluidjumpthreshold
+### `getFluidJumpThreshold`
+<<<
+
+>>> #getfluidjumpthreshold-description
+**Syntax**
+```js
+entity.getFluidJumpThreshold()
+entity.fluidJumpThreshold // read-only bean
+```
+
+**Return value**
+A number, that represents how deep can the entity be submerged in liquid and still not be affected by fluid physics - for example, the entity can still jump and not start to swim. By default, this is `[js]0.4` for most entities, unless the entity's [eye height](#geteyeheight) is less than that, then returns `[js]0` so short mobs like baby mobs can swim up and not drown.
+<<<
+
+<<<
+
+| <#getfluidjumpthreshold>             |
+| <#getfluidjumpthreshold-description> |
+
+---
+
+>>> #getbbwidth
+### `getBbWidth`
+<<<
+
+>>> #getbbwidth-description
+**Syntax**
+```js
+entity.getBbWidth()
+entity.bbWidth // read-only bean
+```
+
+Gets the width of the entity's current entity dimension (not to be confused with "world" dimensions).
+
+**Return value**
+The entity's current width.
+<<<
+
+| <#getbbwidth>             |
+| <#getbbwidth-description> |
+
+---
+
+>>> #getbbheight
+### `getBbHeight`
+<<<
+
+>>> #getbbheight-description
+**Syntax**
+```js
+entity.getBbHeight()
+entity.bbHeight // read-only bean
+```
+
+Gets the height of the entity's current entity dimension (not to be confused with "world" dimensions).
+
+**Return value**
+The entity's current height.
+<<<
+
+| <#getbbheight>             |
+| <#getbbheight-description> |
+
+---
+
+>>> #getdimensions
+### `getDimensions`
+<<<
+
+>>> #getdimensions-description
+**Syntax**
+```js
+entity.getDimensions(pose)
+```
+
+Gets the dimensions of the entity based on the provided pose.
+
+**Parameters**
+- `pose`: The `Pose` to check entity dimensions for.
+
+**Return value**
+The `EntityDimensions` record that contains entity dimensions.
+<<<
+
+| <#getdimensions>             |
+| <#getdimensions-description> |
+
+---
 ## Properties
 
 >>> #fireImmune
@@ -3616,7 +3803,7 @@ All non-player entities have a permission level of `[js]0`.
 - `[js]permissionLevel`: An integer representing the permission level to check for.
 
 **Return value**
-None (`[js]undefined`). 
+`[js]true` if the entity has the specified permission level, `[js]false` if it does not.
 <<<
 
 | <#haspermissions>             |

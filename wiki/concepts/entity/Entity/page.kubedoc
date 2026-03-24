@@ -424,7 +424,7 @@ Corresponds to `CustomNameVisible` NBT tag on the entity.
 
 ---
 
-## Position
+## Position related
 
 >>> #position
 ### `position`
@@ -479,7 +479,7 @@ entity.trackingPosition()
 ```
 
 **Return value**
-A `Vec3` that contains the tracking position of the entity. Usually, it's identical to the position returned by [`entity.position`](#position-1), except for paintings - those return the lower corner of the block position where paining is attached to.
+A `Vec3` that contains the tracking position of the entity. Usually, it's identical to the position returned by [`entity.position`](#position), except for paintings - those return the lower corner of the block position where paining is attached to.
 <<<
 
 | <#trackingposition>             |
@@ -559,10 +559,10 @@ entity.getZ()
 entity.z // read-only bean
 ```
 
-Gets the `x`, `y` or `z` component of the entity's [position](#position-1) respectively.
+Gets the `x`, `y` or `z` component of the entity's [position](#position) respectively.
 
 **Return value**
-An number, which is the `x`, `y` or `z` component of the entity's [position](#position-1).
+An number, which is the `x`, `y` or `z` component of the entity's [position](#position).
 
 **Example**
 Position related beans on `Entity` make for a useful application of a [destructuring pattern](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring) to quickly get all the entity's coordinates to variables.
@@ -579,13 +579,13 @@ entity.getX(widthScale)
 entity.getZ(widthScale)
 ```
 
-Gets the `x` or `z` component of the entity's [position](#position-1) respectively, increased by the entity's [bounding box width](#getbbwidth)  multiplied by `[js]widthScale`.
+Gets the `x` or `z` component of the entity's [position](#position) respectively, increased by the entity's [bounding box width](#getbbwidth)  multiplied by `[js]widthScale`.
 
 **Parameters**
 - `[js]widthScale`: The multiplier for the entity's bounding box width component of the equation.
 
 **Return value**
-An number, which is the `x`, `y` or `z` component of the entity's [position](#position-1) scaled appropriately.
+An number, which is the `x`, `y` or `z` component of the entity's [position](#position) scaled appropriately.
 
 The return value can be thought of as `scaledX_Z` in this equation: `scaledX_Z = x_z + bbWidth * widthScale`, where:
 - `x_z`: The entity's current X or Z position appropriately,
@@ -598,13 +598,13 @@ The return value can be thought of as `scaledX_Z` in this equation: `scaledX_Z =
 entity.getY(heightScale)
 ```
 
-Gets the `y` component of the entity's [position](#position-1), increased by the entity's [bounding box height](#getbbheight) multiplied by `[js]heightScale`.
+Gets the `y` component of the entity's [position](#position), increased by the entity's [bounding box height](#getbbheight) multiplied by `[js]heightScale`.
 
 **Parameters**
 - `[js]heightScale`: The multiplier for the entity's bounding box height component of the equation.
 
 **Return value**
-An number, which is the `y` component of the entity's [position](#position-1) scaled appropriately.
+An number, which is the `y` component of the entity's [position](#position) scaled appropriately.
 
 The return value can be thought of as `scaledY` in this equation: `scaledY = y + bbHeight * heightScale`, where:
 - `y`: The entity's current Y position,
@@ -633,7 +633,7 @@ entity.getRandomZ(widthScale)
 Generates a random `x` or `z` coordinate respectively by calling `entity.getX(scale)` or `entity.getZ(scale)` with a random `scale` between `[js]-widthScale` and `[js]widthScale`. Used in vanilla to pick random coordinates for particles around the entity.
 
 **Parameters**
-- `[js]widthScale`: A multiplier, that increases/decrases maximum deviation from the entity's [position](#position-1).
+- `[js]widthScale`: A multiplier, that increases/decrases maximum deviation from the entity's [position](#position).
 
 **Return value**
 A random `x` or `z` coordinate.
@@ -3713,7 +3713,7 @@ const isCowMounted = entity.hasPassenger(passenger => passenger.type == 'minecra
 ---
 
 >>> #getSelfAndPassengers
-### `fullName`
+### `getSelfAndPassengers`
 <<<
 
 >>> #getSelfAndPassengers-description

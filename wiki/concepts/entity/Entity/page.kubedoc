@@ -1233,6 +1233,24 @@ A number, representing the entity's current eye height relative to its position 
 
 ---
 
+**Syntax**
+```js
+entity.getEyeHeight(pose)
+```
+
+**Parameters**
+- `[js]pose`: A `Pose` to check eye height for.
+
+**Return value**
+A number, representing the entity's eye height for the given `[js]pose` relative to its position (feet).
+
+<<<
+
+| <#geteyeheight>             |
+| <#geteyeheight-description> |
+
+---
+
 >>> #geteyey
 ### `getEyeY`
 <<<
@@ -1251,24 +1269,6 @@ The `y` coordinate of the entity's eyes.
 
 | <#geteyey>             |
 | <#geteyey-description> |
-
----
-
-**Syntax**
-```js
-entity.getEyeHeight(pose)
-```
-
-**Parameters**
-- `[js]pose`: A `Pose` to check eye height for.
-
-**Return value**
-A number, representing the entity's eye height for the given `[js]pose` relative to its position (feet).
-
-<<<
-
-| <#geteyeheight>             |
-| <#geteyeheight-description> |
 
 ---
 
@@ -4049,7 +4049,7 @@ A `CommandSourceStack` that represents this entity.
 ---
 
 >>> #haspermissions
-### `fullName`
+### `hasPermissions`
 <<<
 
 >>> #haspermissions-description

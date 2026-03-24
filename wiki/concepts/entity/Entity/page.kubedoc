@@ -506,6 +506,166 @@ A `BlockPos` of the entity - represents the block position in which entity stand
 
 ---
 
+>>> #getblockx-y-z
+### `getBlockX`, `getBlockY`, `getBlockZ`
+<<<
+
+>>> #getblockx-y-z-description
+**Syntax**
+```js
+entity.getBlockX()
+entity.blockX // read-only bean
+
+entity.getBlockY()
+entity.blockY // read-only bean
+
+entity.getBlockZ()
+entity.blockZ // read-only bean
+```
+
+Gets the `x`, `y` or `z` component of the entity's [block position](#blockposition) respectively.
+
+**Return value**
+An integer, which is the `x`, `y` or `z` component of the entity's [block position](#blockposition).
+
+**Example**
+Block position related beans on `Entity` make for a useful application of a [destructuring pattern](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring) to quickly get all the entity's block coordinates to variables.
+
+```js
+const { blockX, blockY, blockZ } = entity
+// Now blockX, blockY and blockZ constants are respectively the entity's x, y and z block coordinate.
+```
+<<<
+
+| <#getblockx-y-z>             |
+| <#getblockx-y-z-description> |
+
+---
+
+>>> #getx-y-z
+### `getX`, `getY`, `getZ`
+<<<
+
+>>> #getx-y-z-description
+**Syntax**
+```js
+entity.getX()
+entity.x // read-only bean
+
+entity.getY()
+entity.y // read-only bean
+
+entity.getZ()
+entity.z // read-only bean
+```
+
+Gets the `x`, `y` or `z` component of the entity's [position](#position-1) respectively.
+
+**Return value**
+An number, which is the `x`, `y` or `z` component of the entity's [position](#position-1).
+
+**Example**
+Position related beans on `Entity` make for a useful application of a [destructuring pattern](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring) to quickly get all the entity's coordinates to variables.
+
+```js
+const { x, y, z } = entity
+// Now x, y and z constants are respectively the entity's x, y and z coordinate.
+```
+---
+**Syntax**
+```js
+entity.getX(widthScale)
+
+entity.getZ(widthScale)
+```
+
+Gets the `x` or `z` component of the entity's [position](#position-1) respectively, increased by the entity's [bounding box width](#getbbwidth)  multiplied by `[js]widthScale`.
+
+**Parameters**
+- `[js]widthScale`: The multiplier for the entity's bounding box width component of the equation.
+
+**Return value**
+An number, which is the `x`, `y` or `z` component of the entity's [position](#position-1) scaled appropriately.
+
+The return value can be thought of as `scaledX_Z` in this equation: `scaledX_Z = x_z + bbWidth * widthScale`, where:
+- `x_z`: The entity's current X or Z position appropriately,
+- `bbWidth`: The entity's current bounding box width,
+- `widthScale`: The provided height scale.
+
+---
+**Syntax**
+```js
+entity.getY(heightScale)
+```
+
+Gets the `y` component of the entity's [position](#position-1), increased by the entity's [bounding box height](#getbbheight) multiplied by `[js]heightScale`.
+
+**Parameters**
+- `[js]heightScale`: The multiplier for the entity's bounding box height component of the equation.
+
+**Return value**
+An number, which is the `y` component of the entity's [position](#position-1) scaled appropriately.
+
+The return value can be thought of as `scaledY` in this equation: `scaledY = y + bbHeight * heightScale`, where:
+- `y`: The entity's current Y position,
+- `bbHeight`: The entity's current bounding box height,
+- `heightScale`: The provided height scale.
+
+<<<
+
+| <#getx-y-z>             |
+| <#getx-y-z-description> |
+
+---
+
+>>> #getrandomx-z
+### `getRandomX`, `getRandomZ`
+<<<
+
+>>> #getrandomx-z-description
+**Syntax**
+```js
+entity.getRandomX(widthScale)
+
+entity.getRandomZ(widthScale)
+```
+
+Generates a random `x` or `z` coordinate respectively by calling `entity.getX(scale)` or `entity.getZ(scale)` with a random `scale` between `[js]-widthScale` and `[js]widthScale`. Used in vanilla to pick random coordinates for particles around the entity.
+
+**Parameters**
+- `[js]widthScale`: A multiplier, that increases/decrases maximum deviation from the entity's [position](#position-1).
+
+**Return value**
+A random `x` or `z` coordinate.
+<<<
+
+| <#getrandomx-z>             |
+| <#getrandomx-z-description> |
+
+---
+
+>>> #getrandomy
+### `getRandomY`
+<<<
+
+>>> #getrandomy-description
+**Syntax**
+```js
+entity.getRandomY()
+entity.randomY // read-only bean
+```
+
+Generates a random `y` coordinate between the bottom and the top of the entity's bounding box.
+
+**Return value**
+A random `y` coordinate.
+<<<
+
+| <#getrandomy>             |
+| <#getrandomy-description> |
+
+---
+
 >>> #getinblockstate
 ### `getInBlockState`
 <<<
@@ -758,56 +918,6 @@ None (`[js]undefined`).
 
 ---
 
->>> #move
-### `move`
-<<<
-
->>> #move-description
-
-**Syntax**
-```js
-entity.move(moverType, movementVector)
-```
-
-Tries to move the entity by the specified vector, applying various in-world physics such as being stuck in block, catching fire, extinguishing fire, swimming, vibrations, etc.
-
-**Parameters**
-- `[js]moverType`: What type of mover caused the movement. It may be a string representing a mover type, that is: one of `[js]'piston'`, `[js]'player'`, `[js]'self'`, `[js]'shulker'`, `[js]'shulker_box'`.
-- `[js]movementVector`: A {vec3} which defines the movement vector. It may be an array with three elements specifying respectively x, y and z component, for example `[js]\[0, 1.5, 1\]`.
-
-**Return value**
-None (`[js]undefined`).
-<<<
-
-| <#move> |
-| <#move-description> |
----
-
->>> #moveRelative
-### `moveRelative`
-<<<
-
->>> #moveRelative-description
-
-**Syntax**
-```js
-entity.moveRelative(speed, inputVector)
-```
-
-Applies `[js]speed` to the entity, in direction of cross product of normalized `[js]inputVector` and entity's yaw.
-
-**Parameters**
-- `[js]speed`: Speed (in blocks per tick) to apply.
-- `[js]inputVector`: A {vec3} which is the component of the resulting speed vector. If longer than 1, it will be normalized to a vector with length of 1. It may be an array with three elements specifying respectively x, y and z component, for example `[js]\[0, 1.5, 1\]`.
-
-**Return value**
-None (`[js]undefined`).
-<<<
-
-| <#moveRelative> |
-| <#moveRelative-description> |
----
-
 >>> #absMoveTo
 ### `absMoveTo`
 <<<
@@ -887,63 +997,6 @@ None (`[js]undefined`).
 
 | <#moveTo> |
 | <#moveTo-description> |
----
-
->>> #addMotion
-### `addMotion`
-<<<
-
->>> #addMotion-description
-
->>> info
-This overload has its name changed from vanilla: `push`.
-Other overloads for this method are still referred to as [`push`](#push).
-<<<
-
-**Syntax**
-```js
-entity.addMotion(x, y, z)
-```
-
-Adds motion to the entity with specified x, y and z velocity.
-
-**Parameters**
-- `[js]x`, `[js]y`, `[js]z`: Speed (in blocks per tick) to apply to the entity in the corresponding coordinates. 
-
-**Return value**
-None (`[js]undefined`).
-<<<
-
-| <#addMotion> |
-| <#addMotion-description> |
----
-
->>> #push
-### `push`
-<<<
-
->>> #push-description
-
->>> info
-There is one more overload: `[js]entity.push(entity)`, but it's used for entity-to-entity interactions and not particularly useful in scripts.
-<<<
-
-**Syntax**
-```js
-entity.push(vector)
-```
-
-Adds motion to the entity in direction of the provided velocity vector.
-
-**Parameters**
-- `vector`: A {vec3} specifying the velocity to apply to the entity. Per-coordinate values of the vector refer to the vector's components (in block per tick). It may be a 3-element JS array representing a vector, for example `[js]\[0, 1.5, 2\]`.
-
-**Return value**
-None (`[js]undefined`).
-<<<
-
-| <#push> |
-| <#push-description> |
 ---
 
 >>> #getLookAngle
@@ -1180,6 +1233,27 @@ A number, representing the entity's current eye height relative to its position 
 
 ---
 
+>>> #geteyey
+### `getEyeY`
+<<<
+
+>>> #geteyey-description
+**Syntax**
+```js
+entity.getEyeY()
+entity.eyeY // read-only bean
+```
+
+**Return value**
+The `y` coordinate of the entity's eyes.
+
+<<<
+
+| <#geteyey>             |
+| <#geteyey-description> |
+
+---
+
 **Syntax**
 ```js
 entity.getEyeHeight(pose)
@@ -1218,6 +1292,195 @@ A [[/concepts/level/Level|`Level`]] the entity is in.
 | <#getcommandsenderworld>             |
 | <#getcommandsenderworld-description> |
 
+---
+
+## Movement
+
+>>> #move
+### `move`
+<<<
+
+>>> #move-description
+
+**Syntax**
+```js
+entity.move(moverType, movementVector)
+```
+
+Tries to move the entity by the specified vector, applying various in-world physics such as being stuck in block, catching fire, extinguishing fire, swimming, vibrations, etc.
+
+**Parameters**
+- `[js]moverType`: What type of mover caused the movement. It may be a string representing a mover type, that is: one of `[js]'piston'`, `[js]'player'`, `[js]'self'`, `[js]'shulker'`, `[js]'shulker_box'`.
+- `[js]movementVector`: A {vec3} which defines the movement vector. It may be an array with three elements specifying respectively x, y and z component, for example `[js]\[0, 1.5, 1\]`.
+
+**Return value**
+None (`[js]undefined`).
+<<<
+
+| <#move> |
+| <#move-description> |
+---
+
+>>> #moveRelative
+### `moveRelative`
+<<<
+
+>>> #moveRelative-description
+
+**Syntax**
+```js
+entity.moveRelative(speed, inputVector)
+```
+
+Applies `[js]speed` to the entity, in direction of cross product of normalized `[js]inputVector` and entity's yaw.
+
+**Parameters**
+- `[js]speed`: Speed (in blocks per tick) to apply.
+- `[js]inputVector`: A {vec3} which is the component of the resulting speed vector. If longer than 1, it will be normalized to a vector with length of 1. It may be an array with three elements specifying respectively x, y and z component, for example `[js]\[0, 1.5, 1\]`.
+
+**Return value**
+None (`[js]undefined`).
+<<<
+
+| <#moveRelative> |
+| <#moveRelative-description> |
+---
+
+>>> #getdeltamovement-setdeltamovement
+### `getDeltaMovement`, `setDeltaMovement`
+<<<
+
+>>> #getdeltamovement-setdeltamovement-description
+**Syntax**
+```js
+entity.getDeltaMovement()
+
+entity.setDeltaMovement(speedVector)
+
+entity.deltaMovement // bean
+```
+
+Sets or gets the entity's speed vector, in blocks per tick.
+
+**Setter parameter**
+- `[js]speedVector`: A {Vec3} which is the speed vector to apply to the entity. It may be a JS array with three elements specifying respectively x, y and z component, for example `[js]\[0, 1.5, 1\]`.
+
+**Getter return value**
+A {Vec3} which is the entity's current speed vector.
+<<<
+
+| <#getdeltamovement-setdeltamovement>             |
+| <#getdeltamovement-setdeltamovement-description> |
+
+---
+
+>>> #adddeltamovement
+### `addDeltaMovement`
+<<<
+
+>>> #adddeltamovement-description
+**Syntax**
+```js
+entity.addDeltaMovement(speedVector)
+```
+
+Adds the provided speed vector to the entity's current speed vector.
+
+**Parameters**
+- `[js]speedVector`: A {Vec3} which is the speed vector to add to the entity's current speed vector. It may be a JS array with three elements specifying respectively x, y and z component, for example `[js]\[0, 1.5, 1\]`.
+
+**Return value**
+None (`[js]undefined`).
+<<<
+
+| <#adddeltamovement>             |
+| <#adddeltamovement-description> |
+
+---
+
+>>> #setmotion
+### `setMotion`
+<<<
+
+>>> #setmotion-description
+>>> info
+This overload has its name changed from vanilla: `setDeltaMovement`.
+<<<
+
+**Syntax**
+```js
+entity.setMotion(x, y, z)
+```
+
+Sets the entity's speed vector, in blocks per tick.
+
+**Parameters**
+- `[js]x`, `[js]y`, `[js]z`: The components of the speed vector to apply to the entity. Components of the speed vector are in blocks per tick.
+
+**Return value**
+None (`[js]undefined`).
+<<<
+
+| <#setmotion>             |
+| <#setmotion-description> |
+
+---
+
+>>> #addMotion
+### `addMotion`
+<<<
+
+>>> #addMotion-description
+
+>>> info
+This overload has its name changed from vanilla: `push`.
+Other overloads for this method are still referred to as [`push`](#push).
+<<<
+
+**Syntax**
+```js
+entity.addMotion(x, y, z)
+```
+
+Adds motion to the entity with specified x, y and z velocity.
+
+**Parameters**
+- `[js]x`, `[js]y`, `[js]z`: The components of the speed vector to add to the entity. Components of the speed vector are in blocks per tick.
+
+**Return value**
+None (`[js]undefined`).
+<<<
+
+| <#addMotion> |
+| <#addMotion-description> |
+---
+
+>>> #push
+### `push`
+<<<
+
+>>> #push-description
+
+>>> info
+There is one more overload: `[js]entity.push(entity)`, but it's used for entity-to-entity interactions and not particularly useful in scripts.
+<<<
+
+**Syntax**
+```js
+entity.push(vector)
+```
+
+Adds motion to the entity in direction of the provided velocity vector.
+
+**Parameters**
+- `vector`: A {vec3} specifying the velocity to apply to the entity. Per-coordinate values of the vector refer to the vector's components (in block per tick). It may be a 3-element JS array representing a vector, for example `[js]\[0, 1.5, 2\]`.
+
+**Return value**
+None (`[js]undefined`).
+<<<
+
+| <#push> |
+| <#push-description> |
 ---
 
 ## Interaction
@@ -2212,6 +2475,7 @@ The `EntityDimensions` record that contains entity dimensions.
 | <#getdimensions-description> |
 
 ---
+
 ## Properties
 
 >>> #fireImmune
@@ -3631,6 +3895,7 @@ entity.hasIndirectPassenger(otherEntity)
 | <#hasindirectpassenger-description> |
 
 ---
+
 ## Sound related
 
 >>> #playSound
@@ -3873,6 +4138,7 @@ Checks, whether admins (server operators) can be informed about commands sourced
 | <#shouldinformadmins-description> |
 
 ---
+
 ## Scoreboard related
 
 >>> #getTeamColor
@@ -3971,6 +4237,7 @@ A boolean: `[js]true` if both `entity` and `otherEntity` are on the same team, `
 | <#isAlliedTo> |
 | <#isAlliedTo-description> |
 ---
+
 ## Other
 
 >>> #getServer

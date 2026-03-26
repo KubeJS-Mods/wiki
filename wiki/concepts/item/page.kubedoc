@@ -1,0 +1,35 @@
+`Item`s are objects representing Minecraft items.
+They are usually used in places where the item's components are needed.
+
+TODO: Reword this article!
+
+# Type wrappers
+Various data types can wrap into `Item`s when an `Item` is expected.
+
+## String literals
+
+### {item}
+  - {item} - A string corresponding to item ID.
+  Special case: `''` (empty string), `'-'`, `air` and `minecraft:air` all result in the air item.
+  - Example: `minecraft:diamond_sword`
+  - Results in a Diamond Sword.
+
+### {item}{components}
+  - {item} - A string corresponding to item ID.
+  - {components} - A list of components formatted as follows: `\[key1=value1,key2=value2\]`.
+  - Example: `minecraft:diamond_sword[damage=2]`
+  - Results in a Diamond Sword with 2 durability damage.
+
+### {item}{custom-data}
+  - {item} - A string corresponding to item ID.
+  - {custom-data} - A NBT compound tag to be stored into the `minecraft:custom_data` component, formatted as a stringified NBT: `\{key1:value1, key2:value2\}`.
+  - Example: `minecraft:diamond_sword{souls:2l}`
+  - Results in a Diamond Sword with `minecraft:custom_data` component set to `{souls:2l}`.
+
+# Methods
+
+This page contains only a small subset of possible methods. The following methods can be useful in scripts.
+In code snippets below, `item` will refer to the instance of `Item`.
+
+- `[js]item.getId()` | Getter bean: `[js]item.id`
+  - Returns: The item's namespaced ID as a string.

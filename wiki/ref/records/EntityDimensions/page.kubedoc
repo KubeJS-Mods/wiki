@@ -1,0 +1,141 @@
+>>> info
+This class is a [[/ref/records|record]]. If you want to learn, how to use them in KubeJS scripts, [[/ref/records|go here]].
+<<<
+
+**EntityDimensions** record defines entity dimensions.
+
+>>> #width-type
+`number`
+(float)
+<<<
+>>> #width-description
+The width of the entity.
+<<<
+>>> #height-type
+`number`
+(float)
+<<<
+>>> #height-description
+The height of the entity.
+<<<
+>>> #eye-height-type
+`number`
+(float)
+<<<
+>>> #eye-height-description
+The eye height of the entity.
+<<<
+>>> #attachments-type
+`[java]EntityAttachments`
+<<<
+>>> #attachments-description
+The entity attachments.
+<<<
+>>> #fixed-type
+`boolean`
+<<<
+>>> #fixed-description
+Whether the entity dimensions are fixed (not scalable).
+<<<
+
+# Properties
+
+| Property      | Type                    | Description                |
+| `width`       | <#width-type>           | <#width-description>       |
+| `height`      | <#height-type>          | <#height-description>      |
+| `eyeHeight`   | <#eye-height-type>      | <#eye-height-description>  |
+| `attachments` | <#attachments-type>     | <#attachments-description> |
+| `fixed`       | <#fixed-type>           | <#fixed-description>       |
+
+# Instance methods
+
+In the following examples, `[js]dimensions` will refer to the instance of `[java]EntityDimensions`.
+
+>>> #makeboundingbox
+### `makeBoundingBox`
+<<<
+
+>>> #makeboundingbox-description
+**Syntax**
+```js
+dimensions.makeBoundingBox(positionVector)
+dimensions.makeBoundingBox(x, y, z)
+```
+
+Creates a bounding box for these entity dimensions at the provided coordinates.
+
+**Parameters**
+- `[js]positionVector`: {vec3} representing the position of a point in 3D space. It may be a 3-element JS array representing the vector, like `[js]\[64, 50, -20\]`.
+- `[js]x`, `[js]y`, `[js]z`: The coordinates of point in 3D space.
+
+**Return value**
+The `AABB` for the entity dimensions positioned at provided coordinates.
+<<<
+
+| <#makeboundingbox>             |
+| <#makeboundingbox-description> |
+
+---
+
+>>> #scale
+### `fullName`
+<<<
+
+>>> #scale-description
+**Syntax**
+```js
+dimensions.makeBoundingBox(factor)
+```
+
+Scales the entity dimensions, creating a new object with width and height changed.
+
+**Parameters**
+- `[js]factor`: The width and height scale factor.
+
+**Return value**
+A new `[java]EntityDimensions` object with width and height changed.
+
+---
+
+**Syntax**
+```js
+dimensions.makeBoundingBox(widthFactor, heightFactor)
+```
+
+Scales the entity dimensions, creating a new object with width and height changed.
+
+**Parameters**
+- `[js]widthFactor`: The width scale factor.
+- `[js]heightFactor`: The height scale factor.
+
+**Return value**
+A new `[java]EntityDimensions` object with width and height changed.
+<<<
+
+| <#scale>             |
+| <#scale-description> |
+
+---
+
+>>> #witheyeheight
+### `withEyeHeight`
+<<<
+
+>>> #witheyeheight-description
+```js
+dimensions.withEyeHeight(eyeHeight)
+```
+
+Creates new entity dimensions object with eye height specified.
+
+**Parameters**
+- `[js]eyeHeight`: The eye height.
+
+**Return value**
+A new `[java]EntityDimensions` object with eye height changed.
+<<<
+
+| <#witheyeheight>             |
+| <#witheyeheight-description> |
+
+---

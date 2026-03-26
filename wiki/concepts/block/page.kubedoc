@@ -1,0 +1,13 @@
+**Blocks** are the very foundation of a Minecraft block.
+
+In the game, their role is split into the following Java objects:
+- [[/concepts/block/Block|`Block`]]  - which are the singleton objects defining block behavior. These aren't generally used in in-world interactions.
+
+- [[/concepts/block/BlockState|`BlockState`]]  - which define additional properties attacked to a block (like axis, being waterlogged, orientation, etc.). These are actual objects stored in world, and can be manipulated.
+
+- [[/concepts/block/LevelBlock|`LevelBlock`]] - a special interface added by KubeJS which abstracts away common cases of manipulating blocks in world.
+
+# See also
+
+
+

@@ -1,0 +1,129 @@
+>>> info
+For a more detailed list of everything listed, visit the [Research Tree General Knowledge](https://github.com/wolfieboy09/ResearchTree/wiki/General-Knowledge) page.
+<<<
+
+# Requirements
+Requirements are used for research nodes where certain things need to be met before researching can actually begin.
+
+>>> info
+These listed methods will all be under `Requirements`.
+`ItemRequirement`s are also **not** bound to the limit of 99 item count (as what an `ItemStack` would have. You could have 500 and it'll still work.)
+<<<
+
+## Items
+`[java].item(item: Item, amount: int)`
+Creates an `ItemRequirement` requiring an item with the required amount.
+
+`[java].item(item: TagKey<Item>, amount: int)`
+Creates an `ItemRequirement` allowing any item tag (eg. `#c:ingots/lead`), with the required amount
+
+## Fluids
+`[java].fluid(fluid: Fluid, amount: int)`
+Creates a `FluidRequirement` allowing any fluid (eg. `minecraft:water`), with the required amount (in mB)
+
+`[java].fluid(fluid: TagKey<Fluid>, amount: int)`
+Creates a `FluidRequirement` allowing any fluid tag (eg. `kubejs:deadly_liquid`), with the required amount (in mB)
+
+## Energy
+`[java].energy(amount: int)`
+Creates an `EnergyRequirement` with the required amount of energy (FE)
+
+## Advancement
+`[java].advancement(advancement: ResourceLocation)`
+Creates an `AdvancementRequirement` requiring the player to have the advancement before proceeding
+
+`[java].advancement(advancements: ResourceLocation[])`
+Creates an `AdvancementRequirement` requiring the player to have the given advancements before proceeding
+
+## Dimension
+>>> info
+When research has begun, the player must visit the dimension for it to be counted as fulfilled
+<<<
+
+`[java].dimension(dimension: RegistryKey<Level>)`
+Creates a `DimensionRequirement` requiring the player to visit the dimension (eg. `minecraft:the_end`)
+
+`[java].dimensions(dimensions: RegistryKey<Level>[])`
+Creates a `DimensionRequirement` requiring the player to visit the dimension (eg. `minecraft:the_end` and `minecraft:the_nether`)
+
+## Timed Dimension
+This is the same thing as `Dimension`, but with the number of ticks the player has been in each dimension.
+
+`[java].dimension(dimension: RegistryKey<Level>, int duration)`
+Now, with a second parameter, the amount of time the player has to be in each dimension. Creates a `TimedDimensionRequirement`.
+
+`[java].dimensions(dimensions: RegistryKey<Level>[], int duration). `
+Creates a `TimedDimensionRequirement` with a list of dimensions.
+
+
+## Time
+`[java].time(ticks: int)`
+Creates a `TimeRequirement` requiring the player to wait a certain amount of time
+
+## Stage Requirement
+`[java].requireStage(stage: String)`
+Creates `PlayerStageRequirement` requiring the player to have a stage unlocked/added. (Note: This only works with KubeJS stages).
+
+## Custom Requirements
+`[java].custom(kubeRequirement: ResourceLocation)`
+Allows you to use a requirement created with KubeJS
+
+# Rewards
+>>> info
+These listed methods will all be under `Rewards`.
+<<<
+
+## Items
+`[java].item(item: Item, amount: int)`
+Creates an `ItemReward` granting the player the item(s)
+
+`[java].item(stack: ItemStack)`
+Creates an `ItemReward` from a given `ItemStack`
+
+## Command Execution
+>>> info
+This will execute a command with permission level `2`, and it will be like the player ran it ignoring player permission level.
+To target the player, you can do `@s` or `@p` for the player who has been rewarded.
+Commands are not required to have a `/` at the start (eg. `/kill @p` will do the same as `kill @p`)
+<<<
+
+`[java].command(command: String)`
+Executes a command as the player (eg `title @p title {'text':'Research Complete!','color':'gold'}`)
+
+`[java].command(command: String, diplayName: Text)`
+Executes a command as the player. Display name will show up instead of the command (eg: you can do `kill @s` and have the display name as `Text.of('200 diamond blocks!!')`)
+
+## Experience Points
+`[java].xp(amount: int)`
+Grants the player an amount of xp points (**NOT** levels)
+
+`[java].xpLevels(amount: int)`
+Grants the player an amount of xp levels
+
+## Attribute Modification
+>>> warn
+Any attributes changed to the player (eg max health) are **permanent** changes.
+The modifier id must also be unique.
+<<<
+`[java].attribute(attribute: ResourceLocation, modifierId: ResourceLocation, amount: double, operation: AttributeModifierOperation?)`
+Modifies the player's attributes to one via the reward. If the `operation` argument is not present, it will default to `AttributeModifier.Operation.ADD_VALUE`.
+
+## Loot Tables
+`[java].lootTable(lootTableId: ResourceLocation)`
+Grants the player a loot table that is rolled.
+
+## Mob Effects
+`[java].effect(effectInstance: MobEffectInstance)`
+Gives the player an effect. To make `MobEffectInstance`, see `MobEffectUtil`
+
+## Recipe Unlocking
+`[java].unlockRecipes(recipes: ResourceLocation[])`
+Unlocks the given recipes to the player
+
+## Stage Unlocking
+`[java].grantStage(stage: String)`
+Creates a `PlayerUnlockStageReward` which grants the player a stage. (Note: This only works with KubeJS stages).
+
+## Custom Rewards
+`[java].custom(kubeReward: ResourceLocation)`
+Allows you to use a reward created with KubeJS

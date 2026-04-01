@@ -43,7 +43,7 @@ HexcastingEvents.registeredPatternCastEvent((e) => {
         // Turn the entity into a position 10 blocks above it and add it to the stack
         stack.add(new Vec3Iota(entity.blockPosition().offset(0, 10, 0)))
 
-        // Set the price of the spell to be 5 ametheyst dust (Value is in 10,000s of amtheyst dust)
+        // Set the price of the spell to be 5 amethyst dust (Cost is in 10,000ths of an amethyst dust)
         e.setCost(50000)
 
         // For the cypher, we just want to give the caster a new cypher with the *exact* amount of media needed for the spell, in this case 15.125 dust.

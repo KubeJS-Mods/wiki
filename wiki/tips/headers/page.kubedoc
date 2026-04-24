@@ -1,0 +1,23 @@
+In 1.19.2+ you can add various headers to the top of a script to change its load conditions.
+For example:
+```js
+//ignored: true
+console.log("I am never printed")
+```
+```js
+//packmode: default
+console.log('I will only print when packmode in kubejs/config/common.properties is set to default')
+```
+You can stack them too!
+```js
+//requires: minecraft
+//requires: create
+console.log('I will only print when mods with ids of minecraft AND create are loaded')
+```
+```js
+//priority: 10
+//packmode: hard
+//requires: create
+//requires: tconstruct
+console.log('I am complicated!')
+```

@@ -1,0 +1,23 @@
+class <T>
+
+static <T> Optional<T> empty()
+
+static <T> Optional<T> of(T value)
+
+static <T> Optional<T> ofNullable(T value)
+
+T get()
+
+boolean isPresent()
+
+boolean isEmpty()
+
+void ifPresent(Consumer<? super T> action)
+
+void ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction)
+
+Optional<T> filter(Predicate<? super T> predicate)
+
+T orElseGet(Supplier<? extends T> supplier)
+
+T orElseThrow()

@@ -1,0 +1,11 @@
+title: "Complementos"
+description: "Todas las integraciones de KubeJS"
+
+title-built-in: "Incorporado"
+description-built-in: "Complementos que ya vienen instalados con KubeJS"
+
+title-first-party: "Complementos propios"
+description-first-party: "Complementos de KubeJS hechos por los desarrolladores de KubeJS"
+
+title-third-party: "Complementos de terceros"
+description-third-party: "Complementos de KubeJS hechos por la comunidad"

@@ -1,0 +1,9 @@
+void log(Object... args)
+
+void error(Object... args)
+
+void warn(Object... args)
+
+void info(Object... args)
+
+void debug(Object... args)

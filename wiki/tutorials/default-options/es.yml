@@ -1,0 +1,7 @@
+title: "Opciones Predeterminadas"
+description: "Generación del archivo options.txt predeterminado"
+
+intro: "Puedes incluir opciones predeterminadas desde options.txt con KubeJS. Esto incluye atajos de teclado, configuración de video, paquetes de recursos habilitados, controles como autojump y toggle sprint, y cosas raras como tooltips avanzados."
+overriden: "¿Por qué usar esto en lugar de simplemente incluir options.txt? Si incluyes options.txt, las opciones del usuario se sobrescribirán cada vez que actualicen tu modpack, mientras que KubeJS solo establece las opciones una vez, la primera vez que se inicia el modpack."
+howto: "Para usarlo, simplemente crea un archivo llamado `defaultoptions.txt` en la carpeta `kubejs/config`. Luego copia las líneas que quieras establecer por defecto desde el archivo options.txt normal. También puedes copiar todo el archivo si deseas incluir todo."
+optionlist: "Una lista completa de las opciones que puede contener el archivo options.txt está disponible en la [Minecraft Wiki](https://minecraft.wiki/w/Options.txt)."

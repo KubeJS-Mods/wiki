@@ -1,0 +1,371 @@
+# Getting Started
+Documentation partly copied over from the official wiki on the mod's [Github page](https://github.com/AlmostReliable/ponderjs/wiki) by [[@E7091D7E]]
+>>> info
+You can browse through [Create's Scene Builder](https://github.com/Creators-of-Create/Create/blob/mc1.19/dev/src/main/java/com/simibubi/create/foundation/ponder/SceneBuilder.java) functions for a better look at what's possible
+<<<
+
+## Dependencies
+- KubeJS - [Modrinth](https://modrinth.com/mod/kubejs) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/kubejs)
+- Create - [Modrinth](https://modrinth.com/mod/create) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/create)
+
+## Type Syntax
+In PonderJS some functions will need a selection, block position or a vector. The selection is an area between two positions or vectors. KubeJS and PonderJS provide a simple syntax to pass a position or vector to a function.
+
+Passing an array with three values `[x, y, z]` to a function that requires a selection, block position or vector will automatically wrap the array to the corresponding type. 
+
+>>> info
+Enabling Editing Mode in the Ponder section of the Create client config will label the axes in the Ponder Scene. You can also find a blocks coordinates by pressing Q and hovering over a block.
+<<<
+
+If you want to shorthand a selection area you can pass in the following types:
+- `[x1, y1, z1, x2, y2, z2]`
+- `[vector1, vector2]`
+- `[blockPos1, blockPos2]`
+- `[[x, y, z], [x, y, z]]`
+
+If you dislike the shorthand syntax, you can always use the functions provided in the util object in your Ponder scenes.
+
+## Ponder Tags
+Ponder tags are used to group elements inside the ponder index.
+
+### Creating a Tag
+Create a new `*.js` file in {cl-s} and add the following block:
+```js
+// for 1.18 use: onEvent("ponder.tag", event => { ... })
+Ponder.tags((event) => {
+    event.createTag(
+        "kubejs:getting_started",   // Tag Name
+        "minecraft:paper",          // Icon
+        "Getting started.",         // Title
+        "We ponder now!",           // Description
+        [   // Array of items to appear in the index tag
+        "minecraft:paper",
+        "minecraft:apple",
+        "minecraft:emerald_block",
+        ]
+    );
+});
+```
+![[ponder_index.gif|Preview]]
+
+## Ponder Scene
+
+### Events
+Use the ponder.registry event to create your scenes.
+```js
+// for 1.18 use: onEvent("ponder.registry", event => { ... })
+Ponder.registry((event) => {
+    /**
+     * Create a new ponder entry with one scene for "minecraft:paper".
+     */
+    event
+        .create("minecraft:paper")
+        .scene("our_first_scene", "First example scene for paper",
+        (scene, util) => {
+        // your scene code here
+        }
+    );
+});
+```
+PonderJS will automatically use a basic 5x5 structure.
+You can also use custom structures by storing them as a `.nbt` schematic inside the `kubejs/assets/kubejs/ponder` folder and passing them as an additional argument to `.scene(...)`
+``` js
+// for 1.18 use: onEvent("ponder.registry", event => { ... })
+Ponder.registry((event) => {
+    /**
+     * Scene with custom structure
+     */
+    event
+        .create("minecraft:paper")
+        .scene(
+            "our_first_scene",
+            "Example scene for paper with structure",
+            "kubejs:your_structure_id",
+            (scene, util) => {
+                // your scene code here
+            }
+        );
+});
+```
+
+## Creating a Scene
+This example shows how to create a simple scene with a structure, animation time and controls:
+```js
+// for 1.18 pls use: onEvent("ponder.registry", event => { ... })
+Ponder.registry((event) => {
+    event.create("minecraft:paper").scene("our_first_scene", "First example scene", (scene, util) => {
+        /**
+         * Shows the whole structure.
+         * Alternatively, `scene.showBasePlate()` can be used to show the base plate.
+         * Useful for animating different parts of the structure.
+         */
+        scene.showStructure();
+        
+        /**
+         * Encapsulate the structure bounds to given positions. This is useful if the custom structure has no proper bounds.
+         * scene.showStructure() automatically encapsulates the bounds.
+         */
+        // scene.encapsulateBounds(blockPos)
+
+        /**
+         * idle(ticks) or idleSeconds(seconds) is used to wait for a certain amount of time.
+         * 20 ticks = 1 second
+         */
+        scene.idle(10);
+
+        /**
+         * `.createEntity()` returns an entity link from Create which will be used
+         * as reference in the future
+         * [x, y, z] is the position but any KubeJS way to represent a position can be used.
+         *
+         * Don't modify the entity directly!
+         */
+        const creeperLink = scene.world.createEntity("creeper", [2.5, 1, 2.5]);
+
+        /**
+         * 50 -> the tick length of the instruction
+         * [x, y, z] -> the position that the text should point at
+         */
+        scene
+            .text(60, "Example text", [2, 2.5, 2.5])
+            /**
+             * Optional | Sets the color of the text.
+             * Possible values:
+             * - PonderPalette.WHITE, PonderPalette.BLACK
+             * - PonderPalette.RED, PonderPalette.GREEN, PonderPalette.BLUE
+             * - PonderPalette.SLOW, PonderPalette.MEDIUM, PonderPalette.FAST
+             * - PonderPalette.INPUT, PonderPalette.OUTPUT
+             */
+            .colored(PonderPalette.RED)
+            /**
+             * Optional | Places the text closer to the target position.
+             */
+            .placeNearTarget()
+            /**
+             * Optional | Adds a keyframe to the scene.
+             */
+            .attachKeyFrame();
+
+        /**
+         * 120 -> the tick length of the instruction
+         * [x, y, z] -> the position that the controls should point at
+         * "down" -> the direction that is used by the controls for pointing
+         */
+        scene
+            .showControls(60, [2.5, 3, 2.5], "down")
+            /**
+             * Uses mouse right click as icon.
+             * Alternatively, `.leftClick()` can be used
+             * or `.showing(icon)` for a custom icon.
+             */
+            .rightClick()
+
+            // Defines the item that should be shown with the icon.
+            .withItem("shears")
+
+            /**
+             * Optional | Defines that controls are only shown when sneaking.
+             * `.whileSneaking()` and `.withCTRL()` can not be used simultaneously.
+             */
+            .whileSneaking()
+            
+            /**
+             * Optional | Defines that controls are only shown when holding CTRL.
+             * `.whileSneaking()` and `.withCTRL()` can not be used simultaneously.
+             */
+            .whileCTRL();
+    });
+});
+```
+
+# Scene View
+You can move and scale the Ponder scene to accomodate custom structures that don't fit on the default 5x5 base.
+```js
+// Scale scene to 80% of its original size. (scale down by 20%)
+scene.scaleSceneView(0.8);
+
+// Move scene down 1 block
+scene.setSceneOffsetY(-1);
+```
+
+# Set, Replace, and Modify Blocks
+```js
+// for 1.18 use: onEvent("ponder.registry", event => { ... })
+Ponder.registry((event) => {
+    event.create("minecraft:stone").scene("set_replace_modify_tutorial", "Set, Replace, Modify.", (scene, util) => {
+        scene.showStructure();
+
+        // The last argument is for spawning particles.
+        scene.world.setBlocks([0, 1, 0, 4, 1, 4], "minecraft:brick_slab", true);
+        scene.world.setBlock([0, 1, 1], "minecraft:stone_slab", false);
+
+        scene.world.modifyBlocks([2, 1, 2, 2, 1, 3], (curState) => curState.with("type", "double"), true);
+        scene.world.modifyBlock([0, 1, 4], (curState) => curState.with("type", "top"), true);
+
+        // Or directly return a new block state.
+        scene.world.modifyBlock([0, 1, 3], () => Block.id("minecraft:jungle_slab").with("type", "top"), true);
+
+        scene.world.replaceBlocks([3, 1, 0, 4, 1, 4], "minecraft:oak_slab", false);
+    });
+});
+```
+
+# Block NBT
+```js
+// for 1.18 use: onEvent("ponder.registry", event => { ... })
+Ponder.registry((event) => {
+    event
+        .create("minecraft:paper")
+        .scene("block_entity_nbt", "Set NBT for blocks", "ponderjs:block_entity_tutorial", (scene, util) => {
+            scene.showStructure();
+            scene.scaleSceneView(0.9);
+            scene.setSceneOffsetY(-1);
+            scene.idle(20);
+
+            /**
+             * "nbt" contains the NBT data of the block entity. In our example we are
+             * using a banner which has "Patterns" as an array of NBT data.
+             * 
+             * For other block entities, the NBT data will be differently and you have
+             * lookup yourself the NBT data of the block. Either through the minecraft
+             * wiki or by using "/kubejs hand" when holding the block entity as item, as
+             * some block entities will store their data inside the item after break. 
+             */
+            scene.world.modifyTileNBT([2, 3, 3], (nbt) => {
+                
+                nbt.Patterns = [
+                    {
+                        Color: 0,
+                        Pattern: "pig",
+                    },
+                ];
+            });
+
+            scene.world.modifyTileNBT([3, 3, 2], (nbt) => {
+                nbt.Patterns = [
+                    {
+                        Color: 0,
+                        Pattern: "cre",
+                    },
+                ];
+            });
+        });
+});
+```
+
+# Sections
+Besides scene.showStructure() and scene.showBasePlate(), there is another way to show specific parts of the scene structure.
+
+## `.showSection()` and `.hideSection()`
+The first argument is a selection for the section.
+To select a specific block, a value can be passed. For areas, an array with two positions is required.
+
+>>> info
+**Note:** You don't need to use `[x, y, z]` syntax. You can also pass a `vector` or a `blockpos`
+<<<
+
+You can use `Facing` or `Direction` to indicate the direction the selected section fades into or out of.
+```js
+// For a single block
+scene.world.showSection([x, y, z], Facing.DOWN);
+
+// For an area
+scene.world.showSection([x1, y1, z1, x2, y2, z2], Facing.DOWN);
+```
+Hiding a section with .hideSection() uses the same syntax.
+
+### Section Example
+``` js
+// for 1.18 use: onEvent("ponder.registry", event => { ... })
+Ponder.registry((event) => {
+    event
+        .create("minecraft:cake")
+        .scene("animate_section", "The cake is a lie.", "ponderjs:the_cake_is_a_lie", (scene, util) => {
+            // Layer 0
+            for (let x = 0; x < 5; x++) {
+                for (let z = 0; z < 5; z++) {
+                    scene.world.showSection([x, 0, z], Facing.DOWN);
+                }
+                // Idle can be used to create animations.
+                scene.idle(3);
+            }
+
+            //Layer 1
+            for (let z = 0; z < 5; z++) {
+                for (let x = 0; x < 5; x++) {
+                    scene.world.showSection([x, 1, z], Facing.DOWN);
+                }
+                scene.idle(3);
+            }
+
+            // Layer 2
+            for (let x = 0; x < 5; x++) {
+                for (let z = 0; z < 5; z++) {
+                    scene.world.showSection([x, 2, z], Facing.DOWN);
+                    scene.idle(2);
+                }
+            }
+
+            // Top layer
+            for (let x = 0; x < 5; x++) {
+                for (let z = 0; z < 5; z++) {
+                    scene.world.showSection([x, 3, z], Facing.DOWN);
+                    scene.idle(1);
+                }
+            }
+
+            scene.text(30, "What a great cake!", [2.5, 3.5, 2.5]);
+            scene.idle(40);
+
+            scene.world.hideSection([0, 0, 0, 1, 4, 1], Facing.NORTH);
+
+            scene.text(30, "Yummy!", [1, 1.5, 2.5]).colored(PonderPalette.MEDIUM);
+            scene.idle(40);
+        });
+});
+```
+
+### Fading Example
+``` js
+/**
+ * Helper function for fading a section in
+ *
+ * scene => the scene to fade the section in
+ * section => the section to fade in
+ * movingOffset => the offset to move the section by (a value, not a position)
+ * direction => fade direction
+ * idleTicks => number of ticks to idle
+ */
+function fadeInSection(scene, selection, movingOffset, direction, idleTicks) {
+    let link = scene.world.showIndependentSection(selection, direction);
+    scene.world.moveSection(link, movingOffset, 0); // 0 to instantly move
+    scene.idle(idleTicks);
+    scene.world.hideIndependentSection(link, direction);
+    scene.idle(idleTicks);
+}
+
+// for 1.18 use: onEvent("ponder.registry", event => { ... })
+Ponder.registry((event) => {
+    event.create("minecraft:hopper").scene("section_fading", "Let's fade", (scene, util) => {
+
+        /**
+         * Blocks used for fading so they aren't shown directly.
+         * If a custom structure is used, the blocks can be directly added to the structure file.
+         */
+        scene.world.setBlocks([4, 1, 2], "minecraft:dispenser");
+        scene.world.setBlocks([3, 1, 2], "minecraft:chest");
+        scene.world.setBlocks([2, 1, 2], "minecraft:dropper");
+
+        scene.world.setBlocks([2, 2, 2], "minecraft:hopper");
+
+        // Only shows the base plate and the hopper that was just manually placed.
+        scene.showBasePlate();
+        scene.world.showSection([2, 2, 2], Facing.DOWN);
+        scene.idle(20);
+
+        fadeInSection(scene, [4, 1, 2], [-2, 0, 0], Direction.EAST, 15);
+        fadeInSection(scene, [3, 1, 2], [-1, 0, 0], Direction.EAST, 15);
+        fadeInSection(scene, [2, 1, 2], [0, 0, 0], Direction.EAST, 15);
+    });
+});
+```

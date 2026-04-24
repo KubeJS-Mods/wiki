@@ -1,2 +1,11 @@
 title: "擴充"
 description: "所有 KubeJS 模組集成"
+
+title-built-in: "內建"
+description-built-in: "KubeJS 預設已經包含的擴充"
+
+title-first-party: "官方擴充"
+description-first-party: "由 KubeJS 團隊製作的擴充"
+
+title-third-party: "第三方擴充"
+description-third-party: "由社群製作的擴充"

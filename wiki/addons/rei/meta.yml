@@ -1,0 +1,6 @@
+script: "common"
+author: "00000001"
+addon: "built-in"
+download-curseforge: "roughly-enough-items"
+download-modrinth: "rei"
+see-also: "/events/RecipeViewerEvents"

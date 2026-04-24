@@ -1,0 +1,7 @@
+title: "Cambiar Nombres de Visualización de Mods"
+description: "¡Sí, es raro, pero posible!"
+
+version-info: "Esto solo es posible en KubeJS 6 o superior."
+startup-line: "En un script de inicio, añade esta línea:"
+useful: "Esto es útil cuando agregas un montón de items con KubeJS pero quieres que muestren el nombre de tu modpack en lugar de \"KubeJS\"."
+other-mods: "Y sí, también puedes cambiar el nombre de otros mods:"

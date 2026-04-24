@@ -1,0 +1,8 @@
+# Example
+```js
+RecipeViewerEvents.registerSubtypes('item', event => {
+	// Stone swords with different 'custom_data' components are now considered different entries
+	event.useComponents('minecraft:stone_sword', 'custom_data')
+})
+
+```

@@ -1,0 +1,9 @@
+class <T>
+
+ResourceLocation location()
+
+ResourceLocation registry()
+
+ResourceKey<Registry<T>> registryKey()
+
+isFor(ResourceKey<? extends Registry<?>> registryKey)

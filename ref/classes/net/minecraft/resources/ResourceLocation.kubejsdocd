@@ -1,0 +1,5 @@
+# The namespace of the resource location
+String getNamespace()
+
+# The path of the resource location
+String getPath()

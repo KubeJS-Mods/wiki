@@ -1,3 +1,0 @@
-script: "server"
-event-result: false
-see-also: "$ServerEvents/blockLootTables, $ServerEvents/entityLootTables, $ServerEvents/giftLootTables, $ServerEvents/fishingLootTables, $ServerEvents/chestLootTables"

@@ -1,0 +1,3 @@
+interface <T>
+
+void accept(T value)

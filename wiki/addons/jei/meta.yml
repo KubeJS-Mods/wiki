@@ -1,0 +1,5 @@
+script: "common"
+addon: "built-in"
+download-curseforge: "jei"
+download-modrinth: "jei"
+see-also: "/events/RecipeViewerEvents"

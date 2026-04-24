@@ -103,8 +103,8 @@ You can find [[$FoodBuilder|full list of FoodBuilder methods here]].
 # foodEaten Example
 Note that the ItemEvents.FoodEaten() event is a Server Event, and should go in the server scripts folder rather than the startup scripts folder
 ```js
-ItemEvents.foodEaten("minecraft:diamond", (foodEaten) => {
-	const { item, level, player } = foodEaten;
+ItemEvents.foodEaten("minecraft:diamond", (foodEatenEvent) => {
+	const { item, level, player } = foodEatenEvent;
 	const num_diamonds_eaten =
 		(player.persistentData.getInt("diamonds_eaten") ?? 0) + 1;
 	player.persistentData.putInt("diamonds_eaten", num_diamonds_eaten);

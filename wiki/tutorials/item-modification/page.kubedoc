@@ -86,7 +86,7 @@ ItemEvents.modification(event => {
         food.hunger(2)
         food.saturation(3)
         food.fastToEat()
-        // the following function is broken in most current KubeJS version, use ItemEvents.foodEaten instead.
+        // The following function is broken in most current KubeJS version, use ItemEvents.foodEaten instead.
         // An example is provided below.
         food.eaten(foodData => foodData.player.tell('you ate')) 
     }

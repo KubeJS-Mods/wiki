@@ -86,7 +86,7 @@ ItemEvents.modification(event => {
         food.hunger(2)
         food.saturation(3)
         food.fastToEat()
-        // The following function is broken in most current KubeJS version, use ItemEvents.foodEaten instead.
+        // The following method is broken in most current KubeJS version, use ItemEvents.foodEaten instead.
         // An example is provided below.
         food.eaten(foodData => foodData.player.tell('you ate')) 
     }
@@ -101,7 +101,7 @@ ItemEvents.modification(event => {
 You can find [[$FoodBuilder|full list of FoodBuilder methods here]].
 
 # foodEaten Example
-This example exists to address the broken $$.eaten() function mentioned in the above section. 
+This example exists to address the broken $$.eaten() method mentioned in the above section. 
 Note that the ItemEvents.FoodEaten() event is a Server Event, and this example should go in the {se-s} folder rather than the {st-s} folder
 ```js
 ItemEvents.foodEaten("minecraft:diamond", (foodEatenEvent) => {

@@ -101,7 +101,8 @@ ItemEvents.modification(event => {
 You can find [[$FoodBuilder|full list of FoodBuilder methods here]].
 
 # foodEaten Example
-Note that the ItemEvents.FoodEaten() event is a Server Event, and should go in the server scripts folder rather than the startup scripts folder
+This example exists to address the broken $$.eaten() function mentioned in the above section. 
+Note that the ItemEvents.FoodEaten() event is a Server Event, and this example should go in the {se-s} folder rather than the {st-s} folder
 ```js
 ItemEvents.foodEaten("minecraft:diamond", (foodEatenEvent) => {
 	const { item, level, player } = foodEatenEvent;

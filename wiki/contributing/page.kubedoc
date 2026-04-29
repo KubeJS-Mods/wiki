@@ -8,6 +8,7 @@ Make sure to **NOT** force push. Currently doing so will cause the preview to no
 {formatting-info}
 - In code blocks, use tab characters, not spaces.
 - Use `[js]const` for variables whenever possible.
+- Use `camelCase` for all variable names apart from constants which should use `SCREAMING_SNAKE_CASE`.
 - Use `[js]event` as the name of the event handler callback parameter.
 - Use arrow functions (`[js]() => {}`) for all functions.
 - Omit parentheses for one-parameter arrow functions (`[js]ServerEvents.recipes(event => {})`).

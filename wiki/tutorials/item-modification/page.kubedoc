@@ -88,7 +88,7 @@ ItemEvents.modification(event => {
         food.fastToEat()
         // The following method is broken in 1.21.1, use ItemEvents.foodEaten instead.
         // An example is provided below.
-        food.eaten(foodData => foodData.player.tell('you ate')) 
+        food.eaten(foodData => foodData.player.tell('You ate a diamond!')) 
     }
   })
 
@@ -101,16 +101,18 @@ ItemEvents.modification(event => {
 You can find [[$FoodBuilder|full list of FoodBuilder methods here]].
 
 # foodEaten Example
-This example exists to address the broken $$.eaten() method mentioned in the above section. 
-Note that the ItemEvents.FoodEaten() event is a Server Event, and this example should go in the {se-s} folder rather than the {st-s} folder
+This example exists as an alternative to the broken `[js].eaten()` method mentioned in the above section.
+>>> info
+The ItemEvents.FoodEaten() event is a Server Event, and this example should go in the {se-s} folder rather than the {st-s} folder.
+<<<
 ```js
-ItemEvents.foodEaten("minecraft:diamond", (foodEatenEvent) => {
-	const { item, level, player } = foodEatenEvent;
-	const num_diamonds_eaten =
-		(player.persistentData.getInt("diamonds_eaten") ?? 0) + 1;
-	player.persistentData.putInt("diamonds_eaten", num_diamonds_eaten);
+ItemEvents.foodEaten('minecraft:diamond', event => {
+	const { item, level, player } = event;
 
-	player.tell(`You ate a diamond! You've eaten ${num_diamonds_eaten} so far`);
+	const diamondsEaten = (player.persistentData.getInt('diamonds_eaten') ?? 0) + 1;
+	player.persistentData.putInt('diamonds_eaten', diamondsEaten);
+
+	player.tell(`You ate a diamond! You've eaten ${diamondsEaten} so far.`);
 });
 
 ```

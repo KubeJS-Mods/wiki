@@ -2,7 +2,7 @@ Custom fluids are made in a startup script. The event is not cancellable.
 
 Here are a couple examples on how to use the fluid builder:
 |>+ Water Clone
-Some methods can be set by default if you use the `[js]'thick'` argument for the builder:
+Some methods can be set by default if you use the `[js]'thin'` argument for the builder:
 ```js
 const $ParticleTypes = Java.loadClass('net.minecraft.core.particles.ParticleTypes')
 

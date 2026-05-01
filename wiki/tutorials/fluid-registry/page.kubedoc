@@ -23,6 +23,9 @@ This is not an exact clone of the vanilla lava.
 Lava has additional properties that are not available in this fluid builder.
 <<<
 ```js
+const $SoundActions = Java.loadClass('net.neoforged.neoforge.common.SoundActions')
+const $SoundEvents = Java.loadClass('net.minecraft.sounds.SoundEvents')
+
 StartupEvents.registry('fluid', event => {
   event.create('lava_clone')
     .displayName('Lava Clone')
@@ -91,10 +94,9 @@ There are 3 ways to write colors:
 - `[js]BLACK_DYE`
 <|
 <|
-
 - `[js]stillTexture(string)`
 - `[js]flowingTexture(string)`
-- `[js]renderType(int)` between [0-3]
+- `[js]renderType(int)` between 0-3
 |> Render Types
 - `0`: solid
 - `1`: cutout
@@ -125,8 +127,37 @@ There are 3 ways to write colors:
 - `[js]canExtinguish(bool)`
 - `[js]canConvertToSource(bool)`
 - `[js]supportsBoating(bool)`
-- `[js]pathType(x)` xxxxx
-- `[js]adjacentPathType(x)` xxxxx
+- `[js]pathType(int)`
+|> Path Types
+The path type is used to tell the AI if it can walk into it.
+- `0`: BLOCKED
+- `1`: OPEN
+- `2`: WALKABLE
+- `3`: WALKABLE_DOOR
+- `4`: TRAPDOOR
+- `5`: POWDER_SNOW
+- `6`: DANGER_POWDER_SNOW
+- `7`: FENCE
+- `8`: LAVA
+- `9`: WATER
+- `10`: WATER_BORDER
+- `11`: RAIL
+- `12`: UNPASSABLE_RAIL
+- `13`: DANGER_FIRE
+- `14`: DAMAGE_FIRE
+- `15`: DANGER_OTHER
+- `16`: DAMAGE_OTHER
+- `17`: DOOR_OPEN
+- `18`: DOOR_WOOD_CLOSED
+- `19`: DOOR_IRON_CLOSED
+- `20`: BREACH
+- `21`: LEAVES
+- `22`: STICKY_HONEY
+- `23`: COCOA
+- `24`: DAMAGE_CAUTIOUS
+- `25`: DANGER_TRAPDOOR
+<|
+- `[js]adjacentPathType(int)`
 - `[js]sound(int, int)`
 |> Sound args
 |> First arg
@@ -158,7 +189,7 @@ sound($SoundActions.BUCKET_FILL, $SoundEvents.AMETHYST_BLOCK_BREAK)
 ```
 <|
 - `[js]canHydrate(bool)`
-- `[js]lightLevel(int)` between [0-15]
+- `[js]lightLevel(int)` between 0-15
 - `[js]density(int)`
 - `[js]temperature(int)`
 - `[js]viscosity(int)`

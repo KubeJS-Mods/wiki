@@ -1,113 +1,142 @@
 Custom fluids are made in a startup script. The event is not cancellable.
 
->>> info
-This is supported by NeoForge/Forge on all versions, and Fabric on 1.18.2+
-<<<
 
-|> 1.19.2+
 ```js
 StartupEvents.registry('fluid', event => {
-  // Basic "thick" (looks like lava) fluid with red tint
-  event.create('thick_fluid')
-    .thickTexture(0xFF0000)
-    .bucketColor(0xFF0000)
-    .displayName('Thick Fluid')
-                 
-  // Basic "thin" (looks like water) fluid with cyan tint, has no bucket and is not placeable
-  event.create('thin_fluid')
-    .thinTexture(0xFF0000)
-    .bucketColor(0x00FFFF)
-    .displayName('Thin Fluid')
-    .noBucket() // both these methods are 1.18.2+ only
-    .noBlock() 
-    
-  // Fluid with custom textures
-  event.create('strawberry_cream')
-    .displayName('Strawberry Cream')
-    .stillTexture('kubejs:block/strawberry_still')
-    .flowingTexture('kubejs:block/strawberry_flow')
-    .bucketColor(0xFF33FF)
+  // ...
+})
+```
 
-  // Fluid with a modified bucket item
-  const tacoSauce = event
-    .create('taco_sauce')
-    .thickTexture(0xff0000)
-    .bucketColor(0xff0000)
-  
-  tacoSauce.bucketItem.group('food')
-})
-```
-<||> 1.18.2 and below
-```js
-onEvent('fluid.registry', event => {
-  // Basic "thick" (looks like lava) fluid with red tint
-  event.create('thick_fluid')
-    .thickTexture(0xFF0000)
-    .bucketColor(0xFF0000)
-    .displayName('Thick Fluid')
-                 
-  // Basic "thin" (looks like water) fluid with cyan tint, has no bucket and is not placeable
-  event.create('thin_fluid')
-    .thinTexture(0xFF0000)
-    .bucketColor(0x00FFFF)
-    .displayName('Thin Fluid')
-    .noBucket() // both these methods are 1.18.2+ only
-    .noBlock() 
-    
-  // Fluid with custom textures
-  event.create('strawberry_cream')
-    .displayName('Strawberry Cream')
-    .stillTexture('kubejs:block/strawberry_still')
-    .flowingTexture('kubejs:block/strawberry_flow')
-    .bucketColor(0xFF33FF)
-  
-  // Fluid with a modified bucket item
-  const tacoSauce = event
-    .create('taco_sauce')
-    .thickTexture(0xff0000)
-    .bucketColor(0xff0000)
-  
-  tacoSauce.bucketItem.group('food')
-})
-```
+|>+ Methods supported by the fluid builder
+- `[js]displayName(string)`
+- `[js]translationKey(string)`
+- `[js]formattedDisplayName()`
+- `[js]tag(string[])`
+- `[js]type(builder)` more details below
+- `[js]tint(color)`
+|> Color options
+There are 3 ways to write colors:
+- Using the `[js]Color` wrapper: `[js]Color.RED`
+- Using RGB hex values: `[js]0xFF0000`
+- Using ARGB hex values: `[js]0x7F0000FF`
+|> List of all the `[js]Color` options
+- `[js]BLACK`
+- `[js]DARK_BLUE`
+- `[js]DARK_GREEN`
+- `[js]DARK_AQUA`
+- `[js]DARK_RED`
+- `[js]DARK_PURPLE`
+- `[js]GOLD`
+- `[js]GRAY`
+- `[js]DARK_GRAY`
+- `[js]BLUE`
+- `[js]GREEN`
+- `[js]AQUA`
+- `[js]RED`
+- `[js]LIGHT_PURPLE`
+- `[js]YELLOW`
+- `[js]WHITE`
+- `[js]WHITE_DYE`
+- `[js]ORANGE_DYE`
+- `[js]MAGENTA_DYE`
+- `[js]LIGHT_BLUE_DYE`
+- `[js]YELLOW_DYE`
+- `[js]LIME_DYE`
+- `[js]PINK_DYE`
+- `[js]GRAY_DYE`
+- `[js]LIGHT_GRAY_DYE`
+- `[js]CYAN_DYE`
+- `[js]PURPLE_DYE`
+- `[js]BLUE_DYE`
+- `[js]BROWN_DYE`
+- `[js]GREEN_DYE`
+- `[js]RED_DYE`
+- `[js]BLACK_DYE`
 <|
-
-Other methods fluid builder supports: (you can chain these methods after create())
-- `[js]displayName(name)`
-- `[js]rarity(value)`
-  - `rarity` can be: 
-    - `'common'`
-    - `'uncommon'`
-    - `'rare'`
-    - `'epic'`
-- `[js]color(color)`
-- `[js]bucketColor(color)`
-- `[js]thinTexture(color)`
-- `[js]thickTexture(color)`
-- `[js]builtinTextures()`
-- `[js]stillTexture(path)`
-  - `path` is the path to the texture, for example `minecraft:block/sand`
-  - This texture is recomended to be 16x16, or if animated with a mcmeta file then 16x48 for 3 frames or 16x80 for 5 or 16x240 for 15
-  - Frame counts of 3, 5, 15, 6, 10, or 30 will make your life easier, because the flowing animation need to be a multiple of 15 to look good
-- `[js]flowingTexture(path)`
-  - `path` is the path to texture, for example `minecraft:block/sand`
-  - This texture is recommended to be 32x480 and animated with a mcmeta file
-  - Each frame is recommended to be 32x32 (recommended to be the same 16x16 texture tiled)
-  - Then each of these frames are shifted one pixel vertically from the previous, so it looks like its moving
-  - If you're going to be making your own flowing fluid texture, it is *highly recommended* to __*not*__ make these by hand (it's hours of suffering), and instead write some program, or setup something with blender nodes to make it
+<|
+- `[js]stillTexture(string)`
+- `[js]flowingTexture(string)`
+- `[js]renderType(int)` between [0-3]
+|> Render Types
+- `0`: solid
+- `1`: cutout
+- `2`: cutout mipped
+- `3`: translucent
+<|
+- `[js]translucent()` sets the render type to 3
+- `[js]slopeFindDistance(int)`
+- `[js]levelDecreasePerBlock(int)`
+- `[js]explosionResistance(float)`
+- `[js]tickRate(int)`
 - `[js]noBucket()`
 - `[js]noBlock()`
-- `[js]gaseous()`
-  - This makes the fluid a gas in Architectury's eyes, which isn't the same as a Mekanism gas!
-- `[js]bucketItem`
-  - You should be able to chain [item builder](https://kubejs.com/wiki/tutorials/item-registry) methods after this
+<|
 
-The following can also be used but have no effect unless a mod adds a purpose:
-- `[js]luminosity(value)`
-  - Default: 0
-- `[js]density(value)`
-  - Default: 1000
-- `[js]temperature(value)`
-  - Default: 300
-- `[js]viscosity(value)`
-  - Default: 1000
+|> Fluid type builder
+- `[js]stillTexture(string)` same as the one above
+- `[js]flowingTexture(string)` same as the one above
+- `[js]screenOverlayTexture(string)`
+- `[js]blockOverlayTexture(string)`
+- `[js]tint(color)` same as the one above
+- `[js]descriptionId(string)`
+- `[js]motionScale(double)`
+- `[js]canPushEntity(bool)`
+- `[js]canSwim(bool)`
+- `[js]canDrown(bool)`
+- `[js]fallDistanceModifier(float)`
+- `[js]canExtinguish(bool)`
+- `[js]canConvertToSource(bool)`
+- `[js]supportsBoating(bool)`
+- `[js]pathType(x)` xxxxx
+- `[js]adjacentPathType(x)` xxxxx
+- `[js]sound(int, int)`
+|> Sound args
+|> First arg
+The first argument is the `[js]SoundAction`:
+>>> warn
+You will have to import the class for this to work!
+<<<
+```js
+const $SoundActions = Java.loadClass('net.neoforged.neoforge.common.SoundActions')
+```
+Possible options:
+- `BUCKET_FILL`
+- `BUCKET_EMPTY`
+- `FLUID_VAPORIZE`
+- `CAULDRON_DRIP`
+<||> Second arg
+The second argument is the `[js]SoundEvent`
+>>> warn
+You will have to import the class for this to work!
+<<<
+```js
+const $SoundEvents = Java.loadClass('net.minecraft.sounds.SoundEvents')
+```
+For a comprehensive list of all the options in the base game, you can check the [online Javadocs](https://lexxie.dev/neoforge/1.21.1/net/minecraft/sounds/SoundEvents.html).
+<|
+Example usage:
+```js
+sound($SoundActions.BUCKET_FILL, $SoundEvents.AMETHYST_BLOCK_BREAK)
+```
+<|
+- `[js]canHydrate(bool)`
+- `[js]lightLevel(int)`
+- `[js]density(int)`
+- `[js]temperature(int)`
+- `[js]viscosity(int)`
+- `[js]rarity(string)`
+|> Rarity options
+- `[js]'common'`
+- `[js]'uncommon'`
+- `[js]'rare'`
+- `[js]'epic'`
+<|
+- `[js]addDripstoneDripping(float, X, string, string)`
+|> Arguments
+- `chance`: the chance that the cauldron below will be filled every time the Pointed Dripstone is randomly ticked
+- `dripParticle`: the particle that spawns randomly from the tip of the Pointed Dripstone when this fluid is above it
+- `cauldron`: the block the Pointed Dripstone should replace an empty cauldron with when it successfully tries to fill the cauldron
+- `fillSound`: the sound that plays when the Pointed Dripstone successfully tries to fill an empty cauldron. If null, no sound will play
+<|
+- `[js]renderType()` same as the one above
+<|

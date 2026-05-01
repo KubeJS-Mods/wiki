@@ -42,18 +42,20 @@ StartupEvents.registry('fluid', event => {
       .canDrown(false)
       .density(3000)
       .viscosity(6000)
+      .addDripstoneDripping(1, $ParticleTypes.DRIPPING_DRIPSTONE_LAVA, 'minecraft:lava_cauldron', $SoundEvents.POINTED_DRIPSTONE_DRIP_LAVA)
     )
 })
 ```
 <|
 
 |>+ Methods supported by the fluid builder
-- `[js]displayName(string)`
-- `[js]translationKey(string)`
-- `[js]formattedDisplayName()`
-- `[js]tag(string[])`
-- `[js]type(builder)` more details below
-- `[js]tint(color)`
+- `[js]displayName(string)` Sets the display name for this object, e.g. `[js]'Water'`. This will be overridden by a lang file if it exists.
+- `[js]translationKey(string)` Sets the translation key for this object, e.g. `[js]'block.minecraft.water'`.
+- `[js]formattedDisplayName()` Makes displayName() override language files.
+- `[js]formattedDisplayName(string)` Combined method of `[js]formattedDisplayName().displayName(name)`.
+- `[js]tag(string[])` Adds a tag to this object, e.g. `[js]'minecraft:fluid'`.
+- `[js]type(builder)` *More details below*
+- `[js]tint(color)` Adds a tint over the texture. This will mix with the colors on the texture, so it will work best with a grayscale texture.
 |> Color options
 There are 3 ways to write colors:
 - Using the `[js]Color` wrapper: `[js]Color.RED`
@@ -94,17 +96,17 @@ There are 3 ways to write colors:
 - `[js]BLACK_DYE`
 <|
 <|
-- `[js]stillTexture(string)`
-- `[js]flowingTexture(string)`
-- `[js]renderType(int)` between \[0-3\]
+- `[js]stillTexture(string)` ==Mandatory== Sets the still texture.
+- `[js]flowingTexture(string)` ==Mandatory== Sets the flowing texture.
+- `[js]renderType(int)` ==Mandatory== Sets the render type. Value must be between \[0-3\]
 |> Render Types
 - `0`: solid
 - `1`: cutout
 - `2`: cutout mipped
 - `3`: translucent
 <|
-- `[js]translucent()` sets the render type to `3`
-- `[js]slopeFindDistance(int)`
+- `[js]translucent()` Sets the render type to `3`
+- `[js]slopeFindDistance(int)` Sets the distance where the fluid will check for a direction to spread.
 - `[js]levelDecreasePerBlock(int)`
 - `[js]explosionResistance(float)`
 - `[js]tickRate(int)`
@@ -113,23 +115,19 @@ There are 3 ways to write colors:
 <|
 
 |> Fluid type builder
-- `[js]stillTexture(string)` same as the one above
-- `[js]flowingTexture(string)` same as the one above
 - `[js]screenOverlayTexture(string)`
 - `[js]blockOverlayTexture(string)`
-- `[js]tint(color)` same as the one above
-- `[js]descriptionId(string)`
-- `[js]motionScale(double)`
+- `[js]descriptionId(string)` Sets the identifier representing the name of the fluid type.
+- `[js]motionScale(double)` Sets how much the velocity of the fluid should be scaled by.
 - `[js]canPushEntity(bool)`
 - `[js]canSwim(bool)`
 - `[js]canDrown(bool)`
-- `[js]fallDistanceModifier(float)`
+- `[js]fallDistanceModifier(float)` Sets how much the fluid should scale the damage done when hitting the ground per tick.
 - `[js]canExtinguish(bool)`
 - `[js]canConvertToSource(bool)`
 - `[js]supportsBoating(bool)`
-- `[js]pathType(int)`
+- `[js]pathType(int)` The path type is used to tell the AI if it can walk into it.
 |> Path Types
-The path type is used to tell the AI if it can walk into it.
 - `0`: BLOCKED
 - `1`: OPEN
 - `2`: WALKABLE
@@ -158,12 +156,12 @@ The path type is used to tell the AI if it can walk into it.
 - `25`: DANGER_TRAPDOOR
 <|
 - `[js]adjacentPathType(int)`
-- `[js]sound(int, int)`
+- `[js]sound(int, int)` Sets a sound to play when a certain action is performed.
 |> Sound args
 |> First arg
 The first argument is the `[js]SoundAction`:
 >>> warn
-You will have to import the class for this to work!
+You will have to load the class for this to work!
 <<<
 ```js
 const $SoundActions = Java.loadClass('net.neoforged.neoforge.common.SoundActions')
@@ -176,7 +174,7 @@ Possible options:
 <||> Second arg
 The second argument is the `[js]SoundEvent`
 >>> warn
-You will have to import the class for this to work!
+You will have to load the class for this to work!
 <<<
 ```js
 const $SoundEvents = Java.loadClass('net.minecraft.sounds.SoundEvents')
@@ -189,7 +187,7 @@ sound($SoundActions.BUCKET_FILL, $SoundEvents.AMETHYST_BLOCK_BREAK)
 ```
 <|
 - `[js]canHydrate(bool)`
-- `[js]lightLevel(int)` between 0-15
+- `[js]lightLevel(int)` Between \[0-15\]
 - `[js]density(int)`
 - `[js]temperature(int)`
 - `[js]viscosity(int)`
@@ -200,12 +198,20 @@ sound($SoundActions.BUCKET_FILL, $SoundEvents.AMETHYST_BLOCK_BREAK)
 - `[js]'rare'`
 - `[js]'epic'`
 <|
-- `[js]addDripstoneDripping(float, X, string, string)`
+- `[js]addDripstoneDripping(float, X, string, string)` Allows this fluid to drip from Pointed Dripstone stalactites and fill cauldrons below.
 |> Arguments
 - `chance`: the chance that the cauldron below will be filled every time the Pointed Dripstone is randomly ticked
-- `dripParticle`: the particle that spawns randomly from the tip of the Pointed Dripstone when this fluid is above it
+- `dripParticle`: ==Nullable== the particle that spawns randomly from the tip of the Pointed Dripstone when this fluid is above it
 - `cauldron`: the block the Pointed Dripstone should replace an empty cauldron with when it successfully tries to fill the cauldron
-- `fillSound`: the sound that plays when the Pointed Dripstone successfully tries to fill an empty cauldron. If null, no sound will play
+- `fillSound`: ==Nullable== the sound that plays when the Pointed Dripstone successfully tries to fill an empty cauldron
+A list of default particles can be found [here](https://lexxie.dev/neoforge/1.21.1/net/minecraft/core/particles/ParticleTypes.html)
+To use these particles, you must load the class:
+```js
+const $ParticleTypes = Java.loadClass('net.minecraft.core.particles.ParticleTypes')
+```
+Example usage:
+```js
+addDripstoneDripping(1, $ParticleTypes.DRIPPING_DRIPSTONE_LAVA, 'minecraft:lava_cauldron', $SoundEvents.POINTED_DRIPSTONE_DRIP_LAVA)
+```
 <|
-- `[js]renderType()` same as the one above
 <|

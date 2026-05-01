@@ -1,11 +1,48 @@
 Custom fluids are made in a startup script. The event is not cancellable.
 
-
+Here are a couple examples on how to use the fluid builder:
+|>+ Water Clone
 ```js
 StartupEvents.registry('fluid', event => {
-  // ...
+  event.create('water_clone')
+  .displayName('Water Clone')
+  .tint(0x3F76E4)
+  .type(type => type
+    .renderType(3)
+    // .stillTexture('minecraft:block/water_still')
+    // .flowingTexture('minecraft:block/water_flow')
+    .stillTexture('kubejs:block/water_still')
+    .flowingTexture('kubejs:block/water_flow')
+    .fallDistanceModifier(0)
+  )
 })
 ```
+<||> Lava Clone
+>>> warn
+This is not an exact clone of the vanilla lava.
+Lava has additional properties that are not available in this fluid builder.
+<<<
+```js
+StartupEvents.registry('fluid', event => {
+  event.create('lava_clone')
+    .displayName('Lava Clone')
+    .slopeFindDistance(2)
+    .type(type => type
+      .renderType(0)
+      // .stillTexture('minecraft:block/lava_still')
+      // .flowingTexture('minecraft:block/lava_flow')
+      .stillTexture('kubejs:block/lava_still')
+      .flowingTexture('kubejs:block/lava_flow')
+      .sound($SoundActions.BUCKET_FILL, $SoundEvents.BUCKET_FILL_LAVA)
+      .sound($SoundActions.BUCKET_EMPTY, $SoundEvents.BUCKET_EMPTY_LAVA)
+      .canSwim(false)
+      .canDrown(false)
+      .density(3000)
+      .viscosity(6000)
+    )
+})
+```
+<|
 
 |>+ Methods supported by the fluid builder
 - `[js]displayName(string)`
@@ -54,6 +91,7 @@ There are 3 ways to write colors:
 - `[js]BLACK_DYE`
 <|
 <|
+
 - `[js]stillTexture(string)`
 - `[js]flowingTexture(string)`
 - `[js]renderType(int)` between [0-3]
@@ -63,7 +101,7 @@ There are 3 ways to write colors:
 - `2`: cutout mipped
 - `3`: translucent
 <|
-- `[js]translucent()` sets the render type to 3
+- `[js]translucent()` sets the render type to `3`
 - `[js]slopeFindDistance(int)`
 - `[js]levelDecreasePerBlock(int)`
 - `[js]explosionResistance(float)`
@@ -120,7 +158,7 @@ sound($SoundActions.BUCKET_FILL, $SoundEvents.AMETHYST_BLOCK_BREAK)
 ```
 <|
 - `[js]canHydrate(bool)`
-- `[js]lightLevel(int)`
+- `[js]lightLevel(int)` between [0-15]
 - `[js]density(int)`
 - `[js]temperature(int)`
 - `[js]viscosity(int)`

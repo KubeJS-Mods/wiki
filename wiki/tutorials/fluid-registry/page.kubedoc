@@ -2,18 +2,32 @@ Custom fluids are made in a startup script. The event is not cancellable.
 
 Here are a couple examples on how to use the fluid builder:
 |>+ Water Clone
+Some methods can be set by default if you use the `[js]'thick'` argument for the builder:
 ```js
+const $ParticleTypes = Java.loadClass('net.minecraft.core.particles.ParticleTypes')
+
+StartupEvents.registry('fluid', event => {
+  event.create('water_clone', 'thin')
+    .displayName('Water Clone')
+    .type(type =>
+      type.addDripstoneDripping(1, $ParticleTypes.DRIPPING_DRIPSTONE_WATER, 'minecraft:water_cauldron', $SoundEvents.POINTED_DRIPSTONE_DRIP_WATER)
+    )
+})
+```
+This is the same as doing it this way:
+```js
+const $ParticleTypes = Java.loadClass('net.minecraft.core.particles.ParticleTypes')
+
 StartupEvents.registry('fluid', event => {
   event.create('water_clone')
   .displayName('Water Clone')
   .tint(0x3F76E4)
   .type(type => type
     .renderType(3)
-    // .stillTexture('minecraft:block/water_still')
-    // .flowingTexture('minecraft:block/water_flow')
-    .stillTexture('kubejs:block/water_still')
-    .flowingTexture('kubejs:block/water_flow')
+    .stillTexture('kubejs:block/thin_fluid_still')
+    .flowingTexture('kubejs:block/thin_fluid_flow')
     .fallDistanceModifier(0)
+    .addDripstoneDripping(1, $ParticleTypes.DRIPPING_DRIPSTONE_WATER, 'minecraft:water_cauldron', $SoundEvents.POINTED_DRIPSTONE_DRIP_WATER)
   )
 })
 ```
@@ -22,6 +36,19 @@ StartupEvents.registry('fluid', event => {
 This is not an exact clone of the vanilla lava.
 Lava has additional properties that are not available in this fluid builder.
 <<<
+Some methods can be set by default if you use the `[js]'thick'` argument for the builder:
+```js
+const $ParticleTypes = Java.loadClass('net.minecraft.core.particles.ParticleTypes')
+
+StartupEvents.registry('fluid', event => {
+  event.create('lava_clone', 'thick')
+    .displayName('Lava Clone')
+    .type(type =>
+      type.addDripstoneDripping(1, $ParticleTypes.DRIPPING_DRIPSTONE_LAVA, 'minecraft:lava_cauldron', $SoundEvents.POINTED_DRIPSTONE_DRIP_LAVA)
+    )
+})
+```
+This is the same as doing it this way:
 ```js
 const $SoundActions = Java.loadClass('net.neoforged.neoforge.common.SoundActions')
 const $SoundEvents = Java.loadClass('net.minecraft.sounds.SoundEvents')
@@ -33,10 +60,8 @@ StartupEvents.registry('fluid', event => {
     .slopeFindDistance(2)
     .type(type => type
       .renderType(0)
-      // .stillTexture('minecraft:block/lava_still')
-      // .flowingTexture('minecraft:block/lava_flow')
-      .stillTexture('kubejs:block/lava_still')
-      .flowingTexture('kubejs:block/lava_flow')
+      .stillTexture('kubejs:block/thick_fluid_still')
+      .flowingTexture('kubejs:block/thick_fluid_flow')
       .sound($SoundActions.BUCKET_FILL, $SoundEvents.BUCKET_FILL_LAVA)
       .sound($SoundActions.BUCKET_EMPTY, $SoundEvents.BUCKET_EMPTY_LAVA)
       .canSwim(false)

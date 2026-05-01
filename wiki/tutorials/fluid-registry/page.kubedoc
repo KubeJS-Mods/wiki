@@ -98,7 +98,7 @@ There are 3 ways to write colors:
 <|
 - `[js]stillTexture(string)` ==Mandatory==
 - `[js]flowingTexture(string)` ==Mandatory==
-- `[js]renderType(int)` ==Mandatory== Value must be between \[0-3\].
+- `[js]renderType(int)` ==Mandatory==
 |> Render Types
 - `0`: solid
 - `1`: cutout

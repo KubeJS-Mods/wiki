@@ -96,9 +96,9 @@ There are 3 ways to write colors:
 - `[js]BLACK_DYE`
 <|
 <|
-- `[js]stillTexture(string)` ==Mandatory== Sets the still texture.
-- `[js]flowingTexture(string)` ==Mandatory== Sets the flowing texture.
-- `[js]renderType(int)` ==Mandatory== Sets the render type. Value must be between \[0-3\]
+- `[js]stillTexture(string)` ==Mandatory==
+- `[js]flowingTexture(string)` ==Mandatory==
+- `[js]renderType(int)` ==Mandatory== Value must be between \[0-3\].
 |> Render Types
 - `0`: solid
 - `1`: cutout
@@ -156,7 +156,7 @@ There are 3 ways to write colors:
 - `25`: DANGER_TRAPDOOR
 <|
 - `[js]adjacentPathType(int)`
-- `[js]sound(int, int)` Sets a sound to play when a certain action is performed.
+- `[js]sound(soundAction, soundEvent)` Sets a sound to play when a certain action is performed.
 |> Sound args
 |> First arg
 The first argument is the `[js]SoundAction`:
@@ -198,14 +198,16 @@ sound($SoundActions.BUCKET_FILL, $SoundEvents.AMETHYST_BLOCK_BREAK)
 - `[js]'rare'`
 - `[js]'epic'`
 <|
-- `[js]addDripstoneDripping(float, X, string, string)` Allows this fluid to drip from Pointed Dripstone stalactites and fill cauldrons below.
+- `[js]addDripstoneDripping(float, particleType, string, soundEvent)` Allows this fluid to drip from Pointed Dripstone stalactites and fill cauldrons below.
 |> Arguments
 - `chance`: the chance that the cauldron below will be filled every time the Pointed Dripstone is randomly ticked
 - `dripParticle`: ==Nullable== the particle that spawns randomly from the tip of the Pointed Dripstone when this fluid is above it
 - `cauldron`: the block the Pointed Dripstone should replace an empty cauldron with when it successfully tries to fill the cauldron
 - `fillSound`: ==Nullable== the sound that plays when the Pointed Dripstone successfully tries to fill an empty cauldron
 A list of default particles can be found [here](https://lexxie.dev/neoforge/1.21.1/net/minecraft/core/particles/ParticleTypes.html)
-To use these particles, you must load the class:
+>>> warn
+You will have to load the class for this to work!
+<<<
 ```js
 const $ParticleTypes = Java.loadClass('net.minecraft.core.particles.ParticleTypes')
 ```

@@ -145,7 +145,7 @@ There are 3 ways to write colors:
 - `[js]slopeFindDistance(int)` Sets the distance where the fluid will check for a direction to spread.
 - `[js]levelDecreasePerBlock(int)`
 - `[js]explosionResistance(float)`
-- `[js]tickRate(int)`
+- `[js]tickRate(int)` Lower rate will make the fluid spread faster.
 - `[js]noBucket()`
 - `[js]noBlock()`
 <|

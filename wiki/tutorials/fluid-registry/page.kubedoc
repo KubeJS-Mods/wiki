@@ -96,7 +96,7 @@ There are 3 ways to write colors:
 <|
 - `[js]stillTexture(string)`
 - `[js]flowingTexture(string)`
-- `[js]renderType(int)` between 0-3
+- `[js]renderType(int)` between \[0-3\]
 |> Render Types
 - `0`: solid
 - `1`: cutout

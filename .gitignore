@@ -7,3 +7,4 @@ build/
 *.sh
 local/
 kubejs_wiki_repo_metadata.json
+.vscode

@@ -126,5 +126,5 @@ PhysicsEvents.ready(event => {
 })
 ```
 <||> {bindings-tab-key}
-{{#bindings-tab-contents}}
+<#bindings-tab-contents>
 <|

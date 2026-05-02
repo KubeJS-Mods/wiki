@@ -35,92 +35,92 @@ PhysicsEvents.ready(event => {
 <||> {bindings-tab-key}
 >| {common-tab-key}+
 # Sable
-- getAllIntersecting(level: Level, bounds: BoundingBox3dc): Iterable<SubLevel>
-- getContaining(level: Level, chunkX: int, chunkZ: int): SubLevel
-- getContaining(level: Level, chunkPos: ChunkPos): SubLevel
-- getContaining(level: Level, pos: SectionPos): SubLevel
-- getContaining(level: Level, pos: Vec3i): SubLevel
-- getContaining(level: Level, pos: Position): SubLevel
-- getContaining(level: Level, pos: Vector3dc): SubLevel
-- getContaining(level: Level, blockX: double, blockZ: double): SubLevel
-- getContaining(entity: Entity): SubLevel
-- getContaining(blockEntity: BlockEntity): SubLevel
-- projectOutOfSubLevel(level: Level, pos: Vector3dc, dest: Vector3d): Vector3d
-- projectOutOfSubLevel(level: Level, pos: Vec3): Vec3
-- projectOutOfSubLevel(level: Level, pos: Position): Vec3
-- runIncludingSubLevels(level: Level, origin: Vec3, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => T): T
-- runIncludingSubLevels(level: Level, origin: Position, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => T): T
-- findIncludingSubLevels(level: Level, origin: Vec3, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => boolean): boolean
-- findIncludingSubLevels(level: Level, origin: Position, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => boolean): boolean
-- distanceSquaredWithSubLevels(level: Level, a: Vector3dc, b: Vector3dc): double
-- distanceSquaredWithSubLevels(level: Level, a: Position, b: Position): double
-- distanceSquaredWithSubLevels(level: Level, a: Vector3dc, bX: double, bY: double, bZ: double): double
-- distanceSquaredWithSubLevels(level: Level, a: Position, bX: double, bY: double, bZ: double): double
-- distanceSquaredWithSubLevels(level: Level, aX: double, aY: double, aZ: double, bX: double, bY: double, bZ: double): double
-- rectilinearDistanceWithSubLevels(level: Level, a: Vector3dc, b: Vector3dc): double
-- rectilinearDistanceWithSubLevels(level: Level, a: Position, b: Position): double
-- rectilinearDistanceWithSubLevels(level: Level, a: Vector3dc, bX: double, bY: double, bZ: double): double
-- rectilinearDistanceWithSubLevels(level: Level, a: Position, bX: double, bY: double, bZ: double): double
-- rectilinearDistanceWithSubLevels(level: Level, aX: double, aY: double, aZ: double, bX: double, bY: double, bZ: double): double
-- getVelocity(level: Level, pos: Vector3dc, dest: Vector3d): Vec3
-- getVelocity(level: Level, pos: Vec3): Vec3
-- getVelocity(level: Level, pos: Position): Vec3
-- getVelocity(level: Level, subLevel: SubLevelAccess, pos: Vector3dc, dest: Vector3d): Vector3d
-- getVelocity(level: Level, subLevel: SubLevelAccess, pos: Vec3): Vec3
-- getVelocity(level: Level, subLevel: SubLevelAccess, pos: Position): Vec3
-- getVelocityRelativeToAir(level: Level, pos: Vector3dc, dest: Vector3d): Vector3d
-- getVelocityRelativeToAir(level: Level, pos: Vec3): Vec3
-- getVelocityRelativeToAir(level: Level, pos: Position): Vec3
-- isInPlotGrid(level: Level, chunkX: int, chunkZ: int): boolean
-- getTrackingSubLevel(entity: Entity): SubLevel
-- getLastTrackingSubLevel(entity: Entity): SubLevel
-- getTrackingOrVehicleSubLevel(entity: Entity): SubLevel
-- getVehicleSubLevel(entity: Entity): SubLevel
-- getEyePositionInterpolated(entity: Entity, partialTicks: float): Vec3
-- getFeetPos(entity: Entity, distanceDown: float): Vector3d
+- `[ts]getAllIntersecting(level: Level, bounds: BoundingBox3dc): Iterable<SubLevel>`
+- `[ts]getContaining(level: Level, chunkX: int, chunkZ: int): SubLevel`
+- `[ts]getContaining(level: Level, chunkPos: ChunkPos): SubLevel`
+- `[ts]getContaining(level: Level, pos: SectionPos): SubLevel`
+- `[ts]getContaining(level: Level, pos: Vec3i): SubLevel`
+- `[ts]getContaining(level: Level, pos: Position): SubLevel`
+- `[ts]getContaining(level: Level, pos: Vector3dc): SubLevel`
+- `[ts]getContaining(level: Level, blockX: double, blockZ: double): SubLevel`
+- `[ts]getContaining(entity: Entity): SubLevel`
+- `[ts]getContaining(blockEntity: BlockEntity): SubLevel`
+- `[ts]projectOutOfSubLevel(level: Level, pos: Vector3dc, dest: Vector3d): Vector3d`
+- `[ts]projectOutOfSubLevel(level: Level, pos: Vec3): Vec3`
+- `[ts]projectOutOfSubLevel(level: Level, pos: Position): Vec3`
+- `[ts]runIncludingSubLevels(level: Level, origin: Vec3, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => T): T`
+- `[ts]runIncludingSubLevels(level: Level, origin: Position, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => T): T`
+- `[ts]findIncludingSubLevels(level: Level, origin: Vec3, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => boolean): boolean`
+- `[ts]findIncludingSubLevels(level: Level, origin: Position, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => boolean): boolean`
+- `[ts]distanceSquaredWithSubLevels(level: Level, a: Vector3dc, b: Vector3dc): double`
+- `[ts]distanceSquaredWithSubLevels(level: Level, a: Position, b: Position): double`
+- `[ts]distanceSquaredWithSubLevels(level: Level, a: Vector3dc, bX: double, bY: double, bZ: double): double`
+- `[ts]distanceSquaredWithSubLevels(level: Level, a: Position, bX: double, bY: double, bZ: double): double`
+- `[ts]distanceSquaredWithSubLevels(level: Level, aX: double, aY: double, aZ: double, bX: double, bY: double, bZ: double): double`
+- `[ts]rectilinearDistanceWithSubLevels(level: Level, a: Vector3dc, b: Vector3dc): double`
+- `[ts]rectilinearDistanceWithSubLevels(level: Level, a: Position, b: Position): double`
+- `[ts]rectilinearDistanceWithSubLevels(level: Level, a: Vector3dc, bX: double, bY: double, bZ: double): double`
+- `[ts]rectilinearDistanceWithSubLevels(level: Level, a: Position, bX: double, bY: double, bZ: double): double`
+- `[ts]rectilinearDistanceWithSubLevels(level: Level, aX: double, aY: double, aZ: double, bX: double, bY: double, bZ: double): double`
+- `[ts]getVelocity(level: Level, pos: Vector3dc, dest: Vector3d): Vec3`
+- `[ts]getVelocity(level: Level, pos: Vec3): Vec3`
+- `[ts]getVelocity(level: Level, pos: Position): Vec3`
+- `[ts]getVelocity(level: Level, subLevel: SubLevelAccess, pos: Vector3dc, dest: Vector3d): Vector3d`
+- `[ts]getVelocity(level: Level, subLevel: SubLevelAccess, pos: Vec3): Vec3`
+- `[ts]getVelocity(level: Level, subLevel: SubLevelAccess, pos: Position): Vec3`
+- `[ts]getVelocityRelativeToAir(level: Level, pos: Vector3dc, dest: Vector3d): Vector3d`
+- `[ts]getVelocityRelativeToAir(level: Level, pos: Vec3): Vec3`
+- `[ts]getVelocityRelativeToAir(level: Level, pos: Position): Vec3`
+- `[ts]isInPlotGrid(level: Level, chunkX: int, chunkZ: int): boolean`
+- `[ts]getTrackingSubLevel(entity: Entity): SubLevel`
+- `[ts]getLastTrackingSubLevel(entity: Entity): SubLevel`
+- `[ts]getTrackingOrVehicleSubLevel(entity: Entity): SubLevel`
+- `[ts]getVehicleSubLevel(entity: Entity): SubLevel`
+- `[ts]getEyePositionInterpolated(entity: Entity, partialTicks: float): Vec3`
+- `[ts]getFeetPos(entity: Entity, distanceDown: float): Vector3d`
 # SubLevelHelper
-- getConnectedChain(subLevel: SubLevel): Collection<SubLevel>
-- getVelocityRelativeToAir(level: Level, pos: Vector3dc, dest: Vector3d): Vector3d
-- popEntityLocal(subLevel: SubLevel, player: Entity)
-- popEntityLocal(subLevel: SubLevel, entity: Entity, anchor: EntityAnchorArgument.Anchor)
-- pushEntityLocal(subLevel: SubLevel, player: Entity)
-- pushEntityLocal(subLevel: SubLevel, entity: Entity, anchor: EntityAnchorArgument.Anchor)
+- `[ts]getConnectedChain(subLevel: SubLevel): Collection<SubLevel>`
+- `[ts]getVelocityRelativeToAir(level: Level, pos: Vector3dc, dest: Vector3d): Vector3d`
+- `[ts]popEntityLocal(subLevel: SubLevel, player: Entity)`
+- `[ts]popEntityLocal(subLevel: SubLevel, entity: Entity, anchor: EntityAnchorArgument.Anchor)`
+- `[ts]pushEntityLocal(subLevel: SubLevel, player: Entity)`
+- `[ts]pushEntityLocal(subLevel: SubLevel, entity: Entity, anchor: EntityAnchorArgument.Anchor)`
 <||> {server-tab-key}
 # SubLevelHelper
-- getLoadingDependencyChain(subLevel: ServerSubLevel): Collection<ServerSubLevel>
+- `[ts]getLoadingDependencyChain(subLevel: ServerSubLevel): Collection<ServerSubLevel>`
 # DimensionPhysics
-- of(level: Level): DimensionPhysics
-- getDefault(level: Level): DimensionPhysics
-- getMagneticNorth(level: Level): Vector3fc
-- getGravity(level: Level): Vector3dc
-- getUniversalDrag(level: ServerLevel): double
-- getAirPressure(level: ServerLevel, position: Vector3dc): double
+- `[ts]of(level: Level): DimensionPhysics`
+- `[ts]getDefault(level: Level): DimensionPhysics`
+- `[ts]getMagneticNorth(level: Level): Vector3fc`
+- `[ts]getGravity(level: Level): Vector3dc`
+- `[ts]getUniversalDrag(level: ServerLevel): double`
+- `[ts]getAirPressure(level: ServerLevel, position: Vector3dc): double`
 # SubLevelContainer
-- getContainer(level: Level): SubLevelContainer
+- `[ts]getContainer(level: Level): SubLevelContainer`
 # SubLevelAssemblyHelper
-- assembleBlocks(level: ServerLevel, anchor: BlockPos, blocks: Iterable<BlockPos>, bounds: BoundingBox3ic): ServerSubLevel
-- kickFromContainingSubLevel(level: ServerLevel, physicsSystem: SubLevelPhysicsSystem, pipeline: PhysicsPipeline, subLevel: ServerSubLevel, containingSubLevel: SubLevel)
-- gatherConnectedBlocks(gatherOrigin: BlockPos, level: ServerLevel, maximumBlocksToAssemble: int, frontierPredicate: (originPos: BlockPos, originState: BlockState, pos: BlockPos, state: BlockState, directionFrom: Direction) => boolean): SubLevelAssemblyHelper.GatherResult
-- moveTrackingPoints(level: ServerLevel, bounds: BoundingBox3ic, subLevel: ServerSubLevel, transform: SubLevelAssemblyHelper.AssemblyTransform)
-- moveOtherStuff(level: ServerLevel, transform: SubLevelAssemblyHelper.AssemblyTransform, blocks: Iterable<BlockPos>, bounds: BoundingBox3ic)
-- moveBlocks(level: ServerLevel, transform: SubLevelAssemblyHelper.AssemblyTransform. blocks: Iterable<BlockPos>)
-- markAndNotifyBlock(level: Level, pPos: BlockPos, levelChunk: LevelChunk, oldState: BlockState, newState: BlockState, pFlags: int, pRecursionLeft: int)
+- `[ts]assembleBlocks(level: ServerLevel, anchor: BlockPos, blocks: Iterable<BlockPos>, bounds: BoundingBox3ic): ServerSubLevel`
+- `[ts]kickFromContainingSubLevel(level: ServerLevel, physicsSystem: SubLevelPhysicsSystem, pipeline: PhysicsPipeline, subLevel: ServerSubLevel, containingSubLevel: SubLevel)`
+- `[ts]gatherConnectedBlocks(gatherOrigin: BlockPos, level: ServerLevel, maximumBlocksToAssemble: int, frontierPredicate: (originPos: BlockPos, originState: BlockState, pos: BlockPos, state: BlockState, directionFrom: Direction) => boolean): SubLevelAssemblyHelper.GatherResult`
+- `[ts]moveTrackingPoints(level: ServerLevel, bounds: BoundingBox3ic, subLevel: ServerSubLevel, transform: SubLevelAssemblyHelper.AssemblyTransform)`
+- `[ts]moveOtherStuff(level: ServerLevel, transform: SubLevelAssemblyHelper.AssemblyTransform, blocks: Iterable<BlockPos>, bounds: BoundingBox3ic)`
+- `[ts]moveBlocks(level: ServerLevel, transform: SubLevelAssemblyHelper.AssemblyTransform. blocks: Iterable<BlockPos>)`
+- `[ts]markAndNotifyBlock(level: Level, pPos: BlockPos, levelChunk: LevelChunk, oldState: BlockState, newState: BlockState, pFlags: int, pRecursionLeft: int)`
 # SubLevelPhysicsSystem
-- get(level: Level): SubLevelPhysicsSystem
-- require(level: Level): SubLevelPhysicsSystem
-- getCurrentlySteppingSystem(): SubLevelPhysicsSystem
+- `[ts]get(level: Level): SubLevelPhysicsSystem`
+- `[ts]require(level: Level): SubLevelPhysicsSystem`
+- `[ts]getCurrentlySteppingSystem(): SubLevelPhysicsSystem`
 <||> {client-tab-key}
 # DimensionPhysics
-- of(level: Level): DimensionPhysics
-- getDefault(level: Level): DimensionPhysics
-- getMagneticNorth(level: Level): Vector3fc
-- getGravity(level: Level): Vector3dc
+- `[ts]of(level: Level): DimensionPhysics`
+- `[ts]getDefault(level: Level): DimensionPhysics`
+- `[ts]getMagneticNorth(level: Level): Vector3fc`
+- `[ts]getGravity(level: Level): Vector3dc`
 # SubLevelContainer
-- getContainer(level: Level): SubLevelContainer
+- `[ts]getContainer(level: Level): SubLevelContainer`
 <||> {startup-tab-key}
 # SubLevelHelper
-- registerWindProvider(fn: (pos: Vector3dc, level: Level) => Vector3dc)
+- `[ts]registerWindProvider(fn: (pos: Vector3dc, level: Level) => Vector3dc)`
 # SubLevelHeatMapManager
-- addSplitListener(listener: (level: Level, assemblyBounds: BoundingBox3ic, blocks: Collection<BlockPos>) => {})
+- `[ts]addSplitListener(listener: (level: Level, assemblyBounds: BoundingBox3ic, blocks: Collection<BlockPos>) => {})`
 <|
 <|

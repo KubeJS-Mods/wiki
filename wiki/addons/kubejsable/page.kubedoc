@@ -121,6 +121,6 @@ PhysicsEvents.ready(event => {
 # SubLevelHelper
 - `[ts]registerWindProvider(fn: (pos: Vector3dc, level: Level) => Vector3dc)`
 # SubLevelHeatMapManager
-- `[ts]addSplitListener(listener: (level: Level, assemblyBounds: BoundingBox3ic, blocks: Collection<BlockPos>) => {})`
+- `[ts]addSplitListener(listener: (level: Level, assemblyBounds: BoundingBox3ic, blocks: Collection<BlockPos>) => void)`
 <|
 <|

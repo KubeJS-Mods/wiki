@@ -1,39 +1,7 @@
 KubeJSable is a KubeJS addon for interacting with Sable! This includes multiple new bindings and access to Sable events!
 
-|>+ {events-tab-key}
-# PhysicsEvents
-## Pre
-This event is fired from `ForgeSablePrePhysicsTickEvent` just before the next physics tick.
-The event object itself includes a `SubLevelPhysicsSystem` (`physicsSystem`) instance and a `timeStep` value.
->>> info
-This event still fires when the physics engine in a world is paused!
-<<<
-```javascript
-PhysicsEvents.ready(event => {
-	console.info("Pre-Physics Tick!")
-})
-```
-## Post
-This event is fired from `ForgeSablePostPhysicsTickEvent` just after the last physics tick.
-The event object itself includes a `SubLevelPhysicsSystem` (`physicsSystem`) instance and a `timeStep` value.
->>> info
-This event still fires when the physics engine in a world is paused!
-<<<
-```javascript
-PhysicsEvents.post(event => {
-	console.info("Post-Physics Tick!")
-})
-```
-## Ready
-This event is fired from `ForgeSableSubLevelContainerReadyEvent` whenever a `SubLevelContainer` is readied.
-The event object itself includes a `Level` (`level`) instance and a `SubLevelContainer` (`subLevelContainer`) instance.
-```javascript
-PhysicsEvents.ready(event => {
-	console.info("Sub-Level Container Ready!")
-})
-```
-<||> {bindings-tab-key}
->| {common-tab-key}+
+>>> #bindings-tab-contents
+>|+ {common-tab-key}
 # Sable
 - `[ts]getAllIntersecting(level: Level, bounds: BoundingBox3dc): Iterable<SubLevel>`
 - `[ts]getContaining(level: Level, chunkX: int, chunkZ: int): SubLevel`
@@ -123,4 +91,40 @@ PhysicsEvents.ready(event => {
 # SubLevelHeatMapManager
 - `[ts]addSplitListener(listener: (level: Level, assemblyBounds: BoundingBox3ic, blocks: Collection<BlockPos>) => void)`
 <|
+<<<
+
+|>+ {events-tab-key}
+# PhysicsEvents
+## Pre
+This event is fired from `ForgeSablePrePhysicsTickEvent` just before the next physics tick.
+The event object itself includes a `SubLevelPhysicsSystem` (`physicsSystem`) instance and a `timeStep` value.
+>>> info
+This event still fires when the physics engine in a world is paused!
+<<<
+```javascript
+PhysicsEvents.ready(event => {
+	console.info("Pre-Physics Tick!")
+})
+```
+## Post
+This event is fired from `ForgeSablePostPhysicsTickEvent` just after the last physics tick.
+The event object itself includes a `SubLevelPhysicsSystem` (`physicsSystem`) instance and a `timeStep` value.
+>>> info
+This event still fires when the physics engine in a world is paused!
+<<<
+```javascript
+PhysicsEvents.post(event => {
+	console.info("Post-Physics Tick!")
+})
+```
+## Ready
+This event is fired from `ForgeSableSubLevelContainerReadyEvent` whenever a `SubLevelContainer` is readied.
+The event object itself includes a `Level` (`level`) instance and a `SubLevelContainer` (`subLevelContainer`) instance.
+```javascript
+PhysicsEvents.ready(event => {
+	console.info("Sub-Level Container Ready!")
+})
+```
+<||> {bindings-tab-key}
+{{#bindings-tab-contents}}
 <|

@@ -1,7 +1,7 @@
 KubeJSable is a KubeJS addon for interacting with Sable! This includes multiple new bindings and access to Sable events!
 
 >>> #bindings-tab-contents
->|+ {common-tab-key}
+|>+ {common-tab-key}
 # Sable
 - `[ts]getAllIntersecting(level: Level, bounds: BoundingBox3dc): Iterable<SubLevel>`
 - `[ts]getContaining(level: Level, chunkX: int, chunkZ: int): SubLevel`

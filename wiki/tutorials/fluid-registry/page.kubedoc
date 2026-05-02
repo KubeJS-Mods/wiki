@@ -8,6 +8,7 @@ If you want the fluid to be transparent, you need to copy or create a transparen
 <<<
 Some methods can be set by default if you use the `[js]'thin'` argument for the builder:
 ```js
+const $SoundEvents = Java.loadClass('net.minecraft.sounds.SoundEvents')
 const $ParticleTypes = Java.loadClass('net.minecraft.core.particles.ParticleTypes')
 
 StartupEvents.registry('fluid', event => {
@@ -20,6 +21,7 @@ StartupEvents.registry('fluid', event => {
 ```
 This is the same as doing it this way:
 ```js
+const $SoundEvents = Java.loadClass('net.minecraft.sounds.SoundEvents')
 const $ParticleTypes = Java.loadClass('net.minecraft.core.particles.ParticleTypes')
 
 StartupEvents.registry('fluid', event => {
@@ -46,6 +48,7 @@ If you want the texture to look like real lava, you need to copy or create a lav
 <<<
 Some methods can be set by default if you use the `[js]'thick'` argument for the builder:
 ```js
+const $SoundEvents = Java.loadClass('net.minecraft.sounds.SoundEvents')
 const $ParticleTypes = Java.loadClass('net.minecraft.core.particles.ParticleTypes')
 
 StartupEvents.registry('fluid', event => {

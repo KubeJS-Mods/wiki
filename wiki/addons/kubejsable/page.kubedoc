@@ -5,47 +5,25 @@ KubeJSable is a KubeJS addon for interacting with Sable! This includes multiple 
 # Sable
 - `[ts]getAllIntersecting(level: Level, bounds: BoundingBox3dc): Iterable<SubLevel>`
 - `[ts]getContaining(level: Level, chunkX: int, chunkZ: int): SubLevel`
-- `[ts]getContaining(level: Level, chunkPos: ChunkPos): SubLevel`
-- `[ts]getContaining(level: Level, pos: SectionPos): SubLevel`
 - `[ts]getContaining(level: Level, pos: Vec3i): SubLevel`
-- `[ts]getContaining(level: Level, pos: Position): SubLevel`
-- `[ts]getContaining(level: Level, pos: Vector3dc): SubLevel`
-- `[ts]getContaining(level: Level, blockX: double, blockZ: double): SubLevel`
+- `[ts]getContaining(level: Level, pos: Vec3): SubLevel`
 - `[ts]getContaining(entity: Entity): SubLevel`
 - `[ts]getContaining(blockEntity: BlockEntity): SubLevel`
-- `[ts]projectOutOfSubLevel(level: Level, pos: Vector3dc, dest: Vector3d): Vector3d`
 - `[ts]projectOutOfSubLevel(level: Level, pos: Vec3): Vec3`
-- `[ts]projectOutOfSubLevel(level: Level, pos: Position): Vec3`
 - `[ts]runIncludingSubLevels(level: Level, origin: Vec3, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => T): T`
-- `[ts]runIncludingSubLevels(level: Level, origin: Position, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => T): T`
 - `[ts]findIncludingSubLevels(level: Level, origin: Vec3, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => boolean): boolean`
-- `[ts]findIncludingSubLevels(level: Level, origin: Position, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => boolean): boolean`
-- `[ts]distanceSquaredWithSubLevels(level: Level, a: Vector3dc, b: Vector3dc): double`
-- `[ts]distanceSquaredWithSubLevels(level: Level, a: Position, b: Position): double`
-- `[ts]distanceSquaredWithSubLevels(level: Level, a: Vector3dc, bX: double, bY: double, bZ: double): double`
-- `[ts]distanceSquaredWithSubLevels(level: Level, a: Position, bX: double, bY: double, bZ: double): double`
-- `[ts]distanceSquaredWithSubLevels(level: Level, aX: double, aY: double, aZ: double, bX: double, bY: double, bZ: double): double`
-- `[ts]rectilinearDistanceWithSubLevels(level: Level, a: Vector3dc, b: Vector3dc): double`
-- `[ts]rectilinearDistanceWithSubLevels(level: Level, a: Position, b: Position): double`
-- `[ts]rectilinearDistanceWithSubLevels(level: Level, a: Vector3dc, bX: double, bY: double, bZ: double): double`
-- `[ts]rectilinearDistanceWithSubLevels(level: Level, a: Position, bX: double, bY: double, bZ: double): double`
-- `[ts]rectilinearDistanceWithSubLevels(level: Level, aX: double, aY: double, aZ: double, bX: double, bY: double, bZ: double): double`
-- `[ts]getVelocity(level: Level, pos: Vector3dc, dest: Vector3d): Vec3`
+- `[ts]distanceSquaredWithSubLevels(level: Level, a: Vec3, b: Vec3): double`
+- `[ts]rectilinearDistanceWithSubLevels(level: Level, a: Vec3, b: Vec3): double`
 - `[ts]getVelocity(level: Level, pos: Vec3): Vec3`
-- `[ts]getVelocity(level: Level, pos: Position): Vec3`
-- `[ts]getVelocity(level: Level, subLevel: SubLevelAccess, pos: Vector3dc, dest: Vector3d): Vector3d`
 - `[ts]getVelocity(level: Level, subLevel: SubLevelAccess, pos: Vec3): Vec3`
-- `[ts]getVelocity(level: Level, subLevel: SubLevelAccess, pos: Position): Vec3`
-- `[ts]getVelocityRelativeToAir(level: Level, pos: Vector3dc, dest: Vector3d): Vector3d`
 - `[ts]getVelocityRelativeToAir(level: Level, pos: Vec3): Vec3`
-- `[ts]getVelocityRelativeToAir(level: Level, pos: Position): Vec3`
 - `[ts]isInPlotGrid(level: Level, chunkX: int, chunkZ: int): boolean`
 - `[ts]getTrackingSubLevel(entity: Entity): SubLevel`
 - `[ts]getLastTrackingSubLevel(entity: Entity): SubLevel`
 - `[ts]getTrackingOrVehicleSubLevel(entity: Entity): SubLevel`
 - `[ts]getVehicleSubLevel(entity: Entity): SubLevel`
 - `[ts]getEyePositionInterpolated(entity: Entity, partialTicks: float): Vec3`
-- `[ts]getFeetPos(entity: Entity, distanceDown: float): Vector3d`
+- `[ts]getFeetPos(entity: Entity, distanceDown: float): Vec3`
 # SubLevelHelper
 - `[ts]getConnectedChain(subLevel: SubLevel): Collection<SubLevel>`
 - `[ts]getVelocityRelativeToAir(level: Level, pos: Vector3dc, dest: Vector3d): Vector3d`
@@ -60,9 +38,9 @@ KubeJSable is a KubeJS addon for interacting with Sable! This includes multiple 
 - `[ts]of(level: Level): DimensionPhysics`
 - `[ts]getDefault(level: Level): DimensionPhysics`
 - `[ts]getMagneticNorth(level: Level): Vector3fc`
-- `[ts]getGravity(level: Level): Vector3dc`
+- `[ts]getGravity(level: Level): Vec3`
 - `[ts]getUniversalDrag(level: ServerLevel): double`
-- `[ts]getAirPressure(level: ServerLevel, position: Vector3dc): double`
+- `[ts]getAirPressure(level: ServerLevel, position: Vec3): double`
 # SubLevelContainer
 - `[ts]getContainer(level: Level): SubLevelContainer`
 # SubLevelAssemblyHelper
@@ -82,12 +60,12 @@ KubeJSable is a KubeJS addon for interacting with Sable! This includes multiple 
 - `[ts]of(level: Level): DimensionPhysics`
 - `[ts]getDefault(level: Level): DimensionPhysics`
 - `[ts]getMagneticNorth(level: Level): Vector3fc`
-- `[ts]getGravity(level: Level): Vector3dc`
+- `[ts]getGravity(level: Level): Vec3`
 # SubLevelContainer
 - `[ts]getContainer(level: Level): SubLevelContainer`
 <||> {startup-tab-key}
 # SubLevelHelper
-- `[ts]registerWindProvider(fn: (pos: Vector3dc, level: Level) => Vector3dc)`
+- `[ts]registerWindProvider(fn: (pos: Vector3dc, level: Level) => Vec3)`
 # SubLevelHeatMapManager
 - `[ts]addSplitListener(listener: (level: Level, assemblyBounds: BoundingBox3ic, blocks: Collection<BlockPos>) => void)`
 <|

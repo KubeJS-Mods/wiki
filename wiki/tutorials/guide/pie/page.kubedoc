@@ -1,0 +1,9 @@
+# Pie's KubeJS Guide
+
+Part 1 of this community guide explains **how KubeJS works** from the ground up: the layers from your OS and the JVM through the mod loader and Rhino to the JavaScript you write. It is aimed at programmers and assumes basic OOP and JavaScript.
+
+**[[/tutorials/guide/architecture|Part 1: KubeJS Architecture]]** — Layers (OS, JVM, Class Loader, Mod Implementation, JS/Rhino), script types, bindings and events, type wrappers, beans, and functional interface proxies.
+
+**[[/tutorials/guide/documentation|Part 2: Where is the documentation?]]** — Wiki, generated docs, IDE support, existing sources, and in-code documentation.
+
+**[[/tutorials/guide/reading-kubejs|Part 3: Reading KubeJS]]** — Script structure, server/client/startup scripts, and tracing from script to Java source.

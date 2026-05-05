@@ -1,4 +1,4 @@
-Custom fluids are made in a startup script. The event is not cancellable.
+Compostable recipes are made in a server script. The event is not cancellable.
 
 Here is an example on how to use this event:
 ```js

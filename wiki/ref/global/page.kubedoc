@@ -1,0 +1,100 @@
+Global object map for sharing data between scripts. You can use this to set objects and callbacks in startup script and reference them from server or client scripts.
+
+**Java Class:** `java.util.Map<String, Object>` - [View Java Documentation](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html)
+
+---
+# Properties
+---
+## $$.size: int
+Returns the number of key-value mappings in this map.
+---
+## Property Access Syntax
+Java `Map` objects in KubeJS can be accessed using JavaScript object syntax, allowing for flexible key access in multiple ways:
+
+**Bracket notation with string literals:**
+```js
+global["My Property Name"] = "value";
+let value = global["My Property Name"];
+```
+
+**Dot notation:**
+```js
+global.myPropertyName = "value";
+let value = global.myPropertyName;
+```
+
+**Dynamic key access:**
+```js
+let key = "example";
+global[key] = "value";
+let value = global[key];
+```
+
+All of these syntaxes work for both reading and writing values. This is the most common way to interact with `global` in scripts.
+
+---
+# Methods
+---
+Since `global` is a standard Java `Map<String, Object>`, it supports all standard Map methods. You can also use it as a JavaScript object with property access syntax (e.g., `global.propertyName = value`).
+
+## $$.get(key: String): Object
+Returns the value associated with the specified key, or `undefined` if the key is not present.
+---
+## $$.put(key: String, value: Object): Object
+Associates the specified value with the specified key. Returns the previous value associated with the key, or `undefined` if there was no mapping.
+
+#[[red|(Only available in startup scripts in 1.21.1+)]]
+---
+## $$.set(key: String, value: Object): Object
+Alias for `put()`. Associates the specified value with the specified key. Returns the previous value associated with the key, or `undefined` if there was no mapping.
+
+#[[red|(Only available in startup scripts in 1.21.1+)]]
+---
+## $$.containsKey(key: String): boolean
+Returns `true` if this map contains a mapping for the specified key.
+---
+## $$.has(key: String): boolean
+Alias for `containsKey()`. Returns `true` if this map contains a mapping for the specified key.
+---
+## $$.remove(key: String): Object
+Removes the mapping for the specified key from this map if present. Returns the value that was associated with the key, or `undefined` if there was no mapping.
+
+#[[red|(Only available in startup scripts in 1.21.1+)]]
+---
+## $$.clear(): void
+Removes all mappings from this map.
+
+#[[red|(Only available in startup scripts in 1.21.1+)]]
+---
+## $$.isEmpty(): boolean
+Returns `true` if this map contains no key-value mappings.
+---
+## $$.keySet(): Set<String>
+Returns a Set view of the keys contained in this map.
+---
+## $$.values(): Collection<Object>
+Returns a Collection view of the values contained in this map.
+---
+## $$.entrySet(): Set<Map.Entry<String, Object>>
+Returns a Set view of the mappings contained in this map.
+
+|> 1.21.1
+
+**Source:** [BuiltinKubeJSPlugin.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/BuiltinKubeJSPlugin.java)
+
+In startup scripts, `global` is a mutable `HashMap<String, Object>`. In server and client scripts, it is wrapped in `Collections.unmodifiableMap()`, making it read-only.
+
+<||> 1.20.1
+
+**Source:** [BuiltinKubeJSPlugin.java](https://github.com/KubeJS-Mods/KubeJS/blob/2001/common/src/main/java/dev/latvian/mods/kubejs/BuiltinKubeJSPlugin.java)
+
+`global` is always mutable across all script types.
+
+<||> 1.19.2
+
+**Source:** [BuiltinKubeJSPlugin.java](https://github.com/KubeJS-Mods/KubeJS/blob/1902/common/src/main/java/dev/latvian/mods/kubejs/BuiltinKubeJSPlugin.java)
+
+`global` is always mutable across all script types.
+
+<|
+

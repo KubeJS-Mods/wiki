@@ -1,0 +1,122 @@
+# Utils
+
+**Java Class:** `dev.latvian.mods.kubejs.plugin.builtin.wrapper.UtilsWrapper` - [View on GitHub](https://github.com/KubeJS-Mods/KubeJS)
+
+A collection of utilities for common operations.
+
+|> 1.21.1
+
+**Source:** [UtilsWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/UtilsWrapper.java)
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+### Static Methods
+
+- `getRandom()`: RandomSource - Get a Random, for generating random numbers. Note this will always return the same Random instance
+- `newRandom(seed: number)`: RandomSource - Get a new random with the specified seed
+- `emptyList()`: List<T> - Get an immutable empty list
+- `emptyMap()`: Map<K, V> - Get an immutable empty map
+- `newList()`: List<?> - Returns a new mutable list
+- `newMap()`: Map<?, ?> - Returns a new mutable map
+- `newCountingMap()`: CountingMap - Returns a new counting map
+- `regex(pattern: string)`: Pattern - Returns a regex pattern of the input
+- `regex(pattern: string, flags: number)`: Pattern - Returns a regex pattern of the input with the specified flags
+- `getStat(id: ResourceLocation)`: Stat<ResourceLocation> - Returns a Stat of the passed in ResourceLocation
+- `getSound(id: ResourceLocation)`: SoundEvent | null - Gets a SoundEvent from the id
+- `randomOf(random: Random, objects: Collection<Object>)`: Object - Gets a random object from the list using the passed in random
+- `getSystemTime()`: number - Gets the current system time, in milliseconds
+- `isWrapped(o: Object)`: boolean - Checks if the passed in object is an instance of WrappedJS
+- `lazy(supplier: Supplier<T>)`: Lazy<T> - Returns a lazy value with the supplier function as its value factory
+- `expiringLazy(supplier: Supplier<T>, expires: Duration)`: Lazy<T> - Returns a lazy value with the supplier function as its value factory, that will expire after the specified time
+- `findCreativeTab(id: ResourceLocation)`: CreativeModeTab | null - Returns the creative tab associated with the id
+- `runAsync(task: Runnable)`: CompletableFuture<Void> - Runs the provided runnable function in KubeJS' background thread and returns its CompletableFuture
+- `supplyAsync(task: Supplier<Object>)`: CompletableFuture<Object> - Runs the provided supplier function in KubeJS' background thread and returns its CompletableFuture
+
+## Examples
+
+WIP
+
+<||> 1.20.1
+
+**Source:** [UtilsWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/2001/common/src/main/java/dev/latvian/mods/kubejs/bindings/UtilsWrapper.java)
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+### Static Methods
+
+- `getRandom()`: RandomSource - Get a Random, for generating random numbers. Note this will always return the same Random instance
+- `newRandom(seed: number)`: RandomSource - Get a new random with the specified seed
+- `emptyList()`: List<T> - Get an immutable empty list
+- `emptyMap()`: Map<K, V> - Get an immutable empty map
+- `newList()`: List<?> - Returns a new mutable list
+- `newMap()`: Map<?, ?> - Returns a new mutable map
+- `newCountingMap()`: CountingMap - Returns a new counting map
+- `regex(pattern: string)`: Pattern - Returns a regex pattern of the input
+- `regex(pattern: string, flags: number)`: Pattern - Returns a regex pattern of the input with the specified flags
+- `getStat(id: ResourceLocation)`: Stat<ResourceLocation> - Returns a Stat of the passed in ResourceLocation
+- `getSound(id: ResourceLocation)`: SoundEvent | null - Gets a SoundEvent from the id
+- `randomOf(random: Random, objects: Collection<Object>)`: Object - Gets a random object from the list using the passed in random
+- `getSystemTime()`: number - Gets the current system time, in milliseconds
+- `isWrapped(o: Object)`: boolean - Checks if the passed in object is an instance of WrappedJS
+- `lazy(supplier: Supplier<T>)`: Lazy<T> - Returns a lazy value with the supplier function as its value factory
+- `expiringLazy(supplier: Supplier<T>, expires: Duration)`: Lazy<T> - Returns a lazy value with the supplier function as its value factory, that will expire after the specified time
+- `findCreativeTab(id: ResourceLocation)`: CreativeModeTab | null - Returns the creative tab associated with the id
+- `runAsync(task: Runnable)`: CompletableFuture<Void> - Runs the provided runnable function in KubeJS' background thread and returns its CompletableFuture
+- `supplyAsync(task: Supplier<Object>)`: CompletableFuture<Object> - Runs the provided supplier function in KubeJS' background thread and returns its CompletableFuture
+
+## Examples
+
+WIP
+
+<||> 1.19.2
+
+**Source:** [UtilsWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/1902/common/src/main/java/dev/latvian/mods/kubejs/bindings/UtilsWrapper.java)
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+### Static Methods
+
+- `getRandom()`: RandomSource - Get a Random, for generating random numbers. Note this will always return the same Random instance
+- `newRandom(seed: number)`: RandomSource - Get a new random with the specified seed
+- `emptyList()`: List<T> - Get an immutable empty list
+- `emptyMap()`: Map<K, V> - Get an immutable empty map
+- `newList()`: List<?> - Returns a new mutable list
+- `newMap()`: Map<?, ?> - Returns a new mutable map
+- `newCountingMap()`: CountingMap - Returns a new counting map
+- `regex(pattern: string)`: Pattern - Returns a regex pattern of the input
+- `regex(pattern: string, flags: number)`: Pattern - Returns a regex pattern of the input with the specified flags
+- `getStat(id: ResourceLocation)`: Stat<ResourceLocation> - Returns a Stat of the passed in ResourceLocation
+- `getSound(id: ResourceLocation)`: SoundEvent | null - Gets a SoundEvent from the id
+- `randomOf(random: Random, objects: Collection<Object>)`: Object - Gets a random object from the list using the passed in random
+- `getSystemTime()`: number - Gets the current system time, in milliseconds
+- `isWrapped(o: Object)`: boolean - Checks if the passed in object is an instance of WrappedJS
+- `lazy(supplier: Supplier<T>)`: Lazy<T> - Returns a lazy value with the supplier function as its value factory
+- `expiringLazy(supplier: Supplier<T>, expires: Duration)`: Lazy<T> - Returns a lazy value with the supplier function as its value factory, that will expire after the specified time
+- `findCreativeTab(id: ResourceLocation)`: CreativeModeTab | null - Returns the creative tab associated with the id
+- `runAsync(task: Runnable)`: CompletableFuture<Void> - Runs the provided runnable function in KubeJS' background thread and returns its CompletableFuture
+- `supplyAsync(task: Supplier<Object>)`: CompletableFuture<Object> - Runs the provided supplier function in KubeJS' background thread and returns its CompletableFuture
+
+## Examples
+
+WIP
+
+<|
+

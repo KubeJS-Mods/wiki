@@ -1,0 +1,32 @@
+Compostable recipes are made in a server script. The event is not cancellable.
+
+Here is an example on how to use this event:
+```js
+ServerEvents.compostableRecipes(event => {
+  event.add('minecraft:nether_star', 0.25)
+  event.add('#minecraft:leaves', 0.5)
+
+  event.remove('minecraft:wheat_seeds')
+  event.remove('#minecraft:saplings')
+
+  event.removeAll()
+})
+```
+
+List of all the available methods:
+|> 1.21
+- `[js]add(item, chance)`
+  - `chance` is a number between 0 and 1.
+- `[js]add(item, chance, villager)`
+  - `villager` is a bool that controls whether farmer villagers can compost the item in their work AI.
+- `[js]addReplace(item, chance)`
+- `[js]addReplace(item, chance, villager)`
+- `[js]replaceAll()`
+- `[js]remove(item)`
+- `[js]removeAll()`
+<||> 1.20
+- `[js]add(item, chance)`
+  - `chance` is a number between 0 and 1.
+- `[js]remove(item)`
+- `[js]removeAll()`
+<|

@@ -80,7 +80,7 @@ The event object itself includes a `SubLevelPhysicsSystem` (`physicsSystem`) ins
 This event still fires when the physics engine in a world is paused!
 <<<
 ```javascript
-PhysicsEvents.ready(event => {
+PhysicsEvents.pre(event => {
 	console.info("Pre-Physics Tick!")
 })
 ```

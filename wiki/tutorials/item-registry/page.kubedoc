@@ -154,6 +154,11 @@ StartupEvents.registry('item', event => {
         .eaten(ctx => global.myAwesomeReloadableFunction(ctx))
     )
 })
+
+global.myAwesomeReloadableFunction = ctx => {
+  ctx.player.tell('Hello there!')
+  ctx.player.tell(Text.of('Change me then reload with ').append(Text.red('/kubejs reload startup_scripts')).append(' to see your changes!'))
+}
 ```
 <||> Previous Versions
 ```js
@@ -192,14 +197,13 @@ StartupEvents.registry('item', event => {
         .eaten(ctx => global.myAwesomeReloadableFunction(ctx))
     )
 })
-```
-<|
+
 global.myAwesomeReloadableFunction = ctx => {
   ctx.player.tell('Hello there!')
   ctx.player.tell(Text.of('Change me then reload with ').append(Text.red('/kubejs reload startup_scripts')).append(' to see your changes!'))
 }
 ```
-
+<|
 ## Custom Uses
 ```js
 StartupEvents.registry('item', event => {

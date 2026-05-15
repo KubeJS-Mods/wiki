@@ -45,6 +45,8 @@ FluidType: "`FluidType`"
 DamageSources: "`DamageSources`"
 RandomSource: "`RandomSource`"
 Set: "[[ref/java/set|`Set`]]"
+EntityType: "`EntityType`"
+CompoundTag: "`CompoundTag`"
 
 # Enums
 

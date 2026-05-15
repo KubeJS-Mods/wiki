@@ -3648,8 +3648,8 @@ Deals `[js]amount` damage to the `[js]entity`. The type of damage dealt is of th
 `[js]true` if `[js]entity` has been successfully damaged, `[js]false` if the entity did not take any damage.
 <<<
 
-| <#attack> |
-| <#attack-description> |
+| <#damage> |
+| <#damage-description> |
 ---
 
 >>> #lavaHurt
@@ -4924,8 +4924,7 @@ entity.spawnAtLocation(itemStack, offsetY)
 Spawns an item entity at the position of the `[js]entity`, optionally moved up/down by the specified `[js]offsetY`. The spawned item entity will gain random momentum.
 
 **Parameters**
-- `[js]itemStack`: An {ItemStack}.
-It may be a string representing an item stack, for example `[js]'2x minecraft:oak_log'`.
+- `[js]itemStack`: An {ItemStack}. It may be a string representing an item stack, for example `[js]'2x minecraft:oak_log'`.
 - `[js]offsetY` {optional}: The Y offset of the newly spawned item entity relative to the position of `[js]entity`.
 **Return value**
 The reference to the {ItemEntity} spawned.

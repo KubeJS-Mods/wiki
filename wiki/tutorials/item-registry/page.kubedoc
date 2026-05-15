@@ -155,7 +155,7 @@ StartupEvents.registry('item', event => {
     )
 })
 ```
-|> Previous Versions
+<||> Previous Versions
 ```js
 StartupEvents.registry('item', event => {
   event.create('magic_steak').food(food => {
@@ -193,6 +193,7 @@ StartupEvents.registry('item', event => {
     )
 })
 ```
+<|
 global.myAwesomeReloadableFunction = ctx => {
   ctx.player.tell('Hello there!')
   ctx.player.tell(Text.of('Change me then reload with ').append(Text.red('/kubejs reload startup_scripts')).append(' to see your changes!'))

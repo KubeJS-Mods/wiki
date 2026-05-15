@@ -156,6 +156,7 @@ StartupEvents.registry('item', event => {
     )
 })
 ```
+```
 |> Previous Versions
 ```js
 ```js
@@ -194,6 +195,7 @@ StartupEvents.registry('item', event => {
         .eaten(ctx => global.myAwesomeReloadableFunction(ctx))
     )
 })
+```
 ```
 global.myAwesomeReloadableFunction = ctx => {
   ctx.player.tell('Hello there!')

@@ -1,3 +1,7 @@
+>>> warn
+This page was created with KubeJS 7.2 (for 1.21.1) in mind. Most of the information you see here will work with your version as well, but code syntax especially might *slightly* differ across versions.
+<<<
+
 {Entity} is an abstract class that serves as a base of all entity behavior.
 As it's abstract, it cannot be directly constructed. Other entity classes extend from this class.
 

@@ -117,7 +117,8 @@ Vanilla group/creative tab IDs:
 
 # Examples
 ## Custom Foods
-
+|> 1.21.1
+```js
 ```js
 StartupEvents.registry('item', event => {
   event.create('magic_steak').food(food => {
@@ -154,7 +155,46 @@ StartupEvents.registry('item', event => {
         .eaten(ctx => global.myAwesomeReloadableFunction(ctx))
     )
 })
+```
+|> Previous Versions
+```js
+```js
+StartupEvents.registry('item', event => {
+  event.create('magic_steak').food(food => {
+    food
+      .hunger(6)
+      .saturation(6) // This value does not directly translate to saturation points gained
+      // The real value can be assumed to be:
+      // min(hunger * saturation * 2 + saturation, foodAmountAfterEating)
+      .effect('minecraft:speed', 600, 0, 1)
+      .removeEffect('minecraft:poison')
+      .alwaysEdible() // Like golden apples
+      .fastToEat() // Like dried kelp
+      .meat() // Dogs are willing to eat it
+      .eaten(ctx => {
+        // runs code upon consumption
+        ctx.player.tell(Text.gold('Yummy Yummy!'))
+        // If you want to modify this code then you need to restart the game.
+        // However, if you make this code call a global startup function
+        // and place the function *outside* of an event handler
+        // then you may use the command:
+        // /kubejs reload startup_scripts
+        // to reload the function instantly.
+        // See example below
+      })
+  })
 
+  event.create('magicer_steak')
+    .unstackable()
+    .food(food =>
+      food
+        .hunger(7)
+        .saturation(7)
+        // This references the function below instead of having code directly, so it is reloadable!
+        .eaten(ctx => global.myAwesomeReloadableFunction(ctx))
+    )
+})
+```
 global.myAwesomeReloadableFunction = ctx => {
   ctx.player.tell('Hello there!')
   ctx.player.tell(Text.of('Change me then reload with ').append(Text.red('/kubejs reload startup_scripts')).append(' to see your changes!'))

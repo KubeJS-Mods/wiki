@@ -119,7 +119,6 @@ Vanilla group/creative tab IDs:
 ## Custom Foods
 |> 1.21.1
 ```js
-```js
 StartupEvents.registry('item', event => {
   event.create('magic_steak').food(food => {
     food
@@ -156,9 +155,7 @@ StartupEvents.registry('item', event => {
     )
 })
 ```
-```
 |> Previous Versions
-```js
 ```js
 StartupEvents.registry('item', event => {
   event.create('magic_steak').food(food => {
@@ -195,7 +192,6 @@ StartupEvents.registry('item', event => {
         .eaten(ctx => global.myAwesomeReloadableFunction(ctx))
     )
 })
-```
 ```
 global.myAwesomeReloadableFunction = ctx => {
   ctx.player.tell('Hello there!')

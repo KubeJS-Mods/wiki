@@ -268,7 +268,7 @@ event.replaceInput(
   //do /kjs hand with the items you want to use to see all their tags.
 )
 ```
-<||> Previous Versions
+<||> 1.20 and below
 ```js
 event.replaceInput(
   { input: 'minecraft:stick' }, // Arg 1: the filter

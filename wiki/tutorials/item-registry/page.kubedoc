@@ -122,7 +122,7 @@ Vanilla group/creative tab IDs:
 StartupEvents.registry('item', event => {
   event.create('magic_steak').food(food => {
     food
-      .hunger(6)
+      .nutrition(6)
       .saturation(6) // This value does not directly translate to saturation points gained
       // The real value can be assumed to be:
       // min(hunger * saturation * 2 + saturation, foodAmountAfterEating)
@@ -148,7 +148,7 @@ StartupEvents.registry('item', event => {
     .unstackable()
     .food(food =>
       food
-        .hunger(7)
+        .nutrition(7)
         .saturation(7)
         // This references the function below instead of having code directly, so it is reloadable!
         .eaten(ctx => global.myAwesomeReloadableFunction(ctx))

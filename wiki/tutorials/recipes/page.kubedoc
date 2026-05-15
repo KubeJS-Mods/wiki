@@ -258,7 +258,16 @@ You can bulk-modify supported recipes using `[js]event.replaceInput()` and `[js]
 3. The ingredient to replace it with (can be a tag)
 
 For example, let's say you were removing all sticks and wanted to make people craft things with saplings instead. Inside your [callback](#recipes-callbacks-and-you) you would put:
-
+|> 1.21.1
+```js
+event.replaceInput(
+  { input: 'minecraft:stick' },         // Arg 1: the filter
+  'minecraft:stick',                    // Arg 2: the item to replace
+  Ingredient.of('#minecraft:saplings')  // Arg 3: the item to replace it with 
+  // Do /kjs hand with the items you want to use to see all their tags.
+)
+```
+<||> 1.20 and below
 ```js
 event.replaceInput(
   { input: 'minecraft:stick' }, // Arg 1: the filter
@@ -267,7 +276,7 @@ event.replaceInput(
   // Note: tagged fluid ingredients do not work on Fabric, but tagged items do.
 )
 ```
-
+<|
 # Advanced Techniques
 
 ## Helper functions

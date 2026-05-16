@@ -1584,9 +1584,8 @@ None (`[js]undefined`).
 **Syntax**
 ```js
 entity.moveTo(positionVector)
+entity.moveTo(positionVector, pitch, yaw)
 entity.moveTo(x, y, z)
-entity['moveTo(net.minecraft.core.BlockPos,float,float)'](blockPos, pitch, yaw)
-entity['moveTo(net.minecraft.world.phys.Vec3,float,float)'](positionVector, pitch, yaw)
 entity.moveTo(x, y, z, pitch, yaw)
 ```
 
@@ -1594,7 +1593,6 @@ Sets the entity's position and facing direction.
 
 **Parameters**
 - `[js]positionVector`: A {Vec3} representing the position to move the entity to. It may be a 3-element JS array representing the vector, like `[js]\[64, 50, -20\]`.
-- `[js]blockPos`: A {BlockPos} to move the entity to. The resulting position will be the center of the block. It may be a 3-element JS array representing the block position, like `[js]\[64, 50, -20\]`.
 - `[js]x`, `[js]y`, `[js]z`: The new coordinates of the entity. 
 - `[js]pitch`, `[js]yaw`: The new pitch and yaw of the entity, in degrees.
 
@@ -1604,6 +1602,31 @@ None (`[js]undefined`).
 
 | <#moveTo> |
 | <#moveTo-description> |
+---
+
+>>> #moveToBlockPos
+### `moveToBlockPos`
+<<<
+
+>>> #moveToBlockPos-description
+**Syntax**
+```js
+entity.moveToBlockPos(blockPos, pitch, yaw)
+```
+
+Sets the entity's position to the center of the provided block position, and its facing direction to the provided pitch and yaw.
+
+**Parameters**
+- `[js]blockPos`: A {BlockPos} to move the entity to. The resulting position will be the center of the block. It may be a 3-element JS array representing the block position, like `[js]\[64, 50, -20\]`.
+- `[js]pitch`, `[js]yaw`: The new pitch and yaw of the entity, in degrees.
+
+**Return value**
+None (`[js]undefined`).
+<<<
+
+| <#moveToBlockPos>             |
+| <#moveToBlockPos-description> |
+
 ---
 
 >>> #getLookAngle
@@ -5447,7 +5470,7 @@ Checks, whether the entity can receive command feedback for failed commands.
 >>> #shouldinformadmins-description
 **Syntax**
 ```js
-entity.shouldinformadmins()
+entity.shouldInformAdmins()
 ```
 
 Checks, whether admins (server operators) can be informed about commands sourced from this entity.

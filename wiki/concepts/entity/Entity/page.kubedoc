@@ -236,7 +236,7 @@ if (entity.isClientPlayer()) {
 ---
 
 >>> #getProfile
-### `fullName`
+### `getProfile`
 <<<
 
 >>> #getProfile-description
@@ -2031,10 +2031,10 @@ entity.motionZ // bean
 
 Gets or sets the entity's `x`, `y` or `z` component of the entity's [motion vector](#getdeltamovement-setdeltamovement).
 
-**Parameters**
+**Setter parameter**
 - `[js]motionX`, `[js]motionY`, `[js]motionZ`: The `x`, `y` or `z` component of the entity's motion vector to set.
 
-**Return value**
+**Getter return value**
 The `x`, `y` or `z` component of the entity's motion vector respectively.
 
 **Example**
@@ -4193,7 +4193,7 @@ Sets or gets the removal status of the entity.
 ---
 
 >>> #getRemovalReason
-### `fullName`
+### `getRemovalReason`
 <<<
 
 >>> #getRemovalReason-description

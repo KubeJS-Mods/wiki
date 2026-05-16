@@ -78,7 +78,7 @@ The `AABB` for the entity dimensions positioned at provided coordinates.
 ---
 
 >>> #scale
-### `fullName`
+### `scale`
 <<<
 
 >>> #scale-description

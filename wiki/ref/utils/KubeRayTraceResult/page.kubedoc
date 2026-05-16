@@ -1,8 +1,8 @@
-`SlotAccess` is an interface that exposes an inventory slot for setting and getting the underlaying item stack from.
+`KubeRayTraceResult` is a class that contains results of ray tracing operations performed by [`Entity#rayTrace`](/wiki/concepts/entity/Entity#rayTrace).
 
 # Instance methods
 
-In the following examples, `[js]slot` will refer to an object that implements the `[java]SlotAccess` interface.
+In the following examples, `[js]slot` will refer to an instance of `[java]KubeRayTraceResult`.
 
 >>> #get
 ### `get`

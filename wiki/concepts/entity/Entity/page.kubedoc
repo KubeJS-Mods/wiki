@@ -1609,6 +1609,9 @@ None (`[js]undefined`).
 <<<
 
 >>> #moveToBlockPos-description
+>>> info
+This overload has its name changed from vanilla: `moveTo`.
+<<<
 **Syntax**
 ```js
 entity.moveToBlockPos(blockPos, pitch, yaw)
@@ -5629,7 +5632,7 @@ entity.isAlliedTo(team)
 
 **Syntax**
 ```js
-const myTeam = server.scoreboard.getPlayerTeam("MyTeam")
+const myTeam = server.scoreboard.getPlayerTeam('MyTeam')
 ```
 
 where `[js]server` is a reference to {MinecraftServer}, for example `[js]event.server` in many server events.
@@ -6002,3 +6005,355 @@ The entity represented as string.
 
 | <#toString> |
 | <#toString-description> |
+
+
+# Instance fields
+
+>>> #blocksBuilding
+### `blocksBuilding`
+<<<
+
+>>> #blocksBuilding-description
+**Syntax**
+```js
+entity.blocksBuilding
+```
+
+Specifies, whether the entity should be included in intersection checks.
+Intersection checks prevent block placement or mob spawning within this entity's bounding box.
+
+**Value**
+`[js]true` if this entity is included in intersection checks, `[js]false` if it isn't.
+
+<<<
+
+| <#blocksBuilding>             |
+| <#blocksBuilding-description> |
+
+---
+
+>>> #horizontalCollision
+### `horizontalCollision`
+<<<
+
+>>> #horizontalCollision-description
+**Syntax**
+```js
+entity.horizontalCollision
+```
+
+Specifies, whether the horizontal movement of the entity causes it to collide with a block.
+
+**Value**
+`[js]true` if the horizontal movement of the entity causes it to collide with a block during its horizontal movement, `[js]false` if it isn't.
+<<<
+
+| <#horizontalCollision>             |
+| <#horizontalCollision-description> |
+
+---
+
+>>> #verticalCollision
+### `verticalCollision`
+<<<
+
+>>> #verticalCollision-description
+**Syntax**
+```js
+entity.verticalCollision
+```
+
+Specifies, whether the entity is currently colliding with a block during its vertical movement.
+
+**Value**
+`[js]true` if the vertical movement of the entity is colliding with a block, `[js]false` if it isn't.
+<<<
+
+| <#verticalCollision>             |
+| <#verticalCollision-description> |
+
+---
+
+>>> #verticalCollisionBelow
+### `verticalCollisionBelow`
+<<<
+
+>>> #verticalCollisionBelow-description
+**Syntax**
+```js
+entity.verticalCollisionBelow
+```
+
+Specifies, whether the entity is currently colliding with a block during its downwards movement. Notably, this will be `[js]true` if the entity is on the floor.
+
+**Value**
+`[js]true` if the entity is colliding with a block during entity's downward movement, `[js]false` if it isn't.
+
+<<<
+
+| <#verticalCollisionBelow>             |
+| <#verticalCollisionBelow-description> |
+
+---
+
+>>> #minorHorizontalCollision
+### `minorHorizontalCollision`
+<<<
+
+>>> #minorHorizontalCollision-description
+**Syntax**
+```js
+entity.minorHorizontalCollision
+```
+
+Specifies, whether the horizontal movement of the entity causes it to collide with a block, but at a small enough angle so that the entity can keep sprinting.
+
+This field will be always `[js]false` for most entities, except for {LocalPlayer} instances, for which the above applies.
+
+**Value**
+`[js]true` it the horizontal movement of the entity causes it to collide with a block, but at a small enough angle so that the entity can keep sprinting, `[js]false` if that's not the case.
+
+<<<
+
+| <#minorHorizontalCollision>             |
+| <#minorHorizontalCollision-description> |
+
+---
+
+>>> #hurtMarked
+### `hurtMarked`
+<<<
+
+>>> #hurtMarked-description
+**Syntax**
+```js
+entity.hurtMarked
+```
+
+**Value**
+`[js]true` if the entity has just been damaged, `[js]false` otherwise.
+<<<
+
+| <#hurtMarked>             |
+| <#hurtMarked-description> |
+
+---
+
+>>> #walkDist
+### `walkDist`
+<<<
+
+>>> #walkDist-description
+**Syntax**
+```js
+entity.walkDist
+```
+
+**Value**
+Entity's current total horizontal distance traveled, except distance traveled on vehicles and creative flight. This value doesn't get saved with the entity, so when the entity is re-created, this value starts back from 0.
+<<<
+
+| <#walkDist>             |
+| <#walkDist-description> |
+
+---
+
+>>> #moveDist
+### `moveDist`
+<<<
+
+>>> #moveDist-description
+**Syntax**
+```js
+entity.moveDist
+```
+
+**Value**
+Entity's current total horizontal distance traveled, except distance traveled on vehicles and creative flight. This value doesn't get saved with the entity, so when the entity is re-created, this value starts back from 0.
+
+<<<
+
+| <#moveDist>             |
+| <#moveDist-description> |
+
+---
+
+>>> #flyDist
+### `fullName`
+<<<
+
+>>> #flyDist-description
+**Syntax**
+```js
+entity.flyDist
+```
+
+**Return value**
+Entity's current total distance traveled (in all 3 dimensions), except distance traveled on vehicles and creative flight. This value doesn't get saved with the entity, so when the entity is re-created, this value starts back from 0.
+
+<<<
+
+| <#flyDist>             |
+| <#flyDist-description> |
+
+---
+
+>>> #fallDistance
+### `fallDistance`
+<<<
+
+>>> #fallDistance-description
+**Syntax**
+```js
+entity.fallDistance
+```
+
+Contains the entity's fall distance. Used in Minecraft to calculate fall damage.
+
+**Value**
+Entity's fall distance.
+
+<<<
+
+| <#fallDistance>             |
+| <#fallDistance-description> |
+
+---
+
+>>> #noPhysics
+### `noPhysics`
+<<<
+
+>>> #noPhysics-description
+**Syntax**
+```js
+entity.noPhysics
+```
+
+Specifies, whether the entity can collide with anything.
+**Value**
+`[js]true` if the entity can't collide with environment (no-clip), `[js]false` if it can.
+
+>>> warn
+Setting `noPhysics` to `true` on a server player alone won't make it no-clip through environment, because player movement is controlled by the client.
+<<<
+<<<
+
+| <#noPhysics>             |
+| <#noPhysics-description> |
+
+---
+
+>>> #tickCount
+### `tickCount`
+<<<
+
+>>> #tickCount-description
+**Syntax**
+```js
+entity.tickCount
+```
+**Value**
+Amount of ticks this entity existed for since it has been created.
+
+<<<
+
+| <#tickCount>             |
+| <#tickCount-description> |
+
+---
+
+>>> #invulnerableTime
+### `invulnerableTime`
+<<<
+
+>>> #invulnerableTime-description
+**Syntax**
+```js
+entity.invulnerableTime
+```
+
+Gets the amount of "invulnerability ticks" of the entity. The entity may not actually be invulnerable for this amount of ticks - for example, living entities ({LivingEntity}) can be damaged if its invulnerable time is 10 or lower, so de facto invulnerable time is 10 ticks lower than this value.
+
+For this period, entities can't regenerate passively.
+
+**Value**
+Entity's invulnerable time, in ticks.
+
+<<<
+
+| <#invulnerableTime>             |
+| <#invulnerableTime-description> |
+
+---
+
+>>> #noCulling
+### `noCulling`
+<<<
+
+>>> #noCulling-description
+**Syntax**
+```js
+entity.noCulling
+```
+
+Specifies, whether the entity can be culled.
+
+**Value**
+`[js]true` if the entity can't be culled, `[js]false` if it can.
+<<<
+
+| <#noCulling>             |
+| <#noCulling-description> |
+
+---
+
+>>> #isInPowderSnow
+### `isInPowderSnow`
+<<<
+
+>>> #isInPowderSnow-description
+**Syntax**
+```js
+entity.isInPowderSnow
+```
+
+Specifies, whether the entity is in Powder Snow.
+
+**Value**
+`[js]true` if the entity is in Powder Snow, `[js]false` if it isn't.
+<<<
+
+| <#isInPowderSnow>             |
+| <#isInPowderSnow-description> |
+
+---
+
+>>> #mainSupportingBlockPos
+### `mainSupportingBlockPos`
+<<<
+
+>>> #mainSupportingBlockPos-description
+**Syntax**
+```js
+entity.mainSupportingBlockPos
+```
+
+**Value**
+An {Optional} object that can contain a {BlockPos} of the block that holds the majority of bottom of this entity's hitbox if the entity stands on some block.
+
+**Example**
+To make accessing this field easier, you can use the `orElse` method on `Optional` to return a default object, in this case `[js]null`.
+
+```js
+const supportingBlock = entity.mainSupportingBlockPos.orElse(null)
+```
+
+Now, `[js]supportingBlock` will be either a {BlockPos} or `[js]null`.
+
+<<<
+
+| <#mainSupportingBlockPos>             |
+| <#mainSupportingBlockPos-description> |
+
+---

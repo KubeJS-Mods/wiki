@@ -1,2 +1,6 @@
 title: "SlotAccess"
 description: "Slot accessor"
+
+# Referenced Java classes - put links to documentation here, if documented
+
+ItemStack: "[[/concepts/item-stack|`ItemStack`]]"

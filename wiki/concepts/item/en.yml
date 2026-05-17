@@ -1,0 +1,6 @@
+title: "Item"
+description: "Things you can pick up to your inventory, store in chests, etc."
+
+item: "#[[orange|`<`#[[yellow|`item`]]`>`]]"
+components: "#[[blue|`\\[​`#[[orange|`<`#[[yellow|`components`]]`>`]]`​\\]`]]"
+custom-data: "#[[blue|`\\{​`#[[orange|`<`#[[yellow|`custom-data`]]`>`]]`​\\}`]]"

@@ -1,0 +1,1484 @@
+>>> info
+This guide assumes that you know about:
+- Java types and JavaScript types,
+- Various types of Java classes (`[java]class`, `[java]interface`, `[java]enum`, `[java]record`)
+
+<<<
+In order to abstract away the knowledge of underlying types from the scripter, Rhino and KubeJS add what's known as **type wrappers**. Their role is to attempt to convert the type provided as an argument of a function, assigned to a variable or assigned to an object to the intended Java type.
+
+Below is the comprehensive table describing all the implicit type conversions possible in KubeJS. Types are Java types by default, unless prepended with "JS".
+
+# To `AABB`
+
+>>> #aabb-blockpos
+`[java]BlockPos`
+<<<
+
+>>> #aabb-blockpos-method
+Creates an axis aligned bounding box encompassing the block at the provided `[java]BlockPos` only.
+<<<
+
+>>> #aabb-array-3
+JS array with 3 `number` elements:
+`[js]\[x, y, z\]`
+<<<
+
+>>> #aabb-array-3-method
+Creates an axis aligned bounding box of size `[js]x`, `[js]y`, `[js]z` centered at the origin (0, 0, 0).
+<<<
+
+>>> #aabb-array-6
+JS array with 6 `number` elements:
+`[js]\[x1, y1, z1, x2, y2, z2\]`
+<<<
+
+>>> #aabb-array-6-method
+Creates an axis aligned bounding box between coordinates `[js]x1`, `[js]y1`, `[js]z1` and `[js]x2`, `[js]y2`, `[js]z2`.
+<<<
+
+>>> #aabb-default
+Other types
+<<<
+
+>>> #aabb-default-method
+Creates an empty `[java]AABB` (__**fails silently!**__)
+<<<
+
+| From type        | Method                  |
+| <#aabb-blockpos> | <#aabb-blockpos-method> |
+| <#aabb-array-3>  | <#aabb-array-3-method>  |
+| <#aabb-array-6>  | <#aabb-array-6-method>  |
+| <#aabb-default>  | <#aabb-default-method>  |
+
+# To `BlockSetType`
+
+>>> #blocksettype-string
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #blocksettype-string-method
+Tries to find a `[java]BlockSetType` in the `[java]BlockSetType.VALUES` set by name. The lookup ignores casing of characters.
+If the lookup finds a block set type, it returns that block set type.
+Otherwise, returns `[js]null`.
+<<<
+
+>>> #blocksettype-default
+Other types
+<<<
+
+>>> #blocksettype-default-method
+A record conversion (???)
+<<<
+
+| From type               | Method                         |
+| <#blocksettype-string>  | <#blocksettype-string-method>  |
+| <#blocksettype-default> | <#blocksettype-default-method> |
+
+# To `BlockState`
+
+>>> #blockstate-null
+`[js]null`
+<<<
+
+>>> #blockstate-null-method
+Returns the default block state of Air.
+<<<
+
+>>> #blockstate-block
+`[java]Block`
+<<<
+
+>>> #blockstate-block-method
+Returns the default block state of the provided `[java]Block`.
+<<<
+
+>>> #blockstate-default
+Other types (including JS `string`)
+<<<
+
+>>> #blockstate-default-method
+The provided object is converted to string using its `[java]toString()` method.
+If the resulting string is empty, the default block state of Air is returned.
+Otherwise, a `[java]BlockStateParser.parseForBlock()` method is invoked to try to parse the block state.
+The expected string follows the format used in commands like `/setblock`: A block, like `[js]'minecraft:stone'`, or a block with properties, like `[js]'minecraft:oak_log\[axis=x\]'`.
+If parsing fails, __**it does so silently**__, returning the default block state of Air.
+<<<
+
+| From type             | Method                       |
+| <#blockstate-null>    | <#blockstate-null-method>    |
+| <#blockstate-block>   | <#blockstate-block-method>   |
+| <#blockstate-default> | <#blockstate-default-method> |
+
+# To `KubeColor`
+
+>>> #kubecolor-string
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #kubecolor-string-method
+The character sequence is converted to string using its `[java]toString()` method.
+If the string is found as a key of the `[java]ColorWrapper.MAP` map, the color returned is the value found at that key.
+Otherwise, if the string starts with `#`:
+- All characters past `#` are interpreted as a hexadecimal long integer.
+- If the string is 7 characters long (so, 6 hex digits), a `[java]SimpleColor` is returned corresponding to the provided RGB color.
+- Otherwise, a `[java]SimpleColorWithAlpha` is returned corresponding to the provided ARGB color.
+
+If no color is found, a `[java]ColorWrapper.NONE` color is returned (__**fails silently!**__).
+<<<
+
+>>> #kubecolor-number
+JS `number`, unless it's `[js]0`
+<<<
+
+>>> #kubecolor-number-method
+The provided number is converted to `[java]int`, then a `[java]SimpleColor` corresponding to the provided RGB color is returned.
+>>>warn
+ARGB colors aren't handled here.
+<<<
+<<<
+
+>>> #kubecolor-default
+Other types
+<<<
+
+>>> #kubecolor-default-method
+Returns the `[java]ColorWrapper.NONE` color (__**fails silently!**__).
+<<<
+
+| From type             | Method                      |
+| <#kubecolor-string>   | <#kubecolor-string-method>  |
+| <#kubecolor-number>   | <#kubecolor-number-method>  |
+| <#kubecolor-default>  | <#kubecolor-default-method> |
+
+# To `TextColor`
+
+Conversion mostly identical to [`KubeColor`](#to-kubecolor), but the resulting `[java]KubeColor` is converted to `[java]TextColor` by using the `[java]kjs$createTextColor()` method on it, which creates a `[java]TextColor` from the color held by the `[java]KubeColor`.
+
+
+# To `ColorRGBA`
+
+Conversion mostly identical to [`KubeColor`](#to-kubecolor), but the resulting `[java]KubeColor` is converted to `[java]ColorRGBA` by constructing a new instance of it with the color held by the `[java]KubeColor`.
+
+# To `DamageSource`
+
+>>> #damagesource-player
+[[/concepts/entity/Player|`Player`]]
+<<<
+
+>>> #damagesource-player-method
+Returns the `[js]'minecraft:player_attack'` damage source caused by the provided `[java]Player`.
+<<<
+
+>>> #damagesource-livingentity
+[[/concepts/entity/LivingEntity|`LivingEntity`]]
+<<<
+
+>>> #damagesource-livingentity-method
+Returns the `[js]'minecraft:mob_attack'` damage source caused by the provided `[java]LivingEntity`.
+<<<
+
+>>> #damagesource-default
+Other types (`string`, `[java]ResourceLocation`, `[java]ResourceKey`, etc.)
+<<<
+
+>>> #damagesource-default-method
+First, the object is [converted to `ResourceLocation`](#to-resourcelocation). If the object is a string, and it has no namespace part (like `[js]'mob_attack'`), `[js]'minecraft'` is assumed.
+This conversion may throw for invalid inputs.
+Then, a registry lookup is performed.
+If the resource location is in the registry, the corresponding `[java]DamageSource` is returned. Its causing entity and direct entity will be both `[js]null`.
+Otherwise, an exception is thrown.
+<<<
+
+| From type                    | Method                               |
+| <#damagesource-player>       | <#damagesource-player-method>        |
+| <#damagesource-livingentity> | <#damagesource-livingentity-method>  |
+| <#damagesource-default>      | <#damagesource-default-method>       |
+
+# To `EntitySelector`
+There are multiple classes in Minecraft with that name, so to avoid ambiguity, this refers to the `net.minecraft.commands.arguments.selector.EntitySelector` class.
+
+>>> #entityselector-null
+`[js]null`
+<<<
+
+>>> #entityselector-null-method
+Returns an `[java]EntitySelector` selecting all entities - equivalent to `[js]'@e'` used in commands.
+<<<
+
+>>> #entityselector-default
+Other types (including JS `string`)
+<<<
+
+>>> #entityselector-default-method
+The object is converted to string using its `[java]toString()` method.
+Then, the string is passed to the `[java]EntitySelectorParser` to try to parse the entity selector, using logic used in the command interpreter.
+The expected string format is explained in detail in the [Target selectors](https://minecraft.wiki/w/Target_selectors) article on the [minecraft.wiki](https://minecraft.wiki).
+If the parsing fails, it fails __**semi-silently**__:
+- An error is printed into the console that says: `Error parsing entity selector, falling back to all`,
+- Returns an `[java]EntitySelector` selecting all entities - equivalent to `[js]'@e'` used in commands.
+<<<
+
+| From type                  | Method                           |
+| <#entityselector-null>     | <#entityselector-null-method>    |
+| <#entityselector-default>  | <#entityselector-default-method> |
+
+# To `Ingredient`
+
+>>> #ingredient-wrapper
+`[java]Wrapper`
+<<<
+
+>>> #ingredient-wrapper-method
+Will be recursively unwrapped, until the object is no longer a `[java]Wrapper`, then conversion will happen according to the following steps.
+<<<
+
+>>> #ingredient-null
+`[js]null`
+`[java]ItemStack` (if it's empty)
+`[java]ItemLike` (if it represents Air)
+<<<
+
+>>> #ingredient-null-method
+Returns an empty `[java]Ingredient`.
+<<<
+
+>>> #ingredient-ingredientsupplierkjs
+`[java]IngredientSupplierKJS`, implemented/extended by:
+- `[java]ICustomIngredient`
+- `[java]Ingredient`
+- `[java]SizedIngredient`
+- `[java]ItemStack`
+- `[java]Item`
+- `[java]ItemPredicate`
+<<<
+
+>>> #ingredient-ingredientsupplierkjs-method
+Will call a `[java]kjs$getIngredient()` method on the object, which will convert an object into an `[java]Ingredient` appropriately.
+<<<
+
+>>> #ingredient-itemlike
+`[java]ItemLike`
+<<<
+
+>>> #ingredient-itemlike-method
+Will use vanilla `[java]Ingredient.of()` method to create an ingredient.
+<<<
+
+>>> #ingredient-tagkey
+`[java]TagKey`
+<<<
+
+>>> #ingredient-tagkey-method
+Will use vanilla `[java]Ingredient.of()` method to create an ingredient matching items belonging to the given tag in `[java]TagKey`.
+<<<
+
+>>> #ingredient-regex
+`[java]Pattern` / JS `[js]RegExp`
+<<<
+
+>>> #ingredient-regex-method
+Will construct an ingredient which will match all items whose ID matches the given regular expression.
+<<<
+
+>>> #ingredient-json
+`[java]JsonElement`
+<<<
+
+>>> #ingredient-json-method
+If the `[java]JsonElement` is:
+- `[js]null`, `[java]JsonNull`, `[java]JsonArray` if the array is empty: returns an empty ingredient,
+- `[java]JsonPrimitive` (represents non-object, non-array types in JSON): converted to string, then the type wrapper is invoked on that string,
+- Otherwise, the GSON `[java]JsonElement` is passed into the vanilla `[java]Ingredient.CODEC` to be decoded into an `[java]Ingredient`.
+<<<
+
+>>> #ingredient-string
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #ingredient-string-method
+If the string is:
+- `[js]''` (empty string), `[js]'-'`, `[js]'air'`, `[js]'minecraft:air'` - returns an empty ingredient,
+- `[js]'*'` - returns an ingredient that matches every item in the game,
+Otherwise, a `[java]StringReader` is constructed from the string and analyzed.
+All whitespaces are skipped while reading the string.
+If the string consists of whitespaces only, an empty ingredient is returned.
+Otherwise, if the first non-space character is a:
+- `[js]'-'` - returns an empty ingredient,
+- `[js]'*'` - returns an ingredient that matches every item in the game,
+- `[js]'#'` - All following characters are interpreted as a `[java]ResourceLocation` of an item tag, until a character is encountered which isn't allowed in a `[java]ResourceLocation`. Then, returns a tag ingredient that is constructed from that tag.
+- `[js]'@'` - All following characters are interpreted as a namespace (mod name), until a character is encountered which isn't allowed in an unquoted string in SNBT. Then, returns a namespace ingredient that matches all items belonging in a given namespace.
+- `[js]'%'` - All following characters are interpreted as a `[java]ResourceLocation` of a creative mode tab, until a character is encountered which isn't allowed in a `[java]ResourceLocation`. If the creative mod tab exists at the given location, returns a creative tab ingredient that matches all items in a given creative mode tab.
+- `[js]'/'` - All following characters, up to another unescaped `[js]'/'` are interpreted as a regular expression pattern. Regex flags may appear after the last slash, just like in the JS `[js]RegExp` literal. Returns an ingredient which will match all items whose ID matches the given regular expression.
+- `[js]'\['` - All following characters up to the closing bracket `[js]'\]'` will be interpreted as a compound ingredient (list of ingredients). Different ingredients must be separated by commas. If the list is empty, an empty ingredient is returned. If the list has only one ingredient, that ingredient will be returned. Otherwise, returns the resulting compound ingredient.
+Otherwise, all characters are interpreted as a `[java]ResourceLocation` of an item, until a character is encountered which isn't allowed in a `[java]ResourceLocation`.
+Then, if the location is followed by `[js]'\['` or `[js]'{'`, it will be interpreted as a component predicate for the item ingredient.
+Predicates starting with `[js]'{'` correspond to `[js]'minecraft:custom_data'` component and must be formatted as SNBT, like the format used in commands. Otherwise, the syntax is similar to that used in the [item predicate command argument](https://minecraft.wiki/w/Argument_types#minecraft:item_predicate).
+<<<
+
+>>> #ingredient-list
+`[java]List`, `[java]Iterable` or Java array
+JS array
+<<<
+
+>>> #ingredient-list-method
+The collections will be first normalized to a `[java]List`.
+Then, each element of the list will be converted to `[java]Ingredient` if possible by invoking the type wrapper on each element.
+If the list is empty, an empty ingredient is returned. If the list has only one ingredient, that ingredient will be returned. Otherwise, returns the resulting compound ingredient.
+<<<
+
+>>> #ingredient-map
+`[java]Map`, JS `object`
+<<<
+
+>>> #ingredient-map-method
+The provided object will be first normalized to `[java]Map<String, Object>`.
+Then the map will be passed to the vanilla `[java]Ingredient.CODEC` to be decoded into an `[java]Ingredient`.
+<<<
+
+>>> #ingredient-default
+Other types
+<<<
+
+>>> #ingredient-default-method
+[Will be converted to `ItemStack` if possible](#to-itemstack), then the resulting `[java]ItemStack` will be converted into an `[java]Ingredient` by calling the `[java]kjs$getIngredient()` method on the item stack.
+<<<
+
+| From type                           | Method                                     |
+| <#ingredient-wrapper>               | <#ingredient-wrapper-method>               |
+| <#ingredient-ingredientsupplierkjs> | <#ingredient-ingredientsupplierkjs-method> |
+| <#ingredient-itemlike>              | <#ingredient-itemlike-method>              |
+| <#ingredient-tagkey>                | <#ingredient-tagkey-method>                |
+| <#ingredient-regex>                 | <#ingredient-regex-method>                 |
+| <#ingredient-json>                  | <#ingredient-json-method>                  |
+| <#ingredient-string>                | <#ingredient-string-method>                |
+| <#ingredient-list>                  | <#ingredient-list-method>                  |
+| <#ingredient-map>                   | <#ingredient-map-method>                   |
+| <#ingredient-default>               | <#ingredient-default-method>               |
+
+# To `ItemStack`
+
+>>> #itemstack-wrapper
+`[java]Wrapper`
+<<<
+
+>>> #itemstack-wrapper-method
+Will be recursively unwrapped, until the object is no longer a `[java]Wrapper`, then conversion will happen according to the following steps.
+<<<
+
+>>> #itemstack-null
+`[js]null`
+`[java]ItemLike` (if it represents Air)
+<<<
+
+>>> #itemstack-null-method
+Returns an empty `[java]ItemStack`.
+<<<
+
+>>> #itemstack-ingredient
+`[java]Ingredient`, `[java]SizedIngredient`
+<<<
+
+>>> #itemstack-ingredient-method
+__**Will throw an exception**__. As of KubeJS 1.21.1, `[java]Ingredient` objects are not implicitly convertible into `[java]ItemStack` objects due to them being lazily fetched now.
+To get the first `[java]ItemStack` that matches the `[java]Ingredient`: `[js]ingredient`, use `[js]ingredient.getFirst()` (bean: `[js]ingredient.first`).
+To get the first `[java]ItemStack` that matches the `[java]SizedIngredient`: `[js]sizedIngredient`, use `[js]sizedIngredient.getIngredient().getFirst()` (bean: `[js]sizedIngredient.ingredient.first`).
+<<<
+
+>>> #itemstack-itemlike
+`[java]ItemLike`
+<<<
+
+>>> #itemstack-itemlike-method
+Will be converted to `[java]ItemStack` by doing the following:
+- First, the `[java]ItemLike` is converted into `[java]Item` by using the `[java]asItem` method.
+- Then, the `[java]Item` is converted to `[java]ItemStack` by using the `[java]getDefaultInstance` method.
+<<<
+
+>>> #itemstack-resourcelocation
+`[java]ResourceLocation`
+<<<
+
+>>> #itemstack-resourcelocation-method
+Performs registry lookup for the `[java]Item` at specified `[java]ResourceLocation`, then uses a `[java]getDefaultInstance` method to get the `[java]ItemStack`.
+<<<
+
+>>> #itemstack-json
+`[java]JsonElement`
+<<<
+
+>>> #itemstack-json-method
+If the `JsonElement` is:
+- `[js]null`, `[java]JsonNull`: returns an empty `[java]ItemStack`,
+- `[java]JsonPrimitive` (represents non-object, non-array types in JSON): converted to string, then the type wrapper is invoked on that string,
+- `[java]JsonObject`: is passed into the vanilla `[java]ItemStack.OPTIONAL_CODEC` to be decoded into an `[java]ItemStack`.
+- Otherwise, an exception is thrown.
+<<<
+
+>>> #itemstack-stringtag
+`[java]StringTag` (NBT)
+<<<
+
+>>> #itemstack-stringtag-method
+Gets converted to string, then the type wrapper is invoked on that string.
+<<<
+
+>>> #itemstack-string
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #itemstack-string-method
+The character sequence is first converted to string and trimmed from spaces at the beginning or end.
+
+If a sequence `[js]'x '` (character "x" and space after it) is found, substring before this sequence should be interpreted as the item stack's count. This count will be parsed as an integer.
+If no `[js]'x '` sequence is found, the count is assumed to be 1.
+
+Then, the remainder of the string (after the `[js]'x '` sequence, if it was present) is interpreted as an item ID, optionally with components.
+If the first non-space character is a:
+- `[js]'-'` or string already ended: an empty `[java]ItemStack` is returned.
+- A digit: All following characters are interpreted as a real number (`double`) until a character that can't be a part of a number is found, then the final count will be rounded up. If this count is below 1, an error will be thrown. A character `[js]'x'` must follow the number. Space is not required after that `[js]'x'`. (This behavior is possibly a bug.)
+
+Then, the remainder of the string (after `[js]'#x'` sequence, where `#` is a number) is interpreted as an item ID, until a character is encountered which isn't allowed in a `[java]ResourceLocation`. If the namespace part is omitted, `[js]'minecraft'` is assumed.
+Then, if the location is followed by `[js]'\['` or `[js]'{'`, it will be interpreted as component modifications for the `[java]ItemStack`.
+Both the location and the component syntax follow the one used in the [item stack command argument](https://minecraft.wiki/w/Argument_types#minecraft:item_stack).
+<<<
+
+>>> #itemstack-default
+Other types (including `[java]Map`, JS `object`)
+<<<
+
+>>> #itemstack-default-method
+The object provided will be normalized to a `[java]Map<String, Object>` if possible.
+Then, the map will be passed into the vanilla `[java]ItemStack.OPTIONAL_CODEC` to be decoded into an `[java]ItemStack`.
+If after the normalization the map ends up being `[js]null`, an error is thrown.
+<<<
+
+| From type                     | Method                               |
+| <#itemstack-wrapper>          | <#itemstack-wrapper-method>          |
+| <#itemstack-null>             | <#itemstack-null-method>             |
+| <#itemstack-ingredient>       | <#itemstack-ingredient-method>       |
+| <#itemstack-itemlike>         | <#itemstack-itemlike-method>         |
+| <#itemstack-resourcelocation> | <#itemstack-resourcelocation-method> |
+| <#itemstack-stringtag>        | <#itemstack-stringtag-method>        |
+| <#itemstack-json>             | <#itemstack-json-method>             |
+| <#itemstack-string>           | <#itemstack-string-method>           |
+| <#itemstack-default>          | <#itemstack-default-method>          |
+
+# To `IntProvider`
+
+>>> #intprovider-number
+`[java]Number`, JS `number`
+<<<
+
+>>> #intprovider-number-method
+Will result in an `[java]ConstantInt` provider that provides the specified constant number converted to integer.
+<<<
+
+>>> #intprovider-list
+`[java]List`, JS array
+List must not be empty
+<<<
+
+>>> #intprovider-list-method
+Will result in an `[java]UniformInt` provider.
+Its minimum is the first element of the list.
+Its maximum depends on the length of the list:
+- If it has 2 elements or more, maximum is the second element of the list.
+- Otherwise (the list has only one element), maximum will be equal to minimum.
+
+Effectively, the conversions will happen as follows for these examples (`[js]_` means that this element is ignored):
+- `[js]\[min\]` (`[js]max = min`)
+- `[js]\[min, max\]`
+- `[js]\[min, max, _\]`
+- `[js]\[min, max, _, _, _, /* … */, _\]`
+<<<
+
+>>> #intprovider-map
+`[java]Map<String, Object>`, JS `object`
+(examples will use JS object syntax)
+<<<
+
+>>> #intprovider-map-method
+## Int bounds parsing
+If the object is `[js]\{ bounds: \[min, max\] \}`:
+- Will result in an `[java]UniformInt` provider. Its minimum will be the first element (`[js]min`) of the list, its maximum will be the second element (`[js]max`) of the list  at the `bounds` key. Note that the elements of the list will be parsed from string. If parsing fails, __**it does so silently**__ and the default value of `[js]0` is used. Also, the list length is unchecked. If the list is shorter than 2 elements, an `[java]IndexOutOfBoundsException` will be thrown.
+
+If the object is `[js]\{ min: minVal, max: maxVal \}`:
+- Will result in an `[java]UniformInt` provider. Its minimum will be the number value at the `min` key (`minVal`), its maximum will be the number value at the `max` key (`maxVal`).
+
+If the object is `[js]\{ min_inclusive: minVal, max_inclusive: maxVal \}`:
+- Will result in an `[java]UniformInt` provider. Its minimum will be the number value at the `min_inclusive` key (`minVal`), its maximum will be the number value at the `max_inclusive` key (`maxVal`). (Yes, that's the exact same method as the previous object, just different key names)
+
+If the object is `[js]\{ value: val \}`:
+- Will result in an `[java]UniformInt` provider. Its minimum and maximum will be the number value at the `value` key (`val`).
+
+If the object does not conform to any of the above schemas, `[js]null` is returned.
+
+---
+
+The object provided will be treated as `[java]Map<String, Object>`.
+Then, [int bounds are parsed](#int-bounds-parsing).
+If the resulting object is not `[js]null` (and thus the object conforms to one of the schemas):
+- The returned `[java]UniformInt` provider is returned.
+Else, if the object contains the `clamped` key, thus the object looks like for example:
+```js
+{
+	clamped: {
+		min: 20,
+		max: 50,
+	}
+}
+```
+- The object inside the `clamped` key has its [int bounds parsed](#int-bounds-parsing), then the outer object itself has its [int bounds parsed](#int-bounds-parsing). As the outer object's int bounds are parsed as `[js]null` (or else, the first case would pass), nothing is returned here, and the next case is checked.
+Else, if the object contains the `clamped_normal` key, thus the object looks like for example:
+```js
+{
+	clamped_normal: {
+		mean: 20,
+		deviation: 10,
+	}
+}
+```
+- The outer object has its [int bounds parsed](#int-bounds-parsing).
+- Then, the provider's mean becomes the number at the `mean` key converted to integer.
+- Then, the provider's deviation becomes the number at the `deviation` key converted to integer.
+- As the outer object's int bounds are parsed as `[js]null` (or else, the first case would pass), nothing is returned here, and the next case is checked.
+
+If all the checks above fail, the object is wrapped into an NBT compound tag and passed into the vanilla `[java]IntProvider.CODEC` to be hopefully decoded into an `[java]IntProvider`.
+<<<
+
+
+>>> #intprovider-default
+Other types
+(including non-conformant `Map`s and `object`s)
+<<<
+
+>>> #intprovider-default-method
+Will result in a `[java]ConstantInt` provider that provides `[js]0` (__**fails silently!**__).
+<<<
+
+| From type                        | Method                                  |
+| <#intprovider-number>            | <#intprovider-number-method>            |
+| <#intprovider-list>              | <#intprovider-list-method>              |
+| <#intprovider-map>               | <#intprovider-map-method>               |
+| <#intprovider-default>           | <#intprovider-default-method>           |
+
+# To `FloatProvider`
+
+>>> #floatprovider-number
+`[java]Number`, JS `number`
+<<<
+
+>>> #floatprovider-number-method
+Will result in an `[java]ConstantFloat` provider that provides the specified constant number converted to 32-bit float.
+<<<
+
+>>> #floatprovider-list
+`[java]List`, JS array
+List must not be empty
+<<<
+
+>>> #floatprovider-list-method
+Will result in an `[java]UniformFloat` provider.
+Its minimum is the first element of the list.
+Its maximum depends on the length of the list:
+- If it has 2 elements or more, maximum is the second element of the list.
+- Otherwise (the list has only one element), maximum will be equal to minimum.
+
+Effectively, the conversions will happen as follows for these examples (`[js]_` means that this element is ignored):
+- `[js]\[min\]` (`[js]max = min`)
+- `[js]\[min, max\]`
+- `[js]\[min, max, _\]`
+- `[js]\[min, max, _, _, _, /* … */, _\]`
+<<<
+
+>>> #floatprovider-map
+`[java]Map<String, Object>`, JS `object`
+(examples will use JS object syntax)
+<<<
+
+>>> #floatprovider-map-method
+## Float bounds parsing
+If the object is `[js]\{ bounds: \[min, max\] \}`:
+- Will result in an `[java]UniformFloat` provider. Its minimum will be the first element (`[js]min`) of the list, its maximum will be the second element (`[js]max`) of the list  at the `bounds` key. Note that the elements of the list will be parsed from string. If parsing fails, __**it does so silently**__ and the default value of `[js]0` is used. Also, the list length is unchecked. If the list is shorter than 2 elements, an `[java]IndexOutOfBoundsException` will be thrown.
+
+If the object is `[js]\{ min: minVal, max: maxVal \}`:
+- Will result in an `[java]UniformFloat` provider. Its minimum will be the number value at the `min` key (`minVal`), its maximum will be the number value at the `max` key (`maxVal`).
+
+If the object is `[js]\{ min_inclusive: minVal, max_inclusive: maxVal \}`:
+- Will result in an `[java]UniformFloat` provider. Its minimum will be the number value at the `min_inclusive` key (`minVal`), its maximum will be the number value at the `max_inclusive` key (`maxVal`). (Yes, that's the exact same method as the previous object, just different key names)
+
+If the object is `[js]\{ value: val \}`:
+- Will result in an `[java]UniformFloat` provider. Its minimum and maximum will be the number value at the `value` key (`val`).
+
+If the object does not conform to any of the above schemas, `[js]null` is returned.
+
+---
+
+The object provided will be treated as `[java]Map<String, Object>`.
+Then, [float bounds are parsed](#float-bounds-parsing).
+If the resulting object is not `[js]null` (and thus the object conforms to one of the schemas):
+- The returned `[java]UniformFloat` provider is returned.
+Else, if the object contains the `clamped_normal` key, thus the object looks like for example:
+```js
+{
+	clamped_normal: {
+		mean: 20,
+		deviation: 10,
+	}
+}
+```
+- The outer object has its [float bounds parsed](#float-bounds-parsing).
+- Then, the provider's mean becomes the number at the `mean` key converted to integer (sic!).
+- Then, the provider's deviation becomes the number at the `deviation` key converted to integer (sic!).
+- As the outer object's float bounds are parsed as `[js]null` (or else, the first case would pass), nothing is returned here, and the next case is checked.
+
+If all the checks above fail, the object is wrapped into an NBT compound tag and then passed into the vanilla `[java]FloatProvider.CODEC` to be hopefully decoded into an `[java]FloatProvider`.
+<<<
+
+>>> #floatprovider-default
+Other types
+(including non-conformant `Map`s and `object`s)
+<<<
+
+>>> #floatprovider-default-method
+Will result in a `[java]ConstantFloat` provider that provides `[js]0` (__**fails silently!**__).
+<<<
+
+| From type                | Method                          |
+| <#floatprovider-number>  | <#floatprovider-number-method>  |
+| <#floatprovider-list>    | <#floatprovider-list-method>    |
+| <#floatprovider-map>     | <#floatprovider-map-method>     |
+| <#floatprovider-default> | <#floatprovider-default-method> |
+
+# To `NumberProvider`
+
+>>> #numberprovider-number
+`[java]Number`, JS `number`
+<<<
+
+>>> #numberprovider-number-method
+Will result in an `[java]UniformGenerator` whose min and max is set to the provided number converted to a 32-bit float.
+<<<
+
+>>> #numberprovider-list
+`[java]List`, JS array
+List must not be empty
+<<<
+
+>>> #numberprovider-list-method
+Will result in an `[java]UniformGenerator`.
+Its minimum is the first element of the list.
+Its maximum depends on the length of the list:
+- If it has 2 elements or more, maximum is the second element of the list.
+- Otherwise (the list has only one element), maximum will be equal to minimum.
+
+Effectively, the conversions will happen as follows for these examples (`[js]_` means that this element is ignored):
+- `[js]\[min\]` (`[js]max = min`)
+- `[js]\[min, max\]`
+- `[js]\[min, max, _\]`
+- `[js]\[min, max, _, _, _, /* … */, _\]`
+<<<
+
+>>> #numberprovider-map
+`[java]Map<String, Object>`, JS `object`
+(examples will use JS object syntax)
+<<<
+
+>>> #numberprovider-map-method
+If the object is `[js]\{ min: minVal, max: maxVal \}`:
+- Will result in an `[java]UniformGenerator`. Its minimum will be the number value at the `min` key (`minVal`), its maximum will be the number value at the `max` key (`maxVal`).
+
+If the object is `[js]\{ n: nVal, p: pVal \}`:
+- Will result in an `[java]BinomialDistributionGenerator`. Its `n` will be set to the number value at the `n` key (`nVal`) converted to an integer, its `p` will be the number value at the `p` key (`pVal`) converted to a 32-bit float. The `n` and `p` relate to the parameters of the [binominal distribution](https://en.wikipedia.org/wiki/Binomial_distribution).
+
+If the object is `[js]\{ value: val \}`:
+- Will result in an `[java]UniformGenerator`. Its min and max will be set to a number value at the `value` key converted to a 32-bit float.
+<<<
+
+>>> #numberprovider-default
+Other types
+(including non-conformant `Map`s and `object`s)
+<<<
+
+>>> #numberprovider-default-method
+Will result in a `[java]ConstantValue` provider that provides `[js]0` (__**fails silently!**__).
+<<<
+
+| From type                 | Method                           |
+| <#numberprovider-number>  | <#numberprovider-number-method>  |
+| <#numberprovider-list>    | <#numberprovider-list-method>    |
+| <#numberprovider-map>     | <#numberprovider-map-method>     |
+| <#numberprovider-default> | <#numberprovider-default-method> |
+
+# To `RegistryPredicate`
+
+Note that this interface is generic, and this type wrapper's behavior will depend on the generic type parameter of the target type.
+The type parameter is the target registry.
+
+>>> #registrypredicate-null
+`[js]null`
+<<<
+
+>>> #registrypredicate-null-method
+Will result in an `[java]EntireRegistryPredicate.FALSE` predicate. (matches no registry items)
+<<<
+
+>>> #registrypredicate-regex
+`[java]Pattern` / JS `[js]RegExp`
+<<<
+
+>>> #registrypredicate-regex-method
+Will result in a `[java]RegistryRegExpPredicate`. It will match all registry items whose `ResourceLocation`s converted to string match the provided regex.
+<<<
+
+>>> #registrypredicate-string
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+`[java]JsonPrimitive` (GSON)
+<<<
+
+>>> #registrypredicate-string-method
+The object is first converted to string.
+
+If the string:
+- is `[js]'*'`: Will result in an `[java]EntireRegistryPredicate.TRUE` predicate (matches every registry item in the target registry)
+- is `[js]'-'`: Will result in an `[java]EntireRegistryPredicate.FALSE` predicate (matches no registry items)
+- starts with `[js]'#'`: The remainder of string is interpreted as a resource location of an registry item. If the namespace part is omitted, `[js]'minecraft'` is assumed. If the target registry is not `[js]null`, the result is a `[java]RegistryTagKeyPredicate` (matches all registry items in a given tag). Otherwise, the result is a `[java]RegistryTagIDPredicate` (matches only if the provided tag key is equal to the one in the registry) (???).
+- starts with `[js]'@`: The remainder of string is interpreted as a namespace. The result is a `[java]RegistryNamespacePredicate` (matches all registry items in a given namespace).
+
+Otherwise, the string is converted to a `[java]Pattern` (regex).
+Effectively, this will only happen if the string starts with `[js]'/`, so it's a string that looks like a `[js]RegExp` literal.
+If the conversion succeeds, the result is a `[java]RegistryRegExpPredicate` (will match all registry items whose `[java]ResourceLocation`s converted to string match the provided regex).
+Otherwise, if the conversion results in `[js]null` (so, conversion failed), the string is interpreted as a `[java]ResourceLocation` of a registry item. If the namespace part is omitted, `[js]'minecraft'` is assumed.
+
+If the target registry is not `[js]null`:
+- a registry lookup is performed on a target registry,
+- if the registry item is present in the target registry, the result is a `[java]RegistryHolderPredicate` (matches only the given registry item).
+
+Otherwise, the result is a `[java]RegistryIDPredicate` (matches only the registry item with the provided resource location) (???)
+<<<
+
+>>> #registrypredicate-function
+JS function, effectively:
+`[ts](item: Holder<T>) => boolean`
+<<<
+
+>>> #registrypredicate-function-method
+The function is converted to `[java]Predicate<Holder<T>>`, where `T` is the target registry type.
+<<<
+
+>>> #registrypredicate-default
+Other types
+<<<
+
+>>> #registrypredicate-default-method
+A object (which is assumed to be a registry item) is wrapped into a direct holder (`[java]Holder.Direct`).
+The result is a `[java]RegistryHolderPredicate` (matches only the given registry item).
+<<<
+
+| From type                     | Method                               |
+| <#registrypredicate-null>     | <#registrypredicate-null-method>     |
+| <#registrypredicate-regex>    | <#registrypredicate-regex-method>    |
+| <#registrypredicate-string>   | <#registrypredicate-string-method>   |
+| <#registrypredicate-function> | <#registrypredicate-function-method> |
+| <#registrypredicate-default>  | <#registrypredicate-default-method>  |
+
+# To `UUID`
+
+If the object is `[js]null`, the result is `[js]null`.
+Otherwise, the object is converted to string using its `[java]toString()` method.
+
+If the string is not exactly 32 or 36 characters long, the result is `[js]null`.
+If the string contains dashes (`[js]'-'`) (and thus is 36 characters long), then it's assumed that the string [conforms to the standard string representation of UUID](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html#toString()), so it's converted to UUID using a standard Java [`UUID.fromString`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html#fromString(java.lang.String)) method.
+Example of conformant UUID representation: `[js]'45e65f84-2731-40b1-8f2a-618783dc7d5b'`.
+
+Otherwise, the wrapper silently fixes the string by appending dashes where they are expected to create a string [conformant to the standard string representation of UUID](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html#toString()), then the string is passed to the standard Java [`UUID.fromString`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html#fromString(java.lang.String)) method to create the resulting UUID.
+Example of this non-conformant but still valid UUID representation: `[js]'45e65f84273140b18f2a618783dc7d5b'`
+
+If the conversion fails, it fails __**semi-silently**__:
+- The stack trace is printed into the game logs,
+- The conversion results in `[js]null`.
+
+# To `Pattern`
+
+If the provided object is either a string or a JS `RegExp`:
+- The object is converted to string using its `[java]toString()` method,
+- The string is interpreted as a regex pattern using the JS [literal notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions), including the slashes. If the string doesn't start with a slash or is shorter than 3 character (so could only fit an empty regex pattern), the result is `[js]null`.
+Otherwise, the result is `[js]null`.
+
+# To `JsonObject`
+To be exact, a `JsonObject` object from GSON.
+`[js]null` result means that the conversion failed.
+
+>>> #jsonobject-string
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #jsonobject-string-method
+The string is parsed to JSON.
+If the string does not represent a JSON object, the result is `[js]null`.
+<<<
+
+>>> #jsonobject-default
+Other objects
+<<<
+
+>>> #jsonobject-default-method
+The object is treated as a `[java]Map`.
+Then, the conversion is straightforward, with a caveat: numbers smaller than long bounds with decimal points will be rounded towards zero to the integer or long value.
+If the object can't be treated as a `[java]Map`, the result is `[js]null`.
+<<<
+
+| From type             | Method                       |
+| <#jsonobject-string>  | <#jsonobject-string-method>  |
+| <#jsonobject-default> | <#jsonobject-default-method> |
+
+# To `JsonArray`
+To be exact, a `[java]JsonArray` object from GSON.
+`[js]null` result means that the conversion failed.
+
+>>> #jsonarray-string
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #jsonarray-string-method
+The string is parsed to JSON.
+If the string does not represent a JSON array, the result is `[js]null`.
+<<<
+
+>>> #jsonarray-iterable
+`[java]Iterable`
+JS array
+<<<
+
+>>> #jsonarray-iterable-method
+All elements of the iterable object are added to the `[java]JsonArray`, then the result is that `[java]JsonArray`.
+<<<
+
+>>> #jsonarray-default
+Other types (including `[js]null`)
+<<<
+
+>>> #jsonarray-default-method
+The result is `[js]null`.
+<<<
+
+| From type             | Method                       |
+| <#jsonarray-string>   | <#jsonarray-string-method>   |
+| <#jsonarray-iterable> | <#jsonarray-iterable-method> |
+| <#jsonarray-default>  | <#jsonarray-default-method>  |
+
+# To `JsonElement`
+To be exact, a `[java]JsonElement` object from GSON.
+It's an object representing any element in JSON - primitives, arrays and objects.
+
+>>> #jsonelement-jsonserializable
+`[java]JsonSerializable` from KubeJS, implemented/extended by:
+- `[java]ClickEvent`
+- `[java]FluidIngredient`
+- `[java]FluidStack`
+- `[java]Ingredient`
+- `[java]ItemStack`
+- `[java]MutableComponent`
+- `[java]WithCodec`
+<<<
+
+>>> #jsonelement-jsonserializable-method
+The object is converted to JSON using its `[java]toJson()` method.
+<<<
+
+>>> #jsonelement-primitive
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+`[java]Boolean`, JS `boolean`
+`[java]Number`, JS `number`
+`[java]Character`
+<<<
+
+>>> #jsonelement-primitive-method
+Results in a `[java]JsonPrimitive` object representing the provided JSON primitive.
+<<<
+
+>>> #jsonelement-null
+`[js]null`
+<<<
+
+>>> #jsonelement-null-method
+Results in `[java]JsonNull.INSTANCE` which represents `[js]null` in JSON.
+<<<
+
+>>> #jsonelement-map
+`[java]Map`, JS `object`
+<<<
+
+>>> #jsonelement-map-method
+Results in `[java]JsonObject` or `[js]null` according to the [`JsonObject` conversion](#to-jsonobject).
+<<<
+
+>>> #jsonelement-list
+`[java]List`, Java array, JS array
+<<<
+
+>>> #jsonelement-list-method
+Results in `[java]JsonArray` or `[js]null` according to the [`JsonArray` conversion](#to-jsonarray).
+<<<
+
+>>> #jsonelement-default
+Other types
+<<<
+
+>>> #jsonelement-default-method
+Results in `[java]JsonNull.INSTANCE` which represents `[js]null` in JSON.
+<<<
+
+| From type                       | Method                                 |
+| <#jsonelement-jsonserializable> | <#jsonelement-jsonserializable-method> |
+| <#jsonelement-primitive>        | <#jsonelement-primitive-method>        |
+| <#jsonelement-null>             | <#jsonelement-null-method>             |
+| <#jsonelement-map>              | <#jsonelement-map-method>              |
+| <#jsonelement-list>             | <#jsonelement-list-method>             |
+| <#jsonelement-default>          | <#jsonelement-default-method>          |
+
+
+# To `JsonPrimitive`
+To be exact, a `[java]JsonPrimitive` object from GSON.
+
+Conversion happens according to the [`JsonElement` conversion](#to-jsonelement).
+If the result of this conversion is not a `[java]JsonPrimitive`, `[js]null` is the result.
+
+# To `Path`
+
+>>> #path-path
+`[java]Path`
+<<<
+
+>>> #path-path-method
+Will be first **sanitized** - attempting to pass a `[java]Path` that points outside the game directory will result in an error being thrown, with message: `You can't access files outside Minecraft directory!`. Then, the path will be returned as-is.
+<<<
+
+>>> #path-null
+`[js]null`
+<<<
+
+>>> #path-null-method
+Converts to `[js]null`.
+<<<
+
+>>> #path-default
+Other types (including JS `string`)
+<<<
+
+>>> #path-default-method
+The object will be first converted to string using its `[java]toString()` method. If the string is empty, `[js]null` is the result.
+Then, the path provided will be resolved against the game directory (usually `.minecraft` or `minecraft`), then **sanitized**, and then returned.
+If any of the aforementioned steps throws an exception, `[js]null` is the result (__**fails silently!**__)
+<<<
+
+
+| From type       | Method                 |
+| <#path-path>    | <#path-path-method>    |
+| <#path-null>    | <#path-null-method>    |
+| <#path-default> | <#path-default-method> |
+
+
+# To `File`
+
+Steps identical to [`Path` conversion](#to-path), except the resulting path is converted to `[java]File` using its `[java]toFile()` method.
+
+# To `TemporalAmount`
+
+>>> #temporalamount-number
+`[java]Number`
+JS `number`
+<<<
+
+>>> #temporalamount-number-method
+Will be converted to long, then the result is a `[java]Duration` of that many milliseconds.
+For example: `[js]120` will be converted to `[java]Duration` of 120 ms.
+<<<
+
+>>> #temporalamount-string
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #temporalamount-string-method
+The string will be matched against [the following regex](https://regex101.com/r/RZ3QSF/2): `[js]/(\\d+)\\s*(y|M|d|w|h|m|s|ms|ns|t)\\b/`, representing the sequence:
+- number,
+- any number of spaces, or none at all,
+- unit.
+The result of a match will be:
+. Number (like `[js]'2'`)
+. Unit (like `[js]ms`)
+Amount of ticks is handled specially and initialized to `[js]NaN` - more on that later.
+Then, matches will be iterated one-by-one:
+- Number will be parsed into double.
+- Then, depending on unit:
+  - `[js]'t'`: Interpreted as amount of ticks. First, if ticks were `[js]NaN` then they are set to 0. Then the amount is added to the tick count.
+  - `[js]'ns'`: Interpreted as nanoseconds, the amount is added to nanoseconds. (1 millionth of a millisecond)
+  - `[js]'ms'`: Interpreted as milliseconds, the amount is added to milliseconds.
+  - `[js]'s'`: Interpreted as seconds, the milliseconds are __**set**__ to the specified amount of seconds (1000 milliseconds).
+  - `[js]'m'`: Interpreted as minutes, the milliseconds are __**set**__ to the specified amount of minutes (60 seconds).
+  - `[js]'h'`: Interpreted as hours, the milliseconds are __**set**__ to the specified amount of hours (60 minutes).
+  - `[js]'d'`: Interpreted as days, the milliseconds are __**set**__ to the specified amount of days (24 hours).
+  - `[js]'M'`: Interpreted as months, the milliseconds are __**set**__ to the specified amount of months (1/12th of a year).
+  - `[js]'y'`: Interpreted as years, the milliseconds are __**set**__ to the specified amount of years (31,556,952 seconds).
+  - Otherwise, an exception is thrown: `Invalid temporal unit: <unit>`, but this shouldn't happen as the regex doesn't capture any other units.
+
+Note the lack of microseconds.
+If ticks aren't `[js]NaN` (so, the string did include ticks), the result is a `[java]TickDuration` representing the amount of ticks plus the amount of milliseconds divided by 50, rounded towards zero to a long value. Nanoseconds are ignored, if any.
+
+Example: `[js]'2t 60ms'` will result in `[java]TickDuration` of 3 ticks.
+
+Otherwise, the result is a `[java]Duration` of the amount of milliseconds plus microseconds.
+
+Examples:
+- `[js]'35 s 350 ms'` will result in a `[java]Duration` of 35.350 seconds, or 35350 ms.
+- `[js]'2h'` will result in a `[java]Duration` of 2 hours (7200 seconds, or 7,200,000 ms).
+
+>>>danger
+Units that are seconds or longer will __**set**__ the amount of time to milliseconds, not add to that amount!
+Because of that, `[js]'2m 30s'` will result in a `[java]Duration` of 30 seconds, not 150 seconds!
+<<<
+<<<
+
+>>> #temporalamount-default
+`[js]null` and other types
+<<<
+
+>>> #temporalamount-default-method
+Will throw an exception.
+<<<
+
+| From type                 | Method                           |
+| <#temporalamount-number>  | <#temporalamount-number-method>  |
+| <#temporalamount-string>  | <#temporalamount-string-method>  |
+| <#temporalamount-default> | <#temporalamount-default-method> |
+
+# To `Duration`
+
+First, the object is converted to `[java]TemporalAmount` according to the [`TemporalAmount` conversion](#to-temporalamount).
+
+>>> #duration-duration
+`[java]Duration`
+<<<
+
+>>> #duration-duration-method
+Returned as-is.
+<<<
+
+>>> #duration-tickduration
+`[java]TickDuration`
+<<<
+
+>>> #duration-tickduration-method
+Results in a `[java]Duration` of the number of ticks represented by the `[java]TickDuration` multiplied by 50 ms.
+<<<
+
+>>> #duration-default
+Other classes that implement `[java]TemporalAmount`
+<<<
+
+>>> #duration-default-method
+The object will be normalized to `[java]Duration` by looping over the time units and adding the durations from the `[java]TemporalAmount` to the resulting `[java]Duration`.
+<<<
+
+| From type                 | Method                           |
+| <#duration-duration>      | <#duration-duration-method>      |
+| <#duration-tickduration>  | <#duration-tickduration-method>  |
+| <#duration-default>       | <#duration-default-method>       |
+
+# To `TickDuration`
+
+>>> #tickduration-null
+`[js]null`
+<<<
+
+>>> #tickduration-null-method
+Results in a `[java]TickDuration` of 0 ticks.
+<<<
+
+>>> #tickduration-number
+`[java]Number`
+JS `number`
+<<<
+
+>>> #tickduration-number-method
+Results in a `[java]TickDuration` of the specified amount of ticks, rounded towards zero to a long value.
+<<<
+
+>>> #tickduration-jsonprimitive
+`[java]JsonPrimitive` (GSON)
+<<<
+
+>>> #tickduration-jsonprimitive-method
+The `[java]JsonPrimitive` is converted to long number using its `[java]getAsLong()` method.
+The result is a `[java]TickDuration` of that number of ticks.
+
+>>>warn
+`[java]JsonPrimitive` objects that represent strings are treated as a string representation of a long number, so they will be converted to long using `[java]Long.parseLong()` method.
+Strings aren't treated specially here.
+<<<
+<<<
+
+>>> #tickduration-default
+Other types (including JS `string`)
+<<<
+
+>>> #tickduration-default-method
+Will be [converted to `Duration`](#to-duration), then the resulting amount of ticks is the amount of milliseconds represented by that `[java]Duration` divided by 50 ms, rounded towards zero to the nearest long value.
+<<<
+
+| From type                     | Method                               |
+| <#tickduration-null>          | <#tickduration-null-method>          |
+| <#tickduration-number>        | <#tickduration-number-method>        |
+| <#tickduration-jsonprimitive> | <#tickduration-jsonprimitive-method> |
+| <#tickduration-default>       | <#tickduration-default-method>       |
+
+# To `ResourceLocation`
+Also describes `ResourceLocation` conversions where `[js]'minecraft'` is the implicit namespace.
+
+>>> #resourcelocation-null
+`[js]null`
+<<<
+
+>>> #resourcelocation-null-method
+Results in `[js]null`.
+<<<
+
+>>> #resourcelocation-resourcekey
+`[java]ResourceKey`
+<<<
+
+>>> #resourcelocation-resourcekey-method
+The `[java]ResourceKey` is converted to `[java]ResourceLocation` using its `[java]location()` method.
+<<<
+
+>>> #resourcelocation-holder
+`[java]Holder`
+<<<
+
+>>> #resourcelocation-resourcekey-method
+The `[java]Holder` is converted to `[java]ResourceLocation` by:
+. Getting a `[java]ResourceKey` from a `[java]Holder` using its `[java]getKey()` method,
+. Getting a `[java]ResourceLocation` from a `[java]ResourceKey` using its `[java]location()` method.
+<<<
+
+>>> #resourcelocation-registryobjectkjs
+`[java]RegistryObjectKJS`, implemented/extended by:
+- `[java]BlockBehaviour`
+- `[java]Block`
+- `[java]BlockProviderKJS`
+- `[java]CachedLevelBlock`
+- `[java]LevelBlock`
+- `[java]EntityType`
+- `[java]Fluid`
+- `[java]FluidStack`
+- `[java]Item`
+- `[java]ItemStack`
+- `[java]MenuType`
+<<<
+
+>>> #resourcelocation-registryobjectkjs-method
+The `[java]RegistryObjectKJS` is converted to `[java]ResourceLocation` using its `[java]kjs$getIdLocation()` method.
+<<<
+
+>>> #resourcelocation-default
+Other types (including JS `string`)
+<<<
+
+>>> #resourcelocation-default-method
+If the object is a `[java]JsonPrimitive`, it's converted to string using its `[java]getAsString()` method.
+Otherwise, the object is converted to string using its `[java]toString()` method.
+
+If the string does not have any `[js]':'` characters (that is, no namespace is provided), `[js]'minecraft'` is assumed. This is done by not appending any namespace to the string before passing it to the resource location parser, as Minecraft's parser already assumes `[js]'minecraft'` as an implicit namespace.
+
+Then, a `[java]ResourceLocation` is parsed from the string using `[java]ResourceLocation.parse()` method. If parsing throws an exception, another exception is thrown with a message: `Could not create ID from <stringified object>!`
+<<<
+
+| From type                             | Method                                       |
+| <#resourcelocation-null>              | <#resourcelocation-null-method>              |
+| <#resourcelocation-resourcekey>       | <#resourcelocation-resourcekey-method>       |
+| <#resourcelocation-registryobjectkjs> | <#resourcelocation-registryobjectkjs-method> |
+| <#resourcelocation-default>           | <#resourcelocation-default-method>           |
+
+# To `KubeResourceLocation`
+
+Steps identical to [`ResourceLocation` conversion](#to-resourcelocation), except for a change in string parsing:
+
+If the string does not have any `[js]':'` characters (that is, no namespace is provided), `[js]'kubejs'` is assumed. This is done by appending `[js]'kubejs:'` to the back of the string.
+
+Then, the resulting `[java]ResourceLocation` is passed to `[java]KubeResourceLocation`'s constructor.
+
+# To `CompoundTag`
+
+>>> #compoundtag-null
+`[js]null`
+<<<
+
+>>> #compoundtag-null-method
+The result is `[js]null`.
+<<<
+
+>>> #compoundtag-string
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #compoundtag-string-method
+The object is converted to string using its `[java]toString()` method.
+Then, the string is passed into the vanilla `[java]TagParser.parseTag()` method to parse NBT compound tag from string.
+The expected string format is the same one as used in commands.
+Parsing exceptions will be re-thrown, adding context, like the script line.
+<<<
+
+>>> #compoundtag-jsonprimitive
+`[java]JsonPrimitive` (GSON)
+<<<
+
+>>> #compoundtag-jsonprimitive-method
+The `[java]JsonPrimitive` is converted to string using its `[java]getAsString()` method.
+Then, the string is passed into the vanilla `[java]TagParser.parseTag()` method to parse NBT compound tag from string.
+The expected string format is the same one as used in commands.
+Parsing exceptions will be re-thrown, adding context, like the script line.
+<<<
+
+>>> #compoundtag-jsonobject
+`[java]JsonObject` (GSON)
+<<<
+
+>>> #compoundtag-jsonobject-method
+The `[java]JsonObject` is converted to string using its `[java]toString()` method.
+Then, the string is passed into the vanilla `[java]TagParser.parseTag()` method to parse NBT compound tag from string.
+The expected string format is the same one as used in commands.
+Parsing exceptions will be re-thrown, adding context, like the script line.
+
+>>>info
+Note that it is impossible to encode strict typing data in a JSON object, because JSON does not support number type suffixes, so all numbers will become double tags.
+<<<
+<<<
+
+>>> #compoundtag-default
+`[js]undefined`
+`[java]Map`, JS `object`
+<<<
+
+>>> #compoundtag-default-method
+The object will be converted according to the [`Tag` conversion](#to-tag).
+Then, if the resulting object is `[java]CompoundTag`, then it is the result of the conversion.
+Otherwise, the result is `[js]null`.
+<<<
+
+| From type                    | Method                              |
+| <#compoundtag-null>          | <#compoundtag-null-method>          |
+| <#compoundtag-string>        | <#compoundtag-string-method>        |
+| <#compoundtag-jsonprimitive> | <#compoundtag-jsonprimitive-method> |
+| <#compoundtag-jsonobject>    | <#compoundtag-jsonobject-method>    |
+| <#compoundtag-default>       | <#compoundtag-default-method>       |
+
+# To `CollectionTag`
+Encompasses various collection tags, like `[java]ByteArrayTag`, `[java]IntArrayTag`, `[java]LongArrayTag` and `[java]ListTag`.
+
+>>> #collectiontag-null
+`[js]null`
+<<<
+
+>>> #collectiontag-null-method
+The result is `[js]null`.
+<<<
+
+>>> #collectiontag-string
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #collectiontag-string-method
+The object is converted to string using its `[java]toString()` method. Then, the string is concatenated with the following strings to form a stringified representation of a compound tag, where `[js]string` is the provided string:
+```js
+'{a:' + string + '}'`
+```
+Then, the string is passed into the vanilla `[java]TagParser.parseTag()` method to parse NBT compound tag from string.
+The expected string format is the same one as used in commands.
+The result of the conversion is the tag at `[js]'a'` key, cast to `[java]CollectionTag`.
+Parsing and casting exceptions will be re-thrown, adding context, like the script line.
+<<<
+
+>>> #collectiontag-jsonarray
+`[java]JsonArray` (GSON)
+<<<
+
+>>> #collectiontag-jsonarray-method
+Each element of the `[java]JsonArray` is put into an `[java]ArrayList`. Then, each element of the list will be [converted to `Tag`](#to-tag).
+Depending on the common type of the arguments (byte tag, int tag or long tag), the array of `[java]Tag`s will become a `[java]ByteArrayTag`, `[java]IntArrayTag` or `[java]LongArrayTag` respectively. If there are no types in common, `[java]ListTag` is the result.
+<<<
+
+>>> #collectiontag-default
+`[js]undefined`
+`[java]Collection`, JS array
+<<<
+
+>>> #collectiontag-default-method
+The provided object is cast into `[java]Collection`, then each element of that collection is put into an `[java]ArrayList`. Then, each element of the list will be [converted to `Tag`](#to-tag).
+Depending on the common type of the arguments (byte tag, int tag or long tag), the array of `[java]Tag`s will become a `[java]ByteArrayTag`, `[java]IntArrayTag` or `[java]LongArrayTag` respectively. If there are no types in common, `[java]ListTag` is the result.
+<<<
+
+| From type                  | Method                            |
+| <#collectiontag-null>      | <#collectiontag-null-method>      |
+| <#collectiontag-string>    | <#collectiontag-string-method>    |
+| <#collectiontag-jsonarray> | <#collectiontag-jsonarray-method> |
+| <#collectiontag-default>   | <#collectiontag-default-method>   |
+
+# To `ListTag`
+
+The object provided will be [converted into a `CollectionTag`](#to-collectiontag), then the result will be cast to `[java]ListTag`.
+
+# To `Tag`
+
+>>> #tag-null
+`[js]null`
+`[java]EndTag`
+<<<
+
+>>> #tag-null-method
+The result is `[js]null`.
+<<<
+
+>>> #tag-nbtserializable
+`[java]NBTSerializable` from KubeJS, implemented/extended by:
+- `[java]ClickEvent`
+- `[java]FluidIngredient`
+- `[java]FluidStack`
+- `[java]Ingredient`
+- `[java]ItemStack`
+- `[java]MutableComponent`
+- `[java]WithCodec`
+<<<
+
+>>> #tag-nbtserializable-method
+Will be converted to NBT `[java]Tag` using its `[java]toNBT()` method.
+<<<
+
+>>> #tag-nbtserializable
+`[java]CharSequence`
+(encompasses string types, including JS `string`)
+<<<
+
+>>> #tag-nbtserializable-method
+Will result in a `[java]StringTag` representing the string contained in the provided character sequence.
+<<<
+
+>>> #tag-string
+`[java]Character`
+(boxed `char` primitive)
+<<<
+
+>>> #tag-string-method
+Will result in a `[java]StringTag` representing the string containing a single character provided.
+<<<
+
+>>> #tag-boolean
+`[java]Boolean`, JS `boolean`
+<<<
+
+>>> #tag-boolean-method
+Will result in a `[java]BooleanTag` representing the boolean.
+<<<
+
+>>> #tag-number
+`[java]Number`, JS `number`
+<<<
+
+>>> #tag-number-method
+Depending on the `[java]Number`'s type, the result is:
+- `[java]Byte`: `[java]ByteTag`,
+- `[java]Short`: `[java]ShortTag`,
+- `[java]Integer`: `[java]IntTag`,
+- `[java]Long`: `[java]LongTag`,
+- `[java]Float`: `[java]FloatTag`,
+- Other (effectively `[java]Double`): `[java]DoubleTag`.
+
+>>>info
+Providing a JS number here will result in a `[java]DoubleTag`, because JS numbers are doubles. Other conversions are possible, if the number provided comes as a result of a Java method call - as Java number stays as a Java number until a JS operation is performed on it.
+<<<
+<<<
+
+>>> #tag-jsonprimitive
+`[java]JsonPrimitive` (GSON)
+<<<
+
+>>> #tag-jsonprimitive-method
+Depending on `[java]JsonPrimitive`'s type, it will be converted to `[java]Number`, `[java]boolean` or `[java]String`, then appropriate conversions will be invoked on those.
+<<<
+
+>>> #tag-map
+`[java]Map`, JS object
+<<<
+
+>>> #tag-map-method
+A new compound tag is created. Then, for each entry in the provided `[java]Map`/JS object:
+- Value will be [converted to `Tag`](#to-tag) recursively,
+- If the resulting tag is not `[js]null`, it is put to the compound tag under the entry's key converted to string.
+The result is that compound tag.
+<<<
+
+>>> #tag-jsonobject
+`[java]JsonObject` (GSON)
+<<<
+
+>>> #tag-jsonobject-method
+A new compound tag is created. Then, for each entry in the provided `[java]JsonObject`:
+- Value (being `[java]JsonElement`) will be [converted to `Tag`](#to-tag) recursively,
+- If the resulting tag is not `[js]null`, it is put to the compound tag under the entry's key.
+The result is that compound tag.
+<<<
+
+>>> #tag-collection
+`[java]Collection`, JS array
+<<<
+
+>>> #tag-collection-method
+Each element of the collection is put into an `[java]ArrayList`. Then, each element of the list will be [converted to `Tag`](#to-tag).
+Depending on the common type of the arguments (byte tag, int tag or long tag), the array of `[java]Tag`s will become a `[java]ByteArrayTag`, `[java]IntArrayTag` or `[java]LongArrayTag` respectively. If there are no types in common, `[java]ListTag` is the result.
+<<<
+
+>>> #tag-jsonarray
+`[java]JsonArray` (GSON)
+<<<
+
+>>> #tag-jsonarray-method
+Each element of the `[java]JsonArray` is put into an `[java]ArrayList`. Then, each element of the list will be [converted to `Tag`](#to-tag).
+Depending on the common type of the arguments (byte tag, int tag or long tag), the array of `[java]Tag`s will become a `[java]ByteArrayTag`, `[java]IntArrayTag` or `[java]LongArrayTag` respectively. If there are no types in common, `[java]ListTag` is the result.
+<<<
+
+>>> #tag-default
+Other types
+<<<
+
+>>> #tag-default-method
+The result is `[js]null`.
+<<<
+
+| From type              | Method                        |
+| <#tag-null>            | <#tag-null-method>            |
+| <#tag-nbtserializable> | <#tag-nbtserializable-method> |
+| <#tag-string>          | <#tag-string-method>          |
+| <#tag-boolean>         | <#tag-boolean-method>         |
+| <#tag-number>          | <#tag-number-method>          |
+| <#tag-jsonprimitive>   | <#tag-jsonprimitive-method>   |
+| <#tag-map>             | <#tag-map-method>             |
+| <#tag-jsonobject>      | <#tag-jsonobject-method>      |
+| <#tag-collection>      | <#tag-collection-method>      |
+| <#tag-jsonarray>       | <#tag-jsonarray-method>       |
+| <#tag-default>         | <#tag-default-method>         |
+
+# To `DataComponentType`
+
+If the object is not `[java]DataComponentType` already, it will be [converted to `ResourceLocation`](#to-resourcelocation), then a registry lookup will be performed on the `[java]DATA_COMPONENT_TYPE` registry. The result is the `[java]DataComponentType` under the given resource location, or `[js]null` if there's no such registry item.
+
+# To `DataComponentMap`

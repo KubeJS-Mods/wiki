@@ -1,0 +1,51 @@
+`KubeRayTraceResult` is a class that contains results of ray tracing operations performed by [`Entity#rayTrace`](/wiki/concepts/entity/Entity#rayTrace).
+
+# Instance methods
+
+In the following examples, `[js]slot` will refer to an instance of `[java]KubeRayTraceResult`.
+
+>>> #get
+### `get`
+<<<
+
+>>> #get-description
+**Syntax**
+```js
+slot.get()
+```
+
+Gets the underlaying item stack of the slot.
+
+**Return value**
+An {ItemStack} in the slot.
+<<<
+
+| <#get>             |
+| <#get-description> |
+
+---
+
+>>> #set
+### `set`
+<<<
+
+>>> #set-description
+**Syntax**
+```js
+slot.set(itemStack)
+```
+
+Sets the underlaying item stack of the slot.
+
+**Parameters**
+- `[js]itemStack`: An {ItemStack}.
+It may be a string representing an item stack, for example `[js]'2x minecraft:oak_log'`.
+
+**Return value**
+`[js]false` if the slot can't be set, `[js]true` if the stack has been set successfully.
+<<<
+
+| <#set>             |
+| <#set-description> |
+
+---

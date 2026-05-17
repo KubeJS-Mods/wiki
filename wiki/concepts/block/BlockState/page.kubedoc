@@ -1,0 +1,6 @@
+# Creating BlockStates
+
+In places where `BlockState`s are expected, KubeJS will try to implicitly convert other objects into them.
+Most `BlockState`s can be written as string literals, with block property syntax being the same as one used in [`/setblock` or `/fill`](https://minecraft.wiki/w/Argument_types#minecraft:block_state).
+
+# Useful BlockState methods

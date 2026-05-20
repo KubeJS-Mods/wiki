@@ -1,4 +1,5 @@
 title: "Erste Schritte"
 description: "Grundlagen von KubeJS"
-
-warning: ">>> Es ist wichtig zuerst die Grundlagen der Programmierung in JavaScript zu verstehen, bevor du startest KubeJS zu benutzen!<<<"
+warning1: ">>> warning"
+warning2: "Es ist wichtig zuerst die Grundlagen der Programmierung in JavaScript zu verstehen, bevor du startest KubeJS zu benutzen!"
+warning3: "<<<"

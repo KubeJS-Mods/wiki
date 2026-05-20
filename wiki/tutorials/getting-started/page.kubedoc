@@ -1,4 +1,6 @@
-{warning}
+{warning1}
+{warning2}
+{warning3}
 
 Starting off, you will need a code editor. A code editor will make your code more readable, and help you find errors you have made.
 We recommend [Visual Studio Code](https://code.visualstudio.com/), which has native support for JS.

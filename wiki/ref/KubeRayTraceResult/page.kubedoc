@@ -1,0 +1,211 @@
+`KubeRayTraceResult` is a class that contains results of ray tracing operations performed by:
+- [`Entity#rayTrace()`](/wiki/ref/Entity#rayTrace) method,
+- `LivingEntity#rayTrace()` method,
+- `[js]BlockEvents.picked` event,
+- and `[js]ItemEvents.rightClicked` event.
+
+# Example
+
+With the following server script, whenever a player uses a Spyglass, the script will tell the player about the position of the block or type of the entity the player is looking at, or will inform the player that they can't see anything if nothing is found 32 blocks ahead of the player.
+
+```js
+ItemEvents.rightClicked('minecraft:spyglass', event => {
+	const { player } = event
+	const result = event.player.rayTrace(32)
+	switch (result.type) {
+		case 'miss':
+			player.tell("I can't see anything!")
+			break
+		case 'block': // Tell the position of the block that the player is looking at
+			let { x, y, z } = result.block.pos
+			player.tell(`I see a block at coordinates: [${x}, ${y}, ${z}]!`)
+			break
+		case 'entity': // Tell the type of entity (localized) that the player is looking at
+			player.tell(`I see a ${result.entity.entityType.description.string}!`)
+			break
+	}
+})
+```
+
+# Instance methods
+
+In the following examples, `[js]result` will refer to an instance of `[java]KubeRayTraceResult`.
+
+>>> #gethitx-gethity-gethitz
+### `getHitX`, `getHitY`, `getHitZ`
+<<<
+
+>>> #gethitx-gethity-gethitz-description
+**Syntax**
+```js
+result.getHitX()
+result.hitX // read-only bean
+
+result.getHitY()
+result.hitY // read-only bean
+
+result.getHitZ()
+result.hitZ // read-only bean
+```
+
+**Return value**
+The `x`, `y` and `z` components of the hit position appropriately, or [entity's](#fromentity) eye position if ray tracing missed.
+
+**Example**
+Hit position related beans on {KubeRayTraceResult} make for a useful application of a [destructuring pattern](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring) to quickly get all the hit coordinates to variables.
+
+```js
+const { hitX, hitY, hitZ } = entity.rayTrace(8)
+// Now hitX, hitY and hitZ constants are respectively the hit position's x, y and z coordinate.
+```
+<<<
+
+| <#gethitx-gethity-gethitz>             |
+| <#gethitx-gethity-gethitz-description> |
+
+---
+
+# Instance fields
+
+>>> #fromEntity
+### `fromEntity`
+<<<
+
+>>> #fromEntity-description
+**Syntax**
+```js
+result.fromEntity
+```
+
+**Read-only value**
+The {Entity} from which the ray tracing operation was performed.
+
+<<<
+
+| <#fromEntity>             |
+| <#fromEntity-description> |
+
+---
+
+>>> #type
+### `type`
+<<<
+
+>>> #type-description
+**Syntax**
+```js
+result.type
+```
+
+**Read-only value**
+A {HitResultType} enumeration member that specifies what did the ray tracing operation hit. String representations of possible values are:
+- `[js]'miss'`: if no entity or block has been hit,
+- `[js]'block'`: if a block has been hit,
+- `[js]'entity'`: if an entity has been hit.
+Can be loosely compared to by its string value.
+
+<<<
+
+| <#type>             |
+| <#type-description> |
+
+---
+
+>>> #distance
+### `distance`
+<<<
+
+>>> #distance-description
+**Syntax**
+```js
+result.distance
+```
+
+**Read-only value**
+A double value, which is the maximum distance of the ray trace operation performed.
+<<<
+
+| <#distance>             |
+| <#distance-description> |
+
+---
+
+>>> #hit
+### `hit`
+<<<
+
+>>> #hit-description
+**Syntax**
+```js
+result.hit
+```
+
+**Read-only value**
+A {Vec3} containing the coordinates of the hit, or [entity's](#fromentity) eye position if ray tracing missed.
+<<<
+
+| <#hit>             |
+| <#hit-description> |
+
+---
+
+>>> #block
+### `block`
+<<<
+
+>>> #block-description
+**Syntax**
+```js
+result.block
+```
+
+**Read-only value**
+A {LevelBlock} representing a block in world that the ray tracing operation hit, or `[js]null` if no block was hit.
+Will be only non-null if [`result.type`](#type) field contains `[js]'block'`.
+
+<<<
+
+| <#block>             |
+| <#block-description> |
+
+---
+
+>>> #facing
+### `facing`
+<<<
+
+>>> #facing-description
+**Syntax**
+```js
+result.facing
+```
+
+**Read-only value**
+A {Direction}, which is the side of the block that the ray tracing operation hit, or `[js]null` if no block was hit.
+Will be only non-null if [`result.type`](#type) field contains `[js]'block'`.
+<<<
+
+| <#facing>             |
+| <#facing-description> |
+
+---
+
+>>> #entity
+### `entity`
+<<<
+
+>>> #entity-description
+**Syntax**
+```js
+result.entity
+```
+
+**Read-only value**
+An {Entity} hit by the ray tracing operation, or `[js]null` if no entity was hit.
+Will be only non-null if [`result.type`](#type) field contains `[js]'entity'`.
+<<<
+
+| <#entity>             |
+| <#entity-description> |
+
+---

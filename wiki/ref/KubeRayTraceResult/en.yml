@@ -1,6 +1,8 @@
 title: "KubeRayTraceResult"
 description: "The result of ray tracing operation"
 
+# Referenced Java classes - put links to documentation here, if documented
+
 Direction: "[[/ref/Direction|`Direction`]]"
 Entity: "[[/ref/Entity|`Entity`]]"
 HitResultType: "`HitResult.Type`"

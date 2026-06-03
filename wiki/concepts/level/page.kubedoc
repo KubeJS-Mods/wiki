@@ -1,0 +1,89 @@
+The term "**entity**" encapsulates all things capable of moving around in a Minecraft world, that aren't blocks.
+
+There are many kinds of entity classes in Minecraft:
+- `Entity`, representing all entities.
+- `LivingEntity`, living entities, which represent all entities that have health, can be damaged, killed and usually be affected by potion effects.
+- `Player`, which are, well, players, including `ServerPlayer` that represent player entities on a server.
+- And other non-living entities, like `ItemEntity`, `FallingBlockEntity`, and many others.
+
+Only the most notable entity classes, that usually appear in KubeJS scripts will be documented here, since entities are quite complex and have tons of methods available on them.
+
+# Overview
+
+A **level** in Minecraft represents a physical dimension, in which blocks and [entities](/wiki/concepts/entity) may exist. Each dimension (Overworld, The Nether, The End and other modded and custom dimensions) is its own separate level. All levels are managed by the server on server-side.
+
+As a Java class, {Level} defines behavior common to client and server-side levels.
+
+# Instance methods
+
+
+
+>>> #isClientSide
+### `isClientSide`
+<<<
+
+>>> #isClientSide-description
+**Syntax**
+```js
+level.isClientSide()
+level.clientSide // read-only bean
+```
+
+Checks if the level is a client-side level.
+
+**Return value**
+`[js]true` if the level is client-side, `[js]false`, if it isn't (either a dedicated server or a logical server on a client).
+
+In vanilla, this will be `[js]true` for {ClientLevel} and `[js]false` for {ServerLevel}.
+
+<<<
+
+| <#isClientSide>             |
+| <#isClientSide-description> |
+
+---
+
+>>> #getServer
+### `getServer`
+<<<
+
+>>> #getServer-description
+**Syntax**
+```js
+level.getServer()
+level.server // read-only bean
+```
+
+**Return value**
+A {MinecraftServer} this level is part of, or `[js]null` if the level is not a server-side level.
+<<<
+
+| <#getServer>             |
+| <#getServer-description> |
+
+---
+
+>>> #isInWorldBounds
+### `isInWorldBounds`
+<<<
+
+>>> #isInWorldBounds-description
+**Syntax**
+```js
+level.isInWorldBounds(pos)
+```
+
+Checks, whether the provided block position ({BlockPos}) is within boundaries of a Minecraft world: that is, no more than 30 million blocks in each horizontal direction and within build height limit.
+
+**Parameters**
+- `[js]pos`: The {BlockPos} to check. It may be a 3-element JS array representing the block position, like `[js]\[64, 50, -20\]`.
+
+**Return value**
+`[js]true` if the provided block position is within boundaries of a Minecraft world, `[js]false` if it isn't.
+<<<
+
+| <#isInWorldBounds>             |
+| <#isInWorldBounds-description> |
+
+---
+

@@ -1,0 +1,10 @@
+title: "Level"
+description: "A dimension you can freely roam"
+
+
+
+Level: "`Level`"
+ClientLevel: "`ClientLevel`"
+ServerLevel: "`ServerLevel`"
+MinecraftServer: "`MinecraftServer`"
+BlockPos: "`BlockPos`"

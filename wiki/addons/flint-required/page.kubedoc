@@ -1,0 +1,71 @@
+## Flint Required
+
+This mod integrates KubeJS by allowing users to lock specific features behind stages, add custom knapping items and degradation, and customize brush loot tables.
+For all of those you need to use at least ==Flint Required v1.4.2 - NeoForge 1.21.1==
+Here are examples for all the things my mod can do with KubeJS:
+
+- Global Knapping Lock
+You can lock all knapping behind a specific condition (such as a KubeJS stage). Returning `true` allows the action, while returning `false` denies it.
+
+```js
+ServerEvents.recipes(event => {
+    FlintRequired.setGlobalKnappingLock(player => {
+        return player.stages.has('stone_age');
+    });
+})
+```
+    
+- Global Brushing Lock
+You can lock all brushing behind a specific condition (such as a KubeJS stage). Returning `true` allows the action, while returning `false` denies it.
+
+```js
+ServerEvents.recipes(event => {
+    FlintRequired.setGlobalBrushingLock(player => {
+        return false;
+    });
+})
+```
+
+- Custom Knapping
+You can define what items act like flint, and what they drop when they break.
+
+```js
+ServerEvents.recipes(event => {
+    // Smashing a Bone against a valid rock drops Bone Meal
+    FlintRequired.addKnappingTool('minecraft:bone', 'minecraft:bone_meal');
+})
+```
+
+- Custom Block Degradation when Knapping
+Define what blocks can be struck, and what they turn into.
+
+```js
+ServerEvents.recipes(event => {
+    // Smashing Sand destroys it completely (turns to Air)
+    FlintRequired.addKnapping('minecraft:sand', 'minecraft:air');
+})
+```
+
+- Conditional Block Degradation
+
+```js
+ServerEvents.recipes(event => {
+    // Smashing Obsidian turns it into Crying Obsidian, but ONLY if the player has 10+ XP levels
+    FlintRequired.addConditionalKnapping('minecraft:obsidian', 'minecraft:crying_obsidian', player => {
+        return player.experienceLevel >= 10;
+    });
+})
+```
+
+- Crude Brush Drops
+Define what blocks the Crude Brush can sweep, and what item spawns on success.
+
+```js
+ServerEvents.recipes(event => {
+    // Sweeping Dirt drops a Stick
+    FlintRequired.addBrushDrop('minecraft:oak_leaves', 'minecraft:stick');
+    
+    // Sweeping Soul Sand drops a Ghast Tear
+    FlintRequired.addBrushDrop('minecraft:soul_sand', 'minecraft:ghast_tear');
+})
+```

@@ -1,0 +1,41 @@
+`HolderWrapper` is an interface used internally by KubeJS to convert strings and other JS objects into `Holder` and `HolderSet` instances.
+It is not exposed to global scope, so only the type wrapper will be discussed here.
+
+`Holder` instances hold references to registry objects of a given type. These are obtained from Minecraft registry lookups.
+For example, `Holder<Item>` holds references to `Item` registry objects.
+
+`HolderSet` instances are sets of `Holder` instances that hold references to registry objects of a given type.
+For example, `HolderSet<Item>` is a set of `Holder<Item>` instances that hold references to `Item` registry objects.
+
+# Wrapping to `Holder`
+
+The following:
+- strings and other Java character sequences,
+- `ResourceLocation` instances,
+- `ResourceKey` instances
+all perform a registry lookup for the ID stored in them, and the result is a Holder of a target type that holds a reference to a registry object.
+
+**Example**
+
+When `[js]'minecraft:iron_pickaxe'` is passed into a method argument that expects a `Holder<Item>`, that function will receive a `Holder<Item>` that holds a reference to an `Item` which represents the Iron Pickaxe item.
+
+# Wrapping to `HolderSet`
+
+These objects can be converted to `HolderSet` directly by doing the following:
+- `HolderSet`: kept as is,
+- `Holder`: creates a one-element `HolderSet` with the `Holder` inside,
+- `ResourceLocation` and strings representing resource locations, like `[js]'minecraft:iron_pickaxe'`: creates a flattened `HolderSet` with the `Holder` instances holding references to registry objects with the given resource location as its ID,
+- [`RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp), [`Pattern`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/regex/Pattern.html) and strings containing regex patterns (like `[js]'/minecraft:.*_wool/'`): Returns a `HolderSet` of all `Holders` of registry objects whose ID match the given regex,
+- `TagKey` and strings representing tags (like `[js]'#minecraft:logs'`): Returns a `HolderSet` of all `Holders` of registry objects who are a part of a given tag,
+- Strings representing mod IDs (like `[js]'@minecraft'`): Returns a `HolderSet` of all `Holders` of registry objects that match the namespace part of their ID,
+- In all other cases, `[js]null` is returned.
+
+If the object passed in is an JS array or any other Java iterable object, it is recursively flattened to produce the final `HolderSet`.
+
+**Example**
+
+When `[js]\['minecraft:iron_pickaxe', 'minecraft:diamond_pickaxe'\]` is passed into a method argument that expects a `HolderSet<Item>`, that function will receive a `HolderSet<Item>` that holds references to `Item` instances which represent respectively: the Iron Pickaxe and the Diamond Pickaxe.
+
+# Source
+
+([HolderWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/holder/HolderWrapper.java))

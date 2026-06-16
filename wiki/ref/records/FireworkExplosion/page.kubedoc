@@ -1,0 +1,55 @@
+>>> info
+This class is a [[/ref/records|record]]. If you want to learn, how to use them in KubeJS scripts, [[/ref/records|go here]].
+<<<
+
+**FireworkExplosion** record defines how fireworks explode. This record is used as a part of the `minecraft:firework_explosion` data component.
+
+>>> #shape-type
+`Shape`
+<<<
+>>> #shape-description
+Defines the shape of the explosion.
+May be also a string representing a shape:
+`[js]'small_ball'`, `[js]'large_ball'`, `[js]'star'`, `[js]'creeper'`, `[js]'burst'`.
+<<<
+>>> #colors-type
+`IntList`
+<<<
+>>> #colors-description
+The RGB colors of the initial particles of the explosion.
+Can be described in JS as an array of numbers:
+```js
+[0x00ff00, 0xff0000, 0x0000ff]
+```
+<<<
+>>> #fade-colors-type
+`IntList`
+<<<
+>>> #fade-colors-description
+The RGB colors of the fading particles of the explosion.
+Can be described in JS as an array of numbers:
+```js
+[0x00ff00, 0xff0000, 0x0000ff]
+```
+<<<
+>>> #has-trail-type
+`boolean`
+<<<
+>>> #has-trail-description
+Whether the firework has a trail effect.
+<<<
+>>> #has-twinkle-type
+`boolean`
+<<<
+>>> #has-twinkle-description
+Whether the firework has a twinkle effect.
+<<<
+
+# Properties
+
+| Property     | Type                | Description                |
+| `shape`      | <#shape-type>       | <#shape-description>       |
+| `colors`     | <#colors-type>      | <#colors-description>      |
+| `fadeColors` | <#fade-colors-type> | <#fade-colors-description> |
+| `hasTrail`   | <#has-trail-type>   | <#has-trail-description>   |
+| `hasTwinkle` | <#has-twinkle-type> | <#has-twinkle-description> |

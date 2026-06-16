@@ -1,0 +1,127 @@
+`JavaWrapper` is an interface containing many useful static methods for accessing Java classes from KubeJS scripts.
+It's exposed to [[/global-scope|global scope]] as `Java`.
+
+# Static methods
+
+## `loadClass`
+
+```js
+Java.loadClass(className)
+```
+
+**Parameters**
+- `[js]className`: A string representing a fully qualified class name - that is, a name of a class prefixed with a name of a package the class is in.
+
+**Return value**
+A reference to a Java class.
+To learn, how to use such reference, see [[/ref/java/class|here]].
+
+===Throws===
+If the provided class name is not allowed by the class filter or not found, this method throws an error.
+
+---
+
+## `tryLoadClass`
+
+```js
+Java.tryloadClass(className)
+```
+
+**Parameters**
+- `[js]className`: A string representing a fully qualified class name - that is, a name of a class prefixed with a name of a package the class is in.
+
+**Return value**
+A reference to a Java class, or `[js]null` if the provided class name is not allowed by the class filter or not found.
+To learn, how to use such reference, see [[/ref/java/class|here]].
+
+---
+
+## `cast`
+
+```js
+Java.cast(theClass, object)
+```
+
+Casts `[js]object` to the target type of `[js]theClass`. Use this in situations, where Rhino can't determine the correct type, for example if the object is provided indirectly.
+
+**Parameters**
+- `[js]theClass`: A reference to a Java class to cast the object to.
+- `[js]object`: Any Java object.
+
+**Return value**
+- The `[js]object` cast to `theClass`.
+
+---
+
+## `createConsole`
+
+```js
+Java.createConsole(name)
+```
+
+Creates a custom `ConsoleJS` instance that allows for logging under a custom name.
+
+**Parameters**
+- `[js]name`: A name of the console.
+
+**Return value**
+- The new `ConsoleJS` instance.
+This instance can be used just like `console` in global scope, but logs created by that console will bear the custom name.
+
+**Example**
+
+```js
+const myConsole = Java.createConsole("My cool console")
+console.log("Standard KubeJS log.")
+myConsole.log("That's an awesome log!")
+
+/* Should log something similar to:
+[15:38:22] [Server thread/INFO] [KubeJS Server/]: server_scripts:test.js#2: Standard KubeJS log.
+[15:38:22] [Server thread/INFO] [My cool console/]: That's an awesome log!
+*/
+
+```
+
+---
+
+## `makeFunctionProxy`
+
+>>> warn
+There is a way easier way to acquire implementations of interfaces. See [[/ref/java/class|here]].
+<<<
+
+```js
+Java.makeFunctionProxy(targetClassTypeInfo, theFunction)
+```
+
+**Parameters**
+- `[js]targetClassTypeInfo`: A `TypeInfo` implementation that implements `asClass()` abstract method which returns the target interface class.
+- `[js]theFunction`: The JS function.
+
+**Return value**
+The function wrapped into an implementation of a functional interface.
+
+---
+
+## `mergeRecord`
+
+>>> warn
+This method is presumably unfinished, as it currently does not do anything to the record.
+<<<
+
+```js
+Java.mergeRecord(originalRecord, mergeMap)
+```
+
+**Parameters**
+- `[js]originalRecord`: A `Record` that serves as a base.
+- `[js]mergeMap`: A Java `Map` with string keys and any values to merge with `originalRecord`. It may be a JS object.
+
+**Return value**
+The `[js]originalRecord`.
+
+---
+
+# Source
+
+([JavaWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/JavaWrapper.java))

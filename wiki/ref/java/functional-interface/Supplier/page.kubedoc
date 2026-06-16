@@ -1,0 +1,34 @@
+**Supplier** functional interfaces represent functions, that take nothing and return a value of a type (specified in type argument).
+
+They are usually used in places, where:
+- The value needs to be fetched lazily, that means that the method that uses such callback can choose when to execute the function to fetch the value,
+- The value can be dependent on external sources, and may change over time.
+
+Examples:
+```js
+const $ItemProperties = Java.loadClass('net.minecraft.world.item.Item$Properties')
+const $ShieldItem = Java.loadClass('net.minecraft.world.item.ShieldItem')
+
+// A function that takes nothing and outputs a ShieldItem
+const shieldSupplier = () => new $ShieldItem(new $ItemProperties().durability(128).stacksTo(1))
+
+StartupEvents.registry('item', event => {
+	event.createCustom(
+		'kubejs:copper_shield',
+		shieldSupplier
+	)
+})
+```
+
+```js
+// Or more commonly, put the function directly inside of the parameter
+const $ItemProperties = Java.loadClass('net.minecraft.world.item.Item$Properties')
+const $ShieldItem = Java.loadClass('net.minecraft.world.item.ShieldItem')
+
+StartupEvents.registry('item', event => {
+	event.createCustom(
+		'kubejs:copper_shield',
+		() => new $ShieldItem(new $ItemProperties().durability(128).stacksTo(1))
+	)
+})
+```

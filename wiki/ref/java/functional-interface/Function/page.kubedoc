@@ -1,0 +1,13 @@
+**Supplier** functional interfaces represent functions, that take a parameter (specified in type argument) and return a value of a type (specified in another type argument).
+
+They are usually used in customized callbacks.
+
+Examples:
+```js
+const $ItemProperties = Java.loadClass('net.minecraft.world.item.Item$Properties')
+const $ShieldItem = Java.loadClass('net.minecraft.world.item.ShieldItem')
+
+// An inpractical example of a function that takes a number and outputs a ShieldItem
+// If could be assigned to places where Function<Integer, ShieldItem> is expected.
+const intToShieldFunction = (durability) => new $ShieldItem(new $ItemProperties().durability(durability).stacksTo(1))
+```

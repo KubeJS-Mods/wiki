@@ -1,0 +1,11 @@
+The term "**entity**" encapsulates all things capable of moving around in a Minecraft world, that aren't blocks.
+
+There are many kinds of entity classes in Minecraft:
+- `Entity`, representing all entities.
+- `LivingEntity`, living entities, which represent all entities that have health, can be damaged, killed and usually be affected by potion effects.
+- `Player`, which are, well, players, including `ServerPlayer` that represent player entities on a server.
+- And other non-living entities, like `ItemEntity`, `FallingBlockEntity`, and many others.
+
+Only the most notable entity classes, that usually appear in KubeJS scripts will be documented here, since entities are quite complex and have tons of methods available on them.
+
+# Notable entity classes

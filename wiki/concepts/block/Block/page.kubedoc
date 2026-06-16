@@ -1,0 +1,10 @@
+# Creating Blocks
+
+In places where `Block`s are expected, KubeJS will convert strings representing the blocks' ID into `Block` instances.
+
+For example: `[js]'minecraft:stone'`.
+
+# Useful Block methods
+
+In the following examples, `[js]block` will refer to the instance of `Block`.
+

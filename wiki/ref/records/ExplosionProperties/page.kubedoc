@@ -1,0 +1,92 @@
+>>> info
+This class is a [[/ref/records|record]]. If you want to learn, how to use them in KubeJS scripts, [[/ref/records|go here]].
+<<<
+
+**ExplosionProperties** define explosion properties. Nothing to write home about here.
+
+>>> #source-type
+[[/concepts/entity/Entity|`Entity`]]
+<<<
+>>> #source-description
+Specifies the source of the explosion's damage (for example, the player who lit the TNT).
+<<<
+>>> #damage-source-type
+`DamageSource`
+<<<
+>>> #damage-source-description
+Specifies the damage source for the explosion.
+<<<
+>>> #explosion-damage-calculator-type
+`ExplosionDamageCalculator`
+<<<
+>>> #explosion-damage-calculator-description
+Explosion damage calculator.
+<<<
+>>> #strength-type
+`number` (float)
+<<<
+>>> #strength-description
+Specifies the strength of the explosion.
+Defaults to `[js]3` if not provided.
+<<<
+>>> #causes-fire-type
+`boolean`
+<<<
+>>> #causes-fire-description
+Specifies, whether explosion causes fire, like Ghast fireball explosions or bed explosions in the Nether.
+Defaults to `[js]false` if not provided.
+<<<
+>>> #mode-type
+`Level.ExplosionInteraction`
+<<<
+>>> #mode-description
+The explosion mode.
+May be also a string representing a mode:
+`[js]'none'`, `[js]'block'`, `[js]'mob'`, `[js]'tnt'`, `[js]'trigger'`
+Defaults to `[js]'none'` if not provided.
+<<<
+>>> #particles-type
+`boolean`
+<<<
+>>> #particles-description
+Whether the explosion emits particles or not.
+Defaults to `[js]true` if not provided.
+<<<
+>>> #small-particles-type
+`ParticleOptions`
+<<<
+>>> #small-particles-description
+Specifies the small particles used in the explosion.
+May be also a string representing the particle to use, for example `[js]'minecraft:angry_villager'`.
+Defaults to `[js]'minecraft:explosion'` if not provided.
+<<<
+>>> #large-particles-type
+`ParticleOptions`
+<<<
+>>> #large-particles-description
+Specifies the large particles used in the explosion.
+May be also a string representing the particle to use, for example `[js]'minecraft:angry_villager'`.
+Defaults to `[js]'minecraft:explosion_emitter'` if not provided.
+<<<
+>>> #explosion-sound-type
+`Holder<SoundEvent>`
+<<<
+>>> #explosion-sound-description
+Specifies the sound of the explosion.
+May be also a string representing a sound, for example `[js]'minecraft:block.amethyst_block.chime'`.
+Defaults to `[js]'minecraft:entity.generic.explode'` if not provided.
+<<<
+
+# Properties
+
+| Property           | Type                                | Description                                |
+| `source`           | <#source-type>                      | <#source-description>                      |
+| `damageSource`     | <#damage-source-type>               | <#damage-source-description>               |
+| `damageCalculator` | <#explosion-damage-calculator-type> | <#explosion-damage-calculator-description> |
+| `strength`         | <#strength-type>                    | <#strength-description>                    |
+| `causesFire`       | <#causes-fire-type>                 | <#causes-fire-description>                 |
+| `mode`             | <#mode-type>                        | <#mode-description>                        |
+| `particles`        | <#particles-type>                   | <#particles-description>                   |
+| `smallParticles`   | <#small-particles-type>             | <#small-particles-description>             |
+| `largeParticles`   | <#large-particles-type>             | <#large-particles-description>             |
+| `explosionSound`   | <#explosion-sound-type>             | <#explosion-sound-description>             |

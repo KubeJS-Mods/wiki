@@ -1,0 +1,235 @@
+`StringUtilsWrapper` is an interface containing many useful methods for interacting with Java classes.
+It's exposed to [[/global-scope|global scope]] as `StringUtils`.
+
+# Static methods
+
+## Typed number parsing
+
+### `parseInt`
+
+```js
+StringUtils.parseInt(object, fallback)
+```
+
+Parses a 32-bit integer (`int`) from a given object.
+
+
+**Parameters**
+- `[js]object` - Any object. If it isn't a number, it will be converted to string.
+- `[js]fallback` - The number that will be returned if parsing fails.
+**Return value**
+The parsed `int` if the object can be converted to string that represents a 32-bit integer.
+If the object is `[js]null`, gets converted into an empty string or parsing fails, returns the `[js]fallback` number as a 32-bit integer.
+
+---
+
+### `parseLong`
+
+```js
+StringUtils.parseLong(object, fallback)
+```
+
+Parses a 64-bit integer (`long`) from a given object.
+
+**Parameters**
+- `[js]object` - Any object. If it isn't a number, it will be converted to string.
+- `[js]fallback` - The number that will be returned if parsing fails.
+**Return value**
+The parsed `long` if the object can be converted to string that represents a 64-bit integer.
+If the object is `[js]null`, gets converted into an empty string or parsing fails, returns the `[js]fallback` number as a 64-bit integer.
+
+>>>info
+`[js]StringUtils.parseLong` is very useful for representing long values exactly in scripts, because:
+- JavaScript only has one type of number: [`number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), which is a 64-bit floating point number (also known as `double` in languages such as Java),
+- `bigint` doesn't exist in Rhino.
+Unless a JS arithmetic operation is performed on a Java number, it will stay as a Java number.  
+<<<
+
+---
+
+### `parseDouble`
+
+```js
+StringUtils.parseDouble(object, fallback)
+```
+
+Parses a 64-bit floating point number (`double`) from a given object.
+
+**Parameters**
+- `[js]object` - Any object. If it isn't a number, it will be converted to string.
+- `[js]fallback` - The number that will be returned if parsing fails.
+**Return value**
+The parsed `double` if the object can be converted to string that represents a 64-bit floating point number.
+If the object is `[js]null`, gets converted into an empty string or parsing fails, returns the `[js]fallback` number as a 64-bit floating point number.
+
+---
+
+## String processing
+
+### `snakeCaseToCamelCase`
+
+```js
+StringUtils.snakeCaseToCamelCase(string)
+```
+
+Converts casing of the provided string from [`snake_case`](https://en.wikipedia.org/wiki/Snake_case) into [`camelCase`](https://en.wikipedia.org/wiki/Camel_case).
+Used internally by KubeJS as a way to give names for recipe handlers from `[js]event.recipes` exposed in `[js]event`.
+For example, `[js]event.recipes.create.mechanical_crafting` gets exposed as `[js]event.createMechanicalCrafting`.
+
+**Parameters**
+- `[js]string` - The string in [`snake_case`](https://en.wikipedia.org/wiki/Snake_case) to process
+
+**Return value**
+The string in [`camelCase`](https://en.wikipedia.org/wiki/Camel_case).
+
+**Example**
+```js
+const string = 'my_cool_identifier'
+console.log(StringUtils.snakeCaseToCamelCase(string)) // "myCoolIdentifier"
+```
+
+---
+
+### `snakeCaseToTitleCase`
+
+```js
+StringUtils.snakeCaseToTitleCase(string)
+```
+
+Converts casing of the provided string from [`snake_case`](https://en.wikipedia.org/wiki/Snake_case) into [Title Case](https://en.wikipedia.org/wiki/Title_case).
+First word will always be capitalized, other words will be capitalized unless the word is an article or preposition.
+Used internally by KubeJS as a part of generating implicit display names from ID for custom items that had no explicit display name provided. 
+For example, `kubejs:my_item` will get "My Item" as an implicit display name.
+
+**Parameters**
+- `[js]string` - The string in [`snake_case`](https://en.wikipedia.org/wiki/Snake_case) to process
+
+**Return value**
+The string in [Title Case](https://en.wikipedia.org/wiki/Title_case).
+
+**Example**
+```js
+const string = 'the_quick_brown_fox_jumps_over_the_lazy_dog'
+console.log(StringUtils.snakeCaseToCamelCase(string)) // "The Quick Brown Fox Jumps Over the Lazy Dog"
+```
+
+---
+
+### `toTitleCase`
+
+```js
+StringUtils.toTitleCase(string)
+StringUtils.toTitleCase(string, ignoreSpecial)
+```
+
+Converts the first letter of the provided `string` to upper case.
+Articles and prepositions like "a", "an", "the", "of", "on", "in", "and", "or", "but", "for" won't be capitalized, unless `ignoreSpecial` is set to `[js]true`
+
+**Parameters**
+- `[js]string` - The string in [`snake_case`](https://en.wikipedia.org/wiki/Snake_case) to process
+- `[js]ignoreSpecial` {optional} - Whether to ignore special cases involving articles and prepositions. Defaults to `[js]false` if not provided.
+
+**Return value**
+The processed string.
+
+**Example**
+```js
+console.log(StringUtils.toTitleCase('the')) // "the"
+console.log(StringUtils.toTitleCase('the', true)) // "The"
+console.log(StringUtils.toTitleCase('fox')) // "Fox"
+```
+
+---
+
+### `stripEventName`
+
+```js
+StringUtils.stripEventName(string)
+```
+
+Converts all `/` and `:` characters into `.`, and all `-` characters into `_`.
+
+**Parameters**
+- `[js]string` - The string to process
+
+**Return value**
+The processed string.
+
+---
+
+### `stripIdForEvent`
+
+```js
+StringUtils.stripIdForEvent(id)
+```
+
+Converts the provided ID (as ResourceLocation) to string and in that string, converts all `/` and `:` characters into `.`, and all `-` characters into `_`.
+
+**Parameters**
+- `[js]id` - A `ResourceLocation`. It may be a string representing a resource location, like `minecraft:iron_pickaxe`.
+
+**Return value**
+The processed string.
+
+---
+
+### `getUniqueId`
+
+```js
+StringUtils.getUniqueId(json)
+```
+
+Used internally by KubeJS to generate random, unique IDs for recipes that don't have explicit recipe ID set.
+
+**Parameters**
+- `[js]json` - A `JsonElement`. It may be a JS object or array (?).
+
+**Return value**
+The hash of JSON as string.
+
+---
+
+```js
+StringUtils.getUniqueId(object, toJsonFunction)
+```
+
+**Parameters**
+- `[js]object` - Object of any type.
+- `[js]toJsonFunction` - A function that takes the `[js]object` and returns a `[js]JsonElement`. It may be a JS function, but be aware that it must return a Java `[js]JsonElement`, not a JS object!
+
+**Return value**
+The hash of JSON created as a result of conversion of `[js]object` to JsonObject as string.
+
+# Static fields
+
+## `SNAKE_CASE_SPLIT`
+
+```js
+StringUtils.SNAKE_CASE_SPLIT
+```
+
+**Value**
+A [`Pattern`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/regex/Pattern.html) corresponding to the following regex: `[js]/[:_/]/`.
+
+## `ALWAYS_LOWER_CASE`
+
+```js
+StringUtils.ALWAYS_LOWER_CASE
+```
+
+**Value**
+A `Set` containing words that won't be normally converted to uppercase in process of converting the string to [Title Case](https://en.wikipedia.org/wiki/Title_case):
+"a", "an", "the", "of", "on", "in", "and", "or", "but", "for".
+
+## `EMPTY_STRING_ARRAY`
+
+```js
+StringUtils.EMPTY_STRING_ARRAY
+```
+
+**Value**
+An empty string Java array.
+
+# Source
+
+([StringUtilsWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/StringUtilsWrapper.java))

@@ -1,0 +1,268 @@
+`Color` is a value-heavy interface mainly containing vanilla colors.
+It also has a few methods to create any arbitrary color for use in text, fireworks, etc.
+It's exposed to [[/global-scope|global scope]] as `Color`.
+
+# Static methods
+
+### `rgba`
+```js
+Color.rgba(red, green, blue, alpha)
+```
+**Parameters**
+- `red`: An integer between `[js]0` and `[js]255` (`[js]0x00` and `[js]0xFF`) representing the intensity of the red color.
+- `green`: An integer between `[js]0` and `[js]255` (`[js]0x00` and `[js]0xFF`) representing the intensity of the green color.
+- `blue`: An integer between `[js]0` and `[js]255` (`[js]0x00` and `[js]0xFF`) representing the intensity of the blue color.
+- `alpha`: An integer between `[js]0` and `[js]255` (`[js]0x00` and `[js]0xFF`) representing the transparency of color. `[js]0` is fully transparent, `[js]255` is fully opaque.
+
+**Return value**
+A new [[/ref/utils/KubeColor|`KubeColor`]] instance representing the color.
+
+---
+
+### `createMapped`
+```js
+Color.createMapped(color, name1)
+Color.createMapped(color, name1, name2)
+Color.createMapped(color, name1, name2, /* …, */ nameN)
+```
+
+Adds a new color to the `[js]Color.MAP` map.
+Recommended to use only in startup scripts to ensure that it will only run once.
+
+**Parameters**
+- `[js]color`: Any object. Will be converted to [[/ref/utils/KubeColor|`KubeColor`]] during the process of adding the color.
+- `[js]name1`, …, `[js]nameN`: String names that may represent the color.
+
+**Return value**
+A [[/ref/utils/KubeColor|`KubeColor`]] instance representing the just-added color.
+From now on, the color may be represented as the provided strings in places where color is expected.
+
+**Example**
+Let's add a new, `lilac` color.
+To do that, in a startup script:
+```js
+Color.createMapped('#D891EF', 'lilac')
+```
+
+Now, this color can be referred to in any place that expects a color:
+```js
+ItemEvents.modifyTooltips(event => {
+  event.add('minecraft:stone', [
+    Text.ofString('Lilac text').color('lilac'),
+  ])
+})
+```
+
+This will result in Stone gaining a tooltip that uses the custom `lilac` color.
+
+![[lilac-tooltip.png|Minecraft Stone with lilac-colored tooltip that says "Lilac text"]]
+
+---
+
+### `wrapTextColor`
+
+```js
+Color.wrapTextColor(object)
+```
+
+Converts any object that can be converted into a color into `TextColor`. Use in scenarios, where color can't be implicitly converted into a `TextColor`.
+
+**Parameters**
+- `[js]object`: Any object. Will be converted to [[/ref/utils/KubeColor|`KubeColor`]].
+
+**Return value**
+A `TextColor` instance representing the color.
+
+---
+
+### `wrapColorRGBA`
+
+```js
+Color.wrapColorRGBA(object)
+```
+
+Converts any object that can be converted into a color into `ColorRGBA`. Use in scenarios, where color can't be implicitly converted into a `ColorRGBA`.
+
+**Parameters**
+- `[js]object`: Any object. Will be converted to [[/ref/utils/KubeColor|`KubeColor`]].
+
+**Return value**
+A `ColorRGBA` instance representing the color.
+
+---
+
+# Static fields
+
+### `MAP`
+
+```js
+Color.MAP
+```
+
+**Value**
+A [[/ref/java/Map|`HashMap`]] with keys being strings corresponding to color value, and values being [[/ref/utils/KubeColor|`KubeColor`]] implementations.
+The keys are also the same strings that can be type wrapped into colors.
+
+>>> #corresponding-color
+Corresponding color (`#AARRGGBB`)
+<<<
+>>> #transparent
+`[js]''` (empty string), `[js]'-'`, `[js]'NONE'`, `[js]'none'`, `[js]'transparent'`
+<<<
+>>> #light-blue-dye
+`[js]'light_blue_dye'`, `[js]'LIGHT_BLUE_DYE'`, `[js]'lightBlueDye'`
+<<<
+>>> #blue-dye
+`[js]'blue_dye'`, `[js]'BLUE_DYE'`, `[js]'blueDye'` 
+<<<
+>>> #purple-dye
+`[js]'purple_dye'`, `[js]'PURPLE_DYE'`, `[js]'purpleDye'`
+<<<
+>>> #dark-red
+`[js]'DARK_RED'`, `[js]'dark_red'`, `[js]'darkRed'`
+<<<
+>>> #light-gray-dye
+`[js]'LIGHT_GRAY_DYE'`, `[js]'lightGrayDye'`
+<<<
+>>> #dark-aqua
+`[js]'DARK_AQUA'`, `[js]'dark_aqua'`, `[js]'darkAqua'`
+<<<
+>>> #green-dye
+`[js]'GREEN_DYE'`, `[js]'green_dye'`, `[js]'greenDye'`
+<<<
+>>> #black
+`[js]'BLACK'`, `[js]'BLACK_DYE'`, `[js]'black_dye'`, `[js]'black'`, `[js]'blackDye'`
+<<<
+>>> #dark-blue
+`[js]'DARK_BLUE'`, `[js]'dark_blue'`, `[js]'darkBlue'`
+<<<
+>>> #red
+`[js]'RED'`, `[js]'red'`
+<<<
+>>> #pink-dye
+`[js]'PINK_DYE'`, `[js]'pink_dye'`, `[js]'pinkDye'`
+<<<
+>>> #aqua
+`[js]'AQUA'`, `[js]'aqua'`
+<<<
+>>> #white-dye
+ `[js]'WHITE'`, `[js]'WHITE_DYE'`, `[js]'white_dye'`, `[js]'white'`, `[js]'whiteDye'`
+<<<
+>>> #dark-gray
+`[js]'DARK_GRAY'`, `[js]'dark_gray'`, `[js]'darkGray'`
+<<<
+>>> #light-purple
+`[js]'LIGHT_PURPLE'`, `[js]'light_purple'`, `[js]'lightPurple'`
+<<<
+>>> #brown-dye
+`[js]'BROWN_DYE'`, `[js]'brown_dye'`, `[js]'brownDye'`
+<<<
+>>> #dark-purple
+`[js]'DARK_PURPLE'`, `[js]'dark_purple'`, `[js]'darkPurple'`
+<<<
+>>> #lime-dye
+`[js]'LIME_DYE'`, `[js]'lime_dye'`, `[js]'limeDye'`
+<<<
+>>> #magenta-dye
+`[js]'MAGENTA_DYE'`, `[js]'magenta_dye'`, `[js]'magentaDye'`
+<<<
+>>> #yellow-dye
+`[js]'YELLOW_DYE'`, `[js]'yellow_dye'`, `[js]'yellowDye'`
+<<<
+>>> #gray-dye
+`[js]'GRAY_DYE'`, `[js]'gray_dye'`, `[js]'grayDye'`
+<<<
+>>> #orange-dye
+`[js]'ORANGE_DYE'`, `[js]'orange_dye'`, `[js]'orangeDye'`
+<<<
+>>> #yellow
+`[js]'YELLOW'`, `[js]'yellow'`
+<<<
+>>> #cyan-dye
+`[js]'CYAN_DYE'`, `[js]'cyan_dye'`, `[js]'cyanDye'`
+<<<
+>>> #gold
+`[js]'GOLD'`, `[js]'gold'`
+<<<
+>>> #gray
+`[js]'GRAY'`, `[js]'gray'`
+<<<
+>>> #blue
+`[js]'BLUE'`, `[js]'blue'`
+<<<
+>>> #red-dye
+`[js]'RED_DYE'`, `[js]'red_dye'`, `[js]'redDye'`
+<<<
+>>> #green
+`[js]'GREEN'`, `[js]'green'`, 
+<<<
+>>> #dark-green
+`[js]'DARK_GREEN'`, `[js]'dark_green'`, `[js]'darkGreen'`,
+<<<
+
+The table below, sorted by hue, describes the colors that are present by default in `Colors.MAP`.
+Static fields corresponding to the color get the [[/ref/utils/KubeColor|`KubeColor`]] directly.
+Color names are string literals that can be used in place of colors that will be implicitly converted to [[/ref/utils/KubeColor|`KubeColor`]] when one is expected.
+
+| Static field               | Color name        | <#corresponding-color> |
+| `[js]Color.NONE`           | <#transparent>    | `#00000000`            |
+| `[js]Color.DARK_RED`       | <#dark-red>       |[bg=#AA0000]`#FFAA0000` |
+| `[js]Color.RED`            | <#red>            |[bg=#FF5555]`#FFFF5555` |
+| `[js]Color.RED_DYE`        | <#red-dye>        |[bg=#FF0000]`#FFFF0000` |
+| `[js]Color.ORANGE_DYE`     | <#orange-dye>     |[bg=#FF681F]`#FFFF681F` |
+| `[js]Color.BROWN_DYE`      | <#brown-dye>      |[bg=#8B4513]`#FF8B4513` |
+| `[js]Color.GOLD`           | <#gold>           |[bg=#FFAA00]`#FFFFAA00` |
+| `[js]Color.YELLOW_DYE`     | <#yellow-dye>     |[bg=#FFFF00]`#FFFFFF00` |
+| `[js]Color.YELLOW`         | <#yellow>         |[bg=#FFFF55]`#FFFFFF55` |
+| `[js]Color.LIME_DYE`       | <#lime-dye>       |[bg=#BFFF00]`#FFBFFF00` |
+| `[js]Color.GREEN_DYE`      | <#green-dye>      |[bg=#00FF00]`#FF00FF00` |
+| `[js]Color.GREEN`          | <#green>          |[bg=#55FF55]`#FF55FF55` |
+| `[js]Color.DARK_GREEN`     | <#dark-green>     |[bg=#00AA00]`#FF00AA00` |
+| `[js]Color.DARK_AQUA`      | <#dark-aqua>      |[bg=#00AAAA]`#FF00AAAA` |
+| `[js]Color.AQUA`           | <#aqua>           |[bg=#55FFFF]`#FF55FFFF` |
+| `[js]Color.CYAN_DYE`       | <#cyan-dye>       |[bg=#00FFFF]`#FF00FFFF` |
+| `[js]Color.LIGHT_BLUE_DYE` | <#light-blue-dye> |[bg=#9AC0CD]`#FF9AC0CD` |
+| `[js]Color.BLUE_DYE`       | <#blue-dye>       |[bg=#0000FF]`#FF0000FF` |
+| `[js]Color.DARK_BLUE`      | <#dark-blue>      |[bg=#0000AA]`#FF0000AA` |
+| `[js]Color.BLUE`           | <#blue>           |[bg=#5555FF]`#FF5555FF` |
+| `[js]Color.PURPLE_DYE`     | <#purple-dye>     |[bg=#A020F0]`#FFA020F0` |
+| `[js]Color.LIGHT_PURPLE`   | <#light-purple>   |[bg=#FF55FF]`#FFFF55FF` |
+| `[js]Color.DARK_PURPLE`    | <#dark-purple>    |[bg=#AA00AA]`#FFAA00AA` |
+| `[js]Color.MAGENTA_DYE`    | <#magenta-dye>    |[bg=#FF00FF]`#FFFF00FF` |
+| `[js]Color.PINK_DYE`       | <#pink-dye>       |[bg=#FF69B4]`#FFFF69B4` |
+| `[js]Color.BLACK`          | <#black>          |[bg=#000000]`#FF000000` |
+| `[js]Color.DARK_GRAY`      | <#dark-gray>      |[bg=#555555]`#FF555555` |
+| `[js]Color.GRAY_DYE`       | <#gray-dye>       |[bg=#808080]`#FF808080` |
+| `[js]Color.GRAY`           | <#gray>           |[bg=#AAAAAA]`#FFAAAAAA` |
+| `[js]Color.LIGHT_GRAY_DYE` | <#light-gray-dye> |[bg=#D3D3D3]`#FFD3D3D3` |
+| `[js]Color.WHITE_DYE`      | <#white-dye>      |[bg=#FFFFFF]`#FFFFFFFF` |
+
+---
+
+### `TEXT`
+
+```js
+Color.TEXT
+```
+
+**Value**
+A [[/ref/java/Map|`HashMap`]] with keys being strings corresponding to color value, and values being `ChatFormatting` enumerations.
+Note that `ChatFormatting` implements the [[/ref/utils/KubeColor|`KubeColor`]] interface, so colors from `ChatFormatting` may be used in place of colors.
+
+---
+
+### `DYE`
+
+```js
+Color.DYE
+```
+
+**Value**
+A [[/ref/java/Map|`HashMap`]] with keys being strings corresponding to color value, and values being `DyeColor` enumerations.
+Note that `DyeColor` implements the [[/ref/utils/KubeColor|`KubeColor`]] interface, so colors from `DyeColor` may be used in place of colors.
+
+---
+
+# Source
+
+([ColorWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/ColorWrapper.java))

@@ -1,0 +1,25 @@
+>>> info
+This class is a [[/ref/records|record]]. If you want to learn, how to use them in KubeJS scripts, [[/ref/records|go here]].
+<<<
+
+**Fireworks** record defines firework properties. This record is used as a part of the `minecraft:firework` data component.
+
+>>> #flight-duration-type
+`number`
+(integer)
+<<<
+>>> #flight-duration-description
+Specifies the flight duration of the rocket, that is - with how much gunpowder the rocket was crafted. Used to specify, for how long should the firework boost Elytra flight and how far should firework fly, with certain random variation.
+<<<
+>>> #explosions-type
+`List<`[[/ref/records/FireworkExplosion|`FireworkExplosion`]]`>`
+<<<
+>>> #explosions-description
+A list of up to 256 [[/ref/records/FireworkExplosion|firework explosions]].
+<<<
+
+# Properties
+
+| Property         | Type                    | Description                    |
+| `flightDuration` | <#flight-duration-type> | <#flight-duration-description> |
+| `explosions`     | <#explosions-type>      | <#explosions-description>      |

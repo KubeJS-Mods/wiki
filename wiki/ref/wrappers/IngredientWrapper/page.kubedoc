@@ -1,0 +1,220 @@
+`IngredientWrapper` is an interface containing many useful static methods for getting ingredients from string and objects.
+It's exposed to [[/global-scope|global scope]] as `Ingredient`.
+
+# Static methods
+
+## Ingredient getters
+
+### `of`
+```js
+Ingredient.of(ingredient)
+```
+**Parameters**
+- `[js]ingredient`: An [[/concepts/ingredient|`Ingredient`]]. Like with any other place that expects an `Ingredient`, the argument will be converted to `Ingredient` if possible.
+**Return value**
+A new [[/concepts/ingredient|`Ingredient`]].
+
+---
+
+```js
+Ingredient.of(ingredient, count)
+```
+**Parameters**
+- `[js]ingredient`: An [[/concepts/ingredient|Ingredient]]. Like with any other place that expects an `Ingredient`, the argument will be converted to `Ingredient` if possible.
+- `[js]count`: An integer, representing the size of the ingredient.
+**Return value**
+A new [[/concepts/ingredient|SizedIngredient]] with the specified `count` set.
+
+---
+
+### `withData`
+
+```js
+Ingredient.withData(itemSet, componentFilter)
+Ingredient.withData(itemSet, componentFilter, strict)
+```
+**Parameters**
+- `[js]itemSet`: a [[/ref/wrappers/HolderWrapper|HolderSet]] of items. See [[/ref/wrappers/HolderWrapper|here]] for a list of possible conversions.
+- `[js]componentFilter`: A [[/concepts/data-components|DataComponentMap]] which acts as a component filter. May be also a string or a JS object: See [[/concepts/data-components|here]] for details.
+- `[js]strict` {optional}: Whether the component filter is strict. Defaults to `[js]false` if not provided.
+**Return value**
+A new [[/concepts/ingredient|Ingredient]] that accepts the given set of items under the given component filter.
+
+---
+
+### `first`
+
+```js
+Ingredient.first(ingredient)
+```
+
+Gets the first item stack that matches the ingredient. Equivalent to `[js]ingredient.first` or `[js]Ingredient.of(ingredient).first`, but unlike the `[js]ingredient.first` case, `ingredient` doesn't have to be an `Ingredient`, it can be any type that can convert to `Ingredient`.
+
+**Parameters**
+- `[js]ingredient`: An [[/concepts/ingredient|Ingredient]]. Like with any other place that expects an `Ingredient`, the argument will be converted to `Ingredient` if possible.
+
+**Return value**
+The first [[/concepts/item-stack|`ItemStack`]] matching the ingredient.
+
+---
+
+## Instance checks
+
+>>> info
+Note that the fact that the object isn't an instance of `Ingredient` doesn't mean, that the object can't be used in place of an `Ingredient`.
+This is due to KubeJS using type wrappers, which attempt to implicitly convert other objects into the necessary type when needed.
+
+So, `[js]'minecraft:stone'` string won't be an instance of `Ingredient`, but can still be passed into places that expect one.
+<<<
+
+### `isIngredient`
+
+```js
+Ingredient.isIngredient(object)
+```
+
+**Parameters**
+- `[js]object`: Any object.
+
+**Return value**
+`[js]true` if `object` is instance of the `Ingredient` class, `[js]false` otherwise.
+
+---
+
+### `isIngredientLike`
+
+```js
+Ingredient.isIngredientLike(object)
+```
+
+**Parameters**
+- `[js]object`: Any object.
+
+**Return value**
+`[js]true` if `object` is instance of either `Ingredient`, `SizedIngredient` or `ItemStack` class, `[js]false` otherwise.
+
+---
+
+## Tags
+
+### `tagKeyOf`
+
+```js
+Ingredient.tagKeyOf(ingredient)
+```
+
+**Parameters**
+- `[js]ingredient`: An [[/concepts/ingredient|`Ingredient`]]. Like with any other place that expects an `Ingredient`, the argument will be converted to `Ingredient` if possible.
+
+**Return value**
+If the ingredient:
+- isn't a custom ingredient (that is - it represents items or lists of items),
+- contains only one value,
+- and that value is a tag value,
+this returns that tag value as a `TagKey<Item>`.
+Otherwise, returns `[js]null`.
+
+---
+
+### `containsAnyTag`
+
+```js
+Ingredient.containsAnyTag(ingredient)
+```
+
+**Parameters**
+- `[js]ingredient`: An [[/concepts/ingredient|`Ingredient`]]. Like with any other place that expects an `Ingredient`, the argument will be converted to `Ingredient` if possible.
+
+**Return value**
+`[js]true` if the ingredient is not custom (that is - it represents items or lists of items) and contains a tag value, `[js]false` otherwise.
+
+---
+
+## Parsers
+
+>>> info
+These are mainly used internally in KubeJS in the type wrapping process, but they are not hidden from JS, so you can use them if you wish to create a framework that needs to parse ingredients.
+<<<
+
+### `parseJson`
+
+```js
+Ingredient.parseJson(json)
+```
+
+Parses a JSON object into a potential Ingredient, according to Minecraft's own codec.
+
+**Parameters**
+- `[js]json`: A `JsonElement`. Can be also a JS object or array (?).
+
+**Return value**
+A `DataResult` that potentially contains an `Ingredient`.
+This is one of the ways an `Ingredient` can be obtained from the data result:
+
+```js
+const ingredient = Ingredient.parseJson(['minecraft:stone', 'minecraft:cobblestone']) // DataResult<Ingredient>
+	.result() // Optional<Ingredient>
+	.orElse(null) // Ingredient
+```
+
+---
+
+### `parseString`
+
+```js
+Ingredient.parseString(string)
+```
+
+Parses a string into a potential Ingredient, according to KubeJS' string type wrapping rules.
+
+**Parameters**
+- `[js]string`: A string to parse.
+
+**Return value**
+A `DataResult` that potentially contains an `Ingredient`.
+This is one of the ways an `Ingredient` can be obtained from the data result:
+
+```js
+const ingredient = Ingredient.parseString('#minecraft:logs') // DataResult<Ingredient>
+	.result() // Optional<Ingredient>
+	.orElse(null) // Ingredient
+```
+
+---
+
+# Static fields
+
+## `TYPE_INFO`
+
+```js
+Ingredient.TYPE_INFO
+```
+
+**Value**
+The `TypeInfo` corresponding to the [[/concepts/ingredient|`Ingredient`]] class.
+
+---
+
+## `none`
+
+```js
+Ingredient.none
+```
+
+**Value**
+An empty [[/concepts/ingredient|`Ingredient`]] that matches nothing.
+
+---
+
+## `all`
+
+```js
+Ingredient.all
+```
+
+**Value**
+An [[/concepts/ingredient|`Ingredient`]] that matches every item in the game.
+
+# Source
+
+([IngredientWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/IngredientWrapper.java))

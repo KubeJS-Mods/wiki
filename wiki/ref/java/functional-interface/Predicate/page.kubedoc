@@ -1,0 +1,26 @@
+**Predicate** functional interfaces represent functions, that take a value of a type (specified in type argument) and return a boolean value.
+
+They are commonly used in callbacks used to filter lists and other collections.
+
+Examples:
+```js
+// When passed into the `rayTraceEntity` predicate parameter, `entity` will be of type Entity
+const cowPredicate = entity => entity.type == 'minecraft:cow'
+
+PlayerEvents.tick(event => {
+	if (event.server.tickCount % 10 != 0) return
+	// The expected type of `rayTraceEntity`'s first parameter is Predicate<Entity>
+	const rayTracedCow = event.player.rayTraceEntity(cowPredicate)
+})
+```
+
+```js
+// Or more commonly, put the function directly inside of the parameter
+PlayerEvents.tick(event => {
+	if (event.server.tickCount % 10 != 0) return;
+	const rayTracedCow = event.player.rayTraceEntity(entity => {
+		// `entity` will be of type Entity
+		return entity.type == 'minecraft:cow'
+	})
+})
+```

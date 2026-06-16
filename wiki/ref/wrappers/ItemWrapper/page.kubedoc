@@ -1,0 +1,223 @@
+`ItemWrapper` is an interface containing many useful static methods for getting items from string.
+It's exposed to [[/global-scope|global scope]] as `Item`.
+
+# Static methods
+
+## `of`
+```js
+Item.of(itemStack)
+Item.of(itemStack, components)
+Item.of(itemStack, count)
+Item.of(itemStack, count, components)
+```
+**Parameters**
+- `[js]itemStack` - an [[/concepts/item-stack|ItemStack]]. Like with any other place that expects an `ItemStack`, the argument will be converted to `ItemStack` if possible.
+**Optional parameters**:
+- `[js]components` - A map of components. Can be a string representing key-value pairs: `damage=2, item_name={text:"Hello world"}`.
+- `[js]count` - An integer, representing the size of the item stack.
+**Return value**
+A new [[/concepts/item-stack|ItemStack]].
+
+---
+
+## `getList`
+
+```js
+Item.getList()
+Item.list // Bean
+```
+
+**Return value**
+A list of most items (as [[/concepts/item-stack|ItemStack]]s) in the game. Items, that are not in a creative tab are ignored.
+
+---
+
+## `getTypeList`
+
+```js
+Item.getTypeList()
+Item.typeList // Bean
+```
+
+**Return value**
+A list of all the namespaced item IDs in the game as strings.
+
+---
+
+## `getTypeToStackMap`
+
+```js
+Item.getTypeToStackMap()
+Item.typeToStackMap // Bean
+```
+
+**Return value**
+A map between ResourceLocations and collections of variants of [[/concepts/item-stack|ItemStack]].
+
+---
+
+## `getVariants`
+
+```js
+Item.getVariants(itemStack)
+```
+**Parameters**
+- `[js]itemStack` - an [[/concepts/item-stack|ItemStack]].
+**Return value**
+A collection of variants of the given [[/concepts/item-stack|ItemStack]].
+
+---
+
+## `getEmpty`
+
+```js
+Item.getEmpty()
+Item.empty // Read-only bean
+```
+
+**Return value**
+- An [[/concepts/item-stack|ItemStack]] that represents an empty slot or air.
+
+---
+
+## `fireworks`
+
+```js
+Item.fireworks(fireworkProperties)
+```
+
+**Parameters**
+- `[js]fireworkProperties` - The [[/ref/records/Fireworks|firework properties]] to use.
+
+**Return value**
+If `fireworkProperties` was already an instance of [[/ref/records/Fireworks|`Fireworks`]], it returns the same [[/ref/records/Fireworks|`Fireworks`]].
+If `fireworkProperties` was an object or an array, it returns the [[/ref/records/Fireworks|`Fireworks`]] instance created from the object/array.
+
+**Example**
+```js
+Item.fireworks({
+	explosions: [
+		{
+			hasTwinkle: true,
+			hasTrail: false,
+			shape: 'creeper',
+			colors: [0xaa11ff],
+			fadeColors: [0xee33ff],
+		},
+	],
+	flightDuration: 2
+})
+```
+
+---
+
+## `getItem`
+
+```js
+Item.getItem(id)
+```
+
+**Parameters**
+- `[js]id` - a ResourceLocation instance or a string representing a resource location, like `'minecraft:diamond_sword'`.
+**Return value**
+An [[/concepts/item|Item]] instance.
+
+---
+
+## `getID`
+
+```js
+Item.getID(item)
+```
+
+**Parameters**
+- `[js]item` - an [[/concepts/item|Item]].
+**Return value**
+An ResourceLocation of the item.
+
+---
+
+## `exists`
+
+```js
+Item.exists(id)
+```
+
+**Parameters**
+- `[js]id` - a ResourceLocation instance or a string representing a resource location, like `'minecraft:diamond_sword'`.
+
+**Return value**
+`true` if the item corresponding to the ID exists, `false` otherwise.
+
+---
+
+## `isItem`
+
+```js
+Item.isItem(object)
+```
+
+**Parameters**
+- `[js]object` - Any object.
+
+**Return value**
+`true` if the object is an instance of [[/concepts/item-stack|ItemStack]], `false` otherwise.
+
+---
+
+## `playerHead`
+
+```js
+Item.playerHead(nickname)
+```
+
+**Parameters**
+- `[js]nickname` - A nickname of a player to get their head.
+
+**Return value**
+A player head with the `minecraft:profile` data component applied.
+
+---
+
+## `playerHeadfromBase64`
+
+```js
+Item.playerHeadfromBase64(uuid, textureBase64)
+```
+
+**Parameters**
+- `[js]uuid` - A non-null UUID.
+- `[js]textureBase64` - Texture data JSON to apply to the head, encoded in Base64.
+
+**Return value**
+A player head with the `minecraft:profile` data component applied.
+
+---
+
+## `playerHeadFromUrl`
+
+```js
+Item.playerHeadFromUrl(url)
+```
+
+**Parameters**
+- `[js]url` - A URL leading to the texture data JSON to apply to the head.
+**Return value**
+A player head with the `minecraft:profile` data component applied.
+
+---
+
+## `playerHeadfromStringHash`
+
+```js
+Item.playerHeadfromStringHash(stringHash)
+```
+
+**Parameters**
+- `[js]stringHash` - A string hash of the player to get the texture data JSON from.
+**Return value**
+A player head with the `minecraft:profile` data component applied.
+
+# Source
+
+([ItemWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/ItemWrapper.java))

@@ -1,22 +1,174 @@
-# Primitive prototype additions
+# Global objects
 
-- `string#namespace`: string - namespace part of namespaced string, aka of `minecraft:oak_planks` it's `minecraft`. Defaults to `minecraft` if there's no `:`.
-- `string#path`: string - path part of namespaced string, aka of `minecraft:oak_planks` it's `oak_planks`
+## `global`
 
-# Constants and Objects
+Serves as a way to create globally accessible values accessible across **all** script types.
 
-| Name | Type | Description |
-| `global` | Map<String, Object> | Global object, you can use this to set objects and callbacks in startup script and reference them from server or client scripts |
-| `console` | Console | Console object, used for logging |
-| `SECOND` | number | 1000 |
-| `MINUTE` | number | 60000 (`60 * SECOND`) |
-| `HOUR` | number | 3600000 (`60 * MINUTE`) |
+**Value**
+A [[/ref/java/Map|`HashMap`]] with string keys whose values can be of any type.
+Only writable in [[folder-structure/startup-scripts|startup scripts]].
+Read-only in [[folder-structure/server-scripts|server scripts]] and [[folder-structure/client-scripts|client scripts]].
 
+---
+
+## `console`
+
+**Value**
+A global `ConsoleJS` instance commonly used to log stuff.
+
+---
+
+# Global constants
+
+## Time
+
+| Name         | Value   | Description                             |
+| `[js]SECOND` | 1000    | The number of milliseconds in a second. |
+| `[js]MINUTE` | 60000   | The number of milliseconds in a minute. |
+| `[js]HOUR`   | 3600000 | The number of milliseconds in an hour.  |
+
+>>> #item-description
+Creates `ItemStack`s from strings and other objects.
+<<<
+>>> #ingredient-description
+Creates `Ingredient`s from strings and other objects.
+<<<
+>>> #sizedingredient-description
+Creates `SizedIngredient`s from strings and other objects.
+<<<
+>>> #block-description
+Gets `Block`s and `BlockState`s and has other block related utilities.
+<<<
+>>> #fluid-description
+Creates `SizedIngredient`s from strings and other objects.
+<<<
+>>> #facing
+[[/ref/wrappers/DirectionWrapper|`Facing`]], [[/ref/wrappers/DirectionWrapper|`Direction`]]
+<<<
+>>> #facing-description
+A value heavy interface containing all directions in a nice interface.
+<<<
+>>> #text
+[[/ref/wrappers/TextWrapper|`Text`]], [[/ref/wrappers/TextWrapper|`Component`]] 
+<<<
+>>> #text-description
+Aids in creation of text components.
+<<<
+>>> #java-description
+Lets you load Java classes, cast objects and create functional interfaces from JS functions.
+<<<
+>>> #utils-description
+Various Java utilities, like random generators, easy access to Java collections, lazy and async functions, etc.
+<<<
+>>> #aabb-description
+Aids in creation of axis aligned bounding boxes (AABB).
+<<<
+>>> #color-description
+A value heavy interface containing vanilla colors and color-related methods.
+<<<
+>>> #dataMap-description
+Aids in creation of data maps.
+<<<
+>>> #entityselector-description
+Has a single method that creates an entity selector.
+<<<
+>>> #nbt-description
+Aids in creation of NBT tags.
+<<<
+>>> #particleoptions-description
+Aids in creation of particle options (particles).
+<<<
+>>> #registry-description
+Contains useful methods for accessing Minecraft's registries
+<<<
+>>> #stringutils-description
+Contains some string-related utilities.
+<<<
+>>> #uuid-description
+Aids in creation of universally unique identifiers (UUIDs).
+<<<
+
+>>> #1.21.1
+# Wrappers
+Classes (or more precisely, interfaces) corresponding to these globals are responsible for implicit type conversions from strings and other objects into Minecraft specific objects.
+They also contain many useful static methods - worth checking out.
+
+| Name                                                       | Description                    |
+| [[/ref/wrappers/ItemWrapper|`Item`]]                       | <#item-description>            |
+| [[/ref/wrappers/IngredientWrapper|`Ingredient`]]           | <#ingredient-description>      |
+| [[/ref/wrappers/SizedIngredientWrapper|`SizedIngredient`]] | <#sizedingredient-description> |
+| [[/ref/wrappers/BlockWrapper|`Block`]]                     | <#block-description>           |
+| [[/ref/wrappers/FluidWrapper|`Fluid`]]                     | <#fluid-description>           |
+| <#facing>                                                  | <#facing-description>          |
+| <#text>                                                    | <#text-description>            |
+| [[/ref/wrappers/JavaWrapper|`Java`]]                       | <#java-description>            |
+| [[/ref/wrappers/UtilsWrapper|`Utils`]]                     | <#utils-description>           |
+| [[/ref/wrappers/AABBWrapper|`AABB`]]                       | <#aabb-description>            |
+| [[/ref/wrappers/ColorWrapper|`Color`]]                     | <#color-description>           |
+| [[/ref/wrappers/DataMapWrapper|`DataMap`]]                 | <#dataMap-description>         |
+| [[/ref/wrappers/EntitySelectorWrapper|`EntitySelector`]]   | <#entityselector-description>  |
+| [[/ref/wrappers/NBTWrapper|`NBT`]]                         | <#nbt-description>             |
+| [[/ref/wrappers/ParticleOptionsWrapper|`ParticleOptions`]] | <#particleoptions-description> |
+| [[/ref/wrappers/RegistryWrapper|`Registry`]]               | <#registry-description>        |
+| [[/ref/wrappers/StringUtilsWrapper|`StringUtils`]]         | <#stringutils-description>     |
+| [[/ref/wrappers/UUIDrapper|`UUID`]]                        | <#uuid-description>            |
+<<<
+
+>>> #old-list
+- [[/ref/wrappers/BlockWrapper|`Block`]]
+- `BlockPos`
+- `BlockProperties`
+- `BlockStatePredicate`
+- `Blocks`
+- `Client`
+- `Color`
+- `Component`
+- `DamageSource`
+- `DataMap`
+- `Direction`
+- `Duration`
+- `EntitySelector`
+- `Facing`
+- `Fluid`
+- `FluidAmounts`
+- `Ingredient`
+- [[/ref/wrappers/ItemWrapper|`Item`]]
+- `Items`
+- `Java`
+- `JavaMath`
+- `JsonIO`
+- `JsonUtils`
+- `Matrix3f`
+- `Matrix4f`
+- `MobEffectUtil`
+- `NBT`
+- `NBTIO`
+- `Notification`
+- `ParticleOptions`
+- `Platform`
+- `Quaternionf`
+- `Registry`
+- `RotationAxis`
+- `SizedIngredient`
+- `SoundType`
+- `Stats`
+- `StringUtils`
+- `Text`
+- `TextIcons`
+- `Types`
+- `UUID`
+- `Utils`
+- `Vec3d`
+- `Vec3f`
+- `Vec3i`
+- `Vec4f`
+<<<
 # Classes
-
-|> 1.20.1
+|>+ 1.21.1
+<#1.21.1>
+<||> 1.20.1
 - WIP
-<||>+ 1.19.2
+<||> 1.19.2
 - `Platform`
 - `ResourceLocation`
 - `Utils`
@@ -39,16 +191,3 @@
 <||> 1.18.2
 - WIP
 <|
-
-# Wrapped Classes
-
-| Name | Class |
-| JavaMath | java.lang.Math |
-| Blocks | net.minecraft.world.level.block.Blocks |
-| Items | net.minecraft.world.item.Items |
-| Stats | net.minecraft.stats.Stats |
-| BlockPos | net.minecraft.core.BlockPos |
-| DamageSource | net.minecraft.world.damagesource.DamageSource |
-| BlockProperties | net.minecraft.world.level.block.state.properties.BlockStateProperties |
-| Vec3, Vec3d | net.minecraft.world.phys.Vec3 |
-| Vec3i | net.minecraft.core.Vec3i |

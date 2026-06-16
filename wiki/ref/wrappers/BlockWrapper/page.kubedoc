@@ -1,0 +1,153 @@
+`BlockWrapper` is an interface containing many useful static methods for getting blocks from string.
+It's exposed to [[/global-scope|global scope]] as `Block`.
+
+# Static methods
+
+## ID related
+
+### `getBlock`
+
+```js
+Block.of(id)
+```
+**Parameters**
+- `[js]id`: A ResourceLocation instance corresponding to a block ID. It can be a string representing a resource location, for example: `[js]'minecraft:stone'`.
+**Return value**
+A new {block} corresponding to the provided `id`.
+
+---
+
+### `getId`
+
+```js
+Block.getId(block)
+```
+**Parameters**
+- `[js]block`: A {block} instance. It can be a string representing a resource location of a block, for example: `[js]'minecraft:stone'`, but in this case that conversion isn't useful.
+**Return value**
+A ResourceLocation corresponding to the provided `block`.
+
+---
+
+## Predicates
+
+### `id`
+
+```js
+Block.id(id)
+```
+
+**Parameters**
+- `[js]id`: A ResourceLocation instance corresponding to a block ID. It can be a string representing a resource location, for example: `[js]'minecraft:stone'`.
+**Return value**
+A new `BlockIDPredicate` matching the block with the given `id`.
+
+---
+
+### `entity`
+
+```js
+Block.entity(id)
+```
+
+**Parameters**
+- `[js]id`: A ResourceLocation instance corresponding to a block entity ID. It can be a string representing a resource location, for example: `[js]'minecraft:chest'`.
+**Return value**
+A new `BlockEntityPredicate` matching the block entity with the given `id`.
+
+---
+
+### `custom`
+
+```js
+Block.custom(blockPredicate)
+```
+
+**Parameters**
+- `[js]blockPredicate`: A BlockPredicate instance. It can be a function, which takes a `LevelBlock` (KubeJS' interface for script-friendly block access) and returns a boolean.
+**Return value**
+If `blockPredicate` was already a BlockPredicate, it returns the same `blockPredicate`.
+If `blockPredicate` was a function, it returns the function wrapped into a `BlockPredicate`.
+**Example**
+```js
+// Returns a BlockPredicate that matches all blocks whose block light is greater than 7
+Block.custom(block => block.blockLight > 7)
+```
+
+---
+
+## Collections
+
+### `getTypeList`
+
+```js
+Block.getTypeList()
+Block.typeList // read-only bean
+```
+
+**Return value**
+A list of class names of all blocks registered in the game.
+
+---
+
+### `getTaggedIds`
+
+```js
+Block.getTaggedIds(tag)
+```
+
+**Parameters**
+- `[js]tag`: A `ResourceLocation` instance corresponding to a block tag. It can be a string representing a resource location, for example: `[js]'minecraft:logs'`.
+
+**Return value**
+A list of `ResourceLocation`s of all blocks in a block tag.
+
+---
+
+### `getAllBlockStates`
+
+```js
+Block.getAllBlockStates()
+Block.allBlockStates // read-only bean
+```
+
+**Return value**
+A set of all `BlockState`s registered in the game.
+
+
+---
+
+### `getFacing`
+
+```js
+Block.getFacing()
+Block.facing // read-only bean
+```
+
+**Return value**
+A map of all directions (as strings) to `Direction` enumerations.
+It can be used as a usual JavaScript object:
+```js
+Block.facing.south // Direction.SOUTH
+```
+
+---
+
+## Other
+
+### `withProperties`
+
+```js
+Block.withProperties(blockState, properties)
+```
+**Parameters**
+- `[js]blockState`: A `BlockState` instance. It can be a string representing a block state, for example: `[js]'minecraft:oak_log\[axis=x\]'`, but in this case that conversion isn't useful, since this method is more useful for modification of existing `BlockState`.
+- `[js]properties`: A map of block state property keys to their values. It can be an object, for example `[js]{axis: 'x'}`. If the property isn't present on the block, the newly created block state won't have that property set.
+**Return value**
+A new `BlockState` with all the properties on the `properties` map/object set.
+
+---
+
+# Source
+
+([BlockWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/BlockWrapper.java))

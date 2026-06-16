@@ -2,7 +2,15 @@
 Make sure to check the README of the wiki repo on GitHub for info on the file structure.
 
 You can look at `https://kubejs.com/wiki/preview/x` for a preview of a currently open PR.
+
+>>> info
+If a PR isn't ready for merging, make sure to mark it as a **draft** when opening.
+Once it is ready, you can change the status to let us know to take a look.
+<<<
+
+>>> warning
 Make sure to **NOT** force push. Currently doing so will cause the preview to not update.
+<<<
 
 # {formatting}
 {formatting-info}

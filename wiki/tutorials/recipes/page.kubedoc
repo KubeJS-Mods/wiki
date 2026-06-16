@@ -324,3 +324,7 @@ ServerEvents.recipes(event => {
 	})
 })
 ```
+>>> info
+[[[/events/ServerEvents/recipes]]]
+View event page for more reference
+<<<

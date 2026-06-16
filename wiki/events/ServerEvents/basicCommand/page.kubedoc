@@ -1,9 +1,22 @@
-# Available Event Fields
-- `event.player` - player entity
-- `event.input` - string (Only 1.21+)
+This event allows regestry of basic chat commands.
 
-# Example
+## Syntax
+|> 1.21
+```js
+ServerEvents.basicCommand('<command name>', event => {
+	event.player // player who executed the command
+	event.input  // string provided as command arguments (ONLY 1.21+)
+})
+```
+<||> 1.20.1
+```js
+ServerEvents.customCommand('<command name>', event => {
+	event.player // player who executed the command
+})
+```
+<|
 
+## Usage example
 |> 1.21
 ```js
 ServerEvents.basicCommand('icons', event => {

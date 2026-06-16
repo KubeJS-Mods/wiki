@@ -48,3 +48,8 @@ ServerEvents.tags('block', event => {
   event.add('minecraft:climbable', 'minecraft:tall_grass')
 })
 ```
+
+>>> info
+[[[/events/ServerEvents/tags]]]
+View event page for more reference including list of vanilla registries
+<<<

@@ -1,0 +1,108 @@
+KubeJSable is a KubeJS addon for interacting with Sable! This includes multiple new bindings and access to Sable events!
+
+>>> #bindings-tab-contents
+|>+ {common-tab-key}
+# Sable
+- `[ts]getAllIntersecting(level: Level, bounds: BoundingBox3dc): Iterable<SubLevel>`
+- `[ts]getContaining(level: Level, chunkX: int, chunkZ: int): SubLevel`
+- `[ts]getContaining(level: Level, pos: Vec3i): SubLevel`
+- `[ts]getContaining(level: Level, pos: Vec3): SubLevel`
+- `[ts]getContaining(entity: Entity): SubLevel`
+- `[ts]getContaining(blockEntity: BlockEntity): SubLevel`
+- `[ts]projectOutOfSubLevel(level: Level, pos: Vec3): Vec3`
+- `[ts]runIncludingSubLevels(level: Level, origin: Vec3, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => T): T`
+- `[ts]findIncludingSubLevels(level: Level, origin: Vec3, shouldCheckOrigin: boolean, subLevel: SubLevel, converter: (subLevel: SubLevel, pos: BlockPos) => boolean): boolean`
+- `[ts]distanceSquaredWithSubLevels(level: Level, a: Vec3, b: Vec3): double`
+- `[ts]rectilinearDistanceWithSubLevels(level: Level, a: Vec3, b: Vec3): double`
+- `[ts]getVelocity(level: Level, pos: Vec3): Vec3`
+- `[ts]getVelocity(level: Level, subLevel: SubLevelAccess, pos: Vec3): Vec3`
+- `[ts]getVelocityRelativeToAir(level: Level, pos: Vec3): Vec3`
+- `[ts]isInPlotGrid(level: Level, chunkX: int, chunkZ: int): boolean`
+- `[ts]getTrackingSubLevel(entity: Entity): SubLevel`
+- `[ts]getLastTrackingSubLevel(entity: Entity): SubLevel`
+- `[ts]getTrackingOrVehicleSubLevel(entity: Entity): SubLevel`
+- `[ts]getVehicleSubLevel(entity: Entity): SubLevel`
+- `[ts]getEyePositionInterpolated(entity: Entity, partialTicks: float): Vec3`
+- `[ts]getFeetPos(entity: Entity, distanceDown: float): Vec3`
+# SubLevelHelper
+- `[ts]getConnectedChain(subLevel: SubLevel): Collection<SubLevel>`
+- `[ts]getVelocityRelativeToAir(level: Level, pos: Vector3dc, dest: Vector3d): Vector3d`
+- `[ts]popEntityLocal(subLevel: SubLevel, player: Entity)`
+- `[ts]popEntityLocal(subLevel: SubLevel, entity: Entity, anchor: EntityAnchorArgument.Anchor)`
+- `[ts]pushEntityLocal(subLevel: SubLevel, player: Entity)`
+- `[ts]pushEntityLocal(subLevel: SubLevel, entity: Entity, anchor: EntityAnchorArgument.Anchor)`
+<||> {server-tab-key}
+# SubLevelHelper
+- `[ts]getLoadingDependencyChain(subLevel: ServerSubLevel): Collection<ServerSubLevel>`
+# DimensionPhysics
+- `[ts]of(level: Level): DimensionPhysics`
+- `[ts]getDefault(level: Level): DimensionPhysics`
+- `[ts]getMagneticNorth(level: Level): Vector3fc`
+- `[ts]getGravity(level: Level): Vec3`
+- `[ts]getUniversalDrag(level: ServerLevel): double`
+- `[ts]getAirPressure(level: ServerLevel, position: Vec3): double`
+# SubLevelContainer
+- `[ts]getContainer(level: Level): SubLevelContainer`
+# SubLevelAssemblyHelper
+- `[ts]assembleBlocks(level: ServerLevel, anchor: BlockPos, blocks: Iterable<BlockPos>, bounds: BoundingBox3ic): ServerSubLevel`
+- `[ts]kickFromContainingSubLevel(level: ServerLevel, physicsSystem: SubLevelPhysicsSystem, pipeline: PhysicsPipeline, subLevel: ServerSubLevel, containingSubLevel: SubLevel)`
+- `[ts]gatherConnectedBlocks(gatherOrigin: BlockPos, level: ServerLevel, maximumBlocksToAssemble: int, frontierPredicate: (originPos: BlockPos, originState: BlockState, pos: BlockPos, state: BlockState, directionFrom: Direction) => boolean): SubLevelAssemblyHelper.GatherResult`
+- `[ts]moveTrackingPoints(level: ServerLevel, bounds: BoundingBox3ic, subLevel: ServerSubLevel, transform: SubLevelAssemblyHelper.AssemblyTransform)`
+- `[ts]moveOtherStuff(level: ServerLevel, transform: SubLevelAssemblyHelper.AssemblyTransform, blocks: Iterable<BlockPos>, bounds: BoundingBox3ic)`
+- `[ts]moveBlocks(level: ServerLevel, transform: SubLevelAssemblyHelper.AssemblyTransform. blocks: Iterable<BlockPos>)`
+- `[ts]markAndNotifyBlock(level: Level, pPos: BlockPos, levelChunk: LevelChunk, oldState: BlockState, newState: BlockState, pFlags: int, pRecursionLeft: int)`
+# SubLevelPhysicsSystem
+- `[ts]get(level: Level): SubLevelPhysicsSystem`
+- `[ts]require(level: Level): SubLevelPhysicsSystem`
+- `[ts]getCurrentlySteppingSystem(): SubLevelPhysicsSystem`
+<||> {client-tab-key}
+# DimensionPhysics
+- `[ts]of(level: Level): DimensionPhysics`
+- `[ts]getDefault(level: Level): DimensionPhysics`
+- `[ts]getMagneticNorth(level: Level): Vector3fc`
+- `[ts]getGravity(level: Level): Vec3`
+# SubLevelContainer
+- `[ts]getContainer(level: Level): SubLevelContainer`
+<||> {startup-tab-key}
+# SubLevelHelper
+- `[ts]registerWindProvider(fn: (pos: Vector3dc, level: Level) => Vec3)`
+# SubLevelHeatMapManager
+- `[ts]addSplitListener(listener: (level: Level, assemblyBounds: BoundingBox3ic, blocks: Collection<BlockPos>) => void)`
+<|
+<<<
+
+|>+ {events-tab-key}
+# PhysicsEvents
+## Pre
+This event is fired from `ForgeSablePrePhysicsTickEvent` just before the next physics tick.
+The event object itself includes a `SubLevelPhysicsSystem` (`physicsSystem`) instance and a `timeStep` value.
+>>> info
+This event still fires when the physics engine in a world is paused!
+<<<
+```javascript
+PhysicsEvents.pre(event => {
+	console.info("Pre-Physics Tick!")
+})
+```
+## Post
+This event is fired from `ForgeSablePostPhysicsTickEvent` just after the last physics tick.
+The event object itself includes a `SubLevelPhysicsSystem` (`physicsSystem`) instance and a `timeStep` value.
+>>> info
+This event still fires when the physics engine in a world is paused!
+<<<
+```javascript
+PhysicsEvents.post(event => {
+	console.info("Post-Physics Tick!")
+})
+```
+## Ready
+This event is fired from `ForgeSableSubLevelContainerReadyEvent` whenever a `SubLevelContainer` is readied.
+The event object itself includes a `Level` (`level`) instance and a `SubLevelContainer` (`subLevelContainer`) instance.
+```javascript
+PhysicsEvents.ready(event => {
+	console.info("Sub-Level Container Ready!")
+})
+```
+<||> {bindings-tab-key}
+<#bindings-tab-contents>
+<|

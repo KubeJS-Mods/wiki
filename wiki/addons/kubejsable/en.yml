@@ -1,0 +1,10 @@
+title: "KubeJSable"
+description: "KubeJS x Sable"
+
+events-tab-key: "Events"
+bindings-tab-key: "Bindings"
+
+common-tab-key: "Common"
+server-tab-key: "Server"
+client-tab-key: "Client"
+startup-tab-key: "Startup"

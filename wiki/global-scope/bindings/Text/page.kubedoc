@@ -1,0 +1,86 @@
+# Text
+
+**Java Class:** `dev.latvian.mods.kubejs.plugin.builtin.wrapper.TextWrapper` - [View on GitHub](https://github.com/KubeJS-Mods/KubeJS)
+
+The hub for all things text components. Format text to your hearts content!
+
+|> 1.21.1
+
+**Source:** [TextWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/TextWrapper.java)
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+### Static Methods
+
+- `of(component: MutableComponent)`: MutableComponent - Returns a Component of the input
+- `ofString(text: string)`: MutableComponent - Creates a literal text component
+- `translatable(key: string, ...args)`: MutableComponent - Creates a translatable text component
+- `keybind(key: string)`: MutableComponent - Creates a keybind text component
+- `score(name: string, objective: string)`: MutableComponent - Creates a score text component
+- `selector(selector: string)`: MutableComponent - Creates a selector text component
+- `lore(lore: List<Component>)`: ItemLore - Creates an ItemLore from a list of components
+
+## Examples
+
+WIP
+
+<||> 1.20.1
+
+**Source:** [TextWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/2001/common/src/main/java/dev/latvian/mods/kubejs/bindings/TextWrapper.java)
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+### Static Methods
+
+- `of(component: MutableComponent)`: MutableComponent - Returns a Component of the input
+- `ofString(text: string)`: MutableComponent - Creates a literal text component
+- `translatable(key: string, ...args)`: MutableComponent - Creates a translatable text component
+- `keybind(key: string)`: MutableComponent - Creates a keybind text component
+- `score(name: string, objective: string)`: MutableComponent - Creates a score text component
+- `selector(selector: string)`: MutableComponent - Creates a selector text component
+- `lore(lore: List<Component>)`: ItemLore - Creates an ItemLore from a list of components
+
+## Examples
+
+WIP
+
+<||> 1.19.2
+
+**Source:** [TextWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/1902/common/src/main/java/dev/latvian/mods/kubejs/bindings/TextWrapper.java)
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+### Static Methods
+
+- `of(component: MutableComponent)`: MutableComponent - Returns a Component of the input
+- `ofString(text: string)`: MutableComponent - Creates a literal text component
+- `translatable(key: string, ...args)`: MutableComponent - Creates a translatable text component
+- `keybind(key: string)`: MutableComponent - Creates a keybind text component
+- `score(name: string, objective: string)`: MutableComponent - Creates a score text component
+- `selector(selector: string)`: MutableComponent - Creates a selector text component
+- `lore(lore: List<Component>)`: ItemLore - Creates an ItemLore from a list of components
+
+## Examples
+
+WIP
+
+<|
+

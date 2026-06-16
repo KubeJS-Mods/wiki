@@ -1,0 +1,77 @@
+# Java
+
+**Java Class:** `dev.latvian.mods.kubejs.plugin.builtin.wrapper.JavaWrapper` - [View on GitHub](https://github.com/KubeJS-Mods/KubeJS)
+
+Methods for working with Java classes. Reflection utilities for loading and working with Java classes from JavaScript.
+
+|> 1.21.1
+
+**Source:** [JavaWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/main/src/main/java/dev/latvian/mods/kubejs/plugin/builtin/wrapper/JavaWrapper.java)
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+### Static Methods
+
+- `loadClass(className: string)`: Object - Loads the specified class, and throws error if class is not found or allowed. The returned object can have public static methods and fields accessed directly from it. Constructors can be used with the new keyword.
+- `tryLoadClass(className: string)`: Object | null - Loads the specified class, and returns null if class is not found or allowed. The returned object can have public static methods and fields accessed directly from it. Constructors can be used with the new keyword.
+- `createConsole(name: string)`: ConsoleJS - Creates a custom ConsoleJS instance for logging
+- `cast(targetClass: Class, object: Object)`: T - Cast the object to a target type, use if Rhino can't determine the parameter type due to type erasure.
+
+## Examples
+
+WIP
+
+<||> 1.20.1
+
+**Source:** [JavaWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/2001/common/src/main/java/dev/latvian/mods/kubejs/bindings/JavaWrapper.java)
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+### Static Methods
+
+- `loadClass(className: string)`: Object - Loads the specified class, and throws error if class is not found or allowed. The returned object can have public static methods and fields accessed directly from it. Constructors can be used with the new keyword.
+- `tryLoadClass(className: string)`: Object | null - Loads the specified class, and returns null if class is not found or allowed. The returned object can have public static methods and fields accessed directly from it. Constructors can be used with the new keyword.
+- `createConsole(name: string)`: ConsoleJS - Creates a custom ConsoleJS instance for logging
+- `cast(targetClass: Class, object: Object)`: T - Cast the object to a target type, use if Rhino can't determine the parameter type due to type erasure.
+
+## Examples
+
+WIP
+
+<||> 1.19.2
+
+**Source:** [JavaWrapper.java](https://github.com/KubeJS-Mods/KubeJS/blob/1902/common/src/main/java/dev/latvian/mods/kubejs/bindings/JavaWrapper.java)
+
+## Script Types
+
+- Startup: ✓
+- Server: ✓
+- Client: ✓
+
+## Members
+
+### Static Methods
+
+- `loadClass(className: string)`: Object - Loads the specified class, and throws error if class is not found or allowed. The returned object can have public static methods and fields accessed directly from it. Constructors can be used with the new keyword.
+- `tryLoadClass(className: string)`: Object | null - Loads the specified class, and returns null if class is not found or allowed. The returned object can have public static methods and fields accessed directly from it. Constructors can be used with the new keyword.
+- `createConsole(name: string)`: ConsoleJS - Creates a custom ConsoleJS instance for logging
+- `cast(targetClass: Class, object: Object)`: T - Cast the object to a target type, use if Rhino can't determine the parameter type due to type erasure.
+
+## Examples
+
+WIP
+
+<|
+

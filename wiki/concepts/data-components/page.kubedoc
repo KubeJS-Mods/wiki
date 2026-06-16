@@ -1,3 +1,85 @@
+Data components are a way to attach additional data to certain kinds of content like [[/concepts/item-stack|Items]] and [[/concepts/fluid-stack|Fluids]]. They were introduced in Minecraft 1.20.5 and replace the previously used concept of [NBT Tags for data](/concepts/nbt-data), and are well supported by KubeJS as well.
+
+Components are used for both dynamic data like enchantments, display names, and tool damage, as well as some data that previously used to be baked into the item definition itself, such as max stack size, tool durability, and even food data, which means you can now for example make *any* item edible using components.
+
+# Component Format
+
+There are two fundamental data structures built around components that are each used in different parts of Minecraft:
+
+- **Data Component Maps** represent *all* the data attached to an element, containing both the "prototype" (i.e., its default components, which are set during registry and may be changed by kubejs during [[/tutorials/item-modification]]) and any custom components added on top of that. They are read only and can be changed by using component patches.
+- **Data Component Patches** are a set of *changes* applied on top of an existing map of components, such as an element's prototype; they can be used to either set (i.e., add or override existing) values or **remove** existing values from a component map.
+
+In addition to these two types, **Data Component Predicates** are also used sometimes, for example in commands or ingredients; they represent **filters** over the component map of an item that may ask for a certain set of components with specific values to be present. (which for all intents in purposes, is just a component map in itself)
+
+## Getting data components
+
+The easiest way to find out how a component is encoded (other than looking at its codec in the source code) is by using the [[/tutorials/hand|`/kubejs hand`]] command, which will show you the components the item has attached to it after the item ID. For example, this melon slice with custom lore and food components:
+
+![[melon.png]]
+
+would give you the string representation (note: spacing and new lines added for readability):
+```snbt
+minecraft:melon_slice[
+    unbreakable = {},
+    max_stack_size = 32,
+    lore = [
+        '"hey lois look at me i have custom lore text nyehehehehe"'
+    ],
+    food = {
+        can_always_eat: true,
+        nutrition: 3,
+        saturation: 1.0f
+    }
+]
+```
+
+Additionally, if you have access to an object within that is a component holder, you can use `[js]obj.componentMap` to retrieve its component map, as well as `[js]obj.get(type)` to get the component value for a specific data component type (or `[js]null` if undefined).
+
+Note that in the above representation, components are represented by the values inside the outermost square brackets, and values inside take the shape of one of four different types:
+
+- *Unit types* such as `minecraft:unbreakable`, which can only be set (represented by the empty map `{}`) or unset
+- *Primitive types* like booleans (`true`/`false`, also as bytes `0b` and `1b`), numbers (supported as both normal integer / decimal format and explicitly using suffixes like `f` or float), and strings (single or double-quoted)
+- *Arrays* of values (such as the `minecraft:lore` array above, which takes in a list of strings which each represent stringified component JSON)
+- and finally *Maps* (or *Records*) which in themselves can once again contain a mapping of string keys to any of these value types
+
+(Also note that for a single item, this is the exact same syntax used by the `/give` command!)
+
+## Parsing Components
+To create component maps or patches from JavaScript, you may use one of the following formats:
+
+- A **string** that represents a component map, following the same format as vanilla (see above for an example of a component map on an item), wrapped using square brackets; when writing a component patch, you may also use `!namespaced:id` in place of a component definition to **remove** the given component from the patched object. If an NBT tag is supplied in curly braces, that value will be written to the `custom_data` component.
+- A **JSON Object** or **NBT Compound Tag**, which will be parsed directly using the relevant codec.
+- A **JS Object** in the form of a component map; keys need to be valid component types (as namespaced IDs), while values will be wrapped to the respective value type automatically.
+- A **function** that uses in a builder (specifically, `DataComponentMap.Builder` and `DataComponentPatch.Builder`, respectively) as its only argument, where individual components can be set using the `builder.set(type, value)` method, and in the case of component patches, marked as removed using the `builder.remove(type)` method. As above, components will be wrapped to the relevant type automatically.
+
+>>> success
+We recommend using the builder function or JS object over the string format when writing component maps yourself since it offers a lot more flexibility; for example, it allows for the lore component to be specified using the `Text` wrapper rather than as a stringified JSON:
+
+```js
+{
+    "minecraft:lore": Text.lore([
+        Text.gray("I'm ").append(Text.blue("blue")),
+        Text.gray("da-ba-dee da-ba-die"),
+        Text.gray("If I was ").append("§agreen").append(", I would-- oh no.")
+    ])
+}
+```
+![[apple.png]]
+<<<
+
+## Setting data components
+
+In KubeJS, updating the data components of a supported object can be done in two ways, the first of which is taking an entire component map or patch and applying it to the object using `[js]obj.set(componentsMap)` and `[js]obj.patch(componentsPatch)` respectively. This will override all specified components with the supplied values. Additionally, `[js]obj.resetComponents()` will restore an object's components to its original prototype, removing any patches added. 
+
+Alternatively, you may also choose to only override single components, which can be done using the methods `[js]obj.set(type, value)`, `[js]obj.remove(type)` and `[js]obj.override(type, value?)` (which sets if value is defined, and removes otherwise). Note that "removing" a component in this case means **overriding** its value with null, **not** resetting it to its prototype value!
+
+### Common Component Functions
+WIP! (TODO: paste common functions here and briefly explain)
+
+### Item Component Functions
+WIP! (see above)
+
+# Notes for Addon Devs
 WIP!
 
 # Further Reading

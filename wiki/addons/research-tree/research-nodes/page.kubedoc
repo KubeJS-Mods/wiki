@@ -1,0 +1,61 @@
+# Creating Research Nodes
+Everything will go under the `ResearchTree.research` event
+
+`[java]exists(id: ResourceLocation)`
+Return `true` or `false` depending if a research node exists or not.
+
+`[java]remove(id: ResourceLocation)`
+Removes a research node (eg, `some_other_mod:epic_researchable`)
+
+`[java]modify(id: ResourceLocation)`
+Modifies a research node (eg, `another_mod:super_cool_researchable`). For methods, see below
+
+`[java]create(id: ResourceLocation)`
+>>> info
+Internally, this constructs a `ResourceLocation` that gets set to `kubejs:[the id you chose]`.
+For example, `create('my_research_node')` will get constructed as `kubejs:my_research_node`.
+<<<
+
+## Methods
+
+`[java].icon(icon: Item)`
+The item icon that will be rendered for the node. (eg, `minecraft:dirt` would render dirt, for example)
+
+`[java].pos(x: int, y: int)`
+There is also `position` that does the same thing
+
+`[java].title(title: Text)`
+Overrides the default name (the node's id formatted) with a custom one. Use `Text#of` for the argument
+
+`[java].description(description: Text)`
+Creates a description for the research node
+
+`[java].prerequisite(prerequisite: ResourceLocation)`
+This can be attached multiple times to make other research nodes required to unlock this node. 
+To get the research node id, enable advanced tooltips via `F3+H`
+
+`[java].requires(requirement: ResearchRequirement)`
+See (link the `helpers#Requirements` here) for possible requirements.
+
+`[java].reward(reward: ResearchReward)`
+See (link the `helpers#Rewards` here) for possible rewards.
+
+`[java].category(category: ResourceLocation)`
+Links the node to a category
+
+`[java].hidden()`
+Hides the node until the parent is completed. The rest of the branch will also show up.
+
+`[java].ticksPerPercent(ticksPerPercent: int)`
+For every `1%` of research, the player must wait the ticks set in `ticksPerPercent` for `1%` of progression.
+
+| Method | Type         | Notes |
+| `icon` | ==REQUIRED== | Not required for research node modification  |
+| `pos`  | ==REQUIRED== | Not required for research node modification |
+| `title` | ==OPTIONAL== | Defaults to formatted id |
+| `description` | ==OPTIONAL== | No description is provided |
+| `prerequisite` | ==OPTIONAL== | When none provided, does not rely on other nodes to be unlocked |
+| `requires` | ==OPTIONAL== | When none provided, researching begins immedentally |
+| `reward` | ==OPTIONAL== | When none provided, no rewards are granted |
+| `category` | ==OPTIONAL== | Defaults to the uncategorized section |
+| `ticksPerPercent` | ==OPTIONAL== | Defaults to `100` ticks per `1%` (`10000` total ticks) |

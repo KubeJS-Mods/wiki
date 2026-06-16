@@ -1,0 +1,52 @@
+# Creating Research Categories
+Everything will go under the `ResearchTree.category` event
+
+`[java]exists(id: ResourceLocation)`
+Return `true` or `false` depending if a research category exists or not.
+
+`[java]modify(id: ResourceLocation)`
+Modifies a research category. For methods, see below. **There are extra methods for modifications!**
+
+`[java]create(id: ResourceLocation)`
+>>> info
+Internally, this constructs a `ResourceLocation` that gets set to `kubejs:[the id you chose]`.
+For example, `create('super_cool_category')` will get constructed as `kubejs:super_cool_category`.
+<<<
+
+## Methods
+`[java].name(name: Text)`
+Overrides the default name (the id of the category formatted) to a custom one.
+
+`[java].description(description: Text)`
+Creates a description for the category
+
+`[java].icon(icon: Item)`
+Sets the categories icon as an item
+
+`[java].unlockRequirement(unlockRequirement: ResourceLocation)`
+Unlocks the category after a research node has been completed
+
+`[java].addPrerequisite(prerequisite: ResourceLocation)`
+Requires another category to be unlocked before this category
+
+`[java].addPrerequisites(prerequisites: ResourceLocation[])`
+Same thing as above, but as a list (adds it to the current ones)
+
+`[java].sortOrder(order: int)`
+Display order. Defaults to `0`.
+
+| Method | Type | Notes |
+| `name` | ==OPTIONAL== | Defaults to formatted id |
+| `description` | ==OPTIONAL== | Category will have no description |
+| `icon` | ==OPTIONAL== | Category will have no icon |
+| `unlockRequirement` | ==OPTIONAL== | Will be unlocked. If it is locked, no research in this category can be started |
+| `addPrerequisite`/`addPrerequisites` | ==OPTIONAL== | Will not rely on other categories to be unlocked first |
+| `sortOrder` | ==OPTIONAL== | Defaults to `0`. Sort order is used to sort the categories |
+
+The following is for category modification - methods above are also included with modifications:
+## Methods
+`[java].removeUnlockRequirement()`
+Removes the requirement for another research node to be completed
+
+`[java].removePrerequisites(category: ResourceLocation)`
+Removes the requirement for another category to be unlocked
